@@ -1,0 +1,16 @@
+// shared: functions
+
+// Get spacing value by name
+@function app-spacer($key) {
+    @return map-get($spacers, $key);
+}
+
+// Get breakpoint value by name
+@function app-grid-breakpoint($key) {
+    @return map-get($grid-breakpoints, $key);
+}
+
+// Get breakpoint value by name
+@function app-font-size($key) {
+    @return map-get($app-font-sizes, $key);
+}

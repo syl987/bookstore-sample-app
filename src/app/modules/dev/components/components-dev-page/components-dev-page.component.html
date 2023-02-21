@@ -1,0 +1,407 @@
+<div class="app-container">
+    <!-- <h1>Heading h1 normal</h1> -->
+    <h2>Heading h2 normal</h2>
+    <h3>Heading h3 normal</h3>
+    <h4>Heading h4 normal</h4>
+    <h5><s>Heading h5</s></h5>
+    <h6><s>Heading h6</s></h6>
+
+    <p>
+        Paragraph text with proper
+        <span class="app-text-primary">primary color</span>
+        styling from a theme mixin and with some important text included. This text is also very long and will be wrapped.
+    </p>
+
+    <mat-divider class="mb-s"></mat-divider>
+
+    <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+    <p><u>This line of text will render as underlined</u></p>
+    <p><small>This line of text is meant to be treated as fine print.</small></p>
+    <p><strong>This line rendered as bold text.</strong></p>
+    <p><em>This line rendered as italicized text.</em></p>
+
+    <p><samp>This line rendered as program output sample.</samp></p>
+    <p><code>This line rendered as code-formatted text.</code></p>
+    <pre>This line rendered as preformatted text.</pre>
+
+    <mat-divider class="mb-s"></mat-divider>
+
+    <p class="text-uppercase">This line rendered as uppercase text.</p>
+    <p class="text-lowercase">This line rendered as lowercase text.</p>
+    <p class="text-capitalize">This line rendered as capitalize text.</p>
+
+    <!-- <h2>Breadcrumb</h2>
+
+    <nav aria-label="Breadcrumb" class="my-s">
+        <ol nxBreadcrumb>
+            <li>
+                <a nxBreadcrumbItem routerLink="/dev">First</a>
+            </li>
+            <li>
+                <a nxBreadcrumbItem routerLink="/dev">Second</a>
+            </li>
+            <li>
+                <a nxBreadcrumbItem disabled>Third</a>
+            </li>
+        </ol>
+    </nav>
+
+    <nav aria-label="Breadcrumb" class="my-s">
+        <ol nxBreadcrumb>
+            <li>
+                <a nxBreadcrumbItem routerLink="/dev">Vertragssuche</a>
+            </li>
+            <li>
+                <a nxBreadcrumbItem routerLink="/dev">Kollektivvertrag PB654651351</a>
+            </li>
+            <li>
+                <a nxBreadcrumbItem disabled>Untervertrag PB65168531351</a>
+            </li>
+        </ol>
+    </nav>
+
+    <nav aria-label="Breadcrumb" class="my-s">
+        <ol nxBreadcrumb>
+            <li>
+                <a nxBreadcrumbItem routerLink="/dev">Vertragssuche</a>
+            </li>
+            <li>
+                <a nxBreadcrumbItem disabled>Kollektivvertrag PB654651351</a>
+            </li>
+        </ol>
+    </nav>
+
+    <nav aria-label="Breadcrumb" class="my-s">
+        <ol nxBreadcrumb>
+            <li>
+                <a nxBreadcrumbItem routerLink="/dev">Vertragssuche</a>
+            </li>
+            <li>
+                <a nxBreadcrumbItem disabled>Einzelvertrag PB654651351</a>
+            </li>
+        </ol>
+    </nav> -->
+
+    <!-- <h2>Field</h2>
+
+    <syn-field-group nxChildCol="12,12,4,3,2">
+        <h3 >Regular fields</h3>
+        <ng-template synFieldTemplate label="Name" e2e="nameField">Schmidt</ng-template>
+        <ng-template synFieldTemplate label="Vorname">Michael</ng-template>
+        <ng-template synFieldTemplate label="Adresse">
+            Eine Straße 5
+            <br />
+            34583 Sehr große Stadt
+        </ng-template>
+        <ng-template synFieldTemplate label="Very extremely long label and value">
+            This is a very, very and extremely long field value
+        </ng-template>
+        <ng-template synFieldTemplate label="Looooooooooooooooooooonnnnnnnnnnnngggggggggg">
+            Loooooooooooooooooooooooooooooonnnnnnnnnnnnnnnnnggggggggggg
+        </ng-template>
+    </syn-field-group>
+
+    <syn-description-group nxChildCol="12,12,12,6">
+        <h3 >Frequently Asked Questions (FAQ)</h3>
+        <ng-template synFieldTemplate label="How do I register?" e2e="nameField">You need to click on the register button.</ng-template>
+        <ng-template synFieldTemplate label="How great is this application?">It is absolutely breathtaking.</ng-template>
+    </syn-description-group> -->
+
+    <h2>Button</h2>
+
+    <div class="app-gap-x-2xs">
+        <button mat-flat-button color="primary">Primary</button>
+        <button mat-flat-button color="accent">Accent</button>
+        <button mat-stroked-button color="primary">Secondary</button>
+        <button mat-stroked-button>Tertiary</button>
+        <button mat-stroked-button color="warn">Warn</button>
+        <a mat-button color="primary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener">Link</a>
+        <button mat-icon-button color="primary" aria-label="Icon Button">
+            <mat-icon inline fontIcon="fa-globe"></mat-icon>
+        </button>
+    </div>
+
+    <br />
+
+    <div class="app-gap-x-2xs">
+        <button mat-flat-button color="primary" disabled>Primary</button>
+        <button mat-flat-button color="accent" disabled>Accent</button>
+        <button mat-stroked-button color="primary" disabled>Secondary</button>
+        <button mat-stroked-button disabled>Tertiary</button>
+        <button mat-stroked-button color="warn" disabled>Warn</button>
+        <a mat-button color="primary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener" disabled>Link</a>
+        <button mat-icon-button color="primary" aria-label="Icon Button" disabled>
+            <mat-icon inline fontIcon="fa-globe"></mat-icon>
+        </button>
+    </div>
+
+    <h2>Toast</h2>
+
+    <div class="app-gap-x-2xs">
+        <button mat-flat-button color="primary" (click)="showSuccessToast()">Show Success</button>
+        <button mat-stroked-button color="primary" (click)="showInfoToast()">Show Info</button>
+        <button mat-stroked-button color="warn" (click)="showErrorToast()">Show Error</button>
+    </div>
+
+    <h2>Dialog</h2>
+
+    <button mat-flat-button color="primary" (click)="openExampleDialog()">Open Dialog</button>
+
+    <h2>Spinner</h2>
+
+    <div class="d-flex app-gap-x-2xs align-items-end">
+        <mat-spinner diameter="16"></mat-spinner>
+        <mat-spinner diameter="24"></mat-spinner>
+        <mat-spinner diameter="32"></mat-spinner>
+        <mat-spinner diameter="40"></mat-spinner>
+    </div>
+
+    <br />
+
+    <div class="d-flex app-gap-x-2xs align-items-end">
+        <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async"></mat-progress-spinner>
+        <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async"></mat-progress-spinner>
+        <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async"></mat-progress-spinner>
+        <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async"></mat-progress-spinner>
+    </div>
+
+    <h3>Button with Spinner</h3>
+
+    <div class="app-gap-x-2xs">
+        <button mat-flat-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Primary</button>
+        <button mat-stroked-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Secondary</button>
+    </div>
+
+    <!-- <h3>Button with Progress Indicator</h3>
+
+    <div class="app-gap-x-2xs">
+        <button mat-flat-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Primary</button>
+        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Secondary</button>
+    </div> -->
+
+    <h2>Icons</h2>
+
+    <div class="app-gap-x-2xs">
+        <mat-icon fontIcon="fa-print"></mat-icon>
+        <mat-icon fontIcon="fa-envelope-o"></mat-icon>
+        <mat-icon fontIcon="fa-phone"></mat-icon>
+        <mat-icon fontIcon="fa-code"></mat-icon>
+        <mat-icon fontIcon="fa-close"></mat-icon>
+    </div>
+
+    <div class="app-gap-x-2xs">
+        <mat-icon fontIcon="fa-cog" inline class="fa-spin"></mat-icon>
+        <mat-icon fontIcon="fa-spinner" inline class="fa-pulse"></mat-icon>
+        <mat-icon fontIcon="fa-circle-o-notch" inline class="fa-pulse"></mat-icon>
+        <mat-icon fontIcon="fa-refresh" inline class="fa-pulse"></mat-icon>
+    </div>
+
+    <p>
+        There we go with a beautiful inline
+        <mat-icon fontIcon="fa-print" inline></mat-icon>
+        icon.
+    </p>
+
+    <h2>Text</h2>
+
+    <p class="fs-xl">Extra large text (xlarge) for unknown usage.</p>
+
+    <p class="fs-l">Large text (large) for unknown usage.</p>
+
+    <p class="fs-m">Regular text (normal) with some very important information included.</p>
+
+    <p>Default paragraph text (normal) with some very important information included.</p>
+
+    <p class="fs-s">Footnote text (small).</p>
+
+    <p class="fs-xs">Legal text (xsmall).</p>
+
+    <h2>List</h2>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <h4>Default List</h4>
+            <mat-list dense role="list">
+                <mat-list-item role="listitem">first item</mat-list-item>
+                <mat-list-item role="listitem">some other item</mat-list-item>
+                <mat-list-item role="listitem" disabled>disabled item</mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <h4>Navigation List</h4>
+            <mat-nav-list dense>
+                <a mat-list-item routerLink="/dev">first link</a>
+                <a mat-list-item routerLink="/dev">some other link</a>
+                <a mat-list-item routerLink="/dev" disabled>disabled link</a>
+            </mat-nav-list>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <h4>Action List</h4>
+            <mat-action-list dense>
+                <button mat-list-item (click)="showInfoToast()">first action</button>
+                <button mat-list-item (click)="showInfoToast()">some other action</button>
+                <button mat-list-item disabled>disabled action</button>
+            </mat-action-list>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <h4>Selection List</h4>
+            <mat-selection-list dense>
+                <mat-list-option>first option</mat-list-option>
+                <mat-list-option>some other option</mat-list-option>
+                <mat-list-option disabled>disabled option</mat-list-option>
+            </mat-selection-list>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <h4>Icon List</h4>
+            <mat-list dense role="list">
+                <mat-list-item role="listitem">
+                    <mat-icon matListIcon fontIcon="fa-file-o" class="me-2xs"></mat-icon>
+                    first item
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                    <mat-icon matListIcon fontIcon="fa-file-pdf-o" class="me-2xs"></mat-icon>
+                    some other item
+                </mat-list-item>
+                <mat-list-item role="listitem" disabled>
+                    <mat-icon matListIcon fontIcon="fa-file-archive-o" class="me-2xs"></mat-icon>
+                    disabled item
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <h4>Icon List (large)</h4>
+            <mat-list role="list">
+                <mat-list-item role="listitem">
+                    <mat-icon matListIcon fontIcon="fa-file-o" class="me-2xs"></mat-icon>
+                    first item
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                    <mat-icon matListIcon fontIcon="fa-file-pdf-o" class="me-2xs"></mat-icon>
+                    some other item
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <h4>Multiline List</h4>
+            <mat-list dense>
+                <mat-list-item>
+                    <mat-icon matListIcon fontIcon="fa-folder-open-o" class="me-2xs"></mat-icon>
+                    <h4 matLine class="fw-700 mb-2xs">Title</h4>
+                    <p matLine>Description</p>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <h4>Multiline List (large)</h4>
+            <mat-list>
+                <mat-list-item>
+                    <mat-icon matListIcon fontIcon="fa-folder-open-o" class="me-2xs"></mat-icon>
+                    <h4 matLine class="fw-700 mb-2xs">Title</h4>
+                    <p matLine>Description</p>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+
+    <h2>Utilities</h2>
+
+    <h3>Text Alignment</h3>
+
+    <p class="text-justify">
+        Justified (left and right aligned) text with some very important information included. This text is also very long and will be wrapped. This text is also very long and will be wrapped. This text is also very long and will be wrapped
+        immediately. This text is also very long and will be wrapped very immediately. This text is also very long and will be wrapped now.
+    </p>
+    <p class="text-start">Left (start) aligned text on all viewport sizes.</p>
+    <p class="text-center">Center aligned text on all viewport sizes.</p>
+    <p class="text-end">Right (end) aligned text on all viewport sizes.</p>
+
+    <h3>Text Wrap</h3>
+
+    <div class="text-wrap" style="width: 6rem; background-color: aquamarine">This text should wrap.</div>
+
+    <div class="text-nowrap" style="width: 8rem; background-color: burlywood">This text should overflow the parent.</div>
+
+    <div class="text-truncate" style="max-width: 11rem; background-color: darkkhaki">Truncate block: Praeterea iter est quasdam res quas ex communi.</div>
+
+    <span class="text-truncate" style="max-width: 11rem; display: inline-block; background-color: wheat">Truncate inline: Praeterea iter est quasdam res quas ex communi.</span>
+
+    <p class="text-break">Break word: mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+
+    <h3>Text Colors</h3>
+
+    <p class="text-primary">.text-primary (mat-primary)</p>
+    <p class="text-accent">.text-accent (mat-accent)</p>
+    <p class="text-success">.text-success</p>
+    <p class="text-warn">.text-warn (mat-warn)</p>
+    <p class="text-info">.text-info</p>
+    <p class="text-body">.text-body (primary body color)</p>
+    <p class="text-white" style="background-color: gray">.text-white (inverse body color)</p>
+    <p class="text-muted">.text-muted</p>
+    <p class="text-reset">.text-reset (inherited color)</p>
+
+    <h3>Screen Readers</h3>
+
+    <p>
+        Expose to screen readers only:
+        <span class="visually-hidden">visually-hidden</span>
+    </p>
+
+    <p>
+        Display normally when focused, expose only to screen readers otherwise:
+        <button mat-flat-button color="primary" class="visually-hidden-focusable">visually-hidden</button>
+    </p>
+
+    <h3>Spacing</h3>
+
+    <p>
+        Spacing syntax for margins, paddings and negative margins follows the
+        <a href="https://getbootstrap.com/docs/5.1/utilities/spacing/" target="_blank" rel="noreferrer noopener">Bootstrap syntax</a>.
+    </p>
+
+    <h4>Horizontal Gap</h4>
+
+    <div class="app-gap-x-m">
+        <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
+        <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
+        <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
+        <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
+    </div>
+
+    <h4>Vertical Spacing</h4>
+
+    <div class="d-inline-block app-children-mb-m">
+        <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
+        <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
+        <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
+        <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
+    </div>
+
+    <h2>Grid</h2>
+
+    <div class="row app-docs-grid-colored-row">
+        <div class="col-md-8 app-docs-grid-colored-col">.col-md-8</div>
+        <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
+    </div>
+
+    <br />
+
+    <div class="row app-docs-grid-colored-row">
+        <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
+        <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
+        <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
+    </div>
+
+    <br />
+
+    <div class="row app-docs-grid-colored-row">
+        <div class="col-6 app-docs-grid-colored-col">.col-6</div>
+        <div class="col-6 app-docs-grid-colored-col">.col-6</div>
+    </div>
+</div>

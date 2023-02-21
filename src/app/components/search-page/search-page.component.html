@@ -1,0 +1,29 @@
+<div class="app-container">
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput [formControl]="filterControl" />
+    </mat-form-field>
+
+    <div class="row">
+        <div *ngFor="let profile of profiles$ | async" class="col-sm-6 col-md-4 col-lg-3 mb-m">
+            <mat-card class="mx-auto" style="max-width: 392px">
+                <img mat-card-image [src]="profile.photoUrl" alt="user" />
+
+                <mat-card-title>{{ profile.displayName }}</mat-card-title>
+
+                <mat-card-content>
+                    <p>{{ profile.description }}</p>
+
+                    <dl>
+                        <dt>Height</dt>
+                        <dd>{{ profile.height }} cm</dd>
+                    </dl>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <a mat-button color="primary" routerLink="/profile/{{ profile.id }}/message">Message</a>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

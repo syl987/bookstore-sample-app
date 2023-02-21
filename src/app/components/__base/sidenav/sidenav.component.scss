@@ -1,0 +1,15 @@
+@import 'shared';
+
+a.mat-list-item,
+button.mat-list-item {
+    color: $primary;
+
+    &:hover,
+    &.active {
+        background-color: lighten($primary, 48%);
+    }
+
+    &:focus {
+        background-color: lighten($primary, 45%);
+    }
+}

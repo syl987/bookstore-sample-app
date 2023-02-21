@@ -1,0 +1,95 @@
+<div class="bg-body">
+    <div class="app-container">
+        <mat-stepper class="mx-nm" [orientation]="(stepperOrientation$ | async)!">
+            <mat-step label="Person" [stepControl]="personForm" [state]="getStepState(personForm)">
+                <form [formGroup]="personForm" (ngSubmit)="savePersonData()">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field class="w-100">
+                                <mat-label>Display Name</mat-label>
+                                <input matInput formControlName="displayName" required minlength="3" [pattern]="DISPLAY_NAME_REGEXP" />
+                                <mat-error>{{ personForm.get('displayName') | validationError }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <mat-form-field class="w-100">
+                                <mat-label>Body Type</mat-label>
+                                <mat-select matInput formControlName="bodyType" required>
+                                    <mat-option [value]="BodyType.SLIM">slim</mat-option>
+                                    <mat-option [value]="BodyType.REGULAR">regular</mat-option>
+                                    <mat-option [value]="BodyType.MUSCULAR">muscular</mat-option>
+                                    <mat-option [value]="BodyType.OVERWEIGHT">overweight</mat-option>
+                                </mat-select>
+                                <mat-error>{{ personForm.get('bodyType') | validationError }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <mat-form-field class="w-100">
+                                <mat-label>Body Height</mat-label>
+                                <input matInput formControlName="height" required min="50" max="250" />
+                                <mat-error>{{ personForm.get('height') | validationError }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>Personal Description</mat-label>
+                                <textarea matInput formControlName="description" required minlength="24" [pattern]="DESCRIPTION_REGEXP" rows="1"></textarea>
+                                <mat-error>{{ personForm.get('description') | validationError }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="text-end app-gap-x-2xs">
+                        <button mat-stroked-button color="primary" matStepperNext [disabled]="!personForm.valid">Save & Next</button>
+                        <button mat-stroked-button type="button" matStepperPrevious>Back</button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step label="Images" [state]="getStepState(personForm)">
+                <form [formGroup]="imageForm" (ngSubmit)="saveImageData()">
+                    <div>
+                        <img [src]="photoUrl$ | async" alt="user profile" width="256" height="256" />
+                    </div>
+
+                    <input type="file" class="d-none" accept="image/*" (change)="openCropImageDialog(photopicker.files)" #photopicker />
+
+                    <div class="app-gap-x-2xs">
+                        <button mat-button color="primary" class="my-s" (click)="photopicker.click()">Select Image</button>
+                        <button mat-button class="my-s" (click)="imageForm.get('photo')?.setValue(null)">Reset</button>
+                        <button mat-button color="warn" class="my-s" (click)="deleteProfilePhoto()">Delete</button>
+                    </div>
+
+                    <div class="text-end app-gap-x-2xs">
+                        <button mat-stroked-button color="primary" matStepperNext>Save & Next</button>
+                        <button mat-stroked-button matStepperPrevious>Back</button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step label="Skills" [state]="getStepState(personForm)">
+                <p>This is a section for defining relevant skills.</p>
+
+                <div class="text-end app-gap-x-2xs">
+                    <button mat-stroked-button type="button" matStepperPrevious>Back</button>
+                </div>
+            </mat-step>
+
+            <ng-template matStepperIcon="init">
+                <mat-icon fontIcon="fa-circle-o"></mat-icon>
+            </ng-template>
+
+            <ng-template matStepperIcon="pending">
+                <mat-icon fontIcon="fa-circle-o-notch" inline class="fa-pulse"></mat-icon>
+            </ng-template>
+
+            <ng-template matStepperIcon="error">
+                <mat-icon fontIcon="fa-times"></mat-icon>
+            </ng-template>
+
+            <ng-template matStepperIcon="done">
+                <mat-icon fontIcon="fa-check"></mat-icon>
+            </ng-template>
+        </mat-stepper>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<h3 mat-dialog-title>Crop Image</h3>
+
+<div mat-dialog-content>
+    <image-cropper
+        [imageFile]="file"
+        format="png"
+        [aspectRatio]="1"
+        [resizeToWidth]="256"
+        [resizeToHeight]="256"
+        [cropperMinWidth]="256"
+        [cropperMinHeight]="256"
+        [onlyScaleDown]="true"
+        (imageCropped)="setResult($event)"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+</div>
+
+<mat-dialog-actions>
+    <button mat-flat-button color="primary" [mat-dialog-close]="result">Crop Image</button>
+    <button mat-stroked-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

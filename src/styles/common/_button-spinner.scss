@@ -1,0 +1,24 @@
+.app-button-spinner {
+    transition: background-color 0.3s ease-in-out;
+
+    .mat-button-wrapper,
+    .mat-spinner {
+        opacity: 100;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    &.is-spinning .mat-button-wrapper {
+        opacity: 0;
+    }
+
+    &:not(.is-spinning) .mat-spinner {
+        opacity: 0;
+        display: none;
+    }
+
+    .mat-spinner {
+        position: absolute;
+        top: calc(50% - 10px);
+        left: calc(50% - 10px);
+    }
+}

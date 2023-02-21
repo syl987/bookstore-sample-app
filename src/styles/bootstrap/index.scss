@@ -1,0 +1,46 @@
+@import 'bootstrap/scss/mixins/banner';
+@include bsBanner('');
+
+// Configuration
+
+@import 'bootstrap/scss/functions';
+@import 'variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'utilities';
+
+// Content
+
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/type';
+
+// Layout
+
+/* @import 'bootstrap/scss/containers'; */
+@import 'bootstrap/scss/grid';
+
+// Components
+
+/* @import 'bootstrap/scss/breadcrumb'; */
+
+// Features
+
+@import 'bootstrap/scss/transitions';
+
+// Helpers
+
+@import 'bootstrap/scss/helpers/clearfix';
+/* @import 'bootstrap/scss/helpers/color-bg'; */
+/* @import 'bootstrap/scss/helpers/colored-links'; */
+/* @import 'bootstrap/scss/helpers/ratio'; */
+/* @import 'bootstrap/scss/helpers/position'; */
+/* @import 'bootstrap/scss/helpers/stacks'; */
+@import 'bootstrap/scss/helpers/visually-hidden';
+/* @import 'bootstrap/scss/helpers/stretched-link'; */
+@import 'bootstrap/scss/helpers/text-truncation';
+/* @import 'bootstrap/scss/helpers/vr'; */
+
+// Utilities
+
+@import 'bootstrap/scss/utilities/api';

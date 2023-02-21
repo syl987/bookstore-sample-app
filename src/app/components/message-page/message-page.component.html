@@ -1,0 +1,7 @@
+<div class="app-container">
+    <div *ngIf="otherProfile$ | async as profile">
+        <p>
+            Message history with <strong>{{ profile.displayName }}</strong>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<mat-toolbar class="shadow-sm">
+    <mat-toolbar-row>
+        <ng-container *ngIf="showToggle$ | async">
+            <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="fs-l app-sidebar-toggle">
+                <mat-icon fontIcon="fa-bars"></mat-icon>
+            </button>
+
+            <div class="text-primary fs-m me-s">{{ title$ | async }}</div>
+        </ng-container>
+
+        <ng-container *ngIf="showNavs$ | async">
+            <div class="text-primary fs-l me-s">{{ config.appName }}</div>
+
+            <a mat-button color="primary" routerLink="/home" routerLinkActive="active" class="px-2xs">Home</a>
+
+            <a mat-button color="primary" routerLink="/search" routerLinkActive="active" class="px-2xs">Search</a>
+
+            <a mat-button color="primary" routerLink="/user/profile" routerLinkActive="active" class="px-2xs">Profile</a>
+
+            <a *ngIf="!production" mat-button color="primary" routerLink="/dev" routerLinkActive="active" class="px-2xs">Dev</a>
+        </ng-container>
+
+        <span class="ms-2xs me-auto"></span>
+
+        <ng-container *ngIf="showNavs$ | async">
+            <ng-container *ngIf="user$ | async as user; else login">
+                <button mat-button (click)="openUserSettingsDialog(user)">
+                    <div *ngIf="user?.displayName" class="position-relative">
+                        <div class="d-flex align-items-center">
+                            <div class="fs-s fw-400 text-truncate" style="max-width: 256px">{{ user?.displayName }}</div>
+                            <img *ngIf="user?.photoURL" [src]="user?.photoURL" alt="user" width="40" height="40" class="ms-s rounded-circle" (error)="photo.classList.add('visually-hidden')" #photo />
+                        </div>
+                    </div>
+                </button>
+
+                <div class="border-end" style="height: 32px"></div>
+
+                <button mat-button color="primary" (click)="logout()" class="me-ns">Logout</button>
+            </ng-container>
+
+            <ng-template #login>
+                <a *ngIf="showLogin$ | async" mat-button color="primary" routerLink="/login" class="me-ns">Login</a>
+            </ng-template>
+        </ng-container>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="app-container bg-light">
+    <div class="mt-2xs"></div>
+
+    <h1 *ngIf="showNavs$ | async">{{ title$ | async }}</h1>
+</div>

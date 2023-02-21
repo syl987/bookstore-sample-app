@@ -1,0 +1,14 @@
+// unified entry file for component imports
+//
+// import any mixins, variables and functions that can be shared accross components
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/mixins';
+
+@import '../bootstrap/variables';
+@import '../material/typography';
+@import '../material/palette';
+
+@import '../variables';
+@import '../functions';
+@import '../mixins';

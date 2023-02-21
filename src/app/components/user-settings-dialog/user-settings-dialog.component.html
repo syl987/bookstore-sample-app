@@ -1,0 +1,35 @@
+<h3 mat-dialog-title>User Settings</h3>
+
+<div mat-dialog-content>
+    <dl class="row">
+        <div class="col-sm-6">
+            <dt>Name</dt>
+            <dd>{{ user.displayName }}</dd>
+        </div>
+        <div class="col-sm-6">
+            <dt>Last Login</dt>
+            <dd>{{ user.metadata.lastLoginAt | date }}</dd>
+        </div>
+        <div class="col-sm-6">
+            <dt>Email</dt>
+            <dd>{{ user.email }}</dd>
+        </div>
+        <div class="col-sm-6">
+            <dt>Phone Number</dt>
+            <dd>{{ user.phoneNumber || 'none' }}</dd>
+        </div>
+        <div class="col-sm-6">
+            <dt>Providers</dt>
+            <dd>{{ getProviders(user) }}</dd>
+        </div>
+        <div class="col-sm-6">
+            <dt>Email Verified</dt>
+            <dd>{{ user.emailVerified }}</dd>
+        </div>
+    </dl>
+</div>
+
+<div mat-dialog-actions>
+    <!-- <button mat-flat-button color="primary" mat-dialog-close="action">Action</button> -->
+    <button mat-stroked-button color="primary" mat-dialog-close>Close</button>
+</div>
