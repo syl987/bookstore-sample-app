@@ -28,12 +28,10 @@ export const reducers: ActionReducerMap<AppState> = {
 
 export const entityDataConfig: AppEntityDataModuleConfig = {
     entityMetadata: {
-        // TODO brands
-        // TODO models
-        [EntityType.CAR]: {
+        [EntityType.BOOK]: {
             selectId: entity => entity.id,
             // sortComparer: stringPropComparerDesc('createdAt'), // TODO add more meta props
-            filterFn: PropsFilterFnFactory(['description', 'modelName']), // TODO add more?
+            filterFn: PropsFilterFnFactory(['id']), // TODO sub-props?
         },
     },
 };
