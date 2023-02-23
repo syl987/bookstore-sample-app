@@ -23,18 +23,18 @@ export const authConfig: AuthConfig = {
 
 export const appDataServiceConfig: AppFirebaseDataServiceConfig = {
     entityHttpResourceUrls: {
-        [EntityType.CAR]: {
-            collectionResourceUrl: 'cars',
+        [EntityType.BOOK]: {
+            collectionResourceUrl: 'books',
         },
     },
 };
 
 export const appEntityNames: AppEntityDisplayNameMap = {
-    [EntityType.CAR]: `Car`,
+    [EntityType.BOOK]: `Book`,
 };
 
 export const appEntityPluralNames: AppEntityDisplayNameMap = {
-    [EntityType.CAR]: `Cars`,
+    [EntityType.BOOK]: `Books`,
 };
 
 export const appStrings: AppStrings = {};
