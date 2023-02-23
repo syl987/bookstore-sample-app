@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "silly-carbook-example-app": {
+        "silly-bookstore-example-app": {
             "projectType": "application",
             "root": "",
             "sourceRoot": "src",
@@ -12,7 +12,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/silly-carbook-example-app",
+                        "outputPath": "dist/silly-bookstore-example-app",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -61,10 +61,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "silly-carbook-example-app:build:production"
+                            "browserTarget": "silly-bookstore-example-app:build:production"
                         },
                         "development": {
-                            "browserTarget": "silly-carbook-example-app:build:development"
+                            "browserTarget": "silly-bookstore-example-app:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "silly-carbook-example-app:build"
+                        "browserTarget": "silly-bookstore-example-app:build"
                     }
                 },
                 "lint": {
@@ -86,7 +86,7 @@
                     "options": {
                         "prerender": false,
                         "ssr": false,
-                        "browserTarget": "silly-carbook-example-app:build:production",
+                        "browserTarget": "silly-bookstore-example-app:build:production",
                         "firebaseProject": "sample-app-a00e0",
                         "firebaseHostingSite": "sample-app-a00e0"
                     }

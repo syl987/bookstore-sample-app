@@ -3,8 +3,8 @@ import { AuthConfig } from './models/auth.models';
 import { EntityType } from './models/entity.models';
 
 export const appConfig: AppConfig = {
-    appName: 'SillyCarbookExampleApp',
-    copyrightName: 'SillyCarbookExampleApp',
+    appName: 'SillyBookstoreExampleApp',
+    copyrightName: 'SillyBookstoreExampleApp',
 };
 
 export const authConfig: AuthConfig = {
