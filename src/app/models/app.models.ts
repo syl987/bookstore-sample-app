@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { EntityDataModuleConfig, EntityMetadata, HttpResourceUrls } from '@ngrx/data';
 
-import { BookDTO } from './book.models';
+import { BookArticleDTO } from './book.models';
 import { EntityType } from './entity.models';
 
 /**
@@ -32,13 +32,13 @@ export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');
  */
 export interface AppEntityDataModuleConfig extends EntityDataModuleConfig {
     entityMetadata: {
-        [EntityType.BOOK]: Partial<EntityMetadata<BookDTO>>;
+        [EntityType.BOOK_ARTICLE]: Partial<EntityMetadata<BookArticleDTO>>;
     };
 }
 
 export interface AppFirebaseDataServiceConfig {
     entityHttpResourceUrls: {
-        [EntityType.BOOK]: Pick<HttpResourceUrls, 'collectionResourceUrl'>;
+        [EntityType.BOOK_ARTICLE]: Pick<HttpResourceUrls, 'collectionResourceUrl'>;
     };
 }
 
@@ -46,7 +46,7 @@ export interface AppFirebaseDataServiceConfig {
  * Type-safe entity display name map.
  */
 export interface AppEntityDisplayNameMap {
-    [EntityType.BOOK]: string;
+    [EntityType.BOOK_ARTICLE]: string;
 }
 
 export const APP_ENTITY_NAMES = new InjectionToken<Partial<AppEntityDisplayNameMap>>('APP_ENTITY_NAMES');

@@ -1,4 +1,6 @@
-export interface RouteParams {}
+export interface RouteParams {
+    bookArticleId?: string;
+}
 
 export interface RouteQueryParams {}
 

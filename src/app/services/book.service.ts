@@ -1,18 +1,31 @@
 import { Injectable } from '@angular/core';
 import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } from '@ngrx/data';
-import { map, Observable, shareReplay } from 'rxjs';
+import { createSelector, select } from '@ngrx/store';
+import { combineLatest, map, Observable, shareReplay } from 'rxjs';
 
-import { BookDTO } from '../models/book.models';
+import { getEntityById } from '../helpers/entity.helpers';
+import { BookArticleDTO } from '../models/book.models';
 import { EntityType } from '../models/entity.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
+import { selectRouterParams } from '../store/router/router.selectors';
 import { GoogleBooksApiService } from './api/google-books-api.service';
+
+const selectKeyByRouterParamId = createSelector(selectRouterParams, params => params?.bookArticleId);
 
 @Injectable({
     providedIn: 'root',
 })
-export class BookService extends EntityCollectionServiceBase<BookDTO> {
+export class BookArticleService extends EntityCollectionServiceBase<BookArticleDTO> {
+    readonly keyByRouterParamId$ = this.store.pipe(select(selectKeyByRouterParamId));
+
+    readonly entityByRouterParamId$ = combineLatest([this.selectors$.entityMap$, this.keyByRouterParamId$]).pipe(map(getEntityById));
+
     constructor(f: EntityCollectionServiceElementsFactory, private readonly googleBooksApi: GoogleBooksApiService) {
-        super(EntityType.BOOK, f);
+        super(EntityType.BOOK_ARTICLE, f);
+    }
+
+    selectEntityByKey(key: string): Observable<BookArticleDTO | undefined> {
+        return this.store.pipe(select(createSelector(this.selectors.selectEntityMap.bind(this), entities => entities[key])));
     }
 
     searchVolumes(query: string): Observable<GoogleBooksVolumeDTO[]> {
