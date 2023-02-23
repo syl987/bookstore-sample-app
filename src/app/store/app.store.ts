@@ -11,19 +11,15 @@ import * as fromAuth from './auth/auth.reducer';
 import { EntityToastEffects } from './entity/entity-toast.effects';
 import { EntityUndoEffects } from './entity/entity-undo.effects';
 import { RouterEffects } from './router/router.effects';
-import { UserEffects } from './user/user.effects';
-import * as fromUser from './user/user.reducer';
 
 interface AppState {
     router: RouterReducerState<MinimalRouterStateSnapshot>;
     [fromAuth.authFeatureKey]: fromAuth.State;
-    [fromUser.userFeatureKey]: fromUser.State;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
     router: routerReducer,
     [fromAuth.authFeatureKey]: fromAuth.reducer,
-    [fromUser.userFeatureKey]: fromUser.reducer,
 };
 
 export const entityDataConfig: AppEntityDataModuleConfig = {
@@ -36,7 +32,7 @@ export const entityDataConfig: AppEntityDataModuleConfig = {
     },
 };
 
-export const effects = [AuthEffects, UserEffects, RouterEffects, EntityUndoEffects, EntityToastEffects];
+export const effects = [AuthEffects, RouterEffects, EntityUndoEffects, EntityToastEffects];
 
 export const storeConfig: RootStoreConfig<AppState> = {
     metaReducers: environment.production ? [] : [consoleLogMetaReducer],

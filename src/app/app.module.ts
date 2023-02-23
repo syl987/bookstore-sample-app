@@ -38,7 +38,7 @@ import { ErrorResponseInterceptor } from './interceptors/error-response.intercep
 import { APP_CONFIG, APP_ENTITY_NAMES, APP_ENTITY_PLURAL_NAMES, APP_STRINGS } from './models/app.models';
 import { AUTH_CONFIG } from './models/auth.models';
 import { SharedModule } from './modules/shared/shared.module';
-import { AppDataServiceFactory } from './services/data/data-service-factory';
+import { AppDataServiceFactory } from './services/__data/data-service-factory';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, entityDataConfig, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 

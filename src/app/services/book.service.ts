@@ -8,7 +8,7 @@ import { BookArticleDTO } from '../models/book.models';
 import { EntityType } from '../models/entity.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import { selectRouterParams } from '../store/router/router.selectors';
-import { GoogleBooksApiService } from './api/google-books-api.service';
+import { GoogleBooksApiService } from './__api/google-books-api.service';
 
 const selectKeyByRouterParamId = createSelector(selectRouterParams, params => params?.bookArticleId);
 
@@ -22,10 +22,6 @@ export class BookArticleService extends EntityCollectionServiceBase<BookArticleD
 
     constructor(f: EntityCollectionServiceElementsFactory, private readonly googleBooksApi: GoogleBooksApiService) {
         super(EntityType.BOOK_ARTICLE, f);
-    }
-
-    selectEntityByKey(key: string): Observable<BookArticleDTO | undefined> {
-        return this.store.pipe(select(createSelector(this.selectors.selectEntityMap.bind(this), entities => entities[key])));
     }
 
     searchVolumes(query: string): Observable<GoogleBooksVolumeDTO[]> {
