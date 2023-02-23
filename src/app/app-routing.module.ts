@@ -3,11 +3,11 @@ import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
+import { BookArticleDetailPageComponent } from './components/book-article-detail-page/book-article-detail-page.component';
+import { BookArticleEditPageComponent } from './components/book-article-edit-page/book-article-edit-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
-import { MessagePageComponent } from './components/message-page/message-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
-import { UserProfilePageComponent } from './components/user-profile-page/user-profile-page.component';
 
 const routes: Routes = [
     {
@@ -34,18 +34,18 @@ const routes: Routes = [
             },
             {
                 path: 'search',
-                title: `Profile Search`,
+                title: `Search Results`,
                 component: SearchPageComponent,
             },
             {
-                path: 'profile/:profileId/message',
-                title: `Direct Messages`,
-                component: MessagePageComponent,
+                path: 'articles/books/:bookArticleId/edit',
+                title: `Book Details`,
+                component: BookArticleEditPageComponent,
             },
             {
-                path: 'user/profile',
-                title: `Your Profile`,
-                component: UserProfilePageComponent,
+                path: 'articles/books/:bookArticleId',
+                title: `Book Details`,
+                component: BookArticleDetailPageComponent,
             },
         ],
     },

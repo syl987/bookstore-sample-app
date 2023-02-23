@@ -25,12 +25,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './components/__base/footer/footer.component';
 import { HeaderComponent } from './components/__base/header/header.component';
 import { SidenavComponent } from './components/__base/sidenav/sidenav.component';
+import { BookArticleDetailPageComponent } from './components/book-article-detail-page/book-article-detail-page.component';
+import { BookArticleEditPageComponent } from './components/book-article-edit-page/book-article-edit-page.component';
 import { CropImageDialogComponent } from './components/crop-image-dialog/crop-image-dialog.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
-import { MessagePageComponent } from './components/message-page/message-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
-import { UserProfilePageComponent } from './components/user-profile-page/user-profile-page.component';
 import { UserSettingsDialogComponent } from './components/user-settings-dialog/user-settings-dialog.component';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
@@ -72,10 +72,10 @@ registerLocaleData(localeDe);
         LoginPageComponent,
         HomePageComponent,
         SearchPageComponent,
-        MessagePageComponent,
-        UserProfilePageComponent,
         UserSettingsDialogComponent,
         CropImageDialogComponent,
+        BookArticleDetailPageComponent,
+        BookArticleEditPageComponent,
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'de-DE' },
