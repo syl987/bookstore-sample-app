@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { DESCRIPTION_REGEXP, DISPLAY_NAME_REGEXP } from 'src/app/models/regexp.models';
 
 @Pipe({
     name: 'validationError',
@@ -33,9 +32,6 @@ export class ValidationErrorPipe implements PipeTransform {
         }
         if (control.hasError('pattern')) {
             switch (control.getError('pattern').requiredPattern) {
-                case DISPLAY_NAME_REGEXP:
-                case DESCRIPTION_REGEXP:
-                    return `Contains invalid characters`;
                 default:
                     return `Invalid text`;
             }

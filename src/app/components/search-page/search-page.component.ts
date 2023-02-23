@@ -12,7 +12,7 @@ import { BookArticleService } from 'src/app/services/book.service';
 export class SearchPageComponent implements OnInit, OnDestroy {
     readonly filterControl = new FormControl('', { nonNullable: true });
 
-    readonly profiles$ = this.bookArticleService.filteredEntities$;
+    readonly bookArticles$ = this.bookArticleService.filteredEntities$;
 
     private readonly _destroyed$ = new Subject<void>();
 

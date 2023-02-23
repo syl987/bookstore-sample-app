@@ -39,8 +39,9 @@ const routes: Routes = [
             },
             {
                 path: 'articles/books/:bookArticleId/edit',
-                title: `Book Details`,
+                title: `Edit Book Details`,
                 component: BookArticleEditPageComponent,
+                // TODO guard own article only
             },
             {
                 path: 'articles/books/:bookArticleId',
