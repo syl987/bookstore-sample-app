@@ -51,7 +51,7 @@ export class AppDataService<T> implements EntityCollectionDataService<T> {
     }
 
     update(update: Update<T>): Observable<T> {
-        return this.dataService.update(this.path, update.id as string, update.changes);
+        return this.dataService.update(this.path, update.id + '', update.changes);
     }
 
     delete(id: string): Observable<string> {
