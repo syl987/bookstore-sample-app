@@ -2,6 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 import { ApplicationRef, DEFAULT_CURRENCY_CODE, DoBootstrap, LOCALE_ID, NgModule } from '@angular/core';
+import { FirebaseOptions } from '@angular/fire/app';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
@@ -44,12 +45,23 @@ import { effects, entityDataConfig, reducers, routerStoreConfig, storeConfig } f
 
 registerLocaleData(localeDe);
 
+const firebaseOptions: FirebaseOptions = {
+  apiKey: 'AIzaSyDrisPHet7H7y-G9GjVoJZFReIp-xqgnjo',
+  authDomain: 'sample-app-a00e0.firebaseapp.com',
+  databaseURL: 'https://sample-app-a00e0-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'sample-app-a00e0',
+  storageBucket: 'sample-app-a00e0.appspot.com',
+  messagingSenderId: '996177241422',
+  appId: '1:996177241422:web:c989fc969fe444ed99ea1f',
+  measurementId: 'G-1MVY64K4ZT',
+};
+
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(firebaseOptions),
     AngularFireAuthModule,
     AngularFireAuthGuardModule,
     AngularFireFunctionsModule,
