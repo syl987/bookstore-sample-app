@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { DefaultDataServiceConfig, DefaultDataServiceFactory, EntityCollectionDataService, EntityDefinitionService, QueryParams } from '@ngrx/data';
+import { DefaultDataServiceConfig, DefaultDataServiceFactory, EntityCollectionDataService, EntityDefinitionService } from '@ngrx/data';
+import { HttpOptions } from '@ngrx/data/src/dataservices/interfaces';
 import { IdSelector, Update } from '@ngrx/entity';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -30,7 +31,7 @@ export class AppDataService<T> implements EntityCollectionDataService<T> {
         }
     }
 
-    getWithQuery(params: string | QueryParams): Observable<T[]> {
+    getWithQuery(params: string | HttpOptions): Observable<T[]> {
         throw new Error('Method not implemented.');
     }
 
