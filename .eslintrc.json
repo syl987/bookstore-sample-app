@@ -44,7 +44,6 @@
         "rxjs/no-internal": "warn",
         "rxjs/no-nested-subscribe": "warn",
         "rxjs/no-redundant-notify": "warn",
-        "rxjs/no-sharereplay": ["warn", { "allowConfig": true }],
         "rxjs/no-subject-unsubscribe": "warn",
         "rxjs/no-unbound-methods": "warn",
         "rxjs/no-unsafe-takeuntil": "warn",
@@ -110,6 +109,7 @@
           "warn",
           { "prefer": "parameter-property", "allow": ["readonly", "protected readonly", "private readonly"] }
         ],
+        "@typescript-eslint/prefer-nullish-coalescing": "off", // recommended override: sometimes intended
         "@typescript-eslint/prefer-readonly": "warn",
 
         // ==== @typescript-eslint: extension rules ====
