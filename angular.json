@@ -81,12 +81,6 @@
             "browserTarget": "silly-bookstore-example-app:build"
           }
         },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
-          }
-        },
         "deploy": {
           "builder": "@angular/fire:deploy",
           "options": {
@@ -138,8 +132,7 @@
     "@ngrx/schematics:container": {
       "changeDetection": "OnPush",
       "inlineStyle": true,
-      "style": "scss",
-      "lintFix": true
+      "style": "scss"
     },
     "@ngrx/schematics:store": {
       "statePath": "store",
@@ -179,16 +172,10 @@
       "flat": false,
       "api": true,
       "skipTests": true
-    },
-    "@angular-eslint/schematics:application": {
-      "setParserOptionsProject": true
-    },
-    "@angular-eslint/schematics:library": {
-      "setParserOptionsProject": true
     }
   },
   "cli": {
-    "schematicCollections": ["@angular-eslint/schematics", "@ngrx/schematics", "@schematics/angular"],
+    "schematicCollections": ["@ngrx/schematics", "@schematics/angular"],
     "packageManager": "npm",
     "analytics": false
   }

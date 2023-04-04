@@ -3,13 +3,9 @@
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.organizeImports": false
+    "source.organizeImports": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.options": {
-    "extensions": [".ts", ".html"]
-  },
   "extensions.ignoreRecommendations": false,
   "typescript.tsdk": "node_modules/typescript/lib"
 }

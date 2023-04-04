@@ -9,7 +9,6 @@ export function safeToString(value: unknown): string {
     case 'function':
       return '[function Function]';
     default:
-      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       return value + '';
   }
 }
