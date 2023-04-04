@@ -1,4 +1,4 @@
-import { MatLegacyTooltipDefaultOptions as MatTooltipDefaultOptions } from '@angular/material/legacy-tooltip';
+import { MatTooltipDefaultOptions } from '@angular/material/tooltip';
 
 export const tooltipOptions: MatTooltipDefaultOptions = {
   touchendHideDelay: 1500,
