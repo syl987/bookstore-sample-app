@@ -10,44 +10,46 @@ import { RouterService } from 'src/app/services/router.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-    readonly user$ = this.authService.user$;
+  readonly user$ = this.authService.user$;
 
-    readonly showToggle$ = this.observer.observe([Breakpoints.XSmall]).pipe(
-        map(({ matches }) => matches),
-        distinctUntilChanged(),
-    );
+  readonly showToggle$ = this.observer.observe([Breakpoints.XSmall]).pipe(
+    map(({ matches }) => matches),
+    distinctUntilChanged()
+  );
 
-    readonly showNavs$ = this.showToggle$.pipe(map(show => !show));
+  readonly showNavs$ = this.showToggle$.pipe(map(show => !show));
 
-    readonly showLogin$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
+  readonly showLogin$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
 
-    readonly title$ = this.routerService.title$;
+  readonly title$ = this.routerService.title$;
 
-    readonly toolbarTitle$ = combineLatest([this.showNavs$, this.title$]).pipe(map(([showNavs, title]) => (showNavs ? this.config.appName : title)));
+  readonly toolbarTitle$ = combineLatest([this.showNavs$, this.title$]).pipe(
+    map(([showNavs, title]) => (showNavs ? this.config.appName : title))
+  );
 
-    readonly production = environment.production;
+  readonly production = environment.production;
 
-    @Output() readonly sidenavToggle = new EventEmitter<void>();
+  @Output() readonly sidenavToggle = new EventEmitter<void>();
 
-    constructor(
-        @Inject(APP_CONFIG) readonly config: AppConfig,
-        private readonly observer: BreakpointObserver,
-        private readonly authService: AuthService,
-        private readonly routerService: RouterService,
-        private readonly dialogService: DialogService,
-    ) {}
+  constructor(
+    @Inject(APP_CONFIG) readonly config: AppConfig,
+    private readonly observer: BreakpointObserver,
+    private readonly authService: AuthService,
+    private readonly routerService: RouterService,
+    private readonly dialogService: DialogService
+  ) {}
 
-    openUserSettingsDialog(user: AuthUser): void {
-        this.dialogService.openUserSettingsDialog(user);
-    }
+  openUserSettingsDialog(user: AuthUser): void {
+    this.dialogService.openUserSettingsDialog(user);
+  }
 
-    logout(): void {
-        this.authService.logout();
-    }
+  logout(): void {
+    this.authService.logout();
+  }
 }

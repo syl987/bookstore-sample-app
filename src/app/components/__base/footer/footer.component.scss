@@ -4,17 +4,17 @@
 $footer-mobile-breakpoint: 599px;
 
 .app-flex-column-reverse-mobile {
-    @media (max-width: $footer-mobile-breakpoint) {
-        flex-direction: column-reverse !important;
-    }
+  @media (max-width: $footer-mobile-breakpoint) {
+    flex-direction: column-reverse !important;
+  }
 }
 
 .app-me-ns {
-    margin-right: -1 * app-spacer(s) !important;
+  margin-right: -1 * app-spacer(s) !important;
 }
 
 .app-me-0-mobile {
-    @media (max-width: $footer-mobile-breakpoint) {
-        margin-right: 0 !important;
-    }
+  @media (max-width: $footer-mobile-breakpoint) {
+    margin-right: 0 !important;
+  }
 }

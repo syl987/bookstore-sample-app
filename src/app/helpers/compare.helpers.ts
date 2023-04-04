@@ -8,8 +8,8 @@ import { Comparer } from '@ngrx/entity';
  * @experimental
  */
 export function stringPropComparerAsc<T, P extends keyof T>(propName: P): T[P] extends string | null | undefined ? Comparer<T> : unknown {
-    const result: Comparer<T> = (a, b) => (a[propName] && b[propName] ? (a[propName] as any).localeCompare(b[propName]) : 0);
-    return result as any;
+  const result: Comparer<T> = (a, b) => (a[propName] && b[propName] ? (a[propName] as any).localeCompare(b[propName]) : 0);
+  return result as any;
 }
 
 /**
@@ -20,6 +20,6 @@ export function stringPropComparerAsc<T, P extends keyof T>(propName: P): T[P] e
  * @experimental
  */
 export function stringPropComparerDesc<T, P extends keyof T>(propName: P): T[P] extends string | null | undefined ? Comparer<T> : unknown {
-    const result: Comparer<T> = (b, a) => (a[propName] && b[propName] ? (a[propName] as any).localeCompare(b[propName]) : 0);
-    return result as any;
+  const result: Comparer<T> = (b, a) => (a[propName] && b[propName] ? (a[propName] as any).localeCompare(b[propName]) : 0);
+  return result as any;
 }

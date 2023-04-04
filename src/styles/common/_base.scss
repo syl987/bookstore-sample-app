@@ -1,6 +1,6 @@
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 // Future-proof rule: in browsers that support :focus-visible, suppress the focus outline
@@ -13,5 +13,5 @@ body {
 // and https://developer.paciellogroup.com/blog/2018/03/focus-visible-and-backwards-compatibility/
 
 [tabindex='-1']:focus:not(:focus-visible) {
-    outline: 0 !important;
+  outline: 0 !important;
 }

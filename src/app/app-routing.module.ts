@@ -10,58 +10,58 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { SearchPageComponent } from './components/search-page/search-page.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: '/home',
-    },
-    {
-        path: 'login',
-        title: `Login`,
-        component: LoginPageComponent,
-        canActivate: [AngularFireAuthGuard],
-        data: { authGuardPipe: () => redirectLoggedInTo('/home') },
-    },
-    {
-        path: '',
-        canActivate: [AngularFireAuthGuard],
-        data: { authGuardPipe: () => redirectUnauthorizedTo('/login') },
-        children: [
-            {
-                path: 'home',
-                title: `Home`,
-                component: HomePageComponent,
-            },
-            {
-                path: 'search',
-                title: `Search Results`,
-                component: SearchPageComponent,
-            },
-            {
-                path: 'articles/books/:bookArticleId/edit',
-                title: `Edit Book Details`,
-                component: BookArticleEditPageComponent,
-                // TODO guard own article only
-            },
-            {
-                path: 'articles/books/:bookArticleId',
-                title: `Book Details`,
-                component: BookArticleDetailPageComponent,
-            },
-        ],
-    },
-    {
-        path: '**',
-        redirectTo: '/home',
-    },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/home',
+  },
+  {
+    path: 'login',
+    title: `Login`,
+    component: LoginPageComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: () => redirectLoggedInTo('/home') },
+  },
+  {
+    path: '',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: () => redirectUnauthorizedTo('/login') },
+    children: [
+      {
+        path: 'home',
+        title: `Home`,
+        component: HomePageComponent,
+      },
+      {
+        path: 'search',
+        title: `Search Results`,
+        component: SearchPageComponent,
+      },
+      {
+        path: 'articles/books/:bookArticleId/edit',
+        title: `Edit Book Details`,
+        component: BookArticleEditPageComponent,
+        // TODO guard own article only
+      },
+      {
+        path: 'articles/books/:bookArticleId',
+        title: `Book Details`,
+        component: BookArticleDetailPageComponent,
+      },
+    ],
+  },
+  {
+    path: '**',
+    redirectTo: '/home',
+  },
 ];
 
 if (!environment.production) {
-    routes.splice(routes.length - 1, 0, { path: 'dev', loadChildren: () => import('./modules/dev/dev.module').then(m => m.DevModule) });
+  routes.splice(routes.length - 1, 0, { path: 'dev', loadChildren: () => import('./modules/dev/dev.module').then(m => m.DevModule) });
 }
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
-    exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

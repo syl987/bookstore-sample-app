@@ -1,19 +1,19 @@
 @use '@angular/material' as mat;
 
 .mat-form-field-appearance-outline .mat-form-field-outline-start {
-    border-top-left-radius: $border-radius !important;
-    border-bottom-left-radius: $border-radius !important;
+  border-top-left-radius: $border-radius !important;
+  border-bottom-left-radius: $border-radius !important;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline-end {
-    border-top-right-radius: $border-radius !important;
-    border-bottom-right-radius: $border-radius !important;
+  border-top-right-radius: $border-radius !important;
+  border-bottom-right-radius: $border-radius !important;
 }
 
 .mat-form-field label {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .mat-form-field-required-marker {
-    color: mat.get-color-from-palette($app-warn) !important;
+  color: mat.get-color-from-palette($app-warn) !important;
 }

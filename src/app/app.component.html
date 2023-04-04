@@ -1,15 +1,15 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav fixedInViewport role="navigation" class="px-2xs" style="min-width: 180px">
-        <app-sidenav (navigated)="sidenav.close()"></app-sidenav>
-    </mat-sidenav>
+  <mat-sidenav #sidenav fixedInViewport role="navigation" class="px-2xs" style="min-width: 180px">
+    <app-sidenav (navigated)="sidenav.close()"></app-sidenav>
+  </mat-sidenav>
 
-    <mat-sidenav-content class="d-flex flex-column min-vh-100" role="main">
-        <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+  <mat-sidenav-content class="d-flex flex-column min-vh-100" role="main">
+    <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
 
-        <div class="flex-grow-1 d-flex flex-column">
-            <router-outlet></router-outlet>
-        </div>
+    <div class="flex-grow-1 d-flex flex-column">
+      <router-outlet></router-outlet>
+    </div>
 
-        <app-footer></app-footer>
-    </mat-sidenav-content>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
 </mat-sidenav-container>

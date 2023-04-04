@@ -4,15 +4,15 @@
 .mat-stroked-button,
 .mat-flat-button,
 .mat-flat-button {
-    border-radius: $border-radius !important;
+  border-radius: $border-radius !important;
 }
 
 // make buttons with visible box broader
 .mat-flat-button,
 .mat-stroked-button,
 .mat-flat-button {
-    padding-right: spacer(m) !important;
-    padding-left: spacer(m) !important;
+  padding-right: spacer(m) !important;
+  padding-left: spacer(m) !important;
 }
 
 .mat-button,
@@ -20,34 +20,34 @@
 .mat-flat-button,
 .mat-flat-button,
 .mat-mini-fab {
-    line-height: 30px !important;
+  line-height: 30px !important;
 }
 
 .mat-icon-button {
-    width: 30px;
-    height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .mat-stroked-button {
-    line-height: 28px !important;
+  line-height: 28px !important;
 
-    &.mat-primary:not([disabled]) {
-        background-color: rgba(mat.get-color-from-palette($app-primary), 0.08);
-        border-color: mat.get-color-from-palette($app-primary);
-    }
-    &.mat-accent:not([disabled]) {
-        background-color: rgba(mat.get-color-from-palette($app-accent), 0.08);
-        border-color: mat.get-color-from-palette($app-accent);
-    }
-    &.mat-warn:not([disabled]) {
-        background-color: rgba(mat.get-color-from-palette($app-warn), 0.08);
-        border-color: mat.get-color-from-palette($app-warn);
-    }
-    &[disabled] {
-        background-color: rgba(0, 0, 0, 0.04);
-        border-color: currentColor;
-    }
-    &:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
-        border-color: rgba(0, 0, 0, 0.32);
-    }
+  &.mat-primary:not([disabled]) {
+    background-color: rgba(mat.get-color-from-palette($app-primary), 0.08);
+    border-color: mat.get-color-from-palette($app-primary);
+  }
+  &.mat-accent:not([disabled]) {
+    background-color: rgba(mat.get-color-from-palette($app-accent), 0.08);
+    border-color: mat.get-color-from-palette($app-accent);
+  }
+  &.mat-warn:not([disabled]) {
+    background-color: rgba(mat.get-color-from-palette($app-warn), 0.08);
+    border-color: mat.get-color-from-palette($app-warn);
+  }
+  &[disabled] {
+    background-color: rgba(0, 0, 0, 0.04);
+    border-color: currentColor;
+  }
+  &:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
+    border-color: rgba(0, 0, 0, 0.32);
+  }
 }

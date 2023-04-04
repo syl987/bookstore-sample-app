@@ -1,60 +1,60 @@
 .mat-snack-bar-container {
-    border-radius: $border-radius !important;
-    min-width: 192px !important;
+  border-radius: $border-radius !important;
+  min-width: 192px !important;
 
-    .mat-simple-snack-bar-content {
-        line-height: 24px; // style fix: text beyond the line hight was cut off
-    }
+  .mat-simple-snack-bar-content {
+    line-height: 24px; // style fix: text beyond the line hight was cut off
+  }
 }
 
 .mat-snack-bar-container.success .mat-simple-snackbar,
 .mat-snack-bar-container.warning .mat-simple-snackbar,
 .mat-snack-bar-container.error .mat-simple-snackbar,
 .mat-snack-bar-container.info .mat-simple-snackbar {
-    margin-left: app-spacer(2m);
+  margin-left: app-spacer(2m);
 
-    &::before {
-        font-family: 'FontAwesome';
-        display: inline-block;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        position: absolute;
-        left: app-spacer(s);
-        width: 1.1em;
-        text-align: center;
-    }
+  &::before {
+    font-family: 'FontAwesome';
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    left: app-spacer(s);
+    width: 1.1em;
+    text-align: center;
+  }
 }
 
 .mat-snack-bar-container.success {
-    background-color: lighten($success, 66); // should equal .bg-success-light
-    border: $success 1px solid;
-    color: $body-color;
+  background-color: lighten($success, 66); // should equal .bg-success-light
+  border: $success 1px solid;
+  color: $body-color;
 
-    .mat-simple-snackbar::before {
-        content: '\f00c'; // fa-check
-        color: $success;
-    }
+  .mat-simple-snackbar::before {
+    content: '\f00c'; // fa-check
+    color: $success;
+  }
 }
 
 .mat-snack-bar-container.warn {
-    background-color: lighten($warn, 40); // should equal .bg-warn-light
-    border: $warn 1px solid;
-    color: $body-color;
+  background-color: lighten($warn, 40); // should equal .bg-warn-light
+  border: $warn 1px solid;
+  color: $body-color;
 
-    .mat-simple-snackbar::before {
-        content: '\f00d'; // fa-times
-        color: $warn;
-    }
+  .mat-simple-snackbar::before {
+    content: '\f00d'; // fa-times
+    color: $warn;
+  }
 }
 
 .mat-snack-bar-container.info {
-    background-color: lighten($info, 49); // should equal .bg-info-light
-    border: $info 1px solid;
-    color: $body-color;
+  background-color: lighten($info, 49); // should equal .bg-info-light
+  border: $info 1px solid;
+  color: $body-color;
 
-    .mat-simple-snackbar::before {
-        content: '\f129'; // fa-info
-        color: $info;
-    }
+  .mat-simple-snackbar::before {
+    content: '\f129'; // fa-info
+    color: $info;
+  }
 }

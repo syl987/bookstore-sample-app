@@ -1,7 +1,7 @@
 .mat-card {
-    border-radius: $border-radius !important;
+  border-radius: $border-radius !important;
 }
 
 a.active > .mat-card {
-    box-shadow: 0px 2px 1px -1px lighten($primary, 10%), 0px 1px 1px 0px lighten($primary, 20%), 0px 1px 4px 4px lighten($primary, 30%);
+  box-shadow: 0px 2px 1px -1px lighten($primary, 10%), 0px 1px 1px 0px lighten($primary, 20%), 0px 1px 4px 4px lighten($primary, 30%);
 }

@@ -6,7 +6,7 @@ import { ExampleDevDialogComponent } from './components/example-dev-dialog/examp
 import { DevRoutingModule } from './dev-routing.module';
 
 @NgModule({
-    imports: [SharedModule, DevRoutingModule],
-    declarations: [ComponentsDevPageComponent, ExampleDevDialogComponent],
+  imports: [SharedModule, DevRoutingModule],
+  declarations: [ComponentsDevPageComponent, ExampleDevDialogComponent],
 })
 export class DevModule {}

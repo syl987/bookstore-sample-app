@@ -16,134 +16,134 @@ import * as AuthActions from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
-    readonly authenticated$ = createEffect(() => {
-        return this.fireAuth.authState.pipe(
-            map(state => {
-                if (state) {
-                    return AuthActions.authenticated();
-                }
-                return AuthActions.unauthenticated();
-            }),
-        );
-    });
-
-    readonly loginWithProviderRequest$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(AuthActions.loginWithProvider),
-            exhaustMap(({ providerId: provider }) =>
-                from(this.fireAuth.signInWithPopup(getAuthProvider(provider))).pipe(
-                    map(_ => AuthActions.loginWithProviderSuccess()),
-                    catchError((err: FirebaseError) => of(AuthActions.loginWithProviderError({ error: firebaseError({ error: err }) }))),
-                ),
-            ),
-        );
-    });
-
-    readonly navigateHome$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(AuthActions.loginWithProviderSuccess),
-                map(_ => this.router.navigateByUrl(this.config.afterLoginUrl)),
-            );
-        },
-        { dispatch: false },
+  readonly authenticated$ = createEffect(() => {
+    return this.fireAuth.authState.pipe(
+      map(state => {
+        if (state) {
+          return AuthActions.authenticated();
+        }
+        return AuthActions.unauthenticated();
+      })
     );
+  });
 
-    readonly openLoginErrorToast$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(AuthActions.loginWithProviderError),
-                map(({ error }) => this.toastService.showErrorToast(toResponseErrorMessage(error))),
-            );
-        },
-        { dispatch: false },
+  readonly loginWithProviderRequest$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.loginWithProvider),
+      exhaustMap(({ providerId: provider }) =>
+        from(this.fireAuth.signInWithPopup(getAuthProvider(provider))).pipe(
+          map(_ => AuthActions.loginWithProviderSuccess()),
+          catchError((err: FirebaseError) => of(AuthActions.loginWithProviderError({ error: firebaseError({ error: err }) })))
+        )
+      )
     );
+  });
 
-    readonly logoutRequest$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(AuthActions.logout, AuthActions.authRefreshError, AuthActions.authTokenNotFound, AuthActions.authResponseError),
-            concatMap(_ =>
-                from(this.fireAuth.signOut()).pipe(
-                    map(() => AuthActions.logoutSuccess()),
-                    catchError((err: FirebaseError) => of(AuthActions.logoutError({ error: firebaseError({ error: err }) }))),
-                ),
-            ),
-        );
-    });
+  readonly navigateHome$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.loginWithProviderSuccess),
+        map(_ => this.router.navigateByUrl(this.config.afterLoginUrl))
+      );
+    },
+    { dispatch: false }
+  );
 
-    readonly closeAllDialogs$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(AuthActions.unauthenticated),
-                map(_ => this.dialogService.closeAllDialogs()),
-            );
-        },
-        { dispatch: false },
+  readonly openLoginErrorToast$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.loginWithProviderError),
+        map(({ error }) => this.toastService.showErrorToast(toResponseErrorMessage(error)))
+      );
+    },
+    { dispatch: false }
+  );
+
+  readonly logoutRequest$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.logout, AuthActions.authRefreshError, AuthActions.authTokenNotFound, AuthActions.authResponseError),
+      concatMap(_ =>
+        from(this.fireAuth.signOut()).pipe(
+          map(() => AuthActions.logoutSuccess()),
+          catchError((err: FirebaseError) => of(AuthActions.logoutError({ error: firebaseError({ error: err }) })))
+        )
+      )
     );
+  });
 
-    readonly navigateToLogin$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(AuthActions.unauthenticated),
-                map(_ => this.router.navigateByUrl(this.config.afterLogoutUrl)),
-            );
-        },
-        { dispatch: false },
+  readonly closeAllDialogs$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.unauthenticated),
+        map(_ => this.dialogService.closeAllDialogs())
+      );
+    },
+    { dispatch: false }
+  );
+
+  readonly navigateToLogin$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.unauthenticated),
+        map(_ => this.router.navigateByUrl(this.config.afterLogoutUrl))
+      );
+    },
+    { dispatch: false }
+  );
+
+  readonly resetState$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.unauthenticated),
+      map(_ => AuthActions.resetState())
     );
+  });
 
-    readonly resetState$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(AuthActions.unauthenticated),
-            map(_ => AuthActions.resetState()),
-        );
-    });
+  readonly openLogoutToast$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.logoutSuccess),
+        map(_ => this.toastService.showSuccessToast(this.config.messages.logout))
+      );
+    },
+    { dispatch: false }
+  );
 
-    readonly openLogoutToast$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(AuthActions.logoutSuccess),
-                map(_ => this.toastService.showSuccessToast(this.config.messages.logout)),
-            );
-        },
-        { dispatch: false },
-    );
+  readonly openRefreshErrorToast$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.authRefreshError),
+        map(_ => this.toastService.showErrorToast(this.config.messages.refreshError))
+      );
+    },
+    { dispatch: false }
+  );
 
-    readonly openRefreshErrorToast$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(AuthActions.authRefreshError),
-                map(_ => this.toastService.showErrorToast(this.config.messages.refreshError)),
-            );
-        },
-        { dispatch: false },
-    );
+  readonly openSessionExpiredToast$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.authTokenNotFound),
+        map(_ => this.toastService.showErrorToast(this.config.messages.tokenNotFound))
+      );
+    },
+    { dispatch: false }
+  );
 
-    readonly openSessionExpiredToast$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(AuthActions.authTokenNotFound),
-                map(_ => this.toastService.showErrorToast(this.config.messages.tokenNotFound)),
-            );
-        },
-        { dispatch: false },
-    );
+  readonly openResponseErrorToast$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.authResponseError),
+        map(_ => this.toastService.showInfoToast(this.config.messages.response401))
+      );
+    },
+    { dispatch: false }
+  );
 
-    readonly openResponseErrorToast$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(AuthActions.authResponseError),
-                map(_ => this.toastService.showInfoToast(this.config.messages.response401)),
-            );
-        },
-        { dispatch: false },
-    );
-
-    constructor(
-        @Inject(AUTH_CONFIG) private readonly config: AuthConfig,
-        private readonly actions$: Actions,
-        private readonly router: Router,
-        private readonly fireAuth: AngularFireAuth,
-        private readonly toastService: ToastService,
-        private readonly dialogService: DialogService,
-    ) {}
+  constructor(
+    @Inject(AUTH_CONFIG) private readonly config: AuthConfig,
+    private readonly actions$: Actions,
+    private readonly router: Router,
+    private readonly fireAuth: AngularFireAuth,
+    private readonly toastService: ToastService,
+    private readonly dialogService: DialogService
+  ) {}
 }

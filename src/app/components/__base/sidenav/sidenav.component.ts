@@ -7,31 +7,36 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-sidenav',
-    templateUrl: './sidenav.component.html',
-    styleUrls: ['./sidenav.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavComponent {
-    readonly user$ = this.authService.user$;
-    readonly loggedIn$ = this.authService.loggedIn$;
-    readonly loggedOut$ = this.authService.loggedOut$;
+  readonly user$ = this.authService.user$;
+  readonly loggedIn$ = this.authService.loggedIn$;
+  readonly loggedOut$ = this.authService.loggedOut$;
 
-    readonly production = environment.production;
+  readonly production = environment.production;
 
-    @Output() readonly navigated = new EventEmitter<void>();
+  @Output() readonly navigated = new EventEmitter<void>();
 
-    constructor(@Inject(APP_CONFIG) readonly config: AppConfig, private readonly router: Router, private readonly authService: AuthService, private readonly dialogService: DialogService) {}
+  constructor(
+    @Inject(APP_CONFIG) readonly config: AppConfig,
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly dialogService: DialogService
+  ) {}
 
-    navigateToLogin(): void {
-        this.router.navigateByUrl('/login');
-    }
+  navigateToLogin(): void {
+    this.router.navigateByUrl('/login');
+  }
 
-    openUserSettingsDialog(user: AuthUser): void {
-        this.dialogService.openUserSettingsDialog(user);
-    }
+  openUserSettingsDialog(user: AuthUser): void {
+    this.dialogService.openUserSettingsDialog(user);
+  }
 
-    logout(): void {
-        this.authService.logout();
-    }
+  logout(): void {
+    this.authService.logout();
+  }
 }

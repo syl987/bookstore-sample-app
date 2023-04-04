@@ -1,5 +1,5 @@
 export interface RouteParams {
-    bookArticleId?: string;
+  bookArticleId?: string;
 }
 
 export interface RouteQueryParams {}

@@ -2,43 +2,43 @@
  * Omits properties with `null` values and redefine the input objects type.
  */
 export function omitNullProps<T extends object>(object: { [P in keyof T]: T[P] | null }): Partial<T> {
-    return Object.entries(object).reduce((acc, [key, value]) => {
-        if (value !== null) {
-            return { ...acc, [key]: value };
-        }
-        return acc;
-    }, {});
+  return Object.entries(object).reduce((acc, [key, value]) => {
+    if (value !== null) {
+      return { ...acc, [key]: value };
+    }
+    return acc;
+  }, {});
 }
 
 /**
  * Omits properties with `undefined` values and redefine the input objects type.
  */
 export function omitUndefinedProps<T extends object>(object: Partial<T>): Partial<T> {
-    return Object.entries(object).reduce((acc, [key, value]) => {
-        if (value !== undefined) {
-            return { ...acc, [key]: value };
-        }
-        return acc;
-    }, {});
+  return Object.entries(object).reduce((acc, [key, value]) => {
+    if (value !== undefined) {
+      return { ...acc, [key]: value };
+    }
+    return acc;
+  }, {});
 }
 
 /**
  * Omits properties with `null` or `undefined` values and redefine the input objects type.
  */
 export function omitNonExistingProps<T extends object>(object: { [P in keyof T]?: T[P] | undefined | null }): Partial<T> {
-    return Object.entries(object).reduce((acc, [key, value]) => {
-        if (value != null) {
-            return { ...acc, [key]: value };
-        }
-        return acc;
-    }, {});
+  return Object.entries(object).reduce((acc, [key, value]) => {
+    if (value != null) {
+      return { ...acc, [key]: value };
+    }
+    return acc;
+  }, {});
 }
 
 /**
  * Returns a top level property value of an object by its key.
  */
 export function getProperty<T extends object>(object: T, key: keyof T): T[keyof T] {
-    return object[key];
+  return object[key];
 }
 
 /**
@@ -49,5 +49,5 @@ export function getProperty<T extends object>(object: T, key: keyof T): T[keyof 
  * @returns requested property value or `undefined`, if not found
  */
 export function getNestedProperty(object: object, keys: string): any {
-    return keys.split('.').reduce((result, key) => (result as any)[key], object);
+  return keys.split('.').reduce((result, key) => (result as any)[key], object);
 }

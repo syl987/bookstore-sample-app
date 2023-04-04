@@ -9,7 +9,13 @@ const selectRouterState = createFeatureSelector<RouterReducerState<MinimalRouter
 
 export const selectRouterUrl = getRouterSelectors(selectRouterState).selectUrl as MemoizedSelector<object, string | undefined>;
 export const selectRouterData = getRouterSelectors(selectRouterState).selectRouteData as MemoizedSelector<object, Data | undefined>;
-export const selectRouterParams = getRouterSelectors(selectRouterState).selectRouteParams as MemoizedSelector<object, RouteParams | undefined>; // enhancement: typed params
-export const selectRouterQueryParams = getRouterSelectors(selectRouterState).selectQueryParams as MemoizedSelector<object, RouteQueryParams | undefined>; // enhancement: typed query params
+export const selectRouterParams = getRouterSelectors(selectRouterState).selectRouteParams as MemoizedSelector<
+  object,
+  RouteParams | undefined
+>; // enhancement: typed params
+export const selectRouterQueryParams = getRouterSelectors(selectRouterState).selectQueryParams as MemoizedSelector<
+  object,
+  RouteQueryParams | undefined
+>; // enhancement: typed query params
 export const selectRouterFragment = getRouterSelectors(selectRouterState).selectFragment as MemoizedSelector<object, string | undefined>;
 export const selectRouterTitle = getRouterSelectors(selectRouterState).selectTitle as MemoizedSelector<object, string | undefined>;

@@ -6,24 +6,24 @@ import { UserSettingsDialogComponent, UserSettingsDialogData } from '../componen
 import { AuthUser } from '../models/auth.models';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class DialogService {
-    constructor(private readonly dialog: MatDialog) {}
+  constructor(private readonly dialog: MatDialog) {}
 
-    openCropImageDialog(file: File): MatDialogRef<CropImageDialogComponent, Blob | null | undefined> {
-        const data: CropImageDialogData = { file };
+  openCropImageDialog(file: File): MatDialogRef<CropImageDialogComponent, Blob | null | undefined> {
+    const data: CropImageDialogData = { file };
 
-        return this.dialog.open(CropImageDialogComponent, { data, maxWidth: 768 });
-    }
+    return this.dialog.open(CropImageDialogComponent, { data, maxWidth: 768 });
+  }
 
-    openUserSettingsDialog(user: AuthUser): MatDialogRef<UserSettingsDialogComponent, void> {
-        const data: UserSettingsDialogData = { user };
+  openUserSettingsDialog(user: AuthUser): MatDialogRef<UserSettingsDialogComponent, void> {
+    const data: UserSettingsDialogData = { user };
 
-        return this.dialog.open(UserSettingsDialogComponent, { data, maxWidth: 768 });
-    }
+    return this.dialog.open(UserSettingsDialogComponent, { data, maxWidth: 768 });
+  }
 
-    closeAllDialogs(): void {
-        return this.dialog.closeAll();
-    }
+  closeAllDialogs(): void {
+    return this.dialog.closeAll();
+  }
 }

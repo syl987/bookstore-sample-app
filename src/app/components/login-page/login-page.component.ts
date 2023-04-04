@@ -4,17 +4,17 @@ import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-    selector: 'app-login-page',
-    templateUrl: './login-page.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    host: { class: 'flex-grow-1 d-flex flex-column justify-content-center' },
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'flex-grow-1 d-flex flex-column justify-content-center' },
 })
 export class LoginPageComponent {
-    readonly loginPending$ = this.authService.pending$;
+  readonly loginPending$ = this.authService.pending$;
 
-    constructor(@Inject(APP_CONFIG) readonly config: AppConfig, private readonly authService: AuthService) {}
+  constructor(@Inject(APP_CONFIG) readonly config: AppConfig, private readonly authService: AuthService) {}
 
-    loginWithGoogle(): void {
-        this.authService.loginWithProvider(ProviderId.GOOGLE);
-    }
+  loginWithGoogle(): void {
+    this.authService.loginWithProvider(ProviderId.GOOGLE);
+  }
 }

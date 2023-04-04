@@ -3,9 +3,9 @@ import { FirebaseError } from '@angular/fire/app';
 import { createAction, props } from '@ngrx/store';
 
 export enum ResponseErrorType {
-    HTTP = '<Error> http',
-    FIREBASE = '<Error> firebase',
-    INTERNAL = '<Error> internal',
+  HTTP = '<Error> http',
+  FIREBASE = '<Error> firebase',
+  INTERNAL = '<Error> internal',
 }
 
 export const httpError = createAction(ResponseErrorType.HTTP, props<{ error: HttpErrorResponse }>());

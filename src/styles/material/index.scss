@@ -37,13 +37,13 @@
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $app-light-theme: mat.define-light-theme(
-    (
-        color: (
-            primary: $app-primary,
-            accent: $app-accent,
-            warn: $app-warn,
-        ),
-    )
+  (
+    color: (
+      primary: $app-primary,
+      accent: $app-accent,
+      warn: $app-warn,
+    ),
+  )
 );
 
 // Include theme styles for core and each component used in your app.

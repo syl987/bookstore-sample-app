@@ -1,49 +1,49 @@
 @use '@angular/material' as mat;
 
 .mat-list-base .mat-list-item {
-    border-radius: $border-radius !important;
+  border-radius: $border-radius !important;
 
-    .mat-list-item-ripple {
-        border-radius: $border-radius !important;
-    }
+  .mat-list-item-ripple {
+    border-radius: $border-radius !important;
+  }
 }
 
 .mat-list-base .mat-list-item.mat-list-item-disabled {
-    opacity: 30%;
-    background-color: transparent !important;
+  opacity: 30%;
+  background-color: transparent !important;
 }
 
 .mat-list-base[dense] .mat-list-item .mat-list-icon {
-    // scale down
-    &.fa.fa-users {
-        font-size: 1.5 * 80% !important;
-        margin-top: 2px !important;
-    }
+  // scale down
+  &.fa.fa-users {
+    font-size: 1.5 * 80% !important;
+    margin-top: 2px !important;
+  }
 
-    // scale down
-    &.fa.fa-handshake-o {
-        font-size: 1.5 * 80% !important;
-        margin-top: 2px !important;
-    }
+  // scale down
+  &.fa.fa-handshake-o {
+    font-size: 1.5 * 80% !important;
+    margin-top: 2px !important;
+  }
 }
 
 .mat-list-base:not([dense]) .mat-list-item .mat-list-icon {
-    // scale down
-    &.fa.fa-users {
-        font-size: 1.25 * 80% !important;
-        margin-top: 3px !important;
-    }
+  // scale down
+  &.fa.fa-users {
+    font-size: 1.25 * 80% !important;
+    margin-top: 3px !important;
+  }
 
-    // scale down
-    &.fa.fa-handshake-o {
-        font-size: 1.25 * 80% !important;
-        margin-top: 2px !important;
-    }
+  // scale down
+  &.fa.fa-handshake-o {
+    font-size: 1.25 * 80% !important;
+    margin-top: 2px !important;
+  }
 }
 
 button.mat-list-item:not(:hover),
 button.mat-list-item:not(:focus) {
-    background-color: transparent; // workaround: prevent fallback to browser defaults
+  background-color: transparent; // workaround: prevent fallback to browser defaults
 }
 
 .mat-list-option:hover,
@@ -52,21 +52,21 @@ button.mat-list-item:not(:focus) {
 .mat-nav-list .mat-list-item:focus,
 .mat-action-list .mat-list-item:hover,
 .mat-action-list .mat-list-item:focus {
-    background: mat.get-color-from-palette($app-primary, 50);
-    background-image: initial;
-    background-position-x: initial;
-    background-position-y: initial;
-    background-size: initial;
-    background-attachment: initial;
-    background-origin: initial;
-    background-clip: initial;
-    background-color: mat.get-color-from-palette($app-primary, 50);
+  background: mat.get-color-from-palette($app-primary, 50);
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: mat.get-color-from-palette($app-primary, 50);
 
-    .mat-ripple-element {
-        background-color: rgba(mat.get-color-from-palette($app-primary), 0.12);
-    }
+  .mat-ripple-element {
+    background-color: rgba(mat.get-color-from-palette($app-primary), 0.12);
+  }
 }
 
 .mat-list-item.active {
-    background-color: mat.get-color-from-palette($app-primary, 50);
+  background-color: mat.get-color-from-palette($app-primary, 50);
 }

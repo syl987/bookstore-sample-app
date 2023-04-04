@@ -6,7 +6,7 @@ import { ComponentsDevPageComponent } from './components/components-dev-page/com
 const routes: Routes = [{ path: '', component: ComponentsDevPageComponent, title: `Component Collection` }];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class DevRoutingModule {}

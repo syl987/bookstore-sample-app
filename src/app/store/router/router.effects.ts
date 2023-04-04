@@ -7,15 +7,15 @@ import * as RouterActions from './router.actions';
 
 @Injectable()
 export class RouterEffects {
-    readonly navigate$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(RouterActions.navigate),
-                tap(({ url, state }) => this.router.navigateByUrl(url, { state })),
-            );
-        },
-        { dispatch: false },
-    );
+  readonly navigate$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(RouterActions.navigate),
+        tap(({ url, state }) => this.router.navigateByUrl(url, { state }))
+      );
+    },
+    { dispatch: false }
+  );
 
-    constructor(private readonly actions$: Actions, private readonly router: Router) {}
+  constructor(private readonly actions$: Actions, private readonly router: Router) {}
 }

@@ -1,24 +1,24 @@
 <div class="app-container">
-    <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput [formControl]="filterControl" />
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput [formControl]="filterControl" />
+  </mat-form-field>
 
-    <div class="row">
-        <div *ngFor="let bookArticle of bookArticles$ | async" class="col-sm-6 col-md-4 col-lg-3 mb-m">
-            <mat-card class="mx-auto" style="max-width: 392px">
-                <img mat-card-image [src]="bookArticle.volumeInfo.imageLinks.thumbnail" alt="user" />
+  <div class="row">
+    <div *ngFor="let bookArticle of bookArticles$ | async" class="col-sm-6 col-md-4 col-lg-3 mb-m">
+      <mat-card class="mx-auto" style="max-width: 392px">
+        <img mat-card-image [src]="bookArticle.volumeInfo.imageLinks.thumbnail" alt="user" />
 
-                <mat-card-title>{{ bookArticle.volumeInfo.title }}</mat-card-title>
+        <mat-card-title>{{ bookArticle.volumeInfo.title }}</mat-card-title>
 
-                <mat-card-content>
-                    <p>{{ bookArticle.volumeInfo.description }}</p>
-                </mat-card-content>
+        <mat-card-content>
+          <p>{{ bookArticle.volumeInfo.description }}</p>
+        </mat-card-content>
 
-                <mat-card-actions>
-                    <a mat-button color="primary" routerLink="/articles/books/{{ bookArticle.id }}">Details</a>
-                </mat-card-actions>
-            </mat-card>
-        </div>
+        <mat-card-actions>
+          <a mat-button color="primary" routerLink="/articles/books/{{ bookArticle.id }}">Details</a>
+        </mat-card-actions>
+      </mat-card>
     </div>
+  </div>
 </div>

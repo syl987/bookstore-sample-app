@@ -13,21 +13,21 @@ import { GoogleBooksApiService } from './__api/google-books-api.service';
 const selectKeyByRouterParamId = createSelector(selectRouterParams, params => params?.bookArticleId);
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class BookArticleService extends EntityCollectionServiceBase<BookArticleDTO> {
-    readonly keyByRouterParamId$ = this.store.pipe(select(selectKeyByRouterParamId));
+  readonly keyByRouterParamId$ = this.store.pipe(select(selectKeyByRouterParamId));
 
-    readonly entityByRouterParamId$ = combineLatest([this.selectors$.entityMap$, this.keyByRouterParamId$]).pipe(map(getEntityById));
+  readonly entityByRouterParamId$ = combineLatest([this.selectors$.entityMap$, this.keyByRouterParamId$]).pipe(map(getEntityById));
 
-    constructor(f: EntityCollectionServiceElementsFactory, private readonly googleBooksApi: GoogleBooksApiService) {
-        super(EntityType.BOOK_ARTICLE, f);
-    }
+  constructor(f: EntityCollectionServiceElementsFactory, private readonly googleBooksApi: GoogleBooksApiService) {
+    super(EntityType.BOOK_ARTICLE, f);
+  }
 
-    searchVolumes(query: string): Observable<GoogleBooksVolumeDTO[]> {
-        return this.googleBooksApi.list(query).pipe(
-            map(({ items }) => items),
-            shareReplay(1),
-        );
-    }
+  searchVolumes(query: string): Observable<GoogleBooksVolumeDTO[]> {
+    return this.googleBooksApi.list(query).pipe(
+      map(({ items }) => items),
+      shareReplay(1)
+    );
+  }
 }

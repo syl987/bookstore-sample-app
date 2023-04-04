@@ -1,10 +1,10 @@
 export interface UserProfileDTO {
-    id: string;
-    createdAt: number;
-    updatedAt: number;
-    version: number;
+  id: string;
+  createdAt: number;
+  updatedAt: number;
+  version: number;
 
-    photoUrl?: string | null;
-    displayName: string;
-    description: string;
+  photoUrl?: string | null;
+  displayName: string;
+  description: string;
 }

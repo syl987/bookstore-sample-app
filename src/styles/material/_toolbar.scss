@@ -1,12 +1,12 @@
 .mat-toolbar div,
 .mat-toolbar .mat-button,
 .mat-toolbar .mat-icon-button {
-    height: 100%;
-    line-height: 66px !important; // pull slightly down (header height is 64px on desktop)
-    border-radius: 0 !important;
+  height: 100%;
+  line-height: 66px !important; // pull slightly down (header height is 64px on desktop)
+  border-radius: 0 !important;
 
-    // hardcoded mat-toolbar mobile breakpoint
-    @media (max-width: 599px) {
-        line-height: 57px !important; // pull slightly down (header height is 56px on mobile)
-    }
+  // hardcoded mat-toolbar mobile breakpoint
+  @media (max-width: 599px) {
+    line-height: 57px !important; // pull slightly down (header height is 56px on mobile)
+  }
 }

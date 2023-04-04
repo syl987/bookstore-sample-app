@@ -1,24 +1,24 @@
 .mat-expansion-panel {
-    border-radius: $border-radius !important;
+  border-radius: $border-radius !important;
 
-    .mat-accordion & {
-        &:not(.mat-expanded),
-        &:not(.mat-expansion-panel-spacing) {
-            border-radius: 0 !important;
-        }
-
-        &:first-of-type {
-            border-top-right-radius: $border-radius !important;
-            border-top-left-radius: $border-radius !important;
-        }
-
-        &:last-of-type {
-            border-bottom-right-radius: $border-radius !important;
-            border-bottom-left-radius: $border-radius !important;
-        }
+  .mat-accordion & {
+    &:not(.mat-expanded),
+    &:not(.mat-expansion-panel-spacing) {
+      border-radius: 0 !important;
     }
 
-    .mat-expansion-panel-header .mat-expansion-indicator {
-        margin-left: 20px;
+    &:first-of-type {
+      border-top-right-radius: $border-radius !important;
+      border-top-left-radius: $border-radius !important;
     }
+
+    &:last-of-type {
+      border-bottom-right-radius: $border-radius !important;
+      border-bottom-left-radius: $border-radius !important;
+    }
+  }
+
+  .mat-expansion-panel-header .mat-expansion-indicator {
+    margin-left: 20px;
+  }
 }

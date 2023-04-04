@@ -5,21 +5,27 @@ import * as AuthActions from './auth.actions';
 export const authFeatureKey = 'auth';
 
 export interface State {
-    pending: boolean;
+  pending: boolean;
 }
 
 export const initialState: State = {
-    pending: false,
+  pending: false,
 };
 
 export const reducer = createReducer(
-    initialState,
-    on(AuthActions.loginWithProvider, AuthActions.logout, state => ({
-        ...state,
-        pending: true,
-    })),
-    on(AuthActions.loginWithProviderSuccess, AuthActions.loginWithProviderError, AuthActions.logoutSuccess, AuthActions.logoutError, state => ({
-        ...state,
-        pending: false,
-    })),
+  initialState,
+  on(AuthActions.loginWithProvider, AuthActions.logout, state => ({
+    ...state,
+    pending: true,
+  })),
+  on(
+    AuthActions.loginWithProviderSuccess,
+    AuthActions.loginWithProviderError,
+    AuthActions.logoutSuccess,
+    AuthActions.logoutError,
+    state => ({
+      ...state,
+      pending: false,
+    })
+  )
 );

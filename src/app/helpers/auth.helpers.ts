@@ -12,10 +12,10 @@ import * as AuthActions from '../store/auth/auth.actions';
  * Check if the `HttpRequest` is excluded from authentication based on `bearerIncluded` and `bearerExcluded` auth config.
  */
 export function isBearerExcluded(request: HttpRequest<unknown>, config: AuthConfig): boolean {
-    const included = config.bearerIncluded.some(endpoint => matchesEndpointUrl(request, endpoint));
-    const excluded = config.bearerExcluded.some(endpoint => matchesEndpointUrl(request, endpoint));
+  const included = config.bearerIncluded.some(endpoint => matchesEndpointUrl(request, endpoint));
+  const excluded = config.bearerExcluded.some(endpoint => matchesEndpointUrl(request, endpoint));
 
-    return excluded && !included;
+  return excluded && !included;
 }
 
 /**
@@ -24,20 +24,20 @@ export function isBearerExcluded(request: HttpRequest<unknown>, config: AuthConf
  * Starts with `AuthActions.authenticated` (exclusive) and ends with `AuthActions.authenticated` (inclusive).
  */
 export function requireAuth(actions$: Actions, resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {
-    return actions$.pipe(
-        ofType(AuthActions.authenticated),
-        exhaustMap(() => resolvedEffects$.pipe(takeUntil(actions$.pipe(ofType(AuthActions.unauthenticated))))),
-    );
+  return actions$.pipe(
+    ofType(AuthActions.authenticated),
+    exhaustMap(() => resolvedEffects$.pipe(takeUntil(actions$.pipe(ofType(AuthActions.unauthenticated)))))
+  );
 }
 
 /**
  * Get authentication provider based on the given provider id.
  */
 export function getAuthProvider(providerId: AuthProviderId): AuthProvider {
-    switch (providerId) {
-        case GoogleAuthProvider.PROVIDER_ID:
-            return new GoogleAuthProvider();
-        default:
-            return new GoogleAuthProvider(); // should not happen
-    }
+  switch (providerId) {
+    case GoogleAuthProvider.PROVIDER_ID:
+      return new GoogleAuthProvider();
+    default:
+      return new GoogleAuthProvider(); // should not happen
+  }
 }
