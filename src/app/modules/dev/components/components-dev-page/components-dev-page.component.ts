@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { timer } from 'rxjs';
 import { auditTime, map } from 'rxjs/operators';
 import { ToastService } from 'src/app/services/toast.service';
