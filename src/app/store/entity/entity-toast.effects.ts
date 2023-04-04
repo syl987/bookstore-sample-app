@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { EntityAction, EntityOp, ofEntityOp, Pluralizer } from '@ngrx/data';
+import { EntityAction, EntityOp, Pluralizer, ofEntityOp } from '@ngrx/data';
 import { Actions, createEffect } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
 import { APP_ENTITY_NAMES, APP_ENTITY_PLURAL_NAMES, AppEntityDisplayNameMap } from 'src/app/models/app.models';

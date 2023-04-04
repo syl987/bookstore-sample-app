@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } from '@ngrx/data';
 import { createSelector, select } from '@ngrx/store';
-import { combineLatest, map, Observable, shareReplay } from 'rxjs';
+import { Observable, combineLatest, map, shareReplay } from 'rxjs';
 
 import { getEntityById } from '../helpers/entity.helpers';
 import { BookArticleDTO } from '../models/book.models';

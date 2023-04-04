@@ -20,9 +20,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { environment } from 'src/environments/environment';
 
-import { AppComponent } from './app.component';
 import { appConfig, appDataServiceConfig, appEntityNames, appEntityPluralNames, appStrings, authConfig } from './app-config.options';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { FooterComponent } from './components/__base/footer/footer.component';
 import { HeaderComponent } from './components/__base/header/header.component';
 import { SidenavComponent } from './components/__base/sidenav/sidenav.component';

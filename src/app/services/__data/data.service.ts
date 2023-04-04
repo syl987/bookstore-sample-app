@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { from, Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
 async function queryAll<T>(list: AngularFireList<T>): Promise<T[]> {
   const snapshot = list.query.get();
