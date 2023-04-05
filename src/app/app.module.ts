@@ -26,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './components/__base/footer/footer.component';
 import { HeaderComponent } from './components/__base/header/header.component';
 import { SidenavComponent } from './components/__base/sidenav/sidenav.component';
+import { BookCreateDialogComponent } from './components/book-create-dialog/book-create-dialog.component';
 import { BookDetailPageComponent } from './components/book-detail-page/book-detail-page.component';
 import { BookEditPageComponent } from './components/book-edit-page/book-edit-page.component';
 import { CropImageDialogComponent } from './components/crop-image-dialog/crop-image-dialog.component';
@@ -86,6 +87,7 @@ const firebaseOptions: FirebaseOptions = {
     SearchPageComponent,
     UserSettingsDialogComponent,
     CropImageDialogComponent,
+    BookCreateDialogComponent,
     BookDetailPageComponent,
     BookEditPageComponent,
   ],
