@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { AuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { environment } from 'src/environments/environment';
 
+import { environment } from '../environments/environment';
 import { BookArticleDetailPageComponent } from './components/book-article-detail-page/book-article-detail-page.component';
 import { BookArticleEditPageComponent } from './components/book-article-edit-page/book-article-edit-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -19,13 +19,11 @@ const routes: Routes = [
     path: 'login',
     title: `Login`,
     component: LoginPageComponent,
-    canActivate: [AuthGuard],
-    data: { authGuardPipe: () => redirectLoggedInTo('/home') },
+    ...canActivate(() => redirectLoggedInTo('/home')),
   },
   {
     path: '',
-    canActivate: [AuthGuard],
-    data: { authGuardPipe: () => redirectUnauthorizedTo('/login') },
+    ...canActivate(() => redirectUnauthorizedTo('/login')),
     children: [
       {
         path: 'home',

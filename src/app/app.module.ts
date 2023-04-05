@@ -4,7 +4,6 @@ import localeDe from '@angular/common/locales/de';
 import { ApplicationRef, DEFAULT_CURRENCY_CODE, DoBootstrap, LOCALE_ID, NgModule } from '@angular/core';
 import { FirebaseOptions, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { AuthGuardModule } from '@angular/fire/auth-guard';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { getStorage, provideStorage } from '@angular/fire/storage';
@@ -61,7 +60,6 @@ const firebaseOptions: FirebaseOptions = {
     BrowserAnimationsModule,
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(firebaseOptions)),
-    AuthGuardModule,
     provideAuth(() => getAuth()),
     provideFunctions(() => getFunctions()),
     provideDatabase(() => getDatabase()),
