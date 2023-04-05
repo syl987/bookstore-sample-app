@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
-  selector: 'app-book-edit-page',
-  templateUrl: './book-edit-page.component.html',
+  selector: 'app-user-book-edit-page',
+  templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookEditPageComponent implements OnInit {
+export class UserBookEditPageComponent implements OnInit {
   readonly id: string = this.route.snapshot.params['bookId'];
 
   readonly book$ = this.bookService.entityByRouterParamId$;
