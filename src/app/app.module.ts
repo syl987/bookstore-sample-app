@@ -26,8 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './components/__base/footer/footer.component';
 import { HeaderComponent } from './components/__base/header/header.component';
 import { SidenavComponent } from './components/__base/sidenav/sidenav.component';
-import { BookArticleDetailPageComponent } from './components/book-article-detail-page/book-article-detail-page.component';
-import { BookArticleEditPageComponent } from './components/book-article-edit-page/book-article-edit-page.component';
+import { BookDetailPageComponent } from './components/book-detail-page/book-detail-page.component';
+import { BookEditPageComponent } from './components/book-edit-page/book-edit-page.component';
 import { CropImageDialogComponent } from './components/crop-image-dialog/crop-image-dialog.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
@@ -86,8 +86,8 @@ const firebaseOptions: FirebaseOptions = {
     SearchPageComponent,
     UserSettingsDialogComponent,
     CropImageDialogComponent,
-    BookArticleDetailPageComponent,
-    BookArticleEditPageComponent,
+    BookDetailPageComponent,
+    BookEditPageComponent,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de-DE' },

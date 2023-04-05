@@ -1,4 +1,4 @@
-export interface BookArticleDTO {
+export interface BookDTO {
   id: string;
   volumeInfo: {
     title: string;

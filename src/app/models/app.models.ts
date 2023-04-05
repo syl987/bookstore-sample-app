@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { EntityDataModuleConfig, EntityMetadata, HttpResourceUrls } from '@ngrx/data';
 
-import { BookArticleDTO } from './book.models';
+import { BookDTO } from './book.models';
 import { EntityType } from './entity.models';
 
 /**
@@ -32,7 +32,7 @@ export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');
  */
 export interface AppEntityDataModuleConfig extends EntityDataModuleConfig {
   entityMetadata: {
-    [EntityType.BOOK_ARTICLE]: Partial<EntityMetadata<BookArticleDTO>>;
+    [EntityType.BOOK_ARTICLE]: Partial<EntityMetadata<BookDTO>>;
   };
 }
 

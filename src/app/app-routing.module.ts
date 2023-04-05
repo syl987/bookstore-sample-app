@@ -3,8 +3,8 @@ import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
-import { BookArticleDetailPageComponent } from './components/book-article-detail-page/book-article-detail-page.component';
-import { BookArticleEditPageComponent } from './components/book-article-edit-page/book-article-edit-page.component';
+import { BookDetailPageComponent } from './components/book-detail-page/book-detail-page.component';
+import { BookEditPageComponent } from './components/book-edit-page/book-edit-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
@@ -38,15 +38,15 @@ const routes: Routes = [
         component: SearchPageComponent,
       },
       {
-        path: 'articles/books/:bookArticleId/edit',
+        path: 'books/:bookId/edit',
         title: `Edit Book Details`,
-        component: BookArticleEditPageComponent,
+        component: BookEditPageComponent,
         // TODO guard own article only
       },
       {
-        path: 'articles/books/:bookArticleId',
+        path: 'books/:bookId',
         title: `Book Details`,
-        component: BookArticleDetailPageComponent,
+        component: BookDetailPageComponent,
       },
     ],
   },
