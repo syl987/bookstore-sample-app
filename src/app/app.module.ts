@@ -2,13 +2,12 @@ import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 import { ApplicationRef, DEFAULT_CURRENCY_CODE, DoBootstrap, LOCALE_ID, NgModule } from '@angular/core';
-import { FirebaseOptions } from '@angular/fire/app';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { FirebaseOptions, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { AuthGuardModule } from '@angular/fire/auth-guard';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { getFunctions, provideFunctions } from '@angular/fire/functions';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TitleStrategy } from '@angular/router';
@@ -61,12 +60,12 @@ const firebaseOptions: FirebaseOptions = {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseOptions),
-    AngularFireAuthModule,
-    AngularFireAuthGuardModule,
-    AngularFireFunctionsModule,
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
+    provideFirebaseApp(() => initializeApp(firebaseOptions)),
+    AuthGuardModule,
+    provideAuth(() => getAuth()),
+    provideFunctions(() => getFunctions()),
+    provideDatabase(() => getDatabase()),
+    provideStorage(() => getStorage()),
     StoreModule.forRoot(reducers, storeConfig),
     EffectsModule.forRoot(effects),
     EntityDataModule.forRoot(entityDataConfig),

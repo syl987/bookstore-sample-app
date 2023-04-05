@@ -1,11 +1,11 @@
 import { HttpRequest } from '@angular/common/http';
 import { Actions, EffectNotification, ofType } from '@ngrx/effects';
-import { AuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { AuthProvider, GoogleAuthProvider, User } from 'firebase/auth';
 import { Observable } from 'rxjs';
 import { exhaustMap, takeUntil } from 'rxjs/operators';
 import { matchesEndpointUrl } from 'src/app/functions/http.functions';
 
-import { AuthConfig, AuthProviderId } from '../models/auth.models';
+import { AuthConfig, AuthProviderId, AuthUser } from '../models/auth.models';
 import * as AuthActions from '../store/auth/auth.actions';
 
 /**
@@ -40,4 +40,23 @@ export function getAuthProvider(providerId: AuthProviderId): AuthProvider {
     default:
       return new GoogleAuthProvider(); // should not happen
   }
+}
+
+/**
+ * Map firebase auth user object to app auth user object.
+ */
+export function toAuthUser(firebaseUser: User | null): AuthUser | null {
+  if (!firebaseUser) {
+    return null;
+  }
+  return {
+    uid: firebaseUser.uid,
+    displayName: firebaseUser.displayName,
+    email: firebaseUser.email,
+    emailVerified: firebaseUser.emailVerified,
+    phoneNumber: firebaseUser.phoneNumber,
+    photoURL: firebaseUser.photoURL,
+    providerData: firebaseUser.providerData,
+    metadata: firebaseUser.metadata,
+  };
 }
