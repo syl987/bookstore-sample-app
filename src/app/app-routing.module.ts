@@ -24,32 +24,32 @@ const routes: Routes = [
     data: { authGuardPipe: () => redirectLoggedInTo('/home') },
   },
   {
-    path: '',
+    path: 'home',
+    title: `Home`,
+    component: HomePageComponent,
+  },
+  {
+    path: 'search',
+    title: `Search`,
+    component: SearchPageComponent,
+  },
+  {
+    path: 'books/:bookId',
+    title: `Book Details`,
+    component: BookDetailPageComponent,
+  },
+  {
+    path: 'user',
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: () => redirectUnauthorizedTo('/login') },
     children: [
       {
-        path: 'home',
-        title: `Home`,
-        component: HomePageComponent,
-      },
-      {
-        path: 'search',
-        title: `Search Results`,
-        component: SearchPageComponent,
-      },
-      {
-        path: 'books/:bookId',
-        title: `Book Details`,
-        component: BookDetailPageComponent,
-      },
-      {
-        path: 'user/books',
+        path: 'books',
         title: `My Books`,
         component: UserBookListPageComponent,
       },
       {
-        path: 'user/books/:bookId/edit',
+        path: 'books/:bookId/edit',
         title: `Edit Book Details`,
         component: UserBookEditPageComponent,
         // TODO guard own article only
