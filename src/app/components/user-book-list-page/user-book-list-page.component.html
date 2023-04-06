@@ -1,1 +1,23 @@
 <p>user-book-list-page works!</p>
+
+<div class="app-container">
+  <button mat-stroked-button color="primary" (click)="openBookCreateDialog()">New Book</button>
+
+  <div class="row">
+    <div *ngFor="let book of books$ | async" class="col-sm-6 col-md-4 col-lg-3 mb-m">
+      <mat-card class="mx-auto" style="max-width: 392px">
+        <img mat-card-image [src]="book.volumeInfo.imageLinks.thumbnail" alt="user" />
+
+        <mat-card-title>{{ book.volumeInfo.title }}</mat-card-title>
+
+        <mat-card-content>
+          <p>{{ book.volumeInfo.description }}</p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <a mat-button color="primary" routerLink="/books/{{ book.id }}">Details</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
