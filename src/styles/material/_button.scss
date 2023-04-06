@@ -1,34 +1,34 @@
 @use '@angular/material' as mat;
 
-.mat-button,
-.mat-stroked-button,
-.mat-flat-button,
-.mat-flat-button {
+.mat-mdc-button,
+.mat-mdc-outlined-button,
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
   border-radius: $border-radius !important;
 }
 
 // make buttons with visible box broader
-.mat-flat-button,
-.mat-stroked-button,
-.mat-flat-button {
+.mat-mdc-unelevated-button,
+.mat-mdc-outlined-button,
+.mat-mdc-raised-button {
   padding-right: spacer(m) !important;
   padding-left: spacer(m) !important;
 }
 
-.mat-button,
-.mat-icon-button,
-.mat-flat-button,
-.mat-flat-button,
+.mat-mdc-button,
+.mat-mdc-icon-button,
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button,
 .mat-mini-fab {
   line-height: 30px !important;
 }
 
-.mat-icon-button {
+.mat-mdc-icon-button {
   width: 30px;
   height: 30px;
 }
 
-.mat-stroked-button {
+.mat-mdc-outlined-button {
   line-height: 28px !important;
 
   &.mat-primary:not([disabled]) {
