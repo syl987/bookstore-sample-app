@@ -1,22 +1,22 @@
 .app-button-spinner {
   transition: background-color 0.3s ease-in-out;
 
-  .mat-button-wrapper,
-  .mat-spinner {
+  .mdc-button__label,
+  .mat-mdc-progress-spinner {
     opacity: 100;
     transition: opacity 0.3s ease-in-out;
   }
 
-  &.is-spinning .mat-button-wrapper {
+  &.is-spinning .mdc-button__label {
     opacity: 0;
   }
 
-  &:not(.is-spinning) .mat-spinner {
+  &:not(.is-spinning) .mat-mdc-progress-spinner {
     opacity: 0;
     display: none;
   }
 
-  .mat-spinner {
+  .mat-mdc-progress-spinner {
     position: absolute;
     top: calc(50% - 10px);
     left: calc(50% - 10px);
