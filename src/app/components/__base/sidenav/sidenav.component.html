@@ -28,6 +28,8 @@
 
   <a mat-list-item routerLink="/search" routerLinkActive="active" (click)="navigated.emit()">Search</a>
 
+  <a mat-list-item routerLink="/user/books" routerLinkActive="active" (click)="navigated.emit()">My Books</a>
+
   <a *ngIf="!production" mat-list-item routerLink="/dev" routerLinkActive="active" (click)="navigated.emit()">Dev</a>
 </mat-nav-list>
 

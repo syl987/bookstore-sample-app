@@ -1,7 +1,13 @@
-<mat-toolbar class="shadow-sm">
+<mat-toolbar class="shadow">
   <mat-toolbar-row>
     <ng-container *ngIf="showToggle$ | async">
-      <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="fs-l app-sidebar-toggle">
+      <button
+        mat-icon-button
+        color="primary"
+        (click)="sidenavToggle.emit()"
+        aria-label="Toggle Navigation"
+        class="fs-l app-sidebar-toggle me-3xs"
+      >
         <mat-icon fontIcon="fa-bars"></mat-icon>
       </button>
 
@@ -41,6 +47,8 @@
         </button>
 
         <div class="border-end" style="height: 32px"></div>
+
+        <a mat-button color="primary" routerLink="/user/books" routerLinkActive="active" class="px-2xs">My Books</a>
 
         <button mat-button color="primary" (click)="logout()" class="me-ns">Logout</button>
       </ng-container>
