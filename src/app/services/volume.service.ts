@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } from '@ngrx/data';
+import { createSelector, select } from '@ngrx/store';
+import { combineLatest, map } from 'rxjs';
 
-import * as VolumeActions from '../store/volume/volume.actions';
-import { selectVolumeAll, selectVolumeSearchError, selectVolumeSearchPending, selectVolumeTotal } from '../store/volume/volume.selectors';
+import { getEntityById } from '../helpers/entity.helpers';
+import { EntityType } from '../models/entity.models';
+import { VolumeDTO } from '../models/volume.models';
+import { selectRouterParams } from '../store/router/router.selectors';
+
+const selectKeyByRouterParamId = createSelector(selectRouterParams, params => params?.volumeId);
 
 @Injectable({
   providedIn: 'root',
 })
-export class VolumeService {
-  readonly volumes$ = this.store.select(selectVolumeAll);
-  readonly volumesTotal$ = this.store.select(selectVolumeTotal);
+export class VolumeService extends EntityCollectionServiceBase<VolumeDTO> {
+  readonly keyByRouterParamId$ = this.store.pipe(select(selectKeyByRouterParamId));
 
-  readonly searchPending$ = this.store.select(selectVolumeSearchPending);
-  readonly searchError$ = this.store.select(selectVolumeSearchError);
+  readonly entityByRouterParamId$ = combineLatest([this.selectors$.entityMap$, this.keyByRouterParamId$]).pipe(map(getEntityById));
 
-  constructor(private readonly store: Store) {}
-
-  searchVolumes(query: string): void {
-    this.store.dispatch(VolumeActions.searchVolumes({ query }));
+  constructor(f: EntityCollectionServiceElementsFactory) {
+    super(EntityType.VOLUME, f);
   }
 }

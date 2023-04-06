@@ -21,5 +21,9 @@ export interface BookDTO {
   imageUrl?: string;
   condition?: BookCondition;
   volumeId: string;
+}
+
+export interface Book extends BookDTO {
   volumeInfo: GoogleBooksVolumeDTO['volumeInfo'];
+  searchInfo: GoogleBooksVolumeDTO['searchInfo'];
 }

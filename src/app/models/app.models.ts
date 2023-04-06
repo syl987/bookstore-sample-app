@@ -3,6 +3,7 @@ import { EntityDataModuleConfig, EntityMetadata, HttpResourceUrls } from '@ngrx/
 
 import { BookDTO } from './book.models';
 import { EntityType } from './entity.models';
+import { VolumeDTO } from './volume.models';
 
 /**
  * Container for language-specific text elements for conditional use in templates.
@@ -33,7 +34,7 @@ export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');
 export interface AppEntityDataModuleConfig extends EntityDataModuleConfig {
   entityMetadata: {
     [EntityType.BOOK]: Partial<EntityMetadata<BookDTO>>;
-    [EntityType.VOLUME]: Partial<EntityMetadata<BookDTO>>;
+    [EntityType.VOLUME]: Partial<EntityMetadata<VolumeDTO>>;
   };
 }
 
