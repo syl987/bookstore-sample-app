@@ -12,7 +12,8 @@ import { environment } from 'src/environments/environment';
 
 import { AppEntityDataModuleConfig } from '../models/app.models';
 import { EntityType } from '../models/entity.models';
-import { consoleLogMetaReducer } from './app.meta-reducers';
+import { consoleLogMetaReducer, resetStateMetaReducer } from './app.meta-reducers';
+import { resetState } from './auth/auth.actions';
 import { AuthEffects } from './auth/auth.effects';
 import * as fromAuth from './auth/auth.reducer';
 import { EntityToastEffects } from './entity/entity-toast.effects';
@@ -51,7 +52,7 @@ export const entityDataConfig: AppEntityDataModuleConfig = {
 export const effects = [AuthEffects, VolumeEffects, RouterEffects, EntityUndoEffects, EntityToastEffects];
 
 export const storeConfig: RootStoreConfig<AppState> = {
-  metaReducers: environment.production ? [] : [consoleLogMetaReducer],
+  metaReducers: [resetStateMetaReducer(resetState.type), consoleLogMetaReducer],
   runtimeChecks: {
     strictActionTypeUniqueness: !environment.production,
     strictActionImmutability: !environment.production,
