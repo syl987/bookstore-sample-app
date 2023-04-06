@@ -19,6 +19,6 @@ export class BookService extends EntityCollectionServiceBase<BookDTO> {
   readonly entityByRouterParamId$ = combineLatest([this.selectors$.entityMap$, this.keyByRouterParamId$]).pipe(map(getEntityById));
 
   constructor(f: EntityCollectionServiceElementsFactory) {
-    super(EntityType.BOOK_ARTICLE, f);
+    super(EntityType.BOOK, f);
   }
 }

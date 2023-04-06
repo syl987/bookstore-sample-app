@@ -32,13 +32,15 @@ export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');
  */
 export interface AppEntityDataModuleConfig extends EntityDataModuleConfig {
   entityMetadata: {
-    [EntityType.BOOK_ARTICLE]: Partial<EntityMetadata<BookDTO>>;
+    [EntityType.BOOK]: Partial<EntityMetadata<BookDTO>>;
+    [EntityType.VOLUME]: Partial<EntityMetadata<BookDTO>>;
   };
 }
 
 export interface AppFirebaseDataServiceConfig {
   entityHttpResourceUrls: {
-    [EntityType.BOOK_ARTICLE]: Pick<HttpResourceUrls, 'collectionResourceUrl'>;
+    [EntityType.BOOK]: Pick<HttpResourceUrls, 'collectionResourceUrl'>;
+    [EntityType.VOLUME]: Pick<HttpResourceUrls, 'collectionResourceUrl'>;
   };
 }
 
@@ -46,7 +48,8 @@ export interface AppFirebaseDataServiceConfig {
  * Type-safe entity display name map.
  */
 export interface AppEntityDisplayNameMap {
-  [EntityType.BOOK_ARTICLE]: string;
+  [EntityType.BOOK]: string;
+  [EntityType.VOLUME]: string;
 }
 
 export const APP_ENTITY_NAMES = new InjectionToken<Partial<AppEntityDisplayNameMap>>('APP_ENTITY_NAMES');
