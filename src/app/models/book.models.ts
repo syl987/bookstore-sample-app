@@ -1,5 +1,3 @@
-import { GoogleBooksVolumeDTO } from './google-books.models';
-
 export enum BookStatus {
   DRAFT = 'DRAFT',
   PUBLIC = 'PUBLIC',
@@ -20,10 +18,4 @@ export interface BookDTO {
   description?: string;
   imageUrl?: string;
   condition?: BookCondition;
-  volumeId: string;
-}
-
-export interface Book extends BookDTO {
-  volumeInfo: GoogleBooksVolumeDTO['volumeInfo'];
-  searchInfo: GoogleBooksVolumeDTO['searchInfo'];
 }

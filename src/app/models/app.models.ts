@@ -1,7 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { EntityDataModuleConfig, EntityMetadata, HttpResourceUrls } from '@ngrx/data';
 
-import { BookDTO } from './book.models';
 import { EntityType } from './entity.models';
 import { VolumeDTO } from './volume.models';
 
@@ -33,14 +32,12 @@ export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');
  */
 export interface AppEntityDataModuleConfig extends EntityDataModuleConfig {
   entityMetadata: {
-    [EntityType.BOOK]: Partial<EntityMetadata<BookDTO>>;
     [EntityType.VOLUME]: Partial<EntityMetadata<VolumeDTO>>;
   };
 }
 
 export interface AppFirebaseDataServiceConfig {
   entityHttpResourceUrls: {
-    [EntityType.BOOK]: Pick<HttpResourceUrls, 'collectionResourceUrl'>;
     [EntityType.VOLUME]: Pick<HttpResourceUrls, 'collectionResourceUrl'>;
   };
 }
@@ -49,7 +46,6 @@ export interface AppFirebaseDataServiceConfig {
  * Type-safe entity display name map.
  */
 export interface AppEntityDisplayNameMap {
-  [EntityType.BOOK]: string;
   [EntityType.VOLUME]: string;
 }
 
