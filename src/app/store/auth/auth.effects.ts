@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Auth, authState, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { from, of } from 'rxjs';
@@ -17,7 +17,7 @@ import * as AuthActions from './auth.actions';
 @Injectable()
 export class AuthEffects {
   readonly authenticated$ = createEffect(() => {
-    return this.fireAuth.authState.pipe(
+    return authState(this.auth).pipe(
       map(state => {
         if (state) {
           return AuthActions.authenticated();
@@ -31,7 +31,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.loginWithProvider),
       exhaustMap(({ providerId: provider }) =>
-        from(this.fireAuth.signInWithPopup(getAuthProvider(provider))).pipe(
+        from(signInWithPopup(this.auth, getAuthProvider(provider))).pipe(
           map(_ => AuthActions.loginWithProviderSuccess()),
           catchError((err: FirebaseError) => of(AuthActions.loginWithProviderError({ error: firebaseError({ error: err }) })))
         )
@@ -63,7 +63,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.logout, AuthActions.authRefreshError, AuthActions.authTokenNotFound, AuthActions.authResponseError),
       concatMap(_ =>
-        from(this.fireAuth.signOut()).pipe(
+        from(this.auth.signOut()).pipe(
           map(() => AuthActions.logoutSuccess()),
           catchError((err: FirebaseError) => of(AuthActions.logoutError({ error: firebaseError({ error: err }) })))
         )
@@ -142,7 +142,7 @@ export class AuthEffects {
     @Inject(AUTH_CONFIG) private readonly config: AuthConfig,
     private readonly actions$: Actions,
     private readonly router: Router,
-    private readonly fireAuth: AngularFireAuth,
+    private readonly auth: Auth,
     private readonly toastService: ToastService,
     private readonly dialogService: DialogService
   ) {}

@@ -1,9 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Auth, user } from '@angular/fire/auth';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
+import { toAuthUser } from '../helpers/auth.helpers';
 import { AuthProviderId, AuthUser } from '../models/auth.models';
 import { loginWithProvider, logout } from '../store/auth/auth.actions';
 import * as AuthSelectors from '../store/auth/auth.selectors';
@@ -12,10 +13,10 @@ import * as AuthSelectors from '../store/auth/auth.selectors';
   providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
-  readonly user$: Observable<AuthUser | null> = this.fireAuth.user;
+  readonly user$: Observable<AuthUser | null> = user(this.auth).pipe(map(toAuthUser));
 
-  readonly loggedIn$ = this.user$.pipe(map(user => !!user));
-  readonly loggedOut$ = this.user$.pipe(map(user => !user));
+  readonly loggedIn$ = this.user$.pipe(map(u => !!u));
+  readonly loggedOut$ = this.user$.pipe(map(u => !u));
 
   readonly pending$ = this.store.select(AuthSelectors.selectAuthPending);
 
@@ -31,10 +32,10 @@ export class AuthService implements OnDestroy {
 
   private readonly _destroyed$ = new Subject<void>();
 
-  constructor(private readonly store: Store, private readonly fireAuth: AngularFireAuth) {
-    this.fireAuth.user.pipe(takeUntil(this._destroyed$)).subscribe(user => {
-      this.#user = user as unknown as AuthUser;
-      this.#uid = user?.uid;
+  constructor(private readonly store: Store, private readonly auth: Auth) {
+    this.user$.pipe(takeUntil(this._destroyed$)).subscribe(u => {
+      this.#user = u as unknown as AuthUser;
+      this.#uid = u?.uid;
     });
   }
 

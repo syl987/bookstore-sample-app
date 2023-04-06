@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { deleteObject, ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
 import { from, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FileService {
-  constructor(private readonly fireStorage: AngularFireStorage) {}
+  constructor(private readonly storage: Storage) {}
 
   upload(path: string, data: any, options: { contentType?: string; contentEncoding?: string } = {}): Observable<string> {
-    const task = this.fireStorage.upload(path, data, options);
+    const task = uploadBytesResumable(ref(this.storage, path), data, options);
 
-    return from(task.then(snapshop => snapshop.ref.getDownloadURL()));
+    return from(task.then(snapshot => snapshot.ref.fullPath) as Promise<string>);
   }
 
   delete(path: string): Observable<void> {
-    const ref = this.fireStorage.ref(path);
+    const task = deleteObject(ref(this.storage, path));
 
-    return ref.delete().pipe(tap(console.log)); // TODO kick console
+    return from(task).pipe(tap(console.log)); // TODO kick console
   }
 }
