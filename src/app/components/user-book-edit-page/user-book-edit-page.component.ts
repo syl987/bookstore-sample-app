@@ -1,20 +1,35 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BookService } from 'src/app/services/book.service';
+import { map, Subject, takeUntil } from 'rxjs';
+import { RouterService } from 'src/app/services/router.service';
+import { VolumeService } from 'src/app/services/volume.service';
 
 @Component({
   selector: 'app-user-book-edit-page',
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBookEditPageComponent implements OnInit {
+export class UserBookEditPageComponent implements OnInit, OnDestroy {
   readonly id: string = this.route.snapshot.params['bookId'];
 
-  readonly book$ = this.bookService.entityByRouterParamId$;
+  readonly book$ = this.volumeService.entities$.pipe(map(volumes => null)); // TODO get the right book
 
-  constructor(private readonly route: ActivatedRoute, private readonly bookService: BookService) {}
+  private readonly _destroyed$ = new Subject<void>();
+
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly routerService: RouterService,
+    private readonly volumeService: VolumeService
+  ) {}
 
   ngOnInit(): void {
-    this.bookService.getByKey(this.id);
+    this.routerService.navigated$.pipe(takeUntil(this._destroyed$)).subscribe(_ => {
+      this.volumeService.getAll(); // TODO query the right book
+    });
+  }
+
+  ngOnDestroy(): void {
+    this._destroyed$.next();
+    this._destroyed$.complete();
   }
 }

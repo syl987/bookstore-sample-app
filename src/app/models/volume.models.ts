@@ -1,3 +1,5 @@
+import { BookDTO } from './book.models';
+
 export interface VolumeDTO {
   id: string;
   volumeInfo: {
@@ -38,5 +40,8 @@ export interface VolumeDTO {
   };
   searchInfo: {
     textSnippet: string;
+  };
+  books: {
+    [key: string]: BookDTO;
   };
 }
