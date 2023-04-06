@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>New Book</h1>
+
+<div mat-dialog-content>
+  <p>Create a new book, pick a volume.</p>
+
+  <mat-form-field>
+    <mat-label>Input</mat-label>
+    <input matInput (input)="searchVolumes($any($event.target).value)" />
+  </mat-form-field>
+
+  <mat-action-list>
+    <button *ngFor="let volume of volumes$ | async | slice : 0 : 10" mat-list-item (click)="createBook(volume)" class="text-truncate">
+      <img
+        *ngIf="volume.volumeInfo.imageLinks"
+        [src]="volume.volumeInfo.imageLinks.smallThumbnail"
+        alt="Book thumbnail"
+        height="44"
+        width="44"
+        class="me-s"
+      />
+      {{ volume.volumeInfo.title }}
+    </button>
+  </mat-action-list>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

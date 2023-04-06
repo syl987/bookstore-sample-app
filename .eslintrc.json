@@ -86,6 +86,7 @@
         "no-useless-concat": "warn",
         "no-useless-rename": "warn",
         "no-useless-return": "warn",
+        "no-warning-comments": ["warn", { "terms": ["todo"] }],
         "operator-assignment": "warn",
         "prefer-arrow-callback": ["warn", { "allowUnboundThis": false }],
         "prefer-exponentiation-operator": "warn",

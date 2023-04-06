@@ -1,8 +1,7 @@
+<p>user-book-list-page works!</p>
+
 <div class="app-container">
-  <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput [formControl]="filterControl" />
-  </mat-form-field>
+  <button mat-stroked-button color="primary" (click)="openBookCreateDialog()">New Book</button>
 
   <div class="row">
     <div *ngFor="let book of books$ | async" class="col-sm-6 col-md-4 col-lg-3 mb-m">

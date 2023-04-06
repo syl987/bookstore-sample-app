@@ -3,11 +3,12 @@ import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angula
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { environment } from '../environments/environment';
-import { BookArticleDetailPageComponent } from './components/book-article-detail-page/book-article-detail-page.component';
-import { BookArticleEditPageComponent } from './components/book-article-edit-page/book-article-edit-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
+import { UserBookEditPageComponent } from './components/user-book-edit-page/user-book-edit-page.component';
+import { UserBookListPageComponent } from './components/user-book-list-page/user-book-list-page.component';
+import { VolumeDetailPageComponent } from './components/volume-detail-page/volume-detail-page.component';
 
 const routes: Routes = [
   {
@@ -22,29 +23,35 @@ const routes: Routes = [
     ...canActivate(() => redirectLoggedInTo('/home')),
   },
   {
-    path: '',
+    path: 'home',
+    title: `Home`,
+    component: HomePageComponent,
+  },
+  {
+    path: 'search',
+    title: `Search`,
+    component: SearchPageComponent,
+  },
+  {
+    path: 'books/:volumeId',
+    title: `Book Details`,
+    component: VolumeDetailPageComponent,
+    // TODO leave naming as book?
+  },
+  {
+    path: 'user',
     ...canActivate(() => redirectUnauthorizedTo('/login')),
     children: [
       {
-        path: 'home',
-        title: `Home`,
-        component: HomePageComponent,
+        path: 'books',
+        title: `My Books`,
+        component: UserBookListPageComponent,
       },
       {
-        path: 'search',
-        title: `Search Results`,
-        component: SearchPageComponent,
-      },
-      {
-        path: 'articles/books/:bookArticleId/edit',
+        path: 'books/:bookId/edit',
         title: `Edit Book Details`,
-        component: BookArticleEditPageComponent,
+        component: UserBookEditPageComponent,
         // TODO guard own article only
-      },
-      {
-        path: 'articles/books/:bookArticleId',
-        title: `Book Details`,
-        component: BookArticleDetailPageComponent,
       },
     ],
   },

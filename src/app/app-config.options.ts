@@ -3,15 +3,15 @@ import { AuthConfig } from './models/auth.models';
 import { EntityType } from './models/entity.models';
 
 export const appConfig: AppConfig = {
-  appName: 'SillyBookstoreExampleApp',
-  copyrightName: 'SillyBookstoreExampleApp',
+  appName: 'Silly Bookstore Example App',
+  copyrightName: 'Silly Bookstore Example App',
 };
 
 export const authConfig: AuthConfig = {
   loginUrl: '/login',
   afterLoginUrl: '/',
   afterLogoutUrl: '/login',
-  bearerExcluded: [],
+  bearerExcluded: [{ url: 'https://www.googleapis.com/books/v1/volumes' }],
   bearerIncluded: [],
   messages: {
     logout: `Logout successful`,
@@ -23,18 +23,23 @@ export const authConfig: AuthConfig = {
 
 export const appDataServiceConfig: AppFirebaseDataServiceConfig = {
   entityHttpResourceUrls: {
-    [EntityType.BOOK_ARTICLE]: {
+    [EntityType.BOOK]: {
       collectionResourceUrl: 'books',
+    },
+    [EntityType.VOLUME]: {
+      collectionResourceUrl: 'volumes',
     },
   },
 };
 
 export const appEntityNames: AppEntityDisplayNameMap = {
-  [EntityType.BOOK_ARTICLE]: `Book`,
+  [EntityType.BOOK]: `Book`,
+  [EntityType.VOLUME]: `Volume`,
 };
 
 export const appEntityPluralNames: AppEntityDisplayNameMap = {
-  [EntityType.BOOK_ARTICLE]: `Books`,
+  [EntityType.BOOK]: `Books`,
+  [EntityType.VOLUME]: `Volumes`,
 };
 
 export const appStrings: AppStrings = {};
