@@ -1,4 +1,4 @@
-import { MatLegacyCheckboxDefaultOptions as MatCheckboxDefaultOptions } from '@angular/material/legacy-checkbox';
+import { MatCheckboxDefaultOptions } from '@angular/material/checkbox';
 
 export const checkboxOptions: MatCheckboxDefaultOptions = {
   color: 'primary',

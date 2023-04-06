@@ -1,19 +1,19 @@
 @use '@angular/material' as mat;
 
-.mat-list-base .mat-list-item {
+.mat-mdc-list-base .mat-mdc-list-item {
   border-radius: $border-radius !important;
 
-  .mat-list-item-ripple {
+  .mat-ripple-element {
     border-radius: $border-radius !important;
   }
 }
 
-.mat-list-base .mat-list-item.mat-list-item-disabled {
+.mat-mdc-list-base .mat-mdc-list-item.mat-mdc-list-item--disabled {
   opacity: 30%;
   background-color: transparent !important;
 }
 
-.mat-list-base[dense] .mat-list-item .mat-list-icon {
+.mat-mdc-list-base[dense] .mat-mdc-list-item .mat-list-icon {
   // scale down
   &.fa.fa-users {
     font-size: 1.5 * 80% !important;
@@ -27,7 +27,7 @@
   }
 }
 
-.mat-list-base:not([dense]) .mat-list-item .mat-list-icon {
+.mat-mdc-list-base:not([dense]) .mat-mdc-list-item .mat-list-icon {
   // scale down
   &.fa.fa-users {
     font-size: 1.25 * 80% !important;
@@ -41,17 +41,17 @@
   }
 }
 
-button.mat-list-item:not(:hover),
-button.mat-list-item:not(:focus) {
+button.mat-mdc-list-item:not(:hover),
+button.mat-mdc-list-item:not(:focus) {
   background-color: transparent; // workaround: prevent fallback to browser defaults
 }
 
 .mat-list-option:hover,
 .mat-list-option:focus,
-.mat-nav-list .mat-list-item:hover,
-.mat-nav-list .mat-list-item:focus,
-.mat-action-list .mat-list-item:hover,
-.mat-action-list .mat-list-item:focus {
+.mat-nav-list .mat-mdc-list-item:hover,
+.mat-nav-list .mat-mdc-list-item:focus,
+.mat-action-list .mat-mdc-list-item:hover,
+.mat-action-list .mat-mdc-list-item:focus {
   background: mat.get-color-from-palette($app-primary, 50);
   background-image: initial;
   background-position-x: initial;
@@ -67,6 +67,6 @@ button.mat-list-item:not(:focus) {
   }
 }
 
-.mat-list-item.active {
+.mat-mdc-list-item.active {
   background-color: mat.get-color-from-palette($app-primary, 50);
 }

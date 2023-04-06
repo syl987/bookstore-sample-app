@@ -1,6 +1,6 @@
-import { MatLegacyFormFieldDefaultOptions as MatFormFieldDefaultOptions } from '@angular/material/legacy-form-field';
+import { MatFormFieldDefaultOptions } from '@angular/material/form-field';
 
 export const formFieldOptions: MatFormFieldDefaultOptions = {
   hideRequiredMarker: false,
-  appearance: 'standard',
+  appearance: 'fill',
 };

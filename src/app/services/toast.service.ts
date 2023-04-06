@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  LegacySimpleSnackBar as SimpleSnackBar,
-  MatLegacySnackBar as MatSnackBar,
-  MatLegacySnackBarConfig as MatSnackBarConfig,
-  MatLegacySnackBarRef as MatSnackBarRef,
-} from '@angular/material/legacy-snack-bar';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 
 type SimpleSnackBarConfig = Pick<MatSnackBarConfig<never>, 'duration'>;
 

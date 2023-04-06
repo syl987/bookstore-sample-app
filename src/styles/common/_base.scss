@@ -2,6 +2,9 @@ html,
 body {
   height: 100%;
 }
+body {
+  margin: 0;
+}
 
 // Future-proof rule: in browsers that support :focus-visible, suppress the focus outline
 // on elements that programmatically receive focus but wouldn't normally show a visible
