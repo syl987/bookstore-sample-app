@@ -6,18 +6,18 @@ import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 import { httpError } from 'src/app/models/error.models';
 import { GoogleBooksApiService } from 'src/app/services/__api/google-books-api.service';
 
-import * as VolumeActions from './volume.actions';
+import * as GoogleBooksActions from './google-books.actions';
 
 @Injectable()
-export class VolumeEffects {
-  readonly searchVolumes$ = createEffect(() => {
+export class GoogleBooksEffects {
+  readonly searchGoogleBooks$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(VolumeActions.searchVolumes),
+      ofType(GoogleBooksActions.searchGoogleBooks),
       debounceTime(200),
       switchMap(({ query }) =>
         this.googleBooksApi.list(query).pipe(
-          map(({ items }) => VolumeActions.searchVolumesSuccess({ items })),
-          catchError((err: HttpErrorResponse) => of(VolumeActions.searchVolumesError({ error: httpError({ error: err }) })))
+          map(list => GoogleBooksActions.searchGoogleBooksSuccess({ list })),
+          catchError((err: HttpErrorResponse) => of(GoogleBooksActions.searchGoogleBooksError({ error: httpError({ error: err }) })))
         )
       )
     );
