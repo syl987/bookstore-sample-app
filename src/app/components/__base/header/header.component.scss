@@ -15,7 +15,7 @@
   @include app-container-padding;
 }
 
-.mat-toolbar .mat-button::after {
+.mat-toolbar .mat-mdc-button::after {
   content: '';
   display: block;
   position: absolute;
@@ -28,7 +28,7 @@
   transition: width 0.3s;
 }
 
-.mat-toolbar .mat-button.active::after {
+.mat-toolbar .mat-mdc-button.active::after {
   width: calc(100% - 16px);
   transition: width 0.3s;
 }

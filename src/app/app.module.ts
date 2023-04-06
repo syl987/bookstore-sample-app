@@ -43,6 +43,11 @@ import { AppDataServiceFactory } from './services/__data/data-service-factory';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, entityDataConfig, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO toolbar button ripple style
+// TODO snackbar icon and text
+// TODO kick dialog supporting text config
+// TODO fix icon button positioning
+
 registerLocaleData(localeDe);
 
 const firebaseOptions: FirebaseOptions = {

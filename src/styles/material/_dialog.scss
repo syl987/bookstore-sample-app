@@ -1,9 +1,12 @@
 .mat-mdc-dialog-container {
-  border-radius: $border-radius !important;
   margin-left: app-spacer(s);
   margin-right: app-spacer(s);
+
+  .mat-mdc-dialog-surface {
+    border-radius: $border-radius !important;
+  }
 }
 
 .mat-mdc-dialog-actions {
-  justify-content: flex-end;
+  justify-content: end !important;
 }
