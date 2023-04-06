@@ -1,15 +1,14 @@
 @use '@angular/material' as mat;
 
 // Define a custom typography config that overrides the font-family as well as the `headline`, `body-1`,... levels.
-$app-typography-config: mat.define-legacy-typography-config(
+$app-typography-config: mat.define-typography-config(
   $font-family: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif",
-  $headline: mat.define-typography-level($h1-font-size, $headings-line-height, $font-weight-bold),
-  $title: mat.define-typography-level($h2-font-size, $headings-line-height, $font-weight-bold),
-  $subheading-2: mat.define-typography-level($h3-font-size, $headings-line-height, $font-weight-bold),
-  $subheading-1: mat.define-typography-level($h4-font-size, $headings-line-height, $font-weight-bold),
+  $headline-5: mat.define-typography-level($h1-font-size, $headings-line-height, $font-weight-bold),
+  $headline-6: mat.define-typography-level($h2-font-size, $headings-line-height, $font-weight-bold),
+  $subtitle-1: mat.define-typography-level($h3-font-size, $headings-line-height, $font-weight-bold),
+  $body-1: mat.define-typography-level($h4-font-size, $headings-line-height, $font-weight-bold),
   $body-2: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-bold),
-  $body-1: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-normal),
+  $subtitle-2: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-normal),
   $caption: mat.define-typography-level($font-size-sm, $line-height-base, $font-weight-normal),
   $button: mat.define-typography-level($font-size-sm, $line-height-sm, $font-weight-bold),
-  $input: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-normal),
 );

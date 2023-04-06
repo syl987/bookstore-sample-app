@@ -1,4 +1,7 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+// Plus imports for other components in your app.
 
 @import 'typography';
 @import 'palette';
@@ -23,15 +26,6 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy($app-typography-config);`
-@include mat.all-component-typographies($app-typography-config);
 @include mat.core();
 
 // Create the theme object. A theme consists of configurations for individual
@@ -43,6 +37,7 @@ $app-light-theme: mat.define-light-theme(
       accent: $app-accent,
       warn: $app-warn,
     ),
+    typography: $app-typography-config,
   )
 );
 
