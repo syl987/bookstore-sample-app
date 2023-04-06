@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { catchError, concatMap } from 'rxjs/operators';
 import { BookDTO, BookStatus } from 'src/app/models/book.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
