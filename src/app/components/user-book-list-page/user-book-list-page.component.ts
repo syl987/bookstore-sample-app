@@ -1,9 +1,25 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { BookDTO } from 'src/app/models/book.models';
+import { VolumeDTO } from 'src/app/models/volume.models';
 import { AuthService } from 'src/app/services/auth.service';
-import { BookService } from 'src/app/services/book.service';
 import { DialogService } from 'src/app/services/dialog.service';
+import { VolumeService } from 'src/app/services/volume.service';
+
+// TODO create special book model with volume info
+// TODO create a selector to improve runtime behavior
+function mapToBooks(volumes: VolumeDTO[], filterFn: (book: BookDTO) => boolean): (BookDTO & { volume: VolumeDTO })[] {
+  return volumes.reduce<(BookDTO & { volume: VolumeDTO })[]>((acc, volume) => {
+    return [
+      ...acc,
+      ...Object.values(volume.books)
+        .filter(filterFn)
+        .map(book => ({ ...book, volume })),
+    ];
+  }, []);
+}
 
 @Component({
   selector: 'app-user-book-list-page',
@@ -11,15 +27,15 @@ import { DialogService } from 'src/app/services/dialog.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookListPageComponent implements OnInit, OnDestroy {
-  readonly books$ = this.bookService.entities$.pipe(map(books => books.filter(book => book.sellerUid === this.authService.uid)));
+  readonly books$ = this.volumeService.entities$.pipe(map(volumes => mapToBooks(volumes, book => book.sellerUid === this.authService.uid)));
 
   private readonly _destroyed$ = new Subject<void>();
 
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly dialogService: DialogService,
-    private readonly bookService: BookService
+    private readonly volumeService: VolumeService,
+    private readonly dialogService: DialogService
   ) {}
 
   openBookCreateDialog(): void {
@@ -33,7 +49,7 @@ export class UserBookListPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.bookService.getAll(); // TODO just my books
+    this.volumeService.getAll(); // TODO just my books
   }
 
   ngOnDestroy(): void {
