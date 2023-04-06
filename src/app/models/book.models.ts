@@ -1,39 +1,21 @@
-export interface BookArticleDTO {
+export enum BookStatus {
+  DRAFT = 'DRAFT',
+  PUBLIC = 'PUBLIC',
+  SOLD = 'SOLD',
+}
+
+export enum BookCondition {
+  NEW = 'NEW',
+  VERY_GOOD = 'VERY_GOOD',
+  VISIBLY_USED = 'VISIBLY_USED',
+  DAMAGED = 'DAMAGED',
+}
+
+export interface BookDTO {
   id: string;
-  volumeInfo: {
-    title: string;
-    subtitle: string;
-    authors: string[];
-    publisher: string;
-    publishedDate: string; // 'yyyy-MM-dd'
-    description: string;
-    industryIdentifiers: {
-      type: string;
-      identifier: string;
-    }[];
-    pageCount: number;
-    dimensions: {
-      height: string;
-      width: string;
-      thickness: string;
-    };
-    printType: string;
-    mainCategory: string;
-    categories: string[];
-    averageRating: number;
-    ratingsCount: number;
-    contentVersion: string;
-    imageLinks: {
-      smallThumbnail: string;
-      thumbnail: string;
-      small: string;
-      medium: string;
-      large: string;
-      extraLarge: string;
-    };
-    language: string;
-    previewLink: string;
-    infoLink: string;
-    canonicalVolumeLink: string;
-  };
+  sellerUid: string;
+  status: BookStatus;
+  description?: string;
+  imageUrl?: string;
+  condition?: BookCondition;
 }

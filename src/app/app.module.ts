@@ -2,13 +2,11 @@ import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 import { ApplicationRef, DEFAULT_CURRENCY_CODE, DoBootstrap, LOCALE_ID, NgModule } from '@angular/core';
-import { FirebaseOptions } from '@angular/fire/app';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { FirebaseOptions, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { getFunctions, provideFunctions } from '@angular/fire/functions';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TitleStrategy } from '@angular/router';
@@ -26,13 +24,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './components/__base/footer/footer.component';
 import { HeaderComponent } from './components/__base/header/header.component';
 import { SidenavComponent } from './components/__base/sidenav/sidenav.component';
-import { BookArticleDetailPageComponent } from './components/book-article-detail-page/book-article-detail-page.component';
-import { BookArticleEditPageComponent } from './components/book-article-edit-page/book-article-edit-page.component';
+import { BookCreateDialogComponent } from './components/book-create-dialog/book-create-dialog.component';
 import { CropImageDialogComponent } from './components/crop-image-dialog/crop-image-dialog.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
+import { UserBookEditPageComponent } from './components/user-book-edit-page/user-book-edit-page.component';
+import { UserBookListPageComponent } from './components/user-book-list-page/user-book-list-page.component';
 import { UserSettingsDialogComponent } from './components/user-settings-dialog/user-settings-dialog.component';
+import { VolumeDetailPageComponent } from './components/volume-detail-page/volume-detail-page.component';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { ErrorResponseInterceptor } from './interceptors/error-response.interceptor';
@@ -61,12 +61,11 @@ const firebaseOptions: FirebaseOptions = {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseOptions),
-    AngularFireAuthModule,
-    AngularFireAuthGuardModule,
-    AngularFireFunctionsModule,
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
+    provideFirebaseApp(() => initializeApp(firebaseOptions)),
+    provideAuth(() => getAuth()),
+    provideFunctions(() => getFunctions()),
+    provideDatabase(() => getDatabase()),
+    provideStorage(() => getStorage()),
     StoreModule.forRoot(reducers, storeConfig),
     EffectsModule.forRoot(effects),
     EntityDataModule.forRoot(entityDataConfig),
@@ -86,8 +85,10 @@ const firebaseOptions: FirebaseOptions = {
     SearchPageComponent,
     UserSettingsDialogComponent,
     CropImageDialogComponent,
-    BookArticleDetailPageComponent,
-    BookArticleEditPageComponent,
+    BookCreateDialogComponent,
+    UserBookListPageComponent,
+    UserBookEditPageComponent,
+    VolumeDetailPageComponent,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de-DE' },

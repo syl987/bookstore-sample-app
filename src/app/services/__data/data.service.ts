@@ -1,56 +1,58 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { from, Observable } from 'rxjs';
+import { child, Database, DataSnapshot, get, push, ref, remove, update } from '@angular/fire/database';
+import { concatMap, from, Observable } from 'rxjs';
 
-async function queryAll<T>(list: AngularFireList<T>): Promise<T[]> {
-  const snapshot = list.query.get();
-
-  return snapshot.then(s => Object.values(s.val()));
+function toValueWithIdOrThrow(snapshot: DataSnapshot): any {
+  if (snapshot.exists()) {
+    return { ...snapshot.val(), id: snapshot.key };
+  }
+  throw new Error(`Firebase data not found.`);
 }
 
-async function queryItem<T>(list: AngularFireList<T>, key: string): Promise<T> {
-  const snapshot = list.query.ref.child(key).get();
-
-  return snapshot.then(s => s.val());
+function toListWithIdsOrThrow(snapshot: DataSnapshot): any[] {
+  if (snapshot.exists()) {
+    return Object.entries(snapshot.val()).map(([key, val]) => ({ ...(val as object), id: key })); // TODO safe guard, kick casting
+  }
+  throw new Error(`Firebase data not found.`);
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  constructor(private readonly fireDatabase: AngularFireDatabase) {}
+  constructor(private readonly database: Database) {}
 
   getAll<T>(path: string): Observable<T[]> {
-    const list = this.fireDatabase.list<T>(path);
+    const reference = ref(this.database, path);
 
-    return from(queryAll(list));
+    return from(get(reference).then(toListWithIdsOrThrow));
   }
 
   get<T>(path: string, key: string): Observable<T> {
-    const list = this.fireDatabase.list<T>(path);
+    const reference = ref(this.database, path);
 
-    return from(queryItem(list, key));
+    return from(get(child(reference, key)).then(toValueWithIdOrThrow));
   }
 
   push<T>(path: string, entity: T): Observable<T> {
-    const list = this.fireDatabase.list<T>(path);
+    const reference = ref(this.database, path);
 
-    entity = { ...entity, createdAt: Date.now(), updatedAt: Date.now(), id: list.query.ref.push().key };
+    const data: T = { ...entity, createdAt: Date.now(), updatedAt: Date.now() };
 
-    return from(list.push(entity).then(ref => queryItem(list, ref.key!)));
+    return from(push(reference, data)).pipe(concatMap(({ key }) => this.get<T>(path, key!)));
   }
 
   update<T>(path: string, key: string, changes: Partial<T>): Observable<T> {
-    const list = this.fireDatabase.list<T>(path);
+    const reference = ref(this.database, path);
 
-    changes = { ...changes, updatedAt: Date.now() };
+    const data: Partial<T> = { ...changes, updatedAt: Date.now() };
 
-    return from(list.update(key, changes).then(_ => queryItem(list, key)));
+    return from(update(child(reference, key), data)).pipe(concatMap(_ => this.get<T>(path, key)));
   }
 
-  remove<T>(path: string, key: string): Observable<void> {
-    const list = this.fireDatabase.list<T>(path);
+  remove(path: string, key: string): Observable<void> {
+    const reference = ref(this.database, path);
 
-    return from(list.remove(key));
+    return from(remove(child(reference, key)));
   }
 }

@@ -58,6 +58,7 @@
     "@angular/localize": "^15.2.5",
     "@ngrx/eslint-plugin": "^15.4.0",
     "@ngrx/schematics": "^15.4.0",
+    "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
     "eslint": "^8.28.0",

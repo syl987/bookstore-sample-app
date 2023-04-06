@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { BookArticleService } from 'src/app/services/book.service';
+import { VolumeService } from 'src/app/services/volume.service';
 
 @Component({
   selector: 'app-search-page',
@@ -12,20 +12,20 @@ import { BookArticleService } from 'src/app/services/book.service';
 export class SearchPageComponent implements OnInit, OnDestroy {
   readonly filterControl = new FormControl('', { nonNullable: true });
 
-  readonly bookArticles$ = this.bookArticleService.filteredEntities$;
+  readonly volumes$ = this.volumeService.filteredEntities$;
 
   private readonly _destroyed$ = new Subject<void>();
 
-  constructor(private readonly bookArticleService: BookArticleService) {}
+  constructor(private readonly volumeService: VolumeService) {}
 
   ngOnInit(): void {
-    this.bookArticleService.getAll();
+    this.volumeService.getAll();
 
     this.filterControl.valueChanges
       .pipe(debounceTime(250), takeUntil(this._destroyed$))
-      .subscribe(value => this.bookArticleService.setFilter(value));
+      .subscribe(value => this.volumeService.setFilter(value));
 
-    this.bookArticleService.filter$
+    this.volumeService.filter$
       .pipe(takeUntil(this._destroyed$))
       .subscribe(filter => this.filterControl.setValue(filter, { emitEvent: false }));
   }
