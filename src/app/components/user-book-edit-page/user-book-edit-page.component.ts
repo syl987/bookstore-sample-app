@@ -4,6 +4,11 @@ import { map, Subject, takeUntil } from 'rxjs';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
+// TODO display volume data
+// TODO edit book data (if not published or sold)
+// TODO delete book (if not sold)
+// TODO navigate to user books
+
 @Component({
   selector: 'app-user-book-edit-page',
   templateUrl: './user-book-edit-page.component.html',

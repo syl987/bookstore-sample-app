@@ -3,6 +3,10 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { VolumeService } from 'src/app/services/volume.service';
 
+// search volumes by query or params
+// include published books data
+// navigate to volume detail
+
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',

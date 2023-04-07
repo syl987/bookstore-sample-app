@@ -8,6 +8,10 @@ import { GoogleBooksService } from 'src/app/services/google-books.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
+// TODO search google books
+// TODO create a book, save volume if not existing, link them
+// TODO navigate to user book edit
+
 @Component({
   selector: 'app-book-create-dialog',
   templateUrl: './book-create-dialog.component.html',

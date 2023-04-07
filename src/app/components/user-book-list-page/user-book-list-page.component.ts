@@ -8,6 +8,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
+// TODO display user books with volume data
+// TODO display bought books with volume data
+// TODO display books separately by status (draft, published, sold, bought)
+// TODO navigate to book edit
+
 // TODO create special book model with volume info
 // TODO create a selector to improve runtime behavior
 function mapToBooks(volumes: VolumeDTO[], filterFn: (book: BookDTO) => boolean): (BookDTO & { volume: VolumeDTO })[] {

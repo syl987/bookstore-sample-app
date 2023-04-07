@@ -3,6 +3,8 @@ import { ProviderId } from 'firebase/auth';
 import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
 import { AuthService } from 'src/app/services/auth.service';
 
+// TODO include more login providers
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
