@@ -37,17 +37,13 @@ export class DataService {
   push<T>(path: string, entity: T): Observable<T> {
     const reference = ref(this.database, path);
 
-    const data: T = { ...entity, createdAt: Date.now(), updatedAt: Date.now() };
-
-    return from(push(reference, data)).pipe(concatMap(({ key }) => this.get<T>(path, key!)));
+    return from(push(reference, entity)).pipe(concatMap(({ key }) => this.get<T>(path, key!)));
   }
 
-  update<T>(path: string, key: string, changes: Partial<T>): Observable<T> {
+  update<T>(path: string, key: string, changes: { [path: string]: any }): Observable<T> {
     const reference = ref(this.database, path);
 
-    const data: Partial<T> = { ...changes, updatedAt: Date.now() };
-
-    return from(update(child(reference, key), data)).pipe(concatMap(_ => this.get<T>(path, key)));
+    return from(update(child(reference, key), changes)).pipe(concatMap(_ => this.get<T>(path, key)));
   }
 
   remove(path: string, key: string): Observable<void> {
