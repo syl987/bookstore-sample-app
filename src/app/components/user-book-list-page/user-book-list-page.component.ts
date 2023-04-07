@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
+// TODO consider revamping data model: volumes_with_books, user_books_as_volume_ids, user_bought_books_as_volume_ids, book_volume_id (check if efficient querying is possible)
+
 // TODO display user books with volume data
 // TODO display bought books with volume data
 // TODO display books separately by status (draft, published, sold, bought)
