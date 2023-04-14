@@ -4,7 +4,7 @@ import * as fromGoogleBooks from './google-books.reducer';
 
 const selectGoogleBooksState = createFeatureSelector<fromGoogleBooks.State>('google-books');
 
-export const selectGoogleBooksSearch = createSelector(selectGoogleBooksState, state => state.search);
+const selectGoogleBooksSearch = createSelector(selectGoogleBooksState, state => state.search);
 export const selectGoogleBooksSearchList = createSelector(selectGoogleBooksSearch, ({ list }) => list);
 export const selectGoogleBooksSearchVolumes = createSelector(selectGoogleBooksSearchList, list => list?.items ?? []);
 export const selectGoogleBooksSearchPending = createSelector(selectGoogleBooksSearch, ({ pending }) => pending);
