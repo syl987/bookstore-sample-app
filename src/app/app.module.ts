@@ -10,7 +10,6 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TitleStrategy } from '@angular/router';
-import { DefaultDataServiceConfig, DefaultDataServiceFactory, EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -19,7 +18,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
-import { appConfig, appDataServiceConfig, appEntityNames, appEntityPluralNames, appStrings, authConfig } from './app-config.options';
+import { appConfig, appStrings, authConfig } from './app-config.options';
 import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './components/__base/footer/footer.component';
 import { HeaderComponent } from './components/__base/header/header.component';
@@ -36,12 +35,11 @@ import { VolumeDetailPageComponent } from './components/volume-detail-page/volum
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { ErrorResponseInterceptor } from './interceptors/error-response.interceptor';
-import { APP_CONFIG, APP_ENTITY_NAMES, APP_ENTITY_PLURAL_NAMES, APP_STRINGS } from './models/app.models';
+import { APP_CONFIG, APP_STRINGS } from './models/app.models';
 import { AUTH_CONFIG } from './models/auth.models';
 import { SharedModule } from './modules/shared/shared.module';
-import { AppDataServiceFactory } from './services/__entity/data-service-factory';
 import { AppTitleStrategy } from './services/title-strategy';
-import { effects, entityDataConfig, reducers, routerStoreConfig, storeConfig } from './store/app.store';
+import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
 // TODO toolbar button ripple style
 // TODO snackbar icon and text
@@ -73,7 +71,6 @@ const firebaseOptions: FirebaseOptions = {
     provideStorage(() => getStorage()),
     StoreModule.forRoot(reducers, storeConfig),
     EffectsModule.forRoot(effects),
-    EntityDataModule.forRoot(entityDataConfig),
     StoreRouterConnectingModule.forRoot(routerStoreConfig),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
     ImageCropperModule,
@@ -104,10 +101,6 @@ const firebaseOptions: FirebaseOptions = {
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorResponseInterceptor, multi: true },
     { provide: TitleStrategy, useClass: AppTitleStrategy },
-    { provide: DefaultDataServiceFactory, useClass: AppDataServiceFactory },
-    { provide: DefaultDataServiceConfig, useValue: appDataServiceConfig },
-    { provide: APP_ENTITY_NAMES, useValue: appEntityNames },
-    { provide: APP_ENTITY_PLURAL_NAMES, useValue: appEntityPluralNames },
     { provide: APP_STRINGS, useValue: appStrings },
   ],
 })

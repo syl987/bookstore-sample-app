@@ -7,8 +7,6 @@ import { getEntityById } from '../helpers/entity.helpers';
 import { BookStatus, UserBookDTO } from '../models/book.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import { selectRouterParams } from '../store/router/router.selectors';
-import { UserBooksCollectionService } from './__entity/user-books-collection.service';
-import { VolumeCollectionService } from './__entity/volume-collection.service';
 import { AuthService } from './auth.service';
 
 interface IUserBooksService {
@@ -21,7 +19,7 @@ interface IUserBooksService {
   /** Create a new volume from google books if missing and add a new book with initial data to it. */
   create(volumeData: GoogleBooksVolumeDTO): Observable<UserBookDTO>;
   /** Edit data of an unpublished book. */
-  edit(id: string, volumeId: string, data: unknown): Observable<UserBookDTO>;
+  edit(id: string, data: unknown): Observable<UserBookDTO>;
   /** Delete a book. Delete the volume if not related to any books. */
   delete(id: string, volumeId: string): Observable<void>;
   /** Publish a book. */
@@ -87,12 +85,13 @@ export class UserBooksService implements IUserBooksService {
     );
   }
 
-  edit(id: string, volumeId: string, data: unknown): Observable<UserBookDTO> {
-    throw new Error('Method not implemented.');
+  edit(id: string, data: Pick<UserBookDTO, 'condition' | 'description' | 'imageUrl'>): Observable<UserBookDTO> {
+    // TODO check status
+    return this.userBooksCollection.update({ id, ...data });
   }
 
   delete(id: string, volumeId: string): Observable<void> {
-    throw new Error('Method not implemented.');
+    return this.userBooksCollection.getByKey(id).pipe(concatMap(({ status }) => {}));
   }
 
   publish(id: string, volumeId: string): Observable<void> {

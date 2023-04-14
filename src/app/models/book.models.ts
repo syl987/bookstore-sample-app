@@ -25,3 +25,7 @@ export interface BookDTO {
 export interface UserBookDTO extends BookDTO {
   volume: VolumeDTO;
 }
+
+export interface UserBooksDTO {
+  [bookId: string]: UserBookDTO;
+}

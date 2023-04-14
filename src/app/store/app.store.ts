@@ -1,4 +1,3 @@
-import { PropsFilterFnFactory } from '@ngrx/data';
 import {
   MinimalRouterStateSnapshot,
   NavigationActionTiming,
@@ -10,14 +9,10 @@ import {
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
 
-import { AppEntityDataModuleConfig } from '../models/app.models';
-import { EntityType } from '../models/entity.models';
 import { consoleLogMetaReducer, resetStateMetaReducer } from './app.meta-reducers';
 import { resetState } from './auth/auth.actions';
 import { AuthEffects } from './auth/auth.effects';
 import * as fromAuth from './auth/auth.reducer';
-import { EntityToastEffects } from './entity/entity-toast.effects';
-import { EntityUndoEffects } from './entity/entity-undo.effects';
 import { GoogleBooksEffects } from './google-books/google-books.effects';
 import * as fromGoogleBooks from './google-books/google-books.reducer';
 import { RouterEffects } from './router/router.effects';
@@ -34,22 +29,7 @@ export const reducers: ActionReducerMap<AppState> = {
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.reducer,
 };
 
-export const entityDataConfig: AppEntityDataModuleConfig = {
-  entityMetadata: {
-    [EntityType.USER_BOOKS]: {
-      selectId: entity => entity.id,
-      // sortComparer: stringPropComparerDesc('createdAt'), // TODO add more meta props
-      filterFn: PropsFilterFnFactory(['id']), // TODO sub-props?
-    },
-    [EntityType.VOLUME]: {
-      selectId: entity => entity.id,
-      // sortComparer: stringPropComparerDesc('createdAt'), // TODO add more meta props
-      filterFn: PropsFilterFnFactory(['id']), // TODO sub-props?
-    },
-  },
-};
-
-export const effects = [AuthEffects, GoogleBooksEffects, RouterEffects, EntityUndoEffects, EntityToastEffects];
+export const effects = [AuthEffects, GoogleBooksEffects, RouterEffects];
 
 export const storeConfig: RootStoreConfig<AppState> = {
   metaReducers: [resetStateMetaReducer(resetState.type), consoleLogMetaReducer],
