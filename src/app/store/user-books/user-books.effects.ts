@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, concatMap, map, switchMap } from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
+import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { firebaseError, internalError } from 'src/app/models/error.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 import * as UserBooksActions from './user-books.actions';
 
@@ -49,20 +50,32 @@ export class UserBooksEffects {
         if (!this.authService.uid) {
           return of(UserBooksActions.createUserBookError({ error: internalError({ message: `User not logged in.` }) }));
         }
-        const initialVolumeData: VolumeDTO = {
-          id: volumeData.id,
-          volumeInfo: volumeData.volumeInfo,
-          searchInfo: volumeData.searchInfo,
-          publishedBooks: {},
-        };
-        const initialUserBookData: Partial<UserBookDTO> = {
-          uid: this.authService.uid,
-          status: BookStatus.DRAFT,
-          volume: volumeData,
-        };
-        // TODO create volume if not existing
-        return this.firebaseApi.createUserBook(this.authService.uid, initialUserBookData).pipe(
-          map(book => UserBooksActions.createUserBookSuccess({ book })),
+        const currentUid = this.authService.uid;
+
+        return this.firebaseApi.getVolume(volumeData.id).pipe(
+          catchError(err => {
+            // TODO check for 404
+            if (err.code !== 'TODO some sort of 404 code') {
+              return throwError(() => err);
+            }
+            const volume: VolumeDTO = {
+              id: volumeData.id,
+              volumeInfo: volumeData.volumeInfo,
+              searchInfo: volumeData.searchInfo,
+            };
+            return this.firebaseApi.createVolume(volume);
+          }),
+          concatMap(volume => {
+            const book: Partial<UserBookDTO> = {
+              uid: currentUid,
+              status: BookStatus.DRAFT,
+              volume,
+            };
+            return this.firebaseApi.createUserBook(currentUid, book).pipe(
+              map(res => UserBooksActions.createUserBookSuccess({ book: res })),
+              catchError(err => of(UserBooksActions.createUserBookError({ error: firebaseError({ err }) }))),
+            );
+          }),
           catchError(err => of(UserBooksActions.createUserBookError({ error: firebaseError({ err }) }))),
         );
       }),
@@ -72,12 +85,18 @@ export class UserBooksEffects {
   readonly editUserBookDraft = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.editUserBookDraft),
-      switchMap(({ id, data }) => {
+      switchMap(({ id, book }) => {
         if (!this.authService.uid) {
           return of(UserBooksActions.editUserBookDraftError({ error: internalError({ message: `User not logged in.` }) }));
         }
-        return this.firebaseApi.updateUserBook(this.authService.uid, id, data).pipe(
-          map(book => UserBooksActions.editUserBookDraftSuccess({ book })),
+        if (book.uid !== this.authService.uid) {
+          return of(UserBooksActions.editUserBookDraftError({ error: internalError({ message: `Invalid user.` }) }));
+        }
+        if (book.status !== BookStatus.DRAFT) {
+          return of(UserBooksActions.editUserBookDraftError({ error: internalError({ message: `Book already published.` }) }));
+        }
+        return this.firebaseApi.updateUserBook(this.authService.uid, id, book).pipe(
+          map(res => UserBooksActions.editUserBookDraftSuccess({ book: res })),
           catchError(err => of(UserBooksActions.editUserBookDraftError({ error: firebaseError({ err }) }))),
         );
       }),
@@ -87,9 +106,15 @@ export class UserBooksEffects {
   readonly deleteUserBook = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.deleteUserBook),
-      switchMap(({ id }) => {
+      switchMap(({ id, book }) => {
         if (!this.authService.uid) {
           return of(UserBooksActions.deleteUserBookError({ error: internalError({ message: `User not logged in.` }) }));
+        }
+        if (book.uid !== this.authService.uid) {
+          return of(UserBooksActions.deleteUserBookError({ error: internalError({ message: `Invalid user.` }) }));
+        }
+        if (book.status !== BookStatus.DRAFT) {
+          return of(UserBooksActions.deleteUserBookError({ error: internalError({ message: `Book already published.` }) }));
         }
         return this.firebaseApi.deleteUserBook(this.authService.uid, id).pipe(
           map(_ => UserBooksActions.deleteUserBookSuccess({ id })),
@@ -99,8 +124,38 @@ export class UserBooksEffects {
     );
   });
 
-  // TODO copy this one with all the validity checks and messages
   readonly publishUserBook = createEffect(() => {
+    return this.actions.pipe(
+      ofType(UserBooksActions.publishUserBook),
+      concatMap(({ id, book }) => {
+        if (!this.authService.uid) {
+          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `User not logged in.` }) }));
+        }
+        if (book.uid !== this.authService.uid) {
+          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Invalid user.` }) }));
+        }
+        if (book.status !== BookStatus.DRAFT) {
+          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Book already published.` }) }));
+        }
+        if (!book.description) {
+          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Missing description.` }) }));
+        }
+        if (book.description.length < 100) {
+          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Insufficient description.` }) }));
+        }
+        if (!book.condition) {
+          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Missing condition.` }) }));
+        }
+        return this.firebaseApi.updateUserBook(this.authService.uid, id, { status: BookStatus.PUBLISHED }).pipe(
+          map(res => UserBooksActions.publishUserBookSuccess({ book: res })),
+          catchError(err => of(UserBooksActions.publishUserBookError({ error: firebaseError({ err }) }))),
+        );
+      }),
+    );
+  });
+
+  // TODO copy this one with all the validity checks and messages
+  /* readonly publishUserBook = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.publishUserBook),
       switchMap(({ id }) => {
@@ -137,13 +192,112 @@ export class UserBooksEffects {
         );
       }),
     );
-  });
+  }); */
 
-  // TODO success and error toasts
+  readonly createUserBookSuccessToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.createUserBookSuccess),
+        tap(_ => this.toastService.showSuccessToast(`Book successfully created.`)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly editUserBookDraftSuccessToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.editUserBookDraftSuccess),
+        tap(_ => this.toastService.showSuccessToast(`Book successfully updated.`)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly deleteUserBookSuccessToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.deleteUserBookSuccess),
+        tap(_ => this.toastService.showSuccessToast(`Book successfully deleted.`)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly publishUserBookSuccessToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.publishUserBookSuccess),
+        tap(_ => this.toastService.showSuccessToast(`Book successfully published.`)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly loadUserBookErrorToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.loadUserBookError),
+        tap(_ => this.toastService.showErrorToast(`Error loading book.`)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly loadUserBooksErrorToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.loadUserBooksError),
+        tap(_ => this.toastService.showErrorToast(`Error loading books.`)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly createUserBookErrorToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.createUserBookError),
+        tap(_ => this.toastService.showErrorToast(`Error creating book.`)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly editUserBookDraftErrorToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.editUserBookDraftError),
+        tap(_ => this.toastService.showErrorToast(`Error updating book.`)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly deleteUserBookErrorToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.deleteUserBookError),
+        tap(_ => this.toastService.showErrorToast(`Error deleting book.`)),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly publishUserBookErrorToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(UserBooksActions.publishUserBookError),
+        tap(_ => this.toastService.showErrorToast(`Error publishing book.`)),
+      );
+    },
+    { dispatch: false },
+  );
 
   constructor(
     private readonly actions: Actions,
     private readonly authService: AuthService,
     private readonly firebaseApi: FirebaseDatabaseService,
+    private readonly toastService: ToastService,
   ) {}
 }
