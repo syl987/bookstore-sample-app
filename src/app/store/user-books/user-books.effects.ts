@@ -54,6 +54,7 @@ export class UserBooksEffects {
 
         return this.firebaseApi.getVolume(volumeData.id).pipe(
           catchError(err => {
+            console.warn(err);
             // TODO check for 404
             if (err.code !== 'TODO some sort of 404 code') {
               return throwError(() => err);
@@ -104,6 +105,7 @@ export class UserBooksEffects {
   });
 
   readonly deleteUserBook = createEffect(() => {
+    // TODO also delete the volume if not related to any books
     return this.actions.pipe(
       ofType(UserBooksActions.deleteUserBook),
       switchMap(({ id, book }) => {
@@ -153,46 +155,6 @@ export class UserBooksEffects {
       }),
     );
   });
-
-  // TODO copy this one with all the validity checks and messages
-  /* readonly publishUserBook = createEffect(() => {
-    return this.actions.pipe(
-      ofType(UserBooksActions.publishUserBook),
-      switchMap(({ id }) => {
-        if (!this.authService.uid) {
-          return of(
-            UserBooksActions.publishUserBookError({ error: internalError({ message: `Error publishing book. User not logged in.` }) }),
-          );
-        }
-        const currentUid = this.authService.uid;
-
-        return this.firebaseApi.getUserBook(currentUid, id).pipe(
-          concatMap(({ uid, status, condition, description }) => {
-            if (uid !== currentUid) {
-              return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Invalid user.` }) }));
-            }
-            if (status !== BookStatus.DRAFT) {
-              return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Invalid status.` }) }));
-            }
-            if (!description) {
-              return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Missing description.` }) }));
-            }
-            if (description.length < 42) {
-              return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Insufficient description.` }) }));
-            }
-            if (!condition) {
-              return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Missing condition.` }) }));
-            }
-            return this.firebaseApi.updateUserBook(currentUid, id, { status: BookStatus.PUBLISHED }).pipe(
-              map(book => UserBooksActions.publishUserBookSuccess({ book })),
-              catchError(err => of(UserBooksActions.publishUserBookError({ error: firebaseError({ err }) }))),
-            );
-          }),
-          catchError(err => of(UserBooksActions.publishUserBookError({ error: firebaseError({ err }) }))),
-        );
-      }),
-    );
-  }); */
 
   readonly createUserBookSuccessToast = createEffect(
     () => {
