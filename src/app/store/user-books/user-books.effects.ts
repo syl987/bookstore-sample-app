@@ -127,6 +127,7 @@ export class UserBooksEffects {
   });
 
   readonly publishUserBook = createEffect(() => {
+    // TODO update volume
     return this.actions.pipe(
       ofType(UserBooksActions.publishUserBook),
       concatMap(({ id, book }) => {
