@@ -3,7 +3,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { BookDTO } from 'src/app/models/book.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
 import { GoogleBooksService } from 'src/app/services/google-books.service';
-import { ToastService } from 'src/app/services/toast.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
 // TODO search google books
@@ -27,7 +26,6 @@ export class BookCreateDialogComponent {
     readonly dialogRef: MatDialogRef<BookCreateDialogComponent, BookDTO | undefined>,
     private readonly userBooksService: UserBooksService,
     private readonly googleBooksService: GoogleBooksService,
-    private readonly toastService: ToastService,
   ) {}
 
   searchVolumes(query: string | null): void {
@@ -35,6 +33,7 @@ export class BookCreateDialogComponent {
   }
 
   createBook(googleBooksVolume: GoogleBooksVolumeDTO): void {
+    // TODO problem
     this.userBooksService.create(googleBooksVolume).subscribe(book => {
       this.dialogRef.close(book);
     });

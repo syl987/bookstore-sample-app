@@ -18,6 +18,8 @@ import {
 interface IUserBooksService {
   /** Load a book with volume data. */
   load(id: string): void;
+  /** Load all books with volume data. */
+  loadAll(): void;
   /** Create a new volume from google books if missing and add a new book with initial data to it. */
   create(volumeData: GoogleBooksVolumeDTO): void;
   /** Edit data of an unpublished book. */
@@ -50,6 +52,10 @@ export class UserBooksService implements IUserBooksService {
 
   load(id: string): void {
     this.store.dispatch(UserBooksActions.loadUserBook({ id }));
+  }
+
+  loadAll(): void {
+    this.store.dispatch(UserBooksActions.loadUserBooks());
   }
 
   create(volumeData: GoogleBooksVolumeDTO): void {

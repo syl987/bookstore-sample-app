@@ -4,9 +4,10 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
-import { VolumeCollectionService } from 'src/app/services/__entity/volume-collection.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
+import { UserBooksService } from 'src/app/services/user-books.service';
+import { VolumeService } from 'src/app/services/volume.service';
 
 // TODO consider revamping data model: volumes_with_books, user_books_as_volume_ids, user_bought_books_as_volume_ids, book_volume_id (check if efficient querying is possible)
 
@@ -34,14 +35,16 @@ function mapToBooks(volumes: VolumeDTO[], filterFn: (book: BookDTO) => boolean):
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookListPageComponent implements OnInit, OnDestroy {
-  readonly books$ = this.volumeService.entities$.pipe(map(volumes => mapToBooks(volumes, book => book.uid === this.authService.uid)));
+  readonly books$ = this.volumeService.volumes$.pipe(map(volumes => mapToBooks(volumes, book => book.uid === this.authService.uid)));
 
+  // TODO check where destroyed is really needed
   private readonly _destroyed$ = new Subject<void>();
 
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly volumeService: VolumeCollectionService,
+    private readonly userBooksService: UserBooksService,
+    private readonly volumeService: VolumeService,
     private readonly dialogService: DialogService,
   ) {}
 
@@ -56,7 +59,7 @@ export class UserBookListPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.volumeService.getAll(); // TODO just my books
+    this.userBooksService.loadAll();
   }
 
   ngOnDestroy(): void {
