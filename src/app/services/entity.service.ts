@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Database } from '@angular/fire/database';
+import { Store } from '@ngrx/store';
 import { EMPTY, Observable } from 'rxjs';
 
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
@@ -35,12 +36,16 @@ interface IEntityService {
 })
 export class EntityService implements IEntityService {
   readonly volumesWithPublishedBooks$: Observable<VolumeDTO[]> = EMPTY;
+
   readonly volumesWithBoughtBooks$: Observable<VolumeDTO[]> = EMPTY;
+
   readonly volumesWithUserBooks$: Observable<VolumeDTO[]> = EMPTY;
+
   readonly volume$: Observable<VolumeDTO> = EMPTY;
+
   readonly book$: Observable<VolumeDTO> = EMPTY;
 
-  constructor(private readonly database: Database, private readonly storage: Storage) {}
+  constructor(private readonly store: Store, private readonly database: Database, private readonly storage: Storage) {}
 
   searchVolumes(params?: unknown): Observable<void> {
     throw new Error('Method not implemented.');
