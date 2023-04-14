@@ -10,7 +10,7 @@ import { HttpEndpointUrl } from '../models/http.models';
  * Uses `'='` to join a key with its value and `'&'` to separate key-value pairs. Joins array values with a comma.
  */
 export function toXwwwEncodedString(
-  object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null
+  object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null,
 ): string {
   if (object == null) {
     return '';
@@ -56,7 +56,7 @@ export function toFormData(object?: { [key: string]: string | Blob | null | unde
  * Converts an http params compatible object, omitting `undefined` and empty string values.
  */
 export function toUrlParams(
-  object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null
+  object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null,
 ): {
   [param: string]: string | string[];
 } {

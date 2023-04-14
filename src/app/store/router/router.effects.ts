@@ -11,10 +11,10 @@ export class RouterEffects {
     () => {
       return this.actions$.pipe(
         ofType(RouterActions.navigate),
-        tap(({ url, state }) => this.router.navigateByUrl(url, { state }))
+        tap(({ url, state }) => this.router.navigateByUrl(url, { state })),
       );
     },
-    { dispatch: false }
+    { dispatch: false },
   );
 
   constructor(private readonly actions$: Actions, private readonly router: Router) {}

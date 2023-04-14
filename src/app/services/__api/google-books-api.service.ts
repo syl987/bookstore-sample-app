@@ -26,7 +26,7 @@ export class GoogleBooksApiService {
       showPreorders?: boolean;
       source?: string;
       startIndex?: number;
-    }
+    },
   ): Observable<GoogleBooksListDTO> {
     const url = `${this.baseUrl}/volumes`;
 
@@ -39,7 +39,7 @@ export class GoogleBooksApiService {
       partner: string;
       projection: 'full' | 'lite';
       source: string;
-    }
+    },
   ): Observable<GoogleBooksVolumeDTO> {
     const url = `${this.baseUrl}/volumes/${volumeId}`;
 

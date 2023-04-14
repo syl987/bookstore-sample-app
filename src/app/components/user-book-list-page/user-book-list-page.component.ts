@@ -40,7 +40,7 @@ export class UserBookListPageComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly volumeService: VolumeService,
-    private readonly dialogService: DialogService
+    private readonly dialogService: DialogService,
   ) {}
 
   openBookCreateDialog(): void {

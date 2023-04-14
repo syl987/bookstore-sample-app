@@ -2,7 +2,7 @@ import { ActivatedRouteSnapshot, Data, Params } from '@angular/router';
 
 export function collectActivatedRouteSnapshotData(
   snapshot: ActivatedRouteSnapshot | null | undefined,
-  accessor: (snapshot: ActivatedRouteSnapshot) => Data | Params
+  accessor: (snapshot: ActivatedRouteSnapshot) => Data | Params,
 ): ReturnType<typeof accessor> {
   if (!snapshot) {
     return {};

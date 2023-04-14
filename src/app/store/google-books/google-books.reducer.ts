@@ -33,5 +33,5 @@ export const reducer = createReducer(
     ...state,
     search: { ...state.search, pending: false, error },
   })),
-  on(routerNavigatedAction, _ => initialState)
+  on(routerNavigatedAction, _ => initialState),
 );

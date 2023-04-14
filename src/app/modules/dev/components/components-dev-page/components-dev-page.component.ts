@@ -15,12 +15,12 @@ import { ExampleDevDialogComponent } from '../example-dev-dialog/example-dev-dia
 export class ComponentsDevPageComponent {
   readonly disabled$ = timer(0, 3000).pipe(
     map(value => value % 2),
-    map(value => !!value)
+    map(value => !!value),
   );
 
   readonly progress$ = timer(1000, 35).pipe(
     map(value => value % 100),
-    auditTime(140)
+    auditTime(140),
   );
 
   constructor(private readonly dialog: MatDialog, private readonly toastService: ToastService) {}

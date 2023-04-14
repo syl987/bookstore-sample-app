@@ -13,7 +13,7 @@ import { selectRouterParams } from '../store/router/router.selectors';
 export function getEntityByRouterParam<T>(
   store: Store,
   entityMap$: Observable<Dictionary<T>>,
-  param: keyof RouteParams
+  param: keyof RouteParams,
 ): Observable<T | undefined> {
   return combineLatest([entityMap$, store.select(selectRouterParams).pipe(map(params => params?.[param]))]).pipe(map(getEntityById));
 }

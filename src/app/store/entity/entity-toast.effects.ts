@@ -20,10 +20,10 @@ export class EntityToastEffects {
           EntityOp.SAVE_UPSERT_MANY_SUCCESS,
           EntityOp.SAVE_DELETE_MANY_SUCCESS,
         ]),
-        tap(({ payload }) => this.toastService.showSuccessToast(this.getSuccessMessage(payload.entityName, payload.entityOp)))
+        tap(({ payload }) => this.toastService.showSuccessToast(this.getSuccessMessage(payload.entityName, payload.entityOp))),
       );
     },
-    { dispatch: false }
+    { dispatch: false },
   );
 
   readonly showEntityErrorToast$ = createEffect(
@@ -43,10 +43,10 @@ export class EntityToastEffects {
           EntityOp.QUERY_MANY_ERROR,
           EntityOp.QUERY_LOAD_ERROR,
         ]),
-        tap(({ payload }) => this.toastService.showErrorToast(this.getErrorMessage(payload.entityName, payload.entityOp)))
+        tap(({ payload }) => this.toastService.showErrorToast(this.getErrorMessage(payload.entityName, payload.entityOp))),
       );
     },
-    { dispatch: false }
+    { dispatch: false },
   );
 
   constructor(
@@ -54,7 +54,7 @@ export class EntityToastEffects {
     private readonly toastService: ToastService,
     @Inject(APP_ENTITY_NAMES) private readonly entityNames: Partial<AppEntityDisplayNameMap>,
     @Inject(APP_ENTITY_PLURAL_NAMES) private readonly entityPluralNames: Partial<AppEntityDisplayNameMap>,
-    private readonly pluralizer: Pluralizer
+    private readonly pluralizer: Pluralizer,
   ) {}
 
   private getSuccessMessage(entityName: string, endityOp: EntityOp): string {

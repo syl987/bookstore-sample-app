@@ -12,7 +12,7 @@ export class AppDataServiceFactory implements Pick<DefaultDataServiceFactory, 'c
   constructor(
     private readonly definitionService: EntityDefinitionService,
     private readonly dataService: DataService,
-    private readonly config: DefaultDataServiceConfig
+    private readonly config: DefaultDataServiceConfig,
   ) {}
 
   create<T>(entityName: string): EntityCollectionDataService<T> {
@@ -31,7 +31,7 @@ export class AppDataService<T> implements EntityCollectionDataService<T> {
     protected readonly entityName: string,
     private readonly definitionService: EntityDefinitionService,
     private readonly dataService: DataService,
-    config: DefaultDataServiceConfig
+    config: DefaultDataServiceConfig,
   ) {
     this.path = config.entityHttpResourceUrls?.[entityName]?.collectionResourceUrl ?? '';
 
