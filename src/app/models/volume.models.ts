@@ -42,6 +42,10 @@ export interface VolumeDTO {
     textSnippet: string;
   };
   publishedBooks?: {
-    [key: string]: BookDTO;
+    [id: string]: BookDTO;
   };
+}
+
+export interface VolumesDTO {
+  [id: string]: VolumeDTO;
 }

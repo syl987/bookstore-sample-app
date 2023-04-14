@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { child, Database, DataSnapshot, get, push, ref, remove, set, update } from '@angular/fire/database';
 import { concatMap, from, Observable } from 'rxjs';
 import { UserBookDTO, UserBooksDTO } from 'src/app/models/book.models';
-import { VolumeDTO } from 'src/app/models/volume.models';
+import { VolumeDTO, VolumesDTO } from 'src/app/models/volume.models';
 
 function toValueWithIdOrThrow(snapshot: DataSnapshot): any {
   if (snapshot.exists()) {
@@ -50,7 +50,7 @@ export class FirebaseDatabaseService {
     throw new Error('Method not implemented.');
   }
 
-  getVolumes(): Observable<VolumeDTO[]> {
+  getVolumes(): Observable<VolumesDTO> {
     throw new Error('Method not implemented.');
   }
 

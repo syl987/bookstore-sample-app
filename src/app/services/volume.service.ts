@@ -1,39 +1,41 @@
 import { Injectable } from '@angular/core';
-import { createSelector, Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
-import { getEntityById } from '../helpers/entity.helpers';
-import { VolumeDTO } from '../models/volume.models';
-import { selectRouterParams } from '../store/router/router.selectors';
+import * as VolumeActions from '../store/volume/volume.actions';
+import {
+  selectVolumeByRoute,
+  selectVolumesAll,
+  selectVolumesError,
+  selectVolumesPending,
+  selectVolumesTotal,
+} from '../store/volume/volume.selectors';
 
 interface IVolumeService {
-  /** Stream of a volume with published books by router volume id. */
-  readonly volumeByRoute$: Observable<VolumeDTO | undefined>;
   /** Search volumes with published books. */
-  search(params?: unknown): Observable<VolumeDTO[]>;
+  search(params?: unknown): void;
   /** Load a volume with published books */
-  load(id: string): Observable<VolumeDTO>;
+  load(id: string): void;
 }
-
-const selectKeyByRoute = createSelector(selectRouterParams, params => params?.volumeId);
 
 @Injectable({
   providedIn: 'root',
 })
 export class VolumeService implements IVolumeService {
-  readonly volumeByRoute$: Observable<VolumeDTO | undefined> = combineLatest([
-    this.volumeCollection.selectors$.entityMap$,
-    this.store.select(selectKeyByRoute),
-  ]).pipe(map(getEntityById));
+  readonly volumes$ = this.store.select(selectVolumesAll);
+  readonly volumesTotal$ = this.store.select(selectVolumesTotal);
+
+  readonly volumeByRoute$ = this.store.select(selectVolumeByRoute);
+
+  readonly pending$ = this.store.select(selectVolumesPending);
+  readonly error$ = this.store.select(selectVolumesError);
 
   constructor(private readonly store: Store) {}
 
-  search(params?: unknown): Observable<VolumeDTO[]> {
-    return this.volumeCollection.getWithQuery(params as any); // TODO model params
+  search(params?: unknown): void {
+    return this.store.dispatch(VolumeActions.loadVolumes());
   }
 
-  load(id: string): Observable<VolumeDTO> {
-    return this.volumeCollection.getByKey(id);
+  load(id: string): void {
+    throw new Error('Method not implemented.');
   }
 }
