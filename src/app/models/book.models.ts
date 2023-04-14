@@ -26,6 +26,8 @@ export interface UserBookDTO extends BookDTO {
   volume: VolumeDTO;
 }
 
+export type UserBookEditDTO = Pick<UserBookDTO, 'condition' | 'description' | 'imageUrl'>;
+
 export interface UserBooksDTO {
   [bookId: string]: UserBookDTO;
 }

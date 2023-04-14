@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { child, Database, DataSnapshot, get, push, ref, remove, set, update } from '@angular/fire/database';
 import { concatMap, from, Observable } from 'rxjs';
+import { UserBookDTO, UserBooksDTO } from 'src/app/models/book.models';
 
 function toValueWithIdOrThrow(snapshot: DataSnapshot): any {
   if (snapshot.exists()) {
@@ -20,7 +21,29 @@ function toListWithIdsOrThrow(snapshot: DataSnapshot): any[] {
   providedIn: 'root',
 })
 export class FirebaseDatabaseService {
+  readonly baseUrl = `userBooks`;
+
   constructor(private readonly database: Database) {}
+
+  getUserBook(uid: string, id: string): Observable<UserBookDTO> {
+    throw new Error('Method not implemented.');
+  }
+
+  getUserBooks(uid: string): Observable<UserBooksDTO> {
+    throw new Error('Method not implemented.');
+  }
+
+  createUserBook(uid: string, data: Partial<UserBookDTO>): Observable<UserBookDTO> {
+    throw new Error('Method not implemented.');
+  }
+
+  updateUserBook(uid: string, id: string, data: Partial<UserBookDTO>): Observable<UserBookDTO> {
+    throw new Error('Method not implemented.');
+  }
+
+  deleteUserBook(uid: string, id: string): Observable<void> {
+    throw new Error('Method not implemented.');
+  }
 
   getAll<T>(path: string): Observable<T[]> {
     const reference = ref(this.database, path);
