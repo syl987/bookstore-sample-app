@@ -1,3 +1,5 @@
+import { VolumeDTO } from './volume.models';
+
 export enum BookStatus {
   DRAFT = 'DRAFT',
   PUBLISHED = 'PUBLISHED',
@@ -13,9 +15,13 @@ export enum BookCondition {
 
 export interface BookDTO {
   id: string;
-  sellerUid: string;
+  uid: string;
   status: BookStatus;
   description?: string;
   imageUrl?: string;
   condition?: BookCondition;
+}
+
+export interface UserBookDTO extends BookDTO {
+  volume: VolumeDTO;
 }

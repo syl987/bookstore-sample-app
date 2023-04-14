@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { map, Subject, takeUntil } from 'rxjs';
 import { RouterService } from 'src/app/services/router.service';
-import { VolumeService } from 'src/app/services/volume.service';
+import { VolumeCollectionService } from 'src/app/services/__entity/volume-collection.service';
 
 // TODO display volume data
 // TODO edit book data (if not published or sold)
@@ -24,7 +24,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly routerService: RouterService,
-    private readonly volumeService: VolumeService,
+    private readonly volumeService: VolumeCollectionService,
   ) {}
 
   ngOnInit(): void {

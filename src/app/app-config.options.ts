@@ -23,6 +23,9 @@ export const authConfig: AuthConfig = {
 
 export const appDataServiceConfig: AppFirebaseDataServiceConfig = {
   entityHttpResourceUrls: {
+    [EntityType.USER_BOOKS]: {
+      collectionResourceUrl: 'userBooks/{$uid}',
+    },
     [EntityType.VOLUME]: {
       collectionResourceUrl: 'volumes',
     },
@@ -30,10 +33,12 @@ export const appDataServiceConfig: AppFirebaseDataServiceConfig = {
 };
 
 export const appEntityNames: AppEntityDisplayNameMap = {
+  [EntityType.USER_BOOKS]: `User Book`,
   [EntityType.VOLUME]: `Volume`,
 };
 
 export const appEntityPluralNames: AppEntityDisplayNameMap = {
+  [EntityType.USER_BOOKS]: `User Books`,
   [EntityType.VOLUME]: `Volumes`,
 };
 

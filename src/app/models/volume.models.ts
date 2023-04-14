@@ -41,7 +41,7 @@ export interface VolumeDTO {
   searchInfo: {
     textSnippet: string;
   };
-  books: {
+  publishedBooks?: {
     [key: string]: BookDTO;
   };
 }

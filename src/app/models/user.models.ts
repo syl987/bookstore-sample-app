@@ -1,3 +1,5 @@
+import { UserBookDTO } from './book.models';
+
 export interface UserProfileDTO {
   id: string;
   createdAt: number;
@@ -7,4 +9,8 @@ export interface UserProfileDTO {
   photoUrl?: string | null;
   displayName: string;
   description: string;
+}
+
+export interface UserBooksDTO {
+  [bookId: string]: UserBookDTO;
 }

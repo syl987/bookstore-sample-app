@@ -4,9 +4,9 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
+import { VolumeCollectionService } from 'src/app/services/__entity/volume-collection.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
-import { VolumeService } from 'src/app/services/volume.service';
 
 // TODO consider revamping data model: volumes_with_books, user_books_as_volume_ids, user_bought_books_as_volume_ids, book_volume_id (check if efficient querying is possible)
 
@@ -21,7 +21,7 @@ function mapToBooks(volumes: VolumeDTO[], filterFn: (book: BookDTO) => boolean):
   return volumes.reduce<(BookDTO & { volume: VolumeDTO })[]>((acc, volume) => {
     return [
       ...acc,
-      ...Object.values(volume.books)
+      ...Object.values(volume.publishedBooks ?? {})
         .filter(filterFn)
         .map(book => ({ ...book, volume })),
     ];
@@ -34,14 +34,14 @@ function mapToBooks(volumes: VolumeDTO[], filterFn: (book: BookDTO) => boolean):
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookListPageComponent implements OnInit, OnDestroy {
-  readonly books$ = this.volumeService.entities$.pipe(map(volumes => mapToBooks(volumes, book => book.sellerUid === this.authService.uid)));
+  readonly books$ = this.volumeService.entities$.pipe(map(volumes => mapToBooks(volumes, book => book.uid === this.authService.uid)));
 
   private readonly _destroyed$ = new Subject<void>();
 
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly volumeService: VolumeService,
+    private readonly volumeService: VolumeCollectionService,
     private readonly dialogService: DialogService,
   ) {}
 

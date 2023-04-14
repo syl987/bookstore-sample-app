@@ -5,7 +5,7 @@ import { from, Observable, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class FileService {
+export class FirebaseStorageService {
   constructor(private readonly storage: Storage) {}
 
   upload(path: string, data: any, options: { contentType?: string; contentEncoding?: string } = {}): Observable<string> {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { child, Database, DataSnapshot, get, push, ref, remove, update } from '@angular/fire/database';
+import { child, Database, DataSnapshot, get, push, ref, remove, set, update } from '@angular/fire/database';
 import { concatMap, from, Observable } from 'rxjs';
 
 function toValueWithIdOrThrow(snapshot: DataSnapshot): any {
@@ -19,7 +19,7 @@ function toListWithIdsOrThrow(snapshot: DataSnapshot): any[] {
 @Injectable({
   providedIn: 'root',
 })
-export class DataService {
+export class FirebaseDatabaseService {
   constructor(private readonly database: Database) {}
 
   getAll<T>(path: string): Observable<T[]> {
@@ -37,7 +37,15 @@ export class DataService {
   push<T>(path: string, entity: T): Observable<T> {
     const reference = ref(this.database, path);
 
-    return from(push(reference, entity)).pipe(concatMap(({ key }) => this.get<T>(path, key!)));
+    const key = push(reference).key!;
+
+    return from(set(child(reference, key), { ...entity, id: key })).pipe(concatMap(_ => this.get<T>(path, key!)));
+  }
+
+  set<T>(path: string, key: string, entity: T): Observable<T> {
+    const reference = ref(this.database, path);
+
+    return from(set(child(reference, key), entity)).pipe(concatMap(_ => this.get<T>(path, key!)));
   }
 
   update<T>(path: string, key: string, changes: { [path: string]: any }): Observable<T> {

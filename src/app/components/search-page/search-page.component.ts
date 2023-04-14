@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { VolumeService } from 'src/app/services/volume.service';
+import { VolumeCollectionService } from 'src/app/services/__entity/volume-collection.service';
 
 // search volumes by query or params
 // include published books data
@@ -20,7 +20,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   private readonly _destroyed$ = new Subject<void>();
 
-  constructor(private readonly volumeService: VolumeService) {}
+  constructor(private readonly volumeService: VolumeCollectionService) {}
 
   ngOnInit(): void {
     this.volumeService.getAll();

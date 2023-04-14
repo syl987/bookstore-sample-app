@@ -36,6 +36,11 @@ export const reducers: ActionReducerMap<AppState> = {
 
 export const entityDataConfig: AppEntityDataModuleConfig = {
   entityMetadata: {
+    [EntityType.USER_BOOKS]: {
+      selectId: entity => entity.id,
+      // sortComparer: stringPropComparerDesc('createdAt'), // TODO add more meta props
+      filterFn: PropsFilterFnFactory(['id']), // TODO sub-props?
+    },
     [EntityType.VOLUME]: {
       selectId: entity => entity.id,
       // sortComparer: stringPropComparerDesc('createdAt'), // TODO add more meta props

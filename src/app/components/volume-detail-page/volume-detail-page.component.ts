@@ -15,11 +15,11 @@ import { VolumeService } from 'src/app/services/volume.service';
 export class VolumeDetailPageComponent implements OnInit {
   readonly id: string = this.route.snapshot.params['volumeId'];
 
-  readonly book$ = this.volumeService.entityByRouterParamId$;
+  readonly book$ = this.volumeService.volumeByRoute$;
 
   constructor(private readonly route: ActivatedRoute, private readonly volumeService: VolumeService) {}
 
   ngOnInit(): void {
-    this.volumeService.getByKey(this.id);
+    this.volumeService.load(this.id);
   }
 }
