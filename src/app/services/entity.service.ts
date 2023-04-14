@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Database } from '@angular/fire/database';
+import { Auth, user } from '@angular/fire/auth';
+import { Database, objectVal, ref } from '@angular/fire/database';
+import { Storage } from '@angular/fire/storage';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable } from 'rxjs';
+import { combineLatest, EMPTY, Observable, of, shareReplay, switchMap } from 'rxjs';
 
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import { VolumeDTO } from '../models/volume.models';
+import { selectRouterParams } from '../store/router/router.selectors';
 
 interface IEntityService {
   /** Stream of volumes with published books by search params. */
@@ -14,9 +17,9 @@ interface IEntityService {
   /** Stream of volumes with user books. */
   readonly volumesWithUserBooks$: Observable<VolumeDTO[]>;
   /** Stream of a volume with books by router volume id. */
-  readonly volume$: Observable<VolumeDTO>;
+  readonly volume$: Observable<VolumeDTO | undefined>;
   /** Stream of a book with volume data by user id and router book id. */
-  readonly book$: Observable<VolumeDTO>;
+  readonly book$: Observable<VolumeDTO | undefined>;
   /** Apply search params to the stream of volumes with published books. */
   searchVolumes(params?: unknown): Observable<void>;
   /** Create a new volume from google books if missing and add a new book with initial data to it. */
@@ -41,11 +44,32 @@ export class EntityService implements IEntityService {
 
   readonly volumesWithUserBooks$: Observable<VolumeDTO[]> = EMPTY;
 
-  readonly volume$: Observable<VolumeDTO> = EMPTY;
+  readonly volume$: Observable<VolumeDTO | undefined> = this.store.select(selectRouterParams).pipe(
+    switchMap(params => {
+      if (!params?.volumeId) {
+        return of(undefined);
+      }
+      return objectVal<VolumeDTO>(ref(this.database, `volumes/${params.volumeId}`), { keyField: 'id' });
+    }),
+    shareReplay(1),
+  );
 
-  readonly book$: Observable<VolumeDTO> = EMPTY;
+  readonly book$: Observable<VolumeDTO | undefined> = combineLatest([user(this.auth), this.store.select(selectRouterParams)]).pipe(
+    switchMap(([currentUser, params]) => {
+      if (currentUser == null || !params?.volumeId) {
+        return of(undefined);
+      }
+      throw new Error('Observable not implemented.');
+    }),
+    shareReplay(1),
+  );
 
-  constructor(private readonly store: Store, private readonly database: Database, private readonly storage: Storage) {}
+  constructor(
+    private readonly store: Store,
+    private readonly auth: Auth,
+    private readonly database: Database,
+    private readonly storage: Storage,
+  ) {}
 
   searchVolumes(params?: unknown): Observable<void> {
     throw new Error('Method not implemented.');
