@@ -21,7 +21,7 @@ export class RouterService {
 
   readonly navigated$ = this.actions.pipe(
     ofType(routerNavigatedAction),
-    map(({ payload }) => payload.event)
+    map(({ payload }) => payload.event),
   );
 
   constructor(private readonly store: Store, private readonly actions: Actions) {}

@@ -20,7 +20,7 @@ export class HeaderComponent {
 
   readonly showToggle$ = this.observer.observe([Breakpoints.XSmall]).pipe(
     map(({ matches }) => matches),
-    distinctUntilChanged()
+    distinctUntilChanged(),
   );
 
   readonly showNavs$ = this.showToggle$.pipe(map(show => !show));
@@ -30,7 +30,7 @@ export class HeaderComponent {
   readonly title$ = this.routerService.title$;
 
   readonly toolbarTitle$ = combineLatest([this.showNavs$, this.title$]).pipe(
-    map(([showNavs, title]) => (showNavs ? this.config.appName : title))
+    map(([showNavs, title]) => (showNavs ? this.config.appName : title)),
   );
 
   readonly production = environment.production;
@@ -42,7 +42,7 @@ export class HeaderComponent {
     private readonly observer: BreakpointObserver,
     private readonly authService: AuthService,
     private readonly routerService: RouterService,
-    private readonly dialogService: DialogService
+    private readonly dialogService: DialogService,
   ) {}
 
   openUserSettingsDialog(user: AuthUser): void {

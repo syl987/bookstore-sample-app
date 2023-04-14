@@ -26,6 +26,6 @@ export const reducer = createReducer(
     state => ({
       ...state,
       pending: false,
-    })
-  )
+    }),
+  ),
 );

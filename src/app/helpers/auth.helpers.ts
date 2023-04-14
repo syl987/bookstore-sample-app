@@ -26,7 +26,7 @@ export function isBearerExcluded(request: HttpRequest<unknown>, config: AuthConf
 export function requireAuth(actions$: Actions, resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {
   return actions$.pipe(
     ofType(AuthActions.authenticated),
-    exhaustMap(() => resolvedEffects$.pipe(takeUntil(actions$.pipe(ofType(AuthActions.unauthenticated)))))
+    exhaustMap(() => resolvedEffects$.pipe(takeUntil(actions$.pipe(ofType(AuthActions.unauthenticated))))),
   );
 }
 

@@ -30,7 +30,7 @@ export class BookCreateDialogComponent {
     private readonly authService: AuthService,
     private readonly volumeService: VolumeService,
     private readonly googleBooksService: GoogleBooksService,
-    private readonly toastService: ToastService
+    private readonly toastService: ToastService,
   ) {}
 
   searchVolumes(query: string | null): void {
@@ -53,7 +53,7 @@ export class BookCreateDialogComponent {
           this.volumeService.update({
             id: volume.id,
             books: { [book.id]: book },
-          })
+          }),
         ), // TODO check sub-property partial update
         catchError(_ =>
           this.volumeService.add({
@@ -61,8 +61,8 @@ export class BookCreateDialogComponent {
             volumeInfo: googleBooksVolume.volumeInfo,
             searchInfo: googleBooksVolume.searchInfo,
             books: { [book.id]: book },
-          })
-        ) // TODO check http status, proceed only on 404
+          }),
+        ), // TODO check http status, proceed only on 404
       )
       .subscribe(_ => this.dialogRef.close(book));
   }

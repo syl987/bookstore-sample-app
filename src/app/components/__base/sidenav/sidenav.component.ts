@@ -25,7 +25,7 @@ export class SidenavComponent {
     @Inject(APP_CONFIG) readonly config: AppConfig,
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly dialogService: DialogService
+    private readonly dialogService: DialogService,
   ) {}
 
   navigateToLogin(): void {

@@ -26,7 +26,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
         }
         this.store.dispatch(authTokenNotFound());
         return EMPTY;
-      })
+      }),
     );
   }
 }

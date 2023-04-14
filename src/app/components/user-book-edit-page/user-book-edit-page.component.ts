@@ -24,7 +24,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly routerService: RouterService,
-    private readonly volumeService: VolumeService
+    private readonly volumeService: VolumeService,
   ) {}
 
   ngOnInit(): void {
