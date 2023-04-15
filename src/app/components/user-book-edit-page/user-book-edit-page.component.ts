@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
-import { VolumeService } from 'src/app/services/volume.service';
 
 // TODO display volume data
 // TODO edit book data (if not published or sold)
@@ -26,7 +25,6 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly routerService: RouterService,
     private readonly userBooksService: UserBooksService,
-    private readonly volumeService: VolumeService,
   ) {}
 
   ngOnInit(): void {

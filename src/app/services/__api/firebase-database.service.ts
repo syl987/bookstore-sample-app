@@ -58,6 +58,14 @@ export class FirebaseDatabaseService {
     throw new Error('Method not implemented.');
   }
 
+  updateVolume(id: string, data: Partial<VolumeDTO>): Observable<VolumeDTO> {
+    throw new Error('Method not implemented.');
+  }
+
+  deleteVolume(id: string): Observable<void> {
+    throw new Error('Method not implemented.');
+  }
+
   // ========
 
   getAll<T>(path: string): Observable<T[]> {

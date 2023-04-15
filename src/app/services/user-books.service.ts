@@ -7,6 +7,7 @@ import * as UserBooksActions from '../store/user-books/user-books.actions';
 import {
   selectUserBookByRoute,
   selectUserBooksAll,
+  selectUserBooksCreatedId,
   selectUserBooksDraft,
   selectUserBooksError,
   selectUserBooksPending,
@@ -45,6 +46,7 @@ export class UserBooksService implements IUserBooksService {
 
   readonly userBookByRoute$ = this.store.select(selectUserBookByRoute);
 
+  readonly createdId$ = this.store.select(selectUserBooksCreatedId);
   readonly pending$ = this.store.select(selectUserBooksPending);
   readonly error$ = this.store.select(selectUserBooksError);
 

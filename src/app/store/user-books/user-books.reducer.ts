@@ -8,6 +8,7 @@ import * as UserBooksActions from './user-books.actions';
 export const userBooksFeatureKey = 'user-books';
 
 export interface State extends EntityState<UserBookDTO> {
+  createdId?: string;
   pending: boolean;
   error?: ResponseError;
 }
@@ -26,6 +27,7 @@ export const reducer = createReducer(
   on(
     UserBooksActions.loadUserBook,
     UserBooksActions.loadUserBooks,
+    UserBooksActions.createUserBook,
     UserBooksActions.editUserBookDraft,
     UserBooksActions.publishUserBook,
     UserBooksActions.deleteUserBook,
@@ -34,6 +36,7 @@ export const reducer = createReducer(
   on(
     UserBooksActions.loadUserBookSuccess,
     UserBooksActions.loadUserBooksSuccess,
+    UserBooksActions.createUserBookSuccess,
     UserBooksActions.editUserBookDraftSuccess,
     UserBooksActions.publishUserBookSuccess,
     UserBooksActions.deleteUserBookSuccess,
@@ -42,6 +45,7 @@ export const reducer = createReducer(
   on(
     UserBooksActions.loadUserBookError,
     UserBooksActions.loadUserBooksError,
+    UserBooksActions.createUserBookError,
     UserBooksActions.editUserBookDraftError,
     UserBooksActions.publishUserBookError,
     UserBooksActions.deleteUserBookError,
@@ -49,6 +53,7 @@ export const reducer = createReducer(
   ),
   on(UserBooksActions.loadUserBookSuccess, (state, { book }) => adapter.upsertOne(book, state)),
   on(UserBooksActions.loadUserBooksSuccess, (state, { books }) => adapter.upsertMany(Object.values(books), state)),
+  on(UserBooksActions.createUserBookSuccess, (state, { book }) => adapter.upsertOne(book, { ...state, createdId: book.id })),
   on(UserBooksActions.editUserBookDraftSuccess, (state, { book }) => adapter.upsertOne(book, state)),
   on(UserBooksActions.publishUserBookSuccess, (state, { book }) => adapter.upsertOne(book, state)),
   on(UserBooksActions.deleteUserBookSuccess, (state, { id }) => adapter.removeOne(id, state)),
