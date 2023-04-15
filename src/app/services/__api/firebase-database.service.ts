@@ -22,20 +22,26 @@ function toListWithIdsOrThrow(snapshot: DataSnapshot): any[] {
   providedIn: 'root',
 })
 export class FirebaseDatabaseService {
-  readonly baseUrl = `userBooks`;
-
   constructor(private readonly database: Database) {}
 
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {
-    throw new Error('Method not implemented.');
+    const result = get(child(child(ref(this.database, 'userBooks'), uid), id));
+
+    return from(result.then(snap => snap.val()));
   }
 
   getUserBooks(uid: string): Observable<UserBooksDTO> {
-    throw new Error('Method not implemented.');
+    const result = get(child(ref(this.database, 'userBooks'), uid));
+
+    return from(result.then(snap => snap.val()));
   }
 
   createUserBook(uid: string, data: Partial<UserBookDTO>): Observable<UserBookDTO> {
-    throw new Error('Method not implemented.');
+    const result = push(child(ref(this.database, 'userBooks'), uid), data);
+
+    return from(
+      result.then(snap => snap.key!).then(key => get(child(child(ref(this.database, 'userBooks'), uid), key)).then(snap => snap.val())),
+    );
   }
 
   updateUserBook(uid: string, id: string, data: Partial<UserBookDTO>): Observable<UserBookDTO> {
@@ -43,19 +49,27 @@ export class FirebaseDatabaseService {
   }
 
   deleteUserBook(uid: string, id: string): Observable<void> {
-    throw new Error('Method not implemented.');
+    const result = remove(child(child(ref(this.database, 'userBooks'), uid), id));
+
+    return from(result);
   }
 
   getVolume(id: string): Observable<VolumeDTO> {
-    throw new Error('Method not implemented.');
+    const result = get(child(ref(this.database, 'volumes'), id));
+
+    return from(result.then(snap => snap.val()));
   }
 
   getVolumes(): Observable<VolumesDTO> {
-    throw new Error('Method not implemented.');
+    const result = get(ref(this.database, 'volumes'));
+
+    return from(result.then(snap => snap.val()));
   }
 
   createVolume(data: Partial<VolumeDTO>): Observable<VolumeDTO> {
-    throw new Error('Method not implemented.');
+    const result = push(ref(this.database, 'volumes'), data);
+
+    return from(result.then(snap => snap.key!).then(key => get(child(ref(this.database, 'userBooks'), key)).then(snap => snap.val())));
   }
 
   updateVolume(id: string, data: Partial<VolumeDTO>): Observable<VolumeDTO> {
@@ -63,7 +77,9 @@ export class FirebaseDatabaseService {
   }
 
   deleteVolume(id: string): Observable<void> {
-    throw new Error('Method not implemented.');
+    const result = remove(child(ref(this.database, 'userBooks'), id));
+
+    return from(result);
   }
 
   // ========
