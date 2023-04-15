@@ -33,7 +33,7 @@ export class FirebaseDatabaseService {
     return from(result);
   }
 
-  getUserBooks(uid: string): Observable<UserBooksDTO> {
+  getUserBooks(uid: string): Observable<UserBooksDTO | null> {
     const reference = ref(this.database, `userBooks/${uid}`);
     const result = get(reference).then(snap => snap.val());
     return from(result);
@@ -137,7 +137,7 @@ export class FirebaseDatabaseService {
     return from(result.then(snap => snap.val()));
   }
 
-  getVolumes(): Observable<VolumesDTO> {
+  getVolumes(): Observable<VolumesDTO | null> {
     const reference = ref(this.database, `volumes`);
     const result = get(reference).then(snap => snap.val());
     return from(result);

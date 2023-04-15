@@ -52,7 +52,7 @@ export const reducer = createReducer(
     (state, { error }) => ({ ...state, pending: false, error }),
   ),
   on(UserBooksActions.loadUserBookSuccess, (state, { book }) => adapter.upsertOne(book, state)),
-  on(UserBooksActions.loadUserBooksSuccess, (state, { books }) => adapter.upsertMany(Object.values(books), state)),
+  on(UserBooksActions.loadUserBooksSuccess, (state, { books }) => adapter.upsertMany(Object.values(books ?? {}), state)),
   on(UserBooksActions.createUserBookSuccess, (state, { book }) => adapter.upsertOne(book, { ...state, createdId: book.id })),
   on(UserBooksActions.editUserBookDraftSuccess, (state, { book }) => adapter.upsertOne(book, state)),
   on(UserBooksActions.publishUserBookSuccess, (state, { book }) => adapter.upsertOne(book, state)),

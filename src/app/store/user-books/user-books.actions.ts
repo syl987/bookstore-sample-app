@@ -8,7 +8,7 @@ export const loadUserBookSuccess = createAction('[UserBooks] load SUCCESS', prop
 export const loadUserBookError = createAction('[UserBooks] load ERROR', props<{ error: ResponseError }>());
 
 export const loadUserBooks = createAction('[UserBooks] load all');
-export const loadUserBooksSuccess = createAction('[UserBooks] load all SUCCESS', props<{ books: UserBooksDTO }>());
+export const loadUserBooksSuccess = createAction('[UserBooks] load all SUCCESS', props<{ books: UserBooksDTO | null }>());
 export const loadUserBooksError = createAction('[UserBooks] load all ERROR', props<{ error: ResponseError }>());
 
 export const createUserBook = createAction('[UserBooks] create', props<{ volumeData: GoogleBooksVolumeDTO }>());
