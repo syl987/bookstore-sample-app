@@ -19,11 +19,11 @@ export const editUserBookDraft = createAction('[UserBooks] edit draft', props<{ 
 export const editUserBookDraftSuccess = createAction('[UserBooks] edit draft SUCCESS', props<{ book: UserBookDTO }>());
 export const editUserBookDraftError = createAction('[UserBooks] edit draft ERROR', props<{ error: ResponseError }>());
 
-export const publishUserBook = createAction('[UserBooks] publish', props<{ id: string; book: UserBookDTO }>());
+export const publishUserBook = createAction('[UserBooks] publish', props<{ id: string }>());
 export const publishUserBookSuccess = createAction('[UserBooks] publish SUCCESS', props<{ book: UserBookDTO }>());
 export const publishUserBookError = createAction('[UserBooks] publish ERROR', props<{ error: ResponseError }>());
 
-export const deleteUserBook = createAction('[UserBooks] delete', props<{ id: string; book: UserBookDTO }>());
+export const deleteUserBook = createAction('[UserBooks] delete', props<{ id: string }>());
 export const deleteUserBookSuccess = createAction('[UserBooks] delete SUCCESS', props<{ id: string }>());
 export const deleteUserBookError = createAction('[UserBooks] delete ERROR', props<{ error: ResponseError }>());
 

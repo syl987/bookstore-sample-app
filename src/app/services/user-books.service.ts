@@ -68,15 +68,15 @@ export class UserBooksService implements IUserBooksService {
     this.store.dispatch(UserBooksActions.editUserBookDraft({ id, book }));
   }
 
-  publish(id: string, book: UserBookDTO): void {
-    this.store.dispatch(UserBooksActions.publishUserBook({ id, book }));
+  publish(id: string): void {
+    this.store.dispatch(UserBooksActions.publishUserBook({ id }));
   }
 
-  delete(id: string, book: UserBookDTO): void {
-    this.store.dispatch(UserBooksActions.deleteUserBook({ id, book }));
+  delete(id: string): void {
+    this.store.dispatch(UserBooksActions.deleteUserBook({ id }));
   }
 
-  buy(id: string, book: UserBookDTO): void {
+  buy(id: string): void {
     throw new Error('Method not implemented.');
   }
 }

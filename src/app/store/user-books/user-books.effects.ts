@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
-import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { firebaseError, internalError } from 'src/app/models/error.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
@@ -52,31 +51,13 @@ export class UserBooksEffects {
         }
         const currentUid = this.authService.uid;
 
-        return this.firebaseApi.getVolume(volumeData.id).pipe(
-          catchError(err => {
-            console.warn(err);
-            // TODO check for 404
-            if (err.code !== 'TODO some sort of 404 code') {
-              return throwError(() => err);
-            }
-            const volume: VolumeDTO = {
-              id: volumeData.id,
-              volumeInfo: volumeData.volumeInfo,
-              searchInfo: volumeData.searchInfo,
-            };
-            return this.firebaseApi.createVolume(volume);
-          }),
-          concatMap(volume => {
-            const book: Partial<UserBookDTO> = {
-              uid: currentUid,
-              status: BookStatus.DRAFT,
-              volume,
-            };
-            return this.firebaseApi.createUserBook(currentUid, book).pipe(
-              map(res => UserBooksActions.createUserBookSuccess({ book: res })),
-              catchError(err => of(UserBooksActions.createUserBookError({ error: firebaseError({ err }) }))),
-            );
-          }),
+        const volume: VolumeDTO = {
+          id: volumeData.id,
+          volumeInfo: volumeData.volumeInfo,
+          searchInfo: volumeData.searchInfo,
+        };
+        return this.firebaseApi.createUserBook(currentUid, volume).pipe(
+          map(res => UserBooksActions.createUserBookSuccess({ book: res })),
           catchError(err => of(UserBooksActions.createUserBookError({ error: firebaseError({ err }) }))),
         );
       }),
@@ -90,13 +71,7 @@ export class UserBooksEffects {
         if (!this.authService.uid) {
           return of(UserBooksActions.editUserBookDraftError({ error: internalError({ message: `User not logged in.` }) }));
         }
-        if (book.uid !== this.authService.uid) {
-          return of(UserBooksActions.editUserBookDraftError({ error: internalError({ message: `Invalid user.` }) }));
-        }
-        if (book.status !== BookStatus.DRAFT) {
-          return of(UserBooksActions.editUserBookDraftError({ error: internalError({ message: `Book already published.` }) }));
-        }
-        return this.firebaseApi.updateUserBook(this.authService.uid, id, book).pipe(
+        return this.firebaseApi.editUserBookDraft(this.authService.uid, id, book).pipe(
           map(res => UserBooksActions.editUserBookDraftSuccess({ book: res })),
           catchError(err => of(UserBooksActions.editUserBookDraftError({ error: firebaseError({ err }) }))),
         );
@@ -105,43 +80,14 @@ export class UserBooksEffects {
   });
 
   readonly publishUserBook = createEffect(() => {
-    // TODO update volume
     return this.actions.pipe(
       ofType(UserBooksActions.publishUserBook),
-      concatMap(({ id, book }) => {
+      concatMap(({ id }) => {
         if (!this.authService.uid) {
           return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `User not logged in.` }) }));
         }
-        if (book.uid !== this.authService.uid) {
-          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Invalid user.` }) }));
-        }
-        if (book.status !== BookStatus.DRAFT) {
-          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Book already published.` }) }));
-        }
-        if (!book.description) {
-          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Missing description.` }) }));
-        }
-        if (book.description.length < 100) {
-          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Insufficient description.` }) }));
-        }
-        if (!book.condition) {
-          return of(UserBooksActions.publishUserBookError({ error: internalError({ message: `Missing condition.` }) }));
-        }
-        return this.firebaseApi.updateUserBook(this.authService.uid, id, { status: BookStatus.PUBLISHED }).pipe(
-          concatMap(b => {
-            const trimmedBook: BookDTO = {
-              id: b.id,
-              uid: b.uid,
-              status: b.status,
-              description: b.description,
-              condition: b.condition,
-              imageUrl: b.imageUrl,
-            };
-            return this.firebaseApi.updateVolume(b.volume.id, { publishedBooks: { [b.id]: trimmedBook } }).pipe(
-              map(res => UserBooksActions.publishUserBookSuccess({ book: b })),
-              catchError(err => of(UserBooksActions.publishUserBookError({ error: firebaseError({ err }) }))),
-            );
-          }),
+        return this.firebaseApi.publishUserBook(this.authService.uid, id).pipe(
+          map(res => UserBooksActions.publishUserBookSuccess({ book: res })),
           catchError(err => of(UserBooksActions.publishUserBookError({ error: firebaseError({ err }) }))),
         );
       }),
@@ -149,18 +95,11 @@ export class UserBooksEffects {
   });
 
   readonly deleteUserBook = createEffect(() => {
-    // TODO also delete the volume if not related to any books
     return this.actions.pipe(
       ofType(UserBooksActions.deleteUserBook),
-      switchMap(({ id, book }) => {
+      switchMap(({ id }) => {
         if (!this.authService.uid) {
           return of(UserBooksActions.deleteUserBookError({ error: internalError({ message: `User not logged in.` }) }));
-        }
-        if (book.uid !== this.authService.uid) {
-          return of(UserBooksActions.deleteUserBookError({ error: internalError({ message: `Invalid user.` }) }));
-        }
-        if (book.status !== BookStatus.DRAFT) {
-          return of(UserBooksActions.deleteUserBookError({ error: internalError({ message: `Book already published.` }) }));
         }
         return this.firebaseApi.deleteUserBook(this.authService.uid, id).pipe(
           map(_ => UserBooksActions.deleteUserBookSuccess({ id })),
