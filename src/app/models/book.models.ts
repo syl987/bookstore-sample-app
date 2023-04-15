@@ -19,6 +19,7 @@ export interface BookDTO {
   status: BookStatus;
   description?: string;
   imageUrl?: string;
+  price?: number;
   condition?: BookCondition;
 }
 

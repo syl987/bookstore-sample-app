@@ -1,17 +1,71 @@
-<p>user-book-list-page works!</p>
-
 <div class="app-container">
+  <p>This is a collection of your books. Once you publish a book, it will be available for other users to buy.</p>
+
   <button mat-stroked-button color="primary" (click)="openBookCreateDialog()">New Book</button>
+</div>
+
+<div *ngIf="(booksDraft$ | async)?.length" class="app-container">
+  <h2>Draft</h2>
 
   <div class="row">
-    <div *ngFor="let book of books$ | async" class="col-sm-6 col-md-4 col-lg-3 mb-m">
-      <mat-card class="mx-auto" style="max-width: 392px">
-        <img mat-card-image [src]="book.volume.volumeInfo.imageLinks.thumbnail" alt="user" />
+    <div *ngFor="let book of booksDraft$ | async" class="col-sm-6 col-lg-4 col-xl-3 mb-m">
+      <mat-card>
+        <mat-card-header>
+          <img mat-card-sm-image [src]="book.volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
+          <mat-card-title>{{ book.volume.volumeInfo.title }}</mat-card-title>
+          <mat-card-subtitle>{{ book.volume.volumeInfo.authors }}</mat-card-subtitle>
+        </mat-card-header>
 
-        <mat-card-title>{{ book.volume.volumeInfo.title }}</mat-card-title>
+        <mat-card-content class="py-2xs">
+          <p>{{ book.volume.volumeInfo.description | slice : 0 : 100 }}...</p>
+        </mat-card-content>
 
-        <mat-card-content>
-          <p>{{ book.volume.volumeInfo.description }}</p>
+        <mat-card-actions>
+          <a mat-button color="primary" routerLink="/user/books/{{ book.id }}/edit">Details</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="(booksPublished$ | async)?.length" class="app-container">
+  <h2>Published</h2>
+
+  <div class="row">
+    <div *ngFor="let book of booksPublished$ | async" class="col-sm-6 col-lg-4 col-xl-3 mb-m">
+      <mat-card>
+        <mat-card-header>
+          <img mat-card-sm-image [src]="book.volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
+          <mat-card-title>{{ book.volume.volumeInfo.title }}</mat-card-title>
+          <mat-card-subtitle>{{ book.volume.volumeInfo.authors }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content class="py-2xs">
+          <p>{{ book.volume.volumeInfo.description | slice : 0 : 100 }}...</p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <a mat-button color="primary" routerLink="/books/{{ book.id }}">Details</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="(booksSold$ | async)?.length" class="app-container">
+  <h2>Sold</h2>
+
+  <div class="row">
+    <div *ngFor="let book of booksSold$ | async" class="col-sm-6 col-lg-4 col-xl-3 mb-m">
+      <mat-card>
+        <mat-card-header>
+          <img mat-card-sm-image [src]="book.volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
+          <mat-card-title>{{ book.volume.volumeInfo.title }}</mat-card-title>
+          <mat-card-subtitle>{{ book.volume.volumeInfo.authors }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content class="py-2xs">
+          <p>{{ book.volume.volumeInfo.description | slice : 0 : 100 }}...</p>
         </mat-card-content>
 
         <mat-card-actions>

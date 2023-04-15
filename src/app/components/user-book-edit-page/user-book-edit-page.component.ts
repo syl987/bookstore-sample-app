@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { BookCondition } from 'src/app/models/book.models';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
@@ -19,6 +20,8 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
 
   readonly book$ = this.userBooksService.userBookByRoute$;
 
+  readonly BookCondition = BookCondition;
+
   private readonly _destroyed$ = new Subject<void>();
 
   constructor(
@@ -28,6 +31,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.userBooksService.load(this.id);
     this.routerService.navigated$.pipe(takeUntil(this._destroyed$)).subscribe(_ => {
       this.userBooksService.loadAll(); // TODO query the right book
     });
@@ -36,5 +40,9 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._destroyed$.next();
     this._destroyed$.complete();
+  }
+
+  publish(): void {
+    this.userBooksService.publish(this.id);
   }
 }

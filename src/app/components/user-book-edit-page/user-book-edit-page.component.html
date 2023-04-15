@@ -1,1 +1,53 @@
-<p>book-edit-page works!</p>
+<div class="app-container">
+  <p>Carefully fill in the book details. Once published, these data cannot be changed any more.</p>
+
+  <mat-card *ngIf="book$ | async as book" class="mb-s">
+    <mat-card-header>
+      <img mat-card-sm-image [src]="book.volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
+      <mat-card-title>{{ book.volume.volumeInfo.title }}</mat-card-title>
+      <mat-card-subtitle>{{ book.volume.volumeInfo.authors }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="py-2xs">
+      <p>{{ book.volume.volumeInfo.description | slice : 0 : 100 }}...</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <a mat-button color="primary" routerLink="/user/books/{{ book.id }}/edit">Details</a>
+    </mat-card-actions>
+  </mat-card>
+
+  <form>
+    <div class="row">
+      <div class="col-md-8 col-lg-9">
+        <mat-form-field class="w-100">
+          <mat-label>Description</mat-label>
+          <textarea matInput rows="3"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <mat-form-field class="w-100">
+          <mat-label>Condition</mat-label>
+          <select matNativeControl>
+            <option></option>
+            <option [value]="BookCondition.NEW">New</option>
+            <option [value]="BookCondition.VERY_GOOD">Very good</option>
+            <option [value]="BookCondition.VISIBLY_USED">Visibly used</option>
+            <option [value]="BookCondition.DAMAGED">Damaged</option>
+          </select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+      <mat-form-field class="w-100">
+        <mat-label>Price</mat-label>
+        <input type="number" matInput />
+        <span matTextSuffix class="ms-2xs">{{ 0 | currency | slice : 1 }}</span>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <button mat-stroked-button color="primary" (click)="publish()">Publish</button>
+</div>
