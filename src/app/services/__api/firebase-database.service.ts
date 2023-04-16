@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { Database, get, push, ref, remove, set, update } from '@angular/fire/database';
 import { concatMap, from, Observable } from 'rxjs';
+import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
 import { BookDTO, BookStatus, UserBookDTO, UserBooksDTO } from 'src/app/models/book.models';
 import { VolumeDTO, VolumesDTO } from 'src/app/models/volume.models';
 
@@ -24,11 +25,8 @@ export class FirebaseDatabaseService {
   }
 
   createUserBook(uid: string, volume: VolumeDTO): Observable<UserBookDTO> {
-    const book: Pick<UserBookDTO, 'uid' | 'status' | 'volume'> = {
-      uid,
-      status: BookStatus.DRAFT,
-      volume,
-    };
+    const book: Pick<UserBookDTO, 'uid' | 'status' | 'volume'> = { uid, status: BookStatus.DRAFT, volume };
+
     const result = push(ref(this.database))
       .then(snap => snap.key!)
       .then(id => set(ref(this.database, `userBooks/${uid}/${id}`), { ...book, id }).then(_ => id));
@@ -56,18 +54,13 @@ export class FirebaseDatabaseService {
   publishUserBook(uid: string, id: string): Observable<UserBookDTO> {
     return this.getUserBook(uid, id).pipe(
       concatMap(book => {
-        // TODO accumulate all errors into the FirebaseError object
         if (book.status !== BookStatus.DRAFT) {
-          throw new FirebaseError('custom', 'Invalid status.');
+          throw new FirebaseError('custom:publish_user_book_error', 'Invalid status.');
         }
-        if (book.description == null || book.description.length < 100) {
-          throw new FirebaseError('custom', 'Insufficient description.');
-        }
-        if (book.condition == null) {
-          throw new FirebaseError('custom', 'Missing condition.');
-        }
-        if (book.price == null) {
-          throw new FirebaseError('custom', 'Missing price.');
+        const errors = getPublishUserBookValidationErrors(book);
+
+        if (Object.keys(errors).length) {
+          throw new FirebaseError('custom:publish_user_book_error', 'Invalid data.', errors);
         }
         const publishedBook: BookDTO = {
           id: book.id,
