@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 import { consoleLogMetaReducer, resetStateMetaReducer } from './app.meta-reducers';
 import { resetState } from './auth/auth.actions';
 import { AuthEffects } from './auth/auth.effects';
-import * as fromAuth from './auth/auth.reducer';
 import { GoogleBooksEffects } from './google-books/google-books.effects';
 import * as fromGoogleBooks from './google-books/google-books.reducer';
 import { RouterEffects } from './router/router.effects';
@@ -23,7 +22,6 @@ import * as fromVolume from './volume/volume.reducer';
 
 interface AppState {
   router: RouterReducerState<MinimalRouterStateSnapshot>;
-  [fromAuth.authFeatureKey]: fromAuth.State;
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.State;
   [fromUserBooks.userBooksFeatureKey]: fromUserBooks.State;
   [fromVolume.volumesFeatureKey]: fromVolume.State;
@@ -31,7 +29,6 @@ interface AppState {
 
 export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer,
-  [fromAuth.authFeatureKey]: fromAuth.reducer,
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.reducer,
   [fromUserBooks.userBooksFeatureKey]: fromUserBooks.reducer,
   [fromVolume.volumesFeatureKey]: fromVolume.reducer,
