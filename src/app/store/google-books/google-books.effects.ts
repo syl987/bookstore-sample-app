@@ -10,8 +10,8 @@ import * as GoogleBooksActions from './google-books.actions';
 
 @Injectable()
 export class GoogleBooksEffects {
-  readonly searchGoogleBooks$ = createEffect(() => {
-    return this.actions$.pipe(
+  readonly searchGoogleBooks = createEffect(() => {
+    return this.actions.pipe(
       ofType(GoogleBooksActions.searchGoogleBooks),
       debounceTime(200),
       switchMap(({ query }) =>
@@ -23,5 +23,5 @@ export class GoogleBooksEffects {
     );
   });
 
-  constructor(private readonly actions$: Actions, private readonly googleBooksApi: GoogleBooksApiService) {}
+  constructor(private readonly actions: Actions, private readonly googleBooksApi: GoogleBooksApiService) {}
 }

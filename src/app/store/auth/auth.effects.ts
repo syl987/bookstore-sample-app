@@ -16,7 +16,7 @@ import * as AuthActions from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
-  readonly authenticated$ = createEffect(() => {
+  readonly authenticated = createEffect(() => {
     return authState(this.auth).pipe(
       map(state => {
         if (state) {
@@ -27,8 +27,8 @@ export class AuthEffects {
     );
   });
 
-  readonly loginWithProviderRequest$ = createEffect(() => {
-    return this.actions$.pipe(
+  readonly loginWithProviderRequest = createEffect(() => {
+    return this.actions.pipe(
       ofType(AuthActions.loginWithProvider),
       exhaustMap(({ providerId: provider }) =>
         from(signInWithPopup(this.auth, getAuthProvider(provider))).pipe(
@@ -39,9 +39,9 @@ export class AuthEffects {
     );
   });
 
-  readonly navigateHome$ = createEffect(
+  readonly navigateHome = createEffect(
     () => {
-      return this.actions$.pipe(
+      return this.actions.pipe(
         ofType(AuthActions.loginWithProviderSuccess),
         map(_ => this.router.navigateByUrl(this.config.afterLoginUrl)),
       );
@@ -49,9 +49,9 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly openLoginErrorToast$ = createEffect(
+  readonly openLoginErrorToast = createEffect(
     () => {
-      return this.actions$.pipe(
+      return this.actions.pipe(
         ofType(AuthActions.loginWithProviderError),
         map(({ error }) => this.toastService.showErrorToast(toResponseErrorMessage(error))),
       );
@@ -59,8 +59,8 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly logoutRequest$ = createEffect(() => {
-    return this.actions$.pipe(
+  readonly logoutRequest = createEffect(() => {
+    return this.actions.pipe(
       ofType(AuthActions.logout, AuthActions.authRefreshError, AuthActions.authTokenNotFound, AuthActions.authResponseError),
       concatMap(_ =>
         from(this.auth.signOut()).pipe(
@@ -71,9 +71,9 @@ export class AuthEffects {
     );
   });
 
-  readonly closeAllDialogs$ = createEffect(
+  readonly closeAllDialogs = createEffect(
     () => {
-      return this.actions$.pipe(
+      return this.actions.pipe(
         ofType(AuthActions.unauthenticated),
         map(_ => this.dialogService.closeAllDialogs()),
       );
@@ -81,9 +81,9 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly navigateToLogin$ = createEffect(
+  readonly navigateToLogin = createEffect(
     () => {
-      return this.actions$.pipe(
+      return this.actions.pipe(
         ofType(AuthActions.unauthenticated),
         map(_ => this.router.navigateByUrl(this.config.afterLogoutUrl)),
       );
@@ -91,16 +91,16 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly resetState$ = createEffect(() => {
-    return this.actions$.pipe(
+  readonly resetState = createEffect(() => {
+    return this.actions.pipe(
       ofType(AuthActions.unauthenticated),
       map(_ => AuthActions.resetState()),
     );
   });
 
-  readonly openLogoutToast$ = createEffect(
+  readonly openLogoutToast = createEffect(
     () => {
-      return this.actions$.pipe(
+      return this.actions.pipe(
         ofType(AuthActions.logoutSuccess),
         map(_ => this.toastService.showSuccessToast(this.config.messages.logout)),
       );
@@ -108,9 +108,9 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly openRefreshErrorToast$ = createEffect(
+  readonly openRefreshErrorToast = createEffect(
     () => {
-      return this.actions$.pipe(
+      return this.actions.pipe(
         ofType(AuthActions.authRefreshError),
         map(_ => this.toastService.showErrorToast(this.config.messages.refreshError)),
       );
@@ -118,9 +118,9 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly openSessionExpiredToast$ = createEffect(
+  readonly openSessionExpiredToast = createEffect(
     () => {
-      return this.actions$.pipe(
+      return this.actions.pipe(
         ofType(AuthActions.authTokenNotFound),
         map(_ => this.toastService.showErrorToast(this.config.messages.tokenNotFound)),
       );
@@ -128,9 +128,9 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly openResponseErrorToast$ = createEffect(
+  readonly openResponseErrorToast = createEffect(
     () => {
-      return this.actions$.pipe(
+      return this.actions.pipe(
         ofType(AuthActions.authResponseError),
         map(_ => this.toastService.showInfoToast(this.config.messages.response401)),
       );
@@ -140,7 +140,7 @@ export class AuthEffects {
 
   constructor(
     @Inject(AUTH_CONFIG) private readonly config: AuthConfig,
-    private readonly actions$: Actions,
+    private readonly actions: Actions,
     private readonly router: Router,
     private readonly auth: Auth,
     private readonly toastService: ToastService,
