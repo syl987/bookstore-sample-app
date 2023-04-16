@@ -17,17 +17,17 @@ export interface BookDTO {
   id: string;
   uid: string;
   status: BookStatus;
-  description?: string;
-  imageUrl?: string;
-  price?: number;
-  condition?: BookCondition;
+  description?: string | null;
+  condition?: BookCondition | null;
+  imageUrl?: string | null;
+  price?: number | null;
 }
 
 export interface UserBookDTO extends BookDTO {
   volume: VolumeDTO;
 }
 
-export type UserBookEditDTO = Pick<UserBookDTO, 'condition' | 'description' | 'imageUrl'>;
+export type UserBookEditDraftDTO = Pick<UserBookDTO, 'condition' | 'description' | 'price'>;
 
 export interface UserBooksDTO {
   [bookId: string]: UserBookDTO;

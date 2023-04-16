@@ -67,11 +67,11 @@ export class UserBooksEffects {
   readonly editUserBookDraft = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.editUserBookDraft),
-      switchMap(({ id, book }) => {
+      switchMap(({ id, data }) => {
         if (!this.authService.uid) {
           return of(UserBooksActions.editUserBookDraftError({ error: internalError({ message: `User not logged in.` }) }));
         }
-        return this.firebaseApi.editUserBookDraft(this.authService.uid, id, book).pipe(
+        return this.firebaseApi.editUserBookDraft(this.authService.uid, id, data).pipe(
           map(res => UserBooksActions.editUserBookDraftSuccess({ book: res })),
           catchError(err => of(UserBooksActions.editUserBookDraftError({ error: firebaseError({ err }) }))),
         );

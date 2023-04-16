@@ -7,6 +7,8 @@
 <div *ngIf="(booksDraft$ | async)?.length" class="app-container">
   <h2>Draft</h2>
 
+  <p>Carefully fill in the book details. Once published, the book will be available to other users and its data cannot be changed.</p>
+
   <div class="row">
     <div *ngFor="let book of booksDraft$ | async" class="col-sm-6 col-lg-4 col-xl-3 mb-m">
       <mat-card>
@@ -31,6 +33,8 @@
 <div *ngIf="(booksPublished$ | async)?.length" class="app-container">
   <h2>Published</h2>
 
+  <p>These books are publicly accessible and available for buying.</p>
+
   <div class="row">
     <div *ngFor="let book of booksPublished$ | async" class="col-sm-6 col-lg-4 col-xl-3 mb-m">
       <mat-card>
@@ -54,6 +58,8 @@
 
 <div *ngIf="(booksSold$ | async)?.length" class="app-container">
   <h2>Sold</h2>
+
+  <p>Sold books are not publicly visible any more but they will remain listed here.</p>
 
   <div class="row">
     <div *ngFor="let book of booksSold$ | async" class="col-sm-6 col-lg-4 col-xl-3 mb-m">

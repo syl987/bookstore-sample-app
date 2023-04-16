@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserBookDTO, UserBooksDTO } from 'src/app/models/book.models';
+import { UserBookDTO, UserBookEditDraftDTO, UserBooksDTO } from 'src/app/models/book.models';
 import { ResponseError } from 'src/app/models/error.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
 
@@ -15,7 +15,7 @@ export const createUserBook = createAction('[UserBooks] create', props<{ volumeD
 export const createUserBookSuccess = createAction('[UserBooks] create SUCCESS', props<{ book: UserBookDTO }>());
 export const createUserBookError = createAction('[UserBooks] create ERROR', props<{ error: ResponseError }>());
 
-export const editUserBookDraft = createAction('[UserBooks] edit draft', props<{ id: string; book: UserBookDTO }>());
+export const editUserBookDraft = createAction('[UserBooks] edit draft', props<{ id: string; data: UserBookEditDraftDTO }>());
 export const editUserBookDraftSuccess = createAction('[UserBooks] edit draft SUCCESS', props<{ book: UserBookDTO }>());
 export const editUserBookDraftError = createAction('[UserBooks] edit draft ERROR', props<{ error: ResponseError }>());
 

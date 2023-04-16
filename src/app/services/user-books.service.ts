@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { UserBookDTO } from '../models/book.models';
+import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import * as UserBooksActions from '../store/user-books/user-books.actions';
 import {
@@ -64,8 +64,8 @@ export class UserBooksService implements IUserBooksService {
     this.store.dispatch(UserBooksActions.createUserBook({ volumeData }));
   }
 
-  editDraft(id: string, book: UserBookDTO): void {
-    this.store.dispatch(UserBooksActions.editUserBookDraft({ id, book }));
+  editDraft(id: string, data: UserBookEditDraftDTO): void {
+    this.store.dispatch(UserBooksActions.editUserBookDraft({ id, data }));
   }
 
   publish(id: string): void {

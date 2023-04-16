@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { BookCondition } from 'src/app/models/book.models';
@@ -22,9 +23,16 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
 
   readonly BookCondition = BookCondition;
 
+  readonly form = this.fb.nonNullable.group({
+    description: new FormControl<string | null>(null),
+    condition: new FormControl<BookCondition | null>(null),
+    price: new FormControl<number | null>(null),
+  });
+
   private readonly _destroyed$ = new Subject<void>();
 
   constructor(
+    private readonly fb: FormBuilder,
     private readonly route: ActivatedRoute,
     private readonly routerService: RouterService,
     private readonly userBooksService: UserBooksService,
@@ -33,8 +41,16 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userBooksService.load(this.id);
     this.routerService.navigated$.pipe(takeUntil(this._destroyed$)).subscribe(_ => {
-      this.userBooksService.loadAll(); // TODO query the right book
+      this.userBooksService.loadAll(); // loading all
     });
+
+    this.book$.pipe(takeUntil(this._destroyed$)).subscribe(book =>
+      this.form.setValue({
+        description: book?.description ?? null,
+        condition: book?.condition ?? null,
+        price: book?.price ?? null,
+      }),
+    );
   }
 
   ngOnDestroy(): void {
@@ -42,7 +58,16 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
     this._destroyed$.complete();
   }
 
+  saveChanges(): void {
+    const data = {
+      description: this.form.value.description,
+      condition: this.form.value.condition,
+      price: this.form.value.price,
+    };
+    this.userBooksService.editDraft(this.id, data);
+  }
+
   publish(): void {
-    this.userBooksService.publish(this.id);
+    this.userBooksService.publish(this.id); // TODO kick static variables
   }
 }

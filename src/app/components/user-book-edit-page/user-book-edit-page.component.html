@@ -9,7 +9,7 @@
     </mat-card-header>
 
     <mat-card-content class="py-2xs">
-      <p>{{ book.volume.volumeInfo.description | slice : 0 : 100 }}...</p>
+      <p>{{ book.volume.volumeInfo.description | slice : 0 : 480 }}...</p>
     </mat-card-content>
 
     <mat-card-actions>
@@ -17,25 +17,27 @@
     </mat-card-actions>
   </mat-card>
 
-  <form>
+  <form [formGroup]="form" (ngSubmit)="saveChanges()">
     <div class="row">
       <div class="col-md-8 col-lg-9">
         <mat-form-field class="w-100">
           <mat-label>Description</mat-label>
-          <textarea matInput rows="3"></textarea>
+          <textarea matInput formControlName="description" rows="3"></textarea>
+          <mat-error>{{ form.get('description') | validationError }}</mat-error>
         </mat-form-field>
       </div>
 
       <div class="col-md-4 col-lg-3">
         <mat-form-field class="w-100">
           <mat-label>Condition</mat-label>
-          <select matNativeControl>
+          <select matNativeControl formControlName="condition">
             <option></option>
             <option [value]="BookCondition.NEW">New</option>
             <option [value]="BookCondition.VERY_GOOD">Very good</option>
             <option [value]="BookCondition.VISIBLY_USED">Visibly used</option>
             <option [value]="BookCondition.DAMAGED">Damaged</option>
           </select>
+          <mat-error>{{ form.get('condition') | validationError }}</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -43,11 +45,17 @@
     <div class="col-md-4 col-lg-3">
       <mat-form-field class="w-100">
         <mat-label>Price</mat-label>
-        <input type="number" matInput />
+        <input type="number" matInput formControlName="price" />
         <span matTextSuffix class="ms-2xs">{{ 0 | currency | slice : 1 }}</span>
+        <mat-error>{{ form.get('price') | validationError }}</mat-error>
       </mat-form-field>
     </div>
-  </form>
 
-  <button mat-stroked-button color="primary" (click)="publish()">Publish</button>
+    <div class="app-gap-x-2xs">
+      <button type="submit" mat-stroked-button color="primary">Save changes</button>
+      <button type="button" mat-stroked-button>Cancel</button>
+      <button type="button" mat-stroked-button color="accent" (click)="publish()">Publish</button>
+      <button type="button" mat-stroked-button color="warn">Delete</button>
+    </div>
+  </form>
 </div>
