@@ -56,6 +56,7 @@ export class FirebaseDatabaseService {
   publishUserBook(uid: string, id: string): Observable<UserBookDTO> {
     return this.getUserBook(uid, id).pipe(
       concatMap(book => {
+        // TODO accumulate all errors into the FirebaseError object
         if (book.status !== BookStatus.DRAFT) {
           throw new FirebaseError('custom', 'Invalid status.');
         }

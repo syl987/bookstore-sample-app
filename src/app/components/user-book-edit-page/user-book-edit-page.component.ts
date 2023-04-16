@@ -1,15 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { BookCondition } from 'src/app/models/book.models';
+import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs';
+import { BookCondition, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO display volume data
-// TODO edit book data (if not published or sold)
+// TODO edit book data
+// TODO display controls disabled if published or sold
 // TODO delete book (if not sold)
-// TODO navigate to user books
+// TODO navigate to user books after an action (need correlation ids?)
+// TODO display spinners on pending actions
 
 @Component({
   selector: 'app-user-book-edit-page',
@@ -29,6 +30,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
     price: new FormControl<number | null>(null),
   });
 
+  private readonly _resetFields = new BehaviorSubject<void>(undefined);
   private readonly _destroyed$ = new Subject<void>();
 
   constructor(
@@ -41,16 +43,18 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userBooksService.load(this.id);
     this.routerService.navigated$.pipe(takeUntil(this._destroyed$)).subscribe(_ => {
-      this.userBooksService.loadAll(); // loading all
+      this.userBooksService.loadAll(); // TODO load just one
     });
 
-    this.book$.pipe(takeUntil(this._destroyed$)).subscribe(book =>
-      this.form.setValue({
-        description: book?.description ?? null,
-        condition: book?.condition ?? null,
-        price: book?.price ?? null,
-      }),
-    );
+    combineLatest([this.book$, this._resetFields])
+      .pipe(takeUntil(this._destroyed$))
+      .subscribe(([book]) => {
+        this.form.setValue({
+          description: book?.description ?? null,
+          condition: book?.condition ?? null,
+          price: book?.price ?? null,
+        });
+      });
   }
 
   ngOnDestroy(): void {
@@ -59,7 +63,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   }
 
   saveChanges(): void {
-    const data = {
+    const data: UserBookEditDraftDTO = {
       description: this.form.value.description,
       condition: this.form.value.condition,
       price: this.form.value.price,
@@ -67,7 +71,15 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
     this.userBooksService.editDraft(this.id, data);
   }
 
-  publish(): void {
+  discardChanges(): void {
+    this._resetFields.next();
+  }
+
+  publishBook(): void {
     this.userBooksService.publish(this.id); // TODO kick static variables
+  }
+
+  deleteBook(): void {
+    throw new Error('Method not implemented.');
   }
 }
