@@ -34,7 +34,6 @@ import { UserSettingsDialogComponent } from './components/user-settings-dialog/u
 import { VolumeDetailPageComponent } from './components/volume-detail-page/volume-detail-page.component';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
-import { ErrorResponseInterceptor } from './interceptors/error-response.interceptor';
 import { APP_CONFIG, APP_STRINGS } from './models/app.models';
 import { AUTH_CONFIG } from './models/auth.models';
 import { SharedModule } from './modules/shared/shared.module';
@@ -96,12 +95,11 @@ const firebaseOptions: FirebaseOptions = {
     { provide: LOCALE_ID, useValue: 'de-DE' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: APP_CONFIG, useValue: appConfig },
+    { provide: APP_STRINGS, useValue: appStrings },
     { provide: AUTH_CONFIG, useValue: authConfig },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorResponseInterceptor, multi: true },
     { provide: TitleStrategy, useClass: AppTitleStrategy },
-    { provide: APP_STRINGS, useValue: appStrings },
   ],
 })
 export class AppModule implements DoBootstrap {
