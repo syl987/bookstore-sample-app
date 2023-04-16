@@ -5,9 +5,10 @@ import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
 import { GoogleBooksService } from 'src/app/services/google-books.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO search google books
-// TODO create a book, save volume if not existing, link them
-// TODO navigate to user book edit
+// TODO improve design field + books
+// TODO implement as material single selection list
+// TODO add google books loading spinner
+// TODO add create pending spinner
 
 @Component({
   selector: 'app-book-create-dialog',

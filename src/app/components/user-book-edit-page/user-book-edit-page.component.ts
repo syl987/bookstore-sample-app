@@ -6,14 +6,13 @@ import { BookCondition, UserBookEditDraftDTO } from 'src/app/models/book.models'
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO edit book data
-// TODO display controls disabled if published or sold
+// TODO disabled controls if published or sold
 // TODO delete book (if not sold)
 // TODO navigate to user books after an action (need correlation ids?)
 // TODO display spinners on pending actions
 // TODO publish confirm dialog
-// TODO display validation errors on publishing
-// TODO display form field hints
+// TODO check button and field behavior correct
+// TODO check validations on publish
 
 @Component({
   selector: 'app-user-book-edit-page',

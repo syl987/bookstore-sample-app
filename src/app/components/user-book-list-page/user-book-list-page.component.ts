@@ -4,12 +4,8 @@ import { Subject } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO consider revamping data model: volumes_with_books, user_books_as_volume_ids, user_bought_books_as_volume_ids, book_volume_id (check if efficient querying is possible)
-
-// TODO display user books with volume data
-// TODO display bought books with volume data
-// TODO display books separately by status (draft, published, sold, bought)
-// TODO navigate to book edit
+// TODO display user books data alongside with volume data
+// TODO full size anchors + separate book / volume components
 
 @Component({
   selector: 'app-user-book-list-page',
@@ -26,6 +22,15 @@ export class UserBookListPageComponent implements OnInit, OnDestroy {
 
   constructor(private readonly router: Router, private readonly userBooksService: UserBooksService, private readonly dialogService: DialogService) {}
 
+  ngOnInit(): void {
+    this.userBooksService.loadAll();
+  }
+
+  ngOnDestroy(): void {
+    this._destroyed$.next();
+    this._destroyed$.complete();
+  }
+
   openBookCreateDialog(): void {
     const dialogRef = this.dialogService.openBookCreateDialog();
 
@@ -34,14 +39,5 @@ export class UserBookListPageComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('/user/books/' + book.id + '/edit');
       }
     });
-  }
-
-  ngOnInit(): void {
-    this.userBooksService.loadAll();
-  }
-
-  ngOnDestroy(): void {
-    this._destroyed$.next();
-    this._destroyed$.complete();
   }
 }
