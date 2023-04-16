@@ -1,16 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { catchError, concatMap } from 'rxjs/operators';
-import { BookDTO, BookStatus } from 'src/app/models/book.models';
+import { UserBookDTO } from 'src/app/models/book.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
-import { AuthService } from 'src/app/services/auth.service';
 import { GoogleBooksService } from 'src/app/services/google-books.service';
-import { ToastService } from 'src/app/services/toast.service';
-import { VolumeService } from 'src/app/services/volume.service';
+import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO search google books
-// TODO create a book, save volume if not existing, link them
-// TODO navigate to user book edit
+// TODO improve design field + books
+// TODO implement as material single selection list
+// TODO add google books loading spinner
+// TODO add create pending spinner
 
 @Component({
   selector: 'app-book-create-dialog',
@@ -23,14 +21,12 @@ export class BookCreateDialogComponent {
   readonly searchPending$ = this.googleBooksService.searchPending$;
   readonly searchError$ = this.googleBooksService.searchError$;
 
-  readonly createPending$ = this.volumeService.loading$;
+  readonly createPending$ = this.userBooksService.pending$;
 
   constructor(
-    readonly dialogRef: MatDialogRef<BookCreateDialogComponent, BookDTO | undefined>,
-    private readonly authService: AuthService,
-    private readonly volumeService: VolumeService,
+    readonly dialogRef: MatDialogRef<BookCreateDialogComponent, UserBookDTO | undefined>,
+    private readonly userBooksService: UserBooksService,
     private readonly googleBooksService: GoogleBooksService,
-    private readonly toastService: ToastService,
   ) {}
 
   searchVolumes(query: string | null): void {
@@ -38,32 +34,8 @@ export class BookCreateDialogComponent {
   }
 
   createBook(googleBooksVolume: GoogleBooksVolumeDTO): void {
-    const book: BookDTO = {
-      id: '' + new Date().getTime(), // TODO improve id generation
-      sellerUid: this.authService.uid!, // TODO kick '!' + guard with toast error
-      status: BookStatus.DRAFT,
-    };
-
-    // TODO need existence check?
-    // TODO check if old volume gets replaced
-    this.volumeService
-      .getByKey(googleBooksVolume.id)
-      .pipe(
-        concatMap(volume =>
-          this.volumeService.update({
-            id: volume.id,
-            books: { [book.id]: book },
-          }),
-        ), // TODO check sub-property partial update
-        catchError(_ =>
-          this.volumeService.add({
-            id: googleBooksVolume.id,
-            volumeInfo: googleBooksVolume.volumeInfo,
-            searchInfo: googleBooksVolume.searchInfo,
-            books: { [book.id]: book },
-          }),
-        ), // TODO check http status, proceed only on 404
-      )
-      .subscribe(_ => this.dialogRef.close(book));
+    this.userBooksService.create(googleBooksVolume).subscribe(book => {
+      this.dialogRef.close(book);
+    });
   }
 }

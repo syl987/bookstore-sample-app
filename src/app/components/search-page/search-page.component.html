@@ -1,18 +1,24 @@
 <div class="app-container">
-  <mat-form-field appearance="outline">
+  <!-- <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput [formControl]="filterControl" />
-  </mat-form-field>
+  </mat-form-field> -->
 
   <div class="row">
-    <div *ngFor="let volume of volumes$ | async" class="col-sm-6 col-md-4 col-lg-3 mb-m">
-      <mat-card class="mx-auto" style="max-width: 392px">
-        <img mat-card-image [src]="volume.volumeInfo.imageLinks.thumbnail" alt="user" />
+    <div *ngFor="let volume of volumes$ | async" class="col-sm-6 col-lg-4 col-xl-3 mb-m">
+      <mat-card>
+        <mat-card-header>
+          <img mat-card-sm-image [src]="volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
+          <mat-card-title>{{ volume.volumeInfo.title }}</mat-card-title>
+          <mat-card-subtitle>{{ volume.volumeInfo.authors }}</mat-card-subtitle>
+        </mat-card-header>
 
-        <mat-card-title>{{ volume.volumeInfo.title }}</mat-card-title>
+        <mat-card-content class="py-2xs">
+          <p>{{ volume.volumeInfo.description | slice : 0 : 100 }}...</p>
 
-        <mat-card-content>
-          <p>{{ volume.volumeInfo.description }}</p>
+          <p>
+            <em>Contains {{ getPublishedBooksTotal(volume) }} individual books.</em>
+          </p>
         </mat-card-content>
 
         <mat-card-actions>

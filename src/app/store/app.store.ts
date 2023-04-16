@@ -1,40 +1,33 @@
-import { PropsFilterFnFactory } from '@ngrx/data';
 import { MinimalRouterStateSnapshot, NavigationActionTiming, routerReducer, RouterReducerState, RouterState, StoreRouterConfig } from '@ngrx/router-store';
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
 
-import { AppEntityDataModuleConfig } from '../models/app.models';
-import { EntityType } from '../models/entity.models';
 import { consoleLogMetaReducer, resetStateMetaReducer } from './app.meta-reducers';
 import { resetState } from './auth/auth.actions';
 import { AuthEffects } from './auth/auth.effects';
-import { EntityToastEffects } from './entity/entity-toast.effects';
-import { EntityUndoEffects } from './entity/entity-undo.effects';
 import { GoogleBooksEffects } from './google-books/google-books.effects';
 import * as fromGoogleBooks from './google-books/google-books.reducer';
 import { RouterEffects } from './router/router.effects';
+import { UserBooksEffects } from './user-books/user-books.effects';
+import * as fromUserBooks from './user-books/user-books.reducer';
+import { VolumesEffects } from './volume/volume.effects';
+import * as fromVolume from './volume/volume.reducer';
 
 interface AppState {
   router: RouterReducerState<MinimalRouterStateSnapshot>;
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.State;
+  [fromUserBooks.userBooksFeatureKey]: fromUserBooks.State;
+  [fromVolume.volumesFeatureKey]: fromVolume.State;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer,
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.reducer,
+  [fromUserBooks.userBooksFeatureKey]: fromUserBooks.reducer,
+  [fromVolume.volumesFeatureKey]: fromVolume.reducer,
 };
 
-export const entityDataConfig: AppEntityDataModuleConfig = {
-  entityMetadata: {
-    [EntityType.VOLUME]: {
-      selectId: entity => entity.id,
-      // sortComparer: stringPropComparerDesc('createdAt'), // TODO add more meta props
-      filterFn: PropsFilterFnFactory(['id']), // TODO sub-props?
-    },
-  },
-};
-
-export const effects = [AuthEffects, RouterEffects, GoogleBooksEffects, EntityUndoEffects, EntityToastEffects];
+export const effects = [AuthEffects, RouterEffects, GoogleBooksEffects, UserBooksEffects, VolumesEffects];
 
 export const storeConfig: RootStoreConfig<AppState> = {
   metaReducers: [resetStateMetaReducer(resetState.type), consoleLogMetaReducer],

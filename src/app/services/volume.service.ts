@@ -1,24 +1,56 @@
 import { Injectable } from '@angular/core';
-import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } from '@ngrx/data';
-import { createSelector, select } from '@ngrx/store';
-import { combineLatest, map } from 'rxjs';
+import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { Observable, of, throwError } from 'rxjs';
+import { concatMap, filter, shareReplay, take } from 'rxjs/operators';
 
-import { getEntityById } from '../helpers/entity.helpers';
-import { EntityType } from '../models/entity.models';
+import { nextCorrelationId } from '../helpers/entity.helpers';
 import { VolumeDTO } from '../models/volume.models';
-import { selectRouterParams } from '../store/router/router.selectors';
+import * as VolumeActions from '../store/volume/volume.actions';
+import { selectVolumeByRoute, selectVolumesAll, selectVolumesError, selectVolumesPending, selectVolumesTotal } from '../store/volume/volume.selectors';
 
-const selectKeyByRouterParamId = createSelector(selectRouterParams, params => params?.volumeId);
+interface IVolumeService {
+  /** Search volumes with published books. */
+  search(params?: unknown): Observable<VolumeDTO[]>;
+  /** Load a volume with published books */
+  load(id: string): Observable<VolumeDTO>;
+}
 
 @Injectable({
   providedIn: 'root',
 })
-export class VolumeService extends EntityCollectionServiceBase<VolumeDTO> {
-  readonly keyByRouterParamId$ = this.store.pipe(select(selectKeyByRouterParamId));
+export class VolumeService implements IVolumeService {
+  readonly volumes$ = this.store.select(selectVolumesAll);
+  readonly volumesTotal$ = this.store.select(selectVolumesTotal);
 
-  readonly entityByRouterParamId$ = combineLatest([this.selectors$.entityMap$, this.keyByRouterParamId$]).pipe(map(getEntityById));
+  readonly volumeByRoute$ = this.store.select(selectVolumeByRoute);
 
-  constructor(f: EntityCollectionServiceElementsFactory) {
-    super(EntityType.VOLUME, f);
+  readonly pending$ = this.store.select(selectVolumesPending);
+  readonly error$ = this.store.select(selectVolumesError);
+
+  constructor(private readonly store: Store, private readonly actions: Actions) {}
+
+  search(params?: unknown): Observable<VolumeDTO[]> {
+    const cid = nextCorrelationId();
+    this.store.dispatch(VolumeActions.loadVolumes({ cid }));
+
+    const result = this.actions.pipe(
+      ofType(VolumeActions.loadVolumesSuccess, VolumeActions.loadVolumesError),
+      filter(action => action.cid === cid),
+      take(1),
+      concatMap(action => {
+        if (action.type === VolumeActions.loadVolumesSuccess.type) {
+          return of(action.volumes);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
+  }
+
+  load(id: string): Observable<VolumeDTO> {
+    throw new Error('Method not implemented.');
   }
 }

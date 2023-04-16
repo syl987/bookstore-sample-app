@@ -1,8 +1,4 @@
 import { InjectionToken } from '@angular/core';
-import { EntityDataModuleConfig, EntityMetadata, HttpResourceUrls } from '@ngrx/data';
-
-import { EntityType } from './entity.models';
-import { VolumeDTO } from './volume.models';
 
 /**
  * Container for language-specific text elements for conditional use in templates.
@@ -26,29 +22,3 @@ export interface AppConfig {
 }
 
 export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');
-
-/**
- * Type-safe entity data config.
- */
-export interface AppEntityDataModuleConfig extends EntityDataModuleConfig {
-  entityMetadata: {
-    [EntityType.VOLUME]: Partial<EntityMetadata<VolumeDTO>>;
-  };
-}
-
-export interface AppFirebaseDataServiceConfig {
-  entityHttpResourceUrls: {
-    [EntityType.VOLUME]: Pick<HttpResourceUrls, 'collectionResourceUrl'>;
-  };
-}
-
-/**
- * Type-safe entity display name map.
- */
-export interface AppEntityDisplayNameMap {
-  [EntityType.VOLUME]: string;
-}
-
-export const APP_ENTITY_NAMES = new InjectionToken<Partial<AppEntityDisplayNameMap>>('APP_ENTITY_NAMES');
-
-export const APP_ENTITY_PLURAL_NAMES = new InjectionToken<Partial<AppEntityDisplayNameMap>>('APP_ENTITY_PLURAL_NAMES');

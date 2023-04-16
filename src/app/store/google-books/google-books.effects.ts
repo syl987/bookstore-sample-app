@@ -17,7 +17,7 @@ export class GoogleBooksEffects {
       switchMap(({ query }) =>
         this.googleBooksApi.list(query).pipe(
           map(list => GoogleBooksActions.searchGoogleBooksSuccess({ list })),
-          catchError((err: HttpErrorResponse) => of(GoogleBooksActions.searchGoogleBooksError({ error: httpError({ error: err }) }))),
+          catchError((err: HttpErrorResponse) => of(GoogleBooksActions.searchGoogleBooksError({ error: httpError({ err }) }))),
         ),
       ),
     );
