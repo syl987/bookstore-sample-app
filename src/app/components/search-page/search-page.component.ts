@@ -25,13 +25,9 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.volumeService.getAll();
 
-    this.filterControl.valueChanges
-      .pipe(debounceTime(250), takeUntil(this._destroyed$))
-      .subscribe(value => this.volumeService.setFilter(value));
+    this.filterControl.valueChanges.pipe(debounceTime(250), takeUntil(this._destroyed$)).subscribe(value => this.volumeService.setFilter(value));
 
-    this.volumeService.filter$
-      .pipe(takeUntil(this._destroyed$))
-      .subscribe(filter => this.filterControl.setValue(filter, { emitEvent: false }));
+    this.volumeService.filter$.pipe(takeUntil(this._destroyed$)).subscribe(filter => this.filterControl.setValue(filter, { emitEvent: false }));
   }
 
   ngOnDestroy(): void {

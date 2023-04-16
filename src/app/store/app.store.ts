@@ -1,12 +1,5 @@
 import { PropsFilterFnFactory } from '@ngrx/data';
-import {
-  MinimalRouterStateSnapshot,
-  NavigationActionTiming,
-  routerReducer,
-  RouterReducerState,
-  RouterState,
-  StoreRouterConfig,
-} from '@ngrx/router-store';
+import { MinimalRouterStateSnapshot, NavigationActionTiming, routerReducer, RouterReducerState, RouterState, StoreRouterConfig } from '@ngrx/router-store';
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
 

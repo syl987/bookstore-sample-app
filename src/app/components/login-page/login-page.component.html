@@ -9,14 +9,7 @@
     </div>
   </div>
 
-  <button
-    mat-stroked-button
-    color="primary"
-    [spinning]="loginPending$ | async"
-    [disabled]="loginPending$ | async"
-    (click)="loginWithGoogle()"
-    class="w-100"
-  >
+  <button mat-stroked-button color="primary" [spinning]="loginPending$ | async" [disabled]="loginPending$ | async" (click)="loginWithGoogle()" class="w-100">
     Login with Google
   </button>
 </div>

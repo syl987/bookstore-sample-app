@@ -40,9 +40,7 @@ export class AuthService implements OnDestroy {
       this.#uid = u?.uid;
     });
 
-    this.actions
-      .pipe(ofType(AuthActions.loginWithProvider, AuthActions.logout), takeUntil(this._destroyed$))
-      .subscribe(_ => this._pending.next(true));
+    this.actions.pipe(ofType(AuthActions.loginWithProvider, AuthActions.logout), takeUntil(this._destroyed$)).subscribe(_ => this._pending.next(true));
     this.actions
       .pipe(
         ofType(

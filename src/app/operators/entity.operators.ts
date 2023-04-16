@@ -10,10 +10,6 @@ import { selectRouterParams } from '../store/router/router.selectors';
 /**
  * Listen for entities by the specified route param. Return `undefined` if none was found.
  */
-export function getEntityByRouterParam<T>(
-  store: Store,
-  entityMap$: Observable<Dictionary<T>>,
-  param: keyof RouteParams,
-): Observable<T | undefined> {
+export function getEntityByRouterParam<T>(store: Store, entityMap$: Observable<Dictionary<T>>, param: keyof RouteParams): Observable<T | undefined> {
   return combineLatest([entityMap$, store.select(selectRouterParams).pipe(map(params => params?.[param]))]).pipe(map(getEntityById));
 }

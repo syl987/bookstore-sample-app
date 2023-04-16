@@ -9,19 +9,14 @@ import { HttpEndpointUrl } from '../models/http.models';
  *
  * Uses `'='` to join a key with its value and `'&'` to separate key-value pairs. Joins array values with a comma.
  */
-export function toXwwwEncodedString(
-  object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null,
-): string {
+export function toXwwwEncodedString(object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null): string {
   if (object == null) {
     return '';
   }
   return Object.entries(object)
     .reduce<string[]>((result, [key, value]) => {
       if (value != null && value !== '') {
-        return [
-          ...result,
-          `${encodeURIComponent(key)}=${Array.isArray(value) ? value.map(encodeXwwwComponent).join() : encodeXwwwComponent(value)}`,
-        ];
+        return [...result, `${encodeURIComponent(key)}=${Array.isArray(value) ? value.map(encodeXwwwComponent).join() : encodeXwwwComponent(value)}`];
       }
       return result;
     }, [])
@@ -55,9 +50,7 @@ export function toFormData(object?: { [key: string]: string | Blob | null | unde
 /**
  * Converts an http params compatible object, omitting `undefined` and empty string values.
  */
-export function toUrlParams(
-  object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null,
-): {
+export function toUrlParams(object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null): {
   [param: string]: string | string[];
 } {
   if (object == null) {
@@ -75,8 +68,5 @@ export function toUrlParams(
  * Test whether a request matches any endpoint definition. An empty or omitted array of methods is interpreted as match.
  */
 export function matchesEndpointUrl(request: HttpRequest<unknown>, { url, httpMethods }: HttpEndpointUrl): boolean {
-  return (
-    new RegExp(url).test(request.url) &&
-    (!httpMethods || httpMethods.length === 0 || httpMethods.join().includes(request.method.toUpperCase()))
-  );
+  return new RegExp(url).test(request.url) && (!httpMethods || httpMethods.length === 0 || httpMethods.join().includes(request.method.toUpperCase()));
 }

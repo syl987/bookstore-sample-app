@@ -21,11 +21,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
 
   private readonly _destroyed$ = new Subject<void>();
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly routerService: RouterService,
-    private readonly volumeService: VolumeService,
-  ) {}
+  constructor(private readonly route: ActivatedRoute, private readonly routerService: RouterService, private readonly volumeService: VolumeService) {}
 
   ngOnInit(): void {
     this.routerService.navigated$.pipe(takeUntil(this._destroyed$)).subscribe(_ => {

@@ -1,21 +1,12 @@
 <div *ngIf="user$ | async as user; else notAuthenticated" class="d-flex flex-column align-items-center mt-3m mb-s">
-  <img
-    [src]="user?.photoURL || 'favicon.ico'"
-    alt="current user"
-    width="128"
-    height="128"
-    class="rounded-circle fs-xs fw-400 mb-2xs p-3xs border"
-  />
+  <img [src]="user?.photoURL || 'favicon.ico'" alt="current user" width="128" height="128" class="rounded-circle fs-xs fw-400 mb-2xs p-3xs border" />
   {{ user?.displayName || 'Current User' }}
 </div>
 
 <ng-template #notAuthenticated>
   <div class="d-flex flex-column align-items-center mt-3m mb-s">
     <div class="mb-2xs p-3xs border rounded-circle" style="width: 128px; height: 128px">
-      <div
-        class="d-flex flex-column justify-content-center align-items-center rounded-circle w-100 h-100 bg-light"
-        style="color: lightgrey; font-size: 56px"
-      >
+      <div class="d-flex flex-column justify-content-center align-items-center rounded-circle w-100 h-100 bg-light" style="color: lightgrey; font-size: 56px">
         ?
       </div>
     </div>
