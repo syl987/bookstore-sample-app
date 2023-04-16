@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
@@ -25,19 +24,14 @@ export class UserBookListPageComponent implements OnInit, OnDestroy {
   // TODO check where destroyed is really needed
   private readonly _destroyed$ = new Subject<void>();
 
-  constructor(
-    private readonly router: Router,
-    private readonly authService: AuthService,
-    private readonly userBooksService: UserBooksService,
-    private readonly dialogService: DialogService,
-  ) {}
+  constructor(private readonly router: Router, private readonly userBooksService: UserBooksService, private readonly dialogService: DialogService) {}
 
   openBookCreateDialog(): void {
     const dialogRef = this.dialogService.openBookCreateDialog();
 
-    dialogRef.beforeClosed().subscribe(bookId => {
-      if (bookId) {
-        this.router.navigateByUrl('/user/books/' + bookId + '/edit');
+    dialogRef.beforeClosed().subscribe(book => {
+      if (book) {
+        this.router.navigateByUrl('/user/books/' + book.id + '/edit');
       }
     });
   }
