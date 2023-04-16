@@ -29,9 +29,7 @@ export class HeaderComponent {
 
   readonly title$ = this.routerService.title$;
 
-  readonly toolbarTitle$ = combineLatest([this.showNavs$, this.title$]).pipe(
-    map(([showNavs, title]) => (showNavs ? this.config.appName : title)),
-  );
+  readonly toolbarTitle$ = combineLatest([this.showNavs$, this.title$]).pipe(map(([showNavs, title]) => (showNavs ? this.config.appName : title)));
 
   readonly production = environment.production;
 

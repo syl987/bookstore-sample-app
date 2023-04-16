@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as VolumeActions from '../store/volume/volume.actions';
-import {
-  selectVolumeByRoute,
-  selectVolumesAll,
-  selectVolumesError,
-  selectVolumesPending,
-  selectVolumesTotal,
-} from '../store/volume/volume.selectors';
+import { selectVolumeByRoute, selectVolumesAll, selectVolumesError, selectVolumesPending, selectVolumesTotal } from '../store/volume/volume.selectors';
 
 interface IVolumeService {
   /** Search volumes with published books. */

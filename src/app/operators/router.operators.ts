@@ -23,29 +23,20 @@ export function getRouterActionByData(): OperatorFunction<RouterRequestAction | 
 /**
  * Map a navigation action to the router state `params`. Does not support nested routes.
  */
-export function getRouterActionParams(): OperatorFunction<
-  RouterRequestAction | RouterNavigationAction | RouterNavigatedAction,
-  RouteParams
-> {
+export function getRouterActionParams(): OperatorFunction<RouterRequestAction | RouterNavigationAction | RouterNavigatedAction, RouteParams> {
   return map(({ payload }) => collectActivatedRouteSnapshotData(payload.routerState.root, ({ params }) => params));
 }
 
 /**
  * Map a navigation action to the router state `queryParams`. Does not support nested routes.
  */
-export function getRouterActionQueryParams(): OperatorFunction<
-  RouterRequestAction | RouterNavigationAction | RouterNavigatedAction,
-  RouteQueryParams
-> {
+export function getRouterActionQueryParams(): OperatorFunction<RouterRequestAction | RouterNavigationAction | RouterNavigatedAction, RouteQueryParams> {
   return map(({ payload }) => collectActivatedRouteSnapshotData(payload.routerState.root, ({ queryParams }) => queryParams));
 }
 
 /**
  * Map a navigation action to the router state `fragment`. Does not support nested routes.
  */
-export function getRouterActionByFragment(): OperatorFunction<
-  RouterRequestAction | RouterNavigationAction | RouterNavigatedAction,
-  string | null
-> {
+export function getRouterActionByFragment(): OperatorFunction<RouterRequestAction | RouterNavigationAction | RouterNavigatedAction, string | null> {
   return map(({ payload }) => getActivatedRouteSnapshotFragment(payload.routerState.root));
 }

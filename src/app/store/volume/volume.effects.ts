@@ -32,9 +32,5 @@ export class VolumesEffects {
     { dispatch: false },
   );
 
-  constructor(
-    private readonly actions: Actions,
-    private readonly firebaseApi: FirebaseDatabaseService,
-    private readonly toastService: ToastService,
-  ) {}
+  constructor(private readonly actions: Actions, private readonly firebaseApi: FirebaseDatabaseService, private readonly toastService: ToastService) {}
 }
