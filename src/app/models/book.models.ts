@@ -28,7 +28,3 @@ export interface UserBookDTO extends BookDTO {
 }
 
 export type UserBookEditDraftDTO = Pick<UserBookDTO, 'condition' | 'description' | 'price'>;
-
-export interface UserBooksDTO {
-  [bookId: string]: UserBookDTO;
-}

@@ -5,6 +5,7 @@ import { BookCreateDialogComponent } from '../components/book-create-dialog/book
 import { CropImageDialogComponent, CropImageDialogData } from '../components/crop-image-dialog/crop-image-dialog.component';
 import { UserSettingsDialogComponent, UserSettingsDialogData } from '../components/user-settings-dialog/user-settings-dialog.component';
 import { AuthUser } from '../models/auth.models';
+import { UserBookDTO } from '../models/book.models';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class DialogService {
     return this.dialog.open(UserSettingsDialogComponent, { data, maxWidth: 768 });
   }
 
-  openBookCreateDialog(): MatDialogRef<BookCreateDialogComponent, string | undefined> {
+  openBookCreateDialog(): MatDialogRef<BookCreateDialogComponent, UserBookDTO | undefined> {
     return this.dialog.open(BookCreateDialogComponent, { maxWidth: 768 });
   }
 

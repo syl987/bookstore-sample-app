@@ -1,7 +1,7 @@
 <div class="app-container">
   <p>Carefully fill in the book details. Once published, these data cannot be changed any more.</p>
 
-  <mat-card *ngIf="book$ | async as book" class="mb-s">
+  <mat-card *ngIf="book$ | async as book" class="mb-2m">
     <mat-card-header>
       <img mat-card-sm-image [src]="book.volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
       <mat-card-title>{{ book.volume.volumeInfo.title }}</mat-card-title>
@@ -13,22 +13,14 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <a mat-button color="primary" routerLink="/user/books/{{ book.id }}/edit" disabled>Details</a>
+      <a mat-button color="primary" routerLink="/books/{{ book.volume.id }}">Details</a>
     </mat-card-actions>
   </mat-card>
 
   <form [formGroup]="form" (ngSubmit)="saveChanges()">
     <div class="row">
-      <div class="col-md-8 col-lg-9">
-        <mat-form-field class="w-100">
-          <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description" rows="3"></textarea>
-          <mat-error>{{ form.get('description') | validationError }}</mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="col-md-4 col-lg-3">
-        <mat-form-field class="w-100">
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <mat-form-field class="w-100 mb-s">
           <mat-label>Condition</mat-label>
           <select matNativeControl formControlName="condition">
             <option></option>
@@ -40,15 +32,24 @@
           <mat-error>{{ form.get('condition') | validationError }}</mat-error>
         </mat-form-field>
       </div>
-    </div>
 
-    <div class="col-md-4 col-lg-3">
-      <mat-form-field class="w-100">
-        <mat-label>Price</mat-label>
-        <input type="number" matInput formControlName="price" />
-        <span matTextSuffix class="ms-2xs">{{ 0 | currency | slice : 1 }}</span>
-        <mat-error>{{ form.get('price') | validationError }}</mat-error>
-      </mat-form-field>
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Price</mat-label>
+          <input type="number" matInput formControlName="price" />
+          <span matTextSuffix class="ms-2xs">{{ 0 | currency | slice : 1 }}</span>
+          <mat-error>{{ form.get('price') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-8">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" rows="3"></textarea>
+          <mat-hint>Describe your specific book as good as possible.</mat-hint>
+          <mat-error>{{ form.get('description') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
     </div>
 
     <div class="app-gap-x-2xs">

@@ -11,6 +11,9 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 // TODO delete book (if not sold)
 // TODO navigate to user books after an action (need correlation ids?)
 // TODO display spinners on pending actions
+// TODO publish confirm dialog
+// TODO display validation errors on publishing
+// TODO display form field hints
 
 @Component({
   selector: 'app-user-book-edit-page',

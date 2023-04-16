@@ -27,7 +27,7 @@ export const reducer = createReducer(
   on(VolumeActions.loadVolumesSuccess, state => ({ ...state, pending: false, error: undefined })),
   on(VolumeActions.loadVolumesError, (state, { error }) => ({ ...state, pending: false, error })),
 
-  on(VolumeActions.loadVolumesSuccess, (state, { volumes }) => adapter.upsertMany(Object.values(volumes ?? {}), state)),
+  on(VolumeActions.loadVolumesSuccess, (state, { volumes }) => adapter.upsertMany(volumes, state)),
 );
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();

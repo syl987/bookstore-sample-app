@@ -45,7 +45,3 @@ export interface VolumeDTO {
     [id: string]: BookDTO;
   };
 }
-
-export interface VolumesDTO {
-  [id: string]: VolumeDTO;
-}

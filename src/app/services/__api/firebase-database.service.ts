@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { Database, get, push, ref, remove, set, update } from '@angular/fire/database';
 import { concatMap, from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
-import { BookDTO, BookStatus, UserBookDTO, UserBooksDTO } from 'src/app/models/book.models';
-import { VolumeDTO, VolumesDTO } from 'src/app/models/volume.models';
+import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
+import { VolumeDTO } from 'src/app/models/volume.models';
 
 @Injectable({
   providedIn: 'root',
@@ -18,10 +19,10 @@ export class FirebaseDatabaseService {
     return from(result);
   }
 
-  getUserBooks(uid: string): Observable<UserBooksDTO | null> {
+  getUserBooks(uid: string): Observable<UserBookDTO[]> {
     const reference = ref(this.database, `userBooks/${uid}`);
     const result = get(reference).then(snap => snap.val());
-    return from(result);
+    return from(result).pipe(map(entityMap => Object.values(entityMap ?? {})));
   }
 
   createUserBook(uid: string, volume: VolumeDTO): Observable<UserBookDTO> {
@@ -106,9 +107,9 @@ export class FirebaseDatabaseService {
     return from(result.then(snap => snap.val()));
   }
 
-  getVolumes(): Observable<VolumesDTO | null> {
+  getVolumes(): Observable<VolumeDTO[]> {
     const reference = ref(this.database, `volumes`);
     const result = get(reference).then(snap => snap.val());
-    return from(result);
+    return from(result).pipe(map(entityMap => Object.values(entityMap ?? {})));
   }
 }
