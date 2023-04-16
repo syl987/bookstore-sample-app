@@ -15,7 +15,6 @@ import { EntityType } from '../models/entity.models';
 import { consoleLogMetaReducer, resetStateMetaReducer } from './app.meta-reducers';
 import { resetState } from './auth/auth.actions';
 import { AuthEffects } from './auth/auth.effects';
-import * as fromAuth from './auth/auth.reducer';
 import { EntityToastEffects } from './entity/entity-toast.effects';
 import { EntityUndoEffects } from './entity/entity-undo.effects';
 import { GoogleBooksEffects } from './google-books/google-books.effects';
@@ -24,13 +23,11 @@ import { RouterEffects } from './router/router.effects';
 
 interface AppState {
   router: RouterReducerState<MinimalRouterStateSnapshot>;
-  [fromAuth.authFeatureKey]: fromAuth.State;
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.State;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer,
-  [fromAuth.authFeatureKey]: fromAuth.reducer,
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.reducer,
 };
 
@@ -44,7 +41,7 @@ export const entityDataConfig: AppEntityDataModuleConfig = {
   },
 };
 
-export const effects = [AuthEffects, GoogleBooksEffects, RouterEffects, EntityUndoEffects, EntityToastEffects];
+export const effects = [AuthEffects, RouterEffects, GoogleBooksEffects, EntityUndoEffects, EntityToastEffects];
 
 export const storeConfig: RootStoreConfig<AppState> = {
   metaReducers: [resetStateMetaReducer(resetState.type), consoleLogMetaReducer],

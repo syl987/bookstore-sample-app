@@ -1,13 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Auth, user } from '@angular/fire/auth';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
 import { toAuthUser } from '../helpers/auth.helpers';
 import { AuthProviderId, AuthUser } from '../models/auth.models';
 import { loginWithProvider, logout } from '../store/auth/auth.actions';
-import * as AuthSelectors from '../store/auth/auth.selectors';
+import * as AuthActions from '../store/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,8 @@ export class AuthService implements OnDestroy {
   readonly loggedIn$ = this.user$.pipe(map(u => !!u));
   readonly loggedOut$ = this.user$.pipe(map(u => !u));
 
-  readonly pending$ = this.store.select(AuthSelectors.selectAuthPending);
+  private readonly _pending = new BehaviorSubject<boolean>(false);
+  readonly pending$ = this._pending.asObservable();
 
   get user(): AuthUser | null {
     return this.#user ?? null;
@@ -32,11 +34,27 @@ export class AuthService implements OnDestroy {
 
   private readonly _destroyed$ = new Subject<void>();
 
-  constructor(private readonly store: Store, private readonly auth: Auth) {
+  constructor(private readonly store: Store, private readonly actions: Actions, private readonly auth: Auth) {
     this.user$.pipe(takeUntil(this._destroyed$)).subscribe(u => {
       this.#user = u as unknown as AuthUser;
       this.#uid = u?.uid;
     });
+
+    this.actions
+      .pipe(ofType(AuthActions.loginWithProvider, AuthActions.logout), takeUntil(this._destroyed$))
+      .subscribe(_ => this._pending.next(true));
+    this.actions
+      .pipe(
+        ofType(
+          AuthActions.loginWithProviderSuccess,
+          AuthActions.loginWithProviderError,
+          AuthActions.logoutSuccess,
+          AuthActions.logoutError,
+          AuthActions.resetState,
+        ),
+        takeUntil(this._destroyed$),
+      )
+      .subscribe(_ => this._pending.next(false));
   }
 
   ngOnDestroy(): void {
