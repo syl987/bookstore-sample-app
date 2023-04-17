@@ -41,10 +41,10 @@
     </div>
 
     <div class="app-gap-x-2xs">
-      <button type="submit" mat-stroked-button color="primary" [spinning]="pending$ | async" [disabled]="pending$ | async">Save changes</button>
+      <button type="submit" mat-stroked-button color="primary" [spinning]="editingDraft$ | async" [disabled]="editingDraft$ | async">Save changes</button>
       <button type="button" mat-stroked-button (click)="discardChanges()">Discard changes</button>
       <button type="reset" mat-stroked-button>Clear fields</button>
-      <button type="button" mat-stroked-button color="accent" (click)="publishBook()" [spinning]="pending$ | async" [disabled]="pending$ | async">
+      <button type="button" mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishing$ | async" [disabled]="publishing$ | async">
         Publish book
       </button>
       <button type="button" mat-stroked-button color="warn" (click)="deleteBook()" disabled>Delete book</button>

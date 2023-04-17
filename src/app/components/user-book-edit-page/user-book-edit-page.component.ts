@@ -12,7 +12,6 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 // TODO remove details from the card
 // TODO navigate to user books after an action (need correlation ids?)
 // TODO delete book (if not sold)
-// TODO separate spinners for separate actions
 
 @Component({
   selector: 'app-user-book-edit-page',
@@ -21,7 +20,9 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 })
 export class UserBookEditPageComponent implements OnInit, OnDestroy {
   readonly book$ = this.userBooksService.userBookByRoute$;
-  readonly pending$ = this.userBooksService.pending$;
+  readonly editingDraft$ = this.userBooksService.editingDraft$;
+  readonly publishing$ = this.userBooksService.publishing$;
+  readonly deleting$ = this.userBooksService.deleting$;
 
   id: string = this.route.snapshot.params['bookId'];
   book?: UserBookDTO;

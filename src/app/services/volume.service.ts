@@ -7,7 +7,7 @@ import { concatMap, filter, shareReplay, take } from 'rxjs/operators';
 import { nextCorrelationId } from '../helpers/entity.helpers';
 import { VolumeDTO } from '../models/volume.models';
 import * as VolumeActions from '../store/volume/volume.actions';
-import { selectVolumeByRoute, selectVolumesAll, selectVolumesError, selectVolumesPending, selectVolumesTotal } from '../store/volume/volume.selectors';
+import { selectVolumeByRoute, selectVolumesAll, selectVolumesError, selectVolumesLoading, selectVolumesTotal } from '../store/volume/volume.selectors';
 
 interface IVolumeService {
   /** Search volumes with published books. */
@@ -25,7 +25,7 @@ export class VolumeService implements IVolumeService {
 
   readonly volumeByRoute$ = this.store.select(selectVolumeByRoute);
 
-  readonly pending$ = this.store.select(selectVolumesPending);
+  readonly loading$ = this.store.select(selectVolumesLoading);
   readonly error$ = this.store.select(selectVolumesError);
 
   constructor(private readonly store: Store, private readonly actions: Actions) {}

@@ -19,5 +19,9 @@ export const selectUserBookByRoute = createSelector(selectUserBooksEntities, sel
   params?.bookId ? entities[params.bookId] : undefined,
 );
 
-export const selectUserBooksPending = createSelector(selectUserBooksState, ({ pending }) => pending);
+export const selectUserBooksLoading = createSelector(selectUserBooksState, ({ loading }) => loading);
+export const selectUserBooksCreating = createSelector(selectUserBooksState, ({ creating }) => creating);
+export const selectUserBooksDeleting = createSelector(selectUserBooksState, ({ deleting }) => deleting);
+export const selectUserBooksEditingDraft = createSelector(selectUserBooksState, ({ editingDraft }) => editingDraft);
+export const selectUserBooksPublishing = createSelector(selectUserBooksState, ({ publishing }) => publishing);
 export const selectUserBooksError = createSelector(selectUserBooksState, ({ error }) => error);

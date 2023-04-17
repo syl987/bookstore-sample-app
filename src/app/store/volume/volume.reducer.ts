@@ -8,7 +8,7 @@ import * as VolumeActions from './volume.actions';
 export const volumesFeatureKey = 'volumes';
 
 export interface State extends EntityState<VolumeDTO> {
-  pending: boolean;
+  loading: boolean;
   error?: ResponseError;
 }
 
@@ -18,16 +18,14 @@ const adapter = createEntityAdapter<VolumeDTO>({
 });
 
 export const initialState: State = adapter.getInitialState({
-  pending: false,
+  loading: false,
 });
 
 export const reducer = createReducer(
   initialState,
-  on(VolumeActions.loadVolumes, state => ({ ...state, pending: true, error: undefined })),
-  on(VolumeActions.loadVolumesSuccess, state => ({ ...state, pending: false, error: undefined })),
-  on(VolumeActions.loadVolumesError, (state, { error }) => ({ ...state, pending: false, error })),
-
-  on(VolumeActions.loadVolumesSuccess, (state, { volumes }) => adapter.upsertMany(volumes, state)),
+  on(VolumeActions.loadVolumes, state => ({ ...state, loading: true, error: undefined })),
+  on(VolumeActions.loadVolumesSuccess, (state, { volumes }) => adapter.upsertMany(volumes, { ...state, loading: false, error: undefined })),
+  on(VolumeActions.loadVolumesError, (state, { error }) => ({ ...state, loading: false, error })),
 );
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();

@@ -21,7 +21,7 @@ export class BookCreateDialogComponent {
   readonly searchPending$ = this.googleBooksService.searchPending$;
   readonly searchError$ = this.googleBooksService.searchError$;
 
-  readonly createPending$ = this.userBooksService.pending$;
+  readonly creating$ = this.userBooksService.creating$;
 
   constructor(
     readonly dialogRef: MatDialogRef<BookCreateDialogComponent, UserBookDTO | undefined>,

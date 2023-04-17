@@ -11,10 +11,14 @@ import * as UserBooksActions from '../store/user-books/user-books.actions';
 import {
   selectUserBookByRoute,
   selectUserBooksAll,
+  selectUserBooksCreating,
+  selectUserBooksDeleting,
   selectUserBooksDraft,
+  selectUserBooksEditingDraft,
   selectUserBooksError,
-  selectUserBooksPending,
+  selectUserBooksLoading,
   selectUserBooksPublished,
+  selectUserBooksPublishing,
   selectUserBooksSold,
   selectUserBooksTotal,
 } from '../store/user-books/user-books.selectors';
@@ -49,7 +53,11 @@ export class UserBooksService implements IUserBooksService {
 
   readonly userBookByRoute$ = this.store.select(selectUserBookByRoute);
 
-  readonly pending$ = this.store.select(selectUserBooksPending);
+  readonly loading$ = this.store.select(selectUserBooksLoading);
+  readonly creating$ = this.store.select(selectUserBooksCreating);
+  readonly deleting$ = this.store.select(selectUserBooksDeleting);
+  readonly editingDraft$ = this.store.select(selectUserBooksEditingDraft);
+  readonly publishing$ = this.store.select(selectUserBooksPublishing);
   readonly error$ = this.store.select(selectUserBooksError);
 
   constructor(private readonly store: Store, private readonly actions: Actions) {}
