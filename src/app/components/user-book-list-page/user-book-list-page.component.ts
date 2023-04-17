@@ -4,8 +4,6 @@ import { Subject } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO display user books data alongside with volume data
-
 @Component({
   selector: 'app-user-book-list-page',
   templateUrl: './user-book-list-page.component.html',

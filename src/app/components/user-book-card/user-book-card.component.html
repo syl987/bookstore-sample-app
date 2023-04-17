@@ -6,6 +6,25 @@
   </mat-card-header>
 
   <mat-card-content class="py-2xs">
-    <p>{{ book.volume.volumeInfo.description | slice : 0 : 100 }}...</p>
+    <p class="mb-xs">{{ book.volume.volumeInfo.description | slice : 0 : 100 }}...</p>
+
+    <ng-container *ngIf="book.description || book.condition || book.price">
+      <mat-divider></mat-divider>
+
+      <dl class="mt-2xs">
+        <div *ngIf="book.description">
+          <dt>Description</dt>
+          <dd>{{ book.description | slice : 0 : 100 }}...</dd>
+        </div>
+        <div *ngIf="book.condition" class="row">
+          <dt class="col-6">Condition</dt>
+          <dd class="col-6">{{ book.condition | bookCondition }}</dd>
+        </div>
+        <div *ngIf="book.price" class="row">
+          <dt class="col-6">Price</dt>
+          <dd class="col-6">{{ book.price | currency }}</dd>
+        </div>
+      </dl>
+    </ng-container>
   </mat-card-content>
 </mat-card>

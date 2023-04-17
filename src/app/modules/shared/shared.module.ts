@@ -26,6 +26,7 @@ import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
 import { snackBarOptions } from './options/snack-bar.options';
 import { tooltipOptions } from './options/tooltip.options';
+import { BookConditionPipe } from './pipes/book-condition.pipe';
 import { RemoveHtmlPipe } from './pipes/remove-html.pipe';
 import { ResponseErrorPipe } from './pipes/response-error.pipe';
 import { ValidationErrorPipe } from './pipes/validation-error.pipe';
@@ -51,7 +52,7 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
     MatToolbarModule,
     MatTooltipModule,
   ],
-  declarations: [ButtonSpinnerDirective, RemoveHtmlPipe, ResponseErrorPipe, ValidationErrorPipe],
+  declarations: [ButtonSpinnerDirective, RemoveHtmlPipe, ResponseErrorPipe, ValidationErrorPipe, BookConditionPipe],
   exports: [
     CommonModule,
     ReactiveFormsModule,
@@ -76,6 +77,7 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
     RemoveHtmlPipe,
     ResponseErrorPipe,
     ValidationErrorPipe,
+    BookConditionPipe,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: DirtyOrTouchedMatcher },
