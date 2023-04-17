@@ -6,9 +6,11 @@
   </mat-card-header>
 
   <mat-card-content class="py-2xs">
-    <p>{{ volume.volumeInfo.description | slice : 0 : 100 }}...</p>
+    <p class="mb-xs">{{ volume.volumeInfo.description | slice : 0 : 100 }}...</p>
 
-    <p>
+    <mat-divider></mat-divider>
+
+    <p class="my-2xs">
       <em>Contains {{ getPublishedBooksTotal(volume) }} individual books.</em>
     </p>
   </mat-card-content>

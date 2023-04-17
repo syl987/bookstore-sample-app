@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
-import { Database, get, push, ref, remove, set, update } from '@angular/fire/database';
+import { Database, endAt, get, limitToFirst, orderByChild, push, query, ref, remove, set, startAt, update } from '@angular/fire/database';
 import { concatMap, from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
@@ -110,6 +110,19 @@ export class FirebaseDatabaseService {
   getVolumes(): Observable<VolumeDTO[]> {
     const reference = ref(this.database, `volumes`);
     const result = get(reference).then(snap => snap.val());
+    return from(result).pipe(map(entityMap => Object.values(entityMap ?? {})));
+  }
+
+  searchVolumes(queryString: string, size?: number): Observable<VolumeDTO[]> {
+    const reference = ref(this.database, `volumes`);
+    const searchQuery = query(
+      reference,
+      orderByChild('volumeInfo/title'),
+      startAt('%' + queryString + '%'),
+      endAt(queryString + '\uf8ff'),
+      limitToFirst(size ?? 12),
+    );
+    const result = get(searchQuery).then(snap => snap.val());
     return from(result).pipe(map(entityMap => Object.values(entityMap ?? {})));
   }
 }

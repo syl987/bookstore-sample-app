@@ -10,7 +10,6 @@ import { VolumeService } from 'src/app/services/volume.service';
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPageComponent implements OnInit, OnDestroy {
@@ -23,7 +22,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   constructor(private readonly volumeService: VolumeService) {}
 
   ngOnInit(): void {
-    this.volumeService.search();
+    this.volumeService.loadAll(); // TODO replace with search
 
     /* this.filterControl.valueChanges.pipe(debounceTime(250), takeUntil(this._destroyed$)).subscribe(value => this.volumeService.setFilter(value));
 
