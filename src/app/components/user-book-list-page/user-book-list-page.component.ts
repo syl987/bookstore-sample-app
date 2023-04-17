@@ -29,7 +29,7 @@ export class UserBookListPageComponent implements OnInit, OnDestroy {
   }
 
   openBookCreateDialog(): void {
-    const dialogRef = this.dialogService.openBookCreateDialog();
+    const dialogRef = this.dialogService.openUserBookCreateDialog();
 
     dialogRef.beforeClosed().subscribe(book => {
       if (book) {

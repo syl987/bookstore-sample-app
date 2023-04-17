@@ -31,6 +31,7 @@ import { SearchPageComponent } from './components/search-page/search-page.compon
 import { UserBookCardComponent } from './components/user-book-card/user-book-card.component';
 import { UserBookEditPageComponent } from './components/user-book-edit-page/user-book-edit-page.component';
 import { UserBookListPageComponent } from './components/user-book-list-page/user-book-list-page.component';
+import { UserBookPublishDialogComponent } from './components/user-book-publish-dialog/user-book-publish-dialog.component';
 import { UserSettingsDialogComponent } from './components/user-settings-dialog/user-settings-dialog.component';
 import { VolumeCardComponent } from './components/volume-card/volume-card.component';
 import { VolumeDetailPageComponent } from './components/volume-detail-page/volume-detail-page.component';
@@ -91,8 +92,9 @@ const firebaseOptions: FirebaseOptions = {
     BookCreateDialogComponent,
     UserBookListPageComponent,
     UserBookEditPageComponent,
-    VolumeDetailPageComponent,
+    UserBookPublishDialogComponent,
     UserBookCardComponent,
+    VolumeDetailPageComponent,
     VolumeCardComponent,
   ],
   providers: [

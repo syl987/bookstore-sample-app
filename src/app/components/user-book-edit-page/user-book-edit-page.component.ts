@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs';
-import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
+import { concatMap, filter, takeUntil } from 'rxjs/operators';
+import { isTrue } from 'src/app/functions/typeguard.functions';
+import { BookCondition, BookStatus, UserBookDTO, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
 // TODO remove details from the card
-// TODO publish confirm dialog
 // TODO navigate to user books after an action (need correlation ids?)
 // TODO delete book (if not sold)
 // TODO separate spinners for separate actions
@@ -18,11 +20,11 @@ import { UserBooksService } from 'src/app/services/user-books.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookEditPageComponent implements OnInit, OnDestroy {
-  readonly id: string = this.route.snapshot.params['bookId'];
-
   readonly book$ = this.userBooksService.userBookByRoute$;
-
   readonly pending$ = this.userBooksService.pending$;
+
+  id: string = this.route.snapshot.params['bookId'];
+  book?: UserBookDTO;
 
   readonly BookCondition = BookCondition;
 
@@ -41,12 +43,20 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly routerService: RouterService,
     private readonly userBooksService: UserBooksService,
+    private readonly dialogService: DialogService,
   ) {}
 
   ngOnInit(): void {
     this.userBooksService.load(this.id);
     this.routerService.navigated$.pipe(takeUntil(this._destroyed$)).subscribe(_ => {
       this.userBooksService.loadAll(); // TODO load just one
+    });
+
+    this.book$.pipe(takeUntil(this._destroyed$)).subscribe(book => {
+      if (book) {
+        this.id = book.id;
+        this.book = book;
+      }
     });
 
     combineLatest([this.book$, this._resetFields])
@@ -84,19 +94,25 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   }
 
   publishBook(): void {
-    // TODO kick static variables
-    this.userBooksService.publish(this.id).subscribe({
-      next: _ => this.router.navigateByUrl(`/user/books`),
-      error: err => {
-        // reliably retrieve error details
-        const errors: { [key: string]: ValidationErrors | null } = err?.err?.customData ?? {};
+    this.dialogService
+      .openUserBookPublishDialog()
+      .beforeClosed()
+      .pipe(
+        filter(isTrue), // ignore close without result
+        concatMap(_ => this.userBooksService.publish(this.id)),
+      )
+      .subscribe({
+        next: _ => this.router.navigateByUrl(`/user/books`),
+        error: err => {
+          // reliably retrieve error details
+          const errors: { [key: string]: ValidationErrors | null } = err?.err?.customData ?? {};
 
-        this.form.controls.description.setErrors(errors['description']);
-        this.form.controls.condition.setErrors(errors['condition']);
-        this.form.controls.price.setErrors(errors['price']);
-        this.form.markAllAsTouched();
-      },
-    });
+          this.form.controls.description.setErrors(errors['description']);
+          this.form.controls.condition.setErrors(errors['condition']);
+          this.form.controls.price.setErrors(errors['price']);
+          this.form.markAllAsTouched();
+        },
+      });
   }
 
   deleteBook(): void {
