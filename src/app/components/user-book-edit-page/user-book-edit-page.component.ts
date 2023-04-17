@@ -1,18 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs';
-import { BookCondition, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO disabled controls if published or sold
-// TODO delete book (if not sold)
-// TODO navigate to user books after an action (need correlation ids?)
-// TODO display spinners on pending actions
+// TODO remove details from the card
 // TODO publish confirm dialog
-// TODO check button and field behavior correct
-// TODO check validations on publish
+// TODO navigate to user books after an action (need correlation ids?)
+// TODO delete book (if not sold)
+// TODO separate spinners for separate actions
 
 @Component({
   selector: 'app-user-book-edit-page',
@@ -23,6 +21,8 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   readonly id: string = this.route.snapshot.params['bookId'];
 
   readonly book$ = this.userBooksService.userBookByRoute$;
+
+  readonly pending$ = this.userBooksService.pending$;
 
   readonly BookCondition = BookCondition;
 
@@ -38,6 +38,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly routerService: RouterService,
     private readonly userBooksService: UserBooksService,
   ) {}
@@ -56,6 +57,11 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
           condition: book?.condition ?? null,
           price: book?.price ?? null,
         });
+        if (book?.status !== BookStatus.DRAFT) {
+          this.form.disable();
+        } else {
+          this.form.enable();
+        }
       });
   }
 
@@ -78,7 +84,19 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   }
 
   publishBook(): void {
-    this.userBooksService.publish(this.id); // TODO kick static variables
+    // TODO kick static variables
+    this.userBooksService.publish(this.id).subscribe({
+      next: _ => this.router.navigateByUrl(`/user/books`),
+      error: err => {
+        // reliably retrieve error details
+        const errors: { [key: string]: ValidationErrors | null } = err?.err?.customData ?? {};
+
+        this.form.controls.description.setErrors(errors['description']);
+        this.form.controls.condition.setErrors(errors['condition']);
+        this.form.controls.price.setErrors(errors['price']);
+        this.form.markAllAsTouched();
+      },
+    });
   }
 
   deleteBook(): void {

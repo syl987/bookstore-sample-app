@@ -24,8 +24,8 @@
       <div class="col-sm-6 col-md-4 col-lg-3">
         <mat-form-field class="w-100 mb-s">
           <mat-label>Price</mat-label>
-          <input type="number" matInput formControlName="price" />
-          <span matTextSuffix class="ms-2xs">{{ 0 | currency | slice : 1 }}</span>
+          <input type="number" matInput formControlName="price" min="0" max="500" />
+          <span matTextSuffix class="text-muted ms-2xs">{{ 0 | currency | slice : 1 }}</span>
           <mat-error>{{ form.get('price') | validationError }}</mat-error>
         </mat-form-field>
       </div>
@@ -33,7 +33,7 @@
       <div class="col-md-8">
         <mat-form-field class="w-100 mb-s">
           <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description" rows="3"></textarea>
+          <textarea matInput formControlName="description" rows="3" minlength="100"></textarea>
           <mat-hint>Describe your specific book as good as possible.</mat-hint>
           <mat-error>{{ form.get('description') | validationError }}</mat-error>
         </mat-form-field>
@@ -41,10 +41,12 @@
     </div>
 
     <div class="app-gap-x-2xs">
-      <button type="submit" mat-stroked-button color="primary">Save changes</button>
+      <button type="submit" mat-stroked-button color="primary" [spinning]="pending$ | async" [disabled]="pending$ | async">Save changes</button>
       <button type="button" mat-stroked-button (click)="discardChanges()">Discard changes</button>
       <button type="reset" mat-stroked-button>Clear fields</button>
-      <button type="button" mat-stroked-button color="accent" (click)="publishBook()">Publish book</button>
+      <button type="button" mat-stroked-button color="accent" (click)="publishBook()" [spinning]="pending$ | async" [disabled]="pending$ | async">
+        Publish book
+      </button>
       <button type="button" mat-stroked-button color="warn" (click)="deleteBook()" disabled>Delete book</button>
     </div>
   </form>
