@@ -5,7 +5,6 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
 // TODO display user books data alongside with volume data
-// TODO full size anchors + separate book / volume components
 
 @Component({
   selector: 'app-user-book-list-page',

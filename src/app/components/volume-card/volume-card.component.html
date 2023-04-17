@@ -1,0 +1,15 @@
+<mat-card *ngIf="volume">
+  <mat-card-header>
+    <img mat-card-sm-image [src]="volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
+    <mat-card-title>{{ volume.volumeInfo.title }}</mat-card-title>
+    <mat-card-subtitle>{{ volume.volumeInfo.authors }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="py-2xs">
+    <p>{{ volume.volumeInfo.description | slice : 0 : 100 }}...</p>
+
+    <p>
+      <em>Contains {{ getPublishedBooksTotal(volume) }} individual books.</em>
+    </p>
+  </mat-card-content>
+</mat-card>

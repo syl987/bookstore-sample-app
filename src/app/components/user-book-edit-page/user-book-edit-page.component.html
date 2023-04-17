@@ -1,23 +1,11 @@
 <div class="app-container">
   <p>Carefully fill in the book details. Once published, these data cannot be changed any more.</p>
 
-  <mat-card *ngIf="book$ | async as book" class="mb-2m">
-    <mat-card-header>
-      <img mat-card-sm-image [src]="book.volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
-      <mat-card-title>{{ book.volume.volumeInfo.title }}</mat-card-title>
-      <mat-card-subtitle>{{ book.volume.volumeInfo.authors }}</mat-card-subtitle>
-    </mat-card-header>
+  <a *ngIf="book$ | async as book" routerLink="/books/{{ book.id }}" class="text-reset text-decoration-none">
+    <app-user-book-card [book]="book"></app-user-book-card>
+  </a>
 
-    <mat-card-content class="py-2xs">
-      <p>{{ book.volume.volumeInfo.description | slice : 0 : 480 }}...</p>
-    </mat-card-content>
-
-    <mat-card-actions>
-      <a mat-button color="primary" routerLink="/books/{{ book.volume.id }}">Details</a>
-    </mat-card-actions>
-  </mat-card>
-
-  <form [formGroup]="form" (ngSubmit)="saveChanges()">
+  <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-2m">
     <div class="row">
       <div class="col-sm-6 col-md-4 col-lg-3">
         <mat-form-field class="w-100 mb-s">

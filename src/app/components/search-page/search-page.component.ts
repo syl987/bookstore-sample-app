@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { VolumeDTO } from 'src/app/models/volume.models';
 import { VolumeService } from 'src/app/services/volume.service';
 
-// search volumes by query or params
-// include published books data
-// navigate to volume detail
+// TODO search volumes by query or params
+// TODO include published books data
+// TODO navigate to volume detail
 
 @Component({
   selector: 'app-search-page',
@@ -34,9 +33,5 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._destroyed$.next();
     this._destroyed$.complete();
-  }
-
-  getPublishedBooksTotal(volume: VolumeDTO): number {
-    return Object.keys(volume.publishedBooks ?? {}).length;
   }
 }

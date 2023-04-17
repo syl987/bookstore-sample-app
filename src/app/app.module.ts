@@ -28,9 +28,11 @@ import { CropImageDialogComponent } from './components/crop-image-dialog/crop-im
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
+import { UserBookCardComponent } from './components/user-book-card/user-book-card.component';
 import { UserBookEditPageComponent } from './components/user-book-edit-page/user-book-edit-page.component';
 import { UserBookListPageComponent } from './components/user-book-list-page/user-book-list-page.component';
 import { UserSettingsDialogComponent } from './components/user-settings-dialog/user-settings-dialog.component';
+import { VolumeCardComponent } from './components/volume-card/volume-card.component';
 import { VolumeDetailPageComponent } from './components/volume-detail-page/volume-detail-page.component';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
@@ -90,6 +92,8 @@ const firebaseOptions: FirebaseOptions = {
     UserBookListPageComponent,
     UserBookEditPageComponent,
     VolumeDetailPageComponent,
+    UserBookCardComponent,
+    VolumeCardComponent,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de-DE' },
