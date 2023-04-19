@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "sample-app-a00e0": {
+      "hosting": {
+        "silly-bookstore-example-app": [
+          "sample-app-a00e0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "sample-app-a00e0"
+  }
+}
