@@ -3,6 +3,7 @@
     <img mat-card-sm-image [src]="book.volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
     <mat-card-title>{{ book.volume.volumeInfo.title }}</mat-card-title>
     <mat-card-subtitle>{{ book.volume.volumeInfo.authors }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ book.volume.volumeInfo.publishedDate | date : 'yyyy' }} {{ book.volume.volumeInfo.publisher }}</mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content class="py-2xs">
