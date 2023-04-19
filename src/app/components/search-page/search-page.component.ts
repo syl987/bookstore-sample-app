@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { combineLatest, startWith, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, startWith, Subject } from 'rxjs';
+import { debounceTime, map, tap } from 'rxjs/operators';
 import { VolumeService } from 'src/app/services/volume.service';
 
 // TODO include published books data
@@ -18,7 +18,13 @@ import { VolumeService } from 'src/app/services/volume.service';
 export class SearchPageComponent implements OnInit, OnDestroy {
   readonly filterControl = new FormControl<string>('', { nonNullable: true });
 
-  readonly volumes$ = combineLatest([this.volumeService.volumes$, this.filterControl.valueChanges.pipe(startWith(this.filterControl.defaultValue))]).pipe(
+  readonly filtering$ = new BehaviorSubject<boolean>(false);
+
+  readonly volumes$ = combineLatest([this.volumeService.volumes$, this.filterControl.valueChanges]).pipe(
+    tap(_ => this.filtering$.next(true)),
+    debounceTime(650),
+    tap(_ => this.filtering$.next(false)),
+    startWith([]),
     map(([volumes, filterString]) => {
       if (!filterString || filterString.length < 3) {
         return [];

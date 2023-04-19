@@ -4,6 +4,7 @@
       <mat-form-field floatLabel="always" class="w-100 mt-s mb-2m">
         <mat-label>Search</mat-label>
         <input matInput [formControl]="filterControl" placeholder="title..." />
+        <mat-spinner *ngIf="filtering$ | async" matSuffix diameter="24" class="me-s"></mat-spinner>
         <mat-hint>Supports case-independent substring. Min length 3.</mat-hint>
       </mat-form-field>
     </div>
