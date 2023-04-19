@@ -301,7 +301,7 @@ $cyans: (
 $primary: rgb(63, 81, 181) !default; // equals material primary
 $accent: rgb(255, 64, 129) !default; // equals material accent
 $success: $green !default;
-$info: $cyan !default;
+$info: $primary;
 $warn: rgb(244, 67, 54) !default; // equals material warn
 $light: $gray-100 !default;
 $dark: $gray-900 !default;

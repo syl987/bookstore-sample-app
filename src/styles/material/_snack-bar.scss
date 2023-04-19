@@ -7,10 +7,9 @@
   }
 }
 
-.mat-mdc-snack-bar-container.success .mat-mdc-simple-snackbar,
-.mat-mdc-snack-bar-container.warning .mat-mdc-simple-snackbar,
-.mat-mdc-snack-bar-container.error .mat-mdc-simple-snackbar,
-.mat-mdc-snack-bar-container.info .mat-mdc-simple-snackbar {
+.mat-mdc-snack-bar-container.success .mdc-snackbar__label,
+.mat-mdc-snack-bar-container.error .mdc-snackbar__label,
+.mat-mdc-snack-bar-container.info .mdc-snackbar__label {
   margin-left: app-spacer(2m);
 
   &::before {
@@ -30,29 +29,31 @@
   .mdc-snackbar__surface {
     background-color: lighten($success, 66); // should equal .bg-success-light
     border: $success 1px solid;
+  }
+  .mdc-snackbar__label {
+    color: $body-color;
 
     &::before {
       content: '\f00c'; // fa-check
       color: $success;
+      display: inline;
     }
-  }
-  .mdc-snackbar__label {
-    color: $body-color;
   }
 }
 
-.mat-mdc-snack-bar-container.warn {
+.mat-mdc-snack-bar-container.error {
   .mdc-snackbar__surface {
     background-color: lighten($warn, 40); // should equal .bg-warn-light
     border: $warn 1px solid;
+  }
+  .mdc-snackbar__label {
+    color: $body-color;
 
     &::before {
       content: '\f00d'; // fa-times
       color: $warn;
+      display: inline;
     }
-  }
-  .mdc-snackbar__label {
-    color: $body-color;
   }
 }
 
@@ -60,13 +61,14 @@
   .mdc-snackbar__surface {
     background-color: lighten($info, 49); // should equal .bg-info-light
     border: $info 1px solid;
+  }
+  .mdc-snackbar__label {
+    color: $body-color;
 
     &::before {
       content: '\f129'; // fa-info
       color: $info;
+      display: inline;
     }
-  }
-  .mdc-snackbar__label {
-    color: $body-color;
   }
 }
