@@ -10,9 +10,11 @@
       <mat-expansion-panel *ngFor="let book of getVolumePublishedBooks(volume)">
         <mat-expansion-panel-header>
           <mat-panel-title>{{ book.condition | bookCondition }} - {{ book.price | currency }}</mat-panel-title>
-          <mat-panel-description>by {{ book.uid }}</mat-panel-description>
+          <mat-panel-description>by [user details hidden]</mat-panel-description>
         </mat-expansion-panel-header>
         <p>{{ book.description }}</p>
+
+        <button type="button" mat-stroked-button color="accent">Buy book</button>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
