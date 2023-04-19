@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { BookCreateDialogComponent } from '../components/book-create-dialog/book-create-dialog.component';
 import { CropImageDialogComponent, CropImageDialogData } from '../components/crop-image-dialog/crop-image-dialog.component';
+import { UserBookDeleteDialogComponent } from '../components/user-book-delete-dialog/user-book-delete-dialog.component';
 import { UserBookPublishDialogComponent } from '../components/user-book-publish-dialog/user-book-publish-dialog.component';
 import { UserSettingsDialogComponent, UserSettingsDialogData } from '../components/user-settings-dialog/user-settings-dialog.component';
 import { AuthUser } from '../models/auth.models';
@@ -32,6 +33,10 @@ export class DialogService {
 
   openUserBookPublishDialog(): MatDialogRef<UserBookPublishDialogComponent, boolean | undefined> {
     return this.dialog.open(UserBookPublishDialogComponent, { maxWidth: 568 });
+  }
+
+  openUserBookDeleteDialog(): MatDialogRef<UserBookDeleteDialogComponent, boolean | undefined> {
+    return this.dialog.open(UserBookDeleteDialogComponent, { maxWidth: 568 });
   }
 
   closeAllDialogs(): void {

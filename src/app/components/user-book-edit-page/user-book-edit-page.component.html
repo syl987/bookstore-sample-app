@@ -40,14 +40,19 @@
       </div>
     </div>
 
-    <div class="app-gap-x-2xs">
+    <div class="app-gap-x-2xs mb-2m">
       <button type="submit" mat-stroked-button color="primary" [spinning]="editingDraft$ | async" [disabled]="editingDraft$ | async">Save changes</button>
-      <button type="button" mat-stroked-button (click)="discardChanges()">Discard changes</button>
-      <button type="reset" mat-stroked-button>Clear fields</button>
-      <button type="button" mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishing$ | async" [disabled]="publishing$ | async">
-        Publish book
-      </button>
-      <button type="button" mat-stroked-button color="warn" (click)="deleteBook()" disabled>Delete book</button>
+      <button type="button" mat-stroked-button (click)="discardChanges()">Reset</button>
+      <button type="reset" mat-stroked-button>Clear</button>
     </div>
   </form>
+
+  <div class="app-gap-x-2xs">
+    <button type="button" mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishing$ | async" [disabled]="publishing$ | async">
+      Publish book
+    </button>
+    <button type="button" mat-stroked-button color="warn" (click)="deleteBook()" [spinning]="deleting$ | async" [disabled]="deleting$ | async">
+      Delete book
+    </button>
+  </div>
 </div>

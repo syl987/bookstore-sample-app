@@ -29,6 +29,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { UserBookCardComponent } from './components/user-book-card/user-book-card.component';
+import { UserBookDeleteDialogComponent } from './components/user-book-delete-dialog/user-book-delete-dialog.component';
 import { UserBookEditPageComponent } from './components/user-book-edit-page/user-book-edit-page.component';
 import { UserBookListPageComponent } from './components/user-book-list-page/user-book-list-page.component';
 import { UserBookPublishDialogComponent } from './components/user-book-publish-dialog/user-book-publish-dialog.component';
@@ -93,6 +94,7 @@ const firebaseOptions: FirebaseOptions = {
     UserBookListPageComponent,
     UserBookEditPageComponent,
     UserBookPublishDialogComponent,
+    UserBookDeleteDialogComponent,
     UserBookCardComponent,
     VolumeDetailPageComponent,
     VolumeCardComponent,

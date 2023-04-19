@@ -87,7 +87,7 @@ export class FirebaseDatabaseService {
   }
 
   deleteUserBook(uid: string, id: string): Observable<void> {
-    // TODO also delete the volume if not related to any books
+    // TODO allow deletion if published and also delete the volume if not related to any books
     return this.getUserBook(uid, id).pipe(
       concatMap(book => {
         if (book.status !== BookStatus.DRAFT) {

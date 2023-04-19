@@ -118,6 +118,13 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   }
 
   deleteBook(): void {
-    throw new Error('Method not implemented.');
+    this.dialogService
+      .openUserBookDeleteDialog()
+      .beforeClosed()
+      .pipe(
+        filter(isTrue), // ignore close without result
+        concatMap(_ => this.userBooksService.delete(this.id)),
+      )
+      .subscribe(_ => this.router.navigateByUrl(`/user/books`));
   }
 }
