@@ -54,7 +54,9 @@ export class UserBooksEffects {
         const volume: VolumeDTO = {
           id: volumeData.id,
           volumeInfo: volumeData.volumeInfo,
-          searchInfo: volumeData.searchInfo,
+          searchInfo: {
+            textSnippet: volumeData.searchInfo?.textSnippet ?? null,
+          },
         };
         return this.firebaseApi.createUserBook(currentUid, volume).pipe(
           map(res => UserBooksActions.createUserBookSuccess({ cid, book: res })),

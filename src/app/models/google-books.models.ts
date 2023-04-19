@@ -45,7 +45,7 @@ export interface GoogleBooksVolumeDTO {
     infoLink: string;
     canonicalVolumeLink: string;
   };
-  userInfo: {
+  userInfo?: {
     review: unknown;
     readingPosition: unknown;
     isPurchased: boolean;
@@ -100,7 +100,7 @@ export interface GoogleBooksVolumeDTO {
       signature: string;
     };
   };
-  searchInfo: {
+  searchInfo?: {
     textSnippet: string;
   };
 }
