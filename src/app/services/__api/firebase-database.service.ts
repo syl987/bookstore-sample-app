@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { Database, endAt, get, limitToFirst, orderByChild, push, query, ref, remove, set, startAt, update } from '@angular/fire/database';
-import { concatMap, from, Observable } from 'rxjs';
+import { concatMap, from, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
 import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
-
-// TODO test snapshot.val() returns null instead of error for no data
-// TODO adapt all methods accordingly
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +16,7 @@ export class FirebaseDatabaseService {
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {
     const reference = ref(this.database, `userBooks/${uid}/${id}`);
     const result = get(reference).then(snap => snap.val());
-    return from(result);
+    return from(result).pipe(map(entity => entity ?? throwError(() => new FirebaseError('custom:no_data', 'No data available.'))));
   }
 
   getUserBooks(uid: string): Observable<UserBookDTO[]> {
@@ -41,7 +38,7 @@ export class FirebaseDatabaseService {
     return this.getUserBook(uid, id).pipe(
       concatMap(book => {
         if (book.status !== BookStatus.DRAFT) {
-          throw new FirebaseError('custom', 'Invalid status.');
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
         }
         const changes: { [path: string]: any } = {
           [`userBooks/${uid}/${id}/description`]: data.description,
@@ -59,7 +56,7 @@ export class FirebaseDatabaseService {
     return this.getUserBook(uid, id).pipe(
       concatMap(book => {
         if (book.status !== BookStatus.DRAFT) {
-          throw new FirebaseError('custom:publish_user_book_error', 'Invalid status.');
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
         }
         const errors = getPublishUserBookValidationErrors(book);
 
@@ -91,11 +88,10 @@ export class FirebaseDatabaseService {
 
   deleteUserBook(uid: string, id: string): Observable<void> {
     // TODO also delete the volume if not related to any books
-
     return this.getUserBook(uid, id).pipe(
       concatMap(book => {
         if (book.status !== BookStatus.DRAFT) {
-          throw new FirebaseError('custom', 'Invalid status.');
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
         }
         const reference = ref(this.database, `userBooks/${uid}/${id}`);
         const result = remove(reference);
@@ -107,7 +103,7 @@ export class FirebaseDatabaseService {
   getVolume(id: string): Observable<VolumeDTO> {
     const reference = ref(this.database, `volumes/${id}`);
     const result = get(reference).then(snap => snap.val());
-    return from(result);
+    return from(result).pipe(map(entity => entity ?? throwError(() => new FirebaseError('custom:no_data', 'No data available.'))));
   }
 
   getVolumes(): Observable<VolumeDTO[]> {
