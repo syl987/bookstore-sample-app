@@ -30,7 +30,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
         }
         this.filtering$.next(true);
       }),
-      debounceTime(650),
+      debounceTime(750),
       tap(_ => this.filtering$.next(false)),
       startWith(this.filterControl.defaultValue),
     ),
