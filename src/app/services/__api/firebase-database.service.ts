@@ -42,7 +42,7 @@ export class FirebaseDatabaseService {
         }
         const changes: { [path: string]: any } = {
           [`userBooks/${uid}/${id}/description`]: data.description,
-          [`userBooks/${uid}/${id}/condiction`]: data.condition,
+          [`userBooks/${uid}/${id}/condition`]: data.condition,
           [`userBooks/${uid}/${id}/price`]: data.price,
         };
         const reference = ref(this.database);
