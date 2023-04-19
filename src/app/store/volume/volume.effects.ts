@@ -13,10 +13,10 @@ export class VolumesEffects {
   readonly loadVolume = createEffect(() => {
     return this.actions.pipe(
       ofType(VolumeActions.loadVolume),
-      switchMap(({ cid, id }) => {
+      switchMap(({ id }) => {
         return this.firebaseApi.getVolume(id).pipe(
-          map(volume => VolumeActions.loadVolumeSuccess({ cid, volume })),
-          catchError(err => of(VolumeActions.loadVolumeError({ cid, error: firebaseError({ err }) }))),
+          map(volume => VolumeActions.loadVolumeSuccess({ volume })),
+          catchError(err => of(VolumeActions.loadVolumeError({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -25,10 +25,10 @@ export class VolumesEffects {
   readonly loadVolumes = createEffect(() => {
     return this.actions.pipe(
       ofType(VolumeActions.loadVolumes),
-      switchMap(({ cid }) => {
+      switchMap(_ => {
         return this.firebaseApi.getVolumes().pipe(
-          map(res => VolumeActions.loadVolumesSuccess({ cid, volumes: res })),
-          catchError(err => of(VolumeActions.loadVolumesError({ cid, error: firebaseError({ err }) }))),
+          map(res => VolumeActions.loadVolumesSuccess({ volumes: res })),
+          catchError(err => of(VolumeActions.loadVolumesError({ error: firebaseError({ err }) }))),
         );
       }),
     );
