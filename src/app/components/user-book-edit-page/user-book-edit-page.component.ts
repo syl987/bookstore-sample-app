@@ -12,6 +12,7 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 // TODO remove details from the card
 // TODO navigate to user books after an action (need correlation ids?)
 // TODO delete book (if not sold)
+// TODO display some sort of 404 message if the book or volume is not found
 
 @Component({
   selector: 'app-user-book-edit-page',
