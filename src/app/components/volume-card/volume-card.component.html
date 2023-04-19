@@ -9,10 +9,12 @@
   <mat-card-content class="py-2xs">
     <p class="mb-xs">{{ volume.volumeInfo.description | slice : 0 : 100 }}...</p>
 
-    <mat-divider></mat-divider>
+    <ng-container *ngIf="getPublishedBooksTotal(volume) as total">
+      <mat-divider></mat-divider>
 
-    <p class="my-2xs">
-      <em>Contains {{ getPublishedBooksTotal(volume) }} individual books.</em>
-    </p>
+      <p class="my-2xs">
+        <em>Contains {{ total }} individual books.</em>
+      </p>
+    </ng-container>
   </mat-card-content>
 </mat-card>

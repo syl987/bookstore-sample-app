@@ -1,9 +1,9 @@
 <div class="app-container">
   <p>Carefully fill in the book details. Once published, these data cannot be changed any more.</p>
 
-  <a *ngIf="book$ | async as book" routerLink="/books/{{ book.id }}" class="text-reset text-decoration-none">
-    <app-user-book-card [book]="book"></app-user-book-card>
-  </a>
+  <!-- <a *ngIf="book$ | async as book" routerLink="/books/{{ book.id }}" class="text-reset text-decoration-none"> -->
+  <app-volume-card *ngIf="book$ | async as book" [volume]="book.volume"></app-volume-card>
+  <!-- </a> -->
 
   <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-2m">
     <div class="row">

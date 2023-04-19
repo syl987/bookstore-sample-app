@@ -7,6 +7,8 @@ import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers
 import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
+// TODO duplicate database volumes, one for detail, one for published search
+
 @Injectable({
   providedIn: 'root',
 })
