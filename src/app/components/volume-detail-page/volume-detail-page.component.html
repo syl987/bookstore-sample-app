@@ -1,1 +1,19 @@
-<p>volume-detail-page works!</p>
+<div class="app-container">
+  <p>List of offers for the selected volume.</p>
+
+  <div *ngIf="volume$ | async as volume">
+    <app-volume-card [volume]="volume"></app-volume-card>
+
+    <h3>List of offers</h3>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let book of getVolumePublishedBooks(volume)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ book.condition | bookCondition }} - {{ book.price | currency }}</mat-panel-title>
+          <mat-panel-description>by {{ book.uid }}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{ book.description }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

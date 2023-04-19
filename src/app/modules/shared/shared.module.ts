@@ -7,6 +7,7 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule } from '@angular/materi
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -40,6 +41,7 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
     MatCheckboxModule,
     MatDialogModule,
     MatDividerModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -61,6 +63,7 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
     MatCheckboxModule,
     MatDialogModule,
     MatDividerModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

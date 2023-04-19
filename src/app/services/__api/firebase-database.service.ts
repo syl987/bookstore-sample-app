@@ -7,6 +7,9 @@ import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers
 import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
+// TODO test snapshot.val() returns null instead of error for no data
+// TODO adapt all methods accordingly
+
 @Injectable({
   providedIn: 'root',
 })
@@ -103,8 +106,8 @@ export class FirebaseDatabaseService {
 
   getVolume(id: string): Observable<VolumeDTO> {
     const reference = ref(this.database, `volumes/${id}`);
-    const result = get(reference);
-    return from(result.then(snap => snap.val()));
+    const result = get(reference).then(snap => snap.val());
+    return from(result);
   }
 
   getVolumes(): Observable<VolumeDTO[]> {
