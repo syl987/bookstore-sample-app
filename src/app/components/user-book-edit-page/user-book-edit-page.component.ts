@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { concatMap, filter, takeUntil } from 'rxjs/operators';
+import { concatMap, filter, map, takeUntil } from 'rxjs/operators';
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookCondition, BookStatus, UserBookDTO, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -24,6 +24,9 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   readonly editingDraft$ = this.userBooksService.editingDraft$;
   readonly publishing$ = this.userBooksService.publishing$;
   readonly deleting$ = this.userBooksService.deleting$;
+
+  readonly publishDisabled$ = combineLatest([this.publishing$, this.book$]).pipe(map(([publishing, book]) => publishing || book?.status !== BookStatus.DRAFT));
+  readonly deleteDisabled$ = combineLatest([this.deleting$, this.book$]).pipe(map(([deleting, book]) => deleting || book?.status !== BookStatus.DRAFT));
 
   id: string = this.route.snapshot.params['bookId'];
   book?: UserBookDTO;
