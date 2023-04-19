@@ -20,13 +20,28 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   readonly filtering$ = new BehaviorSubject<boolean>(false);
 
-  readonly volumes$ = combineLatest([this.volumeService.volumes$, this.filterControl.valueChanges]).pipe(
-    tap(_ => this.filtering$.next(true)),
-    debounceTime(650),
-    tap(_ => this.filtering$.next(false)),
-    startWith([]),
+  readonly volumes$ = combineLatest([
+    this.volumeService.volumes$,
+    this.filterControl.valueChanges.pipe(
+      tap(filterString => {
+        // do not display filtering spinner for invalid strings
+        if (filterString && filterString.length < 3) {
+          return;
+        }
+        this.filtering$.next(true);
+      }),
+      debounceTime(650),
+      tap(_ => this.filtering$.next(false)),
+      startWith(this.filterControl.defaultValue),
+    ),
+  ]).pipe(
     map(([volumes, filterString]) => {
-      if (!filterString || filterString.length < 3) {
+      // display all results for empty string
+      if (!filterString) {
+        return volumes;
+      }
+      // do not display results for invalid strings
+      if (filterString.length < 3) {
         return [];
       }
       return volumes.filter(v => v.volumeInfo.title.toLowerCase().includes(filterString));
