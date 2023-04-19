@@ -9,6 +9,8 @@ import { VolumeDTO } from '../models/volume.models';
 import * as VolumeActions from '../store/volume/volume.actions';
 import { selectVolumeByRoute, selectVolumesAll, selectVolumesError, selectVolumesLoading, selectVolumesTotal } from '../store/volume/volume.selectors';
 
+// TODO handle switchMap in effects
+
 interface IVolumeService {
   /** Load a volume with published books. */
   load(id: string): Observable<VolumeDTO>;

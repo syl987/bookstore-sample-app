@@ -23,6 +23,8 @@ import {
   selectUserBooksTotal,
 } from '../store/user-books/user-books.selectors';
 
+// TODO handle switchMap in effects
+
 interface IUserBooksService {
   /** Load a book with volume data. */
   load(id: string): Observable<UserBookDTO>;
