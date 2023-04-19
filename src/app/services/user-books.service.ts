@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, of, throwError } from 'rxjs';
-import { concatMap, filter, shareReplay, take } from 'rxjs/operators';
+import { concatMap, shareReplay, take } from 'rxjs/operators';
 
-import { nextCorrelationId } from '../helpers/entity.helpers';
 import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import * as UserBooksActions from '../store/user-books/user-books.actions';
@@ -22,8 +21,6 @@ import {
   selectUserBooksSold,
   selectUserBooksTotal,
 } from '../store/user-books/user-books.selectors';
-
-// TODO handle switchMap in effects
 
 interface IUserBooksService {
   /** Load a book with volume data. */
@@ -65,12 +62,10 @@ export class UserBooksService implements IUserBooksService {
   constructor(private readonly store: Store, private readonly actions: Actions) {}
 
   load(id: string): Observable<UserBookDTO> {
-    const cid = nextCorrelationId();
-    this.store.dispatch(UserBooksActions.loadUserBook({ cid, id }));
+    this.store.dispatch(UserBooksActions.loadUserBook({ id }));
 
     const result = this.actions.pipe(
       ofType(UserBooksActions.loadUserBookSuccess, UserBooksActions.loadUserBookError),
-      filter(action => action.cid === cid),
       take(1),
       concatMap(action => {
         if (action.type === UserBooksActions.loadUserBookSuccess.type) {
@@ -85,12 +80,10 @@ export class UserBooksService implements IUserBooksService {
   }
 
   loadAll(): Observable<UserBookDTO[]> {
-    const cid = nextCorrelationId();
-    this.store.dispatch(UserBooksActions.loadUserBooks({ cid }));
+    this.store.dispatch(UserBooksActions.loadUserBooks());
 
     const result = this.actions.pipe(
       ofType(UserBooksActions.loadUserBooksSuccess, UserBooksActions.loadUserBooksError),
-      filter(action => action.cid === cid),
       take(1),
       concatMap(action => {
         if (action.type === UserBooksActions.loadUserBooksSuccess.type) {
@@ -105,12 +98,10 @@ export class UserBooksService implements IUserBooksService {
   }
 
   create(volumeData: GoogleBooksVolumeDTO): Observable<UserBookDTO> {
-    const cid = nextCorrelationId();
-    this.store.dispatch(UserBooksActions.createUserBook({ cid, volumeData }));
+    this.store.dispatch(UserBooksActions.createUserBook({ volumeData }));
 
     const result = this.actions.pipe(
       ofType(UserBooksActions.createUserBookSuccess, UserBooksActions.createUserBookError),
-      filter(action => action.cid === cid),
       take(1),
       concatMap(action => {
         if (action.type === UserBooksActions.createUserBookSuccess.type) {
@@ -125,12 +116,10 @@ export class UserBooksService implements IUserBooksService {
   }
 
   delete(id: string): Observable<void> {
-    const cid = nextCorrelationId();
-    this.store.dispatch(UserBooksActions.deleteUserBook({ cid, id }));
+    this.store.dispatch(UserBooksActions.deleteUserBook({ id }));
 
     const result = this.actions.pipe(
       ofType(UserBooksActions.deleteUserBookSuccess, UserBooksActions.deleteUserBookError),
-      filter(action => action.cid === cid),
       take(1),
       concatMap(action => {
         if (action.type === UserBooksActions.deleteUserBookSuccess.type) {
@@ -145,12 +134,10 @@ export class UserBooksService implements IUserBooksService {
   }
 
   editDraft(id: string, data: UserBookEditDraftDTO): Observable<UserBookDTO> {
-    const cid = nextCorrelationId();
-    this.store.dispatch(UserBooksActions.editUserBookDraft({ cid, id, data }));
+    this.store.dispatch(UserBooksActions.editUserBookDraft({ id, data }));
 
     const result = this.actions.pipe(
       ofType(UserBooksActions.editUserBookDraftSuccess, UserBooksActions.editUserBookDraftError),
-      filter(action => action.cid === cid),
       take(1),
       concatMap(action => {
         if (action.type === UserBooksActions.editUserBookDraftSuccess.type) {
@@ -165,12 +152,10 @@ export class UserBooksService implements IUserBooksService {
   }
 
   publish(id: string): Observable<UserBookDTO> {
-    const cid = nextCorrelationId();
-    this.store.dispatch(UserBooksActions.publishUserBook({ cid, id }));
+    this.store.dispatch(UserBooksActions.publishUserBook({ id }));
 
     const result = this.actions.pipe(
       ofType(UserBooksActions.publishUserBookSuccess, UserBooksActions.publishUserBookError),
-      filter(action => action.cid === cid),
       take(1),
       concatMap(action => {
         if (action.type === UserBooksActions.publishUserBookSuccess.type) {
