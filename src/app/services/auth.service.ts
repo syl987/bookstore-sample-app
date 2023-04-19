@@ -19,8 +19,11 @@ export class AuthService implements OnDestroy {
   readonly loggedIn$ = this.user$.pipe(map(u => !!u));
   readonly loggedOut$ = this.user$.pipe(map(u => !u));
 
-  private readonly _pending = new BehaviorSubject<boolean>(false);
-  readonly pending$ = this._pending.asObservable();
+  private readonly _loginPending = new BehaviorSubject<boolean>(false);
+  readonly loginPending$ = this._loginPending.asObservable();
+
+  private readonly _logoutPending = new BehaviorSubject<boolean>(false);
+  readonly logoutPending$ = this._loginPending.asObservable();
 
   get user(): AuthUser | null {
     return this.#user ?? null;
@@ -35,24 +38,23 @@ export class AuthService implements OnDestroy {
   private readonly _destroyed$ = new Subject<void>();
 
   constructor(private readonly store: Store, private readonly actions: Actions, private readonly auth: Auth) {
+    // set user and uid props
     this.user$.pipe(takeUntil(this._destroyed$)).subscribe(u => {
       this.#user = u as unknown as AuthUser;
       this.#uid = u?.uid;
     });
 
-    this.actions.pipe(ofType(AuthActions.loginWithProvider, AuthActions.logout), takeUntil(this._destroyed$)).subscribe(_ => this._pending.next(true));
+    // set login pending stream
+    this.actions.pipe(ofType(AuthActions.loginWithProvider), takeUntil(this._destroyed$)).subscribe(_ => this._loginPending.next(true));
     this.actions
-      .pipe(
-        ofType(
-          AuthActions.loginWithProviderSuccess,
-          AuthActions.loginWithProviderError,
-          AuthActions.logoutSuccess,
-          AuthActions.logoutError,
-          AuthActions.resetState,
-        ),
-        takeUntil(this._destroyed$),
-      )
-      .subscribe(_ => this._pending.next(false));
+      .pipe(ofType(AuthActions.loginWithProviderSuccess, AuthActions.loginWithProviderError, AuthActions.resetState), takeUntil(this._destroyed$))
+      .subscribe(_ => this._loginPending.next(false));
+
+    // set logout pending stream
+    this.actions.pipe(ofType(AuthActions.logout), takeUntil(this._destroyed$)).subscribe(_ => this._logoutPending.next(true));
+    this.actions
+      .pipe(ofType(AuthActions.logoutSuccess, AuthActions.logoutError, AuthActions.resetState), takeUntil(this._destroyed$))
+      .subscribe(_ => this._logoutPending.next(false));
   }
 
   ngOnDestroy(): void {

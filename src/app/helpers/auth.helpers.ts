@@ -38,7 +38,7 @@ export function getAuthProvider(providerId: AuthProviderId): AuthProvider {
     case GoogleAuthProvider.PROVIDER_ID:
       return new GoogleAuthProvider();
     default:
-      return new GoogleAuthProvider(); // should not happen
+      throw new Error('Internal error. Unsupported auth provider.');
   }
 }
 

@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
   host: { class: 'flex-grow-1 d-flex flex-column justify-content-center' },
 })
 export class LoginPageComponent {
-  readonly loginPending$ = this.authService.pending$;
+  readonly loginPending$ = this.authService.loginPending$;
 
   constructor(@Inject(APP_CONFIG) readonly config: AppConfig, private readonly authService: AuthService) {}
 

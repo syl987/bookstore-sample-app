@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { FirebaseError } from '@angular/fire/app';
 import { Auth, authState, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -30,10 +29,10 @@ export class AuthEffects {
   readonly loginWithProviderRequest = createEffect(() => {
     return this.actions.pipe(
       ofType(AuthActions.loginWithProvider),
-      exhaustMap(({ providerId: provider }) =>
-        from(signInWithPopup(this.auth, getAuthProvider(provider))).pipe(
+      exhaustMap(({ providerId }) =>
+        from(signInWithPopup(this.auth, getAuthProvider(providerId))).pipe(
           map(_ => AuthActions.loginWithProviderSuccess()),
-          catchError((err: FirebaseError) => of(AuthActions.loginWithProviderError({ error: firebaseError({ err }) }))),
+          catchError(err => of(AuthActions.loginWithProviderError({ error: firebaseError({ err }) }))),
         ),
       ),
     );
@@ -65,7 +64,7 @@ export class AuthEffects {
       concatMap(_ =>
         from(this.auth.signOut()).pipe(
           map(() => AuthActions.logoutSuccess()),
-          catchError((err: FirebaseError) => of(AuthActions.logoutError({ error: firebaseError({ err }) }))),
+          catchError(err => of(AuthActions.logoutError({ error: firebaseError({ err }) }))),
         ),
       ),
     );
