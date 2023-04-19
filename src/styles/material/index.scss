@@ -62,6 +62,7 @@ $app-light-theme: mat.define-light-theme(
 @include mat.form-field-theme($app-light-theme);
 /* @include mat.grid-list-theme($app-light-theme); */
 @include mat.icon-theme($app-light-theme);
+@include mat.icon-button-theme($app-light-theme);
 @include mat.input-theme($app-light-theme);
 @include mat.list-theme($app-light-theme);
 /* @include mat.menu-theme($app-light-theme); */

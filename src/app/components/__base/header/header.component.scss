@@ -3,7 +3,8 @@
 @import 'shared';
 
 .app-sidebar-toggle {
-  width: app-spacer(2xs) + app-spacer(2xs) + 40px !important; // align button width and hight (default icon-button width is 40px)
+  width: app-spacer(s) + app-spacer(s) + 24px !important; // horizontal padding + default icon-button size of 24px
+  padding: app-spacer(s);
   margin-left: -1 * app-spacer(s) !important; // adjust spacing within the container padding
 }
 
