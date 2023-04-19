@@ -1,11 +1,16 @@
 <div class="app-container">
-  <!-- <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput [formControl]="filterControl" />
-  </mat-form-field> -->
+  <div class="row">
+    <div class="col-sm-8 col-md-6 col-xl-4">
+      <mat-form-field floatLabel="always" class="w-100 mt-s mb-2m">
+        <mat-label>Search</mat-label>
+        <input matInput [formControl]="filterControl" placeholder="title..." />
+        <mat-hint>Supports case-independent substring. Min length 3.</mat-hint>
+      </mat-form-field>
+    </div>
+  </div>
 
   <div class="row">
-    <div *ngFor="let volume of volumes$ | async" class="col-sm-6 col-lg-4 col-xl-3 mb-m">
+    <div *ngFor="let volume of volumes$ | async" class="col-md-6 col-xl-4 mb-m">
       <a routerLink="/books/{{ volume.id }}" class="text-reset text-decoration-none"><app-volume-card [volume]="volume"></app-volume-card></a>
     </div>
   </div>

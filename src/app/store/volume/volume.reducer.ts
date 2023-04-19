@@ -9,7 +9,6 @@ export const volumesFeatureKey = 'volumes';
 
 export interface State extends EntityState<VolumeDTO> {
   loading: boolean;
-  searching: boolean;
   error?: ResponseError;
 }
 
@@ -20,7 +19,6 @@ const adapter = createEntityAdapter<VolumeDTO>({
 
 export const initialState: State = adapter.getInitialState({
   loading: false,
-  searching: false,
 });
 
 export const reducer = createReducer(
@@ -31,9 +29,6 @@ export const reducer = createReducer(
   on(VolumeActions.loadVolumes, state => ({ ...state, loading: true, error: undefined })),
   on(VolumeActions.loadVolumesSuccess, (state, { volumes }) => adapter.upsertMany(volumes, { ...state, loading: false, error: undefined })),
   on(VolumeActions.loadVolumesError, (state, { error }) => ({ ...state, loading: false, error })),
-  on(VolumeActions.searchVolumes, state => ({ ...state, searching: true, error: undefined })),
-  on(VolumeActions.searchVolumesSuccess, (state, { volumes }) => adapter.upsertMany(volumes, { ...state, searching: false, error: undefined })),
-  on(VolumeActions.searchVolumesError, (state, { error }) => ({ ...state, searching: false, error })),
 );
 
 export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();

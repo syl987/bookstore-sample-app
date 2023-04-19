@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { combineLatest, startWith, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { VolumeService } from 'src/app/services/volume.service';
 
-// TODO search volumes by query or params
 // TODO include published books data
-// TODO navigate to volume detail
+// TODO add featured books query and page
+// TODO move the search field into the header
+// TODO add database search support (?)
+// TODO add search store (?)
 
 @Component({
   selector: 'app-search-page',
@@ -13,20 +16,23 @@ import { VolumeService } from 'src/app/services/volume.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPageComponent implements OnInit, OnDestroy {
-  readonly filterControl = new FormControl('', { nonNullable: true });
+  readonly filterControl = new FormControl<string>('', { nonNullable: true });
 
-  readonly volumes$ = this.volumeService.volumes$;
+  readonly volumes$ = combineLatest([this.volumeService.volumes$, this.filterControl.valueChanges.pipe(startWith(this.filterControl.defaultValue))]).pipe(
+    map(([volumes, filterString]) => {
+      if (!filterString || filterString.length < 3) {
+        return [];
+      }
+      return volumes.filter(v => v.volumeInfo.title.toLowerCase().includes(filterString));
+    }),
+  );
 
   private readonly _destroyed$ = new Subject<void>();
 
   constructor(private readonly volumeService: VolumeService) {}
 
   ngOnInit(): void {
-    this.volumeService.loadAll(); // TODO replace with search
-
-    /* this.filterControl.valueChanges.pipe(debounceTime(250), takeUntil(this._destroyed$)).subscribe(value => this.volumeService.setFilter(value));
-
-    this.volumeService.filter$.pipe(takeUntil(this._destroyed$)).subscribe(filter => this.filterControl.setValue(filter, { emitEvent: false })); */
+    this.volumeService.loadAll();
   }
 
   ngOnDestroy(): void {

@@ -34,18 +34,6 @@ export class VolumesEffects {
     );
   });
 
-  readonly searchVolumes = createEffect(() => {
-    return this.actions.pipe(
-      ofType(VolumeActions.searchVolumes),
-      switchMap(({ cid, query, size }) => {
-        return this.firebaseApi.searchVolumes(query, size).pipe(
-          map(res => VolumeActions.searchVolumesSuccess({ cid, volumes: res })),
-          catchError(err => of(VolumeActions.searchVolumesError({ cid, error: firebaseError({ err }) }))),
-        );
-      }),
-    );
-  });
-
   readonly loadVolumeErrorToast = createEffect(
     () => {
       return this.actions.pipe(
@@ -61,16 +49,6 @@ export class VolumesEffects {
       return this.actions.pipe(
         ofType(VolumeActions.loadVolumesError),
         tap(_ => this.toastService.showErrorToast(`Error loading volumes.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly searchVolumesErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(VolumeActions.searchVolumesError),
-        tap(_ => this.toastService.showErrorToast(`Error searching volumes.`)),
       );
     },
     { dispatch: false },
