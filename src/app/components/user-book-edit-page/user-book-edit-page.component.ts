@@ -25,6 +25,8 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   readonly publishing$ = this.userBooksService.publishing$;
   readonly deleting$ = this.userBooksService.deleting$;
 
+  readonly editDraftDisabled$ = this.editingDraft$.pipe(map(editing => editing || this.form.disabled));
+
   readonly publishDisabled$ = combineLatest([this.publishing$, this.book$]).pipe(map(([publishing, book]) => publishing || book?.status !== BookStatus.DRAFT));
   readonly deleteDisabled$ = combineLatest([this.deleting$, this.book$]).pipe(map(([deleting, book]) => deleting || book?.status !== BookStatus.DRAFT));
 
