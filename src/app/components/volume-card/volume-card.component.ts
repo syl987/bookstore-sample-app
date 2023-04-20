@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
-// TODO use this card as baseline for more content projection
 // TODO loading appearence
 
 @Component({
