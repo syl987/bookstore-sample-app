@@ -9,7 +9,7 @@
   </mat-form-field>
 
   <mat-action-list>
-    <button *ngFor="let volume of volumes$ | async | slice : 0 : 10" mat-list-item (click)="createBook(volume)" class="text-truncate">
+    <button *ngFor="let volume of volumes$ | async | slice : 0 : 10" mat-list-item (click)="createUserBook(volume)" class="text-truncate">
       <img *ngIf="volume.volumeInfo.imageLinks" [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="Book thumbnail" height="44" width="44" class="me-s" />
       {{ volume.volumeInfo.title }}
     </button>

@@ -10,11 +10,11 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 // TODO add google books loading spinner, similar to search field spinner
 
 @Component({
-  selector: 'app-book-create-dialog',
-  templateUrl: './book-create-dialog.component.html',
+  selector: 'app-user-book-create-dialog',
+  templateUrl: './user-book-create-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookCreateDialogComponent {
+export class UserBookCreateDialogComponent {
   readonly volumes$ = this.googleBooksService.searchVolumes$;
 
   readonly searchPending$ = this.googleBooksService.searchPending$;
@@ -23,7 +23,7 @@ export class BookCreateDialogComponent {
   readonly creating$ = this.userBooksService.creating$;
 
   constructor(
-    readonly dialogRef: MatDialogRef<BookCreateDialogComponent, UserBookDTO | undefined>,
+    readonly dialogRef: MatDialogRef<UserBookCreateDialogComponent, UserBookDTO | undefined>,
     private readonly userBooksService: UserBooksService,
     private readonly googleBooksService: GoogleBooksService,
   ) {}
@@ -32,7 +32,7 @@ export class BookCreateDialogComponent {
     this.googleBooksService.searchVolumes(query ?? '');
   }
 
-  createBook(googleBooksVolume: GoogleBooksVolumeDTO): void {
+  createUserBook(googleBooksVolume: GoogleBooksVolumeDTO): void {
     this.userBooksService.create(googleBooksVolume).subscribe(book => {
       this.dialogRef.close(book);
     });

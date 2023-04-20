@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
-import { BookCreateDialogComponent } from '../components/book-create-dialog/book-create-dialog.component';
 import { CropImageDialogComponent, CropImageDialogData } from '../components/crop-image-dialog/crop-image-dialog.component';
+import { UserBookCreateDialogComponent } from '../components/user-book-create-dialog/user-book-create-dialog.component';
 import { UserBookDeleteDialogComponent } from '../components/user-book-delete-dialog/user-book-delete-dialog.component';
 import { UserBookPublishDialogComponent } from '../components/user-book-publish-dialog/user-book-publish-dialog.component';
 import { UserSettingsDialogComponent, UserSettingsDialogData } from '../components/user-settings-dialog/user-settings-dialog.component';
@@ -27,8 +27,8 @@ export class DialogService {
     return this.dialog.open(UserSettingsDialogComponent, { data, maxWidth: 768 });
   }
 
-  openUserBookCreateDialog(): MatDialogRef<BookCreateDialogComponent, UserBookDTO | undefined> {
-    return this.dialog.open(BookCreateDialogComponent, { maxWidth: 768 });
+  openUserBookCreateDialog(): MatDialogRef<UserBookCreateDialogComponent, UserBookDTO | undefined> {
+    return this.dialog.open(UserBookCreateDialogComponent, { maxWidth: 768 });
   }
 
   openUserBookPublishDialog(): MatDialogRef<UserBookPublishDialogComponent, boolean | undefined> {
