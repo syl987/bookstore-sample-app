@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 import { AuthService } from 'src/app/services/auth.service';
+import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
 // TODO loading spinner
@@ -26,11 +27,20 @@ export class VolumeDetailPageComponent implements OnInit, OnDestroy {
 
   private readonly _destroyed$ = new Subject<void>();
 
-  constructor(private readonly route: ActivatedRoute, private readonly authService: AuthService, private readonly volumeService: VolumeService) {}
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly authService: AuthService,
+    private readonly routerService: RouterService,
+    private readonly volumeService: VolumeService,
+  ) {}
 
   ngOnInit(): void {
     this.volumeService.load(this.id);
-    this.volume$.pipe(takeUntil(this._destroyed$)).subscribe(volume => volume && this.volumeService.load(volume.id));
+    this.routerService.params$.pipe(takeUntil(this._destroyed$)).subscribe(params => {
+      if (params?.volumeId) {
+        this.volumeService.load(params.volumeId);
+      }
+    });
   }
 
   ngOnDestroy(): void {
