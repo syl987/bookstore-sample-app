@@ -8,8 +8,6 @@ import { GoogleBooksService } from 'src/app/services/google-books.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
 // TODO improve search field design
-// TODO replace action list with selection list, add create spinner button
-// TODO add google books loading spinner, similar to search field spinner
 
 @Component({
   selector: 'app-user-book-create-dialog',
