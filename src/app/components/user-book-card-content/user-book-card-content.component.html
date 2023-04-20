@@ -10,9 +10,5 @@
       <dt>Price</dt>
       <dd>{{ book.price | currency }}</dd>
     </div>
-    <div *ngIf="book.description" class="col-12">
-      <dt>Description</dt>
-      <dd>{{ book.description | slice : 0 : 92 }}...</dd>
-    </div>
   </dl>
 </ng-container>
