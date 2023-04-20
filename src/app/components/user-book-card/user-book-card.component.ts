@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { UserBookDTO } from 'src/app/models/book.models';
 
+// TODO use volume card as baseline with content projection
 // TODO loading appearence
 
 @Component({

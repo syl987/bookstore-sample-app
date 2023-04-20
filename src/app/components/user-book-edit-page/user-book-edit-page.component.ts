@@ -9,10 +9,11 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO remove details from the card
+// TODO use volume card with published books info
+// TODO add navigation to volume, if published books exist
 // TODO navigate to user books after an action (need correlation ids?)
 // TODO delete book (if not sold)
-// TODO display some sort of 404 message if the book or volume is not found
+// TODO add support for 404
 
 @Component({
   selector: 'app-user-book-edit-page',

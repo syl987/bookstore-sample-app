@@ -5,10 +5,9 @@ import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
 import { GoogleBooksService } from 'src/app/services/google-books.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO improve design field + books
-// TODO implement as material single selection list
-// TODO add google books loading spinner
-// TODO add create pending spinner
+// TODO improve search field design
+// TODO replace action list with selection list, add create spinner button
+// TODO add google books loading spinner, similar to search field spinner
 
 @Component({
   selector: 'app-book-create-dialog',
