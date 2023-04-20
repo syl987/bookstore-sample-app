@@ -1,12 +1,12 @@
 <ng-container *ngIf="book && (book.description || book.condition || book.price)">
   <mat-divider></mat-divider>
 
-  <dl class="row mt-2xs">
-    <div *ngIf="book.condition" class="col-12">
+  <dl class="row mt-2xs mb-0">
+    <div *ngIf="book.condition" class="col-6">
       <dt>Condition</dt>
       <dd>{{ book.condition | bookCondition }}</dd>
     </div>
-    <div *ngIf="book.price" class="col-12">
+    <div *ngIf="book.price" class="col-6">
       <dt>Price</dt>
       <dd>{{ book.price | currency }}</dd>
     </div>

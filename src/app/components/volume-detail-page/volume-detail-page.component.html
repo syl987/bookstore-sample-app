@@ -7,14 +7,20 @@
     <h3>List of offers</h3>
 
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let book of getVolumePublishedBooks(volume)">
+      <mat-expansion-panel *ngFor="let book of getPublishedBooks(volume)">
         <mat-expansion-panel-header>
-          <mat-panel-title>{{ book.condition | bookCondition }} - {{ book.price | currency }}</mat-panel-title>
-          <mat-panel-description>by [user details hidden]</mat-panel-description>
+          <mat-panel-title>{{ book.price | currency }}</mat-panel-title>
+          <mat-panel-description class="text-truncate">
+            <span class="d-none d-sm-inline">Condition:&nbsp;</span>
+            {{ book.condition | bookCondition }}
+          </mat-panel-description>
         </mat-expansion-panel-header>
+
         <p>{{ book.description }}</p>
 
-        <button type="button" mat-stroked-button color="accent" disabled>Buy book</button>
+        <p class="text-info">This is my book.</p>
+
+        <button type="button" mat-stroked-button color="accent" [disabled]="isUserBook(book)">Buy book</button>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
