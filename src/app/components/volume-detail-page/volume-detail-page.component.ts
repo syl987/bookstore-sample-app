@@ -14,6 +14,7 @@ import { VolumeService } from 'src/app/services/volume.service';
 // TODO filter offers
 // TODO sort offers
 // TODO add support for 404
+// TODO use async pipe in templates to be able to react to logout change
 
 @Component({
   selector: 'app-volume-detail-page',
