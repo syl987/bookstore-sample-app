@@ -47,6 +47,10 @@ export class VolumeDetailPageComponent implements OnInit, OnDestroy {
     this._destroyed$.complete();
   }
 
+  isLoggedIn(): boolean {
+    return !!this.authService.user;
+  }
+
   isUserBook(book: BookDTO): boolean {
     return book.uid === this.authService.uid;
   }
