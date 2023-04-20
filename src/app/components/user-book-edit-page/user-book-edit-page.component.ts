@@ -55,9 +55,10 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.userBooksService.load(this.id);
-    this.routerService.navigated$.pipe(takeUntil(this._destroyed$)).subscribe(_ => {
-      this.userBooksService.loadAll(); // TODO load just one
+    this.routerService.params$.pipe(takeUntil(this._destroyed$)).subscribe(params => {
+      if (params?.bookId) {
+        this.userBooksService.load(params.bookId);
+      }
     });
 
     this.book$.pipe(takeUntil(this._destroyed$)).subscribe(book => {

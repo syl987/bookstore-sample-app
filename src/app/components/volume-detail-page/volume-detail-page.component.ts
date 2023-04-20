@@ -35,7 +35,6 @@ export class VolumeDetailPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.volumeService.load(this.id);
     this.routerService.params$.pipe(takeUntil(this._destroyed$)).subscribe(params => {
       if (params?.volumeId) {
         this.volumeService.load(params.volumeId);
