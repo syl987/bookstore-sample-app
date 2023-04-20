@@ -4,27 +4,27 @@
   <dl class="row">
     <div class="col-sm-6">
       <dt>Name</dt>
-      <dd>{{ user.displayName }}</dd>
+      <dd>{{ user.displayName || '-' }}</dd>
     </div>
     <div class="col-sm-6">
       <dt>Last Login</dt>
-      <dd>{{ user.metadata.lastLoginAt | date }}</dd>
+      <dd>{{ (user.metadata.lastLoginAt | date) || '-' }}</dd>
     </div>
     <div class="col-sm-6">
       <dt>Email</dt>
-      <dd>{{ user.email }}</dd>
+      <dd>{{ user.email || '-' }}</dd>
     </div>
     <div class="col-sm-6">
       <dt>Phone Number</dt>
-      <dd>{{ user.phoneNumber || 'none' }}</dd>
+      <dd>{{ user.phoneNumber || '-' }}</dd>
     </div>
     <div class="col-sm-6">
       <dt>Providers</dt>
-      <dd>{{ getProviders(user) }}</dd>
+      <dd>{{ getProviders(user) || '-' }}</dd>
     </div>
     <div class="col-sm-6">
       <dt>Email Verified</dt>
-      <dd>{{ user.emailVerified }}</dd>
+      <dd>{{ user.emailVerified | boolean : 'YesNo' || '-' }}</dd>
     </div>
   </dl>
 </div>

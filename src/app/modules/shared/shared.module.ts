@@ -28,6 +28,7 @@ import { formFieldOptions } from './options/form-field.options';
 import { snackBarOptions } from './options/snack-bar.options';
 import { tooltipOptions } from './options/tooltip.options';
 import { BookConditionPipe } from './pipes/book-condition.pipe';
+import { BooleanPipe } from './pipes/boolean.pipe';
 import { RemoveHtmlPipe } from './pipes/remove-html.pipe';
 import { ResponseErrorPipe } from './pipes/response-error.pipe';
 import { ValidationErrorPipe } from './pipes/validation-error.pipe';
@@ -54,7 +55,7 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
     MatToolbarModule,
     MatTooltipModule,
   ],
-  declarations: [ButtonSpinnerDirective, RemoveHtmlPipe, ResponseErrorPipe, ValidationErrorPipe, BookConditionPipe],
+  declarations: [ButtonSpinnerDirective, RemoveHtmlPipe, ResponseErrorPipe, ValidationErrorPipe, BookConditionPipe, BooleanPipe],
   exports: [
     CommonModule,
     ReactiveFormsModule,
@@ -81,6 +82,7 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
     ResponseErrorPipe,
     ValidationErrorPipe,
     BookConditionPipe,
+    BooleanPipe,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: DirtyOrTouchedMatcher },
