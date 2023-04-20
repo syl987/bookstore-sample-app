@@ -12,11 +12,11 @@
   line-height: inherit !important;
 }
 
-.mat-toolbar .mat-toolbar-row {
+.mat-toolbar-row {
   @include app-container-padding;
 }
 
-.mat-toolbar .mat-mdc-button::after {
+.mat-mdc-button::after {
   content: '';
   display: block;
   position: absolute;
@@ -29,7 +29,24 @@
   transition: width 0.3s;
 }
 
-.mat-toolbar .mat-mdc-button.active::after {
+.mat-mdc-button.active::after {
   width: calc(100% - 16px);
   transition: width 0.3s;
+}
+
+.mat-toolbar div {
+  height: 100% !important;
+  line-height: 66px !important; // pull slightly down (header height is 64px on desktop)
+
+  // hardcoded mat-toolbar mobile breakpoint
+  @media (max-width: 599px) {
+    line-height: 57px !important; // pull slightly down (header height is 56px on mobile)
+  }
+}
+
+.mat-mdc-button,
+.mat-mdc-icon-button,
+:host .mat-mdc-icon-button ::ng-deep .mat-mdc-button-persistent-ripple {
+  height: 100% !important;
+  border-radius: 0 !important;
 }

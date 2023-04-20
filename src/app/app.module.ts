@@ -45,7 +45,6 @@ import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
 // TODO update angular and kick destroyed subjects
-// TODO fix toolbar button ripple style
 // TODO add $localize function and x18n tags to all language strings
 
 registerLocaleData(localeDe);
