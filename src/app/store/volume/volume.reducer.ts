@@ -24,10 +24,10 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
   on(VolumeActions.loadVolume, state => ({ ...state, loading: true, error: undefined })),
-  on(VolumeActions.loadVolumeSuccess, (state, { volume }) => adapter.upsertOne(volume, { ...state, loading: false, error: undefined })),
+  on(VolumeActions.loadVolumeSuccess, (state, { volume }) => ({ ...adapter.upsertOne(volume, state), loading: false, error: undefined })),
   on(VolumeActions.loadVolumeError, (state, { error }) => ({ ...state, loading: false, error })),
   on(VolumeActions.loadVolumes, state => ({ ...state, loading: true, error: undefined })),
-  on(VolumeActions.loadVolumesSuccess, (state, { volumes }) => adapter.upsertMany(volumes, { ...state, loading: false, error: undefined })),
+  on(VolumeActions.loadVolumesSuccess, (state, { volumes }) => ({ ...adapter.upsertMany(volumes, state), loading: false, error: undefined })),
   on(VolumeActions.loadVolumesError, (state, { error }) => ({ ...state, loading: false, error })),
 );
 
