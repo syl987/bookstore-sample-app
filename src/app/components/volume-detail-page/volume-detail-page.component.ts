@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BookDTO } from 'src/app/models/book.models';
@@ -22,18 +21,14 @@ import { VolumeService } from 'src/app/services/volume.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeDetailPageComponent implements OnInit, OnDestroy {
-  readonly id: string = this.route.snapshot.params['volumeId'];
-
   readonly volume$ = this.volumeService.volumeByRoute$;
+  readonly loggedIn$ = this.authService.loggedIn$;
+  readonly uid$ = this.authService.user$;
 
+  // TODO check where destroyed is really needed
   private readonly _destroyed$ = new Subject<void>();
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly authService: AuthService,
-    private readonly routerService: RouterService,
-    private readonly volumeService: VolumeService,
-  ) {}
+  constructor(private readonly authService: AuthService, private readonly routerService: RouterService, private readonly volumeService: VolumeService) {}
 
   ngOnInit(): void {
     this.routerService.params$.pipe(takeUntil(this._destroyed$)).subscribe(params => {
@@ -46,14 +41,6 @@ export class VolumeDetailPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._destroyed$.next();
     this._destroyed$.complete();
-  }
-
-  isLoggedIn(): boolean {
-    return !!this.authService.user;
-  }
-
-  isUserBook(book: BookDTO): boolean {
-    return book.uid === this.authService.uid;
   }
 
   getPublishedBooks(volume: VolumeDTO): BookDTO[] {

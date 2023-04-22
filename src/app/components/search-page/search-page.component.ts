@@ -4,7 +4,8 @@ import { BehaviorSubject, combineLatest, startWith, Subject } from 'rxjs';
 import { debounceTime, map, tap } from 'rxjs/operators';
 import { VolumeService } from 'src/app/services/volume.service';
 
-// TODO include published books data
+// TODO open as firebase database stream
+// TODO include a ittle bit of published books data
 // TODO add featured books query and page
 // TODO move the search field into the header
 // TODO add database search support (?)

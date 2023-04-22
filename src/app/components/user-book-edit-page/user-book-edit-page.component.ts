@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { concatMap, filter, map, takeUntil } from 'rxjs/operators';
 import { isTrue } from 'src/app/functions/typeguard.functions';
-import { BookCondition, BookStatus, UserBookDTO, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
@@ -21,18 +21,17 @@ import { UserBooksService } from 'src/app/services/user-books.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookEditPageComponent implements OnInit, OnDestroy {
+  readonly id: string = this.route.snapshot.params['bookId'];
+
   readonly book$ = this.userBooksService.userBookByRoute$;
   readonly editingDraft$ = this.userBooksService.editingDraft$;
   readonly publishing$ = this.userBooksService.publishing$;
   readonly deleting$ = this.userBooksService.deleting$;
 
-  readonly editDraftDisabled$ = this.editingDraft$.pipe(map(editing => editing || this.form.disabled));
+  readonly editDraftDisabled$ = this.editingDraft$.pipe(map(editing => editing || this.form.disabled)); // TODO false on startup
 
   readonly publishDisabled$ = combineLatest([this.publishing$, this.book$]).pipe(map(([publishing, book]) => publishing || book?.status !== BookStatus.DRAFT));
   readonly deleteDisabled$ = combineLatest([this.deleting$, this.book$]).pipe(map(([deleting, book]) => deleting || book?.status !== BookStatus.DRAFT));
-
-  id: string = this.route.snapshot.params['bookId'];
-  book?: UserBookDTO;
 
   readonly BookCondition = BookCondition;
 
@@ -58,13 +57,6 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
     this.routerService.params$.pipe(takeUntil(this._destroyed$)).subscribe(params => {
       if (params?.bookId) {
         this.userBooksService.load(params.bookId);
-      }
-    });
-
-    this.book$.pipe(takeUntil(this._destroyed$)).subscribe(book => {
-      if (book) {
-        this.id = book.id;
-        this.book = book;
       }
     });
 
@@ -113,6 +105,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
       .subscribe({
         next: _ => this.router.navigateByUrl(`/user/books`),
         error: err => {
+          // TODO customize typing
           // reliably retrieve error details
           const errors: { [key: string]: ValidationErrors | null } = err?.err?.customData ?? {};
 

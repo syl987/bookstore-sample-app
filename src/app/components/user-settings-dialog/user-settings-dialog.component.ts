@@ -16,7 +16,7 @@ export class UserSettingsDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) readonly data: UserSettingsDialogData) {}
 
-  getProviders(user: AuthUser): string {
+  getAuthProviders(user: AuthUser): string {
     return user.providerData.map((p: any) => p.providerId).join(', ');
   }
 }
