@@ -22,6 +22,7 @@ import { VolumeService } from 'src/app/services/volume.service';
 })
 export class VolumeDetailPageComponent implements OnInit, OnDestroy {
   readonly volume$ = this.volumeService.volumeByRoute$;
+
   readonly loggedIn$ = this.authService.loggedIn$;
   readonly uid$ = this.authService.user$;
 
