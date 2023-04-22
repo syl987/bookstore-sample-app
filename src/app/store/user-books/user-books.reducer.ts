@@ -18,7 +18,7 @@ export interface State extends EntityState<UserBookDTO> {
 
 const adapter = createEntityAdapter<UserBookDTO>({
   selectId: entity => entity.id,
-  sortComparer: (entity1, entity2) => entity2.id.localeCompare(entity1.id),
+  sortComparer: (e1, e2) => e2.id.localeCompare(e1.id),
 });
 
 export const initialState: State = adapter.getInitialState({
