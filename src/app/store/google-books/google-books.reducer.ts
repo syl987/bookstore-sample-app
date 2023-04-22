@@ -9,6 +9,7 @@ export const googleBooksFeatureKey = 'google-books';
 
 export interface State {
   search: {
+    query?: string;
     list?: GoogleBooksListDTO;
     pending: boolean;
     error?: ResponseError;
@@ -25,13 +26,13 @@ export const reducer = createReducer(
     ...state,
     search: { ...state.search, pending: true, error: undefined },
   })),
-  on(GoogleBooksActions.searchGoogleBooksSuccess, (state, { list }) => ({
+  on(GoogleBooksActions.searchGoogleBooksSuccess, (state, { query, list }) => ({
     ...state,
-    search: { ...state.search, list, pending: false, error: undefined },
+    search: { ...state.search, query, list, pending: false, error: undefined },
   })),
   on(GoogleBooksActions.searchGoogleBooksError, (state, { error }) => ({
     ...state,
     search: { ...state.search, pending: false, error },
   })),
-  on(routerNavigatedAction, _ => initialState),
+  on(routerNavigatedAction, _ => initialState), // reset for a new book
 );
