@@ -1,5 +1,6 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
+import { onOperationError, onOperationSuccess, onOperationTrigger } from 'src/app/helpers/store.helpers';
 import { OperationState } from 'src/app/models/store.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
@@ -22,6 +23,14 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
+  // test start
+  on(VolumeActions.loadVolume, onOperationTrigger('load')),
+  on(
+    VolumeActions.loadVolumeSuccess,
+    onOperationSuccess('load', (state, { volume }) => adapter.upsertOne(volume, state)),
+  ),
+  on(VolumeActions.loadVolumeError, onOperationError('load')),
+  // test end
   on(VolumeActions.loadVolume, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
