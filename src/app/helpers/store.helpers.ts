@@ -2,6 +2,8 @@ import { ActionCreator, on, ReducerTypes } from '@ngrx/store';
 
 import { OperationState } from '../models/store.models';
 
+// TODO problem: set state functions require params, how to get these? streamline action signatures?
+
 export function onOperation<S extends { [op: string]: OperationState }>(
   operationKey: string,
   actionCreators: [ActionCreator, ActionCreator, ActionCreator],
