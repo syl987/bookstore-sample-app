@@ -1,53 +1,30 @@
-import { ActionCreator, on, ReducerTypes } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 
-import { OperationState } from '../models/store.models';
+import { ResponseError } from '../models/error.models';
 
-// TODO problem: set state functions require params, how to get these? streamline action signatures?
-
-export function onOperation<S extends { [op: string]: OperationState }>(
-  operationKey: string,
-  actionCreators: [ActionCreator, ActionCreator, ActionCreator],
-  options?: { setOnTriggerState?(): Partial<S>; setOnSuccessState?(): Partial<S>; setOnErrorState?(): Partial<S> },
-): ReducerTypes<S, [ActionCreator]>[] {
-  return [
-    onOperationTrigger(operationKey, actionCreators[0], options?.setOnTriggerState),
-    onOperationSuccess(operationKey, actionCreators[1], options?.setOnSuccessState),
-    onOperationError(operationKey, actionCreators[2], options?.setOnErrorState),
-  ];
+export function onOperationTrigger<S, A extends Action>(op: keyof S, extraReducer?: (state: S, action: A) => Partial<S>): (state: S, action: A) => S {
+  return (state, action) => ({
+    ...state,
+    ...extraReducer?.(state, action),
+    [op]: { ...state[op], pending: true, error: undefined },
+  });
 }
 
-function onOperationTrigger<S extends { [op: string]: OperationState }>(
-  operationKey: string,
-  actionCreator: ActionCreator,
-  setState?: () => Partial<S>,
-): ReducerTypes<S, [ActionCreator]> {
-  return on<S, [ActionCreator], S>(actionCreator, state => ({
+export function onOperationSuccess<S, A extends Action>(op: keyof S, extraReducer?: (state: S, action: A) => Partial<S>): (state: S, action: A) => S {
+  return (state, action) => ({
     ...state,
-    ...setState?.(),
-    [operationKey]: { ...state[operationKey], pending: true, error: undefined },
-  }));
+    ...extraReducer?.(state, action),
+    [op]: { ...state[op], pending: false, error: undefined },
+  });
 }
 
-function onOperationSuccess<S extends { [op: string]: OperationState }>(
-  operationKey: string,
-  actionCreator: ActionCreator,
-  setState?: () => Partial<S>,
-): ReducerTypes<S, [ActionCreator]> {
-  return on<S, [ActionCreator], S>(actionCreator, state => ({
+export function onOperationError<S, A extends Action & { error: ResponseError }>(
+  op: keyof S,
+  extraReducer?: (state: S, action: A) => Partial<S>,
+): (state: S, action: A) => S {
+  return (state, action) => ({
     ...state,
-    ...setState?.(),
-    [operationKey]: { ...state[operationKey], pending: false, error: undefined },
-  }));
-}
-
-function onOperationError<S extends { [op: string]: OperationState }>(
-  operationKey: string,
-  actionCreator: ActionCreator,
-  setState?: () => Partial<S>,
-): ReducerTypes<S, [ActionCreator]> {
-  return on<S, [ActionCreator], S>(actionCreator, (state, action) => ({
-    ...state,
-    ...setState?.(),
-    [operationKey]: { ...state[operationKey], pending: false, error: (action as any).error },
-  }));
+    ...extraReducer?.(state, action),
+    [op]: { ...state[op], pending: false, error: action.error },
+  });
 }
