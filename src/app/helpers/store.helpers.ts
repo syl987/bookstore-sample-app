@@ -3,37 +3,49 @@ import { ActionCreator, on, ReducerTypes } from '@ngrx/store';
 import { OperationState } from '../models/store.models';
 
 export function onOperation<S extends { [op: string]: OperationState }>(
-  operationKey: keyof S,
+  operationKey: string,
+  actionCreators: [ActionCreator, ActionCreator, ActionCreator],
+  options?: { setOnTriggerState?(): Partial<S>; setOnSuccessState?(): Partial<S>; setOnErrorState?(): Partial<S> },
+): ReducerTypes<S, [ActionCreator]>[] {
+  return [
+    onOperationTrigger(operationKey, actionCreators[0], options?.setOnTriggerState),
+    onOperationSuccess(operationKey, actionCreators[1], options?.setOnSuccessState),
+    onOperationError(operationKey, actionCreators[2], options?.setOnErrorState),
+  ];
+}
+
+function onOperationTrigger<S extends { [op: string]: OperationState }>(
+  operationKey: string,
   actionCreator: ActionCreator,
-  setProps?: () => Partial<S>,
+  setState?: () => Partial<S>,
 ): ReducerTypes<S, [ActionCreator]> {
   return on<S, [ActionCreator], S>(actionCreator, state => ({
     ...state,
-    ...setProps?.(),
-    [operationKey]: { ...state[operationKey as keyof typeof state], pending: true, error: undefined },
+    ...setState?.(),
+    [operationKey]: { ...state[operationKey], pending: true, error: undefined },
   }));
 }
 
-export function onOperationSuccess<S extends { [op: string]: OperationState }>(
-  operationKey: keyof S,
+function onOperationSuccess<S extends { [op: string]: OperationState }>(
+  operationKey: string,
   actionCreator: ActionCreator,
-  setProps?: () => Partial<S>,
+  setState?: () => Partial<S>,
 ): ReducerTypes<S, [ActionCreator]> {
   return on<S, [ActionCreator], S>(actionCreator, state => ({
     ...state,
-    ...setProps?.(),
-    [operationKey]: { ...state[operationKey as keyof typeof state], pending: false, error: undefined },
+    ...setState?.(),
+    [operationKey]: { ...state[operationKey], pending: false, error: undefined },
   }));
 }
 
-export function onOperationError<S extends { [op: string]: OperationState }>(
-  operationKey: keyof S,
+function onOperationError<S extends { [op: string]: OperationState }>(
+  operationKey: string,
   actionCreator: ActionCreator,
-  setProps?: () => Partial<S>,
+  setState?: () => Partial<S>,
 ): ReducerTypes<S, [ActionCreator]> {
   return on<S, [ActionCreator], S>(actionCreator, (state, action) => ({
     ...state,
-    ...setProps?.(),
-    [operationKey]: { ...state[operationKey as keyof typeof state], pending: false, error: (action as any).error },
+    ...setState?.(),
+    [operationKey]: { ...state[operationKey], pending: false, error: (action as any).error },
   }));
 }
