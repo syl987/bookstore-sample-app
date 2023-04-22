@@ -14,5 +14,5 @@ export const selectVolumeByRoute = createSelector(selectVolumesEntities, selectR
   params?.volumeId ? entities[params.volumeId] : undefined,
 );
 
-export const selectVolumesLoading = createSelector(selectVolumesState, ({ loading }) => loading);
-export const selectVolumesError = createSelector(selectVolumesState, ({ error }) => error);
+export const selectVolumesLoadPending = createSelector(selectVolumesState, ({ load }) => load.pending);
+export const selectVolumesLoadError = createSelector(selectVolumesState, ({ load }) => load.error);

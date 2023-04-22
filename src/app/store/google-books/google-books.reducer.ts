@@ -1,19 +1,14 @@
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { createReducer, on } from '@ngrx/store';
-import { ResponseError } from 'src/app/models/error.models';
 import { GoogleBooksListDTO } from 'src/app/models/google-books.models';
+import { OperationState } from 'src/app/models/store.models';
 
 import * as GoogleBooksActions from './google-books.actions';
 
 export const googleBooksFeatureKey = 'google-books';
 
 export interface State {
-  search: {
-    query?: string;
-    list?: GoogleBooksListDTO;
-    pending: boolean;
-    error?: ResponseError;
-  };
+  search: OperationState<{ query?: string; list?: GoogleBooksListDTO }>;
 }
 
 export const initialState: State = {

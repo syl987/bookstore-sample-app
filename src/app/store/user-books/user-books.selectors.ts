@@ -19,9 +19,17 @@ export const selectUserBookByRoute = createSelector(selectUserBooksEntities, sel
   params?.bookId ? entities[params.bookId] : undefined,
 );
 
-export const selectUserBooksLoading = createSelector(selectUserBooksState, ({ loading }) => loading);
-export const selectUserBooksCreating = createSelector(selectUserBooksState, ({ creating }) => creating);
-export const selectUserBooksDeleting = createSelector(selectUserBooksState, ({ deleting }) => deleting);
-export const selectUserBooksEditingDraft = createSelector(selectUserBooksState, ({ editingDraft }) => editingDraft);
-export const selectUserBooksPublishing = createSelector(selectUserBooksState, ({ publishing }) => publishing);
-export const selectUserBooksError = createSelector(selectUserBooksState, ({ error }) => error);
+export const selectUserBooksLoadPending = createSelector(selectUserBooksState, ({ load }) => load.pending);
+export const selectUserBooksLoadError = createSelector(selectUserBooksState, ({ load }) => load.error);
+
+export const selectUserBooksCreatePending = createSelector(selectUserBooksState, ({ create }) => create.pending);
+export const selectUserBooksCreateError = createSelector(selectUserBooksState, ({ create }) => create.error);
+
+export const selectUserBooksDeletePending = createSelector(selectUserBooksState, ({ remove }) => remove.pending);
+export const selectUserBooksDeleteError = createSelector(selectUserBooksState, ({ remove }) => remove.error);
+
+export const selectUserBooksEditDraftPending = createSelector(selectUserBooksState, ({ editDraft }) => editDraft.pending);
+export const selectUserBooksEditDraftError = createSelector(selectUserBooksState, ({ editDraft }) => editDraft.error);
+
+export const selectUserBooksPublishPending = createSelector(selectUserBooksState, ({ publish }) => publish.pending);
+export const selectUserBooksPublishError = createSelector(selectUserBooksState, ({ publish }) => publish.error);

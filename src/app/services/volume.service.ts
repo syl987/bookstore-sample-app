@@ -6,7 +6,7 @@ import { concatMap, shareReplay, take } from 'rxjs/operators';
 
 import { VolumeDTO } from '../models/volume.models';
 import * as VolumeActions from '../store/volume/volume.actions';
-import { selectVolumeByRoute, selectVolumesAll, selectVolumesError, selectVolumesLoading, selectVolumesTotal } from '../store/volume/volume.selectors';
+import * as VolumeSelectors from '../store/volume/volume.selectors';
 
 interface IVolumeService {
   /** Load a volume with published books. */
@@ -19,13 +19,13 @@ interface IVolumeService {
   providedIn: 'root',
 })
 export class VolumeService implements IVolumeService {
-  readonly volumes$ = this.store.select(selectVolumesAll);
-  readonly volumesTotal$ = this.store.select(selectVolumesTotal);
+  readonly volumes$ = this.store.select(VolumeSelectors.selectVolumesAll);
+  readonly volumesTotal$ = this.store.select(VolumeSelectors.selectVolumesTotal);
 
-  readonly volumeByRoute$ = this.store.select(selectVolumeByRoute);
+  readonly volumeByRoute$ = this.store.select(VolumeSelectors.selectVolumeByRoute);
 
-  readonly loading$ = this.store.select(selectVolumesLoading);
-  readonly error$ = this.store.select(selectVolumesError);
+  readonly loadPending$ = this.store.select(VolumeSelectors.selectVolumesLoadPending);
+  readonly loadError$ = this.store.select(VolumeSelectors.selectVolumesLoadError);
 
   constructor(private readonly store: Store, private readonly actions: Actions) {}
 

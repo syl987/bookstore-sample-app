@@ -22,8 +22,8 @@
     mat-flat-button
     color="primary"
     (click)="createUserBook(list.selectedOptions.selected[0].value)"
-    [spinning]="creating$ | async"
-    [disabled]="list.selectedOptions.isEmpty() || (creating$ | async)"
+    [spinning]="createPending$ | async"
+    [disabled]="list.selectedOptions.isEmpty() || (createPending$ | async)"
   >
     Create book
   </button>

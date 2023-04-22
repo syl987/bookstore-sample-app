@@ -23,7 +23,7 @@ export class UserBookCreateDialogComponent implements OnInit, AfterViewInit, OnD
   readonly searchPending$ = this.googleBooksService.searchPending$;
   readonly searchError$ = this.googleBooksService.searchError$;
 
-  readonly creating$ = this.userBooksService.creating$;
+  readonly createPending$ = this.userBooksService.createPending$;
 
   readonly control = new FormControl<string>('', { nonNullable: true });
 
