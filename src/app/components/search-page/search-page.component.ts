@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { debounceTime, startWith, take, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, take, takeUntil, tap } from 'rxjs/operators';
 import { VolumeService } from 'src/app/services/volume.service';
 
 // TODO move the search field into the header
@@ -10,6 +10,9 @@ import { VolumeService } from 'src/app/services/volume.service';
 // TODO add featured books query and page
 // TODO add database search support (?)
 // TODO add search store (?)
+
+const DEBOUNCE_TIME = 500;
+const FAKE_RESPONSE_TIME = 500;
 
 @Component({
   selector: 'app-search-page',
@@ -34,10 +37,10 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
     this.filterControl.valueChanges
       .pipe(
+        debounceTime(DEBOUNCE_TIME),
         tap(_ => this.filtering$.next(true)),
-        debounceTime(750),
+        debounceTime(FAKE_RESPONSE_TIME),
         tap(_ => this.filtering$.next(false)),
-        startWith(this.filterControl.defaultValue),
         takeUntil(this._destroyed$),
       )
       .subscribe(query => {

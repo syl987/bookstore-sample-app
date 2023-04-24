@@ -3,7 +3,7 @@
 <div mat-dialog-content>
   <mat-form-field floatLabel="always" class="w-50 mt-2xs">
     <mat-label>Search volume</mat-label>
-    <input matInput [formControl]="control" placeholder="Title, author, text,..." />
+    <input matInput [formControl]="searchControl" placeholder="Title, author, text,..." />
     <mat-spinner *ngIf="searchPending$ | async" matSuffix diameter="24" class="me-s"></mat-spinner>
   </mat-form-field>
 
