@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
 export class HeaderComponent {
   readonly user$ = this.authService.user$;
 
-  readonly showToggle$ = this.observer.observe([Breakpoints.XSmall]).pipe(
+  readonly showToggle$ = this.observer.observe([Breakpoints.XSmall, Breakpoints.Small]).pipe(
     map(({ matches }) => matches),
     distinctUntilChanged(),
   );
