@@ -4,12 +4,11 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { debounceTime, take, takeUntil, tap } from 'rxjs/operators';
 import { VolumeService } from 'src/app/services/volume.service';
 
+// TODO refactor as search store
+// TODO brainstorm splitting search and detail store
 // TODO move the search field into the header
 // TODO open as firebase database stream
-// TODO include a ittle bit of published books data
-// TODO add featured books query and page
 // TODO add database search support (?)
-// TODO add search store (?)
 
 const DEBOUNCE_TIME = 500;
 const FAKE_RESPONSE_TIME = 500;

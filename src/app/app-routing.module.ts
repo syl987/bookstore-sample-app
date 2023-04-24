@@ -10,6 +10,9 @@ import { UserBookEditPageComponent } from './components/user-book-edit-page/user
 import { UserBookListPageComponent } from './components/user-book-list-page/user-book-list-page.component';
 import { VolumeDetailPageComponent } from './components/volume-detail-page/volume-detail-page.component';
 
+// TODO keep same page after login
+// TODO guard and keep same page or redirect after logout
+
 const routes: Routes = [
   {
     path: '',
@@ -36,7 +39,6 @@ const routes: Routes = [
     path: 'books/:volumeId',
     title: `Book Details`,
     component: VolumeDetailPageComponent,
-    // TODO leave naming as book?
   },
   {
     path: 'user',
@@ -51,7 +53,7 @@ const routes: Routes = [
         path: 'books/:bookId/edit',
         title: `Edit Book Details`,
         component: UserBookEditPageComponent,
-        // TODO guard own article only
+        // TODO guard own book only
       },
     ],
   },
