@@ -9,3 +9,5 @@ export const loadVolumeError = createAction('[Volume] load ERROR', props<{ error
 export const loadVolumes = createAction('[Volume] load all');
 export const loadVolumesSuccess = createAction('[Volume] load all SUCCESS', props<{ volumes: VolumeDTO[] }>());
 export const loadVolumesError = createAction('[Volume] load all ERROR', props<{ error: ResponseError }>());
+
+export const filterVolumes = createAction('[Volume] filter', props<{ query: string }>());

@@ -11,7 +11,7 @@
   </div>
 
   <div class="row">
-    <div *ngFor="let volume of volumes$ | async" class="col-md-6 col-xl-4 mb-m">
+    <div *ngFor="let volume of volumesFiltered$ | async" class="col-md-6 col-xl-4 mb-m">
       <a routerLink="/books/{{ volume.id }}" class="text-reset text-decoration-none"><app-volume-card [volume]="volume"></app-volume-card></a>
     </div>
   </div>

@@ -1,5 +1,6 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
+import { filterVolumes } from 'src/app/helpers/volume.helpers';
 import { OperationState } from 'src/app/models/store.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
@@ -8,6 +9,7 @@ import * as VolumeActions from './volume.actions';
 export const volumesFeatureKey = 'volumes';
 
 export interface State extends EntityState<VolumeDTO> {
+  filter: { query: string; ids: string[] | number[] };
   load: OperationState;
 }
 
@@ -17,6 +19,7 @@ const adapter = createEntityAdapter<VolumeDTO>({
 });
 
 export const initialState: State = adapter.getInitialState({
+  filter: { query: '', ids: [] },
   load: { pending: false },
 });
 
@@ -45,6 +48,10 @@ export const reducer = createReducer(
   on(VolumeActions.loadVolumesError, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
+  })),
+  on(VolumeActions.filterVolumes, (state, { query }) => ({
+    ...state,
+    filter: { ...state.filter, query, ids: filterVolumes(query, state) },
   })),
 );
 

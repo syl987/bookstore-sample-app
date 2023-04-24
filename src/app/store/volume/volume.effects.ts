@@ -34,6 +34,13 @@ export class VolumesEffects {
     );
   });
 
+  readonly loadVolumesFilter = createEffect(() => {
+    return this.actions.pipe(
+      ofType(VolumeActions.loadVolumesSuccess),
+      map(_ => VolumeActions.filterVolumes({ query: '' })),
+    );
+  });
+
   readonly loadVolumeErrorToast = createEffect(
     () => {
       return this.actions.pipe(
