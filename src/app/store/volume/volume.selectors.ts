@@ -4,7 +4,7 @@ import { notUndefined } from 'src/app/functions/typeguard.functions';
 import { selectRouterParams } from '../router/router.selectors';
 import * as fromVolumes from './volume.reducer';
 
-const selectVolumesState = createFeatureSelector<fromVolumes.State>('volumes');
+const selectVolumesState = createFeatureSelector<fromVolumes.State>(fromVolumes.volumeFeatureKey);
 
 export const selectVolumesAll = createSelector(selectVolumesState, fromVolumes.selectAll);
 export const selectVolumesEntities = createSelector(selectVolumesState, fromVolumes.selectEntities);

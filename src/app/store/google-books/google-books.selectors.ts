@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromGoogleBooks from './google-books.reducer';
 
-const selectGoogleBooksState = createFeatureSelector<fromGoogleBooks.State>('google-books');
+const selectGoogleBooksState = createFeatureSelector<fromGoogleBooks.State>(fromGoogleBooks.googleBooksFeatureKey);
 
 const selectGoogleBooksSearch = createSelector(selectGoogleBooksState, state => state.search);
 export const selectGoogleBooksSearchQuery = createSelector(selectGoogleBooksSearch, ({ query }) => query);

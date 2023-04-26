@@ -4,7 +4,7 @@ import { BookStatus } from 'src/app/models/book.models';
 import { selectRouterParams } from '../router/router.selectors';
 import * as fromUserBooks from './user-books.reducer';
 
-const selectUserBooksState = createFeatureSelector<fromUserBooks.State>('user-books');
+const selectUserBooksState = createFeatureSelector<fromUserBooks.State>(fromUserBooks.userBooksFeatureKey);
 
 export const selectUserBooksAll = createSelector(selectUserBooksState, fromUserBooks.selectAll);
 export const selectUserBooksEntities = createSelector(selectUserBooksState, fromUserBooks.selectEntities);
