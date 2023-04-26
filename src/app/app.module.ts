@@ -18,7 +18,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
-import { appConfig, appStrings, authConfig } from './app-config.options';
+import { appConfig, appStrings, authConfig } from './app-global.options';
 import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './components/__base/footer/footer.component';
 import { HeaderComponent } from './components/__base/header/header.component';

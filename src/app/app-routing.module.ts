@@ -53,7 +53,6 @@ const routes: Routes = [
         path: 'books/:bookId/edit',
         title: `Edit Book Details`,
         component: UserBookEditPageComponent,
-        // TODO guard own book only
       },
     ],
   },
