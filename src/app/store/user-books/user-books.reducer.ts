@@ -3,7 +3,7 @@ import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { OperationState } from 'src/app/models/store.models';
 
-import { selectRouterParams } from '../router/router.selectors';
+import { selectRouteParam } from '../router/router.selectors';
 import { UserBooksActions } from './user-books.actions';
 
 export const userBooksFeatureKey = 'userBooks';
@@ -122,7 +122,7 @@ export const userBooksFeature = createFeature({
       books.filter(b => b.status === BookStatus.SOLD),
     ),
 
-    selectByRoute: createSelector(selectEntities, selectRouterParams, (entities, params) => (params?.bookId ? entities[params.bookId] : undefined)),
+    selectByRoute: createSelector(selectEntities, selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
 
     selectLoadPending: createSelector(selectLoad, ({ pending }) => pending),
     selectLoadError: createSelector(selectLoad, ({ error }) => error),

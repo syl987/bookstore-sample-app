@@ -32,11 +32,14 @@ export class VolumeDetailPageComponent implements OnInit, OnDestroy {
   constructor(private readonly authService: AuthService, private readonly routerService: RouterService, private readonly volumeService: VolumeService) {}
 
   ngOnInit(): void {
-    this.routerService.params$.pipe(takeUntil(this._destroyed$)).subscribe(params => {
-      if (params?.volumeId) {
-        this.volumeService.load(params.volumeId);
-      }
-    });
+    this.routerService
+      .selectRouteParam('volumeId')
+      .pipe(takeUntil(this._destroyed$))
+      .subscribe(id => {
+        if (id) {
+          this.volumeService.load(id);
+        }
+      });
   }
 
   ngOnDestroy(): void {

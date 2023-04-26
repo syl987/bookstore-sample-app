@@ -5,7 +5,7 @@ import { filterVolumes } from 'src/app/helpers/volume.helpers';
 import { OperationState } from 'src/app/models/store.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
-import { selectRouterParams } from '../router/router.selectors';
+import { selectRouteParam } from '../router/router.selectors';
 import { VolumeActions } from './volume.actions';
 
 export const volumeFeatureKey = 'volumes';
@@ -68,7 +68,7 @@ export const volumeFeature = createFeature({
 
     selectAllFiltered: createSelector(selectEntities, selectFilter, (entities, { ids }) => ids.map(id => entities[id]).filter(notUndefined)),
 
-    selectByRoute: createSelector(selectEntities, selectRouterParams, (entities, params) => (params?.volumeId ? entities[params.volumeId] : undefined)),
+    selectByRoute: createSelector(selectEntities, selectRouteParam('volumeId'), (entities, id) => (id ? entities[id] : undefined)),
 
     selectFilterQuery: createSelector(selectVolumesState, ({ filter }) => filter.query),
 

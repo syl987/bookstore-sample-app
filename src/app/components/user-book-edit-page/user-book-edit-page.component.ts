@@ -58,11 +58,14 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.routerService.params$.pipe(takeUntil(this._destroyed$)).subscribe(params => {
-      if (params?.bookId) {
-        this.userBooksService.load(params.bookId);
-      }
-    });
+    this.routerService
+      .selectRouteParam('bookId')
+      .pipe(takeUntil(this._destroyed$))
+      .subscribe(id => {
+        if (id) {
+          this.userBooksService.load(id);
+        }
+      });
 
     combineLatest([this.book$, this._resetFields])
       .pipe(takeUntil(this._destroyed$))
