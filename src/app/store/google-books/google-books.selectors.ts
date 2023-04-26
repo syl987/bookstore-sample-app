@@ -1,11 +1,16 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { googleBooksFeature } from './google-books.reducer';
 
-import * as fromGoogleBooks from './google-books.reducer';
+// TODO delete this file, all feature selectors are already defined inside the feature object
+// TODO add complex multi-feature selectors here
 
-const selectGoogleBooksState = createFeatureSelector<fromGoogleBooks.State>(fromGoogleBooks.googleBooksFeatureKey);
+export const selectGoogleBooksSearchQuery = googleBooksFeature.selectSearchQuery;
+export const selectGoogleBooksSearchList = googleBooksFeature.selectSearchList;
+export const selectGoogleBooksSearchPending = googleBooksFeature.selectSearchPending;
+export const selectGoogleBooksSearchError = googleBooksFeature.selectSearchError;
 
-const selectGoogleBooksSearch = createSelector(selectGoogleBooksState, state => state.search);
-export const selectGoogleBooksSearchQuery = createSelector(selectGoogleBooksSearch, ({ query }) => query);
-export const selectGoogleBooksSearchVolumes = createSelector(selectGoogleBooksSearch, ({ list }) => list?.items ?? []);
-export const selectGoogleBooksSearchPending = createSelector(selectGoogleBooksSearch, ({ pending }) => pending);
-export const selectGoogleBooksSearchError = createSelector(selectGoogleBooksSearch, ({ error }) => error);
+export const SearchSelectors = {
+  selectSearchQuery: googleBooksFeature.selectSearchQuery,
+  selectSearchList: googleBooksFeature.selectSearchList,
+  selectSearchPending: googleBooksFeature.selectSearchPending,
+  selectSearchError: googleBooksFeature.selectSearchError,
+};

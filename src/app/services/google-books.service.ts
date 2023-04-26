@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { GoogleBooksActions } from '../store/google-books/google-books.actions';
-import * as GoogleBooksSelectors from '../store/google-books/google-books.selectors';
+import { googleBooksFeature } from '../store/google-books/google-books.reducer';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoogleBooksService {
-  readonly searchQuery$ = this.store.select(GoogleBooksSelectors.selectGoogleBooksSearchQuery);
-  readonly searchVolumes$ = this.store.select(GoogleBooksSelectors.selectGoogleBooksSearchVolumes);
+  readonly searchQuery$ = this.store.select(googleBooksFeature.selectSearchQuery);
+  readonly searchVolumes$ = this.store.select(googleBooksFeature.selectSearchList); // TODO rename as results?
 
-  readonly searchPending$ = this.store.select(GoogleBooksSelectors.selectGoogleBooksSearchPending);
-  readonly searchError$ = this.store.select(GoogleBooksSelectors.selectGoogleBooksSearchError);
+  readonly searchPending$ = this.store.select(googleBooksFeature.selectSearchPending);
+  readonly searchError$ = this.store.select(googleBooksFeature.selectSearchError);
 
   constructor(private readonly store: Store) {}
 

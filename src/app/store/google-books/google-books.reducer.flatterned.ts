@@ -1,36 +1,41 @@
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { ResponseError } from 'src/app/models/error.models';
 import { GoogleBooksListDTO } from 'src/app/models/google-books.models';
-import { OperationState } from 'src/app/models/store.models';
 
 import { GoogleBooksActions } from './google-books.actions';
 
 export const googleBooksFeatureKey = 'googleBooks';
 
 export interface State {
-  search: OperationState<{
-    query?: string;
-    list?: GoogleBooksListDTO;
-  }>;
+  searchQuery: string;
+  searchList: GoogleBooksListDTO;
+  searchPending: boolean;
+  searchError: ResponseError;
 }
 
 const initialState: State = {
-  search: { pending: false },
+  searchPending: false,
 };
 
 export const reducer = createReducer(
   initialState,
   on(GoogleBooksActions.search, state => ({
     ...state,
-    search: { ...state.search, pending: true, error: undefined },
+    searchPending: true,
+    searchError: undefined,
   })),
   on(GoogleBooksActions.searchSuccess, (state, { query, list }) => ({
     ...state,
-    search: { ...state.search, query, list, pending: false, error: undefined },
+    searchQuery: query,
+    searchList: list,
+    searchPending: false,
+    searchError: undefined,
   })),
   on(GoogleBooksActions.searchError, (state, { error }) => ({
     ...state,
-    search: { ...state.search, pending: false, error },
+    searchPending: false,
+    searchError: error,
   })),
   on(routerNavigatedAction, _ => initialState), // reset for a new book
 );
@@ -38,10 +43,8 @@ export const reducer = createReducer(
 export const googleBooksFeature = createFeature({
   name: googleBooksFeatureKey,
   reducer,
-  extraSelectors: ({ selectSearch }) => ({
-    selectSearchQuery: createSelector(selectSearch, ({ query }) => query),
-    selectSearchList: createSelector(selectSearch, ({ list }) => list),
-    selectSearchPending: createSelector(selectSearch, ({ pending }) => pending),
-    selectSearchError: createSelector(selectSearch, ({ error }) => error),
+  extraSelectors: ({ selectSearchQuery, selectSearchList, selectSearchPending, selectSearchError }) => ({
+    selectSearchResults: createSelector(selectSearchList, ({ items }) => items),
+    selectSearchTotal: createSelector(selectSearchList, ({ items }) => items.length),
   }),
 });
