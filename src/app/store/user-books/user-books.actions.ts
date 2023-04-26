@@ -6,7 +6,7 @@ import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
 // TODO buy actions
 
 export const UserBooksActions = createActionGroup({
-  source: 'GoogleBooks',
+  source: 'UserBooks',
   events: {
     'load': props<{ id: string }>(),
     'load SUCCESS': props<{ book: UserBookDTO }>(),

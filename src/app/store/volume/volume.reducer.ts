@@ -6,7 +6,7 @@ import { VolumeDTO } from 'src/app/models/volume.models';
 
 import { VolumeActions } from './volume.actions';
 
-export const volumesFeatureKey = 'volumes';
+export const volumeFeatureKey = 'volumes';
 
 export interface State extends EntityState<VolumeDTO> {
   filter: { query: string; ids: string[] | number[] };
@@ -18,7 +18,7 @@ const adapter = createEntityAdapter<VolumeDTO>({
   sortComparer: (e1, e2) => e2.id.localeCompare(e1.id),
 });
 
-export const initialState: State = adapter.getInitialState({
+const initialState: State = adapter.getInitialState({
   filter: { query: '', ids: [] },
   load: { pending: false },
 });

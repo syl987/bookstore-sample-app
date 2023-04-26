@@ -5,7 +5,7 @@ import { OperationState } from 'src/app/models/store.models';
 
 import { UserBooksActions } from './user-books.actions';
 
-export const userBooksFeatureKey = 'user-books';
+export const userBooksFeatureKey = 'userBooks';
 
 export interface State extends EntityState<UserBookDTO> {
   load: OperationState;
@@ -20,7 +20,7 @@ const adapter = createEntityAdapter<UserBookDTO>({
   sortComparer: (e1, e2) => e2.id.localeCompare(e1.id),
 });
 
-export const initialState: State = adapter.getInitialState({
+const initialState: State = adapter.getInitialState({
   load: { pending: false },
   create: { pending: false },
   remove: { pending: false },

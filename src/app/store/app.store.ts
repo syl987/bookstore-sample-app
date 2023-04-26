@@ -16,14 +16,14 @@ interface AppState {
   router: RouterReducerState<MinimalRouterStateSnapshot>;
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.State;
   [fromUserBooks.userBooksFeatureKey]: fromUserBooks.State;
-  [fromVolume.volumesFeatureKey]: fromVolume.State;
+  [fromVolume.volumeFeatureKey]: fromVolume.State;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer,
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.reducer,
   [fromUserBooks.userBooksFeatureKey]: fromUserBooks.reducer,
-  [fromVolume.volumesFeatureKey]: fromVolume.reducer,
+  [fromVolume.volumeFeatureKey]: fromVolume.reducer,
 };
 
 export const effects = [AuthEffects, GoogleBooksEffects, UserBooksEffects, VolumesEffects];

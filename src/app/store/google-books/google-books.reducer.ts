@@ -5,13 +5,13 @@ import { OperationState } from 'src/app/models/store.models';
 
 import { GoogleBooksActions } from './google-books.actions';
 
-export const googleBooksFeatureKey = 'google-books';
+export const googleBooksFeatureKey = 'googleBooks';
 
 export interface State {
   search: OperationState<{ query?: string; list?: GoogleBooksListDTO }>;
 }
 
-export const initialState: State = {
+const initialState: State = {
   search: { pending: false },
 };
 
