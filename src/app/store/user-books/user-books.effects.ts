@@ -8,20 +8,20 @@ import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-databas
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 
-import { UserBooksActions } from './user-books.actions';
+import { userBooksActions } from './user-books.actions';
 
 @Injectable()
 export class UserBooksEffects {
   readonly load = createEffect(() => {
     return this.actions.pipe(
-      ofType(UserBooksActions.load),
+      ofType(userBooksActions.load),
       switchMap(({ id }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.loadError({ error: internalError({ message: `User not logged in.` }) }));
+          return of(userBooksActions.loadError({ error: internalError({ message: `User not logged in.` }) }));
         }
         return this.firebaseApi.getUserBook(this.authService.uid, id).pipe(
-          map(book => UserBooksActions.loadSuccess({ book })),
-          catchError(err => of(UserBooksActions.loadError({ error: firebaseError({ err }) }))),
+          map(book => userBooksActions.loadSuccess({ book })),
+          catchError(err => of(userBooksActions.loadError({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -29,14 +29,14 @@ export class UserBooksEffects {
 
   readonly loadAll = createEffect(() => {
     return this.actions.pipe(
-      ofType(UserBooksActions.loadAll),
+      ofType(userBooksActions.loadAll),
       switchMap(_ => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.loadAllError({ error: internalError({ message: `User not logged in.` }) }));
+          return of(userBooksActions.loadAllError({ error: internalError({ message: `User not logged in.` }) }));
         }
         return this.firebaseApi.getUserBooks(this.authService.uid).pipe(
-          map(books => UserBooksActions.loadAllSuccess({ books })),
-          catchError(err => of(UserBooksActions.loadAllError({ error: firebaseError({ err }) }))),
+          map(books => userBooksActions.loadAllSuccess({ books })),
+          catchError(err => of(userBooksActions.loadAllError({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -44,10 +44,10 @@ export class UserBooksEffects {
 
   readonly create = createEffect(() => {
     return this.actions.pipe(
-      ofType(UserBooksActions.create),
+      ofType(userBooksActions.create),
       exhaustMap(({ volumeData }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.createError({ error: internalError({ message: `User not logged in.` }) }));
+          return of(userBooksActions.createError({ error: internalError({ message: `User not logged in.` }) }));
         }
         const currentUid = this.authService.uid;
 
@@ -59,8 +59,8 @@ export class UserBooksEffects {
           },
         };
         return this.firebaseApi.createUserBook(currentUid, volume).pipe(
-          map(res => UserBooksActions.createSuccess({ book: res })),
-          catchError(err => of(UserBooksActions.createError({ error: firebaseError({ err }) }))),
+          map(res => userBooksActions.createSuccess({ book: res })),
+          catchError(err => of(userBooksActions.createError({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -68,14 +68,14 @@ export class UserBooksEffects {
 
   readonly delete = createEffect(() => {
     return this.actions.pipe(
-      ofType(UserBooksActions.delete),
+      ofType(userBooksActions.delete),
       exhaustMap(({ id }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.deleteError({ error: internalError({ message: `User not logged in.` }) }));
+          return of(userBooksActions.deleteError({ error: internalError({ message: `User not logged in.` }) }));
         }
         return this.firebaseApi.deleteUserBook(this.authService.uid, id).pipe(
-          map(_ => UserBooksActions.deleteSuccess({ id })),
-          catchError(err => of(UserBooksActions.deleteError({ error: firebaseError({ err }) }))),
+          map(_ => userBooksActions.deleteSuccess({ id })),
+          catchError(err => of(userBooksActions.deleteError({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -83,14 +83,14 @@ export class UserBooksEffects {
 
   readonly editDraft = createEffect(() => {
     return this.actions.pipe(
-      ofType(UserBooksActions.editDraft),
+      ofType(userBooksActions.editDraft),
       exhaustMap(({ id, data }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.editDraftError({ error: internalError({ message: `User not logged in.` }) }));
+          return of(userBooksActions.editDraftError({ error: internalError({ message: `User not logged in.` }) }));
         }
         return this.firebaseApi.editUserBookDraft(this.authService.uid, id, data).pipe(
-          map(res => UserBooksActions.editDraftSuccess({ book: res })),
-          catchError(err => of(UserBooksActions.editDraftError({ error: firebaseError({ err }) }))),
+          map(res => userBooksActions.editDraftSuccess({ book: res })),
+          catchError(err => of(userBooksActions.editDraftError({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -98,14 +98,14 @@ export class UserBooksEffects {
 
   readonly publish = createEffect(() => {
     return this.actions.pipe(
-      ofType(UserBooksActions.publish),
+      ofType(userBooksActions.publish),
       exhaustMap(({ id }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.publishError({ error: internalError({ message: `User not logged in.` }) }));
+          return of(userBooksActions.publishError({ error: internalError({ message: `User not logged in.` }) }));
         }
         return this.firebaseApi.publishUserBook(this.authService.uid, id).pipe(
-          map(res => UserBooksActions.publishSuccess({ book: res })),
-          catchError(err => of(UserBooksActions.publishError({ error: firebaseError({ err }) }))),
+          map(res => userBooksActions.publishSuccess({ book: res })),
+          catchError(err => of(userBooksActions.publishError({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -114,7 +114,7 @@ export class UserBooksEffects {
   readonly loadErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.loadError),
+        ofType(userBooksActions.loadError),
         tap(_ => this.toastService.showErrorToast(`Error loading book.`)),
       );
     },
@@ -124,7 +124,7 @@ export class UserBooksEffects {
   readonly loadAllErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.loadAllError),
+        ofType(userBooksActions.loadAllError),
         tap(_ => this.toastService.showErrorToast(`Error loading books.`)),
       );
     },
@@ -134,7 +134,7 @@ export class UserBooksEffects {
   readonly createSuccessToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.createSuccess),
+        ofType(userBooksActions.createSuccess),
         tap(_ => this.toastService.showSuccessToast(`Book successfully created.`)),
       );
     },
@@ -144,7 +144,7 @@ export class UserBooksEffects {
   readonly createErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.createError),
+        ofType(userBooksActions.createError),
         tap(_ => this.toastService.showErrorToast(`Error creating book.`)),
       );
     },
@@ -154,7 +154,7 @@ export class UserBooksEffects {
   readonly deleteSuccessToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.deleteSuccess),
+        ofType(userBooksActions.deleteSuccess),
         tap(_ => this.toastService.showSuccessToast(`Book successfully deleted.`)),
       );
     },
@@ -164,7 +164,7 @@ export class UserBooksEffects {
   readonly deleteErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.deleteError),
+        ofType(userBooksActions.deleteError),
         tap(_ => this.toastService.showErrorToast(`Error deleting book.`)),
       );
     },
@@ -174,7 +174,7 @@ export class UserBooksEffects {
   readonly editDraftSuccessToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.editDraftSuccess),
+        ofType(userBooksActions.editDraftSuccess),
         tap(_ => this.toastService.showSuccessToast(`Book successfully updated.`)),
       );
     },
@@ -184,7 +184,7 @@ export class UserBooksEffects {
   readonly editDraftErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.editDraftError),
+        ofType(userBooksActions.editDraftError),
         tap(_ => this.toastService.showErrorToast(`Error updating book.`)),
       );
     },
@@ -194,7 +194,7 @@ export class UserBooksEffects {
   readonly publishSuccessToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.publishSuccess),
+        ofType(userBooksActions.publishSuccess),
         tap(_ => this.toastService.showSuccessToast(`Book successfully published.`)),
       );
     },
@@ -204,7 +204,7 @@ export class UserBooksEffects {
   readonly publishErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.publishError),
+        ofType(userBooksActions.publishError),
         tap(_ => this.toastService.showErrorToast(`Error publishing book.`)),
       );
     },

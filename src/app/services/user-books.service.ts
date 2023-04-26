@@ -6,7 +6,7 @@ import { concatMap, shareReplay, take } from 'rxjs/operators';
 
 import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
-import { UserBooksActions } from '../store/user-books/user-books.actions';
+import { userBooksActions } from '../store/user-books/user-books.actions';
 import * as UserBooksSelectors from '../store/user-books/user-books.selectors';
 
 interface IUserBooksService {
@@ -57,13 +57,13 @@ export class UserBooksService implements IUserBooksService {
   constructor(private readonly store: Store, private readonly actions: Actions) {}
 
   load(id: string): Observable<UserBookDTO> {
-    this.store.dispatch(UserBooksActions.load({ id }));
+    this.store.dispatch(userBooksActions.load({ id }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.loadSuccess, UserBooksActions.loadError),
+      ofType(userBooksActions.loadSuccess, userBooksActions.loadError),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.loadSuccess.type) {
+        if (action.type === userBooksActions.loadSuccess.type) {
           return of(action.book);
         }
         return throwError(() => action.error);
@@ -75,13 +75,13 @@ export class UserBooksService implements IUserBooksService {
   }
 
   loadAll(): Observable<UserBookDTO[]> {
-    this.store.dispatch(UserBooksActions.loadAll());
+    this.store.dispatch(userBooksActions.loadAll());
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.loadAllSuccess, UserBooksActions.loadAllError),
+      ofType(userBooksActions.loadAllSuccess, userBooksActions.loadAllError),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.loadAllSuccess.type) {
+        if (action.type === userBooksActions.loadAllSuccess.type) {
           return of(action.books);
         }
         return throwError(() => action.error);
@@ -93,13 +93,13 @@ export class UserBooksService implements IUserBooksService {
   }
 
   create(volumeData: GoogleBooksVolumeDTO): Observable<UserBookDTO> {
-    this.store.dispatch(UserBooksActions.create({ volumeData }));
+    this.store.dispatch(userBooksActions.create({ volumeData }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.createSuccess, UserBooksActions.createError),
+      ofType(userBooksActions.createSuccess, userBooksActions.createError),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.createSuccess.type) {
+        if (action.type === userBooksActions.createSuccess.type) {
           return of(action.book);
         }
         return throwError(() => action.error);
@@ -111,13 +111,13 @@ export class UserBooksService implements IUserBooksService {
   }
 
   delete(id: string): Observable<void> {
-    this.store.dispatch(UserBooksActions.delete({ id }));
+    this.store.dispatch(userBooksActions.delete({ id }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.deleteSuccess, UserBooksActions.deleteError),
+      ofType(userBooksActions.deleteSuccess, userBooksActions.deleteError),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.deleteSuccess.type) {
+        if (action.type === userBooksActions.deleteSuccess.type) {
           return of(undefined);
         }
         return throwError(() => action.error);
@@ -129,13 +129,13 @@ export class UserBooksService implements IUserBooksService {
   }
 
   editDraft(id: string, data: UserBookEditDraftDTO): Observable<UserBookDTO> {
-    this.store.dispatch(UserBooksActions.editDraft({ id, data }));
+    this.store.dispatch(userBooksActions.editDraft({ id, data }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.editDraftSuccess, UserBooksActions.editDraftError),
+      ofType(userBooksActions.editDraftSuccess, userBooksActions.editDraftError),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.editDraftSuccess.type) {
+        if (action.type === userBooksActions.editDraftSuccess.type) {
           return of(action.book);
         }
         return throwError(() => action.error);
@@ -147,13 +147,13 @@ export class UserBooksService implements IUserBooksService {
   }
 
   publish(id: string): Observable<UserBookDTO> {
-    this.store.dispatch(UserBooksActions.publish({ id }));
+    this.store.dispatch(userBooksActions.publish({ id }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.publishSuccess, UserBooksActions.publishError),
+      ofType(userBooksActions.publishSuccess, userBooksActions.publishError),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.publishSuccess.type) {
+        if (action.type === userBooksActions.publishSuccess.type) {
           return of(action.book);
         }
         return throwError(() => action.error);

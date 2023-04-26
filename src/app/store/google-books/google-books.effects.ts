@@ -6,17 +6,17 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { httpError } from 'src/app/models/error.models';
 import { GoogleBooksApiService } from 'src/app/services/__api/google-books-api.service';
 
-import { GoogleBooksActions } from './google-books.actions';
+import { googleBooksActions } from './google-books.actions';
 
 @Injectable()
 export class GoogleBooksEffects {
   readonly search = createEffect(() => {
     return this.actions.pipe(
-      ofType(GoogleBooksActions.search),
+      ofType(googleBooksActions.search),
       switchMap(({ query }) =>
         this.googleBooksApi.list(query).pipe(
-          map(list => GoogleBooksActions.searchSuccess({ query, list })),
-          catchError((err: HttpErrorResponse) => of(GoogleBooksActions.searchError({ error: httpError({ err }) }))),
+          map(list => googleBooksActions.searchSuccess({ query, list })),
+          catchError((err: HttpErrorResponse) => of(googleBooksActions.searchError({ error: httpError({ err }) }))),
         ),
       ),
     );

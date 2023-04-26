@@ -3,7 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import { UserBookDTO } from 'src/app/models/book.models';
 import { OperationState } from 'src/app/models/store.models';
 
-import { UserBooksActions } from './user-books.actions';
+import { userBooksActions } from './user-books.actions';
 
 export const userBooksFeatureKey = 'userBooks';
 
@@ -30,75 +30,75 @@ const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(UserBooksActions.load, state => ({
+  on(userBooksActions.load, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(UserBooksActions.loadSuccess, (state, { book }) => ({
+  on(userBooksActions.loadSuccess, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadError, (state, { error }) => ({
+  on(userBooksActions.loadError, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
-  on(UserBooksActions.loadAll, state => ({
+  on(userBooksActions.loadAll, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(UserBooksActions.loadAllSuccess, (state, { books }) => ({
+  on(userBooksActions.loadAllSuccess, (state, { books }) => ({
     ...adapter.upsertMany(books, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadAllError, (state, { error }) => ({
+  on(userBooksActions.loadAllError, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
-  on(UserBooksActions.create, state => ({
+  on(userBooksActions.create, state => ({
     ...state,
     create: { ...state.create, pending: true, error: undefined },
   })),
-  on(UserBooksActions.createSuccess, (state, { book }) => ({
+  on(userBooksActions.createSuccess, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     create: { ...state.create, pending: false, error: undefined },
   })),
-  on(UserBooksActions.createError, (state, { error }) => ({
+  on(userBooksActions.createError, (state, { error }) => ({
     ...state,
     create: { ...state.create, pending: false, error },
   })),
-  on(UserBooksActions.delete, state => ({
+  on(userBooksActions.delete, state => ({
     ...state,
     remove: { ...state.remove, pending: true, error: undefined },
   })),
-  on(UserBooksActions.deleteSuccess, (state, { id }) => ({
+  on(userBooksActions.deleteSuccess, (state, { id }) => ({
     ...adapter.removeOne(id, state),
     remove: { ...state.remove, pending: false, error: undefined },
   })),
-  on(UserBooksActions.deleteError, (state, { error }) => ({
+  on(userBooksActions.deleteError, (state, { error }) => ({
     ...state,
     remove: { ...state.remove, pending: false, error },
   })),
-  on(UserBooksActions.editDraft, state => ({
+  on(userBooksActions.editDraft, state => ({
     ...state,
     editDraft: { ...state.editDraft, pending: true, error: undefined },
   })),
-  on(UserBooksActions.editDraftSuccess, (state, { book }) => ({
+  on(userBooksActions.editDraftSuccess, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     editDraft: { ...state.editDraft, pending: false, error: undefined },
   })),
-  on(UserBooksActions.editDraftError, (state, { error }) => ({
+  on(userBooksActions.editDraftError, (state, { error }) => ({
     ...state,
     editDraft: { ...state.editDraft, pending: false, error },
   })),
-  on(UserBooksActions.publish, state => ({
+  on(userBooksActions.publish, state => ({
     ...state,
     publish: { ...state.publish, pending: true, error: undefined },
   })),
-  on(UserBooksActions.publishSuccess, (state, { book }) => ({
+  on(userBooksActions.publishSuccess, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     publish: { ...state.publish, pending: false, error: undefined },
   })),
-  on(UserBooksActions.publishError, (state, { error }) => ({
+  on(userBooksActions.publishError, (state, { error }) => ({
     ...state,
     publish: { ...state.publish, pending: false, error },
   })),
