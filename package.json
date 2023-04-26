@@ -1,5 +1,5 @@
 {
-  "name": "silly-bookstore-example-app",
+  "name": "bookstore-sample-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -14,7 +14,7 @@
     "format:check": "prettier . --check",
     "browserslist": "browserslist --coverage && browserslist",
     "browserslist:update": "browserslist --update-db",
-    "analyze": "ng build --stats-json&&webpack-bundle-analyzer dist/silly-bookstore-example-app/stats.json",
+    "analyze": "ng build --stats-json&&webpack-bundle-analyzer dist/bookstore-sample-app/stats.json",
     "prepare": "husky install &"
   },
   "private": true,

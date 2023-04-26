@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "silly-bookstore-example-app": {
+    "bookstore-sample-app": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -12,7 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/silly-bookstore-example-app",
+            "outputPath": "dist/bookstore-sample-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js", "hammerjs"],
@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "silly-bookstore-example-app:build:production"
+              "browserTarget": "bookstore-sample-app:build:production"
             },
             "development": {
-              "browserTarget": "silly-bookstore-example-app:build:development"
+              "browserTarget": "bookstore-sample-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "silly-bookstore-example-app:build"
+            "browserTarget": "bookstore-sample-app:build"
           }
         },
         "lint": {
@@ -88,7 +88,7 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "silly-bookstore-example-app:build:production",
+            "browserTarget": "bookstore-sample-app:build:production",
             "firebaseProject": "sample-app-a00e0",
             "firebaseHostingSite": "sample-app-a00e0"
           }

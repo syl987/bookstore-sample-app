@@ -2,8 +2,8 @@ import { AppConfig, AppStrings } from './models/app.models';
 import { AuthConfig } from './models/auth.models';
 
 export const appConfig: AppConfig = {
-  appName: 'Silly Bookstore Example App',
-  copyrightName: 'Silly Bookstore Example App',
+  appName: 'Bookstore Sample App',
+  copyrightName: 'Bookstore Sample App',
 };
 
 export const authConfig: AuthConfig = {
