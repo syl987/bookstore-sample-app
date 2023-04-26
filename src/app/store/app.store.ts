@@ -2,8 +2,7 @@ import { isDevMode } from '@angular/core';
 import { MinimalRouterStateSnapshot, NavigationActionTiming, routerReducer, RouterReducerState, RouterState, StoreRouterConfig } from '@ngrx/router-store';
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 
-import { consoleLogMetaReducer, resetStateMetaReducer } from './app.meta-reducers';
-import { AuthActions } from './auth/auth.actions';
+import { metaReducers } from './app.meta-reducers';
 import { AuthEffects } from './auth/auth.effects';
 import { GoogleBooksEffects } from './google-books/google-books.effects';
 import * as fromGoogleBooks from './google-books/google-books.reducer';
@@ -29,7 +28,7 @@ export const reducers: ActionReducerMap<AppState> = {
 export const effects = [AuthEffects, GoogleBooksEffects, UserBooksEffects, VolumesEffects];
 
 export const storeConfig: RootStoreConfig<AppState> = {
-  metaReducers: [resetStateMetaReducer(AuthActions.authResetState.type), consoleLogMetaReducer],
+  metaReducers,
   runtimeChecks: {
     strictActionTypeUniqueness: isDevMode(),
     strictActionImmutability: isDevMode(),

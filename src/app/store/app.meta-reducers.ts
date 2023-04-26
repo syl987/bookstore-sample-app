@@ -1,15 +1,16 @@
+import { isDevMode } from '@angular/core';
 import { MetaReducer } from '@ngrx/store';
 
-export function resetStateMetaReducer(...actionTypes: string[]): MetaReducer {
-  return reducer => (state, action) => {
-    if (actionTypes.some(type => type === action.type)) {
-      return reducer(undefined, action);
-    }
-    return reducer(state, action);
-  };
-}
+import { AuthActions } from './auth/auth.actions';
 
-export const consoleLogMetaReducer: MetaReducer = reducer => (state, action) => {
+const resetState: MetaReducer = reducer => (state, action) => {
+  if (AuthActions.authResetState.type === action.type) {
+    return reducer(undefined, action);
+  }
+  return reducer(state, action);
+};
+
+const consoleLog: MetaReducer = reducer => (state, action) => {
   const result = reducer(state, action);
 
   console.groupCollapsed(action.type);
@@ -20,3 +21,5 @@ export const consoleLogMetaReducer: MetaReducer = reducer => (state, action) => 
 
   return result;
 };
+
+export const metaReducers = isDevMode() ? [resetState, consoleLog] : [resetState];
