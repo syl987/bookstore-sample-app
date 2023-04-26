@@ -6,12 +6,13 @@ import { OperationState } from 'src/app/models/store.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
 import { selectRouteParam } from '../router/router.selectors';
+import { SearchActions } from '../search/search.actions';
 import { VolumeActions } from './volume.actions';
 
 export const volumeFeatureKey = 'volumes';
 
 export interface State extends EntityState<VolumeDTO> {
-  filter: { query: string; ids: string[] | number[] };
+  filteredIds: string[] | number[];
   load: OperationState;
 }
 
@@ -21,7 +22,7 @@ const adapter = createEntityAdapter<VolumeDTO>({
 });
 
 const initialState: State = adapter.getInitialState({
-  filter: { query: '', ids: [] },
+  filteredIds: [],
   load: { pending: false },
 });
 
@@ -51,26 +52,24 @@ export const reducer = createReducer(
     ...state,
     load: { ...state.load, pending: false, error },
   })),
-  on(VolumeActions.filter, (state, { query }) => ({
+  on(SearchActions.filter, (state, { query }) => ({
     ...state,
-    filter: { ...state.filter, query, ids: filterVolumes(query, state) },
+    filteredIds: filterVolumes(query, state),
   })),
 );
 
 export const volumeFeature = createFeature({
   name: volumeFeatureKey,
   reducer,
-  extraSelectors: ({ selectVolumesState, selectEntities, selectFilter, selectLoad }) => ({
+  extraSelectors: ({ selectVolumesState, selectEntities, selectFilteredIds, selectLoad }) => ({
     selectAll: createSelector(selectVolumesState, adapter.getSelectors().selectAll),
     selectEntities: createSelector(selectVolumesState, adapter.getSelectors().selectEntities),
     selectIds: createSelector(selectVolumesState, adapter.getSelectors().selectIds),
     selectTotal: createSelector(selectVolumesState, adapter.getSelectors().selectTotal),
 
-    selectAllFiltered: createSelector(selectEntities, selectFilter, (entities, { ids }) => ids.map(id => entities[id]).filter(notUndefined)),
+    selectAllFiltered: createSelector(selectEntities, selectFilteredIds, (entities, ids) => ids.map(id => entities[id]).filter(notUndefined)),
 
     selectByRoute: createSelector(selectEntities, selectRouteParam('volumeId'), (entities, id) => (id ? entities[id] : undefined)),
-
-    selectFilterQuery: createSelector(selectVolumesState, ({ filter }) => filter.query),
 
     selectLoadPending: createSelector(selectLoad, ({ pending }) => pending),
     selectLoadError: createSelector(selectLoad, ({ error }) => error),

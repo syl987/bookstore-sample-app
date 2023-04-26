@@ -13,8 +13,6 @@ interface IVolumeService {
   load(id: string): Observable<VolumeDTO>;
   /** Load all volumes with published books. */
   loadAll(): Observable<VolumeDTO[]>;
-  /** Filter all loaded volumes with published books by title. */
-  filter(query: string): void;
 }
 
 @Injectable({
@@ -27,8 +25,6 @@ export class VolumeService implements IVolumeService {
   readonly entitiesFiltered$ = this.store.select(volumeFeature.selectAllFiltered);
 
   readonly entitiyByRoute$ = this.store.select(volumeFeature.selectByRoute);
-
-  readonly filterQuery$ = this.store.select(volumeFeature.selectFilterQuery);
 
   readonly loadPending$ = this.store.select(volumeFeature.selectLoadPending);
   readonly loadError$ = this.store.select(volumeFeature.selectLoadError);
@@ -69,9 +65,5 @@ export class VolumeService implements IVolumeService {
     );
     result.subscribe();
     return result;
-  }
-
-  filter(query: string): void {
-    this.store.dispatch(VolumeActions.filter({ query }));
   }
 }

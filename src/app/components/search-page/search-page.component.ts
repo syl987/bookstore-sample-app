@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { debounceTime, take, takeUntil, tap } from 'rxjs/operators';
+import { SearchService } from 'src/app/services/search.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
 // TODO refactor as search store
@@ -25,11 +26,11 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   readonly volumesFiltered$ = this.volumeService.entitiesFiltered$;
 
-  readonly filterQuery$ = this.volumeService.filterQuery$;
+  readonly filterQuery$ = this.searchService.filterQuery$;
 
   private readonly _destroyed$ = new Subject<void>();
 
-  constructor(private readonly volumeService: VolumeService) {}
+  constructor(private readonly searchService: SearchService, private readonly volumeService: VolumeService) {}
 
   ngOnInit(): void {
     this.volumeService.loadAll();
@@ -43,7 +44,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
         takeUntil(this._destroyed$),
       )
       .subscribe(query => {
-        this.volumeService.filter(query);
+        this.searchService.filter(query);
       });
 
     this.filterQuery$.pipe(take(1), takeUntil(this._destroyed$)).subscribe(query => {
