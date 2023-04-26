@@ -7,7 +7,7 @@ import { concatMap, shareReplay, take } from 'rxjs/operators';
 import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import { UserBooksActions } from '../store/user-books/user-books.actions';
-import * as UserBooksSelectors from '../store/user-books/user-books.selectors';
+import { userBooksFeature } from '../store/user-books/user-books.reducer';
 
 interface IUserBooksService {
   /** Load a book with volume data. */
@@ -30,29 +30,29 @@ interface IUserBooksService {
   providedIn: 'root',
 })
 export class UserBooksService implements IUserBooksService {
-  readonly userBooks$ = this.store.select(UserBooksSelectors.selectUserBooksAll);
-  readonly userBooksTotal$ = this.store.select(UserBooksSelectors.selectUserBooksTotal);
+  readonly entities$ = this.store.select(userBooksFeature.selectAll);
+  readonly entitiesTotal$ = this.store.select(userBooksFeature.selectTotal);
 
-  readonly userBooksDraft$ = this.store.select(UserBooksSelectors.selectUserBooksDraft);
-  readonly userBooksPublished$ = this.store.select(UserBooksSelectors.selectUserBooksPublished);
-  readonly userBooksSold$ = this.store.select(UserBooksSelectors.selectUserBooksSold);
+  readonly entitiesDraft$ = this.store.select(userBooksFeature.selectAllDraft);
+  readonly entitiesPublished$ = this.store.select(userBooksFeature.selectAllPublished);
+  readonly entitiesSold$ = this.store.select(userBooksFeature.selectAllSold);
 
-  readonly userBookByRoute$ = this.store.select(UserBooksSelectors.selectUserBookByRoute);
+  readonly entityByRoute$ = this.store.select(userBooksFeature.selectByRoute);
 
-  readonly loadPending$ = this.store.select(UserBooksSelectors.selectUserBooksLoadPending);
-  readonly loadError$ = this.store.select(UserBooksSelectors.selectUserBooksLoadError);
+  readonly loadPending$ = this.store.select(userBooksFeature.selectLoadPending);
+  readonly loadError$ = this.store.select(userBooksFeature.selectLoadError);
 
-  readonly createPending$ = this.store.select(UserBooksSelectors.selectUserBooksCreatePending);
-  readonly createError$ = this.store.select(UserBooksSelectors.selectUserBooksCreateError);
+  readonly createPending$ = this.store.select(userBooksFeature.selectCreatePending);
+  readonly createError$ = this.store.select(userBooksFeature.selectCreateError);
 
-  readonly deletePending$ = this.store.select(UserBooksSelectors.selectUserBooksDeletePending);
-  readonly deleteError$ = this.store.select(UserBooksSelectors.selectUserBooksDeleteError);
+  readonly deletePending$ = this.store.select(userBooksFeature.selectDeletePending);
+  readonly deleteError$ = this.store.select(userBooksFeature.selectDeleteError);
 
-  readonly editDraftPending$ = this.store.select(UserBooksSelectors.selectUserBooksEditDraftPending);
-  readonly editDraftError$ = this.store.select(UserBooksSelectors.selectUserBooksEditDraftError);
+  readonly editDraftPending$ = this.store.select(userBooksFeature.selectEditDraftPending);
+  readonly editDraftError$ = this.store.select(userBooksFeature.selectEditDraftError);
 
-  readonly publishPending$ = this.store.select(UserBooksSelectors.selectUserBooksPublishPending);
-  readonly publishError$ = this.store.select(UserBooksSelectors.selectUserBooksPublishError);
+  readonly publishPending$ = this.store.select(userBooksFeature.selectPublishPending);
+  readonly publishError$ = this.store.select(userBooksFeature.selectPublishError);
 
   constructor(private readonly store: Store, private readonly actions: Actions) {}
 

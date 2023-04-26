@@ -19,7 +19,7 @@ const DEBOUNCE_TIME = 500;
 export class UserBookCreateDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly searchControl = new FormControl<string>('', { nonNullable: true });
 
-  readonly volumes$ = this.googleBooksService.searchVolumes$;
+  readonly volumes$ = this.googleBooksService.searchResults$;
 
   readonly searchQuery$ = this.googleBooksService.searchQuery$;
   readonly searchPending$ = this.googleBooksService.searchPending$;

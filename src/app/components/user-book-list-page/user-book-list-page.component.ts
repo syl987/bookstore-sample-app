@@ -9,9 +9,9 @@ import { UserBooksService } from 'src/app/services/user-books.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookListPageComponent implements OnInit {
-  readonly booksDraft$ = this.userBooksService.userBooksDraft$;
-  readonly booksPublished$ = this.userBooksService.userBooksPublished$;
-  readonly booksSold$ = this.userBooksService.userBooksSold$;
+  readonly userBooksDraft$ = this.userBooksService.entitiesDraft$;
+  readonly userBooksPublished$ = this.userBooksService.entitiesPublished$;
+  readonly userBooksSold$ = this.userBooksService.entitiesSold$;
 
   constructor(private readonly router: Router, private readonly userBooksService: UserBooksService, private readonly dialogService: DialogService) {}
 

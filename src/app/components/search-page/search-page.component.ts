@@ -23,9 +23,9 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   readonly filtering$ = new BehaviorSubject<boolean>(false);
 
-  readonly volumesFiltered$ = this.volumeService.volumesFiltered$;
+  readonly volumesFiltered$ = this.volumeService.entitiesFiltered$;
 
-  readonly filterQuery$ = this.volumeService.filterVolumesQuery$;
+  readonly filterQuery$ = this.volumeService.filterQuery$;
 
   private readonly _destroyed$ = new Subject<void>();
 
