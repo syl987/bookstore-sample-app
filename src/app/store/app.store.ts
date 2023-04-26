@@ -1,6 +1,6 @@
+import { isDevMode } from '@angular/core';
 import { MinimalRouterStateSnapshot, NavigationActionTiming, routerReducer, RouterReducerState, RouterState, StoreRouterConfig } from '@ngrx/router-store';
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
-import { environment } from 'src/environments/environment';
 
 import { consoleLogMetaReducer, resetStateMetaReducer } from './app.meta-reducers';
 import { AuthActions } from './auth/auth.actions';
@@ -31,12 +31,10 @@ export const effects = [AuthEffects, GoogleBooksEffects, UserBooksEffects, Volum
 export const storeConfig: RootStoreConfig<AppState> = {
   metaReducers: [resetStateMetaReducer(AuthActions.authResetState.type), consoleLogMetaReducer],
   runtimeChecks: {
-    strictActionTypeUniqueness: !environment.production,
-    strictActionImmutability: !environment.production,
-    strictActionSerializability: false,
-    strictActionWithinNgZone: !environment.production,
-    strictStateImmutability: !environment.production,
-    strictStateSerializability: false, // angular fire auth guard uses functions as route data
+    strictActionTypeUniqueness: isDevMode(),
+    strictActionImmutability: isDevMode(),
+    strictActionWithinNgZone: isDevMode(),
+    strictStateImmutability: isDevMode(),
   },
 };
 

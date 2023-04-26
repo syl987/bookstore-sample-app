@@ -1,7 +1,7 @@
 import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
-import { ApplicationRef, DEFAULT_CURRENCY_CODE, DoBootstrap, LOCALE_ID, NgModule } from '@angular/core';
+import { ApplicationRef, DEFAULT_CURRENCY_CODE, DoBootstrap, isDevMode, LOCALE_ID, NgModule } from '@angular/core';
 import { FirebaseOptions, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
@@ -15,7 +15,6 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
 import { appConfig, appStrings, authConfig } from './app-global.options';
@@ -44,6 +43,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO resolve browser console warnings on startup
 // TODO update angular and kick destroyed subjects
 // TODO add $localize function and x18n tags to all language strings
 
@@ -73,7 +73,7 @@ const firebaseOptions: FirebaseOptions = {
     StoreModule.forRoot(reducers, storeConfig),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(routerStoreConfig),
-    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
+    StoreDevtoolsModule.instrument({ maxAge: 50, logOnly: !isDevMode() }),
     ImageCropperModule,
     SharedModule,
     AppRoutingModule,
