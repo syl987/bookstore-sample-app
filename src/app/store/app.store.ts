@@ -3,7 +3,7 @@ import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
 
 import { consoleLogMetaReducer, resetStateMetaReducer } from './app.meta-reducers';
-import { resetState } from './auth/auth.actions';
+import { AuthActions } from './auth/auth.actions';
 import { AuthEffects } from './auth/auth.effects';
 import { GoogleBooksEffects } from './google-books/google-books.effects';
 import * as fromGoogleBooks from './google-books/google-books.reducer';
@@ -29,7 +29,7 @@ export const reducers: ActionReducerMap<AppState> = {
 export const effects = [AuthEffects, GoogleBooksEffects, UserBooksEffects, VolumesEffects];
 
 export const storeConfig: RootStoreConfig<AppState> = {
-  metaReducers: [resetStateMetaReducer(resetState.type), consoleLogMetaReducer],
+  metaReducers: [resetStateMetaReducer(AuthActions.authResetState.type), consoleLogMetaReducer],
   runtimeChecks: {
     strictActionTypeUniqueness: !environment.production,
     strictActionImmutability: !environment.production,

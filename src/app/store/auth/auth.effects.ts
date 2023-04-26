@@ -11,7 +11,7 @@ import { ToastService } from 'src/app/services/toast.service';
 
 import { getAuthProvider } from '../../helpers/auth.helpers';
 import { AUTH_CONFIG, AuthConfig } from '../../models/auth.models';
-import * as AuthActions from './auth.actions';
+import { AuthActions } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -26,7 +26,7 @@ export class AuthEffects {
     );
   });
 
-  readonly loginWithProviderRequest = createEffect(() => {
+  readonly loginWithProvider = createEffect(() => {
     return this.actions.pipe(
       ofType(AuthActions.loginWithProvider),
       exhaustMap(({ providerId }) =>
@@ -38,27 +38,7 @@ export class AuthEffects {
     );
   });
 
-  readonly navigateHome = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(AuthActions.loginWithProviderSuccess),
-        map(_ => this.router.navigateByUrl(this.config.afterLoginUrl)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly openLoginErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(AuthActions.loginWithProviderError),
-        map(({ error }) => this.toastService.showErrorToast(toResponseErrorMessage(error))),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly logoutRequest = createEffect(() => {
+  readonly logout = createEffect(() => {
     return this.actions.pipe(
       ofType(AuthActions.logout, AuthActions.authRefreshError, AuthActions.authTokenNotFound, AuthActions.authResponseError),
       concatMap(_ =>
@@ -70,17 +50,17 @@ export class AuthEffects {
     );
   });
 
-  readonly closeAllDialogs = createEffect(
+  readonly navigateOnLoginWithProviderSuccess = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.unauthenticated),
-        map(_ => this.dialogService.closeAllDialogs()),
+        ofType(AuthActions.loginWithProviderSuccess),
+        map(_ => this.router.navigateByUrl(this.config.afterLoginUrl)),
       );
     },
     { dispatch: false },
   );
 
-  readonly navigateToLogin = createEffect(
+  readonly navigateOnUnauthenticated = createEffect(
     () => {
       return this.actions.pipe(
         ofType(AuthActions.unauthenticated),
@@ -90,14 +70,34 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly resetState = createEffect(() => {
+  readonly closeAllDialogsOnUnauthenticated = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(AuthActions.unauthenticated),
+        map(_ => this.dialogService.closeAllDialogs()),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly authResetState = createEffect(() => {
     return this.actions.pipe(
       ofType(AuthActions.unauthenticated),
-      map(_ => AuthActions.resetState()),
+      map(_ => AuthActions.authResetState()),
     );
   });
 
-  readonly openLogoutToast = createEffect(
+  readonly loginWithProviderErrorToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(AuthActions.loginWithProviderError),
+        map(({ error }) => this.toastService.showErrorToast(toResponseErrorMessage(error))),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly logoutSuccessToast = createEffect(
     () => {
       return this.actions.pipe(
         ofType(AuthActions.logoutSuccess),
@@ -107,7 +107,7 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly openRefreshErrorToast = createEffect(
+  readonly authRefreshErrorToast = createEffect(
     () => {
       return this.actions.pipe(
         ofType(AuthActions.authRefreshError),
@@ -117,7 +117,7 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly openSessionExpiredToast = createEffect(
+  readonly authTokenNotFoundToast = createEffect(
     () => {
       return this.actions.pipe(
         ofType(AuthActions.authTokenNotFound),
@@ -127,7 +127,7 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly openResponseErrorToast = createEffect(
+  readonly authResponseErrorToast = createEffect(
     () => {
       return this.actions.pipe(
         ofType(AuthActions.authResponseError),

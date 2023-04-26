@@ -7,7 +7,7 @@ import { concatMap, first } from 'rxjs/operators';
 
 import { isBearerExcluded } from '../helpers/auth.helpers';
 import { AUTH_CONFIG, AuthConfig } from '../models/auth.models';
-import { authTokenNotFound } from '../store/auth/auth.actions';
+import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
@@ -24,7 +24,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
         if (token) {
           return next.handle(request.clone({ setHeaders: { Authorization: `Bearer ${token}` } }));
         }
-        this.store.dispatch(authTokenNotFound());
+        this.store.dispatch(AuthActions.authTokenNotFound());
         return EMPTY;
       }),
     );
