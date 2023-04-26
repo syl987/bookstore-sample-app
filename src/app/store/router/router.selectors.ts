@@ -5,9 +5,11 @@ import { RouteParams, RouteQueryParams } from 'src/app/models/router.models';
 
 const selectRouterState = createFeatureSelector<RouterReducerState<MinimalRouterStateSnapshot>>('router');
 
+// TODO rename to standard names
+
 // bugfix: casting to undefined because the router state is initially undefined
 
-export const selectRouterUrl = getRouterSelectors(selectRouterState).selectUrl as MemoizedSelector<object, string | undefined>;
+export const selectRouterUrl = getRouterSelectors(selectRouterState).selectUrl as MemoizedSelector<object, string | undefined>; // TODO check if rooter state is still undefined on startup
 export const selectRouterData = getRouterSelectors(selectRouterState).selectRouteData as MemoizedSelector<object, Data | undefined>;
 export const selectRouterParams = getRouterSelectors(selectRouterState).selectRouteParams as MemoizedSelector<object, RouteParams | undefined>; // enhancement: typed params
 export const selectRouterQueryParams = getRouterSelectors(selectRouterState).selectQueryParams as MemoizedSelector<object, RouteQueryParams | undefined>; // enhancement: typed query params
