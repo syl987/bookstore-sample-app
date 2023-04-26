@@ -30,14 +30,14 @@ interface IUserBooksService {
   providedIn: 'root',
 })
 export class UserBooksService implements IUserBooksService {
-  readonly userBooks$ = this.store.select(userBooksFeature.selectAll);
-  readonly userBooksTotal$ = this.store.select(userBooksFeature.selectTotal);
+  readonly entities$ = this.store.select(userBooksFeature.selectAll);
+  readonly entitiesTotal$ = this.store.select(userBooksFeature.selectTotal);
 
-  readonly userBooksDraft$ = this.store.select(userBooksFeature.selectAllDraft);
-  readonly userBooksPublished$ = this.store.select(userBooksFeature.selectAllPublished);
-  readonly userBooksSold$ = this.store.select(userBooksFeature.selectAllSold);
+  readonly entitiesDraft$ = this.store.select(userBooksFeature.selectAllDraft);
+  readonly entitiesPublished$ = this.store.select(userBooksFeature.selectAllPublished);
+  readonly entitiesSold$ = this.store.select(userBooksFeature.selectAllSold);
 
-  readonly userBookByRoute$ = this.store.select(userBooksFeature.selectByRoute);
+  readonly entityByRoute$ = this.store.select(userBooksFeature.selectByRoute);
 
   readonly loadPending$ = this.store.select(userBooksFeature.selectLoadPending);
   readonly loadError$ = this.store.select(userBooksFeature.selectLoadError);

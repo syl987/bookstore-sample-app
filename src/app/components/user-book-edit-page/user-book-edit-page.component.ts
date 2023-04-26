@@ -23,7 +23,7 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 export class UserBookEditPageComponent implements OnInit, OnDestroy {
   readonly id: string = this.route.snapshot.params['bookId'];
 
-  readonly book$ = this.userBooksService.userBookByRoute$;
+  readonly book$ = this.userBooksService.entityByRoute$;
 
   readonly editDraftPending$ = this.userBooksService.editDraftPending$;
   readonly publishPending$ = this.userBooksService.publishPending$;

@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSelectionList } from '@angular/material/list';
 import { Subject } from 'rxjs';
-import { debounceTime, map, take, takeUntil } from 'rxjs/operators';
+import { debounceTime, take, takeUntil } from 'rxjs/operators';
 import { UserBookDTO } from 'src/app/models/book.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
 import { GoogleBooksService } from 'src/app/services/google-books.service';
@@ -19,7 +19,7 @@ const DEBOUNCE_TIME = 500;
 export class UserBookCreateDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly searchControl = new FormControl<string>('', { nonNullable: true });
 
-  readonly volumes$ = this.googleBooksService.searchVolumes$.pipe(map(list => list?.items ?? []));
+  readonly volumes$ = this.googleBooksService.searchResults$;
 
   readonly searchQuery$ = this.googleBooksService.searchQuery$;
   readonly searchPending$ = this.googleBooksService.searchPending$;

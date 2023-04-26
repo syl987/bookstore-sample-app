@@ -21,14 +21,14 @@ interface IVolumeService {
   providedIn: 'root',
 })
 export class VolumeService implements IVolumeService {
-  readonly volumes$ = this.store.select(volumeFeature.selectAll);
-  readonly volumesTotal$ = this.store.select(volumeFeature.selectTotal);
+  readonly entities$ = this.store.select(volumeFeature.selectAll);
+  readonly entitiesTotal$ = this.store.select(volumeFeature.selectTotal);
 
-  readonly volumesFiltered$ = this.store.select(volumeFeature.selectAllFiltered);
+  readonly entitiesFiltered$ = this.store.select(volumeFeature.selectAllFiltered);
+
+  readonly entitiyByRoute$ = this.store.select(volumeFeature.selectByRoute);
 
   readonly filterQuery$ = this.store.select(volumeFeature.selectFilterQuery);
-
-  readonly volumeByRoute$ = this.store.select(volumeFeature.selectByRoute);
 
   readonly loadPending$ = this.store.select(volumeFeature.selectLoadPending);
   readonly loadError$ = this.store.select(volumeFeature.selectLoadError);

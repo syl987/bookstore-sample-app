@@ -39,6 +39,9 @@ export const googleBooksFeature = createFeature({
   name: googleBooksFeatureKey,
   reducer,
   extraSelectors: ({ selectSearch }) => ({
+    selectSearchResults: createSelector(selectSearch, ({ list }) => list?.items ?? []),
+    selectSearchResultsTotal: createSelector(selectSearch, ({ list }) => list?.totalItems ?? 0),
+
     selectSearchQuery: createSelector(selectSearch, ({ query }) => query),
     selectSearchList: createSelector(selectSearch, ({ list }) => list),
     selectSearchPending: createSelector(selectSearch, ({ pending }) => pending),
