@@ -5,7 +5,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { concatMap, shareReplay, take } from 'rxjs/operators';
 
 import { VolumeDTO } from '../models/volume.models';
-import * as VolumeActions from '../store/volume/volume.actions';
+import { VolumeActions } from '../store/volume/volume.actions';
 import * as VolumeSelectors from '../store/volume/volume.selectors';
 
 interface IVolumeService {
@@ -36,13 +36,13 @@ export class VolumeService implements IVolumeService {
   constructor(private readonly store: Store, private readonly actions: Actions) {}
 
   load(id: string): Observable<VolumeDTO> {
-    this.store.dispatch(VolumeActions.loadVolume({ id }));
+    this.store.dispatch(VolumeActions.load({ id }));
 
     const result = this.actions.pipe(
-      ofType(VolumeActions.loadVolumeSuccess, VolumeActions.loadVolumeError),
+      ofType(VolumeActions.loadSuccess, VolumeActions.loadError),
       take(1),
       concatMap(action => {
-        if (action.type === VolumeActions.loadVolumeSuccess.type) {
+        if (action.type === VolumeActions.loadSuccess.type) {
           return of(action.volume);
         }
         return throwError(() => action.error);
@@ -54,13 +54,13 @@ export class VolumeService implements IVolumeService {
   }
 
   loadAll(): Observable<VolumeDTO[]> {
-    this.store.dispatch(VolumeActions.loadVolumes());
+    this.store.dispatch(VolumeActions.loadAll());
 
     const result = this.actions.pipe(
-      ofType(VolumeActions.loadVolumesSuccess, VolumeActions.loadVolumesError),
+      ofType(VolumeActions.loadAllSuccess, VolumeActions.loadAllError),
       take(1),
       concatMap(action => {
-        if (action.type === VolumeActions.loadVolumesSuccess.type) {
+        if (action.type === VolumeActions.loadAllSuccess.type) {
           return of(action.volumes);
         }
         return throwError(() => action.error);
@@ -72,6 +72,6 @@ export class VolumeService implements IVolumeService {
   }
 
   filter(query: string): void {
-    this.store.dispatch(VolumeActions.filterVolumes({ query }));
+    this.store.dispatch(VolumeActions.filter({ query }));
   }
 }

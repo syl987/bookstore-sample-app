@@ -4,7 +4,7 @@ import { filterVolumes } from 'src/app/helpers/volume.helpers';
 import { OperationState } from 'src/app/models/store.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
-import * as VolumeActions from './volume.actions';
+import { VolumeActions } from './volume.actions';
 
 export const volumesFeatureKey = 'volumes';
 
@@ -25,31 +25,31 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(VolumeActions.loadVolume, state => ({
+  on(VolumeActions.load, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(VolumeActions.loadVolumeSuccess, (state, { volume }) => ({
+  on(VolumeActions.loadSuccess, (state, { volume }) => ({
     ...adapter.upsertOne(volume, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(VolumeActions.loadVolumeError, (state, { error }) => ({
+  on(VolumeActions.loadError, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
-  on(VolumeActions.loadVolumes, state => ({
+  on(VolumeActions.loadAll, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(VolumeActions.loadVolumesSuccess, (state, { volumes }) => ({
+  on(VolumeActions.loadAllSuccess, (state, { volumes }) => ({
     ...adapter.upsertMany(volumes, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(VolumeActions.loadVolumesError, (state, { error }) => ({
+  on(VolumeActions.loadAllError, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
-  on(VolumeActions.filterVolumes, (state, { query }) => ({
+  on(VolumeActions.filter, (state, { query }) => ({
     ...state,
     filter: { ...state.filter, query, ids: filterVolumes(query, state) },
   })),

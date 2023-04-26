@@ -3,7 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import { UserBookDTO } from 'src/app/models/book.models';
 import { OperationState } from 'src/app/models/store.models';
 
-import * as UserBooksActions from './user-books.actions';
+import { UserBooksActions } from './user-books.actions';
 
 export const userBooksFeatureKey = 'user-books';
 
@@ -30,75 +30,75 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(UserBooksActions.loadUserBook, state => ({
+  on(UserBooksActions.load, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(UserBooksActions.loadUserBookSuccess, (state, { book }) => ({
+  on(UserBooksActions.loadSuccess, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadUserBookError, (state, { error }) => ({
+  on(UserBooksActions.loadError, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
-  on(UserBooksActions.loadUserBooks, state => ({
+  on(UserBooksActions.loadAll, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(UserBooksActions.loadUserBooksSuccess, (state, { books }) => ({
+  on(UserBooksActions.loadAllSuccess, (state, { books }) => ({
     ...adapter.upsertMany(books, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadUserBooksError, (state, { error }) => ({
+  on(UserBooksActions.loadAllError, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
-  on(UserBooksActions.createUserBook, state => ({
+  on(UserBooksActions.create, state => ({
     ...state,
     create: { ...state.create, pending: true, error: undefined },
   })),
-  on(UserBooksActions.createUserBookSuccess, (state, { book }) => ({
+  on(UserBooksActions.createSuccess, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     create: { ...state.create, pending: false, error: undefined },
   })),
-  on(UserBooksActions.createUserBookError, (state, { error }) => ({
+  on(UserBooksActions.createError, (state, { error }) => ({
     ...state,
     create: { ...state.create, pending: false, error },
   })),
-  on(UserBooksActions.deleteUserBook, state => ({
+  on(UserBooksActions.delete, state => ({
     ...state,
     remove: { ...state.remove, pending: true, error: undefined },
   })),
-  on(UserBooksActions.deleteUserBookSuccess, (state, { id }) => ({
+  on(UserBooksActions.deleteSuccess, (state, { id }) => ({
     ...adapter.removeOne(id, state),
     remove: { ...state.remove, pending: false, error: undefined },
   })),
-  on(UserBooksActions.deleteUserBookError, (state, { error }) => ({
+  on(UserBooksActions.deleteError, (state, { error }) => ({
     ...state,
     remove: { ...state.remove, pending: false, error },
   })),
-  on(UserBooksActions.editUserBookDraft, state => ({
+  on(UserBooksActions.editDraft, state => ({
     ...state,
     editDraft: { ...state.editDraft, pending: true, error: undefined },
   })),
-  on(UserBooksActions.editUserBookDraftSuccess, (state, { book }) => ({
+  on(UserBooksActions.editDraftSuccess, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     editDraft: { ...state.editDraft, pending: false, error: undefined },
   })),
-  on(UserBooksActions.editUserBookDraftError, (state, { error }) => ({
+  on(UserBooksActions.editDraftError, (state, { error }) => ({
     ...state,
     editDraft: { ...state.editDraft, pending: false, error },
   })),
-  on(UserBooksActions.publishUserBook, state => ({
+  on(UserBooksActions.publish, state => ({
     ...state,
     publish: { ...state.publish, pending: true, error: undefined },
   })),
-  on(UserBooksActions.publishUserBookSuccess, (state, { book }) => ({
+  on(UserBooksActions.publishSuccess, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     publish: { ...state.publish, pending: false, error: undefined },
   })),
-  on(UserBooksActions.publishUserBookError, (state, { error }) => ({
+  on(UserBooksActions.publishError, (state, { error }) => ({
     ...state,
     publish: { ...state.publish, pending: false, error },
   })),

@@ -3,7 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import { GoogleBooksListDTO } from 'src/app/models/google-books.models';
 import { OperationState } from 'src/app/models/store.models';
 
-import * as GoogleBooksActions from './google-books.actions';
+import { GoogleBooksActions } from './google-books.actions';
 
 export const googleBooksFeatureKey = 'google-books';
 
@@ -17,15 +17,15 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(GoogleBooksActions.searchGoogleBooks, state => ({
+  on(GoogleBooksActions.search, state => ({
     ...state,
     search: { ...state.search, pending: true, error: undefined },
   })),
-  on(GoogleBooksActions.searchGoogleBooksSuccess, (state, { query, list }) => ({
+  on(GoogleBooksActions.searchSuccess, (state, { query, list }) => ({
     ...state,
     search: { ...state.search, query, list, pending: false, error: undefined },
   })),
-  on(GoogleBooksActions.searchGoogleBooksError, (state, { error }) => ({
+  on(GoogleBooksActions.searchError, (state, { error }) => ({
     ...state,
     search: { ...state.search, pending: false, error },
   })),

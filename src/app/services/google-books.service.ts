@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as VolumeActions from '../store/google-books/google-books.actions';
+import { GoogleBooksActions } from '../store/google-books/google-books.actions';
 import * as VolumeSelectors from '../store/google-books/google-books.selectors';
 
 @Injectable({
@@ -17,6 +17,6 @@ export class GoogleBooksService {
   constructor(private readonly store: Store) {}
 
   searchVolumes(query: string): void {
-    this.store.dispatch(VolumeActions.searchGoogleBooks({ query }));
+    this.store.dispatch(GoogleBooksActions.search({ query }));
   }
 }
