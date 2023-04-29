@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { environment } from '../environments/environment';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
@@ -53,7 +52,6 @@ const routes: Routes = [
         path: 'books/:bookId/edit',
         title: `Edit Book Details`,
         component: UserBookEditPageComponent,
-        // TODO guard own book only
       },
     ],
   },
@@ -63,7 +61,7 @@ const routes: Routes = [
   },
 ];
 
-if (!environment.production) {
+if (isDevMode()) {
   routes.splice(routes.length - 1, 0, { path: 'dev', loadChildren: () => import('./modules/dev/dev.module').then(m => m.DevModule) });
 }
 

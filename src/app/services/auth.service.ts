@@ -7,8 +7,7 @@ import { map, takeUntil } from 'rxjs/operators';
 
 import { toAuthUser } from '../helpers/auth.helpers';
 import { AuthProviderId, AuthUser } from '../models/auth.models';
-import { loginWithProvider, logout } from '../store/auth/auth.actions';
-import * as AuthActions from '../store/auth/auth.actions';
+import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -47,13 +46,13 @@ export class AuthService implements OnDestroy {
     // set login pending stream
     this.actions.pipe(ofType(AuthActions.loginWithProvider), takeUntil(this._destroyed$)).subscribe(_ => this._loginPending.next(true));
     this.actions
-      .pipe(ofType(AuthActions.loginWithProviderSuccess, AuthActions.loginWithProviderError, AuthActions.resetState), takeUntil(this._destroyed$))
+      .pipe(ofType(AuthActions.loginWithProviderSuccess, AuthActions.loginWithProviderError, AuthActions.authResetState), takeUntil(this._destroyed$))
       .subscribe(_ => this._loginPending.next(false));
 
     // set logout pending stream
     this.actions.pipe(ofType(AuthActions.logout), takeUntil(this._destroyed$)).subscribe(_ => this._logoutPending.next(true));
     this.actions
-      .pipe(ofType(AuthActions.logoutSuccess, AuthActions.logoutError, AuthActions.resetState), takeUntil(this._destroyed$))
+      .pipe(ofType(AuthActions.logoutSuccess, AuthActions.logoutError, AuthActions.authResetState), takeUntil(this._destroyed$))
       .subscribe(_ => this._logoutPending.next(false));
   }
 
@@ -66,13 +65,13 @@ export class AuthService implements OnDestroy {
    * Login with an external provider.
    */
   loginWithProvider(provider: AuthProviderId): void {
-    this.store.dispatch(loginWithProvider({ providerId: provider }));
+    this.store.dispatch(AuthActions.loginWithProvider({ providerId: provider }));
   }
 
   /**
    * Logout.
    */
   logout(): void {
-    this.store.dispatch(logout());
+    this.store.dispatch(AuthActions.logout());
   }
 }

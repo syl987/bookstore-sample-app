@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sidenav',
@@ -17,7 +16,7 @@ export class SidenavComponent {
   readonly loggedIn$ = this.authService.loggedIn$;
   readonly loggedOut$ = this.authService.loggedOut$;
 
-  readonly production = environment.production;
+  readonly development = isDevMode();
 
   @Output() readonly navigated = new EventEmitter<void>();
 

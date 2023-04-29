@@ -6,55 +6,55 @@ import { firebaseError } from 'src/app/models/error.models';
 import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
 import { ToastService } from 'src/app/services/toast.service';
 
-import * as VolumeActions from './volume.actions';
+import { VolumeActions } from './volume.actions';
 
 @Injectable()
 export class VolumesEffects {
-  readonly loadVolume = createEffect(() => {
+  readonly load = createEffect(() => {
     return this.actions.pipe(
-      ofType(VolumeActions.loadVolume),
+      ofType(VolumeActions.load),
       switchMap(({ id }) => {
         return this.firebaseApi.getVolume(id).pipe(
-          map(volume => VolumeActions.loadVolumeSuccess({ volume })),
-          catchError(err => of(VolumeActions.loadVolumeError({ error: firebaseError({ err }) }))),
+          map(volume => VolumeActions.loadSuccess({ volume })),
+          catchError(err => of(VolumeActions.loadError({ error: firebaseError({ err }) }))),
         );
       }),
     );
   });
 
-  readonly loadVolumes = createEffect(() => {
+  readonly loadAll = createEffect(() => {
     return this.actions.pipe(
-      ofType(VolumeActions.loadVolumes),
+      ofType(VolumeActions.loadAll),
       switchMap(_ => {
         return this.firebaseApi.getVolumes().pipe(
-          map(res => VolumeActions.loadVolumesSuccess({ volumes: res })),
-          catchError(err => of(VolumeActions.loadVolumesError({ error: firebaseError({ err }) }))),
+          map(res => VolumeActions.loadAllSuccess({ volumes: res })),
+          catchError(err => of(VolumeActions.loadAllError({ error: firebaseError({ err }) }))),
         );
       }),
     );
   });
 
-  readonly loadVolumesFilter = createEffect(() => {
+  readonly filterOnLoadSuccess = createEffect(() => {
     return this.actions.pipe(
-      ofType(VolumeActions.loadVolumesSuccess),
-      map(_ => VolumeActions.filterVolumes({ query: '' })),
+      ofType(VolumeActions.loadAllSuccess),
+      map(_ => VolumeActions.filter({ query: '' })),
     );
   });
 
-  readonly loadVolumeErrorToast = createEffect(
+  readonly loadErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.loadVolumeError),
+        ofType(VolumeActions.loadError),
         tap(_ => this.toastService.showErrorToast(`Error loading volume.`)),
       );
     },
     { dispatch: false },
   );
 
-  readonly loadVolumesErrorToast = createEffect(
+  readonly loadAllErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.loadVolumesError),
+        ofType(VolumeActions.loadAllError),
         tap(_ => this.toastService.showErrorToast(`Error loading volumes.`)),
       );
     },

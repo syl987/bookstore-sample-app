@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
@@ -7,7 +7,6 @@ import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -31,7 +30,7 @@ export class HeaderComponent {
 
   readonly toolbarTitle$ = combineLatest([this.showNavs$, this.title$]).pipe(map(([showNavs, title]) => (showNavs ? this.config.appName : title)));
 
-  readonly production = environment.production;
+  readonly development = isDevMode();
 
   @Output() readonly sidenavToggle = new EventEmitter<void>();
 

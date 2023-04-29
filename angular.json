@@ -49,12 +49,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "polyfills": ["zone.js", "hammerjs", "zone.js/plugins/zone-error"]
             }
           },
           "defaultConfiguration": "production"

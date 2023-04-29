@@ -6,7 +6,7 @@ import { exhaustMap, takeUntil } from 'rxjs/operators';
 import { matchesEndpointUrl } from 'src/app/functions/http.functions';
 
 import { AuthConfig, AuthProviderId, AuthUser } from '../models/auth.models';
-import * as AuthActions from '../store/auth/auth.actions';
+import { AuthActions } from '../store/auth/auth.actions';
 
 /**
  * Check if the `HttpRequest` is excluded from authentication based on `bearerIncluded` and `bearerExcluded` auth config.

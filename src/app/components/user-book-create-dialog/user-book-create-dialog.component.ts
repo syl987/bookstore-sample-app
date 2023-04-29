@@ -17,15 +17,15 @@ const DEBOUNCE_TIME = 500;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookCreateDialogComponent implements OnInit, AfterViewInit, OnDestroy {
-  readonly searchControl = new FormControl<string>('', { nonNullable: true });
-
-  readonly volumes$ = this.googleBooksService.searchVolumes$;
+  readonly results$ = this.googleBooksService.searchResults$;
 
   readonly searchQuery$ = this.googleBooksService.searchQuery$;
   readonly searchPending$ = this.googleBooksService.searchPending$;
   readonly searchError$ = this.googleBooksService.searchError$;
 
   readonly createPending$ = this.userBooksService.createPending$;
+
+  readonly searchControl = new FormControl<string>('', { nonNullable: true });
 
   @ViewChild(MatSelectionList) list?: MatSelectionList;
 
