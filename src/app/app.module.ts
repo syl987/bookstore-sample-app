@@ -7,6 +7,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TitleStrategy } from '@angular/router';
@@ -37,6 +38,7 @@ import { VolumeCardComponent } from './components/volume-card/volume-card.compon
 import { VolumeDetailPageComponent } from './components/volume-detail-page/volume-detail-page.component';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
+import { DirtyOrTouchedMatcher } from './matchers/dirty-or-touched-matcher';
 import { APP_CONFIG, APP_STRINGS } from './models/app.models';
 import { AUTH_CONFIG } from './models/auth.models';
 import { SharedModule } from './modules/shared/shared.module';
@@ -106,6 +108,7 @@ const firebaseOptions: FirebaseOptions = {
     { provide: AUTH_CONFIG, useValue: authConfig },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
+    { provide: ErrorStateMatcher, useClass: DirtyOrTouchedMatcher },
     { provide: TitleStrategy, useClass: AppTitleStrategy },
   ],
 })

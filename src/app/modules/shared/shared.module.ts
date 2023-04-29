@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule } from '@angular/material/checkbox';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -20,7 +19,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipModule } from '@angular/material/tooltip';
 
 import { ButtonSpinnerDirective } from './directives/button-spinner.directive';
-import { DirtyOrTouchedMatcher } from './matchers/dirty-or-touched-matcher';
 import { checkboxOptions } from './options/checkbox.options';
 import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
@@ -82,7 +80,6 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
     BooleanPipe,
   ],
   providers: [
-    { provide: ErrorStateMatcher, useClass: DirtyOrTouchedMatcher },
     { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: dialogOptions },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: formFieldOptions },
