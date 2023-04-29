@@ -1,6 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
+/**
+ * Map a form control onto any validation error message. If the control contains multiple errors, only one message will be chosen based on internal priority.
+ *
+ * Note that this pipe is impure as it needs to observe the internal state of a control.
+ */
 @Pipe({
   name: 'validationError',
   pure: false,

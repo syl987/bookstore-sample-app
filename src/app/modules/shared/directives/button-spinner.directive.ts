@@ -3,6 +3,11 @@ import { ComponentRef, Directive, ElementRef, Input, OnInit, Renderer2, ViewCont
 import { ThemePalette } from '@angular/material/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
+/**
+ * Create a component-like structure that allows to display a spinner on a button based on a boolean input.
+ *
+ * Supports disabled state.
+ */
 @Directive({
   selector: '[mat-button][spinning],[mat-raised-button][spinning],[mat-stroked-button][spinning],[mat-flat-button][spinning]',
   host: { class: 'app-button-spinner' },

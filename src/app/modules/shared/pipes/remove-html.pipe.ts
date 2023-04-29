@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { removeHtmlXmlAnnotations } from 'src/app/functions/string.functions';
 
+/**
+ * Remove any XML annotations from a string.
+ */
 @Pipe({
   name: 'removeHtml',
 })
