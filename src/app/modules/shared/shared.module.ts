@@ -17,22 +17,29 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/mater
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipModule } from '@angular/material/tooltip';
+import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
+import { BooleanPipe } from 'src/app/pipes/boolean.pipe';
+import { RemoveHtmlPipe } from 'src/app/pipes/remove-html.pipe';
+import { ResponseErrorPipe } from 'src/app/pipes/response-error.pipe';
+import { ValidationErrorPipe } from 'src/app/pipes/validation-error.pipe';
 
-import { ButtonSpinnerDirective } from './directives/button-spinner.directive';
+import { ButtonSpinnerDirective } from '../../directives/button-spinner.directive';
 import { checkboxOptions } from './options/checkbox.options';
 import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
 import { snackBarOptions } from './options/snack-bar.options';
 import { tooltipOptions } from './options/tooltip.options';
-import { BookConditionPipe } from './pipes/book-condition.pipe';
-import { BooleanPipe } from './pipes/boolean.pipe';
-import { RemoveHtmlPipe } from './pipes/remove-html.pipe';
-import { ResponseErrorPipe } from './pipes/response-error.pipe';
-import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
+
+    ButtonSpinnerDirective,
+    RemoveHtmlPipe,
+    ResponseErrorPipe,
+    ValidationErrorPipe,
+    BookConditionPipe,
+    BooleanPipe,
 
     MatButtonModule,
     MatCardModule,
@@ -52,7 +59,6 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
     MatToolbarModule,
     MatTooltipModule,
   ],
-  declarations: [ButtonSpinnerDirective, RemoveHtmlPipe, ResponseErrorPipe, ValidationErrorPipe, BookConditionPipe, BooleanPipe],
   exports: [
     MatButtonModule,
     MatCardModule,

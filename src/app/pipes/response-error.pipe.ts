@@ -7,6 +7,7 @@ import { ResponseError } from 'src/app/models/error.models';
  */
 @Pipe({
   name: 'responseError',
+  standalone: true,
 })
 export class ResponseErrorPipe implements PipeTransform {
   transform(value: ResponseError | null | undefined): string | null {

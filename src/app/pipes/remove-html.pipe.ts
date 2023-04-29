@@ -6,6 +6,7 @@ import { removeHtmlXmlAnnotations } from 'src/app/functions/string.functions';
  */
 @Pipe({
   name: 'removeHtml',
+  standalone: true,
 })
 export class RemoveHtmlPipe implements PipeTransform {
   transform(value: string | null | undefined): string | null {

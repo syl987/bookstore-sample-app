@@ -10,6 +10,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
  */
 @Directive({
   selector: '[mat-button][spinning],[mat-raised-button][spinning],[mat-stroked-button][spinning],[mat-flat-button][spinning]',
+  standalone: true,
   host: { class: 'app-button-spinner' },
 })
 export class ButtonSpinnerDirective implements OnInit {
