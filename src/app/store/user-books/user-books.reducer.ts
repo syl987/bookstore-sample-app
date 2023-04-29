@@ -6,7 +6,7 @@ import { OperationState } from 'src/app/models/store.models';
 import { selectRouteParam } from '../router/router.selectors';
 import { UserBooksActions } from './user-books.actions';
 
-export const userBooksFeatureKey = 'userBooks';
+const userBooksFeatureKey = 'userBooks';
 
 interface State extends EntityState<UserBookDTO> {
   load: OperationState;
@@ -29,7 +29,7 @@ const initialState: State = adapter.getInitialState({
   publish: { pending: false },
 });
 
-export const reducer = createReducer(
+const reducer = createReducer(
   initialState,
   on(UserBooksActions.load, state => ({
     ...state,

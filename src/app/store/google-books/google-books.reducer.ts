@@ -5,7 +5,7 @@ import { OperationState } from 'src/app/models/store.models';
 
 import { GoogleBooksActions } from './google-books.actions';
 
-export const googleBooksFeatureKey = 'googleBooks';
+const googleBooksFeatureKey = 'googleBooks';
 
 interface State {
   search: OperationState<{
@@ -18,7 +18,7 @@ const initialState: State = {
   search: { pending: false },
 };
 
-export const reducer = createReducer(
+const reducer = createReducer(
   initialState,
   on(GoogleBooksActions.search, state => ({
     ...state,

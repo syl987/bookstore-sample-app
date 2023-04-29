@@ -8,7 +8,7 @@ import { VolumeDTO } from 'src/app/models/volume.models';
 import { selectRouteParam } from '../router/router.selectors';
 import { VolumeActions } from './volume.actions';
 
-export const volumeFeatureKey = 'volumes';
+const volumeFeatureKey = 'volumes';
 
 interface State extends EntityState<VolumeDTO> {
   filter: { query: string; ids: string[] | number[] };
@@ -25,7 +25,7 @@ const initialState: State = adapter.getInitialState({
   load: { pending: false },
 });
 
-export const reducer = createReducer(
+const reducer = createReducer(
   initialState,
   on(VolumeActions.load, state => ({
     ...state,
