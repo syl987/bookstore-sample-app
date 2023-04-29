@@ -24,7 +24,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TitleStrategy } from '@angular/router';
@@ -63,13 +62,13 @@ import { checkboxOptions } from './options/checkbox.options';
 import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
 import { snackBarOptions } from './options/snack-bar.options';
-import { tooltipOptions } from './options/tooltip.options';
 import { BookConditionPipe } from './pipes/book-condition.pipe';
 import { BooleanPipe } from './pipes/boolean.pipe';
 import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO standalone components and migrate material imports to reduce initial bundle size
 // TODO add requireAuth effects lifecycle
 // TODO resolve browser console warnings on startup
 // TODO update angular and kick destroyed subjects
@@ -94,7 +93,6 @@ const firebaseOptions: FirebaseOptions = {
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
     provideFirebaseApp(() => initializeApp(firebaseOptions)),
     provideAuth(() => getAuth()),
     provideFunctions(() => getFunctions()),
@@ -104,7 +102,6 @@ const firebaseOptions: FirebaseOptions = {
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot(routerStoreConfig),
     StoreDevtoolsModule.instrument({ maxAge: 50, logOnly: !isDevMode() }),
-
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -120,7 +117,7 @@ const firebaseOptions: FirebaseOptions = {
     MatSidenavModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatTooltipModule, // unused
+    /* MatTooltipModule, */
 
     ButtonSpinnerDirective,
     ValidationErrorPipe,
@@ -161,7 +158,7 @@ const firebaseOptions: FirebaseOptions = {
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: dialogOptions },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: formFieldOptions },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: snackBarOptions },
-    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipOptions },
+    /* { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipOptions }, */
     { provide: ErrorStateMatcher, useClass: DirtyOrTouchedMatcher },
     { provide: TitleStrategy, useClass: AppTitleStrategy },
   ],
