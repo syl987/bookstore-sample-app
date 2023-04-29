@@ -3,6 +3,7 @@ import { BookCondition } from 'src/app/models/book.models';
 
 @Pipe({
   name: 'bookCondition',
+  standalone: true,
 })
 export class BookConditionPipe implements PipeTransform {
   transform(value: BookCondition | null | undefined): string | null {
