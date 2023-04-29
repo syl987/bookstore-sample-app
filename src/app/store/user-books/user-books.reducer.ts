@@ -8,7 +8,7 @@ import { UserBooksActions } from './user-books.actions';
 
 export const userBooksFeatureKey = 'userBooks';
 
-export interface State extends EntityState<UserBookDTO> {
+interface State extends EntityState<UserBookDTO> {
   load: OperationState;
   create: OperationState;
   remove: OperationState;

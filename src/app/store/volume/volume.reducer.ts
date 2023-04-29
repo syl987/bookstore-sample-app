@@ -10,7 +10,7 @@ import { VolumeActions } from './volume.actions';
 
 export const volumeFeatureKey = 'volumes';
 
-export interface State extends EntityState<VolumeDTO> {
+interface State extends EntityState<VolumeDTO> {
   filter: { query: string; ids: string[] | number[] };
   load: OperationState;
 }

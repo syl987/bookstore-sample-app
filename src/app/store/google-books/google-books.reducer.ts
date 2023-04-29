@@ -7,7 +7,7 @@ import { GoogleBooksActions } from './google-books.actions';
 
 export const googleBooksFeatureKey = 'googleBooks';
 
-export interface State {
+interface State {
   search: OperationState<{
     query?: string;
     list?: GoogleBooksListDTO;
