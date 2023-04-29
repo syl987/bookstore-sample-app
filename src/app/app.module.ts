@@ -68,10 +68,15 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO standalone components and migrate material imports to reduce initial bundle size
 // TODO add requireAuth effects lifecycle
+// TODO consider angular flex-layout instead of bootstrap grid
+// TODO consider normalize.css instead of bootstrap reboot
+// TODO consider material typography instead of bootstrap typography
+// TODO consider kicking bootstrap root if not needed
+// TODO adapt bootstrap variables / helpers: theme colors, font size, font weight
+// TODO standalone components and migrate material imports to reduce initial bundle size
+// TODO experimantal standalone components (possibly all) as pull request
 // TODO resolve browser console warnings on startup
-// TODO update angular and kick destroyed subjects
 // TODO add $localize function and x18n tags to all language strings
 
 registerLocaleData(localeDe);
