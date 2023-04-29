@@ -1,9 +1,11 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { notUndefined } from 'src/app/functions/typeguard.functions';
 import { filterVolumes } from 'src/app/helpers/volume.helpers';
 import { OperationState } from 'src/app/models/store.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
+import { selectRouteParam } from '../router/router.selectors';
 import { volumeActions } from './volume.actions';
 
 export const volumeFeatureKey = 'volumes';
@@ -55,4 +57,22 @@ export const reducer = createReducer(
   })),
 );
 
-export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
+export const volumeFeature = createFeature({
+  name: volumeFeatureKey,
+  reducer,
+  extraSelectors: ({ selectVolumesState, selectEntities, selectFilter, selectLoad }) => ({
+    selectAll: createSelector(selectVolumesState, adapter.getSelectors().selectAll),
+    selectEntities: createSelector(selectVolumesState, adapter.getSelectors().selectEntities),
+    selectIds: createSelector(selectVolumesState, adapter.getSelectors().selectIds),
+    selectTotal: createSelector(selectVolumesState, adapter.getSelectors().selectTotal),
+
+    selectAllFiltered: createSelector(selectEntities, selectFilter, (entities, { ids }) => ids.map(id => entities[id]).filter(notUndefined)),
+
+    selectByRoute: createSelector(selectEntities, selectRouteParam('volumeId'), (entities, id) => (id ? entities[id] : undefined)),
+
+    selectFilterQuery: createSelector(selectVolumesState, ({ filter }) => filter.query),
+
+    selectLoadPending: createSelector(selectLoad, ({ pending }) => pending),
+    selectLoadError: createSelector(selectLoad, ({ error }) => error),
+  }),
+});

@@ -1,8 +1,9 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { createReducer, on } from '@ngrx/store';
-import { UserBookDTO } from 'src/app/models/book.models';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { OperationState } from 'src/app/models/store.models';
 
+import { selectRouteParam } from '../router/router.selectors';
 import { userBooksActions } from './user-books.actions';
 
 export const userBooksFeatureKey = 'userBooks';
@@ -104,4 +105,38 @@ export const reducer = createReducer(
   })),
 );
 
-export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
+export const userBooksFeature = createFeature({
+  name: userBooksFeatureKey,
+  reducer,
+  extraSelectors: ({ selectUserBooksState, selectEntities, selectLoad, selectCreate, selectRemove, selectEditDraft, selectPublish }) => ({
+    selectAll: createSelector(selectUserBooksState, adapter.getSelectors().selectAll),
+    selectTotal: createSelector(selectUserBooksState, adapter.getSelectors().selectTotal),
+
+    selectAllDraft: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
+      books.filter(b => b.status === BookStatus.DRAFT),
+    ),
+    selectAllPublished: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
+      books.filter(b => b.status === BookStatus.PUBLISHED),
+    ),
+    selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
+      books.filter(b => b.status === BookStatus.SOLD),
+    ),
+
+    selectByRoute: createSelector(selectEntities, selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
+
+    selectLoadPending: createSelector(selectLoad, ({ pending }) => pending),
+    selectLoadError: createSelector(selectLoad, ({ error }) => error),
+
+    selectCreatePending: createSelector(selectCreate, ({ pending }) => pending),
+    selectCreateError: createSelector(selectCreate, ({ error }) => error),
+
+    selectDeletePending: createSelector(selectRemove, ({ pending }) => pending),
+    selectDeleteError: createSelector(selectRemove, ({ error }) => error),
+
+    selectEditDraftPending: createSelector(selectEditDraft, ({ pending }) => pending),
+    selectEditDraftError: createSelector(selectEditDraft, ({ error }) => error),
+
+    selectPublishPending: createSelector(selectPublish, ({ pending }) => pending),
+    selectPublishError: createSelector(selectPublish, ({ error }) => error),
+  }),
+});

@@ -4,13 +4,13 @@
   <button mat-stroked-button color="primary" (click)="openBookCreateDialog()">Create book</button>
 </div>
 
-<div *ngIf="(booksDraft$ | async)?.length" class="app-container">
+<div *ngIf="(userBooksDraft$ | async)?.length" class="app-container">
   <h2>Draft</h2>
 
   <p>Carefully fill in the book details. Once published, the book will be available to other users and its data cannot be changed.</p>
 
   <div class="row">
-    <div *ngFor="let book of booksDraft$ | async" class="col-md-6 col-xl-4 mb-m">
+    <div *ngFor="let book of userBooksDraft$ | async" class="col-md-6 col-xl-4 mb-m">
       <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
         <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book"></app-user-book-card-content></app-volume-card>
       </a>
@@ -18,13 +18,13 @@
   </div>
 </div>
 
-<div *ngIf="(booksPublished$ | async)?.length" class="app-container">
+<div *ngIf="(userBooksPublished$ | async)?.length" class="app-container">
   <h2>Published</h2>
 
   <p>These books are publicly accessible and available for buying.</p>
 
   <div class="row">
-    <div *ngFor="let book of booksPublished$ | async" class="col-md-6 col-xl-4 mb-m">
+    <div *ngFor="let book of userBooksPublished$ | async" class="col-md-6 col-xl-4 mb-m">
       <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
         <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book"></app-user-book-card-content></app-volume-card>
       </a>
@@ -32,13 +32,13 @@
   </div>
 </div>
 
-<div *ngIf="(booksSold$ | async)?.length" class="app-container">
+<div *ngIf="(userBooksSold$ | async)?.length" class="app-container">
   <h2>Sold</h2>
 
   <p>Sold books are not publicly visible any more but they will remain listed here.</p>
 
   <div class="row">
-    <div *ngFor="let book of booksSold$ | async" class="col-md-6 col-xl-4 mb-m">
+    <div *ngFor="let book of userBooksSold$ | async" class="col-md-6 col-xl-4 mb-m">
       <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
         <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book"></app-user-book-card-content></app-volume-card>
       </a>

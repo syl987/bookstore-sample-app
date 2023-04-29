@@ -1,5 +1,5 @@
 import { isDevMode } from '@angular/core';
-import { MinimalRouterStateSnapshot, NavigationActionTiming, routerReducer, RouterReducerState, RouterState, StoreRouterConfig } from '@ngrx/router-store';
+import { MinimalRouterStateSnapshot, routerReducer, RouterReducerState, RouterState, StoreRouterConfig } from '@ngrx/router-store';
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 
 import { metaReducers } from './app.meta-reducers';
@@ -39,5 +39,4 @@ export const storeConfig: RootStoreConfig<AppState> = {
 
 export const routerStoreConfig: StoreRouterConfig = {
   routerState: RouterState.Minimal,
-  navigationActionTiming: NavigationActionTiming.PostActivation,
 };
