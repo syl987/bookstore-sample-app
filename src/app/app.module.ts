@@ -43,6 +43,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO add requireAuth effects lifecycle
 // TODO resolve browser console warnings on startup
 // TODO update angular and kick destroyed subjects
 // TODO add $localize function and x18n tags to all language strings
