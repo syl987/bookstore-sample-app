@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
@@ -6,7 +7,7 @@ import { ExampleDevDialogComponent } from './components/example-dev-dialog/examp
 import { DevRoutingModule } from './dev-routing.module';
 
 @NgModule({
-  imports: [SharedModule, DevRoutingModule],
+  imports: [CommonModule, SharedModule, DevRoutingModule],
   declarations: [ComponentsDevPageComponent, ExampleDevDialogComponent],
 })
 export class DevModule {}

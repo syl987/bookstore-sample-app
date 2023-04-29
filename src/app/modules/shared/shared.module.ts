@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule } from '@angular/material/checkbox';
@@ -36,7 +35,7 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -57,8 +56,6 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
   ],
   declarations: [ButtonSpinnerDirective, RemoveHtmlPipe, ResponseErrorPipe, ValidationErrorPipe, BookConditionPipe, BooleanPipe],
   exports: [
-    CommonModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
