@@ -73,7 +73,10 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO consider normalize.css instead of bootstrap reboot
 // TODO consider material typography instead of bootstrap typography
 // TODO consider kicking bootstrap root if not needed
+// TODO check common background styles for material snack bars
+// TODO check style variables and functions, kick irrelevant ones
 // TODO adapt bootstrap variables / helpers: theme colors, font size, font weight
+// TODO check keeping custom container styling
 // TODO standalone components and migrate material imports to reduce initial bundle size
 // TODO experimantal standalone components (possibly all) as pull request
 // TODO resolve browser console warnings on startup
