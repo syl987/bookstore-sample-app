@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
+import { Observable, of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
+import { requireAuth } from 'src/app/helpers/auth.helpers';
 import { firebaseError, internalError } from 'src/app/models/error.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
@@ -11,7 +12,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { UserBooksActions } from './user-books.actions';
 
 @Injectable()
-export class UserBooksEffects {
+export class UserBooksEffects implements OnRunEffects {
   readonly load = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.load),
@@ -217,4 +218,8 @@ export class UserBooksEffects {
     private readonly firebaseApi: FirebaseDatabaseService,
     private readonly toastService: ToastService,
   ) {}
+
+  ngrxOnRunEffects(resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {
+    return requireAuth(this.actions, resolvedEffects$);
+  }
 }
