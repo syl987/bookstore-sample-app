@@ -1,16 +1,15 @@
 .mat-mdc-snack-bar-container {
   border-radius: $border-radius !important;
-  min-width: 192px !important;
 
   .mat-mdc-simple-snack-bar {
-    line-height: 24px; // style fix: text beyond the line hight was cut off
+    line-height: 24px; // fix: text beyond the line hight was cut off
   }
 }
 
 .mat-mdc-snack-bar-container.success .mdc-snackbar__label,
 .mat-mdc-snack-bar-container.error .mdc-snackbar__label,
 .mat-mdc-snack-bar-container.info .mdc-snackbar__label {
-  margin-left: app-spacer(2m);
+  margin-left: app-spacer(2m); // icon spacing
 
   &::before {
     font-family: 'FontAwesome';

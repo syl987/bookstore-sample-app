@@ -68,7 +68,6 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO add requireAuth effects lifecycle
 // TODO consider angular flex-layout instead of bootstrap grid
 // TODO consider normalize.css instead of bootstrap reboot
 // TODO consider material typography instead of bootstrap typography
