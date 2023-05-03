@@ -1,5 +1,5 @@
 <div *ngIf="user$ | async as user; else notAuthenticated" class="d-flex flex-column align-items-center mt-3m mb-s">
-  <img [src]="user?.photoURL || 'favicon.ico'" alt="current user" width="128" height="128" class="rounded-circle fs-xs fw-400 mb-2xs p-3xs border" />
+  <img [src]="user?.photoURL || 'favicon.ico'" alt="current user" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border" />
   {{ user?.displayName || 'Current User' }}
 </div>
 

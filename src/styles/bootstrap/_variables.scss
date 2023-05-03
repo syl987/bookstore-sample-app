@@ -328,7 +328,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
-$enable-shadows: true !default;
+$enable-shadows: true;
 $enable-gradients: false !default;
 $enable-transitions: true !default;
 $enable-reduced-motion: true !default;
@@ -339,7 +339,7 @@ $enable-cssgrid: false !default;
 $enable-button-pointers: true !default;
 $enable-rfs: true !default;
 $enable-validation-icons: true !default;
-$enable-negative-margins: true !default;
+$enable-negative-margins: true;
 $enable-deprecation-messages: true !default;
 $enable-important-utilities: true !default;
 
@@ -567,20 +567,18 @@ $h6-font-size: $font-size-base !default;
 
 // scss-docs-start font-sizes
 $font-sizes: (
-  1: $h1-font-size,
-  2: $h2-font-size,
-  3: $h3-font-size,
-  4: $h4-font-size,
-  5: $h5-font-size,
-  6: $h6-font-size,
+  large: $font-size-base * 1.125,
+  normal: $font-size-base,
+  small: $font-size-base * 0.875,
+  xsmall: $font-size-base * 0.75,
 ) !default;
 // scss-docs-end font-sizes
 
 // scss-docs-start headings-variables
-$headings-margin-bottom: $spacer * 0.5 !default;
+$headings-margin-bottom: $spacer;
 $headings-font-family: null !default;
 $headings-font-style: null !default;
-$headings-font-weight: 500 !default;
+$headings-font-weight: 700;
 $headings-line-height: 1.2 !default;
 $headings-color: null !default;
 // scss-docs-end headings-variables
@@ -597,7 +595,7 @@ $display-font-sizes: (
 
 $display-font-family: null !default;
 $display-font-style: null !default;
-$display-font-weight: 300 !default;
+$display-font-weight: 400;
 $display-line-height: $headings-line-height !default;
 // scss-docs-end display-headings
 
