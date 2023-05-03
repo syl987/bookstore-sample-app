@@ -36,7 +36,8 @@
 
 .mat-toolbar div {
   height: 100% !important;
-  line-height: 66px !important; // pull slightly down (header height is 64px on desktop)
+  display: flex;
+  align-items: center;
 
   // hardcoded mat-toolbar mobile breakpoint
   @media (max-width: 599px) {
