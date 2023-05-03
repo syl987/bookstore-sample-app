@@ -1,6 +1,7 @@
 .mat-mdc-snack-bar-container {
-  border-radius: $border-radius !important;
-
+  .mdc-snackbar__surface {
+    border-radius: $border-radius !important;
+  }
   .mat-mdc-simple-snack-bar {
     line-height: 24px; // fix: text beyond the line hight was cut off
   }
