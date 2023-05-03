@@ -71,7 +71,6 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO check common background styles for material snack bars
 // TODO check style variables and functions, kick irrelevant ones
 // TODO adapt bootstrap variables / helpers: theme colors, font size, font weight
-// TODO check keeping custom container styling
 // TODO consider material grid-list with breakpoint observer instead of bootstrap grid
 // TODO consider normalize.css instead of bootstrap reboot
 // TODO consider material typography instead of bootstrap typography
