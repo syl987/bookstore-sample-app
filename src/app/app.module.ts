@@ -68,18 +68,10 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO check common background styles for material snack bars
-// TODO check style variables and functions, kick irrelevant ones
-// TODO adapt bootstrap variables / helpers: theme colors, font size, font weight
-// TODO check keeping custom container styling
 // TODO consider material grid-list with breakpoint observer instead of bootstrap grid
-// TODO consider normalize.css instead of bootstrap reboot
-// TODO consider material typography instead of bootstrap typography
-// TODO consider kicking bootstrap root if not needed
 // TODO import specific font of sizes 400,600,700, no italics
-// TODO standalone components and migrate material imports to reduce initial bundle size
+// TODO modules or standalone components + migrate material imports to reduce initial bundle size
 // TODO experimantal standalone components (possibly all) as pull request
-// TODO resolve browser console warnings on startup
 // TODO add $localize function and x18n tags to all language strings
 
 registerLocaleData(localeDe);
