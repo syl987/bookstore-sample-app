@@ -1,7 +1,7 @@
 <mat-toolbar class="shadow">
-  <mat-toolbar-row>
+  <mat-toolbar-row class="px-2m">
     <ng-container *ngIf="showToggle$ | async">
-      <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="fs-large app-sidebar-toggle me-3xs">
+      <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="fs-large ms-nm me-2xs">
         <mat-icon fontIcon="fa-bars"></mat-icon>
       </button>
 
@@ -54,7 +54,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="app-container bg-light">
+<div class="container-lg bg-light">
   <div class="mt-2xs"></div>
 
   <h1 *ngIf="showNavs$ | async">{{ title$ | async }}</h1>

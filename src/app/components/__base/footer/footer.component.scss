@@ -1,7 +1,7 @@
 @import 'shared';
 
-// content-based value
-$footer-mobile-breakpoint: 599px;
+// equals $grid-breakpoints.md
+$footer-mobile-breakpoint: 768px;
 
 .app-flex-column-reverse-mobile {
   @media (max-width: $footer-mobile-breakpoint) {
