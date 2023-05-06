@@ -7,5 +7,5 @@ import { UserBookDTO } from 'src/app/models/book.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookCardContentComponent {
-  @Input() book?: UserBookDTO | null;
+  @Input({ required: true }) book!: UserBookDTO;
 }
