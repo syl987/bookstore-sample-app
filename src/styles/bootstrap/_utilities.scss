@@ -19,16 +19,21 @@ $custom-utilities: (
     values: default pointer not-allowed,
   ),
   'font-size': (
-    rfs: true,
+    // override: kick rfs
+    rfs: false,
     property: font-size,
     class: fs,
-    values: $app-font-sizes,
+    values: $font-sizes,
   ),
   'font-weight': (
     // override: override defaults
     property: font-weight,
     class: fw,
-    values: $app-font-weights,
+    values: (
+      normal: $font-weight-normal,
+      semibold: $font-weight-semibold,
+      bold: $font-weight-bold,
+    ),
   ),
   'text-align': (
     // override: add justify

@@ -12,7 +12,7 @@
     <ng-container *ngIf="getPublishedBooksTotal() as total">
       <mat-divider></mat-divider>
 
-      <p class="my-2xs fst-italic fs-s">Contains {{ total }} books starting from {{ getPublishedBooksCheapestPrice() | currency }}</p>
+      <p class="my-2xs fs-small">Contains {{ total }} books starting from {{ getPublishedBooksCheapestPrice() | currency }}</p>
     </ng-container>
 
     <ng-content></ng-content>

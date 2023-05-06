@@ -12,7 +12,7 @@
   <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="py-0">
     <mat-list-option *ngFor="let volume of results$ | async | slice : 0 : 7" [value]="volume" class="text-truncate">
       <img *ngIf="volume.volumeInfo.imageLinks" [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="Book thumbnail" height="44" width="44" class="me-s" />
-      <span class="fw-700">{{ volume.volumeInfo.title }}</span>
+      <span class="fw-bold">{{ volume.volumeInfo.title }}</span>
 
       <span *ngIf="volume.volumeInfo.subtitle" class="text-muted ms-2xs">&nbsp;{{ volume.volumeInfo.subtitle }}</span>
     </mat-list-option>
