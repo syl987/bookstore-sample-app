@@ -12,8 +12,8 @@
     "lint:check": "ng lint",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "browserslist": "browserslist --coverage && browserslist",
-    "browserslist:update": "browserslist --update-db",
+    "browsers": "browserslist --coverage && browserslist",
+    "browsers:update": "browserslist --update-db",
     "analyze": "ng build --stats-json&&webpack-bundle-analyzer dist/bookstore-sample-app/stats.json",
     "prepare": "husky install &"
   },
