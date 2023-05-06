@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -16,7 +16,7 @@ const DEBOUNCE_TIME = 500;
   templateUrl: './user-book-create-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBookCreateDialogComponent implements OnInit, AfterViewInit {
+export class UserBookCreateDialogComponent implements AfterViewInit {
   readonly results$ = this.googleBooksService.searchResults$;
 
   readonly searchQuery$ = this.googleBooksService.searchQuery$;
@@ -34,9 +34,8 @@ export class UserBookCreateDialogComponent implements OnInit, AfterViewInit {
     private readonly userBooksService: UserBooksService,
     private readonly googleBooksService: GoogleBooksService,
     private readonly detector: ChangeDetectorRef,
-  ) {}
-
-  ngOnInit(): void {
+    private readonly destroy: DestroyRef,
+  ) {
     this.searchControl.valueChanges.pipe(debounceTime(DEBOUNCE_TIME), takeUntilDestroyed()).subscribe(query => {
       this.googleBooksService.searchVolumes(query);
     });
@@ -49,7 +48,7 @@ export class UserBookCreateDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.list!.selectedOptions.changed.pipe(takeUntilDestroyed()).subscribe(_ => {
+    this.list!.selectedOptions.changed.pipe(takeUntilDestroyed(this.destroy)).subscribe(_ => {
       this.detector.markForCheck();
     });
   }

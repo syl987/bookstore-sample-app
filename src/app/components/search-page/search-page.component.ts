@@ -25,11 +25,7 @@ export class SearchPageComponent implements OnInit {
 
   readonly filterControl = new FormControl<string>('', { nonNullable: true });
 
-  constructor(private readonly volumeService: VolumeService) {}
-
-  ngOnInit(): void {
-    this.volumeService.loadAll();
-
+  constructor(private readonly volumeService: VolumeService) {
     this.filterControl.valueChanges
       .pipe(
         debounceTime(DEBOUNCE_TIME),
@@ -45,5 +41,9 @@ export class SearchPageComponent implements OnInit {
     this.filterQuery$.pipe(take(1), takeUntilDestroyed()).subscribe(query => {
       this.filterControl.setValue(query, { emitEvent: false });
     });
+  }
+
+  ngOnInit(): void {
+    this.volumeService.loadAll();
   }
 }

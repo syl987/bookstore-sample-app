@@ -21,7 +21,7 @@ import { UserBooksService } from 'src/app/services/user-books.service';
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBookEditPageComponent implements OnInit {
+export class UserBookEditPageComponent {
   readonly id: string = this.route.snapshot.params['bookId'];
 
   readonly book$ = this.userBooksService.entityByRoute$;
@@ -55,9 +55,7 @@ export class UserBookEditPageComponent implements OnInit {
     private readonly routerService: RouterService,
     private readonly userBooksService: UserBooksService,
     private readonly dialogService: DialogService,
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.routerService
       .selectRouteParam('bookId')
       .pipe(takeUntilDestroyed())

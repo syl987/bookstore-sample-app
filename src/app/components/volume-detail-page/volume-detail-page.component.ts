@@ -19,15 +19,13 @@ import { VolumeService } from 'src/app/services/volume.service';
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VolumeDetailPageComponent implements OnInit {
+export class VolumeDetailPageComponent {
   readonly volume$ = this.volumeService.entitiyByRoute$;
 
   readonly loggedIn$ = this.authService.loggedIn$;
   readonly uid$ = this.authService.user$;
 
-  constructor(private readonly authService: AuthService, private readonly routerService: RouterService, private readonly volumeService: VolumeService) {}
-
-  ngOnInit(): void {
+  constructor(private readonly authService: AuthService, private readonly routerService: RouterService, private readonly volumeService: VolumeService) {
     this.routerService
       .selectRouteParam('volumeId')
       .pipe(takeUntilDestroyed())
