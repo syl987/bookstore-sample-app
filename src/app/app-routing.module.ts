@@ -21,23 +21,23 @@ const routes: Routes = [
   {
     path: 'login',
     title: `Login`,
-    component: LoginPageComponent,
     ...canActivate(() => redirectLoggedInTo('/home')),
+    loadComponent: () => import('./components/login-page/login-page.component').then(m => m.LoginPageComponent),
   },
   {
     path: 'home',
     title: `Home`,
-    component: HomePageComponent,
+    loadComponent: () => import('./components/home-page/home-page.component').then(m => m.HomePageComponent),
   },
   {
     path: 'search',
     title: `Search`,
-    component: SearchPageComponent,
+    loadComponent: () => import('./components/search-page/search-page.component').then(m => m.SearchPageComponent),
   },
   {
     path: 'books/:volumeId',
     title: `Book Details`,
-    component: VolumeDetailPageComponent,
+    loadComponent: () => import('./components/volume-detail-page/volume-detail-page.component').then(m => m.VolumeDetailPageComponent),
   },
   {
     path: 'user',
@@ -46,12 +46,12 @@ const routes: Routes = [
       {
         path: 'books',
         title: `My Books`,
-        component: UserBookListPageComponent,
+        loadComponent: () => import('./components/user-book-list-page/user-book-list-page.component').then(m => m.UserBookListPageComponent),
       },
       {
         path: 'books/:bookId/edit',
         title: `Edit Book Details`,
-        component: UserBookEditPageComponent,
+        loadComponent: () => import('./components/user-book-edit-page/user-book-edit-page.component').then(m => m.UserBookEditPageComponent),
       },
     ],
   },
