@@ -68,6 +68,9 @@ import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO update ngrx
+// TODO update angular fire
+
 // TODO consider material grid-list with breakpoint observer instead of bootstrap grid
 // TODO import specific font of sizes 400,600,700, no italics
 // TODO modules or standalone components + migrate material imports to reduce initial bundle size
