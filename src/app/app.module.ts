@@ -76,6 +76,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO modules or standalone components + migrate material imports to reduce initial bundle size
 // TODO experimantal standalone components (possibly all) as pull request
 // TODO add $localize function and x18n tags to all language strings
+// TODO consider using signals, check how to integrate with ngrx
 
 registerLocaleData(localeDe);
 
