@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -5,6 +6,8 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 
 @Component({
   selector: 'app-user-book-list-page',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './user-book-list-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BookDTO } from 'src/app/models/book.models';
@@ -16,6 +17,8 @@ import { VolumeService } from 'src/app/services/volume.service';
 
 @Component({
   selector: 'app-volume-detail-page',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

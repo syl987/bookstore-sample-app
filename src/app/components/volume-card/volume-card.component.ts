@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
@@ -5,6 +6,8 @@ import { VolumeDTO } from 'src/app/models/volume.models';
 
 @Component({
   selector: 'app-volume-card',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './volume-card.component.html',
   styles: ['.mat-mdc-card-sm-image { width: inherit; }'],
   changeDetection: ChangeDetectionStrategy.OnPush,

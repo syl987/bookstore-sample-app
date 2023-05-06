@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
@@ -7,6 +8,8 @@ import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-sidenav',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

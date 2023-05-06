@@ -5,9 +5,12 @@ import { auditTime, map } from 'rxjs/operators';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { ExampleDevDialogComponent } from '../example-dev-dialog/example-dev-dialog.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-components-dev-page',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './components-dev-page.component.html',
   styleUrls: ['./components-dev-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

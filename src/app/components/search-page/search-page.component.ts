@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
@@ -13,6 +14,8 @@ const FAKE_RESPONSE_TIME = 500;
 
 @Component({
   selector: 'app-search-page',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './search-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

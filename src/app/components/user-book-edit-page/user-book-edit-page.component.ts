@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
@@ -18,6 +19,8 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 
 @Component({
   selector: 'app-user-book-edit-page',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

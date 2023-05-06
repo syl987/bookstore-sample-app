@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthUser } from 'src/app/models/auth.models';
@@ -8,6 +9,8 @@ export interface UserSettingsDialogData {
 
 @Component({
   selector: 'app-user-settings-dialog',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './user-settings-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
