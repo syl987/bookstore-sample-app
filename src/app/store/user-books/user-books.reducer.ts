@@ -35,11 +35,11 @@ export const reducer = createReducer(
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(UserBooksActions.loadSuccess, (state, { book }) => ({
+  on(UserBooksActions.loadSUCCESS, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadError, (state, { error }) => ({
+  on(UserBooksActions.loadERROR, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
@@ -47,11 +47,11 @@ export const reducer = createReducer(
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(UserBooksActions.loadAllSuccess, (state, { books }) => ({
+  on(UserBooksActions.loadAllSUCCESS, (state, { books }) => ({
     ...adapter.upsertMany(books, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadAllError, (state, { error }) => ({
+  on(UserBooksActions.loadAllERROR, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
@@ -59,11 +59,11 @@ export const reducer = createReducer(
     ...state,
     create: { ...state.create, pending: true, error: undefined },
   })),
-  on(UserBooksActions.createSuccess, (state, { book }) => ({
+  on(UserBooksActions.createSUCCESS, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     create: { ...state.create, pending: false, error: undefined },
   })),
-  on(UserBooksActions.createError, (state, { error }) => ({
+  on(UserBooksActions.createERROR, (state, { error }) => ({
     ...state,
     create: { ...state.create, pending: false, error },
   })),
@@ -71,11 +71,11 @@ export const reducer = createReducer(
     ...state,
     remove: { ...state.remove, pending: true, error: undefined },
   })),
-  on(UserBooksActions.deleteSuccess, (state, { id }) => ({
+  on(UserBooksActions.deleteSUCCESS, (state, { id }) => ({
     ...adapter.removeOne(id, state),
     remove: { ...state.remove, pending: false, error: undefined },
   })),
-  on(UserBooksActions.deleteError, (state, { error }) => ({
+  on(UserBooksActions.deleteERROR, (state, { error }) => ({
     ...state,
     remove: { ...state.remove, pending: false, error },
   })),
@@ -83,11 +83,11 @@ export const reducer = createReducer(
     ...state,
     editDraft: { ...state.editDraft, pending: true, error: undefined },
   })),
-  on(UserBooksActions.editDraftSuccess, (state, { book }) => ({
+  on(UserBooksActions.editDraftSUCCESS, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     editDraft: { ...state.editDraft, pending: false, error: undefined },
   })),
-  on(UserBooksActions.editDraftError, (state, { error }) => ({
+  on(UserBooksActions.editDraftERROR, (state, { error }) => ({
     ...state,
     editDraft: { ...state.editDraft, pending: false, error },
   })),
@@ -95,11 +95,11 @@ export const reducer = createReducer(
     ...state,
     publish: { ...state.publish, pending: true, error: undefined },
   })),
-  on(UserBooksActions.publishSuccess, (state, { book }) => ({
+  on(UserBooksActions.publishSUCCESS, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     publish: { ...state.publish, pending: false, error: undefined },
   })),
-  on(UserBooksActions.publishError, (state, { error }) => ({
+  on(UserBooksActions.publishERROR, (state, { error }) => ({
     ...state,
     publish: { ...state.publish, pending: false, error },
   })),

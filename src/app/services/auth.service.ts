@@ -45,13 +45,13 @@ export class AuthService {
     // set login pending stream
     this.actions.pipe(ofType(AuthActions.loginWithProvider), takeUntilDestroyed()).subscribe(_ => this._loginPending.next(true));
     this.actions
-      .pipe(ofType(AuthActions.loginWithProviderSuccess, AuthActions.loginWithProviderError, AuthActions.authResetState), takeUntilDestroyed())
+      .pipe(ofType(AuthActions.loginWithProviderSUCCESS, AuthActions.loginWithProviderERROR, AuthActions.authResetState), takeUntilDestroyed())
       .subscribe(_ => this._loginPending.next(false));
 
     // set logout pending stream
     this.actions.pipe(ofType(AuthActions.logout), takeUntilDestroyed()).subscribe(_ => this._logoutPending.next(true));
     this.actions
-      .pipe(ofType(AuthActions.logoutSuccess, AuthActions.logoutError, AuthActions.authResetState), takeUntilDestroyed())
+      .pipe(ofType(AuthActions.logoutSUCCESS, AuthActions.logoutERROR, AuthActions.authResetState), takeUntilDestroyed())
       .subscribe(_ => this._logoutPending.next(false));
   }
 
