@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { concatMap, filter, map, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { concatMap, filter, map } from 'rxjs/operators';
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -20,7 +21,7 @@ import { UserBooksService } from 'src/app/services/user-books.service';
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBookEditPageComponent implements OnInit, OnDestroy {
+export class UserBookEditPageComponent {
   readonly id: string = this.route.snapshot.params['bookId'];
 
   readonly book$ = this.userBooksService.entityByRoute$;
@@ -46,7 +47,6 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   });
 
   private readonly _resetFields = new BehaviorSubject<void>(undefined);
-  private readonly _destroyed$ = new Subject<void>();
 
   constructor(
     private readonly fb: FormBuilder,
@@ -55,12 +55,10 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
     private readonly routerService: RouterService,
     private readonly userBooksService: UserBooksService,
     private readonly dialogService: DialogService,
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.routerService
       .selectRouteParam('bookId')
-      .pipe(takeUntil(this._destroyed$))
+      .pipe(takeUntilDestroyed())
       .subscribe(id => {
         if (id) {
           this.userBooksService.load(id);
@@ -68,7 +66,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
       });
 
     combineLatest([this.book$, this._resetFields])
-      .pipe(takeUntil(this._destroyed$))
+      .pipe(takeUntilDestroyed())
       .subscribe(([book]) => {
         this.form.setValue({
           description: book?.description ?? null,
@@ -81,11 +79,6 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
           this.form.enable();
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    this._destroyed$.next();
-    this._destroyed$.complete();
   }
 
   saveChanges(): void {

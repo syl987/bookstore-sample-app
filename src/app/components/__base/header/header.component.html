@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <ng-container *ngIf="showToggle$ | async">
       <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="fs-large app-sidebar-toggle me-3xs">
-        <mat-icon fontIcon="fa-bars"></mat-icon>
+        <mat-icon fontIcon="fa-bars" />
       </button>
 
       <div class="text-primary fs-normal me-s">{{ title$ | async }}</div>
@@ -40,7 +40,7 @@
           </div>
         </button>
 
-        <mat-divider vertical class="mx-2xs" style="height: 38px"></mat-divider>
+        <mat-divider vertical class="mx-2xs" style="height: 38px" />
 
         <a mat-button color="primary" routerLink="/user/books" routerLinkActive="active" class="px-2xs">My Books</a>
 

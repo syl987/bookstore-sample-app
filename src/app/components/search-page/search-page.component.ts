@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { debounceTime, take, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { debounceTime, take, tap } from 'rxjs/operators';
 import { VolumeService } from 'src/app/services/volume.service';
 
 // TODO move the search field into the header
@@ -15,7 +16,7 @@ const FAKE_RESPONSE_TIME = 500;
   templateUrl: './search-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchPageComponent implements OnInit, OnDestroy {
+export class SearchPageComponent implements OnInit {
   readonly volumesFiltered$ = this.volumeService.entitiesFiltered$;
 
   readonly filterQuery$ = this.volumeService.filterQuery$;
@@ -24,32 +25,25 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   readonly filterControl = new FormControl<string>('', { nonNullable: true });
 
-  private readonly _destroyed$ = new Subject<void>();
-
-  constructor(private readonly volumeService: VolumeService) {}
-
-  ngOnInit(): void {
-    this.volumeService.loadAll();
-
+  constructor(private readonly volumeService: VolumeService) {
     this.filterControl.valueChanges
       .pipe(
         debounceTime(DEBOUNCE_TIME),
         tap(_ => this.filtering$.next(true)),
         debounceTime(FAKE_RESPONSE_TIME),
         tap(_ => this.filtering$.next(false)),
-        takeUntil(this._destroyed$),
+        takeUntilDestroyed(),
       )
       .subscribe(query => {
         this.volumeService.filter(query);
       });
 
-    this.filterQuery$.pipe(take(1), takeUntil(this._destroyed$)).subscribe(query => {
+    this.filterQuery$.pipe(take(1), takeUntilDestroyed()).subscribe(query => {
       this.filterControl.setValue(query, { emitEvent: false });
     });
   }
 
-  ngOnDestroy(): void {
-    this._destroyed$.next();
-    this._destroyed$.complete();
+  ngOnInit(): void {
+    this.volumeService.loadAll();
   }
 }

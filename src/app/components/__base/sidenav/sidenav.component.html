@@ -24,7 +24,7 @@
   <a *ngIf="development" mat-list-item routerLink="/dev" routerLinkActive="active" (click)="navigated.emit()">Dev</a>
 </mat-nav-list>
 
-<mat-divider></mat-divider>
+<mat-divider />
 
 <mat-action-list dense class="py-2xs">
   <button *ngIf="loggedOut$ | async" mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
