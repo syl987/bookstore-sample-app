@@ -1,11 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { BookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
+import { VolumeCardComponent } from '../volume-card/volume-card.component';
+import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
+import { MatButtonModule } from '@angular/material/button';
 
 // TODO loading spinner
 // TODO buy book => create a confirmation page
@@ -18,7 +22,7 @@ import { VolumeService } from 'src/app/services/volume.service';
 @Component({
   selector: 'app-volume-detail-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatExpansionModule, VolumeCardComponent, BookConditionPipe],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -50,11 +50,9 @@
   </form>
 
   <div class="app-gap-x-2xs">
-    <button type="button" mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishPending$ | async" [disabled]="publishDisabled$ | async">
+    <button mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishPending$ | async" [disabled]="publishDisabled$ | async">
       Publish book
     </button>
-    <button type="button" mat-stroked-button color="warn" (click)="deleteBook()" [spinning]="deletePending$ | async" [disabled]="deleteDisabled$ | async">
-      Delete book
-    </button>
+    <button mat-stroked-button color="warn" (click)="deleteBook()" [spinning]="deletePending$ | async" [disabled]="deleteDisabled$ | async">Delete book</button>
   </div>
 </div>

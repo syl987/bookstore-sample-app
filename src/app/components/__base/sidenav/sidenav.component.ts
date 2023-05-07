@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { Router, RouterModule } from '@angular/router';
 import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,7 +10,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, MatListModule],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

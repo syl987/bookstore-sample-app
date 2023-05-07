@@ -5,7 +5,7 @@ import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule /* ,MatButtonModule */],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

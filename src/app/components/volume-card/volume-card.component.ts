@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
 // TODO loading appearence
@@ -7,7 +9,7 @@ import { VolumeDTO } from 'src/app/models/volume.models';
 @Component({
   selector: 'app-volume-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule, MatDividerModule],
   templateUrl: './volume-card.component.html',
   styles: ['.mat-mdc-card-sm-image { width: inherit; }'],
   changeDetection: ChangeDetectionStrategy.OnPush,
