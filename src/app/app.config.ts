@@ -1,5 +1,13 @@
 import { ApplicationConfig, importProvidersFrom, APP_INITIALIZER, inject } from '@angular/core';
-import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
+import {
+  provideRouter,
+  withPreloading,
+  PreloadAllModules,
+  withRouterConfig,
+  withComponentInputBinding,
+  withInMemoryScrolling,
+  withNavigationErrorHandler,
+} from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withXsrfConfiguration, withInterceptors } from '@angular/common/http';
 import { ApplicationRef, DEFAULT_CURRENCY_CODE, DoBootstrap, isDevMode, LOCALE_ID, NgModule } from '@angular/core';
 import { FirebaseOptions, initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -54,8 +62,10 @@ import { tooltipOptions } from './options/tooltip.options';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import { NavigationError } from '@angular/router';
+import { ToastService } from './services/toast.service';
 
-// TODO import browser module
+// TODO how to handle material snackbar and dialog modules?
 // TODO check more router configuration features
 
 // TODO update ngrx
@@ -124,8 +134,6 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
 
     importProvidersFrom(
-      /* BrowserModule, */
-
       provideFirebaseApp(() => initializeApp(firebaseOptions)),
       provideAuth(() => getAuth()),
       provideFunctions(() => getFunctions()),
