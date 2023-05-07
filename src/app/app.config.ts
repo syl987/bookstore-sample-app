@@ -16,7 +16,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/d
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry, ICON_REGISTRY_PROVIDER } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -52,13 +52,11 @@ import { AppConfig, AppStrings } from './models/app.models';
 import { AuthConfig } from './models/auth.models';
 import { tooltipOptions } from './options/tooltip.options';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 
 // TODO import browser module
 // TODO check more router configuration features
-
-// TODO set fonts
-// iconRegistry.registerFontClassAlias('fa', 'fa'); // font-awesome
-// iconRegistry.setDefaultFontSetClass('fa');
 
 // TODO update ngrx
 // TODO update angular fire
@@ -102,9 +100,16 @@ const authConfig: AuthConfig = {
 
 const appStrings: AppStrings = {};
 
-function registerIconFonts(iconRegistry = inject(MatIconRegistry)): void {
-  iconRegistry.registerFontClassAlias('fa', 'fa'); // font-awesome
-  iconRegistry.setDefaultFontSetClass('fa');
+function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
+  return () => {
+    iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa'); // font-awesome
+  };
+}
+
+function registerLocales(): () => void {
+  return () => {
+    registerLocaleData(localeDe);
+  };
 }
 
 export const appConfig: ApplicationConfig = {
@@ -119,6 +124,8 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
 
     importProvidersFrom(
+      /* BrowserModule, */
+
       provideFirebaseApp(() => initializeApp(firebaseOptions)),
       provideAuth(() => getAuth()),
       provideFunctions(() => getFunctions()),
@@ -134,7 +141,8 @@ export const appConfig: ApplicationConfig = {
     { provide: APP_CONFIG, useValue: appConfig2 },
     { provide: APP_STRINGS, useValue: appStrings },
     { provide: AUTH_CONFIG, useValue: authConfig },
-    { provide: APP_INITIALIZER, useFactory: registerIconFonts, multi: true },
+    { provide: APP_INITIALIZER, useFactory: registerIconFonts, deps: [MatIconRegistry], multi: true },
+    { provide: APP_INITIALIZER, useFactory: registerLocales, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
     { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions },
