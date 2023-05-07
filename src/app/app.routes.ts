@@ -55,5 +55,9 @@ export const routes: Routes = [
 ];
 
 if (isDevMode()) {
-  routes.splice(routes.length - 1, 0, { path: 'dev', loadChildren: () => import('./modules/dev/dev.module').then(m => m.DevModule) });
+  routes.splice(routes.length - 1, 0, {
+    path: 'dev',
+    title: `Component Collection`,
+    loadComponent: () => import('./components/dev-components-page/dev-components-page.component').then(m => m.DevComponentsPageComponent),
+  });
 }
