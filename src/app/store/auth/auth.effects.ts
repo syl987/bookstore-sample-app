@@ -31,8 +31,8 @@ export class AuthEffects {
       ofType(AuthActions.loginWithProvider),
       exhaustMap(({ providerId }) =>
         from(signInWithPopup(this.auth, getAuthProvider(providerId))).pipe(
-          map(_ => AuthActions.loginWithProviderSuccess()),
-          catchError(err => of(AuthActions.loginWithProviderError({ error: firebaseError({ err }) }))),
+          map(_ => AuthActions.loginWithProviderSUCCESS()),
+          catchError(err => of(AuthActions.loginWithProviderERROR({ error: firebaseError({ err }) }))),
         ),
       ),
     );
@@ -40,11 +40,11 @@ export class AuthEffects {
 
   readonly logout = createEffect(() => {
     return this.actions.pipe(
-      ofType(AuthActions.logout, AuthActions.authRefreshError, AuthActions.authTokenNotFound, AuthActions.authResponseError),
+      ofType(AuthActions.logout, AuthActions.authRefreshERROR, AuthActions.authTokenNotFound, AuthActions.authResponseERROR),
       concatMap(_ =>
         from(this.auth.signOut()).pipe(
-          map(() => AuthActions.logoutSuccess()),
-          catchError(err => of(AuthActions.logoutError({ error: firebaseError({ err }) }))),
+          map(() => AuthActions.logoutSUCCESS()),
+          catchError(err => of(AuthActions.logoutERROR({ error: firebaseError({ err }) }))),
         ),
       ),
     );
@@ -53,7 +53,7 @@ export class AuthEffects {
   readonly navigateOnLoginWithProviderSuccess = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.loginWithProviderSuccess),
+        ofType(AuthActions.loginWithProviderSUCCESS),
         map(_ => this.router.navigateByUrl(this.config.afterLoginUrl)),
       );
     },
@@ -90,7 +90,7 @@ export class AuthEffects {
   readonly loginWithProviderErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.loginWithProviderError),
+        ofType(AuthActions.loginWithProviderERROR),
         map(({ error }) => this.toastService.showErrorToast(toResponseErrorMessage(error))),
       );
     },
@@ -100,7 +100,7 @@ export class AuthEffects {
   readonly logoutSuccessToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.logoutSuccess),
+        ofType(AuthActions.logoutSUCCESS),
         map(_ => this.toastService.showSuccessToast(this.config.messages.logout)),
       );
     },
@@ -110,7 +110,7 @@ export class AuthEffects {
   readonly authRefreshErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.authRefreshError),
+        ofType(AuthActions.authRefreshERROR),
         map(_ => this.toastService.showErrorToast(this.config.messages.refreshError)),
       );
     },
@@ -130,7 +130,7 @@ export class AuthEffects {
   readonly authResponseErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.authResponseError),
+        ofType(AuthActions.authResponseERROR),
         map(_ => this.toastService.showInfoToast(this.config.messages.response401)),
       );
     },

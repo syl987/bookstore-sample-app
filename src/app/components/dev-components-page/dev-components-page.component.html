@@ -1,5 +1,5 @@
 <div class="app-container">
-  <!-- <h1>Heading h1 normal</h1> -->
+  <h1>Heading h1 normal</h1>
   <h2>Heading h2 normal</h2>
   <h3>Heading h3 normal</h3>
   <h4><s>Heading h4</s></h4>
@@ -12,19 +12,19 @@
     styling from a theme mixin and with some important text included. This text is also very long and will be wrapped.
   </p>
 
-  <mat-divider class="mb-s"></mat-divider>
+  <mat-divider class="mb-s" />
 
   <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
   <p><u>This line of text will render as underlined</u></p>
   <p><small>This line of text is meant to be treated as fine print.</small></p>
   <p><strong>This line rendered as bold text.</strong></p>
-  <p><em>This line rendered as italicized text.</em></p>
+  <!-- <p><em>This line rendered as italicized text.</em></p> -->
 
   <p><samp>This line rendered as program output sample.</samp></p>
   <p><code>This line rendered as code-formatted text.</code></p>
   <pre>This line rendered as preformatted text.</pre>
 
-  <mat-divider class="mb-s"></mat-divider>
+  <mat-divider class="mb-s" />
 
   <p class="text-uppercase">This line rendered as uppercase text.</p>
   <p class="text-lowercase">This line rendered as lowercase text.</p>
@@ -144,19 +144,19 @@
   <h2>Spinner</h2>
 
   <div class="d-flex app-gap-x-2xs align-items-end">
-    <mat-spinner diameter="16"></mat-spinner>
-    <mat-spinner diameter="24"></mat-spinner>
-    <mat-spinner diameter="32"></mat-spinner>
-    <mat-spinner diameter="40"></mat-spinner>
+    <mat-spinner diameter="16" />
+    <mat-spinner diameter="24" />
+    <mat-spinner diameter="32" />
+    <mat-spinner diameter="40" />
   </div>
 
   <br />
 
   <div class="d-flex app-gap-x-2xs align-items-end">
-    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async"></mat-progress-spinner>
-    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async"></mat-progress-spinner>
-    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async"></mat-progress-spinner>
-    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async"></mat-progress-spinner>
+    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async" />
   </div>
 
   <h3>Button with Spinner</h3>
@@ -177,54 +177,62 @@
 
   <p>
     There we go with a beautiful inline
-    <mat-icon inline fontIcon="fa-print"></mat-icon>
+    <mat-icon inline fontIcon="fa-print" />
     icon.
   </p>
 
   <div class="app-gap-x-2xs">
-    <mat-icon inline fontIcon="fa-print"></mat-icon>
-    <mat-icon inline fontIcon="fa-envelope-o"></mat-icon>
-    <mat-icon inline fontIcon="fa-phone"></mat-icon>
-    <mat-icon inline fontIcon="fa-code"></mat-icon>
-    <mat-icon inline fontIcon="fa-close"></mat-icon>
+    <mat-icon inline fontIcon="fa-print" />
+    <mat-icon inline fontIcon="fa-envelope-o" />
+    <mat-icon inline fontIcon="fa-phone" />
+    <mat-icon inline fontIcon="fa-code" />
+    <mat-icon inline fontIcon="fa-close" />
   </div>
 
   <div class="app-gap-x-2xs">
-    <mat-icon inline fontIcon="fa-cog" class="fa-spin"></mat-icon>
-    <mat-icon inline fontIcon="fa-spinner" class="fa-pulse"></mat-icon>
-    <mat-icon inline fontIcon="fa-circle-o-notch" class="fa-pulse"></mat-icon>
-    <mat-icon inline fontIcon="fa-refresh" class="fa-pulse"></mat-icon>
+    <mat-icon inline fontIcon="fa-cog" class="fa-spin" />
+    <mat-icon inline fontIcon="fa-spinner" class="fa-pulse" />
+    <mat-icon inline fontIcon="fa-circle-o-notch" class="fa-pulse" />
+    <mat-icon inline fontIcon="fa-refresh" class="fa-pulse" />
   </div>
 
   <h2>Text</h2>
 
-  <p class="fs-xl">Extra large text (xlarge) for unknown usage.</p>
+  <p class="fs-large">Large text (large) for unknown usage.</p>
 
-  <p class="fs-l">Large text (large) for unknown usage.</p>
-
-  <p class="fs-m">Regular text (normal) with some very important information included.</p>
+  <p class="fs-normal">Regular text (normal) with some very important information included.</p>
 
   <p>Default paragraph text (normal) with some very important information included.</p>
 
-  <p class="fs-s">Footnote text (small).</p>
+  <p class="fs-small">Footnote text (small).</p>
 
-  <p class="fs-xs">Legal text (xsmall).</p>
+  <p class="fs-xsmall">Legal text (xsmall).</p>
 
   <h2>List</h2>
 
   <div class="row">
     <div class="col-md-6 col-lg-3">
       <h4>Default List</h4>
-      <mat-list dense role="list">
-        <mat-list-item role="listitem">first item</mat-list-item>
-        <mat-list-item role="listitem">some other item</mat-list-item>
-        <mat-list-item role="listitem" disabled>disabled item</mat-list-item>
+      <mat-list>
+        <mat-list-item lines="3">
+          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
+          <span matListItemTitle>Title</span>
+          <span matListItemLine>Description</span>
+          <span matListItemLine>Second line</span>
+          <span matListItemMeta>Meta info</span>
+        </mat-list-item>
+        <mat-list-item lines="2">
+          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
+          <span matListItemTitle>Title</span>
+          <span matListItemLine>Description</span>
+          <span matListItemMeta>Meta info</span>
+        </mat-list-item>
       </mat-list>
     </div>
 
     <div class="col-md-6 col-lg-3">
       <h4>Navigation List</h4>
-      <mat-nav-list dense>
+      <mat-nav-list>
         <a mat-list-item routerLink="/dev">first link</a>
         <a mat-list-item routerLink="/dev">some other link</a>
         <a mat-list-item routerLink="/dev" disabled>disabled link</a>
@@ -233,7 +241,7 @@
 
     <div class="col-md-6 col-lg-3">
       <h4>Action List</h4>
-      <mat-action-list dense>
+      <mat-action-list>
         <button mat-list-item (click)="showInfoToast()">first action</button>
         <button mat-list-item (click)="showInfoToast()">some other action</button>
         <button mat-list-item disabled>disabled action</button>
@@ -242,65 +250,11 @@
 
     <div class="col-md-6 col-lg-3">
       <h4>Selection List</h4>
-      <mat-selection-list dense>
+      <mat-selection-list>
         <mat-list-option>first option</mat-list-option>
         <mat-list-option>some other option</mat-list-option>
         <mat-list-option disabled>disabled option</mat-list-option>
       </mat-selection-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Icon List</h4>
-      <mat-list dense role="list">
-        <mat-list-item role="listitem">
-          <mat-icon matListIcon fontIcon="fa-file-o" class="me-2xs"></mat-icon>
-          first item
-        </mat-list-item>
-        <mat-list-item role="listitem">
-          <mat-icon matListIcon fontIcon="fa-file-pdf-o" class="me-2xs"></mat-icon>
-          some other item
-        </mat-list-item>
-        <mat-list-item role="listitem" disabled>
-          <mat-icon matListIcon fontIcon="fa-file-archive-o" class="me-2xs"></mat-icon>
-          disabled item
-        </mat-list-item>
-      </mat-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Icon List (large)</h4>
-      <mat-list role="list">
-        <mat-list-item role="listitem">
-          <mat-icon matListIcon fontIcon="fa-file-o" class="me-2xs"></mat-icon>
-          first item
-        </mat-list-item>
-        <mat-list-item role="listitem">
-          <mat-icon matListIcon fontIcon="fa-file-pdf-o" class="me-2xs"></mat-icon>
-          some other item
-        </mat-list-item>
-      </mat-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Multiline List</h4>
-      <mat-list dense>
-        <mat-list-item>
-          <mat-icon matListIcon fontIcon="fa-folder-open-o" class="me-2xs"></mat-icon>
-          <h4 matLine class="fw-700 mb-2xs">Title</h4>
-          <p matLine>Description</p>
-        </mat-list-item>
-      </mat-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Multiline List (large)</h4>
-      <mat-list>
-        <mat-list-item>
-          <mat-icon matListIcon fontIcon="fa-folder-open-o" class="me-2xs"></mat-icon>
-          <h4 matLine class="fw-700 mb-2xs">Title</h4>
-          <p matLine>Description</p>
-        </mat-list-item>
-      </mat-list>
     </div>
   </div>
 
@@ -365,19 +319,19 @@
   <h4>Horizontal Gap</h4>
 
   <div class="app-gap-x-m">
-    <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
-    <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
-    <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
-    <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
   </div>
 
   <h4>Vertical Spacing</h4>
 
   <div class="d-inline-block app-children-mb-m">
-    <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
-    <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
-    <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
-    <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
   </div>
 
   <h2>Grid</h2>
