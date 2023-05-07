@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
+import { APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -36,14 +36,14 @@ export class HeaderComponent {
 
   readonly title$ = this.routerService.title$;
 
-  readonly toolbarTitle$ = combineLatest([this.showNavs$, this.title$]).pipe(map(([showNavs, title]) => (showNavs ? this.config.appName : title)));
+  readonly toolbarTitle$ = combineLatest([this.showNavs$, this.title$]).pipe(map(([showNavs, title]) => (showNavs ? this.options.applicationName : title)));
 
   readonly development = isDevMode();
 
   @Output() readonly sidenavToggle = new EventEmitter<void>();
 
   constructor(
-    @Inject(APP_CONFIG) readonly config: AppConfig,
+    @Inject(APP_OPTIONS) readonly options: AppOptions,
     private readonly observer: BreakpointObserver,
     private readonly authService: AuthService,
     private readonly routerService: RouterService,

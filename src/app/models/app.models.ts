@@ -14,11 +14,11 @@ export const APP_STRINGS = new InjectionToken<AppStrings>('APP_STRINGS');
 /**
  * App-specific variables.
  */
-export interface AppConfig {
+export interface AppOptions {
   /** Application name to display in header and other places. */
-  appName: string;
+  applicationName: string;
   /** Name of the legal copyright holder for display in the footer */
   copyrightName: string;
 }
 
-export const APP_CONFIG = new InjectionToken<AppConfig>('APP_CONFIG');
+export const APP_OPTIONS = new InjectionToken<AppOptions>('APP_OPTIONS');

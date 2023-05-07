@@ -25,7 +25,7 @@ import { routes } from './app.routes';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { DirtyOrTouchedMatcher } from './matchers/dirty-or-touched-matcher';
-import { APP_CONFIG, APP_STRINGS, AppConfig, AppStrings } from './models/app.models';
+import { APP_OPTIONS, APP_STRINGS, AppOptions, AppStrings } from './models/app.models';
 import { AUTH_CONFIG, AuthConfig } from './models/auth.models';
 import { checkboxOptions } from './options/checkbox.options';
 import { dialogOptions } from './options/dialog.options';
@@ -34,8 +34,6 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { tooltipOptions } from './options/tooltip.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
-
-// TODO how to handle material snackbar and dialog modules?
 
 // TODO update ngrx
 // TODO update angular fire
@@ -58,8 +56,8 @@ const firebaseOptions: FirebaseOptions = {
   measurementId: 'G-1MVY64K4ZT',
 };
 
-const appConfig2: AppConfig = {
-  appName: 'Bookstore Sample App',
+const appOptions: AppOptions = {
+  applicationName: 'Bookstore Sample App',
   copyrightName: 'Bookstore Sample App',
 };
 
@@ -80,15 +78,11 @@ const authConfig: AuthConfig = {
 const appStrings: AppStrings = {};
 
 function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
-  return () => {
-    iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa'); // font-awesome
-  };
+  return () => iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa'); // font-awesome
 }
 
 function registerLocales(): () => void {
-  return () => {
-    registerLocaleData(localeDe);
-  };
+  return () => registerLocaleData(localeDe);
 }
 
 export const appConfig: ApplicationConfig = {
@@ -109,13 +103,13 @@ export const appConfig: ApplicationConfig = {
       provideDatabase(() => getDatabase()),
       provideStorage(() => getStorage()),
 
-      MatDialogModule,
-      MatSnackBarModule,
+      MatDialogModule, // TODO check an alternative way of providing
+      MatSnackBarModule, // TODO check an alternative way of providing
     ),
 
     { provide: LOCALE_ID, useValue: 'de-DE' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
-    { provide: APP_CONFIG, useValue: appConfig2 },
+    { provide: APP_OPTIONS, useValue: appOptions },
     { provide: APP_STRINGS, useValue: appStrings },
     { provide: AUTH_CONFIG, useValue: authConfig },
     { provide: APP_INITIALIZER, useFactory: registerIconFonts, deps: [MatIconRegistry], multi: true },

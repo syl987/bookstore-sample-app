@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ProviderId } from 'firebase/auth';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
-import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
+import { APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginPageComponent {
   readonly loginPending$ = this.authService.loginPending$;
 
-  constructor(@Inject(APP_CONFIG) readonly config: AppConfig, private readonly authService: AuthService) {}
+  constructor(@Inject(APP_OPTIONS) readonly options: AppOptions, private readonly authService: AuthService) {}
 
   loginWithGoogle(): void {
     this.authService.loginWithProvider(ProviderId.GOOGLE);
