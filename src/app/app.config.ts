@@ -1,72 +1,41 @@
-import { ApplicationConfig, importProvidersFrom, APP_INITIALIZER, inject } from '@angular/core';
-import {
-  provideRouter,
-  withPreloading,
-  PreloadAllModules,
-  withRouterConfig,
-  withComponentInputBinding,
-  withInMemoryScrolling,
-  withNavigationErrorHandler,
-} from '@angular/router';
-import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withXsrfConfiguration, withInterceptors } from '@angular/common/http';
-import { ApplicationRef, DEFAULT_CURRENCY_CODE, DoBootstrap, isDevMode, LOCALE_ID, NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import localeDe from '@angular/common/locales/de';
+import { APP_INITIALIZER, ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, isDevMode, LOCALE_ID } from '@angular/core';
 import { FirebaseOptions, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule } from '@angular/material/checkbox';
+import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule, MatIconRegistry, ICON_REGISTRY_PROVIDER } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatIconRegistry } from '@angular/material/icon';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
-import { TitleStrategy } from '@angular/router';
-import { EffectsModule, provideEffects } from '@ngrx/effects';
-import { StoreRouterConnectingModule, provideRouterStore } from '@ngrx/router-store';
-import { StoreModule, provideStore } from '@ngrx/store';
-import { StoreDevtoolsModule, provideStoreDevtools } from '@ngrx/store-devtools';
-import { ImageCropperModule } from 'ngx-image-cropper';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { PreloadAllModules, provideRouter, TitleStrategy, withPreloading } from '@angular/router';
+import { provideEffects } from '@ngrx/effects';
+import { provideRouterStore } from '@ngrx/router-store';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
+import { routes } from './app.routes';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { DirtyOrTouchedMatcher } from './matchers/dirty-or-touched-matcher';
-import { APP_CONFIG, APP_STRINGS } from './models/app.models';
-import { AUTH_CONFIG } from './models/auth.models';
+import { APP_CONFIG, APP_STRINGS, AppConfig, AppStrings } from './models/app.models';
+import { AUTH_CONFIG, AuthConfig } from './models/auth.models';
 import { checkboxOptions } from './options/checkbox.options';
 import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
 import { snackBarOptions } from './options/snack-bar.options';
-import { BookConditionPipe } from './pipes/book-condition.pipe';
-import { BooleanPipe } from './pipes/boolean.pipe';
-import { ValidationErrorPipe } from './pipes/validation-error.pipe';
+import { tooltipOptions } from './options/tooltip.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
-import { routes } from './app.routes';
-import { AppConfig, AppStrings } from './models/app.models';
-import { AuthConfig } from './models/auth.models';
-import { tooltipOptions } from './options/tooltip.options';
-import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
-import { registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
-import { NavigationError } from '@angular/router';
-import { ToastService } from './services/toast.service';
 
 // TODO how to handle material snackbar and dialog modules?
-// TODO check more router configuration features
 
 // TODO update ngrx
 // TODO update angular fire

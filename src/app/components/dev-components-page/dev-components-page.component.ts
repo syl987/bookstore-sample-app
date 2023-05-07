@@ -1,33 +1,22 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { timer } from 'rxjs';
-import { auditTime, map } from 'rxjs/operators';
-import { ToastService } from 'src/app/services/toast.service';
-
-import { DevExampleDialogComponent } from '../dev-example-dialog/dev-example-dialog.component';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { timer } from 'rxjs';
+import { auditTime, map } from 'rxjs/operators';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
+import { ToastService } from 'src/app/services/toast.service';
+
+import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-dialog/dev-example-dialog.component';
 
 @Component({
   selector: 'app-dev-components-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    // MatDialogModule,
-    MatDividerModule,
-    MatIconModule,
-    MatListModule,
-    MatProgressSpinnerModule,
-    // MatSnackBarModule,
-    ButtonSpinnerDirective,
-  ],
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatProgressSpinnerModule, ButtonSpinnerDirective],
   templateUrl: './dev-components-page.component.html',
   styleUrls: ['./dev-components-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,10 +35,9 @@ export class DevComponentsPageComponent {
   constructor(private readonly dialog: MatDialog, private readonly toastService: ToastService) {}
 
   openExampleDialog(): void {
-    const dialogRef = this.dialog.open(DevExampleDialogComponent, {
-      data: { text: 'Example dialog beautiful content.' },
-      maxWidth: '512px',
-    });
+    const data: ExampleDevDialogData = { text: 'Example dialog beautiful content.' };
+
+    const dialogRef = this.dialog.open(DevExampleDialogComponent, { data, maxWidth: '512px' });
 
     dialogRef.beforeClosed().subscribe(result => result === 'action' && this.toastService.showSuccessToast(`Dialog action dispatched.`));
   }

@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+
+import { FooterComponent } from './components/__base/footer/footer.component';
 import { HeaderComponent } from './components/__base/header/header.component';
 import { SidenavComponent } from './components/__base/sidenav/sidenav.component';
-import { FooterComponent } from './components/__base/footer/footer.component';
 
 @Component({
   selector: 'app-root',
