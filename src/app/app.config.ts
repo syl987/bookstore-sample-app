@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, APP_INITIALIZER, inject } from '@angular/core';
 import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withXsrfConfiguration, withInterceptors } from '@angular/common/http';
 import { ApplicationRef, DEFAULT_CURRENCY_CODE, DoBootstrap, isDevMode, LOCALE_ID, NgModule } from '@angular/core';
@@ -102,6 +102,11 @@ const authConfig: AuthConfig = {
 
 const appStrings: AppStrings = {};
 
+function registerIconFonts(iconRegistry = inject(MatIconRegistry)): void {
+  iconRegistry.registerFontClassAlias('fa', 'fa'); // font-awesome
+  iconRegistry.setDefaultFontSetClass('fa');
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
@@ -119,6 +124,9 @@ export const appConfig: ApplicationConfig = {
       provideFunctions(() => getFunctions()),
       provideDatabase(() => getDatabase()),
       provideStorage(() => getStorage()),
+
+      MatDialogModule,
+      MatSnackBarModule,
     ),
 
     { provide: LOCALE_ID, useValue: 'de-DE' },
@@ -126,6 +134,7 @@ export const appConfig: ApplicationConfig = {
     { provide: APP_CONFIG, useValue: appConfig2 },
     { provide: APP_STRINGS, useValue: appStrings },
     { provide: AUTH_CONFIG, useValue: authConfig },
+    { provide: APP_INITIALIZER, useFactory: registerIconFonts, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
     { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions },
