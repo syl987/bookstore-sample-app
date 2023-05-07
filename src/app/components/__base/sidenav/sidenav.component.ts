@@ -1,12 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { APP_CONFIG, AppConfig } from 'src/app/models/app.models';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, isDevMode, Output } from '@angular/core';
+import { MatListModule } from '@angular/material/list';
+import { Router, RouterModule } from '@angular/router';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-sidenav',
+  standalone: true,
+  imports: [CommonModule, RouterModule, MatListModule],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,12 +23,7 @@ export class SidenavComponent {
 
   @Output() readonly navigated = new EventEmitter<void>();
 
-  constructor(
-    @Inject(APP_CONFIG) readonly config: AppConfig,
-    private readonly router: Router,
-    private readonly authService: AuthService,
-    private readonly dialogService: DialogService,
-  ) {}
+  constructor(private readonly router: Router, private readonly authService: AuthService, private readonly dialogService: DialogService) {}
 
   navigateToLogin(): void {
     this.router.navigateByUrl('/login');

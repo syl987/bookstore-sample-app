@@ -1,14 +1,22 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
+import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { ValidationErrorPipe } from 'src/app/pipes/validation-error.pipe';
 import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
+
+import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 // TODO use volume card with published books info
 // TODO add navigation to volume, if published books exist
@@ -18,6 +26,17 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 
 @Component({
   selector: 'app-user-book-edit-page',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    VolumeCardComponent,
+    ButtonSpinnerDirective,
+    ValidationErrorPipe,
+  ],
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
