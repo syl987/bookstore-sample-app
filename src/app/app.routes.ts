@@ -1,18 +1,11 @@
-import { isDevMode, NgModule } from '@angular/core';
+import { isDevMode } from '@angular/core';
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
-import { SearchPageComponent } from './components/search-page/search-page.component';
-import { UserBookEditPageComponent } from './components/user-book-edit-page/user-book-edit-page.component';
-import { UserBookListPageComponent } from './components/user-book-list-page/user-book-list-page.component';
-import { VolumeDetailPageComponent } from './components/volume-detail-page/volume-detail-page.component';
+import { Routes } from '@angular/router';
 
 // TODO keep same page after login
 // TODO guard and keep same page or redirect after logout
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
@@ -64,9 +57,3 @@ const routes: Routes = [
 if (isDevMode()) {
   routes.splice(routes.length - 1, 0, { path: 'dev', loadChildren: () => import('./modules/dev/dev.module').then(m => m.DevModule) });
 }
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
