@@ -39,10 +39,10 @@ export class VolumeService implements IVolumeService {
     this.store.dispatch(VolumeActions.load({ id }));
 
     const result = this.actions.pipe(
-      ofType(VolumeActions.loadSuccess, VolumeActions.loadError),
+      ofType(VolumeActions.loadSUCCESS, VolumeActions.loadERROR),
       take(1),
       concatMap(action => {
-        if (action.type === VolumeActions.loadSuccess.type) {
+        if (action.type === VolumeActions.loadSUCCESS.type) {
           return of(action.volume);
         }
         return throwError(() => action.error);
@@ -57,10 +57,10 @@ export class VolumeService implements IVolumeService {
     this.store.dispatch(VolumeActions.loadAll());
 
     const result = this.actions.pipe(
-      ofType(VolumeActions.loadAllSuccess, VolumeActions.loadAllError),
+      ofType(VolumeActions.loadAllSUCCESS, VolumeActions.loadAllERROR),
       take(1),
       concatMap(action => {
-        if (action.type === VolumeActions.loadAllSuccess.type) {
+        if (action.type === VolumeActions.loadAllSUCCESS.type) {
           return of(action.volumes);
         }
         return throwError(() => action.error);

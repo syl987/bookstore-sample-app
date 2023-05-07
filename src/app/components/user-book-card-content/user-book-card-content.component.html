@@ -1,5 +1,5 @@
-<ng-container *ngIf="book && (book.description || book.condition || book.price)">
-  <mat-divider></mat-divider>
+<ng-container *ngIf="book.condition || book.price != null">
+  <mat-divider />
 
   <dl class="row mt-2xs mb-0">
     <div *ngIf="book.condition" class="col-6">

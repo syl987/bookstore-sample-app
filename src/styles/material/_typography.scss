@@ -2,7 +2,7 @@
 
 // Define a custom typography config that overrides the font-family as well as the `headline`, `body-1`,... levels.
 $app-typography-config: mat.define-typography-config(
-  $font-family: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif",
+  $font-family: $font-family-base,
   $headline-5: mat.define-typography-level($h1-font-size, $headings-line-height, $font-weight-bold),
   $headline-6: mat.define-typography-level($h2-font-size, $headings-line-height, $font-weight-bold),
   $subtitle-1: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-normal),

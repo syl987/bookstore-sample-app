@@ -3,7 +3,7 @@
 @import 'shared';
 
 .app-sidebar-toggle {
-  width: app-spacer(s) + app-spacer(s) + 24px !important; // horizontal padding + default icon-button size of 24px
+  width: app-spacer(s) + app-spacer(s) + 1.5rem !important; // horizontal padding + default icon-button size of 24px
   padding: app-spacer(s);
   margin-left: -1 * app-spacer(s) !important; // adjust spacing within the container padding
 }
@@ -36,7 +36,8 @@
 
 .mat-toolbar div {
   height: 100% !important;
-  line-height: 66px !important; // pull slightly down (header height is 64px on desktop)
+  display: flex;
+  align-items: center;
 
   // hardcoded mat-toolbar mobile breakpoint
   @media (max-width: 599px) {

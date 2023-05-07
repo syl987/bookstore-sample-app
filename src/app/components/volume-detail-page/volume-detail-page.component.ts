@@ -1,11 +1,16 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { BookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
+import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
+
+import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 // TODO loading spinner
 // TODO buy book => create a confirmation page
@@ -17,34 +22,26 @@ import { VolumeService } from 'src/app/services/volume.service';
 
 @Component({
   selector: 'app-volume-detail-page',
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatExpansionModule, VolumeCardComponent, BookConditionPipe],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VolumeDetailPageComponent implements OnInit, OnDestroy {
+export class VolumeDetailPageComponent {
   readonly volume$ = this.volumeService.entitiyByRoute$;
 
   readonly loggedIn$ = this.authService.loggedIn$;
   readonly uid$ = this.authService.user$;
 
-  // TODO check where destroyed is really needed
-  private readonly _destroyed$ = new Subject<void>();
-
-  constructor(private readonly authService: AuthService, private readonly routerService: RouterService, private readonly volumeService: VolumeService) {}
-
-  ngOnInit(): void {
+  constructor(private readonly authService: AuthService, private readonly routerService: RouterService, private readonly volumeService: VolumeService) {
     this.routerService
       .selectRouteParam('volumeId')
-      .pipe(takeUntil(this._destroyed$))
+      .pipe(takeUntilDestroyed())
       .subscribe(id => {
         if (id) {
           this.volumeService.load(id);
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    this._destroyed$.next();
-    this._destroyed$.complete();
   }
 
   getPublishedBooks(volume: VolumeDTO): BookDTO[] {
