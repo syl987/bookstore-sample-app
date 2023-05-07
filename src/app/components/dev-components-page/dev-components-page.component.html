@@ -12,7 +12,7 @@
     styling from a theme mixin and with some important text included. This text is also very long and will be wrapped.
   </p>
 
-  <mat-divider class="mb-s"></mat-divider>
+  <mat-divider class="mb-s" />
 
   <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
   <p><u>This line of text will render as underlined</u></p>
@@ -24,7 +24,7 @@
   <p><code>This line rendered as code-formatted text.</code></p>
   <pre>This line rendered as preformatted text.</pre>
 
-  <mat-divider class="mb-s"></mat-divider>
+  <mat-divider class="mb-s" />
 
   <p class="text-uppercase">This line rendered as uppercase text.</p>
   <p class="text-lowercase">This line rendered as lowercase text.</p>
@@ -144,19 +144,19 @@
   <h2>Spinner</h2>
 
   <div class="d-flex app-gap-x-2xs align-items-end">
-    <mat-spinner diameter="16"></mat-spinner>
-    <mat-spinner diameter="24"></mat-spinner>
-    <mat-spinner diameter="32"></mat-spinner>
-    <mat-spinner diameter="40"></mat-spinner>
+    <mat-spinner diameter="16" />
+    <mat-spinner diameter="24" />
+    <mat-spinner diameter="32" />
+    <mat-spinner diameter="40" />
   </div>
 
   <br />
 
   <div class="d-flex app-gap-x-2xs align-items-end">
-    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async"></mat-progress-spinner>
-    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async"></mat-progress-spinner>
-    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async"></mat-progress-spinner>
-    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async"></mat-progress-spinner>
+    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async" />
   </div>
 
   <h3>Button with Spinner</h3>
@@ -177,23 +177,23 @@
 
   <p>
     There we go with a beautiful inline
-    <mat-icon inline fontIcon="fa-print"></mat-icon>
+    <mat-icon inline fontIcon="fa-print" />
     icon.
   </p>
 
   <div class="app-gap-x-2xs">
-    <mat-icon inline fontIcon="fa-print"></mat-icon>
-    <mat-icon inline fontIcon="fa-envelope-o"></mat-icon>
-    <mat-icon inline fontIcon="fa-phone"></mat-icon>
-    <mat-icon inline fontIcon="fa-code"></mat-icon>
-    <mat-icon inline fontIcon="fa-close"></mat-icon>
+    <mat-icon inline fontIcon="fa-print" />
+    <mat-icon inline fontIcon="fa-envelope-o" />
+    <mat-icon inline fontIcon="fa-phone" />
+    <mat-icon inline fontIcon="fa-code" />
+    <mat-icon inline fontIcon="fa-close" />
   </div>
 
   <div class="app-gap-x-2xs">
-    <mat-icon inline fontIcon="fa-cog" class="fa-spin"></mat-icon>
-    <mat-icon inline fontIcon="fa-spinner" class="fa-pulse"></mat-icon>
-    <mat-icon inline fontIcon="fa-circle-o-notch" class="fa-pulse"></mat-icon>
-    <mat-icon inline fontIcon="fa-refresh" class="fa-pulse"></mat-icon>
+    <mat-icon inline fontIcon="fa-cog" class="fa-spin" />
+    <mat-icon inline fontIcon="fa-spinner" class="fa-pulse" />
+    <mat-icon inline fontIcon="fa-circle-o-notch" class="fa-pulse" />
+    <mat-icon inline fontIcon="fa-refresh" class="fa-pulse" />
   </div>
 
   <h2>Text</h2>
@@ -215,14 +215,14 @@
       <h4>Default List</h4>
       <mat-list>
         <mat-list-item lines="3">
-          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x"></mat-icon>
+          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
           <span matListItemTitle>Title</span>
           <span matListItemLine>Description</span>
           <span matListItemLine>Second line</span>
           <span matListItemMeta>Meta info</span>
         </mat-list-item>
         <mat-list-item lines="2">
-          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x"></mat-icon>
+          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
           <span matListItemTitle>Title</span>
           <span matListItemLine>Description</span>
           <span matListItemMeta>Meta info</span>
@@ -319,19 +319,19 @@
   <h4>Horizontal Gap</h4>
 
   <div class="app-gap-x-m">
-    <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
-    <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
-    <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
-    <div class="d-inline-block border border-primary bg-info-light px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
   </div>
 
   <h4>Vertical Spacing</h4>
 
   <div class="d-inline-block app-children-mb-m">
-    <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
-    <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
-    <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
-    <div class="border border-primary bg-info-light px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
   </div>
 
   <h2>Grid</h2>

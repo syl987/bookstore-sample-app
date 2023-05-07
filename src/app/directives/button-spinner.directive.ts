@@ -16,7 +16,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 export class ButtonSpinnerDirective implements OnInit {
   private readonly spinnerRef: ComponentRef<MatProgressSpinner> = this._viewContainerRef.createComponent(MatProgressSpinner, { index: 0 });
 
-  @Input() set spinning(value: BooleanInput) {
+  @Input({ required: true }) set spinning(value: BooleanInput) {
     this.#spinning = coerceBooleanProperty(value);
 
     if (this.#spinning) {

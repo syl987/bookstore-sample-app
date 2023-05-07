@@ -15,8 +15,8 @@ export class VolumesEffects {
       ofType(VolumeActions.load),
       switchMap(({ id }) => {
         return this.firebaseApi.getVolume(id).pipe(
-          map(volume => VolumeActions.loadSuccess({ volume })),
-          catchError(err => of(VolumeActions.loadError({ error: firebaseError({ err }) }))),
+          map(volume => VolumeActions.loadSUCCESS({ volume })),
+          catchError(err => of(VolumeActions.loadERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -27,8 +27,8 @@ export class VolumesEffects {
       ofType(VolumeActions.loadAll),
       switchMap(_ => {
         return this.firebaseApi.getVolumes().pipe(
-          map(res => VolumeActions.loadAllSuccess({ volumes: res })),
-          catchError(err => of(VolumeActions.loadAllError({ error: firebaseError({ err }) }))),
+          map(res => VolumeActions.loadAllSUCCESS({ volumes: res })),
+          catchError(err => of(VolumeActions.loadAllERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -36,7 +36,7 @@ export class VolumesEffects {
 
   readonly filterOnLoadSuccess = createEffect(() => {
     return this.actions.pipe(
-      ofType(VolumeActions.loadAllSuccess),
+      ofType(VolumeActions.loadAllSUCCESS),
       map(_ => VolumeActions.filter({ query: '' })),
     );
   });
@@ -44,7 +44,7 @@ export class VolumesEffects {
   readonly loadErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.loadError),
+        ofType(VolumeActions.loadERROR),
         tap(_ => this.toastService.showErrorToast(`Error loading volume.`)),
       );
     },
@@ -54,7 +54,7 @@ export class VolumesEffects {
   readonly loadAllErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.loadAllError),
+        ofType(VolumeActions.loadAllERROR),
         tap(_ => this.toastService.showErrorToast(`Error loading volumes.`)),
       );
     },

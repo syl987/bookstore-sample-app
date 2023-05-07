@@ -60,10 +60,10 @@ export class UserBooksService implements IUserBooksService {
     this.store.dispatch(UserBooksActions.load({ id }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.loadSuccess, UserBooksActions.loadError),
+      ofType(UserBooksActions.loadSUCCESS, UserBooksActions.loadERROR),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.loadSuccess.type) {
+        if (action.type === UserBooksActions.loadSUCCESS.type) {
           return of(action.book);
         }
         return throwError(() => action.error);
@@ -78,10 +78,10 @@ export class UserBooksService implements IUserBooksService {
     this.store.dispatch(UserBooksActions.loadAll());
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.loadAllSuccess, UserBooksActions.loadAllError),
+      ofType(UserBooksActions.loadAllSUCCESS, UserBooksActions.loadAllERROR),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.loadAllSuccess.type) {
+        if (action.type === UserBooksActions.loadAllSUCCESS.type) {
           return of(action.books);
         }
         return throwError(() => action.error);
@@ -96,10 +96,10 @@ export class UserBooksService implements IUserBooksService {
     this.store.dispatch(UserBooksActions.create({ volumeData }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.createSuccess, UserBooksActions.createError),
+      ofType(UserBooksActions.createSUCCESS, UserBooksActions.createERROR),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.createSuccess.type) {
+        if (action.type === UserBooksActions.createSUCCESS.type) {
           return of(action.book);
         }
         return throwError(() => action.error);
@@ -114,10 +114,10 @@ export class UserBooksService implements IUserBooksService {
     this.store.dispatch(UserBooksActions.delete({ id }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.deleteSuccess, UserBooksActions.deleteError),
+      ofType(UserBooksActions.deleteSUCCESS, UserBooksActions.deleteERROR),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.deleteSuccess.type) {
+        if (action.type === UserBooksActions.deleteSUCCESS.type) {
           return of(undefined);
         }
         return throwError(() => action.error);
@@ -132,10 +132,10 @@ export class UserBooksService implements IUserBooksService {
     this.store.dispatch(UserBooksActions.editDraft({ id, data }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.editDraftSuccess, UserBooksActions.editDraftError),
+      ofType(UserBooksActions.editDraftSUCCESS, UserBooksActions.editDraftERROR),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.editDraftSuccess.type) {
+        if (action.type === UserBooksActions.editDraftSUCCESS.type) {
           return of(action.book);
         }
         return throwError(() => action.error);
@@ -150,10 +150,10 @@ export class UserBooksService implements IUserBooksService {
     this.store.dispatch(UserBooksActions.publish({ id }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.publishSuccess, UserBooksActions.publishError),
+      ofType(UserBooksActions.publishSUCCESS, UserBooksActions.publishERROR),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.publishSuccess.type) {
+        if (action.type === UserBooksActions.publishSUCCESS.type) {
           return of(action.book);
         }
         return throwError(() => action.error);

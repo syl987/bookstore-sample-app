@@ -2,7 +2,7 @@
   <p>List of offers for the selected volume.</p>
 
   <div *ngIf="volume$ | async as volume">
-    <app-volume-card [volume]="volume"></app-volume-card>
+    <app-volume-card [volume]="volume" />
 
     <h3>List of offers</h3>
 
@@ -20,8 +20,8 @@
 
         <!-- <p *ngIf="isUserBook(book)" class="text-accent">This is my book.</p> -->
 
-        <button type="button" mat-stroked-button color="accent" disabled>Buy book</button>
-        <!-- <button type="button" mat-stroked-button color="accent" [disabled]="!isLoggedIn() || isUserBook(book)">Buy book</button> -->
+        <button mat-stroked-button color="accent" disabled>Buy book</button>
+        <!-- <button mat-stroked-button color="accent" [disabled]="!isLoggedIn() || isUserBook(book)">Buy book</button> -->
       </mat-expansion-panel>
     </mat-accordion>
   </div>

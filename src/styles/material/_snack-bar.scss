@@ -27,7 +27,7 @@
 
 .mat-mdc-snack-bar-container.success {
   .mdc-snackbar__surface {
-    background-color: lighten($success, 66); // should equal .bg-success-light
+    background-color: lighten($success, 66);
     border: $success 1px solid;
   }
   .mdc-snackbar__label {
@@ -43,7 +43,7 @@
 
 .mat-mdc-snack-bar-container.error {
   .mdc-snackbar__surface {
-    background-color: lighten($warn, 40); // should equal .bg-warn-light
+    background-color: lighten($warn, 40);
     border: $warn 1px solid;
   }
   .mdc-snackbar__label {
@@ -59,7 +59,7 @@
 
 .mat-mdc-snack-bar-container.info {
   .mdc-snackbar__surface {
-    background-color: lighten($info, 49); // should equal .bg-info-light
+    background-color: lighten($info, 49);
     border: $info 1px solid;
   }
   .mdc-snackbar__label {
