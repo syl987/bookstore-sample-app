@@ -15,7 +15,7 @@ import { VolumeDTO } from 'src/app/models/volume.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeCardComponent {
-  @Input() volume?: VolumeDTO | null;
+  @Input({ required: true }) volume?: VolumeDTO | null;
 
   getPublishedBooksTotal(): number {
     return Object.keys(this.volume?.publishedBooks ?? {}).length;
