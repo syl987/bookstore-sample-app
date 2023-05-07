@@ -38,7 +38,7 @@ export class AuthService {
   constructor(private readonly store: Store, private readonly actions: Actions, private readonly auth: Auth) {
     // set user and uid props
     this.user$.pipe(takeUntilDestroyed()).subscribe(u => {
-      this.#user = u as unknown as AuthUser;
+      this.#user = u;
       this.#uid = u?.uid;
     });
 
