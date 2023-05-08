@@ -2,16 +2,6 @@
 
 @import 'shared';
 
-.app-sidebar-toggle {
-  width: app-spacer(s) + app-spacer(s) + 1.5rem !important; // horizontal padding + default icon-button size of 24px
-  padding: app-spacer(s);
-  margin-left: -1 * app-spacer(s) !important; // adjust spacing within the container padding
-}
-
-.mat-toolbar {
-  line-height: inherit !important;
-}
-
 .mat-toolbar-row {
   @include app-container-padding;
 }
