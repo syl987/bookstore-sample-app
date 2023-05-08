@@ -38,7 +38,7 @@ export class HeaderComponent {
 
   readonly toolbarTitle$ = combineLatest([this.desktop$, this.title$]).pipe(map(([desktop, title]) => (desktop ? this.options.applicationName : title)));
 
-  readonly LINKS = APP_NAV_LINKS.filter(link => link.dev || isDevMode());
+  readonly LINKS = APP_NAV_LINKS.filter(link => !link.dev || isDevMode());
   readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
   readonly USER_LINKS = this.LINKS.filter(link => link.user);
 
