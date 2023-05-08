@@ -5,6 +5,11 @@
 
       <a mat-button *ngFor="let link of PUBLIC_LINKS" color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
 
+      <mat-form-field appearance="fill">
+        <mat-icon fontIcon="fa-search" style="padding-top: 2px" />
+        <input matInput placeholder="Search books..." aria-label="Search" />
+      </mat-form-field>
+
       <span class="ms-2xs me-auto"></span>
 
       <ng-container *ngIf="user$ | async as user; else public">
