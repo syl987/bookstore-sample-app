@@ -7,13 +7,11 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { PreloadAllModules, provideRouter, TitleStrategy, withPreloading } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
@@ -27,11 +25,9 @@ import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { DirtyOrTouchedMatcher } from './matchers/dirty-or-touched-matcher';
 import { APP_OPTIONS, APP_STRINGS, AppOptions, AppStrings } from './models/app.models';
 import { AUTH_CONFIG, AuthConfig } from './models/auth.models';
-import { checkboxOptions } from './options/checkbox.options';
 import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
 import { snackBarOptions } from './options/snack-bar.options';
-import { tooltipOptions } from './options/tooltip.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
@@ -116,11 +112,11 @@ export const appConfig: ApplicationConfig = {
     { provide: APP_INITIALIZER, useFactory: registerLocales, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
-    { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions },
+    /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: dialogOptions },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: formFieldOptions },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: snackBarOptions },
-    { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipOptions },
+    /* { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipOptions }, */
     { provide: ErrorStateMatcher, useClass: DirtyOrTouchedMatcher },
     { provide: TitleStrategy, useClass: AppTitleStrategy },
   ],

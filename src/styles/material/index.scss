@@ -51,7 +51,7 @@ $app-light-theme: mat.define-light-theme(
 @include mat.button-theme($app-light-theme);
 /* @include mat.button-toggle-theme($app-light-theme); */
 @include mat.card-theme($app-light-theme);
-@include mat.checkbox-theme($app-light-theme);
+/* @include mat.checkbox-theme($app-light-theme); */
 /* @include mat.chips-theme($app-light-theme); */
 /* @include mat.table-theme($app-light-theme); */
 /* @include mat.datepicker-theme($app-light-theme); */
