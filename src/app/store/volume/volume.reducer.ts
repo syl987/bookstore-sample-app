@@ -34,6 +34,7 @@ export const reducer = createReducer(
   on(VolumeActions.loadSUCCESS, (state, { volume }) => ({
     ...adapter.upsertOne(volume, state),
     load: { ...state.load, pending: false, error: undefined },
+    filter: { ...state.filter, ids: filterVolumes(state.filter.query, adapter.upsertOne(volume, state)) }, // TODO simplify
   })),
   on(VolumeActions.loadERROR, (state, { error }) => ({
     ...state,
@@ -46,6 +47,7 @@ export const reducer = createReducer(
   on(VolumeActions.loadAllSUCCESS, (state, { volumes }) => ({
     ...adapter.upsertMany(volumes, state),
     load: { ...state.load, pending: false, error: undefined },
+    filter: { ...state.filter, ids: filterVolumes(state.filter.query, adapter.upsertMany(volumes, state)) }, // TODO simplify
   })),
   on(VolumeActions.loadAllERROR, (state, { error }) => ({
     ...state,

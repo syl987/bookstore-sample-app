@@ -2,17 +2,6 @@
   <app-title-bar />
 
   <div class="row">
-    <div class="col-sm-8 col-md-6 col-xl-4">
-      <mat-form-field floatLabel="always" class="w-100 mt-s mb-2m">
-        <mat-label>Search</mat-label>
-        <input matInput [formControl]="filterControl" placeholder="title..." />
-        <mat-spinner *ngIf="filtering$ | async" matSuffix diameter="24" class="me-s" />
-        <mat-hint>Supports case-independent substring.</mat-hint>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div class="row">
     <div *ngFor="let volume of volumesFiltered$ | async" class="col-md-6 col-xl-4 mb-m">
       <a routerLink="/volumes/{{ volume.id }}" class="text-reset text-decoration-none"><app-volume-card [volume]="volume" /></a>
     </div>

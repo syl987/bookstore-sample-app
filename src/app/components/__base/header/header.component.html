@@ -7,10 +7,16 @@
 
       <span class="me-auto"></span>
 
-      <mat-form-field appearance="fill">
-        <mat-icon fontIcon="fa-search" class="text-primary" style="padding-top: 2px" />
-        <input matInput placeholder="Search books..." aria-label="Search" />
-      </mat-form-field>
+      <form [formGroup]="form" (ngSubmit)="search()">
+        <mat-form-field appearance="fill" style="min-width: 254px">
+          <mat-icon fontIcon="fa-search" class="text-primary" style="padding-top: 2px" />
+          <input matInput formControlName="query" placeholder="Search books..." aria-label="Search" />
+          <mat-spinner *ngIf="searching$ | async" matSuffix diameter="24" class="me-s" />
+          <!-- <button type="submit" mat-icon-button color="primary" aria-label="Submit" matSuffix>
+            <mat-icon fontIcon="fa-chevron-right" />
+          </button> -->
+        </mat-form-field>
+      </form>
 
       <span class="ms-2xs me-auto"></span>
       <span class="me-auto"></span>
