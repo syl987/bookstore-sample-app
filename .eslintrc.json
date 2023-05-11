@@ -139,7 +139,7 @@
     },
     {
       "files": ["scripts/**/*.js"],
-      "extends": ["standard", "prettier"]
+      "extends": ["eslint:recommended", "plugin:node/recommended", "prettier"]
     }
   ]
 }
