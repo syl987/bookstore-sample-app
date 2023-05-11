@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
+import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 // TODO loading spinner
@@ -23,7 +24,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 @Component({
   selector: 'app-volume-detail-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatExpansionModule, VolumeCardComponent, BookConditionPipe],
+  imports: [CommonModule, MatButtonModule, MatExpansionModule, VolumeCardComponent, BookConditionPipe, TitleBarComponent],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
