@@ -31,6 +31,8 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO volume and book details with breadcrumb history via navigation state
+
 // TODO update angular fire
 // TODO consider material grid-list with breakpoint observer instead of bootstrap grid
 // TODO add $localize function and x18n tags to all language strings
