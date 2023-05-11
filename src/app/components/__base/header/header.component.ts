@@ -22,6 +22,7 @@ import { VolumeService } from 'src/app/services/volume.service';
 import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.component';
 
 // TODO increase non-focused visuals
+// TODO adapt input and prefix sizing
 
 const FAKE_RESPONSE_TIME = 500;
 

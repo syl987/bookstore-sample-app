@@ -11,7 +11,7 @@
         <mat-form-field appearance="fill" style="min-width: 244px">
           <mat-icon fontIcon="fa-search" class="text-primary" style="padding-top: 2px" />
           <input matInput formControlName="query" placeholder="Search books..." aria-label="Search" />
-          <mat-spinner *ngIf="searching$ | async" matSuffix diameter="24" class="me-s" />
+          <mat-spinner *ngIf="searching$ | async" diameter="24" class="me-s" matSuffix />
           <!-- <button type="submit" mat-icon-button color="primary" aria-label="Submit" matSuffix>
             <mat-icon fontIcon="fa-chevron-right" />
           </button> -->
