@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 import { debounceTime, take, tap } from 'rxjs/operators';
 import { VolumeService } from 'src/app/services/volume.service';
 
+import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 // TODO move the search field into the header
@@ -20,7 +21,7 @@ const FAKE_RESPONSE_TIME = 500;
 @Component({
   selector: 'app-search-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, MatInputModule, MatProgressSpinnerModule, VolumeCardComponent],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, MatInputModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent],
   templateUrl: './search-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

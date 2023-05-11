@@ -16,6 +16,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
+import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 // TODO use volume card with published books info
@@ -36,6 +37,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
     VolumeCardComponent,
     ButtonSpinnerDirective,
     ValidationErrorPipe,
+    TitleBarComponent,
   ],
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
