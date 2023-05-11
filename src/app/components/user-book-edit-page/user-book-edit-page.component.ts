@@ -19,8 +19,7 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
-// TODO use volume card with published books info
-// TODO add navigation to volume, if published books exist
+// TODO implement view offers or add navigation to volume, if published books exist
 // TODO navigate to user books after an action
 // TODO delete book (if not sold)
 // TODO add support for 404
