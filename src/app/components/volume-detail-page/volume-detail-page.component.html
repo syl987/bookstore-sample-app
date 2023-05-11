@@ -1,4 +1,6 @@
 <div class="app-container">
+  <app-title-bar backUrl="/search" />
+
   <p>List of offers for the selected volume.</p>
 
   <div *ngIf="volume$ | async as volume">

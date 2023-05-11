@@ -5,13 +5,14 @@ import { Router, RouterModule } from '@angular/router';
 import { DialogService } from 'src/app/services/dialog.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
+import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { UserBookCardContentComponent } from '../user-book-card-content/user-book-card-content.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 @Component({
   selector: 'app-user-book-list-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, VolumeCardComponent, UserBookCardContentComponent],
+  imports: [CommonModule, RouterModule, MatButtonModule, VolumeCardComponent, UserBookCardContentComponent, TitleBarComponent],
   templateUrl: './user-book-list-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

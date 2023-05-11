@@ -1,12 +1,11 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { combineLatest } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
@@ -32,12 +31,7 @@ export class HeaderComponent {
     distinctUntilChanged(),
   );
 
-  readonly displayLoginLink$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
-  readonly displayBackButton$ = this.routerService.selectRouteDataParam('navigateBackButton');
-
-  readonly title$ = this.routerService.title$;
-
-  readonly toolbarTitle$ = combineLatest([this.desktop$, this.title$]).pipe(map(([desktop, title]) => (desktop ? this.options.applicationName : title)));
+  readonly displayLogin$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
 
   readonly LINKS = APP_NAV_LINKS.filter(link => !link.dev || isDevMode());
   readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
@@ -47,7 +41,6 @@ export class HeaderComponent {
 
   constructor(
     @Inject(APP_OPTIONS) readonly options: AppOptions,
-    private readonly location: Location,
     private readonly observer: BreakpointObserver,
     private readonly authService: AuthService,
     private readonly routerService: RouterService,
@@ -56,10 +49,6 @@ export class HeaderComponent {
 
   openUserSettingsDialog(user: AuthUser): void {
     this.dialogService.openUserSettingsDialog(user);
-  }
-
-  navigateBack(): void {
-    this.location.back();
   }
 
   logout(): void {
