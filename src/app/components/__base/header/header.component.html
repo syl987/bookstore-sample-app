@@ -8,7 +8,7 @@
       <span class="me-auto"></span>
 
       <form [formGroup]="form" (ngSubmit)="search()">
-        <mat-form-field appearance="fill" style="min-width: 254px">
+        <mat-form-field appearance="fill" style="min-width: 244px">
           <mat-icon fontIcon="fa-search" class="text-primary" style="padding-top: 2px" />
           <input matInput formControlName="query" placeholder="Search books..." aria-label="Search" />
           <mat-spinner *ngIf="searching$ | async" matSuffix diameter="24" class="me-s" />
