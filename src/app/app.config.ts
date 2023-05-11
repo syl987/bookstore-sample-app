@@ -31,7 +31,13 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO revamp titlebar
+// TODO resolve navigation between book and volume
+// TODO rename book to volume for volume pages and routing
+// TODO header search
 // TODO volume and book details with breadcrumb history via navigation state
+// TODO list books as table, kick accordion
+// TODO upload book image
 
 // TODO update angular fire
 // TODO consider material grid-list with breakpoint observer instead of bootstrap grid
