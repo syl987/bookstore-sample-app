@@ -7,6 +7,8 @@ import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 
+// TODO add close button or support ESC key
+
 @Component({
   selector: 'app-sidenav',
   standalone: true,
