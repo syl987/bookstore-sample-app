@@ -1,6 +1,6 @@
 {
   "name": "bookstore-sample-app",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -63,6 +63,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-deprecation": "~1.4.0",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-regexp": "^1.15.0",
     "eslint-plugin-rxjs": "^5.0.3",
     "eslint-plugin-simple-import-sort": "~10.0.0",
