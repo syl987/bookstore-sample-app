@@ -31,12 +31,6 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="app-container bg-light">
-  <div class="mt-m"></div>
-
-  <h1 *ngIf="desktop$ | async" class="mt-0">{{ title$ | async }}</h1>
-</div>
-
 <ng-template #public>
   <a *ngIf="displayLogin$ | async" mat-button color="primary" routerLink="/login" class="me-ns">Login</a>
 </ng-template>
@@ -46,5 +40,5 @@
     <mat-icon fontIcon="fa-bars" style="font-size: 20px" />
   </button>
 
-  <div class="text-primary fs-normal me-s">{{ title$ | async }}</div>
+  <div class="text-primary fs-normal me-s">{{ options.applicationName }}</div>
 </ng-template>

@@ -6,8 +6,8 @@
   @include app-container-padding;
 }
 
-.mat-mdc-form-field ::ng-deep .mat-mdc-text-field-wrapper::after,
-.mat-mdc-button::after {
+.mat-toolbar .mat-mdc-form-field ::ng-deep .mat-mdc-text-field-wrapper::after,
+.mat-toolbar .mat-mdc-button::after {
   content: '';
   display: block;
   position: absolute;
@@ -20,8 +20,8 @@
   transition: width 0.3s;
 }
 
-.mat-mdc-form-field.mat-focused ::ng-deep .mat-mdc-text-field-wrapper::after,
-.mat-mdc-button.active::after {
+.mat-toolbar .mat-mdc-form-field.mat-focused ::ng-deep .mat-mdc-text-field-wrapper::after,
+.mat-toolbar .mat-mdc-button.active::after {
   width: calc(100% - 16px);
   transition: width 0.3s;
 }
@@ -37,9 +37,9 @@
   }
 }
 
-.mat-mdc-button,
-.mat-mdc-icon-button,
-:host .mat-mdc-icon-button ::ng-deep .mat-mdc-button-persistent-ripple {
+.mat-toolbar .mat-mdc-button,
+.mat-toolbar .mat-mdc-icon-button,
+:host .mat-toolbar .mat-mdc-icon-button ::ng-deep .mat-mdc-button-persistent-ripple {
   height: 100% !important;
   border-radius: 0 !important;
 }

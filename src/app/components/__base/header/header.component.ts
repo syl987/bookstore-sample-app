@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { combineLatest } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
@@ -35,11 +34,7 @@ export class HeaderComponent {
 
   readonly displayLogin$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
 
-  readonly title$ = this.routerService.title$;
-
-  readonly toolbarTitle$ = combineLatest([this.desktop$, this.title$]).pipe(map(([desktop, title]) => (desktop ? this.options.applicationName : title)));
-
-  readonly LINKS = APP_NAV_LINKS.filter(link => link.dev || isDevMode());
+  readonly LINKS = APP_NAV_LINKS.filter(link => !link.dev || isDevMode());
   readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
   readonly USER_LINKS = this.LINKS.filter(link => link.user);
 
