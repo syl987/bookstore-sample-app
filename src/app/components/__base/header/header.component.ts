@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -32,8 +32,7 @@ export class HeaderComponent {
     distinctUntilChanged(),
   );
 
-  readonly displayLoginLink$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
-  readonly displayBackButton$ = this.routerService.selectRouteDataParam('navigateBackButton');
+  readonly displayLogin$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
 
   readonly title$ = this.routerService.title$;
 
@@ -47,7 +46,6 @@ export class HeaderComponent {
 
   constructor(
     @Inject(APP_OPTIONS) readonly options: AppOptions,
-    private readonly location: Location,
     private readonly observer: BreakpointObserver,
     private readonly authService: AuthService,
     private readonly routerService: RouterService,
@@ -56,10 +54,6 @@ export class HeaderComponent {
 
   openUserSettingsDialog(user: AuthUser): void {
     this.dialogService.openUserSettingsDialog(user);
-  }
-
-  navigateBack(): void {
-    this.location.back();
   }
 
   logout(): void {

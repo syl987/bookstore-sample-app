@@ -31,7 +31,6 @@ export const routes: Routes = [
     path: 'books/:volumeId',
     title: `Book Details`,
     loadComponent: () => import('./components/volume-detail-page/volume-detail-page.component').then(m => m.VolumeDetailPageComponent),
-    data: { navigateBackButton: true },
   },
   {
     path: 'user',
@@ -46,7 +45,6 @@ export const routes: Routes = [
         path: 'books/:bookId/edit',
         title: `Edit Book Details`,
         loadComponent: () => import('./components/user-book-edit-page/user-book-edit-page.component').then(m => m.UserBookEditPageComponent),
-        data: { navigateBackButton: true },
       },
     ],
   },

@@ -6,7 +6,7 @@
   @include app-container-padding;
 }
 
-.mat-toolbar .mat-mdc-button::after {
+.mat-mdc-button::after {
   content: '';
   display: block;
   position: absolute;
@@ -19,7 +19,7 @@
   transition: width 0.3s;
 }
 
-.mat-toolbar .mat-mdc-button.active::after {
+.mat-mdc-button.active::after {
   width: calc(100% - 16px);
   transition: width 0.3s;
 }
@@ -35,9 +35,9 @@
   }
 }
 
-.mat-toolbar .mat-mdc-button,
-.mat-toolbar .mat-mdc-icon-button,
-:host .mat-toolbar .mat-mdc-icon-button ::ng-deep .mat-mdc-button-persistent-ripple {
+.mat-mdc-button,
+.mat-mdc-icon-button,
+:host .mat-mdc-icon-button ::ng-deep .mat-mdc-button-persistent-ripple {
   height: 100% !important;
   border-radius: 0 !important;
 }
