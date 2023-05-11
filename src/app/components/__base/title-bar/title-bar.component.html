@@ -1,0 +1,16 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/search">Search</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Book Title</li>
+  </ol>
+</nav>
+
+<!-- <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/user/books">My Books</a></li>
+    <li class="breadcrumb-item"><a routerLink="/user/books/123456/edit">Edit Book Details</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Book Title</li>
+  </ol>
+</nav> -->
+
+<h1 class="mt-0">{{ title$ | async }}</h1>
