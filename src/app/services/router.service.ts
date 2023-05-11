@@ -21,4 +21,9 @@ export class RouterService {
   selectQueryParam(param: never): Observable<string | undefined> {
     return this.store.select(RouterSelectors.selectQueryParam(param));
   }
+
+  selectRouteDataParam(param: 'navigateBackButton'): Observable<boolean | undefined>;
+  selectRouteDataParam(param: 'navigateBackButton'): Observable<any> {
+    return this.store.select(RouterSelectors.selectRouteDataParam(param));
+  }
 }
