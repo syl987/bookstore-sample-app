@@ -65,10 +65,10 @@ const authConfig: AuthConfig = {
   bearerExcluded: [{ url: 'https://www.googleapis.com/books/v1/volumes' }],
   bearerIncluded: [],
   messages: {
-    logout: `Logout successful`,
-    refreshError: `Internal authentication error`,
-    tokenNotFound: `Not authenticated`,
-    response401: `Not authenticated`,
+    logout: $localize`Logout successful`,
+    refreshError: $localize`Internal authentication error`,
+    tokenNotFound: $localize`Not authenticated`,
+    response401: $localize`Not authenticated`,
   },
 };
 
@@ -110,7 +110,7 @@ export const appConfig: ApplicationConfig = {
     { provide: APP_STRINGS, useValue: appStrings },
     { provide: AUTH_CONFIG, useValue: authConfig },
     { provide: APP_INITIALIZER, useFactory: registerIconFonts, deps: [MatIconRegistry], multi: true },
-    { provide: APP_INITIALIZER, useFactory: registerLocales, multi: true },
+    { provide: APP_INITIALIZER, useFactory: registerLocales, multi: true }, // TODO kick?
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
     /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */

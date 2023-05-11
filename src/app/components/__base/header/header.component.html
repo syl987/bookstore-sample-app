@@ -16,7 +16,7 @@
 
         <a mat-button *ngFor="let link of USER_LINKS" color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
 
-        <button mat-button color="primary" (click)="logout()" class="me-n2xs">Logout</button>
+        <button mat-button color="primary" (click)="logout()" class="me-n2xs" i18n>Logout</button>
       </ng-container>
     </ng-container>
   </mat-toolbar-row>
@@ -27,7 +27,7 @@
 </ng-template>
 
 <ng-template #mobile>
-  <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="ms-nxs me-3xs">
+  <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" i18n-aria-label class="ms-nxs me-3xs">
     <mat-icon fontIcon="fa-bars" style="font-size: 20px" />
   </button>
 
