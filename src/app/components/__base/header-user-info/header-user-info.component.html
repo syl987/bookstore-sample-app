@@ -1,0 +1,15 @@
+<div class="position-relative">
+  <div class="d-flex align-items-center">
+    <div *ngIf="user.displayName" class="fs-small fw-normal text-truncate" style="max-width: 256px">{{ user.displayName }}</div>
+    <img
+      *ngIf="user.photoURL"
+      [src]="user.photoURL"
+      alt="user picture"
+      width="40"
+      height="40"
+      class="ms-s rounded-circle"
+      (error)="photo.classList.add('visually-hidden')"
+      #photo
+    />
+  </div>
+</div>

@@ -1,7 +1,9 @@
 <div class="app-container">
-  <p>This is a collection of your books. Once you publish a book, it will be available for other users to buy.</p>
+  <app-title-bar>
+    <button mat-stroked-button color="primary" (click)="openBookCreateDialog()">Create book</button>
+  </app-title-bar>
 
-  <button mat-stroked-button color="primary" (click)="openBookCreateDialog()">Create book</button>
+  <p>This is a collection of your books. Once you publish a book, it will be available for other users to buy.</p>
 </div>
 
 <div *ngIf="(userBooksDraft$ | async)?.length" class="app-container">

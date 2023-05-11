@@ -6,18 +6,19 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { combineLatest } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
+import { APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 
+import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.component';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, MatDividerModule, MatIconModule, MatToolbarModule],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatDividerModule, MatIconModule, MatToolbarModule, HeaderUserInfoComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,20 +26,16 @@ import { RouterService } from 'src/app/services/router.service';
 export class HeaderComponent {
   readonly user$ = this.authService.user$;
 
-  readonly showToggle$ = this.observer.observe([Breakpoints.XSmall, Breakpoints.Small]).pipe(
-    map(({ matches }) => matches),
+  readonly desktop$ = this.observer.observe([Breakpoints.XSmall, Breakpoints.Small]).pipe(
+    map(({ matches }) => !matches),
     distinctUntilChanged(),
   );
 
-  readonly showNavs$ = this.showToggle$.pipe(map(show => !show));
+  readonly displayLogin$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
 
-  readonly showLogin$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
-
-  readonly title$ = this.routerService.title$;
-
-  readonly toolbarTitle$ = combineLatest([this.showNavs$, this.title$]).pipe(map(([showNavs, title]) => (showNavs ? this.options.applicationName : title)));
-
-  readonly development = isDevMode();
+  readonly LINKS = APP_NAV_LINKS.filter(link => !link.dev || isDevMode());
+  readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
+  readonly USER_LINKS = this.LINKS.filter(link => link.user);
 
   @Output() readonly sidenavToggle = new EventEmitter<void>();
 

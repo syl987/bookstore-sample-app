@@ -2,21 +2,11 @@
 
 @import 'shared';
 
-.app-sidebar-toggle {
-  width: app-spacer(s) + app-spacer(s) + 1.5rem !important; // horizontal padding + default icon-button size of 24px
-  padding: app-spacer(s);
-  margin-left: -1 * app-spacer(s) !important; // adjust spacing within the container padding
-}
-
-.mat-toolbar {
-  line-height: inherit !important;
-}
-
 .mat-toolbar-row {
   @include app-container-padding;
 }
 
-.mat-mdc-button::after {
+.mat-toolbar .mat-mdc-button::after {
   content: '';
   display: block;
   position: absolute;
@@ -29,7 +19,7 @@
   transition: width 0.3s;
 }
 
-.mat-mdc-button.active::after {
+.mat-toolbar .mat-mdc-button.active::after {
   width: calc(100% - 16px);
   transition: width 0.3s;
 }
@@ -45,9 +35,9 @@
   }
 }
 
-.mat-mdc-button,
-.mat-mdc-icon-button,
-:host .mat-mdc-icon-button ::ng-deep .mat-mdc-button-persistent-ripple {
+.mat-toolbar .mat-mdc-button,
+.mat-toolbar .mat-mdc-icon-button,
+:host .mat-toolbar .mat-mdc-icon-button ::ng-deep .mat-mdc-button-persistent-ripple {
   height: 100% !important;
   border-radius: 0 !important;
 }
