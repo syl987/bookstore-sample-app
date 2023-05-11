@@ -4,6 +4,13 @@
   "newProjectRoot": "projects",
   "projects": {
     "bookstore-sample-app": {
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "de": "src/locale/messages.de.json",
+          "es": "src/locale/messages.es.json"
+        }
+      },
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -12,6 +19,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["en", "de", "es"],
             "outputPath": "dist/bookstore-sample-app",
             "index": "src/index.html",
             "main": "src/main.ts",
