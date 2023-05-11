@@ -2,3 +2,11 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npx --no-install pretty-quick --staged
+
+node scripts/update-build-data.js
+
+npm version patch --no-git-tag-version
+
+git add package.json
+git add package-lock.json
+git add src/assets/js/build.js
