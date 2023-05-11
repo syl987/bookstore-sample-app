@@ -1,5 +1,6 @@
 <div class="app-container">
-  <app-title-bar>
+  <app-title-bar backUrl="/user/books">
+    <!-- <button mat-stroked-button disabled>View Offers</button> -->
     <button mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishPending$ | async" [disabled]="publishDisabled$ | async">
       Publish book
     </button>
