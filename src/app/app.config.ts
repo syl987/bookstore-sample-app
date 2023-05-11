@@ -31,13 +31,8 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO update ngrx
 // TODO update angular fire
-
 // TODO consider material grid-list with breakpoint observer instead of bootstrap grid
-// TODO import specific font of sizes 400,600,700, no italics
-// TODO modules or standalone components + migrate material imports to reduce initial bundle size
-// TODO experimantal standalone components (possibly all) as pull request
 // TODO add $localize function and x18n tags to all language strings
 // TODO consider using signals, check how to integrate with ngrx
 
@@ -99,8 +94,8 @@ export const appConfig: ApplicationConfig = {
       provideDatabase(() => getDatabase()),
       provideStorage(() => getStorage()),
 
-      MatDialogModule, // TODO check an alternative way of providing
-      MatSnackBarModule, // TODO check an alternative way of providing
+      MatDialogModule, // used centrally
+      MatSnackBarModule, // used centrally
     ),
 
     { provide: LOCALE_ID, useValue: 'de-DE' },
