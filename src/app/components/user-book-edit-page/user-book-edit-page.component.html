@@ -1,5 +1,10 @@
-<div class="app-container mt-xs">
-  <app-title-bar />
+<div class="app-container">
+  <app-title-bar>
+    <button mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishPending$ | async" [disabled]="publishDisabled$ | async">
+      Publish book
+    </button>
+    <button mat-stroked-button color="warn" (click)="deleteBook()" [spinning]="deletePending$ | async" [disabled]="deleteDisabled$ | async">Delete book</button>
+  </app-title-bar>
 
   <p>Carefully fill in the book details. Once published, these data cannot be changed any more.</p>
 
@@ -50,11 +55,4 @@
       <button type="reset" mat-stroked-button [disabled]="form.disabled">Clear</button>
     </div>
   </form>
-
-  <div class="app-gap-x-2xs">
-    <button mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishPending$ | async" [disabled]="publishDisabled$ | async">
-      Publish book
-    </button>
-    <button mat-stroked-button color="warn" (click)="deleteBook()" [spinning]="deletePending$ | async" [disabled]="deleteDisabled$ | async">Delete book</button>
-  </div>
 </div>
