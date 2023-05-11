@@ -21,6 +21,8 @@ import { VolumeService } from 'src/app/services/volume.service';
 
 import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.component';
 
+// TODO increase non-focused visuals
+
 const FAKE_RESPONSE_TIME = 500;
 
 @Component({
