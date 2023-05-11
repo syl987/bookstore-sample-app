@@ -136,6 +136,10 @@
         "@angular-eslint/template/no-positive-tabindex": "warn",
         "@angular-eslint/template/use-track-by-function": "off" // currently unused
       }
+    },
+    {
+      "files": ["scripts/**/*.js"],
+      "extends": ["standard", "prettier"]
     }
   ]
 }
