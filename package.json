@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "xi18n": "ng extract-i18n --format json --output-path src/locale",
+    "xi18n": "ng extract-i18n",
     "deploy": "ng deploy",
     "lint": "ng lint --fix",
     "lint:check": "ng lint",
