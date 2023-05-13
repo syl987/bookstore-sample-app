@@ -31,7 +31,6 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO fix ng serve error
 // TODO message files simple 'de', locale definition should be 'de-DE'
 // TODO decide if base url includes locale country code, such as DE in 'de-DE', make it lowercase?
 
