@@ -29,6 +29,8 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO resolve deployed "ERROR Error: NG02100" for https://sample-app-a00e0.web.app/en/home
+
 // TODO resolve navigation between book and volume
 // TODO header search
 // TODO volume and book details with breadcrumb history via navigation state
