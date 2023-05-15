@@ -28,16 +28,16 @@
               "includePaths": ["node_modules/", "src/styles/shared"]
             },
             "allowedCommonJsDependencies": ["b64-to-blob"],
-            "scripts": []
+            "scripts": [],
+            "i18nDuplicateTranslation": "error",
+            "i18nMissingTranslation": "error",
+            "localize": true
           },
           "configurations": {
             "serve": {
               "localize": ["en"]
             },
             "production": {
-              "localize": true,
-              "i18nDuplicateTranslation": "error",
-              "i18nMissingTranslation": "error",
               "budgets": [
                 {
                   "type": "initial",
