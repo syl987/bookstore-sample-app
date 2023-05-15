@@ -7,8 +7,7 @@
       "i18n": {
         "sourceLocale": { "baseHref": "en" },
         "locales": {
-          "de": { "baseHref": "de", "translation": "src/locales/messages.de.json" },
-          "es-MX": { "baseHref": "es", "translation": "src/locales/messages.es-MX.json" }
+          "de": { "baseHref": "de", "translation": "src/locales/messages.de.json" }
         }
       },
       "projectType": "application",
