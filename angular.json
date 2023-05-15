@@ -33,6 +33,7 @@
           "configurations": {
             "production": {
               "localize": true,
+              "i18nDuplicateTranslation": "error",
               "i18nMissingTranslation": "error",
               "budgets": [
                 {
