@@ -7,8 +7,7 @@
       "i18n": {
         "sourceLocale": "en",
         "locales": {
-          "de": "src/locales/messages.de.json",
-          "es": "src/locales/messages.es.json"
+          "de": "src/locales/messages.de.json"
         }
       },
       "projectType": "application",
@@ -19,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": ["en", "de", "es"],
+            "localize": ["en", "de"],
             "outputPath": "dist/bookstore-sample-app",
             "index": "src/index.html",
             "main": "src/main.ts",
