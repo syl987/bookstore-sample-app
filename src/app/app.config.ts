@@ -29,9 +29,6 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO message files simple 'de', locale definition should be 'de-DE'
-// TODO decide if base url includes locale country code, such as DE in 'de-DE', make it lowercase?
-
 // TODO resolve navigation between book and volume
 // TODO header search
 // TODO volume and book details with breadcrumb history via navigation state
