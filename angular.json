@@ -5,9 +5,9 @@
   "projects": {
     "bookstore-sample-app": {
       "i18n": {
-        "sourceLocale": { "baseHref": "en" },
+        "sourceLocale": { "code": "en" },
         "locales": {
-          "de": { "baseHref": "de", "translation": "src/locales/messages.de.json" }
+          "de": "src/locales/messages.de.json"
         }
       },
       "projectType": "application",
@@ -35,6 +35,7 @@
           "configurations": {
             "production": {
               "localize": true,
+              "i18nMissingTranslation": "error",
               "budgets": [
                 {
                   "type": "initial",
