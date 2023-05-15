@@ -6,9 +6,7 @@
     "bookstore-sample-app": {
       "i18n": {
         "sourceLocale": { "code": "en" },
-        "locales": {
-          "de": "src/locales/messages.de.json"
-        }
+        "locales": {}
       },
       "projectType": "application",
       "root": "",
