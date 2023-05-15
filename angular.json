@@ -31,6 +31,9 @@
             "scripts": []
           },
           "configurations": {
+            "serve": {
+              "localize": ["en"]
+            },
             "production": {
               "localize": true,
               "i18nDuplicateTranslation": "error",
@@ -65,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "bookstore-sample-app:build:production"
+              "browserTarget": "bookstore-sample-app:build:production,serve"
             },
             "development": {
-              "browserTarget": "bookstore-sample-app:build:development"
+              "browserTarget": "bookstore-sample-app:build:development,serve"
             }
           },
           "defaultConfiguration": "development"
