@@ -5,9 +5,10 @@
   "projects": {
     "bookstore-sample-app": {
       "i18n": {
-        "sourceLocale": "en",
+        "sourceLocale": { "baseHref": "en" },
         "locales": {
-          "de": "src/locales/messages.de.json"
+          "de": { "baseHref": "de", "translation": "src/locales/messages.de.json" },
+          "es-MX": { "baseHref": "es", "translation": "src/locales/messages.es-MX.json" }
         }
       },
       "projectType": "application",
@@ -18,7 +19,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": ["en", "de"],
             "outputPath": "dist/bookstore-sample-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,6 +35,7 @@
           },
           "configurations": {
             "production": {
+              "localize": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -50,7 +51,6 @@
               "outputHashing": "all"
             },
             "development": {
-              "localize": ["de"],
               "polyfills": ["zone.js", "hammerjs", "zone.js/plugins/zone-error"],
               "buildOptimizer": false,
               "optimization": false,
