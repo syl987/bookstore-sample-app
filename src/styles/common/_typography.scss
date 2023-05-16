@@ -19,11 +19,9 @@ h6 {
 }
 
 dl {
-  dt {
-    margin-bottom: $spacer * 0.25;
-  }
+  margin-bottom: -1 * $spacer;
 
   dd {
-    margin-bottom: $spacer * 0.5;
+    margin-bottom: $spacer;
   }
 }
