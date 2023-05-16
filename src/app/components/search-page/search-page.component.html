@@ -1,6 +1,6 @@
 <div class="app-container">
   <app-title-bar>
-    <button mat-stroked-button color="primary" (click)="resetSearch()" [disabled]="noFilterQuery$ | async">Reset Search</button>
+    <button mat-stroked-button (click)="clearSearch()" [disabled]="noFilterQuery$ | async">Clear Search</button>
   </app-title-bar>
 
   <p>Explore books available for purchase.</p>

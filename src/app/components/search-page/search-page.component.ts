@@ -28,7 +28,7 @@ export class SearchPageComponent implements OnInit {
     this.volumeService.loadAll();
   }
 
-  resetSearch(): void {
+  clearSearch(): void {
     this.volumeService.filter('');
   }
 }
