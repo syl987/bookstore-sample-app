@@ -8,13 +8,17 @@
       <span class="ms-2xs me-auto"></span>
 
       <ng-container *ngIf="user$ | async as user; else public">
-        <button mat-button (click)="openUserSessionInfoDialog(user)">
-          <app-header-user-info [user]="user" />
-        </button>
+        <app-header-user-info [user]="user" class="px-2xs" />
 
         <mat-divider vertical class="mx-2xs" style="height: 32px" />
 
         <a mat-button *ngFor="let link of USER_LINKS" color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+
+        <button mat-button color="primary" [matMenuTriggerFor]="settingsMenu">Settings</button>
+
+        <mat-menu xPosition="before" #settingsMenu="matMenu">
+          <button mat-menu-item (click)="openUserSessionInfoDialog(user)">Session Info</button>
+        </mat-menu>
 
         <button mat-button color="primary" (click)="logout()" class="me-n2xs">Logout</button>
       </ng-container>

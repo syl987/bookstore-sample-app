@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Inject, isDevMode, Ou
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -18,7 +19,7 @@ import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.co
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, MatDividerModule, MatIconModule, MatToolbarModule, HeaderUserInfoComponent],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, MatToolbarModule, HeaderUserInfoComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
