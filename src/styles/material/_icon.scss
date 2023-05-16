@@ -1,18 +1,14 @@
-.mat-icon {
-  vertical-align: middle;
+// font-awesome v4.7.0 overrides
+.mat-icon.fa {
+  font-size: 24px; // full size
 
-  // scale down
-  &.fa.fa-users {
-    font-size: 90%;
-    margin-bottom: 1px;
-  }
-
-  // flagpack svg set
-  &.fp {
-    height: initial; // allow the 4x3 variants to fill in nicely
+  &.fa-users {
+    font-size: 90%; // scale down
+    margin-bottom: 1px; // align
   }
 }
 
-.mat-icon-inline {
-  vertical-align: bottom;
+// flagpack overrides
+.mat-icon.fp {
+  height: initial; // support 4x3 variants
 }
