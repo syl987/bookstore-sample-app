@@ -34,13 +34,12 @@ export class VolumesEffects {
     );
   });
 
-  // TODO simplify?
-  /* readonly filterOnLoadSuccess = createEffect(() => {
+  readonly setFilter = createEffect(() => {
     return this.actions.pipe(
-      ofType(VolumeActions.loadAllSUCCESS),
-      map(_ => VolumeActions.filter({ query: '' })),
+      ofType(VolumeActions.loadSUCCESS, VolumeActions.loadAllSUCCESS), // any entity state mutation action
+      map(_ => VolumeActions.applyFilterINTERNAL()),
     );
-  }); */
+  });
 
   readonly loadErrorToast = createEffect(
     () => {
