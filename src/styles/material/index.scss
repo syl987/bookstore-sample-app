@@ -40,7 +40,7 @@ $app-light-theme: mat.define-light-theme(
 /* @include mat.datepicker-theme($app-light-theme); */
 @include mat.dialog-theme($app-light-theme);
 @include mat.divider-theme($app-light-theme);
-@include mat.expansion-theme($app-light-theme);
+/* @include mat.expansion-theme($app-light-theme); */
 @include mat.form-field-theme($app-light-theme);
 /* @include mat.grid-list-theme($app-light-theme); */
 @include mat.icon-theme($app-light-theme);
@@ -73,7 +73,7 @@ $app-light-theme: mat.define-light-theme(
 @import 'card';
 /* @import 'datepicker'; */
 @import 'dialog';
-@import 'expansion-panel';
+/* @import 'expansion-panel'; */
 @import 'form-field';
 @import 'icon';
 @import 'list';
