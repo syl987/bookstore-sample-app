@@ -4,10 +4,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Inject, isDevMode, Ou
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
+import { APP_LANGUAGES, APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -18,7 +19,7 @@ import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.co
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, MatDividerModule, MatIconModule, MatToolbarModule, HeaderUserInfoComponent],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatDividerModule, MatIconModule, MatMenuModule, MatToolbarModule, HeaderUserInfoComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,6 +37,8 @@ export class HeaderComponent {
   readonly LINKS = APP_NAV_LINKS.filter(link => !link.dev || isDevMode());
   readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
   readonly USER_LINKS = this.LINKS.filter(link => link.user);
+
+  readonly APP_LANGUAGES = APP_LANGUAGES;
 
   @Output() readonly sidenavToggle = new EventEmitter<void>();
 

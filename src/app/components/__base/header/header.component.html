@@ -16,13 +16,24 @@
 
         <a mat-button *ngFor="let link of USER_LINKS" color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
 
+        <button mat-button color="primary" [matMenuTriggerFor]="languageMenu">Language</button>
+
         <button mat-button color="primary" (click)="logout()" class="me-n2xs">Logout</button>
       </ng-container>
     </ng-container>
   </mat-toolbar-row>
 </mat-toolbar>
 
+<mat-menu xPosition="before" #languageMenu="matMenu">
+  <a mat-menu-item *ngFor="let language of APP_LANGUAGES" [href]="language.href">
+    {{ language.label }}
+    <mat-icon fontSet="fp" [fontIcon]="language.icon" />
+  </a>
+</mat-menu>
+
 <ng-template #public>
+  <button mat-button color="primary" [matMenuTriggerFor]="languageMenu">Language</button>
+
   <a *ngIf="displayLogin$ | async" mat-button color="primary" routerLink="/login" class="me-ns">Login</a>
 </ng-template>
 

@@ -13,6 +13,8 @@
   <mat-action-list dense class="py-2xs">
     <button mat-list-item (click)="openUserSettingsDialog(user); navigated.emit()">User Settings</button>
 
+    <button mat-list-item color="primary" [matMenuTriggerFor]="languageMenu">Language</button>
+
     <button mat-list-item (click)="logout(); navigated.emit()">Logout</button>
   </mat-action-list>
 </ng-container>
@@ -34,6 +36,15 @@
   <mat-divider />
 
   <mat-action-list dense class="py-2xs">
+    <button mat-list-item color="primary" [matMenuTriggerFor]="languageMenu">Language</button>
+
     <button mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
   </mat-action-list>
 </ng-template>
+
+<mat-menu yPosition="above" #languageMenu="matMenu">
+  <a mat-menu-item *ngFor="let language of APP_LANGUAGES" [href]="language.href">
+    {{ language.label }}
+    <mat-icon fontSet="fp" [fontIcon]="language.icon" />
+  </a>
+</mat-menu>
