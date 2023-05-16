@@ -73,7 +73,10 @@ const authConfig: AuthConfig = {
 };
 
 function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
-  return () => iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa'); // font-awesome
+  return () => {
+    iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa'); // font-awesome
+    iconRegistry.registerFontClassAlias('fp', 'fp'); // flagpack (4x3 variants)
+  };
 }
 
 function registerLocales(): () => void {
