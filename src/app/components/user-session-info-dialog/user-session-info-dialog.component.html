@@ -1,30 +1,30 @@
-<h3 mat-dialog-title>User Settings</h3>
+<h3 mat-dialog-title>Session Info</h3>
 
 <div mat-dialog-content>
-  <dl class="row">
+  <dl class="row pt-xs mb-ns">
     <div class="col-sm-6">
       <dt>Name</dt>
       <dd>{{ user.displayName || '-' }}</dd>
-    </div>
-    <div class="col-sm-6">
-      <dt>Last Login</dt>
-      <dd>{{ (user.metadata.lastLoginAt | date) || '-' }}</dd>
-    </div>
-    <div class="col-sm-6">
-      <dt>Email</dt>
-      <dd>{{ user.email || '-' }}</dd>
-    </div>
-    <div class="col-sm-6">
-      <dt>Phone Number</dt>
-      <dd>{{ user.phoneNumber || '-' }}</dd>
     </div>
     <div class="col-sm-6">
       <dt>Login Providers</dt>
       <dd>{{ getAuthProviders(user) || '-' }}</dd>
     </div>
     <div class="col-sm-6">
+      <dt>Email</dt>
+      <dd>{{ user.email || '-' }}</dd>
+    </div>
+    <div class="col-sm-6">
       <dt>Email Verified</dt>
       <dd>{{ user.emailVerified | boolean : 'YesNo' || '-' }}</dd>
+    </div>
+    <div class="col-sm-6">
+      <dt>Registration</dt>
+      <dd>{{ (user.metadata.createdAt | date) || '-' }}</dd>
+    </div>
+    <div class="col-sm-6">
+      <dt>Last Login</dt>
+      <dd>{{ (user.metadata.lastLoginAt | date) || '-' }}</dd>
     </div>
   </dl>
 </div>

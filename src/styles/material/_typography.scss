@@ -6,7 +6,7 @@ $app-typography-config: mat.define-typography-config(
   $headline-5: mat.define-typography-level($h1-font-size, $headings-line-height, $font-weight-bold),
   $headline-6: mat.define-typography-level($h2-font-size, $headings-line-height, $font-weight-bold),
   $subtitle-1: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-normal),
-  $subtitle-2: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-normal),
+  $subtitle-2: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-semibold),
   $body-1: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-normal),
   $body-2: mat.define-typography-level($font-size-base, $line-height-base, $font-weight-normal),
   $caption: mat.define-typography-level($font-size-sm, $line-height-base, $font-weight-normal),
