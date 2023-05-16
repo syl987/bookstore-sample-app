@@ -1,15 +1,23 @@
 @import 'shared';
 
-a.mat-mdc-list-item,
-button.mat-mdc-list-item {
-  color: $primary;
-
-  &:hover,
-  &.active {
-    background-color: lighten($primary, 48%);
+a.mdc-list-item,
+button.mdc-list-item {
+  // apply deep styles for this component only
+  ::ng-deep .mdc-list-item__primary-text {
+    color: $primary !important;
+    font-weight: $font-weight-semibold !important;
   }
 
-  &:focus {
-    background-color: lighten($primary, 45%);
+  &.active {
+    background-color: lighten($primary, 45%) !important;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: lighten($primary, 49%) !important;
+
+    &::before {
+      background-color: transparent !important; // override material default
+    }
   }
 }

@@ -1,0 +1,19 @@
+@import 'font-awesome/scss/variables';
+@import 'font-awesome/scss/mixins';
+
+$fa-font-size-base: 14px !default; // has no effect, need hard override
+$fa-line-height-base: 1 !default;
+$fa-border-color: #eee !default;
+$fa-inverse: #fff !default;
+
+@import 'font-awesome/scss/path';
+@import 'font-awesome/scss/core';
+/* @import 'font-awesome/scss/larger'; */
+@import 'font-awesome/scss/fixed-width';
+/* @import 'font-awesome/scss/list'; */
+@import 'font-awesome/scss/bordered-pulled';
+@import 'font-awesome/scss/animated';
+@import 'font-awesome/scss/rotated-flipped';
+/* @import 'font-awesome/scss/stacked'; */
+@import 'font-awesome/scss/icons';
+@import 'font-awesome/scss/screen-reader';

@@ -13,6 +13,8 @@ export enum BookCondition {
   DAMAGED = 'DAMAGED',
 }
 
+// TODO published book model
+
 export interface BookDTO {
   id: string;
   uid: string;

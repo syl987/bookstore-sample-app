@@ -24,11 +24,11 @@ export const reducer = createReducer(
     ...state,
     search: { ...state.search, pending: true, error: undefined },
   })),
-  on(GoogleBooksActions.searchSuccess, (state, { query, list }) => ({
+  on(GoogleBooksActions.searchSUCCESS, (state, { query, list }) => ({
     ...state,
     search: { ...state.search, query, list, pending: false, error: undefined },
   })),
-  on(GoogleBooksActions.searchError, (state, { error }) => ({
+  on(GoogleBooksActions.searchERROR, (state, { error }) => ({
     ...state,
     search: { ...state.search, pending: false, error },
   })),

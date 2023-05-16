@@ -1,26 +1,47 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { concatMap, filter, map, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { concatMap, filter, map } from 'rxjs/operators';
+import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { ValidationErrorPipe } from 'src/app/pipes/validation-error.pipe';
 import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-// TODO use volume card with published books info
-// TODO add navigation to volume, if published books exist
+import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
+import { VolumeCardComponent } from '../volume-card/volume-card.component';
+
+// TODO implement view offers or add navigation to volume, if published books exist
 // TODO navigate to user books after an action
 // TODO delete book (if not sold)
 // TODO add support for 404
 
 @Component({
   selector: 'app-user-book-edit-page',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    VolumeCardComponent,
+    ButtonSpinnerDirective,
+    ValidationErrorPipe,
+    TitleBarComponent,
+  ],
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBookEditPageComponent implements OnInit, OnDestroy {
+export class UserBookEditPageComponent {
   readonly id: string = this.route.snapshot.params['bookId'];
 
   readonly book$ = this.userBooksService.entityByRoute$;
@@ -46,7 +67,6 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
   });
 
   private readonly _resetFields = new BehaviorSubject<void>(undefined);
-  private readonly _destroyed$ = new Subject<void>();
 
   constructor(
     private readonly fb: FormBuilder,
@@ -55,12 +75,10 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
     private readonly routerService: RouterService,
     private readonly userBooksService: UserBooksService,
     private readonly dialogService: DialogService,
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.routerService
       .selectRouteParam('bookId')
-      .pipe(takeUntil(this._destroyed$))
+      .pipe(takeUntilDestroyed())
       .subscribe(id => {
         if (id) {
           this.userBooksService.load(id);
@@ -68,7 +86,7 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
       });
 
     combineLatest([this.book$, this._resetFields])
-      .pipe(takeUntil(this._destroyed$))
+      .pipe(takeUntilDestroyed())
       .subscribe(([book]) => {
         this.form.setValue({
           description: book?.description ?? null,
@@ -81,11 +99,6 @@ export class UserBookEditPageComponent implements OnInit, OnDestroy {
           this.form.enable();
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    this._destroyed$.next();
-    this._destroyed$.complete();
   }
 
   saveChanges(): void {

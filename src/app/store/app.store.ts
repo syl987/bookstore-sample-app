@@ -1,5 +1,5 @@
 import { isDevMode } from '@angular/core';
-import { MinimalRouterStateSnapshot, routerReducer, RouterReducerState, RouterState, StoreRouterConfig } from '@ngrx/router-store';
+import { routerReducer, RouterState, StoreRouterConfig } from '@ngrx/router-store';
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 
 import { metaReducers } from './app.meta-reducers';
@@ -13,15 +13,7 @@ import * as fromUserBooks from './user-books/user-books.reducer';
 import { VolumesEffects } from './volume/volume.effects';
 import * as fromVolume from './volume/volume.reducer';
 
-interface AppState {
-  router: RouterReducerState<MinimalRouterStateSnapshot>;
-  [fromSearch.searchFeatureKey]: fromSearch.State;
-  [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.State;
-  [fromUserBooks.userBooksFeatureKey]: fromUserBooks.State;
-  [fromVolume.volumeFeatureKey]: fromVolume.State;
-}
-
-export const reducers: ActionReducerMap<AppState> = {
+export const reducers: ActionReducerMap<unknown> = {
   router: routerReducer,
   [fromSearch.searchFeatureKey]: fromSearch.reducer,
   [fromGoogleBooks.googleBooksFeatureKey]: fromGoogleBooks.reducer,
@@ -31,7 +23,7 @@ export const reducers: ActionReducerMap<AppState> = {
 
 export const effects = [AuthEffects, SearchEffects, GoogleBooksEffects, UserBooksEffects, VolumesEffects];
 
-export const storeConfig: RootStoreConfig<AppState> = {
+export const storeConfig: RootStoreConfig<unknown> = {
   metaReducers,
   runtimeChecks: {
     strictActionTypeUniqueness: isDevMode(),

@@ -7,29 +7,7 @@
   border-radius: $border-radius !important;
 }
 
-.mat-mdc-button {
-  padding-right: app-spacer(s) !important;
-  padding-left: app-spacer(s) !important;
-}
-
-// make buttons with visible box broader
-.mat-mdc-unelevated-button,
-.mat-mdc-outlined-button,
-.mat-mdc-raised-button {
-  padding-right: app-spacer(m) !important;
-  padding-left: app-spacer(m) !important;
-}
-
-.mat-mdc-button,
-.mat-mdc-raised-button,
-.mat-mdc-unelevated-button,
-.mat-mini-fab {
-  height: 32px !important;
-}
-
 .mat-mdc-outlined-button {
-  height: 32px !important;
-
   &.mat-primary:not([disabled]) {
     background-color: rgba(mat.get-color-from-palette($app-primary), 0.08);
     border-color: mat.get-color-from-palette($app-primary);

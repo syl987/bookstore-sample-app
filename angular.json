@@ -19,7 +19,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["node_modules/normalize.css/normalize.css", "node_modules/font-awesome/css/font-awesome.css", "src/styles/styles.scss"],
+            "styles": ["src/styles/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["node_modules/", "src/styles/shared"]
             },
@@ -43,13 +43,13 @@
               "outputHashing": "all"
             },
             "development": {
+              "polyfills": ["zone.js", "hammerjs", "zone.js/plugins/zone-error"],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "polyfills": ["zone.js", "hammerjs", "zone.js/plugins/zone-error"]
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -93,15 +93,18 @@
   },
   "schematics": {
     "@schematics/angular:component": {
+      "standalone": true,
       "changeDetection": "OnPush",
       "inlineStyle": true,
       "skipTests": true,
       "style": "scss"
     },
     "@schematics/angular:directive": {
+      "standalone": true,
       "skipTests": true
     },
     "@schematics/angular:pipe": {
+      "standalone": true,
       "skipTests": true
     },
     "@schematics/angular:service": {

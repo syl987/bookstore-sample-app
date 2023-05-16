@@ -10,8 +10,13 @@
   border-bottom-right-radius: $border-radius !important;
 }
 
+.mat-form-field-appearance-fill .mdc-text-field {
+  border-top-left-radius: $border-radius !important;
+  border-top-right-radius: $border-radius !important;
+}
+
 .mat-mdc-form-field label {
-  font-weight: 700;
+  font-weight: $font-weight-semibold;
 }
 
 .mat-mdc-form-field-required-marker {

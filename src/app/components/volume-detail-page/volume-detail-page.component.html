@@ -1,28 +1,15 @@
 <div class="app-container">
+  <app-title-bar backUrl="/search" />
+
   <p>List of offers for the selected volume.</p>
 
   <div *ngIf="volume$ | async as volume">
-    <app-volume-card [volume]="volume"></app-volume-card>
+    <app-volume-card [volume]="volume" />
 
     <h3>List of offers</h3>
 
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let book of getPublishedBooks(volume)">
-        <mat-expansion-panel-header>
-          <mat-panel-title>{{ book.price | currency }}</mat-panel-title>
-          <mat-panel-description class="text-truncate">
-            <span class="d-none d-sm-inline">Condition:&nbsp;</span>
-            {{ book.condition | bookCondition }}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <p>{{ book.description }}</p>
-
-        <!-- <p *ngIf="isUserBook(book)" class="text-accent">This is my book.</p> -->
-
-        <button type="button" mat-stroked-button color="accent" disabled>Buy book</button>
-        <!-- <button type="button" mat-stroked-button color="accent" [disabled]="!isLoggedIn() || isUserBook(book)">Buy book</button> -->
-      </mat-expansion-panel>
-    </mat-accordion>
+    <div class="overflow-x-auto">
+      <app-volume-offer-list [volume]="volume" (buy)="buyBook($event)" />
+    </div>
   </div>
 </div>
