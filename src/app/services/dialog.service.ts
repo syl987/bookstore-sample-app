@@ -5,7 +5,7 @@ import { CropImageDialogComponent, CropImageDialogData } from '../components/cro
 import { UserBookCreateDialogComponent } from '../components/user-book-create-dialog/user-book-create-dialog.component';
 import { UserBookDeleteDialogComponent } from '../components/user-book-delete-dialog/user-book-delete-dialog.component';
 import { UserBookPublishDialogComponent } from '../components/user-book-publish-dialog/user-book-publish-dialog.component';
-import { UserSettingsDialogComponent, UserSettingsDialogData } from '../components/user-settings-dialog/user-settings-dialog.component';
+import { UserSessionInfoDialogComponent, UserSessionInfoDialogData } from '../components/user-session-info-dialog/user-session-info-dialog.component';
 import { AuthUser } from '../models/auth.models';
 import { UserBookDTO } from '../models/book.models';
 
@@ -21,10 +21,10 @@ export class DialogService {
     return this.dialog.open(CropImageDialogComponent, { data, maxWidth: 768 });
   }
 
-  openUserSettingsDialog(user: AuthUser): MatDialogRef<UserSettingsDialogComponent, void> {
-    const data: UserSettingsDialogData = { user };
+  openUserSessionInfoDialog(user: AuthUser): MatDialogRef<UserSessionInfoDialogComponent, void> {
+    const data: UserSessionInfoDialogData = { user };
 
-    return this.dialog.open(UserSettingsDialogComponent, { data, maxWidth: 768 });
+    return this.dialog.open(UserSessionInfoDialogComponent, { data, maxWidth: 768 });
   }
 
   openUserBookCreateDialog(): MatDialogRef<UserBookCreateDialogComponent, UserBookDTO | undefined> {

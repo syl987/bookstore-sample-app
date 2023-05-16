@@ -47,8 +47,8 @@ export class HeaderComponent {
     private readonly dialogService: DialogService,
   ) {}
 
-  openUserSettingsDialog(user: AuthUser): void {
-    this.dialogService.openUserSettingsDialog(user);
+  openUserSessionInfoDialog(user: AuthUser): void {
+    this.dialogService.openUserSessionInfoDialog(user);
   }
 
   logout(): void {

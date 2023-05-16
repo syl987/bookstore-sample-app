@@ -11,7 +11,7 @@
   <mat-divider />
 
   <mat-action-list dense class="py-2xs">
-    <button mat-list-item (click)="openUserSettingsDialog(user); navigated.emit()">User Settings</button>
+    <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()">Session Info</button>
 
     <button mat-list-item (click)="logout(); navigated.emit()">Logout</button>
   </mat-action-list>

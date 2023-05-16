@@ -8,7 +8,7 @@
       <span class="ms-2xs me-auto"></span>
 
       <ng-container *ngIf="user$ | async as user; else public">
-        <button mat-button (click)="openUserSettingsDialog(user)">
+        <button mat-button (click)="openUserSessionInfoDialog(user)">
           <app-header-user-info [user]="user" />
         </button>
 
