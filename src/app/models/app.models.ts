@@ -21,6 +21,20 @@ export const APP_NAV_LINKS: readonly Readonly<AppNavLink>[] = [
   { label: 'Dev', path: '/dev', dev: true },
 ];
 
+export interface AppLanguage {
+  /** Display name. */
+  label: string;
+  /** Full href to the localized version of the app with a trailing slash. Should equal to the locale ID. */
+  href: string;
+  /** Flagpack icon class. */
+  icon: string;
+}
+
+export const APP_LANGUAGES: readonly Readonly<AppLanguage>[] = [
+  { label: 'English', href: '/en/', icon: 'us' },
+  // { label: 'Deutsch', href: '/de/', icon: 'de' },
+];
+
 /**
  * App-specific variables.
  */
