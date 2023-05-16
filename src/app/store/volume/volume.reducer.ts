@@ -51,6 +51,10 @@ export const reducer = createReducer(
     ...state,
     load: { ...state.load, pending: false, error },
   })),
+  on(VolumeActions.applyFilterINTERNAL, state => ({
+    ...state,
+    filter: { ...state.filter, ids: filterVolumes(state.filter.query, state) },
+  })),
   on(VolumeActions.filter, (state, { query }) => ({
     ...state,
     filter: { ...state.filter, query, ids: filterVolumes(query, state) },
