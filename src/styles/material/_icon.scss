@@ -6,6 +6,11 @@
     font-size: 90%;
     margin-bottom: 1px;
   }
+
+  // flagpack svg set
+  &.fp {
+    height: initial; // allow the 4x3 variants to fill in nicely
+  }
 }
 
 .mat-icon-inline {
