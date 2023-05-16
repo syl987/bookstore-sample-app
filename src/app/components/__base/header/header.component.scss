@@ -6,7 +6,7 @@
   @include app-container-padding;
 }
 
-/* .mat-toolbar .mat-mdc-form-field ::ng-deep .mat-mdc-text-field-wrapper::after, */
+.mat-toolbar .mat-mdc-form-field ::ng-deep .mat-mdc-text-field-wrapper::after,
 .mat-toolbar .mat-mdc-button::after {
   content: '';
   display: block;
@@ -20,7 +20,7 @@
   transition: width 0.3s;
 }
 
-/* .mat-toolbar .mat-mdc-form-field.mat-focused ::ng-deep .mat-mdc-text-field-wrapper::after, */
+.mat-toolbar .mat-mdc-form-field.mat-focused ::ng-deep .mat-mdc-text-field-wrapper::after,
 .mat-toolbar .mat-mdc-button.active::after {
   width: calc(100% - 16px);
   transition: width 0.3s;
@@ -51,9 +51,9 @@
     padding-bottom: 19px !important;
   }
 
-  /* .mdc-line-ripple {
+  .mdc-line-ripple {
     opacity: 0 !important;
-  } */
+  }
 
   .mat-mdc-form-field-subscript-wrapper {
     height: 0;
