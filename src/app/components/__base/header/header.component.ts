@@ -74,7 +74,11 @@ export class HeaderComponent {
     private readonly routerService: RouterService,
     private readonly dialogService: DialogService,
     private readonly destroy: DestroyRef,
-  ) {}
+  ) {
+    this.volumeService.filterQuery$.pipe(takeUntilDestroyed()).subscribe(query => {
+      this.form.get('query')!.setValue(query, { emitEvent: false });
+    });
+  }
 
   openUserSessionInfoDialog(user: AuthUser): void {
     this.dialogService.openUserSessionInfoDialog(user);

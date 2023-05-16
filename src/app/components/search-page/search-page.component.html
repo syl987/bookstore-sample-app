@@ -1,5 +1,9 @@
 <div class="app-container">
-  <app-title-bar />
+  <app-title-bar>
+    <button mat-stroked-button color="primary" (click)="resetSearch()" [disabled]="noFilterQuery$ | async">Reset Search</button>
+  </app-title-bar>
+
+  <p>Explore books available for purchase.</p>
 
   <div class="row">
     <div *ngFor="let volume of volumesFiltered$ | async" class="col-md-6 col-xl-4 mb-m">
