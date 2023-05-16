@@ -37,18 +37,17 @@ $app-light-theme: mat.define-light-theme(
 @include mat.card-theme($app-light-theme);
 /* @include mat.checkbox-theme($app-light-theme); */
 /* @include mat.chips-theme($app-light-theme); */
-/* @include mat.table-theme($app-light-theme); */
 /* @include mat.datepicker-theme($app-light-theme); */
 @include mat.dialog-theme($app-light-theme);
 @include mat.divider-theme($app-light-theme);
-@include mat.expansion-theme($app-light-theme);
+/* @include mat.expansion-theme($app-light-theme); */
 @include mat.form-field-theme($app-light-theme);
 /* @include mat.grid-list-theme($app-light-theme); */
 @include mat.icon-theme($app-light-theme);
 @include mat.icon-button-theme($app-light-theme);
 @include mat.input-theme($app-light-theme);
 @include mat.list-theme($app-light-theme);
-/* @include mat.menu-theme($app-light-theme); */
+@include mat.menu-theme($app-light-theme);
 /* @include mat.paginator-theme($app-light-theme); */
 /* @include mat.progress-bar-theme($app-light-theme); */
 @include mat.progress-spinner-theme($app-light-theme);
@@ -59,6 +58,7 @@ $app-light-theme: mat.define-light-theme(
 /* @include mat.slider-theme($app-light-theme); */
 /* @include mat.stepper-theme($app-light-theme); */
 /* @include mat.sort-theme($app-light-theme); */
+@include mat.table-theme($app-light-theme);
 /* @include mat.tabs-theme($app-light-theme); */
 @include mat.toolbar-theme($app-light-theme);
 /* @include mat.tooltip-theme($app-light-theme); */
@@ -73,11 +73,11 @@ $app-light-theme: mat.define-light-theme(
 @import 'card';
 /* @import 'datepicker'; */
 @import 'dialog';
-@import 'expansion-panel';
+/* @import 'expansion-panel'; */
 @import 'form-field';
 @import 'icon';
 @import 'list';
-/* @import 'menu'; */
+@import 'menu';
 @import 'select';
 @import 'snack-bar';
 /* @import 'tooltip'; */

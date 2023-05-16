@@ -23,7 +23,7 @@ import { routes } from './app.routes';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { DirtyOrTouchedMatcher } from './matchers/dirty-or-touched-matcher';
-import { APP_OPTIONS, APP_STRINGS, AppOptions, AppStrings } from './models/app.models';
+import { APP_OPTIONS, AppOptions } from './models/app.models';
 import { AUTH_CONFIG, AuthConfig } from './models/auth.models';
 import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
@@ -72,10 +72,11 @@ const authConfig: AuthConfig = {
   },
 };
 
-const appStrings: AppStrings = {};
-
 function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
-  return () => iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa'); // font-awesome
+  return () => {
+    iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa'); // font-awesome
+    iconRegistry.registerFontClassAlias('fp', 'fp'); // flagpack (4x3 variants)
+  };
 }
 
 function registerLocales(): () => void {
@@ -107,7 +108,6 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'de-DE' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: APP_OPTIONS, useValue: appOptions },
-    { provide: APP_STRINGS, useValue: appStrings },
     { provide: AUTH_CONFIG, useValue: authConfig },
     { provide: APP_INITIALIZER, useFactory: registerIconFonts, deps: [MatIconRegistry], multi: true },
     { provide: APP_INITIALIZER, useFactory: registerLocales, multi: true },

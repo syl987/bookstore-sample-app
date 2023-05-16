@@ -43,13 +43,13 @@
               "outputHashing": "all"
             },
             "development": {
+              "polyfills": ["zone.js", "hammerjs", "zone.js/plugins/zone-error"],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "polyfills": ["zone.js", "hammerjs", "zone.js/plugins/zone-error"]
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
