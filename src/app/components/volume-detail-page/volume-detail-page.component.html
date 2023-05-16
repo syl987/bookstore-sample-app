@@ -8,6 +8,8 @@
 
     <h3>List of offers</h3>
 
-    <app-volume-offer-list [volume]="volume" (buy)="buyBook($event)" />
+    <div class="overflow-x-auto">
+      <app-volume-offer-list [volume]="volume" (buy)="buyBook($event)" />
+    </div>
   </div>
 </div>
