@@ -8,23 +8,34 @@
 
     <h3>List of offers</h3>
 
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let book of getPublishedBooks(volume)">
-        <mat-expansion-panel-header>
-          <mat-panel-title>{{ book.price | currency }}</mat-panel-title>
-          <mat-panel-description class="text-truncate">
-            <span class="d-none d-sm-inline">Condition:&nbsp;</span>
-            {{ book.condition | bookCondition }}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+    <table mat-table [dataSource]="getPublishedBooks(volume)" style="background-color: inherit">
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let book; index as i" class="fw-semibold">{{ i }}</td>
+      </ng-container>
 
-        <p>{{ book.description }}</p>
+      <ng-container matColumnDef="condition">
+        <th mat-header-cell *matHeaderCellDef>Condition</th>
+        <td mat-cell *matCellDef="let book">{{ book.condition | bookCondition }}</td>
+      </ng-container>
 
-        <!-- <p *ngIf="isUserBook(book)" class="text-accent">This is my book.</p> -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let book">{{ book.price | currency }}</td>
+      </ng-container>
 
-        <button mat-stroked-button color="accent" disabled>Buy book</button>
-        <!-- <button mat-stroked-button color="accent" [disabled]="!isLoggedIn() || isUserBook(book)">Buy book</button> -->
-      </mat-expansion-panel>
-    </mat-accordion>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let book">{{ book.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let book"><button mat-button color="primary">Buy</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['index', 'condition', 'price', 'description', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['index', 'condition', 'price', 'description', 'actions']"></tr>
+    </table>
   </div>
 </div>

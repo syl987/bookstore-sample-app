@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 import { BookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
@@ -24,7 +24,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 @Component({
   selector: 'app-volume-detail-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatExpansionModule, VolumeCardComponent, BookConditionPipe, TitleBarComponent],
+  imports: [CommonModule, MatButtonModule, MatTableModule, VolumeCardComponent, BookConditionPipe, TitleBarComponent],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
