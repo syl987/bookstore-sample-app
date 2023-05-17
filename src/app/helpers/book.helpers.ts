@@ -1,7 +1,10 @@
 import { ValidationErrors } from '@angular/forms';
 
-import { BookDTO } from '../models/book.models';
+import { BookCondition, BookDTO } from '../models/book.models';
 
+/**
+ * Collect publish user book errors as `ValidationErrors` object.
+ */
 export function getPublishUserBookValidationErrors(book: BookDTO): ValidationErrors {
   let errors = {};
 
@@ -21,4 +24,13 @@ export function getPublishUserBookValidationErrors(book: BookDTO): ValidationErr
     errors = { ...errors, price: { min: 0 } };
   }
   return errors;
+}
+
+const bookConditionOrder = Object.values(BookCondition);
+
+/**
+ * Compare published books by 1. condition (desc) and 2. price (asc).
+ */
+export function comparePublishedBooks(book1: BookDTO, book2: BookDTO): number {
+  return bookConditionOrder.indexOf(book1.condition!) - bookConditionOrder.indexOf(book2.condition!) || book1.price! - book2.price!;
 }

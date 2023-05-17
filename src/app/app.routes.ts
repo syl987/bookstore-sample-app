@@ -28,8 +28,8 @@ export const routes: Routes = [
     loadComponent: () => import('./components/search-page/search-page.component').then(m => m.SearchPageComponent),
   },
   {
-    path: 'books/:volumeId',
-    title: `Book Details`,
+    path: 'volumes/:volumeId',
+    title: `Volume Details`,
     loadComponent: () => import('./components/volume-detail-page/volume-detail-page.component').then(m => m.VolumeDetailPageComponent),
   },
   {

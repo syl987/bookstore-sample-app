@@ -11,12 +11,13 @@ import { auditTime, map } from 'rxjs/operators';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { ToastService } from 'src/app/services/toast.service';
 
+import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-dialog/dev-example-dialog.component';
 
 @Component({
   selector: 'app-dev-components-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatProgressSpinnerModule, ButtonSpinnerDirective],
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatProgressSpinnerModule, TitleBarComponent, ButtonSpinnerDirective],
   templateUrl: './dev-components-page.component.html',
   styleUrls: ['./dev-components-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
