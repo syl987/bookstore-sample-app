@@ -7,12 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
 import { delay, distinctUntilChanged, map, tap } from 'rxjs/operators';
-import { APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
+import { APP_LANGUAGES, APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -33,6 +34,7 @@ const FAKE_RESPONSE_TIME = 750;
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
+    MatMenuModule,
     MatInputModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
@@ -45,8 +47,8 @@ const FAKE_RESPONSE_TIME = 750;
 export class HeaderComponent {
   readonly user$ = this.authService.user$;
 
-  readonly desktop$ = this.observer.observe([Breakpoints.XSmall, Breakpoints.Small]).pipe(
-    map(({ matches }) => !matches),
+  readonly desktop$ = this.observer.observe([Breakpoints.WebLandscape]).pipe(
+    map(({ matches }) => matches),
     distinctUntilChanged(),
   );
 
@@ -59,6 +61,10 @@ export class HeaderComponent {
   readonly LINKS = APP_NAV_LINKS.filter(link => !link.dev || isDevMode());
   readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
   readonly USER_LINKS = this.LINKS.filter(link => link.user);
+
+  readonly APP_LANGUAGES = APP_LANGUAGES;
+
+  readonly localized = window.location.pathname.split('/').at(1)?.length === 2; // TODO find a better way, check if the first path seqment is a locale id
 
   @Output() readonly sidenavToggle = new EventEmitter<void>();
 

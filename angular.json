@@ -4,6 +4,10 @@
   "newProjectRoot": "projects",
   "projects": {
     "bookstore-sample-app": {
+      "i18n": {
+        "sourceLocale": { "code": "en" },
+        "locales": {}
+      },
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -24,9 +28,15 @@
               "includePaths": ["node_modules/", "src/styles/shared"]
             },
             "allowedCommonJsDependencies": ["b64-to-blob"],
-            "scripts": []
+            "scripts": [],
+            "i18nDuplicateTranslation": "error",
+            "i18nMissingTranslation": "error",
+            "localize": true
           },
           "configurations": {
+            "serve": {
+              "localize": ["en"]
+            },
             "production": {
               "budgets": [
                 {
@@ -58,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "bookstore-sample-app:build:production"
+              "browserTarget": "bookstore-sample-app:build:production,serve"
             },
             "development": {
-              "browserTarget": "bookstore-sample-app:build:development"
+              "browserTarget": "bookstore-sample-app:build:development,serve"
             }
           },
           "defaultConfiguration": "development"
@@ -69,6 +79,8 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
+            "format": "json",
+            "outputPath": "src/locales",
             "browserTarget": "bookstore-sample-app:build"
           }
         },

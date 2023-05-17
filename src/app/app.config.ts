@@ -105,7 +105,7 @@ export const appConfig: ApplicationConfig = {
       MatSnackBarModule, // used centrally
     ),
 
-    { provide: LOCALE_ID, useValue: 'de-DE' },
+    { provide: LOCALE_ID, useValue: 'de' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: APP_OPTIONS, useValue: appOptions },
     { provide: AUTH_CONFIG, useValue: authConfig },
