@@ -1,12 +1,12 @@
-<div class="app-container">
+<div class="container">
   <app-title-bar>
-    <button mat-stroked-button color="primary" (click)="openBookCreateDialog()">Create book</button>
+    <button mat-stroked-button color="primary" (click)="openBookCreateDialog()">Create Book</button>
   </app-title-bar>
 
   <p>This is a collection of your books. Once you publish a book, it will be available for other users to buy.</p>
 </div>
 
-<div *ngIf="(userBooksDraft$ | async)?.length" class="app-container">
+<div *ngIf="(userBooksDraft$ | async)?.length" class="container">
   <h2>Draft</h2>
 
   <p>Carefully fill in the book details. Once published, the book will be available to other users and its data cannot be changed.</p>
@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<div *ngIf="(userBooksPublished$ | async)?.length" class="app-container">
+<div *ngIf="(userBooksPublished$ | async)?.length" class="container">
   <h2>Published</h2>
 
   <p>These books are publicly accessible and available for buying.</p>
@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<div *ngIf="(userBooksSold$ | async)?.length" class="app-container">
+<div *ngIf="(userBooksSold$ | async)?.length" class="container">
   <h2>Sold</h2>
 
   <p>Sold books are not publicly visible any more but they will remain listed here.</p>

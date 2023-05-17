@@ -34,10 +34,10 @@ export class VolumesEffects {
     );
   });
 
-  readonly filterOnLoadSuccess = createEffect(() => {
+  readonly applyFilter = createEffect(() => {
     return this.actions.pipe(
-      ofType(VolumeActions.loadAllSUCCESS),
-      map(_ => VolumeActions.filter({ query: '' })),
+      ofType(VolumeActions.loadSUCCESS, VolumeActions.loadAllSUCCESS), // any entity state mutation action
+      map(_ => VolumeActions.applyFilterINTERNAL()),
     );
   });
 

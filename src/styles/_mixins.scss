@@ -1,22 +1,22 @@
 // shared: mixins
 
-@mixin app-container-padding {
+@mixin app-container-fluid {
   padding-left: app-spacer(s);
   padding-right: app-spacer(s);
 
-  @media (min-width: app-grid-breakpoint(sm)) {
+  @media (min-width: app-grid-breakpoint('sm')) {
     padding-left: app-spacer(m);
     padding-right: app-spacer(m);
   }
 
-  @media (min-width: app-grid-breakpoint(lg)) {
+  @media (min-width: app-grid-breakpoint('xl')) {
     padding-left: app-spacer(2m);
     padding-right: app-spacer(2m);
   }
 }
 
 @mixin app-container {
-  @include app-container-padding;
+  @include app-container-fluid;
 
   width: $app-container-max-width;
   max-width: 100%;

@@ -13,6 +13,8 @@ export const VolumeActions = createActionGroup({
     'load all SUCCESS': props<{ volumes: VolumeDTO[] }>(),
     'load all ERROR': props<{ error: ResponseError }>(),
 
+    'apply filter INTERNAL': emptyProps(),
+
     'filter': props<{ query: string }>(),
   },
 });
