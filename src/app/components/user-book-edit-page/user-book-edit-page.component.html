@@ -7,7 +7,7 @@
     <button mat-stroked-button color="warn" (click)="deleteBook()" [spinning]="deletePending$ | async" [disabled]="deleteDisabled$ | async">Delete Book</button>
   </app-title-bar>
 
-  <p>Carefully fill in the book details. Once published, these data cannot be changed any more.</p>
+  <p>Carefully fill in the book details. Once published, this data cannot be changed anymore.</p>
 
   <!-- <a *ngIf="book$ | async as book" routerLink="/volumes/{{ book.id }}" class="text-reset text-decoration-none"> -->
   <app-volume-card *ngIf="book$ | async as book" [volume]="book.volume" />
