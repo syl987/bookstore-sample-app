@@ -69,10 +69,10 @@ const authConfig: AuthConfig = {
   bearerExcluded: [{ url: 'https://www.googleapis.com/books/v1/volumes' }],
   bearerIncluded: [],
   messages: {
-    logout: `Logout successful`,
-    refreshError: `Internal authentication error`,
-    tokenNotFound: `Not authenticated`,
-    response401: `Not authenticated`,
+    logout: $localize`Logout successful`,
+    refreshError: $localize`Internal authentication error`,
+    tokenNotFound: $localize`Not authenticated`,
+    response401: $localize`Not authenticated`,
   },
 };
 

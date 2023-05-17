@@ -8,7 +8,7 @@
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
           <mat-icon fontIcon="fa-search" inline class="text-primary" matPrefix />
-          <input matInput formControlName="query" placeholder="Search..." aria-label="Search" />
+          <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
           <mat-spinner *ngIf="searching$ | async" diameter="24" class="me-s" matSuffix />
         </mat-form-field>
       </form>
@@ -24,13 +24,13 @@
 
         <a mat-button *ngFor="let link of USER_LINKS" color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
 
-        <button mat-button color="primary" (click)="logout()">Logout</button>
+        <button mat-button color="primary" (click)="logout()" i18n>Logout</button>
       </ng-container>
 
       <mat-divider vertical class="mx-2xs" style="height: 32px" />
     </ng-container>
 
-    <button mat-button color="primary" [matMenuTriggerFor]="languageMenu" class="me-n2xs" [disabled]="!localized">Language</button>
+    <button mat-button color="primary" [matMenuTriggerFor]="languageMenu" class="me-n2xs" [disabled]="!localized" i18n>Language</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -42,11 +42,11 @@
 </mat-menu>
 
 <ng-template #public>
-  <a mat-button color="primary" routerLink="/login" routerLinkActive="active">Login</a>
+  <a mat-button color="primary" routerLink="/login" routerLinkActive="active" i18n>Login</a>
 </ng-template>
 
 <ng-template #mobile>
-  <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="ms-nxs me-3xs">
+  <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="ms-nxs me-3xs" i18n-aria-label>
     <mat-icon fontIcon="fa-bars" class="fs-large align-bottom" />
   </button>
 
