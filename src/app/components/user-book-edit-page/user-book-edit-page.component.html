@@ -1,12 +1,8 @@
 <div class="container">
   <app-title-bar backUrl="/user/books">
     <!-- <button mat-stroked-button disabled>View Offers</button> -->
-    <button mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishPending$ | async" [disabled]="publishDisabled$ | async" i18n>
-      Publish Book
-    </button>
-    <button mat-stroked-button color="warn" (click)="deleteBook()" [spinning]="deletePending$ | async" [disabled]="deleteDisabled$ | async" i18n>
-      Delete Book
-    </button>
+    <button mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishPending$ | async" [disabled]="publishDisabled$ | async" i18n>Publish Book</button>
+    <button mat-stroked-button color="warn" (click)="deleteBook()" [spinning]="deletePending$ | async" [disabled]="deleteDisabled$ | async" i18n>Delete Book</button>
   </app-title-bar>
 
   <p i18n>Carefully fill in the book details. Once published, this data cannot be changed anymore.</p>
@@ -51,9 +47,7 @@
     </div>
 
     <div class="app-gap-x-2xs mb-2m">
-      <button type="submit" mat-stroked-button color="primary" [spinning]="editDraftPending$ | async" [disabled]="editDraftDisabled$ | async" i18n>
-        Save changes
-      </button>
+      <button type="submit" mat-stroked-button color="primary" [spinning]="editDraftPending$ | async" [disabled]="editDraftDisabled$ | async" i18n>Save changes</button>
       <button type="button" mat-stroked-button (click)="discardChanges()" [disabled]="form.disabled" i18n>Reset</button>
       <button type="reset" mat-stroked-button [disabled]="form.disabled" i18n>Clear</button>
     </div>

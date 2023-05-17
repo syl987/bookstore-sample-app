@@ -100,10 +100,7 @@
         "@typescript-eslint/no-extraneous-class": "off", // strict override: support angular annotated empty classes
         "@typescript-eslint/no-non-null-assertion": "off", // recommended override: useful with angular and specs at times
         "@typescript-eslint/no-useless-constructor": "off", // strict overide: needed in annotated angular classes
-        "@typescript-eslint/parameter-properties": [
-          "warn",
-          { "prefer": "parameter-property", "allow": ["readonly", "protected readonly", "private readonly"] }
-        ],
+        "@typescript-eslint/parameter-properties": ["warn", { "prefer": "parameter-property", "allow": ["readonly", "protected readonly", "private readonly"] }],
         "@typescript-eslint/prefer-nullish-coalescing": "off", // recommended override: sometimes intended
         "@typescript-eslint/prefer-readonly": "warn",
 

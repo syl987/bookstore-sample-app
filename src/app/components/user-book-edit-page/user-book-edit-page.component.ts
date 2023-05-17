@@ -54,9 +54,7 @@ export class UserBookEditPageComponent {
 
   readonly editDraftDisabled$ = this.editDraftPending$.pipe(map(pending => pending || this.form.disabled)); // TODO false on startup
 
-  readonly publishDisabled$ = combineLatest([this.publishPending$, this.book$]).pipe(
-    map(([publishing, book]) => publishing || book?.status !== BookStatus.DRAFT),
-  );
+  readonly publishDisabled$ = combineLatest([this.publishPending$, this.book$]).pipe(map(([publishing, book]) => publishing || book?.status !== BookStatus.DRAFT));
 
   readonly deleteDisabled$ = combineLatest([this.deletePending$, this.book$]).pipe(map(([pending, book]) => pending || book?.status !== BookStatus.DRAFT));
 
