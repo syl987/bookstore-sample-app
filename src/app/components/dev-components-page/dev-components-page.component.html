@@ -32,108 +32,47 @@
   <p class="text-lowercase">This line rendered as lowercase text.</p>
   <p class="text-capitalize">This line rendered as capitalize text.</p>
 
-  <!-- <h2>Breadcrumb</h2>
-
-    <nav aria-label="Breadcrumb" class="my-s">
-        <ol nxBreadcrumb>
-            <li>
-                <a nxBreadcrumbItem routerLink="/dev">First</a>
-            </li>
-            <li>
-                <a nxBreadcrumbItem routerLink="/dev">Second</a>
-            </li>
-            <li>
-                <a nxBreadcrumbItem disabled>Third</a>
-            </li>
-        </ol>
-    </nav>
-
-    <nav aria-label="Breadcrumb" class="my-s">
-        <ol nxBreadcrumb>
-            <li>
-                <a nxBreadcrumbItem routerLink="/dev">Vertragssuche</a>
-            </li>
-            <li>
-                <a nxBreadcrumbItem routerLink="/dev">Kollektivvertrag PB654651351</a>
-            </li>
-            <li>
-                <a nxBreadcrumbItem disabled>Untervertrag PB65168531351</a>
-            </li>
-        </ol>
-    </nav>
-
-    <nav aria-label="Breadcrumb" class="my-s">
-        <ol nxBreadcrumb>
-            <li>
-                <a nxBreadcrumbItem routerLink="/dev">Vertragssuche</a>
-            </li>
-            <li>
-                <a nxBreadcrumbItem disabled>Kollektivvertrag PB654651351</a>
-            </li>
-        </ol>
-    </nav>
-
-    <nav aria-label="Breadcrumb" class="my-s">
-        <ol nxBreadcrumb>
-            <li>
-                <a nxBreadcrumbItem routerLink="/dev">Vertragssuche</a>
-            </li>
-            <li>
-                <a nxBreadcrumbItem disabled>Einzelvertrag PB654651351</a>
-            </li>
-        </ol>
-    </nav> -->
-
-  <!-- <h2>Field</h2>
-
-    <syn-field-group nxChildCol="12,12,4,3,2">
-        <h3 >Regular fields</h3>
-        <ng-template synFieldTemplate label="Name" e2e="nameField">Schmidt</ng-template>
-        <ng-template synFieldTemplate label="Vorname">Michael</ng-template>
-        <ng-template synFieldTemplate label="Adresse">
-            Eine Straße 5
-            <br />
-            34583 Sehr große Stadt
-        </ng-template>
-        <ng-template synFieldTemplate label="Very extremely long label and value">
-            This is a very, very and extremely long field value
-        </ng-template>
-        <ng-template synFieldTemplate label="Looooooooooooooooooooonnnnnnnnnnnngggggggggg">
-            Loooooooooooooooooooooooooooooonnnnnnnnnnnnnnnnnggggggggggg
-        </ng-template>
-    </syn-field-group>
-
-    <syn-description-group nxChildCol="12,12,12,6">
-        <h3 >Frequently Asked Questions (FAQ)</h3>
-        <ng-template synFieldTemplate label="How do I register?" e2e="nameField">You need to click on the register button.</ng-template>
-        <ng-template synFieldTemplate label="How great is this application?">It is absolutely breathtaking.</ng-template>
-    </syn-description-group> -->
-
   <h2>Button</h2>
 
-  <div class="app-gap-x-2xs">
+  <div class="app-gap-x-2xs mb-s">
     <button mat-flat-button color="primary">Primary</button>
-    <button mat-flat-button color="accent">Accent</button>
     <button mat-stroked-button color="primary">Secondary</button>
     <button mat-stroked-button>Tertiary</button>
+    <button mat-flat-button color="accent">Accent</button>
     <button mat-stroked-button color="warn">Warn</button>
     <a mat-button color="primary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener">Link</a>
   </div>
 
-  <br />
-
-  <div class="app-gap-x-2xs">
+  <div class="app-gap-x-2xs mb-s">
     <button mat-flat-button color="primary" disabled>Primary</button>
-    <button mat-flat-button color="accent" disabled>Accent</button>
     <button mat-stroked-button color="primary" disabled>Secondary</button>
     <button mat-stroked-button disabled>Tertiary</button>
+    <button mat-flat-button color="accent" disabled>Accent</button>
     <button mat-stroked-button color="warn" disabled>Warn</button>
     <a mat-button color="primary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener" disabled>Link</a>
   </div>
 
+  <div class="app-gap-x-3xs mb-s">
+    <button mat-icon-button color="primary" aria-label="Primary">
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Icon Button">
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+    <button mat-icon-button color="accent" aria-label="Accent">
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+    <button mat-icon-button color="warn" aria-label="Warn">
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+    <button mat-icon-button color="primary" aria-label="Disabled" disabled>
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+  </div>
+
   <h2>Toast</h2>
 
-  <div class="app-gap-x-2xs">
+  <div class="app-gap-x-2xs mb-s">
     <button mat-flat-button color="primary" (click)="showSuccessToast()">Show Success</button>
     <button mat-stroked-button color="primary" (click)="showInfoToast()">Show Info</button>
     <button mat-stroked-button color="warn" (click)="showErrorToast()">Show Error</button>
@@ -145,16 +84,14 @@
 
   <h2>Spinner</h2>
 
-  <div class="d-flex app-gap-x-2xs align-items-end">
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
     <mat-spinner diameter="16" />
     <mat-spinner diameter="24" />
     <mat-spinner diameter="32" />
     <mat-spinner diameter="40" />
   </div>
 
-  <br />
-
-  <div class="d-flex app-gap-x-2xs align-items-end">
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
     <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
     <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
     <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
@@ -163,14 +100,14 @@
 
   <h3>Button with Spinner</h3>
 
-  <div class="app-gap-x-2xs">
+  <div class="app-gap-x-2xs mb-s">
     <button mat-flat-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Primary</button>
     <button mat-stroked-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Secondary</button>
   </div>
 
   <!-- <h3>Button with Progress Indicator</h3>
 
-    <div class="app-gap-x-2xs">
+    <div class="app-gap-x-2xs mb-s">
         <button mat-flat-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Primary</button>
         <button mat-stroked-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Secondary</button>
     </div> -->
@@ -179,23 +116,28 @@
 
   <p>
     There we go with a beautiful inline
-    <mat-icon inline fontIcon="fa-print" />
+    <mat-icon fontIcon="fa-print" inline class="align-bottom" />
     icon.
   </p>
 
-  <div class="app-gap-x-2xs">
-    <mat-icon inline fontIcon="fa-print" />
-    <mat-icon inline fontIcon="fa-envelope-o" />
-    <mat-icon inline fontIcon="fa-phone" />
-    <mat-icon inline fontIcon="fa-code" />
-    <mat-icon inline fontIcon="fa-close" />
+  <div class="app-gap-x-2xs mb-s">
+    <mat-icon fontIcon="fa-print" aria-hidden="true" />
+    <mat-icon fontIcon="fa-envelope-o" color="primary" aria-hidden="true" />
+    <mat-icon fontIcon="fa-phone" color="accent" aria-hidden="true" />
+    <mat-icon fontIcon="fa-code" color="warn" aria-hidden="true" />
+    <mat-icon fontIcon="fa-close" aria-hidden="true" />
+    <mat-icon fontIcon="fa-cog" class="fa-spin" aria-hidden="true" />
+    <mat-icon fontIcon="fa-spinner" class="fa-pulse" aria-hidden="true" />
+    <mat-icon fontIcon="fa-circle-o-notch" class="fa-spin" aria-hidden="true" />
+    <mat-icon fontIcon="fa-refresh" class="fa-spin" aria-hidden="true" />
+    <mat-icon fontIcon="fa-home" class="fa-flip-vertical" aria-hidden="true" />
+    <mat-icon fontIcon="fa-thumb-tack" class="fa-rotate-90" aria-hidden="true" />
   </div>
 
-  <div class="app-gap-x-2xs">
-    <mat-icon inline fontIcon="fa-cog" class="fa-spin" />
-    <mat-icon inline fontIcon="fa-spinner" class="fa-pulse" />
-    <mat-icon inline fontIcon="fa-circle-o-notch" class="fa-pulse" />
-    <mat-icon inline fontIcon="fa-refresh" class="fa-pulse" />
+  <div class="app-gap-x-2xs mb-s">
+    <mat-icon fontSet="fp" fontIcon="fp-us" aria-hidden="true" />
+    <!-- <mat-icon fontSet="fp" fontIcon="fp-de" aria-hidden="true" /> -->
+    <!-- <mat-icon fontSet="fp" fontIcon="fp-es" aria-hidden="true" /> -->
   </div>
 
   <h2>Text</h2>
@@ -209,6 +151,35 @@
   <p class="fs-small">Footnote text (small).</p>
 
   <p class="fs-xsmall">Legal text (xsmall).</p>
+
+  <h2>Field</h2>
+
+  <dl class="row mb-s">
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Name</dt>
+      <dd>Michael Jackson</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Address</dt>
+      <dd>Main Street 4<br />D-12345 Munich</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Email</dt>
+      <dd>michael.jackson@some-domain.com</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Phone Number</dt>
+      <dd>+49 151 / 987 654 321</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Last Login</dt>
+      <dd>{{ '2023-05-16' | date }}</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Secrets</dt>
+      <dd>-</dd>
+    </div>
+  </dl>
 
   <h2>List</h2>
 
@@ -320,7 +291,7 @@
 
   <h4>Horizontal Gap</h4>
 
-  <div class="app-gap-x-m">
+  <div class="app-gap-x-m mb-s">
     <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
     <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
     <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
@@ -338,22 +309,18 @@
 
   <h2>Grid</h2>
 
-  <div class="row app-docs-grid-colored-row">
+  <div class="row app-docs-grid-colored-row mb-s">
     <div class="col-md-8 app-docs-grid-colored-col">.col-md-8</div>
     <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
   </div>
 
-  <br />
-
-  <div class="row app-docs-grid-colored-row">
+  <div class="row app-docs-grid-colored-row mb-s">
     <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
     <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
     <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
   </div>
 
-  <br />
-
-  <div class="row app-docs-grid-colored-row">
+  <div class="row app-docs-grid-colored-row mb-s">
     <div class="col-6 app-docs-grid-colored-col">.col-6</div>
     <div class="col-6 app-docs-grid-colored-col">.col-6</div>
   </div>
