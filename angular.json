@@ -40,8 +40,6 @@
               "localize": ["en"]
             },
             "production": {
-              "localize": true,
-              "i18nMissingTranslation": "error",
               "budgets": [
                 {
                   "type": "initial",

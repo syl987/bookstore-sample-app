@@ -1,4 +1,6 @@
+import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import localeDe from '@angular/common/locales/de';
 import { APP_INITIALIZER, ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, isDevMode, LOCALE_ID } from '@angular/core';
 import { FirebaseOptions, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
@@ -28,9 +30,6 @@ import { formFieldOptions } from './options/form-field.options';
 import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
-
-// TODO message files simple 'de', locale definition should be 'de-DE'
-// TODO decide if base url includes locale country code, such as DE in 'de-DE', make it lowercase?
 
 // TODO resolve navigation between book and volume
 // TODO header search
@@ -84,6 +83,10 @@ function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
   };
 }
 
+function registerLocales(): () => void {
+  return () => registerLocaleData(localeDe);
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
@@ -111,6 +114,7 @@ export const appConfig: ApplicationConfig = {
     { provide: APP_OPTIONS, useValue: appOptions },
     { provide: AUTH_CONFIG, useValue: authConfig },
     { provide: APP_INITIALIZER, useFactory: registerIconFonts, deps: [MatIconRegistry], multi: true },
+    { provide: APP_INITIALIZER, useFactory: registerLocales, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
     /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */
