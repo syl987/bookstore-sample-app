@@ -1,6 +1,20 @@
 import { InjectionToken } from '@angular/core';
 
 /**
+ * App-specific variables.
+ */
+export interface AppOptions {
+  /** Application name to display in header and other places. */
+  applicationName: string;
+  /** Name of the legal copyright holder for display in the footer. */
+  copyrightName: string;
+  /** Year of the last update for display in the footer. */
+  copyrightYear: string;
+}
+
+export const APP_OPTIONS = new InjectionToken<AppOptions>('APP_OPTIONS');
+
+/**
  * App-specific router links.
  */
 export interface AppNavLink {
@@ -34,15 +48,3 @@ export const APP_LANGUAGES: readonly Readonly<AppLanguage>[] = [
   { label: 'English', locale: 'en', icon: 'us' },
   // { label: 'Deutsch', locale: 'de', icon: 'de' },
 ];
-
-/**
- * App-specific variables.
- */
-export interface AppOptions {
-  /** Application name to display in header and other places. */
-  applicationName: string;
-  /** Name of the legal copyright holder for display in the footer */
-  copyrightName: string;
-}
-
-export const APP_OPTIONS = new InjectionToken<AppOptions>('APP_OPTIONS');
