@@ -22,7 +22,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
       first(),
       concatMap(token => {
         if (token) {
-          return next.handle(request.clone({ setHeaders: { Authorization: `Bearer ${token}` } }));
+          return next.handle(request.clone({ setHeaders: { Authorization: $localize`Bearer ${token}` } }));
         }
         this.store.dispatch(AuthActions.authTokenNotFound());
         return EMPTY;

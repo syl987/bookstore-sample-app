@@ -14,7 +14,7 @@ export class BooleanPipe implements PipeTransform {
     }
     switch (format) {
       case 'YesNo':
-        return value ? `Yes` : `No`;
+        return value ? $localize`Yes` : $localize`No`;
       default:
         throw new Error('Format not recognized.');
     }

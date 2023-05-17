@@ -18,7 +18,7 @@ export class UserBooksEffects implements OnRunEffects {
       ofType(UserBooksActions.load),
       switchMap(({ id }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.loadERROR({ error: internalError({ message: `User not logged in.` }) }));
+          return of(UserBooksActions.loadERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
         return this.firebaseApi.getUserBook(this.authService.uid, id).pipe(
           map(book => UserBooksActions.loadSUCCESS({ book })),
@@ -33,7 +33,7 @@ export class UserBooksEffects implements OnRunEffects {
       ofType(UserBooksActions.loadAll),
       switchMap(_ => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.loadAllERROR({ error: internalError({ message: `User not logged in.` }) }));
+          return of(UserBooksActions.loadAllERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
         return this.firebaseApi.getUserBooks(this.authService.uid).pipe(
           map(books => UserBooksActions.loadAllSUCCESS({ books })),
@@ -48,7 +48,7 @@ export class UserBooksEffects implements OnRunEffects {
       ofType(UserBooksActions.create),
       exhaustMap(({ volumeData }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.createERROR({ error: internalError({ message: `User not logged in.` }) }));
+          return of(UserBooksActions.createERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
         const currentUid = this.authService.uid;
 
@@ -72,7 +72,7 @@ export class UserBooksEffects implements OnRunEffects {
       ofType(UserBooksActions.delete),
       exhaustMap(({ id }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.deleteERROR({ error: internalError({ message: `User not logged in.` }) }));
+          return of(UserBooksActions.deleteERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
         return this.firebaseApi.deleteUserBook(this.authService.uid, id).pipe(
           map(_ => UserBooksActions.deleteSUCCESS({ id })),
@@ -87,7 +87,7 @@ export class UserBooksEffects implements OnRunEffects {
       ofType(UserBooksActions.editDraft),
       exhaustMap(({ id, data }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.editDraftERROR({ error: internalError({ message: `User not logged in.` }) }));
+          return of(UserBooksActions.editDraftERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
         return this.firebaseApi.editUserBookDraft(this.authService.uid, id, data).pipe(
           map(res => UserBooksActions.editDraftSUCCESS({ book: res })),
@@ -102,7 +102,7 @@ export class UserBooksEffects implements OnRunEffects {
       ofType(UserBooksActions.publish),
       exhaustMap(({ id }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.publishERROR({ error: internalError({ message: `User not logged in.` }) }));
+          return of(UserBooksActions.publishERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
         return this.firebaseApi.publishUserBook(this.authService.uid, id).pipe(
           map(res => UserBooksActions.publishSUCCESS({ book: res })),

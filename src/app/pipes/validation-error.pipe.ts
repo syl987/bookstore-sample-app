@@ -19,39 +19,39 @@ export class ValidationErrorPipe implements PipeTransform {
 
     // default validators
     if (control.hasError('required')) {
-      return `Required`;
+      return $localize`Required`;
     }
     if (control.hasError('minlength')) {
-      return `Minimal length ${control.getError('minlength').requiredLength}`;
+      return $localize`Minimal length ${control.getError('minlength').requiredLength}`;
     }
     if (control.hasError('maxlength')) {
-      return `Maximal length exceeded by ${control.getError('maxlength').actualLength - control.getError('maxlength').requiredLength}`;
+      return $localize`Maximal length exceeded by ${control.getError('maxlength').actualLength - control.getError('maxlength').requiredLength}`;
     }
     if (control.hasError('min')) {
-      return `Min value ${control.getError('min').min}`;
+      return $localize`Min value ${control.getError('min').min}`;
     }
     if (control.hasError('max')) {
-      return `Max value ${control.getError('max').max}`;
+      return $localize`Max value ${control.getError('max').max}`;
     }
     if (control.hasError('email')) {
-      return `Invalid e-mail`;
+      return $localize`Invalid e-mail`;
     }
     if (control.hasError('pattern')) {
       switch (control.getError('pattern').requiredPattern) {
         default:
-          return `Invalid text`;
+          return $localize`Invalid text`;
       }
     }
 
     // material validators
     if (control.hasError('matDatepickerParse')) {
-      return `Invalid date`;
+      return $localize`Invalid date`;
     }
     if (control.hasError('matStartDateInvalid')) {
-      return `Invalid start date`;
+      return $localize`Invalid start date`;
     }
     if (control.hasError('matEndDateInvalid')) {
-      return `Invalid end date`;
+      return $localize`Invalid end date`;
     }
     return null;
   }

@@ -12,13 +12,13 @@ export class BookConditionPipe implements PipeTransform {
     }
     switch (value) {
       case BookCondition.NEW:
-        return `New`;
+        return $localize`New`;
       case BookCondition.VERY_GOOD:
-        return `Very good`;
+        return $localize`Very good`;
       case BookCondition.VISIBLY_USED:
-        return `Visibly used`;
+        return $localize`Visibly used`;
       case BookCondition.DAMAGED:
-        return `Damaged`;
+        return $localize`Damaged`;
       default:
         return value;
     }
