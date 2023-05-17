@@ -31,6 +31,12 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO check translations
+// TODO kick unnecessary texts
+// TODO check better translation file formats
+// TODO check splitting translation files
+// TODO check layout details
+
 // TODO resolve navigation between book and volume
 // TODO header search
 // TODO volume and book details with breadcrumb history via navigation state
