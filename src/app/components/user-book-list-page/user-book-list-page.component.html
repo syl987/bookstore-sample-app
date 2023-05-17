@@ -12,7 +12,7 @@
   <p>Carefully fill in the book details. Once published, the book will be available to other users and its data cannot be changed.</p>
 
   <div class="row">
-    <div *ngFor="let book of userBooksDraft$ | async" class="col-md-6 col-lg-4 mb-m">
+    <div *ngFor="let book of userBooksDraft$ | async" class="col-md-6 col-lg-4 mb-s">
       <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
         <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
       </a>
@@ -26,7 +26,7 @@
   <p>These books are publicly accessible and available for buying.</p>
 
   <div class="row">
-    <div *ngFor="let book of userBooksPublished$ | async" class="col-md-6 col-lg-4 mb-m">
+    <div *ngFor="let book of userBooksPublished$ | async" class="col-md-6 col-lg-4 mb-s">
       <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
         <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
       </a>
@@ -40,7 +40,7 @@
   <p>Sold books are not publicly visible any more but they will remain listed here.</p>
 
   <div class="row">
-    <div *ngFor="let book of userBooksSold$ | async" class="col-md-6 col-lg-4 mb-m">
+    <div *ngFor="let book of userBooksSold$ | async" class="col-md-6 col-lg-4 mb-s">
       <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
         <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
       </a>
