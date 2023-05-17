@@ -36,6 +36,7 @@ const FAKE_RESPONSE_TIME = 750;
     MatIconModule,
     MatMenuModule,
     MatInputModule,
+    MatMenuModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
     HeaderUserInfoComponent,
