@@ -10,8 +10,6 @@ import { APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  readonly currentYear = new Date().getFullYear();
-
   readonly build = build;
 
   constructor(@Inject(APP_OPTIONS) readonly options: AppOptions) {}

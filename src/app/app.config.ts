@@ -44,7 +44,6 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 
 // TODO impressum page
 // TODO footer link to my github or some other page
-// TODO copyright year as static options
 
 const firebaseOptions: FirebaseOptions = {
   apiKey: 'AIzaSyDrisPHet7H7y-G9GjVoJZFReIp-xqgnjo',
@@ -60,6 +59,7 @@ const firebaseOptions: FirebaseOptions = {
 const appOptions: AppOptions = {
   applicationName: 'Bookstore Sample App',
   copyrightName: 'Igor Milly',
+  copyrightYear: '2023',
 };
 
 const authConfig: AuthConfig = {
