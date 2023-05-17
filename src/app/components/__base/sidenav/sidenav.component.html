@@ -1,13 +1,6 @@
 <ng-container *ngIf="user$ | async as user; else public">
   <div class="d-flex flex-column align-items-center mt-3m mb-s">
-    <img
-      [src]="user?.photoURL || 'favicon.ico'"
-      alt="user picture"
-      width="128"
-      height="128"
-      class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border"
-      i18n-alt
-    />
+    <img [src]="user?.photoURL || 'favicon.ico'" alt="user picture" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border" i18n-alt />
     {{ user?.displayName }}
   </div>
 
@@ -27,9 +20,7 @@
 <ng-template #public>
   <div class="d-flex flex-column align-items-center mt-3m mb-s">
     <div class="mb-2xs p-3xs border rounded-circle" style="width: 128px; height: 128px">
-      <div class="d-flex flex-column justify-content-center align-items-center rounded-circle w-100 h-100 bg-light" style="color: lightgrey; font-size: 56px">
-        ?
-      </div>
+      <div class="d-flex flex-column justify-content-center align-items-center rounded-circle w-100 h-100 bg-light" style="color: lightgrey; font-size: 56px">?</div>
     </div>
     <div i18n>Anonymous User</div>
   </div>

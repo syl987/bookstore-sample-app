@@ -19,16 +19,7 @@ const DEBOUNCE_TIME = 500;
 @Component({
   selector: 'app-user-book-create-dialog',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatInputModule,
-    MatListModule,
-    MatProgressSpinnerModule,
-    ButtonSpinnerDirective,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, MatListModule, MatProgressSpinnerModule, ButtonSpinnerDirective],
   templateUrl: './user-book-create-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

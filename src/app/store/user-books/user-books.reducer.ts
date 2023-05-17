@@ -112,15 +112,9 @@ export const userBooksFeature = createFeature({
     selectAll: createSelector(selectUserBooksState, adapter.getSelectors().selectAll),
     selectTotal: createSelector(selectUserBooksState, adapter.getSelectors().selectTotal),
 
-    selectAllDraft: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
-      books.filter(b => b.status === BookStatus.DRAFT),
-    ),
-    selectAllPublished: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
-      books.filter(b => b.status === BookStatus.PUBLISHED),
-    ),
-    selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
-      books.filter(b => b.status === BookStatus.SOLD),
-    ),
+    selectAllDraft: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.DRAFT)),
+    selectAllPublished: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.PUBLISHED)),
+    selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.SOLD)),
 
     selectByRoute: createSelector(selectEntities, selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
 
