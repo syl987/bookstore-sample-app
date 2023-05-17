@@ -57,7 +57,7 @@ export const routes: Routes = [
 if (isDevMode()) {
   routes.splice(routes.length - 1, 0, {
     path: 'dev',
-    title: $localize`Component Collection`,
+    title: `Component Collection`,
     loadComponent: () => import('./components/dev-components-page/dev-components-page.component').then(m => m.DevComponentsPageComponent),
   });
 }
