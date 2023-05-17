@@ -28,10 +28,10 @@ export class ValidationErrorPipe implements PipeTransform {
       return $localize`Maximal length exceeded by ${control.getError('maxlength').actualLength - control.getError('maxlength').requiredLength}`;
     }
     if (control.hasError('min')) {
-      return $localize`Min value ${control.getError('min').min}`;
+      return $localize`Minimal value ${control.getError('min').min}`;
     }
     if (control.hasError('max')) {
-      return $localize`Max value ${control.getError('max').max}`;
+      return $localize`Maximal value ${control.getError('max').max}`;
     }
     if (control.hasError('email')) {
       return $localize`Invalid e-mail`;
