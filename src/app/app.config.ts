@@ -31,8 +31,6 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO review header and sidenav regarding user and language buttons / dropdowns
-
 // TODO resolve navigation between book and volume
 // TODO header search
 // TODO volume and book details with breadcrumb history via navigation state

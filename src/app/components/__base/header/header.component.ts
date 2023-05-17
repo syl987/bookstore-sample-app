@@ -64,7 +64,7 @@ export class HeaderComponent {
 
   readonly APP_LANGUAGES = APP_LANGUAGES;
 
-  readonly localized = window.location.pathname.split('/').at(1)?.length === 2; // TODO find a better way
+  readonly localized = window.location.pathname.split('/').at(1)?.length === 2; // TODO find a better way, check if the first path seqment is a locale id
 
   @Output() readonly sidenavToggle = new EventEmitter<void>();
 
