@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
+// TODO complex plural translation
 // TODO loading appearence
 
 @Component({
