@@ -123,7 +123,7 @@ export class UserBookEditPageComponent {
         concatMap(_ => this.userBooksService.publish(this.id)),
       )
       .subscribe({
-        next: _ => this.router.navigateByUrl(`/user/books`),
+        next: _ => this.router.navigateByUrl('/user/books'),
         error: err => {
           // TODO customize typing
           // reliably retrieve error details
@@ -145,6 +145,6 @@ export class UserBookEditPageComponent {
         filter(isTrue), // ignore close without result
         concatMap(_ => this.userBooksService.delete(this.id)),
       )
-      .subscribe(_ => this.router.navigateByUrl(`/user/books`));
+      .subscribe(_ => this.router.navigateByUrl('/user/books'));
   }
 }
