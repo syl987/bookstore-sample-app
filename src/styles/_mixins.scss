@@ -4,12 +4,12 @@
   padding-left: app-spacer(s);
   padding-right: app-spacer(s);
 
-  @media (min-width: app-grid-breakpoint(sm)) {
+  @media (min-width: app-grid-breakpoint('sm')) {
     padding-left: app-spacer(m);
     padding-right: app-spacer(m);
   }
 
-  @media (min-width: app-grid-breakpoint(lg)) {
+  @media (min-width: app-grid-breakpoint('xl')) {
     padding-left: app-spacer(2m);
     padding-right: app-spacer(2m);
   }
