@@ -5,38 +5,44 @@ import { Observable, of, throwError } from 'rxjs';
 import { concatMap, shareReplay, take } from 'rxjs/operators';
 
 import { VolumeDTO } from '../models/volume.models';
-import * as VolumeActions from '../store/volume/volume.actions';
-import * as VolumeSelectors from '../store/volume/volume.selectors';
+import { VolumeActions } from '../store/volume/volume.actions';
+import { volumeFeature } from '../store/volume/volume.reducer';
 
 interface IVolumeService {
   /** Load a volume with published books. */
   load(id: string): Observable<VolumeDTO>;
   /** Load all volumes with published books. */
   loadAll(): Observable<VolumeDTO[]>;
+  /** Filter all loaded volumes with published books by title. */
+  filter(query: string): void;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class VolumeService implements IVolumeService {
-  readonly volumes$ = this.store.select(VolumeSelectors.selectVolumesAll);
-  readonly volumesTotal$ = this.store.select(VolumeSelectors.selectVolumesTotal);
+  readonly entities$ = this.store.select(volumeFeature.selectAll);
+  readonly entitiesTotal$ = this.store.select(volumeFeature.selectTotal);
 
-  readonly volumeByRoute$ = this.store.select(VolumeSelectors.selectVolumeByRoute);
+  readonly entitiesFiltered$ = this.store.select(volumeFeature.selectAllFiltered);
 
-  readonly loadPending$ = this.store.select(VolumeSelectors.selectVolumesLoadPending);
-  readonly loadError$ = this.store.select(VolumeSelectors.selectVolumesLoadError);
+  readonly entitiyByRoute$ = this.store.select(volumeFeature.selectByRoute);
+
+  readonly filterQuery$ = this.store.select(volumeFeature.selectFilterQuery);
+
+  readonly loadPending$ = this.store.select(volumeFeature.selectLoadPending);
+  readonly loadError$ = this.store.select(volumeFeature.selectLoadError);
 
   constructor(private readonly store: Store, private readonly actions: Actions) {}
 
   load(id: string): Observable<VolumeDTO> {
-    this.store.dispatch(VolumeActions.loadVolume({ id }));
+    this.store.dispatch(VolumeActions.load({ id }));
 
     const result = this.actions.pipe(
-      ofType(VolumeActions.loadVolumeSuccess, VolumeActions.loadVolumeError),
+      ofType(VolumeActions.loadSUCCESS, VolumeActions.loadERROR),
       take(1),
       concatMap(action => {
-        if (action.type === VolumeActions.loadVolumeSuccess.type) {
+        if (action.type === VolumeActions.loadSUCCESS.type) {
           return of(action.volume);
         }
         return throwError(() => action.error);
@@ -48,13 +54,13 @@ export class VolumeService implements IVolumeService {
   }
 
   loadAll(): Observable<VolumeDTO[]> {
-    this.store.dispatch(VolumeActions.loadVolumes());
+    this.store.dispatch(VolumeActions.loadAll());
 
     const result = this.actions.pipe(
-      ofType(VolumeActions.loadVolumesSuccess, VolumeActions.loadVolumesError),
+      ofType(VolumeActions.loadAllSUCCESS, VolumeActions.loadAllERROR),
       take(1),
       concatMap(action => {
-        if (action.type === VolumeActions.loadVolumesSuccess.type) {
+        if (action.type === VolumeActions.loadAllSUCCESS.type) {
           return of(action.volumes);
         }
         return throwError(() => action.error);
@@ -63,5 +69,9 @@ export class VolumeService implements IVolumeService {
     );
     result.subscribe();
     return result;
+  }
+
+  filter(query: string): void {
+    this.store.dispatch(VolumeActions.filter({ query }));
   }
 }

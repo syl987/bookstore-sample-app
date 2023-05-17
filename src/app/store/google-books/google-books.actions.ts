@@ -1,7 +1,12 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, props } from '@ngrx/store';
 import { ResponseError } from 'src/app/models/error.models';
 import { GoogleBooksListDTO } from 'src/app/models/google-books.models';
 
-export const searchGoogleBooks = createAction('[GoogleBooks] search', props<{ query: string }>());
-export const searchGoogleBooksSuccess = createAction('[GoogleBooks] search SUCCESS', props<{ query: string; list: GoogleBooksListDTO }>());
-export const searchGoogleBooksError = createAction('[GoogleBooks] search ERROR', props<{ error: ResponseError }>());
+export const GoogleBooksActions = createActionGroup({
+  source: 'GoogleBooks',
+  events: {
+    'search': props<{ query: string }>(),
+    'search SUCCESS': props<{ query: string; list: GoogleBooksListDTO }>(),
+    'search ERROR': props<{ error: ResponseError }>(),
+  },
+});

@@ -1,0 +1,327 @@
+<div class="container">
+  <app-title-bar />
+
+  <h1>Heading h1 normal</h1>
+  <h2>Heading h2 normal</h2>
+  <h3>Heading h3 normal</h3>
+  <h4><s>Heading h4</s></h4>
+  <h5><s>Heading h5</s></h5>
+  <h6><s>Heading h6</s></h6>
+
+  <p>
+    Paragraph text with proper
+    <span class="app-text-primary">primary color</span>
+    styling from a theme mixin and with some important text included. This text is also very long and will be wrapped.
+  </p>
+
+  <mat-divider class="mb-s" />
+
+  <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+  <p><u>This line of text will render as underlined</u></p>
+  <p><small>This line of text is meant to be treated as fine print.</small></p>
+  <p><strong>This line rendered as bold text.</strong></p>
+  <!-- <p><em>This line rendered as italicized text.</em></p> -->
+
+  <p><samp>This line rendered as program output sample.</samp></p>
+  <p><code>This line rendered as code-formatted text.</code></p>
+  <pre>This line rendered as preformatted text.</pre>
+
+  <mat-divider class="mb-s" />
+
+  <p class="text-uppercase">This line rendered as uppercase text.</p>
+  <p class="text-lowercase">This line rendered as lowercase text.</p>
+  <p class="text-capitalize">This line rendered as capitalize text.</p>
+
+  <h2>Button</h2>
+
+  <div class="app-gap-x-2xs mb-s">
+    <button mat-flat-button color="primary">Primary</button>
+    <button mat-stroked-button color="primary">Secondary</button>
+    <button mat-stroked-button>Tertiary</button>
+    <button mat-flat-button color="accent">Accent</button>
+    <button mat-stroked-button color="warn">Warn</button>
+    <a mat-button color="primary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener">Link</a>
+  </div>
+
+  <div class="app-gap-x-2xs mb-s">
+    <button mat-flat-button color="primary" disabled>Primary</button>
+    <button mat-stroked-button color="primary" disabled>Secondary</button>
+    <button mat-stroked-button disabled>Tertiary</button>
+    <button mat-flat-button color="accent" disabled>Accent</button>
+    <button mat-stroked-button color="warn" disabled>Warn</button>
+    <a mat-button color="primary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener" disabled>Link</a>
+  </div>
+
+  <div class="app-gap-x-3xs mb-s">
+    <button mat-icon-button color="primary" aria-label="Primary">
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Icon Button">
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+    <button mat-icon-button color="accent" aria-label="Accent">
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+    <button mat-icon-button color="warn" aria-label="Warn">
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+    <button mat-icon-button color="primary" aria-label="Disabled" disabled>
+      <mat-icon fontIcon="fa-globe" class="align-top"></mat-icon>
+    </button>
+  </div>
+
+  <h2>Toast</h2>
+
+  <div class="app-gap-x-2xs mb-s">
+    <button mat-flat-button color="primary" (click)="showSuccessToast()">Show Success</button>
+    <button mat-stroked-button color="primary" (click)="showInfoToast()">Show Info</button>
+    <button mat-stroked-button color="warn" (click)="showErrorToast()">Show Error</button>
+  </div>
+
+  <h2>Dialog</h2>
+
+  <button mat-flat-button color="primary" (click)="openExampleDialog()">Open Dialog</button>
+
+  <h2>Spinner</h2>
+
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
+    <mat-spinner diameter="16" />
+    <mat-spinner diameter="24" />
+    <mat-spinner diameter="32" />
+    <mat-spinner diameter="40" />
+  </div>
+
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
+    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async" />
+  </div>
+
+  <h3>Button with Spinner</h3>
+
+  <div class="app-gap-x-2xs mb-s">
+    <button mat-flat-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Primary</button>
+    <button mat-stroked-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Secondary</button>
+  </div>
+
+  <!-- <h3>Button with Progress Indicator</h3>
+
+    <div class="app-gap-x-2xs mb-s">
+        <button mat-flat-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Primary</button>
+        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Secondary</button>
+    </div> -->
+
+  <h2>Icons</h2>
+
+  <p>
+    There we go with a beautiful inline
+    <mat-icon fontIcon="fa-print" inline class="align-bottom" />
+    icon.
+  </p>
+
+  <div class="app-gap-x-2xs mb-s">
+    <mat-icon fontIcon="fa-print" aria-hidden="true" />
+    <mat-icon fontIcon="fa-envelope-o" color="primary" aria-hidden="true" />
+    <mat-icon fontIcon="fa-phone" color="accent" aria-hidden="true" />
+    <mat-icon fontIcon="fa-code" color="warn" aria-hidden="true" />
+    <mat-icon fontIcon="fa-close" aria-hidden="true" />
+    <mat-icon fontIcon="fa-cog" class="fa-spin" aria-hidden="true" />
+    <mat-icon fontIcon="fa-spinner" class="fa-pulse" aria-hidden="true" />
+    <mat-icon fontIcon="fa-circle-o-notch" class="fa-spin" aria-hidden="true" />
+    <mat-icon fontIcon="fa-refresh" class="fa-spin" aria-hidden="true" />
+    <mat-icon fontIcon="fa-home" class="fa-flip-vertical" aria-hidden="true" />
+    <mat-icon fontIcon="fa-thumb-tack" class="fa-rotate-90" aria-hidden="true" />
+  </div>
+
+  <div class="app-gap-x-2xs mb-s">
+    <mat-icon fontSet="fp" fontIcon="fp-us" aria-hidden="true" />
+    <!-- <mat-icon fontSet="fp" fontIcon="fp-de" aria-hidden="true" /> -->
+    <!-- <mat-icon fontSet="fp" fontIcon="fp-es" aria-hidden="true" /> -->
+  </div>
+
+  <h2>Text</h2>
+
+  <p class="fs-large">Large text (large) for unknown usage.</p>
+
+  <p class="fs-normal">Regular text (normal) with some very important information included.</p>
+
+  <p>Default paragraph text (normal) with some very important information included.</p>
+
+  <p class="fs-small">Footnote text (small).</p>
+
+  <p class="fs-xsmall">Legal text (xsmall).</p>
+
+  <h2>Field</h2>
+
+  <dl class="row mb-s">
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Name</dt>
+      <dd>Michael Jackson</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Address</dt>
+      <dd>Main Street 4<br />D-12345 Munich</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Email</dt>
+      <dd>michael.jackson@some-domain.com</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Phone Number</dt>
+      <dd>+49 151 / 987 654 321</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Last Login</dt>
+      <dd>{{ '2023-05-16' | date }}</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Secrets</dt>
+      <dd>-</dd>
+    </div>
+  </dl>
+
+  <h2>List</h2>
+
+  <div class="row">
+    <div class="col-md-6 col-lg-3">
+      <h4>Default List</h4>
+      <mat-list>
+        <mat-list-item lines="3">
+          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
+          <span matListItemTitle>Title</span>
+          <span matListItemLine>Description</span>
+          <span matListItemLine>Second line</span>
+          <span matListItemMeta>Meta info</span>
+        </mat-list-item>
+        <mat-list-item lines="2">
+          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
+          <span matListItemTitle>Title</span>
+          <span matListItemLine>Description</span>
+          <span matListItemMeta>Meta info</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <h4>Navigation List</h4>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/dev">first link</a>
+        <a mat-list-item routerLink="/dev">some other link</a>
+        <a mat-list-item routerLink="/dev" disabled>disabled link</a>
+      </mat-nav-list>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <h4>Action List</h4>
+      <mat-action-list>
+        <button mat-list-item (click)="showInfoToast()">first action</button>
+        <button mat-list-item (click)="showInfoToast()">some other action</button>
+        <button mat-list-item disabled>disabled action</button>
+      </mat-action-list>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <h4>Selection List</h4>
+      <mat-selection-list>
+        <mat-list-option>first option</mat-list-option>
+        <mat-list-option>some other option</mat-list-option>
+        <mat-list-option disabled>disabled option</mat-list-option>
+      </mat-selection-list>
+    </div>
+  </div>
+
+  <h2>Utilities</h2>
+
+  <h3>Text Alignment</h3>
+
+  <p class="text-justify">
+    Justified (left and right aligned) text with some very important information included. This text is also very long and will be wrapped. This text is also
+    very long and will be wrapped. This text is also very long and will be wrapped immediately. This text is also very long and will be wrapped very
+    immediately. This text is also very long and will be wrapped now.
+  </p>
+  <p class="text-start">Left (start) aligned text on all viewport sizes.</p>
+  <p class="text-center">Center aligned text on all viewport sizes.</p>
+  <p class="text-end">Right (end) aligned text on all viewport sizes.</p>
+
+  <h3>Text Wrap</h3>
+
+  <div class="text-wrap" style="width: 6rem; background-color: aquamarine">This text should wrap.</div>
+
+  <div class="text-nowrap" style="width: 8rem; background-color: burlywood">This text should overflow the parent.</div>
+
+  <div class="text-truncate" style="max-width: 11rem; background-color: darkkhaki">Truncate block: Praeterea iter est quasdam res quas ex communi.</div>
+
+  <span class="text-truncate" style="max-width: 11rem; display: inline-block; background-color: wheat"
+    >Truncate inline: Praeterea iter est quasdam res quas ex communi.</span
+  >
+
+  <p class="text-break">Break word: mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+
+  <h3>Text Colors</h3>
+
+  <p class="text-primary">.text-primary (mat-primary)</p>
+  <p class="text-accent">.text-accent (mat-accent)</p>
+  <p class="text-success">.text-success</p>
+  <p class="text-warn">.text-warn (mat-warn)</p>
+  <p class="text-info">.text-info</p>
+  <p class="text-body">.text-body (primary body color)</p>
+  <p class="text-white" style="background-color: gray">.text-white (inverse body color)</p>
+  <p class="text-muted">.text-muted</p>
+  <p class="text-reset">.text-reset (inherited color)</p>
+
+  <h3>Screen Readers</h3>
+
+  <p>
+    Expose to screen readers only:
+    <span class="visually-hidden">visually-hidden</span>
+  </p>
+
+  <p>
+    Display normally when focused, expose only to screen readers otherwise:
+    <button mat-flat-button color="primary" class="visually-hidden-focusable">visually-hidden</button>
+  </p>
+
+  <h3>Spacing</h3>
+
+  <p>
+    Spacing syntax for margins, paddings and negative margins follows the
+    <a href="https://getbootstrap.com/docs/5.1/utilities/spacing/" target="_blank" rel="noreferrer noopener">Bootstrap syntax</a>.
+  </p>
+
+  <h4>Horizontal Gap</h4>
+
+  <div class="app-gap-x-m mb-s">
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+    <div class="d-inline-block border border-primary px-m py-3xs mb-s">Inline Block</div>
+  </div>
+
+  <h4>Vertical Spacing</h4>
+
+  <div class="d-inline-block app-children-mb-m">
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+    <div class="border border-primary px-m py-3xs">Block Element</div>
+  </div>
+
+  <h2>Grid</h2>
+
+  <div class="row app-docs-grid-colored-row mb-s">
+    <div class="col-md-8 app-docs-grid-colored-col">.col-md-8</div>
+    <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
+  </div>
+
+  <div class="row app-docs-grid-colored-row mb-s">
+    <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
+    <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
+    <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
+  </div>
+
+  <div class="row app-docs-grid-colored-row mb-s">
+    <div class="col-6 app-docs-grid-colored-col">.col-6</div>
+    <div class="col-6 app-docs-grid-colored-col">.col-6</div>
+  </div>
+</div>

@@ -1,11 +1,12 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { createReducer, on } from '@ngrx/store';
-import { UserBookDTO } from 'src/app/models/book.models';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { OperationState } from 'src/app/models/store.models';
 
-import * as UserBooksActions from './user-books.actions';
+import { selectRouteParam } from '../router/router.selectors';
+import { UserBooksActions } from './user-books.actions';
 
-export const userBooksFeatureKey = 'user-books';
+export const userBooksFeatureKey = 'userBooks';
 
 export interface State extends EntityState<UserBookDTO> {
   load: OperationState;
@@ -20,7 +21,7 @@ const adapter = createEntityAdapter<UserBookDTO>({
   sortComparer: (e1, e2) => e2.id.localeCompare(e1.id),
 });
 
-export const initialState: State = adapter.getInitialState({
+const initialState: State = adapter.getInitialState({
   load: { pending: false },
   create: { pending: false },
   remove: { pending: false },
@@ -30,78 +31,112 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(UserBooksActions.loadUserBook, state => ({
+  on(UserBooksActions.load, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(UserBooksActions.loadUserBookSuccess, (state, { book }) => ({
+  on(UserBooksActions.loadSUCCESS, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadUserBookError, (state, { error }) => ({
+  on(UserBooksActions.loadERROR, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
-  on(UserBooksActions.loadUserBooks, state => ({
+  on(UserBooksActions.loadAll, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
-  on(UserBooksActions.loadUserBooksSuccess, (state, { books }) => ({
+  on(UserBooksActions.loadAllSUCCESS, (state, { books }) => ({
     ...adapter.upsertMany(books, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadUserBooksError, (state, { error }) => ({
+  on(UserBooksActions.loadAllERROR, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
-  on(UserBooksActions.createUserBook, state => ({
+  on(UserBooksActions.create, state => ({
     ...state,
     create: { ...state.create, pending: true, error: undefined },
   })),
-  on(UserBooksActions.createUserBookSuccess, (state, { book }) => ({
+  on(UserBooksActions.createSUCCESS, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     create: { ...state.create, pending: false, error: undefined },
   })),
-  on(UserBooksActions.createUserBookError, (state, { error }) => ({
+  on(UserBooksActions.createERROR, (state, { error }) => ({
     ...state,
     create: { ...state.create, pending: false, error },
   })),
-  on(UserBooksActions.deleteUserBook, state => ({
+  on(UserBooksActions.delete, state => ({
     ...state,
     remove: { ...state.remove, pending: true, error: undefined },
   })),
-  on(UserBooksActions.deleteUserBookSuccess, (state, { id }) => ({
+  on(UserBooksActions.deleteSUCCESS, (state, { id }) => ({
     ...adapter.removeOne(id, state),
     remove: { ...state.remove, pending: false, error: undefined },
   })),
-  on(UserBooksActions.deleteUserBookError, (state, { error }) => ({
+  on(UserBooksActions.deleteERROR, (state, { error }) => ({
     ...state,
     remove: { ...state.remove, pending: false, error },
   })),
-  on(UserBooksActions.editUserBookDraft, state => ({
+  on(UserBooksActions.editDraft, state => ({
     ...state,
     editDraft: { ...state.editDraft, pending: true, error: undefined },
   })),
-  on(UserBooksActions.editUserBookDraftSuccess, (state, { book }) => ({
+  on(UserBooksActions.editDraftSUCCESS, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     editDraft: { ...state.editDraft, pending: false, error: undefined },
   })),
-  on(UserBooksActions.editUserBookDraftError, (state, { error }) => ({
+  on(UserBooksActions.editDraftERROR, (state, { error }) => ({
     ...state,
     editDraft: { ...state.editDraft, pending: false, error },
   })),
-  on(UserBooksActions.publishUserBook, state => ({
+  on(UserBooksActions.publish, state => ({
     ...state,
     publish: { ...state.publish, pending: true, error: undefined },
   })),
-  on(UserBooksActions.publishUserBookSuccess, (state, { book }) => ({
+  on(UserBooksActions.publishSUCCESS, (state, { book }) => ({
     ...adapter.upsertOne(book, state),
     publish: { ...state.publish, pending: false, error: undefined },
   })),
-  on(UserBooksActions.publishUserBookError, (state, { error }) => ({
+  on(UserBooksActions.publishERROR, (state, { error }) => ({
     ...state,
     publish: { ...state.publish, pending: false, error },
   })),
 );
 
-export const { selectAll, selectEntities, selectIds, selectTotal } = adapter.getSelectors();
+export const userBooksFeature = createFeature({
+  name: userBooksFeatureKey,
+  reducer,
+  extraSelectors: ({ selectUserBooksState, selectEntities, selectLoad, selectCreate, selectRemove, selectEditDraft, selectPublish }) => ({
+    selectAll: createSelector(selectUserBooksState, adapter.getSelectors().selectAll),
+    selectTotal: createSelector(selectUserBooksState, adapter.getSelectors().selectTotal),
+
+    selectAllDraft: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
+      books.filter(b => b.status === BookStatus.DRAFT),
+    ),
+    selectAllPublished: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
+      books.filter(b => b.status === BookStatus.PUBLISHED),
+    ),
+    selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
+      books.filter(b => b.status === BookStatus.SOLD),
+    ),
+
+    selectByRoute: createSelector(selectEntities, selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
+
+    selectLoadPending: createSelector(selectLoad, ({ pending }) => pending),
+    selectLoadError: createSelector(selectLoad, ({ error }) => error),
+
+    selectCreatePending: createSelector(selectCreate, ({ pending }) => pending),
+    selectCreateError: createSelector(selectCreate, ({ error }) => error),
+
+    selectDeletePending: createSelector(selectRemove, ({ pending }) => pending),
+    selectDeleteError: createSelector(selectRemove, ({ error }) => error),
+
+    selectEditDraftPending: createSelector(selectEditDraft, ({ pending }) => pending),
+    selectEditDraftError: createSelector(selectEditDraft, ({ error }) => error),
+
+    selectPublishPending: createSelector(selectPublish, ({ pending }) => pending),
+    selectPublishError: createSelector(selectPublish, ({ error }) => error),
+  }),
+});

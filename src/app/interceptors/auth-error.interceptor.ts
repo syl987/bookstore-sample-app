@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 
 import { isBearerExcluded } from '../helpers/auth.helpers';
 import { AUTH_CONFIG, AuthConfig } from '../models/auth.models';
-import { authResponseError } from '../store/auth/auth.actions';
+import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable()
 export class AuthErrorInterceptor implements HttpInterceptor {
@@ -21,7 +21,7 @@ export class AuthErrorInterceptor implements HttpInterceptor {
       catchError((err?: Partial<HttpErrorResponse>) => {
         if (err?.status === 401) {
           // despite frontend auth checks, backend is still the source of truth. if any non-excluded request could not authenticate, auto-logout.
-          this.store.dispatch(authResponseError());
+          this.store.dispatch(AuthActions.authResponseERROR());
           return EMPTY;
         }
         return throwError(() => err);

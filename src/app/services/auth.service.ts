@@ -1,19 +1,19 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Auth, user } from '@angular/fire/auth';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { toAuthUser } from '../helpers/auth.helpers';
 import { AuthProviderId, AuthUser } from '../models/auth.models';
-import { loginWithProvider, logout } from '../store/auth/auth.actions';
-import * as AuthActions from '../store/auth/auth.actions';
+import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnDestroy {
+export class AuthService {
   readonly user$: Observable<AuthUser | null> = user(this.auth).pipe(map(toAuthUser));
 
   readonly loggedIn$ = this.user$.pipe(map(u => !!u));
@@ -35,44 +35,37 @@ export class AuthService implements OnDestroy {
   }
   #uid?: string;
 
-  private readonly _destroyed$ = new Subject<void>();
-
   constructor(private readonly store: Store, private readonly actions: Actions, private readonly auth: Auth) {
     // set user and uid props
-    this.user$.pipe(takeUntil(this._destroyed$)).subscribe(u => {
-      this.#user = u as unknown as AuthUser;
+    this.user$.pipe(takeUntilDestroyed()).subscribe(u => {
+      this.#user = u;
       this.#uid = u?.uid;
     });
 
     // set login pending stream
-    this.actions.pipe(ofType(AuthActions.loginWithProvider), takeUntil(this._destroyed$)).subscribe(_ => this._loginPending.next(true));
+    this.actions.pipe(ofType(AuthActions.loginWithProvider), takeUntilDestroyed()).subscribe(_ => this._loginPending.next(true));
     this.actions
-      .pipe(ofType(AuthActions.loginWithProviderSuccess, AuthActions.loginWithProviderError, AuthActions.resetState), takeUntil(this._destroyed$))
+      .pipe(ofType(AuthActions.loginWithProviderSUCCESS, AuthActions.loginWithProviderERROR, AuthActions.authResetState), takeUntilDestroyed())
       .subscribe(_ => this._loginPending.next(false));
 
     // set logout pending stream
-    this.actions.pipe(ofType(AuthActions.logout), takeUntil(this._destroyed$)).subscribe(_ => this._logoutPending.next(true));
+    this.actions.pipe(ofType(AuthActions.logout), takeUntilDestroyed()).subscribe(_ => this._logoutPending.next(true));
     this.actions
-      .pipe(ofType(AuthActions.logoutSuccess, AuthActions.logoutError, AuthActions.resetState), takeUntil(this._destroyed$))
+      .pipe(ofType(AuthActions.logoutSUCCESS, AuthActions.logoutERROR, AuthActions.authResetState), takeUntilDestroyed())
       .subscribe(_ => this._logoutPending.next(false));
-  }
-
-  ngOnDestroy(): void {
-    this._destroyed$.next();
-    this._destroyed$.complete();
   }
 
   /**
    * Login with an external provider.
    */
   loginWithProvider(provider: AuthProviderId): void {
-    this.store.dispatch(loginWithProvider({ providerId: provider }));
+    this.store.dispatch(AuthActions.loginWithProvider({ providerId: provider }));
   }
 
   /**
    * Logout.
    */
   logout(): void {
-    this.store.dispatch(logout());
+    this.store.dispatch(AuthActions.logout());
   }
 }

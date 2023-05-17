@@ -1,61 +1,43 @@
 <mat-toolbar class="shadow">
   <mat-toolbar-row>
-    <ng-container *ngIf="showToggle$ | async">
-      <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="fs-l app-sidebar-toggle me-3xs">
-        <mat-icon fontIcon="fa-bars"></mat-icon>
-      </button>
+    <ng-container *ngIf="desktop$ | async; else mobile">
+      <div class="text-primary fs-large me-s">{{ options.applicationName }}</div>
 
-      <div class="text-primary fs-m me-s">{{ title$ | async }}</div>
-    </ng-container>
+      <a mat-button *ngFor="let link of PUBLIC_LINKS" color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
 
-    <ng-container *ngIf="showNavs$ | async">
-      <div class="text-primary fs-l me-s">{{ config.appName }}</div>
+      <form [formGroup]="form" (ngSubmit)="search()">
+        <mat-form-field appearance="fill" style="min-width: 268px">
+          <mat-icon fontIcon="fa-search" inline class="text-primary" matPrefix />
+          <input matInput formControlName="query" placeholder="Search..." aria-label="Search" />
+          <mat-spinner *ngIf="searching$ | async" diameter="24" class="me-s" matSuffix />
+        </mat-form-field>
+      </form>
 
-      <a mat-button color="primary" routerLink="/home" routerLinkActive="active" class="px-2xs">Home</a>
+      <span class="ms-2xs me-auto"></span>
 
-      <a mat-button color="primary" routerLink="/search" routerLinkActive="active" class="px-2xs">Search</a>
-
-      <a *ngIf="!production" mat-button color="primary" routerLink="/dev" routerLinkActive="active" class="px-2xs">Dev</a>
-    </ng-container>
-
-    <span class="ms-2xs me-auto"></span>
-
-    <ng-container *ngIf="showNavs$ | async">
-      <ng-container *ngIf="user$ | async as user; else login">
-        <button mat-button (click)="openUserSettingsDialog(user)">
-          <div *ngIf="user?.displayName" class="position-relative">
-            <div class="d-flex align-items-center">
-              <div class="fs-s fw-400 text-truncate" style="max-width: 256px">{{ user?.displayName }}</div>
-              <img
-                *ngIf="user?.photoURL"
-                [src]="user?.photoURL"
-                alt="user"
-                width="40"
-                height="40"
-                class="ms-s rounded-circle"
-                (error)="photo.classList.add('visually-hidden')"
-                #photo
-              />
-            </div>
-          </div>
+      <ng-container *ngIf="user$ | async as user; else public">
+        <button mat-button (click)="openUserSessionInfoDialog(user)">
+          <app-header-user-info [user]="user" />
         </button>
 
-        <div class="border-end" style="height: 32px !important"></div>
+        <mat-divider vertical class="mx-2xs" style="height: 32px" />
 
-        <a mat-button color="primary" routerLink="/user/books" routerLinkActive="active" class="px-2xs">My Books</a>
+        <a mat-button *ngFor="let link of USER_LINKS" color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
 
-        <button mat-button color="primary" (click)="logout()" class="me-ns">Logout</button>
+        <button mat-button color="primary" (click)="logout()" class="me-n2xs">Logout</button>
       </ng-container>
-
-      <ng-template #login>
-        <a *ngIf="showLogin$ | async" mat-button color="primary" routerLink="/login" class="me-ns">Login</a>
-      </ng-template>
     </ng-container>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="app-container bg-light">
-  <div class="mt-2xs"></div>
+<ng-template #public>
+  <a *ngIf="displayLogin$ | async" mat-button color="primary" routerLink="/login" class="me-ns">Login</a>
+</ng-template>
 
-  <h1 *ngIf="showNavs$ | async">{{ title$ | async }}</h1>
-</div>
+<ng-template #mobile>
+  <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="ms-nxs me-3xs">
+    <mat-icon fontIcon="fa-bars" class="fs-large align-bottom" />
+  </button>
+
+  <div class="text-primary fs-normal me-s">{{ options.applicationName }}</div>
+</ng-template>

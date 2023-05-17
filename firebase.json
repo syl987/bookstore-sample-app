@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "target": "silly-bookstore-example-app",
-    "public": "dist/silly-bookstore-example-app",
+    "target": "bookstore-sample-app",
+    "public": "dist/bookstore-sample-app",
     "ignore": ["**/.*"],
     "headers": [
       {

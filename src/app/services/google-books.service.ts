@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as VolumeActions from '../store/google-books/google-books.actions';
-import * as VolumeSelectors from '../store/google-books/google-books.selectors';
+import { GoogleBooksActions } from '../store/google-books/google-books.actions';
+import { googleBooksFeature } from '../store/google-books/google-books.reducer';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoogleBooksService {
-  readonly searchQuery$ = this.store.select(VolumeSelectors.selectGoogleBooksSearchQuery);
-  readonly searchVolumes$ = this.store.select(VolumeSelectors.selectGoogleBooksSearchVolumes);
+  readonly searchQuery$ = this.store.select(googleBooksFeature.selectSearchQuery);
+  readonly searchList$ = this.store.select(googleBooksFeature.selectSearchList); // TODO rename as results?
 
-  readonly searchPending$ = this.store.select(VolumeSelectors.selectGoogleBooksSearchPending);
-  readonly searchError$ = this.store.select(VolumeSelectors.selectGoogleBooksSearchError);
+  readonly searchResults$ = this.store.select(googleBooksFeature.selectSearchResults);
+  readonly searchResultsTotal$ = this.store.select(googleBooksFeature.selectSearchResultsTotal);
+
+  readonly searchPending$ = this.store.select(googleBooksFeature.selectSearchPending);
+  readonly searchError$ = this.store.select(googleBooksFeature.selectSearchError);
 
   constructor(private readonly store: Store) {}
 
   searchVolumes(query: string): void {
-    this.store.dispatch(VolumeActions.searchGoogleBooks({ query }));
+    this.store.dispatch(GoogleBooksActions.search({ query }));
   }
 }

@@ -1,20 +1,25 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { ResponseError } from 'src/app/models/error.models';
 
 import { AuthProviderId } from '../../models/auth.models';
 
-export const loginWithProvider = createAction('[Auth] login with provider', props<{ providerId: AuthProviderId }>());
-export const loginWithProviderSuccess = createAction('[Auth] login with provider SUCCESS');
-export const loginWithProviderError = createAction('[Auth] login with provider ERROR', props<{ error: ResponseError }>());
+export const AuthActions = createActionGroup({
+  source: 'Auth',
+  events: {
+    'login with provider': props<{ providerId: AuthProviderId }>(),
+    'login with provider SUCCESS': emptyProps(),
+    'login with provider ERROR': props<{ error: ResponseError }>(),
 
-export const authRefreshError = createAction('[Auth] refresh ERROR');
-export const authResponseError = createAction('[Auth] response ERROR');
-export const authTokenNotFound = createAction('[Auth] token not found');
+    'logout': emptyProps(),
+    'logout SUCCESS': emptyProps(),
+    'logout ERROR': props<{ error: ResponseError }>(),
 
-export const logout = createAction('[Auth] logout');
-export const logoutSuccess = createAction('[Auth] logout SUCCESS');
-export const logoutError = createAction('[Auth] logout ERROR', props<{ error: ResponseError }>());
+    'authenticated': emptyProps(),
+    'unauthenticated': emptyProps(),
 
-export const authenticated = createAction('[Auth] authenticated');
-export const unauthenticated = createAction('[Auth] un-authenticated');
-export const resetState = createAction('[Auth] reset state');
+    'auth refresh ERROR': emptyProps(),
+    'auth response ERROR': emptyProps(),
+    'auth token not found': emptyProps(),
+    'auth reset state': emptyProps(),
+  },
+});

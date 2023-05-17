@@ -2,7 +2,7 @@
   "targets": {
     "sample-app-a00e0": {
       "hosting": {
-        "silly-bookstore-example-app": [
+        "bookstore-sample-app": [
           "sample-app-a00e0"
         ]
       }

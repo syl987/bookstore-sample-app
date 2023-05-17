@@ -11,7 +11,7 @@ import { ToastService } from 'src/app/services/toast.service';
 
 import { getAuthProvider } from '../../helpers/auth.helpers';
 import { AUTH_CONFIG, AuthConfig } from '../../models/auth.models';
-import * as AuthActions from './auth.actions';
+import { AuthActions } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -26,61 +26,41 @@ export class AuthEffects {
     );
   });
 
-  readonly loginWithProviderRequest = createEffect(() => {
+  readonly loginWithProvider = createEffect(() => {
     return this.actions.pipe(
       ofType(AuthActions.loginWithProvider),
       exhaustMap(({ providerId }) =>
         from(signInWithPopup(this.auth, getAuthProvider(providerId))).pipe(
-          map(_ => AuthActions.loginWithProviderSuccess()),
-          catchError(err => of(AuthActions.loginWithProviderError({ error: firebaseError({ err }) }))),
+          map(_ => AuthActions.loginWithProviderSUCCESS()),
+          catchError(err => of(AuthActions.loginWithProviderERROR({ error: firebaseError({ err }) }))),
         ),
       ),
     );
   });
 
-  readonly navigateHome = createEffect(
+  readonly logout = createEffect(() => {
+    return this.actions.pipe(
+      ofType(AuthActions.logout, AuthActions.authRefreshERROR, AuthActions.authTokenNotFound, AuthActions.authResponseERROR),
+      concatMap(_ =>
+        from(this.auth.signOut()).pipe(
+          map(() => AuthActions.logoutSUCCESS()),
+          catchError(err => of(AuthActions.logoutERROR({ error: firebaseError({ err }) }))),
+        ),
+      ),
+    );
+  });
+
+  readonly navigateOnLoginWithProviderSuccess = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.loginWithProviderSuccess),
+        ofType(AuthActions.loginWithProviderSUCCESS),
         map(_ => this.router.navigateByUrl(this.config.afterLoginUrl)),
       );
     },
     { dispatch: false },
   );
 
-  readonly openLoginErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(AuthActions.loginWithProviderError),
-        map(({ error }) => this.toastService.showErrorToast(toResponseErrorMessage(error))),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly logoutRequest = createEffect(() => {
-    return this.actions.pipe(
-      ofType(AuthActions.logout, AuthActions.authRefreshError, AuthActions.authTokenNotFound, AuthActions.authResponseError),
-      concatMap(_ =>
-        from(this.auth.signOut()).pipe(
-          map(() => AuthActions.logoutSuccess()),
-          catchError(err => of(AuthActions.logoutError({ error: firebaseError({ err }) }))),
-        ),
-      ),
-    );
-  });
-
-  readonly closeAllDialogs = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(AuthActions.unauthenticated),
-        map(_ => this.dialogService.closeAllDialogs()),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly navigateToLogin = createEffect(
+  readonly navigateOnUnauthenticated = createEffect(
     () => {
       return this.actions.pipe(
         ofType(AuthActions.unauthenticated),
@@ -90,34 +70,54 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly resetState = createEffect(() => {
+  readonly closeAllDialogsOnUnauthenticated = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(AuthActions.unauthenticated),
+        map(_ => this.dialogService.closeAllDialogs()),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly authResetState = createEffect(() => {
     return this.actions.pipe(
       ofType(AuthActions.unauthenticated),
-      map(_ => AuthActions.resetState()),
+      map(_ => AuthActions.authResetState()),
     );
   });
 
-  readonly openLogoutToast = createEffect(
+  readonly loginWithProviderErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.logoutSuccess),
+        ofType(AuthActions.loginWithProviderERROR),
+        map(({ error }) => this.toastService.showErrorToast(toResponseErrorMessage(error))),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly logoutSuccessToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(AuthActions.logoutSUCCESS),
         map(_ => this.toastService.showSuccessToast(this.config.messages.logout)),
       );
     },
     { dispatch: false },
   );
 
-  readonly openRefreshErrorToast = createEffect(
+  readonly authRefreshErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.authRefreshError),
+        ofType(AuthActions.authRefreshERROR),
         map(_ => this.toastService.showErrorToast(this.config.messages.refreshError)),
       );
     },
     { dispatch: false },
   );
 
-  readonly openSessionExpiredToast = createEffect(
+  readonly authTokenNotFoundToast = createEffect(
     () => {
       return this.actions.pipe(
         ofType(AuthActions.authTokenNotFound),
@@ -127,10 +127,10 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  readonly openResponseErrorToast = createEffect(
+  readonly authResponseErrorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(AuthActions.authResponseError),
+        ofType(AuthActions.authResponseERROR),
         map(_ => this.toastService.showInfoToast(this.config.messages.response401)),
       );
     },
