@@ -47,8 +47,8 @@ const FAKE_RESPONSE_TIME = 750;
 export class HeaderComponent {
   readonly user$ = this.authService.user$;
 
-  readonly desktop$ = this.observer.observe([Breakpoints.XSmall, Breakpoints.Small]).pipe(
-    map(({ matches }) => !matches),
+  readonly desktop$ = this.observer.observe([Breakpoints.WebLandscape]).pipe(
+    map(({ matches }) => matches),
     distinctUntilChanged(),
   );
 
@@ -63,6 +63,8 @@ export class HeaderComponent {
   readonly USER_LINKS = this.LINKS.filter(link => link.user);
 
   readonly APP_LANGUAGES = APP_LANGUAGES;
+
+  readonly localized = window.location.pathname.split('/').at(1)?.length === 2; // TODO find a better way
 
   @Output() readonly sidenavToggle = new EventEmitter<void>();
 
