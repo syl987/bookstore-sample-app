@@ -3,7 +3,7 @@
 @import 'shared';
 
 .mat-toolbar-row {
-  @include app-container-padding;
+  @include app-container-fluid;
 }
 
 .mat-toolbar .mat-mdc-form-field ::ng-deep .mat-mdc-text-field-wrapper::after,

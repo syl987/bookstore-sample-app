@@ -1,6 +1,6 @@
 // shared: mixins
 
-@mixin app-container-padding {
+@mixin app-container-fluid {
   padding-left: app-spacer(s);
   padding-right: app-spacer(s);
 
@@ -16,7 +16,7 @@
 }
 
 @mixin app-container {
-  @include app-container-padding;
+  @include app-container-fluid;
 
   width: $app-container-max-width;
   max-width: 100%;
