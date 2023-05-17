@@ -44,6 +44,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 
 // TODO impressum page
 // TODO footer link to my github or some other page
+// TODO copyright year as static options
 
 const firebaseOptions: FirebaseOptions = {
   apiKey: 'AIzaSyDrisPHet7H7y-G9GjVoJZFReIp-xqgnjo',
