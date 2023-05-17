@@ -1,7 +1,7 @@
-.app-container {
+.container {
   @include app-container;
 }
 
-.app-container-fluid {
+.container-fluid {
   @include app-container-fluid;
 }
