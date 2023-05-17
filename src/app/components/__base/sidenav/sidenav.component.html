@@ -1,6 +1,13 @@
 <ng-container *ngIf="user$ | async as user; else public">
   <div class="d-flex flex-column align-items-center mt-3m mb-s">
-    <img [src]="user?.photoURL || 'favicon.ico'" alt="user picture" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border" />
+    <img
+      [src]="user?.photoURL || 'favicon.ico'"
+      alt="user picture"
+      width="128"
+      height="128"
+      class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border"
+      i18n-alt
+    />
     {{ user?.displayName }}
   </div>
 
@@ -11,9 +18,9 @@
   <mat-divider />
 
   <mat-action-list dense class="py-2xs">
-    <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()">Session Info</button>
+    <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()" i18n>Session Info</button>
 
-    <button mat-list-item (click)="logout(); navigated.emit()">Logout</button>
+    <button mat-list-item (click)="logout(); navigated.emit()" i18n>Logout</button>
   </mat-action-list>
 </ng-container>
 
@@ -24,7 +31,7 @@
         ?
       </div>
     </div>
-    <div>Anonymous User</div>
+    <div i18n>Anonymous User</div>
   </div>
 
   <mat-nav-list dense class="py-2xs">

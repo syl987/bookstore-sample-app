@@ -1,9 +1,9 @@
 <div class="container">
   <app-title-bar>
-    <button mat-stroked-button (click)="clearSearch()" [disabled]="noFilterQuery$ | async">Clear Search</button>
+    <button mat-stroked-button (click)="clearSearch()" [disabled]="noFilterQuery$ | async" i18n>Clear Search</button>
   </app-title-bar>
 
-  <p>Explore books available for purchase.</p>
+  <p i18n>Explore books available for purchase.</p>
 
   <div class="row">
     <div *ngFor="let volume of volumesFiltered$ | async" class="col-md-6 col-xl-4 mb-m">
