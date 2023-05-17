@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 
+// TODO localization: language translations only, using German locale by default because the app is not intended to be multi-national in its nature, justmulti-language
+
 // display some welcome message or banner
 // display some data protection policy
 // display random or newest volumes
