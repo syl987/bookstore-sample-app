@@ -27,5 +27,5 @@ function getMessage(error: ResponseError): string | undefined {
  * Get an appropriate error message for display based on the provided `ResponseError` object.
  */
 export function toResponseErrorMessage(error: ResponseError): string {
-  return getMessage(error)?.trim() || `Unknown error`;
+  return getMessage(error)?.trim() || $localize`Unknown error`;
 }

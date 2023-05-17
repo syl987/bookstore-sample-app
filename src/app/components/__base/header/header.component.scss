@@ -3,9 +3,10 @@
 @import 'shared';
 
 .mat-toolbar-row {
-  @include app-container-padding;
+  @include app-container-fluid;
 }
 
+.mat-toolbar .mat-mdc-form-field ::ng-deep .mat-mdc-text-field-wrapper::after,
 .mat-toolbar .mat-mdc-button::after {
   content: '';
   display: block;
@@ -19,6 +20,7 @@
   transition: width 0.3s;
 }
 
+.mat-toolbar .mat-mdc-form-field.mat-focused ::ng-deep .mat-mdc-text-field-wrapper::after,
 .mat-toolbar .mat-mdc-button.active::after {
   width: calc(100% - 16px);
   transition: width 0.3s;
@@ -40,4 +42,20 @@
 :host .mat-toolbar .mat-mdc-icon-button ::ng-deep .mat-mdc-button-persistent-ripple {
   height: 100% !important;
   border-radius: 0 !important;
+}
+
+.mat-mdc-form-field ::ng-deep {
+  .mat-mdc-form-field-infix {
+    height: 64px; // matches toolbar height for desktop layout
+    padding-top: 21px !important;
+    padding-bottom: 19px !important;
+  }
+
+  .mdc-line-ripple {
+    opacity: 0 !important;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
+  }
 }

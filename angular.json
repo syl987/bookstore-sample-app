@@ -25,14 +25,20 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["node_modules/font-awesome/css/font-awesome.css", "src/styles/styles.scss"],
+            "styles": ["src/styles/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["node_modules/", "src/styles/shared"]
             },
             "allowedCommonJsDependencies": ["b64-to-blob"],
-            "scripts": []
+            "scripts": [],
+            "i18nDuplicateTranslation": "error",
+            "i18nMissingTranslation": "error",
+            "localize": true
           },
           "configurations": {
+            "serve": {
+              "localize": ["en"]
+            },
             "production": {
               "localize": true,
               "i18nMissingTranslation": "error",
@@ -66,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "bookstore-sample-app:build:production"
+              "browserTarget": "bookstore-sample-app:build:production,serve"
             },
             "development": {
-              "browserTarget": "bookstore-sample-app:build:development"
+              "browserTarget": "bookstore-sample-app:build:development,serve"
             }
           },
           "defaultConfiguration": "development"

@@ -40,18 +40,18 @@ export class DevComponentsPageComponent {
 
     const dialogRef = this.dialog.open(DevExampleDialogComponent, { data, maxWidth: '512px' });
 
-    dialogRef.beforeClosed().subscribe(result => result === 'action' && this.toastService.showSuccessToast(`Dialog action dispatched.`));
+    dialogRef.beforeClosed().subscribe(result => result === 'action' && this.toastService.showSuccessToast('Dialog action dispatched.'));
   }
 
   showSuccessToast(): void {
-    this.toastService.showSuccessToast(`Short success message (5 seconds).`);
+    this.toastService.showSuccessToast('Short success message (5 seconds).');
   }
 
   showErrorToast(): void {
-    this.toastService.showErrorToast(`Short error message (7 seconds).`);
+    this.toastService.showErrorToast('Short error message (7 seconds).');
   }
 
   showInfoToast(): void {
-    this.toastService.showInfoToast(`Short info message (custom 9 seconds).`, { duration: 9000 });
+    this.toastService.showInfoToast('Short info message (custom 9 seconds).', { duration: 9000 });
   }
 }

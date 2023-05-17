@@ -34,10 +34,10 @@ export class VolumesEffects {
     );
   });
 
-  readonly filterOnLoadSuccess = createEffect(() => {
+  readonly applyFilter = createEffect(() => {
     return this.actions.pipe(
-      ofType(VolumeActions.loadAllSUCCESS),
-      map(_ => VolumeActions.filter({ query: '' })),
+      ofType(VolumeActions.loadSUCCESS, VolumeActions.loadAllSUCCESS), // any entity state mutation action
+      map(_ => VolumeActions.applyFilterINTERNAL()),
     );
   });
 
@@ -45,7 +45,7 @@ export class VolumesEffects {
     () => {
       return this.actions.pipe(
         ofType(VolumeActions.loadERROR),
-        tap(_ => this.toastService.showErrorToast(`Error loading volume.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error loading volume.`)),
       );
     },
     { dispatch: false },
@@ -55,7 +55,7 @@ export class VolumesEffects {
     () => {
       return this.actions.pipe(
         ofType(VolumeActions.loadAllERROR),
-        tap(_ => this.toastService.showErrorToast(`Error loading volumes.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error loading volumes.`)),
       );
     },
     { dispatch: false },

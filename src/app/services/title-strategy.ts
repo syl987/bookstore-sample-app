@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 
+import { APP_OPTIONS, AppOptions } from '../models/app.models';
+
 @Injectable()
 export class AppTitleStrategy extends TitleStrategy {
-  constructor(private readonly title: Title) {
+  constructor(@Inject(APP_OPTIONS) readonly options: AppOptions, private readonly title: Title) {
     super();
   }
 
@@ -12,9 +14,9 @@ export class AppTitleStrategy extends TitleStrategy {
     const title = this.buildTitle(routerState);
 
     if (title) {
-      this.title.setTitle(`${title} - Bookstore Sample App`);
+      this.title.setTitle(title + ' - ' + this.options.applicationName);
     } else {
-      this.title.setTitle(`Bookstore Sample App`);
+      this.title.setTitle(this.options.applicationName);
     }
   }
 }

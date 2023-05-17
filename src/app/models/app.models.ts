@@ -1,6 +1,18 @@
 import { InjectionToken } from '@angular/core';
 
 /**
+ * App-specific variables.
+ */
+export interface AppOptions {
+  /** Application name to display in header and other places. */
+  applicationName: string;
+  /** Name of the legal copyright holder for display in the footer. */
+  copyrightName: string;
+}
+
+export const APP_OPTIONS = new InjectionToken<AppOptions>('APP_OPTIONS');
+
+/**
  * App-specific router links.
  */
 export interface AppNavLink {
@@ -15,31 +27,22 @@ export interface AppNavLink {
 }
 
 export const APP_NAV_LINKS: readonly Readonly<AppNavLink>[] = [
-  { label: `Home`, path: '/home' },
-  { label: `Search`, path: '/search' },
-  { label: `My Books`, path: '/user/books', user: true },
+  { label: $localize`Home`, path: '/home' },
+  { label: $localize`Search`, path: '/search' },
+  { label: $localize`My Books`, path: '/user/books', user: true },
   { label: 'Dev', path: '/dev', dev: true },
 ];
 
-/**
- * App-specific variables.
- */
-export interface AppOptions {
-  /** Application name to display in header and other places. */
-  applicationName: string;
-  /** Name of the legal copyright holder for display in the footer */
-  copyrightName: string;
+export interface AppLanguage {
+  /** Display name. */
+  label: string;
+  /** Locale id. */
+  locale: string;
+  /** Flagpack icon class. */
+  icon: string;
 }
 
-export const APP_OPTIONS = new InjectionToken<AppOptions>('APP_OPTIONS');
-
-/**
- * Container for language-specific text elements for conditional use in templates.
- *
- * Supports internationalization (i18n) via `$localize` function (package `@angular/localize`).
- */
-export interface AppStrings {
-  [key: string]: string; // ready for translation via `$localize`
-}
-
-export const APP_STRINGS = new InjectionToken<AppStrings>('APP_STRINGS');
+export const APP_LANGUAGES: readonly Readonly<AppLanguage>[] = [
+  { label: 'English', locale: 'en', icon: 'us' },
+  // { label: 'Deutsch', locale: 'de', icon: 'de' },
+];

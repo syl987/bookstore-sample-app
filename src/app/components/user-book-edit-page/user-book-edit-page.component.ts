@@ -11,6 +11,7 @@ import { concatMap, filter, map } from 'rxjs/operators';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { ValidationErrorPipe } from 'src/app/pipes/validation-error.pipe';
 import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
@@ -33,10 +34,11 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
+    TitleBarComponent,
     VolumeCardComponent,
     ButtonSpinnerDirective,
     ValidationErrorPipe,
-    TitleBarComponent,
+    BookConditionPipe,
   ],
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -123,7 +125,7 @@ export class UserBookEditPageComponent {
         concatMap(_ => this.userBooksService.publish(this.id)),
       )
       .subscribe({
-        next: _ => this.router.navigateByUrl(`/user/books`),
+        next: _ => this.router.navigateByUrl('/user/books'),
         error: err => {
           // TODO customize typing
           // reliably retrieve error details
@@ -145,6 +147,6 @@ export class UserBookEditPageComponent {
         filter(isTrue), // ignore close without result
         concatMap(_ => this.userBooksService.delete(this.id)),
       )
-      .subscribe(_ => this.router.navigateByUrl(`/user/books`));
+      .subscribe(_ => this.router.navigateByUrl('/user/books'));
   }
 }

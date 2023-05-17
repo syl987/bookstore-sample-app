@@ -1,15 +1,15 @@
-<div class="app-container">
+<div class="container">
   <app-title-bar>
-    <button mat-stroked-button color="primary" (click)="openBookCreateDialog()">Create book</button>
+    <button mat-stroked-button color="primary" (click)="openBookCreateDialog()" i18n>Create Book</button>
   </app-title-bar>
 
-  <p>This is a collection of your books. Once you publish a book, it will be available for other users to buy.</p>
+  <p i18n>This is a collection of your books. Once you publish a book, it will become available for other users to buy.</p>
 </div>
 
-<div *ngIf="(userBooksDraft$ | async)?.length" class="app-container">
-  <h2>Draft</h2>
+<div *ngIf="(userBooksDraft$ | async)?.length" class="container">
+  <h2 i18n>Draft</h2>
 
-  <p>Carefully fill in the book details. Once published, the book will be available to other users and its data cannot be changed.</p>
+  <p i18n>Carefully fill in the book details. Once published, the book will become publicly visible and its data cannot be changed anymore.</p>
 
   <div class="row">
     <div *ngFor="let book of userBooksDraft$ | async" class="col-md-6 col-xl-4 mb-m">
@@ -20,10 +20,10 @@
   </div>
 </div>
 
-<div *ngIf="(userBooksPublished$ | async)?.length" class="app-container">
-  <h2>Published</h2>
+<div *ngIf="(userBooksPublished$ | async)?.length" class="container">
+  <h2 i18n>Published</h2>
 
-  <p>These books are publicly accessible and available for buying.</p>
+  <p i18n>These books are publicly visible and available for buying.</p>
 
   <div class="row">
     <div *ngFor="let book of userBooksPublished$ | async" class="col-md-6 col-xl-4 mb-m">
@@ -34,10 +34,10 @@
   </div>
 </div>
 
-<div *ngIf="(userBooksSold$ | async)?.length" class="app-container">
-  <h2>Sold</h2>
+<div *ngIf="(userBooksSold$ | async)?.length" class="container">
+  <h2 i18n>Sold</h2>
 
-  <p>Sold books are not publicly visible any more but they will remain listed here.</p>
+  <p i18n>Sold books are not publicly visible anymore, but they will remain listed here.</p>
 
   <div class="row">
     <div *ngFor="let book of userBooksSold$ | async" class="col-md-6 col-xl-4 mb-m">

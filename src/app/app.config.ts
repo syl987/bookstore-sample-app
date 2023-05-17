@@ -21,7 +21,7 @@ import { routes } from './app.routes';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { DirtyOrTouchedMatcher } from './matchers/dirty-or-touched-matcher';
-import { APP_OPTIONS, APP_STRINGS, AppOptions, AppStrings } from './models/app.models';
+import { APP_OPTIONS, AppOptions } from './models/app.models';
 import { AUTH_CONFIG, AuthConfig } from './models/auth.models';
 import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
@@ -43,6 +43,10 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO add $localize function and x18n tags to all language strings
 // TODO consider using signals, check how to integrate with ngrx
 
+// TODO impressum page
+// TODO footer link to my github or some other page
+// TODO copyright year as static options
+
 const firebaseOptions: FirebaseOptions = {
   apiKey: 'AIzaSyDrisPHet7H7y-G9GjVoJZFReIp-xqgnjo',
   authDomain: 'sample-app-a00e0.firebaseapp.com',
@@ -56,7 +60,7 @@ const firebaseOptions: FirebaseOptions = {
 
 const appOptions: AppOptions = {
   applicationName: 'Bookstore Sample App',
-  copyrightName: 'Bookstore Sample App',
+  copyrightName: 'Igor Milly',
 };
 
 const authConfig: AuthConfig = {
@@ -73,10 +77,11 @@ const authConfig: AuthConfig = {
   },
 };
 
-const appStrings: AppStrings = {};
-
 function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
-  return () => iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa'); // font-awesome
+  return () => {
+    iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa', 'fa-fw'); // font-awesome v4.7.0
+    iconRegistry.registerFontClassAlias('fp', 'fp'); // flagpack (4x3 variants)
+  };
 }
 
 export const appConfig: ApplicationConfig = {
@@ -101,10 +106,9 @@ export const appConfig: ApplicationConfig = {
       MatSnackBarModule, // used centrally
     ),
 
-    { provide: LOCALE_ID, useValue: 'de-DE' },
+    { provide: LOCALE_ID, useValue: 'de' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: APP_OPTIONS, useValue: appOptions },
-    { provide: APP_STRINGS, useValue: appStrings },
     { provide: AUTH_CONFIG, useValue: authConfig },
     { provide: APP_INITIALIZER, useFactory: registerIconFonts, deps: [MatIconRegistry], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },

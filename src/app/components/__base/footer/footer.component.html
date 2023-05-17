@@ -1,14 +1,12 @@
-<footer class="app-container-padding d-flex align-items-center pt-2m pb-s app-flex-column-reverse-mobile">
-  <div class="text-center fs-small py-2xs">
-    <s>© {{ currentYear }} {{ options.copyrightName }}</s>
-  </div>
+<footer class="container-fluid d-flex flex-column-reverse flex-md-row align-items-center pt-2m pb-s">
+  <div class="text-center fs-small py-2xs">© {{ currentYear }} {{ options.copyrightName }} <span class="text-warn">(work in progress)</span></div>
 
   <!-- transparent vertical / horizontal separator -->
   <div class="mb-2xs me-auto"></div>
 
   <!-- TODO proper link targets -->
-  <!-- <a mat-button routerLink="." class="text-muted fw-normal me-3xs app-me-0-mobile">Legal Notice</a> -->
-  <!-- <a mat-button routerLink="." class="text-muted fw-normal app-me-ns app-me-0-mobile">Data Policy</a> -->
+  <!-- <a mat-button routerLink="." class="text-muted fw-normal my-3xs">Legal Notice</a> -->
+  <!-- <a mat-button routerLink="." class="text-muted fw-normal my-3xs me-md-n2xs">Data Policy</a> -->
 
-  <div class="text-accent fs-small">v{{ build.version }} / last updated on {{ build.date | date }}</div>
+  <div class="text-warn fs-small">v{{ build.version }} / last updated: {{ build.date | date }}</div>
 </footer>
