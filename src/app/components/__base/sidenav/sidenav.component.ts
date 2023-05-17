@@ -2,9 +2,12 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, isDevMode, Output } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
+import { APP_NAV_LINKS } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
+
+// TODO add close button or support ESC key
 
 @Component({
   selector: 'app-sidenav',
@@ -16,10 +19,9 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class SidenavComponent {
   readonly user$ = this.authService.user$;
-  readonly loggedIn$ = this.authService.loggedIn$;
-  readonly loggedOut$ = this.authService.loggedOut$;
 
-  readonly development = isDevMode();
+  readonly LINKS = APP_NAV_LINKS.filter(link => !link.dev || isDevMode());
+  readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
 
   @Output() readonly navigated = new EventEmitter<void>();
 
@@ -29,8 +31,8 @@ export class SidenavComponent {
     this.router.navigateByUrl('/login');
   }
 
-  openUserSettingsDialog(user: AuthUser): void {
-    this.dialogService.openUserSettingsDialog(user);
+  openUserSessionInfoDialog(user: AuthUser): void {
+    this.dialogService.openUserSessionInfoDialog(user);
   }
 
   logout(): void {

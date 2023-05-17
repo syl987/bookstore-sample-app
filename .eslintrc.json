@@ -97,7 +97,8 @@
         "@typescript-eslint/method-signature-style": ["warn", "method"],
         "@typescript-eslint/no-empty-interface": "off", // recommended overide: useful with inheritence and libraries
         "@typescript-eslint/no-explicit-any": "off", // strict override: useful with libraries and generic data
-        "@typescript-eslint/no-extraneous-class": "off", // strict override: support annotated empty classes
+        "@typescript-eslint/no-extraneous-class": "off", // strict override: support angular annotated empty classes
+        "@typescript-eslint/no-non-null-assertion": "off", // recommended override: useful with angular and specs at times
         "@typescript-eslint/no-useless-constructor": "off", // strict overide: needed in annotated angular classes
         "@typescript-eslint/parameter-properties": [
           "warn",
@@ -135,6 +136,10 @@
         "@angular-eslint/template/no-positive-tabindex": "warn",
         "@angular-eslint/template/use-track-by-function": "off" // currently unused
       }
+    },
+    {
+      "files": ["scripts/**/*.js"],
+      "extends": ["eslint:recommended", "plugin:node/recommended", "prettier"]
     }
   ]
 }
