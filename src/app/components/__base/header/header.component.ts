@@ -50,8 +50,6 @@ export class HeaderComponent {
     distinctUntilChanged(),
   );
 
-  readonly displayLogin$ = this.routerService.url$.pipe(map(url => !url?.startsWith('/login')));
-
   readonly searching$ = new BehaviorSubject<boolean>(false);
 
   readonly form = this.builder.nonNullable.group({
