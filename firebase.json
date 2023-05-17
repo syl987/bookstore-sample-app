@@ -25,9 +25,12 @@
     ],
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/en/**",
+        "destination": "/en/index.html"
       }
-    ]
+    ],
+    "i18n": {
+      "root": "/"
+    }
   }
 }

@@ -28,14 +28,25 @@
           <button mat-menu-item (click)="openUserSessionInfoDialog(user)">Session Info</button>
         </mat-menu>
 
-        <button mat-button color="primary" (click)="logout()" class="me-n2xs">Logout</button>
+        <button mat-button color="primary" (click)="logout()">Logout</button>
       </ng-container>
+
+      <mat-divider vertical class="mx-2xs" style="height: 32px" />
     </ng-container>
+
+    <button mat-button color="primary" [matMenuTriggerFor]="languageMenu" class="me-n2xs" [disabled]="!localized">Language</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
+<mat-menu xPosition="before" #languageMenu="matMenu">
+  <a mat-menu-item *ngFor="let language of APP_LANGUAGES" href="/{{ language.locale }}/">
+    <mat-icon fontSet="fp" [fontIcon]="language.icon" />
+    {{ language.label }}
+  </a>
+</mat-menu>
+
 <ng-template #public>
-  <a *ngIf="displayLogin$ | async" mat-button color="primary" routerLink="/login" class="me-ns">Login</a>
+  <a mat-button color="primary" routerLink="/login" routerLinkActive="active">Login</a>
 </ng-template>
 
 <ng-template #mobile>
@@ -43,5 +54,7 @@
     <mat-icon fontIcon="fa-bars" class="fs-large align-bottom" />
   </button>
 
-  <div class="text-primary fs-normal me-s">{{ options.applicationName }}</div>
+  <div class="text-primary fs-normal text-truncate me-s">{{ options.applicationName }}</div>
+
+  <span class="ms-2xs me-auto"></span>
 </ng-template>
