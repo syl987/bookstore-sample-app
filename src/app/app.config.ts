@@ -42,6 +42,9 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO add $localize function and x18n tags to all language strings
 // TODO consider using signals, check how to integrate with ngrx
 
+// TODO impressum page
+// TODO footer link to my github or some other page
+
 const firebaseOptions: FirebaseOptions = {
   apiKey: 'AIzaSyDrisPHet7H7y-G9GjVoJZFReIp-xqgnjo',
   authDomain: 'sample-app-a00e0.firebaseapp.com',
@@ -55,7 +58,7 @@ const firebaseOptions: FirebaseOptions = {
 
 const appOptions: AppOptions = {
   applicationName: 'Bookstore Sample App',
-  copyrightName: 'Bookstore Sample App',
+  copyrightName: 'Igor Milly',
 };
 
 const authConfig: AuthConfig = {
