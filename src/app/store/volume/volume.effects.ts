@@ -45,7 +45,7 @@ export class VolumesEffects {
     () => {
       return this.actions.pipe(
         ofType(VolumeActions.loadERROR),
-        tap(_ => this.toastService.showErrorToast(`Error loading volume.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error loading volume.`)),
       );
     },
     { dispatch: false },
@@ -55,7 +55,7 @@ export class VolumesEffects {
     () => {
       return this.actions.pipe(
         ofType(VolumeActions.loadAllERROR),
-        tap(_ => this.toastService.showErrorToast(`Error loading volumes.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error loading volumes.`)),
       );
     },
     { dispatch: false },

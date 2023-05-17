@@ -116,7 +116,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.loadERROR),
-        tap(_ => this.toastService.showErrorToast(`Error loading book.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error loading book.`)),
       );
     },
     { dispatch: false },
@@ -126,7 +126,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.loadAllERROR),
-        tap(_ => this.toastService.showErrorToast(`Error loading books.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error loading books.`)),
       );
     },
     { dispatch: false },
@@ -136,7 +136,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.createSUCCESS),
-        tap(_ => this.toastService.showSuccessToast(`Book successfully created.`)),
+        tap(_ => this.toastService.showSuccessToast($localize`Book successfully created.`)),
       );
     },
     { dispatch: false },
@@ -146,7 +146,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.createERROR),
-        tap(_ => this.toastService.showErrorToast(`Error creating book.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error creating book.`)),
       );
     },
     { dispatch: false },
@@ -156,7 +156,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.deleteSUCCESS),
-        tap(_ => this.toastService.showSuccessToast(`Book successfully deleted.`)),
+        tap(_ => this.toastService.showSuccessToast($localize`Book successfully deleted.`)),
       );
     },
     { dispatch: false },
@@ -166,7 +166,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.deleteERROR),
-        tap(_ => this.toastService.showErrorToast(`Error deleting book.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error deleting book.`)),
       );
     },
     { dispatch: false },
@@ -176,7 +176,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.editDraftSUCCESS),
-        tap(_ => this.toastService.showSuccessToast(`Book successfully updated.`)),
+        tap(_ => this.toastService.showSuccessToast($localize`Book successfully updated.`)),
       );
     },
     { dispatch: false },
@@ -186,7 +186,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.editDraftERROR),
-        tap(_ => this.toastService.showErrorToast(`Error updating book.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error updating book.`)),
       );
     },
     { dispatch: false },
@@ -196,7 +196,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.publishSUCCESS),
-        tap(_ => this.toastService.showSuccessToast(`Book successfully published.`)),
+        tap(_ => this.toastService.showSuccessToast($localize`Book successfully published.`)),
       );
     },
     { dispatch: false },
@@ -206,7 +206,7 @@ export class UserBooksEffects implements OnRunEffects {
     () => {
       return this.actions.pipe(
         ofType(UserBooksActions.publishERROR),
-        tap(_ => this.toastService.showErrorToast(`Error publishing book.`)),
+        tap(_ => this.toastService.showErrorToast($localize`Error publishing book.`)),
       );
     },
     { dispatch: false },
