@@ -34,7 +34,7 @@ export class VolumesEffects {
     );
   });
 
-  readonly setFilter = createEffect(() => {
+  readonly applyFilter = createEffect(() => {
     return this.actions.pipe(
       ofType(VolumeActions.loadSUCCESS, VolumeActions.loadAllSUCCESS), // any entity state mutation action
       map(_ => VolumeActions.applyFilterINTERNAL()),
