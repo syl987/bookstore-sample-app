@@ -3,11 +3,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 
-// display some welcome message or banner
-// display some data protection policy
-// display random or newest volumes
-// include published books data
-// navigate to volume detail
+// TODO display some welcome message or banner
+// TODO display some data protection policy
+// TODO display random or newest volumes
+// TODO include published books data
+// TODO navigate to volume detail
 
 @Component({
   selector: 'app-home-page',
