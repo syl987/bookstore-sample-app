@@ -7,7 +7,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule, MatSelectionList } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { debounceTime, take } from 'rxjs/operators';
+import { debounceTime, map, take } from 'rxjs/operators';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { UserBookDTO } from 'src/app/models/book.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
@@ -31,6 +31,7 @@ export class UserBookCreateDialogComponent implements AfterViewInit {
   readonly searchError$ = this.googleBooksService.searchError$;
 
   readonly createPending$ = this.userBooksService.createPending$;
+  readonly createDisabled$ = this.userBooksService.createPending$.pipe(map(pending => pending || (this.list?.selectedOptions.isEmpty() ?? true)));
 
   readonly searchControl = new FormControl<string>('', { nonNullable: true });
 
@@ -60,8 +61,10 @@ export class UserBookCreateDialogComponent implements AfterViewInit {
     });
   }
 
-  createUserBook(googleBooksVolume: GoogleBooksVolumeDTO): void {
-    this.userBooksService.create(googleBooksVolume).subscribe(book => {
+  createUserBook(): void {
+    const volume: GoogleBooksVolumeDTO = this.list?.selectedOptions.selected[0].value;
+
+    this.userBooksService.create(volume).subscribe(book => {
       this.dialogRef.close(book);
     });
   }

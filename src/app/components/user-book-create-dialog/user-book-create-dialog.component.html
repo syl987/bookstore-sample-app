@@ -20,15 +20,6 @@
 </div>
 
 <div mat-dialog-actions>
-  <button
-    mat-flat-button
-    color="primary"
-    (click)="createUserBook(list.selectedOptions.selected[0].value)"
-    [spinning]="createPending$ | async"
-    [disabled]="list.selectedOptions.isEmpty() || (createPending$ | async)"
-    i18n
-  >
-    Create Book
-  </button>
+  <button mat-flat-button color="primary" (click)="createUserBook()" [spinning]="createPending$ | async" [disabled]="createDisabled$ | async" i18n>Create Book</button>
   <button mat-stroked-button mat-dialog-close i18n>Close</button>
 </div>

@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { RouterService } from 'src/app/services/router.service';
 
+// TODO gap helper conflicts with negative link margin
+
 @Component({
   selector: 'app-title-bar',
   standalone: true,
