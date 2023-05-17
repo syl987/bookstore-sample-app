@@ -35,8 +35,8 @@
 </mat-toolbar>
 
 <mat-menu xPosition="before" #languageMenu="matMenu">
-  <a mat-menu-item *ngFor="let language of APP_LANGUAGES" [href]="language.href">
-    <mat-icon fontSet="fp" [fontIcon]="language.icon" aria-hidden="true" />
+  <a mat-menu-item *ngFor="let language of APP_LANGUAGES" href="/{{ language.locale }}/">
+    <mat-icon fontSet="fp" [fontIcon]="language.icon" />
     {{ language.label }}
   </a>
 </mat-menu>
