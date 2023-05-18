@@ -74,7 +74,7 @@ export class AuthEffects {
     () => {
       return this.actions.pipe(
         ofType(AuthActions.unauthenticated),
-        map(_ => this.dialogService.closeAllDialogs()),
+        map(_ => this.dialogService.closeAll()),
       );
     },
     { dispatch: false },
