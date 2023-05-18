@@ -8,7 +8,7 @@
     <a mat-list-item *ngFor="let link of LINKS" [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
   </mat-nav-list>
 
-  <mat-divider />
+  <mat-divider class="mx-s" />
 
   <mat-action-list dense class="py-2xs">
     <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()" i18n>Session Info</button>
@@ -29,7 +29,7 @@
     <a mat-list-item *ngFor="let link of PUBLIC_LINKS" [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
   </mat-nav-list>
 
-  <mat-divider />
+  <mat-divider class="mx-s" />
 
   <mat-action-list dense class="py-2xs">
     <button mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
