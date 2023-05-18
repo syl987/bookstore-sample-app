@@ -9,6 +9,8 @@ import { UserSessionInfoDialogComponent, UserSessionInfoDialogData } from '../co
 import { AuthUser } from '../models/auth.models';
 import { UserBookDTO } from '../models/book.models';
 
+// TODO refactor some as generic confirmation dialog
+
 @Injectable({
   providedIn: 'root',
 })
