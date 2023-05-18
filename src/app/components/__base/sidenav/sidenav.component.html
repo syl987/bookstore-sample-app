@@ -4,13 +4,13 @@
     {{ user?.displayName }}
   </div>
 
-  <mat-nav-list dense class="py-2xs">
+  <mat-nav-list class="py-2xs">
     <a mat-list-item *ngFor="let link of LINKS" [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
   </mat-nav-list>
 
   <mat-divider class="mx-s" />
 
-  <mat-action-list dense class="py-2xs">
+  <mat-action-list class="py-2xs">
     <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()" i18n>Session Info</button>
 
     <button mat-list-item (click)="logout(); navigated.emit()" i18n>Logout</button>
@@ -25,13 +25,13 @@
     <div i18n>Anonymous User</div>
   </div>
 
-  <mat-nav-list dense class="py-2xs">
+  <mat-nav-list class="py-2xs">
     <a mat-list-item *ngFor="let link of PUBLIC_LINKS" [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
   </mat-nav-list>
 
   <mat-divider class="mx-s" />
 
-  <mat-action-list dense class="py-2xs">
+  <mat-action-list class="py-2xs">
     <button mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
   </mat-action-list>
 </ng-template>
