@@ -45,4 +45,5 @@ export interface AppLanguage {
 export const APP_LANGUAGES: readonly Readonly<AppLanguage>[] = [
   { label: 'English', locale: 'en', icon: 'us' },
   { label: 'Deutsch', locale: 'de', icon: 'de' },
+  { label: 'Español', locale: 'es', icon: 'es' },
 ];
