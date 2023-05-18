@@ -59,6 +59,14 @@
     "5479564170549712160": "Liste der Angebote",
     "2149165958319691680": "Kaufen",
     "2657043015926552641": "Unbekannter Fehler",
+    "7780017052846519905": "Daten wurden erfolgreich geladen.",
+    "5827458374787049709": "Daten wurden erfolgreich gespeichert.",
+    "3726283221638878816": "Daten wurden erfolgreich entfernt.",
+    "7639652946062282428": "Operation erfolgreich.",
+    "2612543646528354459": "Fehler beim Laden von Daten.",
+    "6443011574817334350": "Error beim Speichern von Daten.",
+    "8608798065903571863": "Error beim Entfernen von Daten.",
+    "153674187856813645": "Unbekannter Fehler",
     "5280218112746407598": "Neu",
     "9167410109364106218": "Sehr gut",
     "2059720967288114545": "Sichtbar abgenutzt",
@@ -76,17 +84,7 @@
     "584288095769834263": "Ungültiges Anfangsdatum",
     "2768970468673295844": "Ungültige Enddatum",
     "3710671809406529423": "Benutzer ist nicht eingeloggt.",
-    "7539802945875056649": "Fehler beim Laden des Buches.",
-    "4287527989341685347": "Fehler beim Laden der Bücher.",
-    "6432670548310906290": "Buch wurde erfolgreich erstellt.",
-    "6610957273975645254": "Fehler beim Erstellen des Buches.",
-    "6264597650653463184": "Buch wurde erfolgreich gelöscht.",
-    "3676530617077517848": "Fehler beim Löschen des Buches.",
-    "4256333974349935418": "Buch wurde erfolgreich gespeichert.",
-    "4416819809751948989": "Fehler beim Speichern des Buches.",
     "7965142489523653031": "Buch wurde erfolgreich veröffentlicht.",
-    "5138391377798252562": "Fehler beim Veröffentlichen des Buches.",
-    "731258499662438147": "Fehler beim Laden des Buchbands.",
-    "7564389794683980500": "Fehler beim Laden der Buchbänder."
+    "5138391377798252562": "Fehler beim Veröffentlichen des Buches."
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError } from 'src/app/models/error.models';
 import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -41,21 +42,11 @@ export class VolumesEffects {
     );
   });
 
-  readonly loadErrorToast = createEffect(
+  readonly errorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.loadERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error loading volume.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly loadAllErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(VolumeActions.loadAllERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error loading volumes.`)),
+        ofType(VolumeActions.loadERROR, VolumeActions.loadAllERROR),
+        tap(action => this.toastService.showSuccessToast(toActionErrorMessage(action))),
       );
     },
     { dispatch: false },
