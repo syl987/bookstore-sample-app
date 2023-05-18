@@ -39,7 +39,7 @@ export class DialogService {
     return this.dialog.open(UserBookDeleteDialogComponent, { maxWidth: 568 });
   }
 
-  closeAllDialogs(): void {
+  closeAll(): void {
     return this.dialog.closeAll();
   }
 }
