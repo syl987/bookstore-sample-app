@@ -7,7 +7,7 @@
       "i18n": {
         "sourceLocale": { "code": "en" },
         "locales": {
-          "de": "src/locales/messages.de.json"
+          "de": "src/locale/messages.de.json"
         }
       },
       "projectType": "application",
@@ -82,7 +82,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "format": "json",
-            "outputPath": "src/locales",
+            "outputPath": "src/locale",
             "browserTarget": "bookstore-sample-app:build"
           }
         },
