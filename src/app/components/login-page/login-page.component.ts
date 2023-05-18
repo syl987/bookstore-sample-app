@@ -6,6 +6,8 @@ import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.direct
 import { APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
 import { AuthService } from 'src/app/services/auth.service';
 
+// TODO container and title bar
+
 @Component({
   selector: 'app-login-page',
   standalone: true,
