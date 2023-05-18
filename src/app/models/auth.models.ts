@@ -1,18 +1,19 @@
 import { InjectionToken } from '@angular/core';
-import { ProviderId } from 'firebase/auth';
+import { ProviderId, User, UserInfo } from 'firebase/auth';
 import { HttpEndpointUrl } from 'src/app/models/http.models';
 
 export type AuthProviderId = typeof ProviderId.GOOGLE;
 
-export interface AuthUser {
-  uid: string;
-  photoURL: string | null;
-  displayName: string | null;
-  email: string | null;
-  phoneNumber: string | null;
-  emailVerified: boolean;
-  providerData: any[];
-  metadata: any;
+/**
+ * Authenticated user data.
+ *
+ * @description Required due to typing inconsistencies with firebase `User` object
+ */
+export interface AuthUser extends UserInfo, Pick<User, 'emailVerified' | 'isAnonymous' | 'providerData' | 'tenantId'> {
+  metadata: {
+    createdAt: string;
+    lastLoginAt: string;
+  };
 }
 
 export interface AuthConfig {

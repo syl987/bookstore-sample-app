@@ -12,8 +12,9 @@ import { RouterService } from 'src/app/services/router.service';
   standalone: true,
   imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
   templateUrl: './title-bar.component.html',
+  styleUrls: ['./title-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'd-flex flex-wrap app-gap-x-2xs' },
+  host: { class: 'd-flex flex-wrap' },
 })
 export class TitleBarComponent {
   readonly title$ = this.routerService.title$;
