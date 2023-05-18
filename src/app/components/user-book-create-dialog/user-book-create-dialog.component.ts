@@ -11,6 +11,7 @@ import { debounceTime, take } from 'rxjs/operators';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { UserBookDTO } from 'src/app/models/book.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
+import { ArrayPipe } from 'src/app/pipes/array.pipe';
 import { GoogleBooksService } from 'src/app/services/google-books.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
@@ -19,7 +20,7 @@ const DEBOUNCE_TIME = 500;
 @Component({
   selector: 'app-user-book-create-dialog',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, MatListModule, MatProgressSpinnerModule, ButtonSpinnerDirective],
+  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, MatListModule, MatProgressSpinnerModule, ButtonSpinnerDirective, ArrayPipe],
   templateUrl: './user-book-create-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
