@@ -1,14 +1,7 @@
-<ng-container *ngIf="book.condition || book.price != null">
+<ng-container *ngSwitch="true as status">
   <mat-divider />
 
-  <dl class="row pt-xs mb-0">
-    <div *ngIf="book.condition" class="col-6">
-      <dt i18n>Condition</dt>
-      <dd>{{ book.condition | bookCondition }}</dd>
-    </div>
-    <div *ngIf="book.price" class="col-6">
-      <dt i18n>Price</dt>
-      <dd>{{ book.price | currency }}</dd>
-    </div>
-  </dl>
+  <p *ngSwitchCase="'empty'" class="text-muted mt-xs mb-2xs" i18n>New book</p>
+  <p *ngSwitchCase="'partial'" class="text-muted mt-xs mb-2xs" i18n>Partially edited</p>
+  <p *ngSwitchCase="'ready'" class="text-success mt-xs mb-2xs" i18n>Required data present</p>
 </ng-container>
