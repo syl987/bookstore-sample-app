@@ -39,7 +39,7 @@
       <div class="col-md-8">
         <mat-form-field class="w-100 mb-s">
           <mat-label i18n>Description</mat-label>
-          <textarea matInput formControlName="description" rows="3" minlength="100"></textarea>
+          <textarea matInput formControlName="description" rows="3" minlength="100" cdkTextareaAutosize></textarea>
           <mat-error>{{ form.get('description') | validationError }}</mat-error>
         </mat-form-field>
       </div>
