@@ -13,4 +13,15 @@ import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 })
 export class UserBookCardContentComponent {
   @Input({ required: true }) book!: UserBookDTO;
+
+  getCompletionStatus(): 'empty' | 'ready' | 'partial' {
+    // TODO add picture
+    if (this.book.condition == null && this.book.price == null && this.book.description == null) {
+      return 'empty';
+    }
+    if (this.book.condition != null && this.book.price != null && this.book.description != null) {
+      return 'ready';
+    }
+    return 'partial';
+  }
 }

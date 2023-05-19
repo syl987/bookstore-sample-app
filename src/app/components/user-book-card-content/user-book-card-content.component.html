@@ -1,7 +1,7 @@
-<ng-container *ngSwitch="true as status">
+<ng-container [ngSwitch]="getCompletionStatus()">
   <mat-divider />
 
   <p *ngSwitchCase="'empty'" class="text-muted mt-xs mb-2xs" i18n>New book</p>
-  <p *ngSwitchCase="'partial'" class="text-muted mt-xs mb-2xs" i18n>Partially edited</p>
   <p *ngSwitchCase="'ready'" class="text-success mt-xs mb-2xs" i18n>Required data present</p>
+  <p *ngSwitchDefault class="text-muted mt-xs mb-2xs" i18n>Partially edited</p>
 </ng-container>
