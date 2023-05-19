@@ -4,7 +4,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
-// TODO complex plural translation
 // TODO loading appearence
 
 @Component({
@@ -16,21 +15,33 @@ import { VolumeDTO } from 'src/app/models/volume.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeCardComponent {
-  @Input({ required: true }) volume?: VolumeDTO | null;
-
-  getPublishedBooksTotal(): number {
-    return Object.keys(this.volume?.publishedBooks ?? {}).length;
+  @Input({ required: true }) set volume(value: VolumeDTO | null | undefined) {
+    this.#volume = value;
+    this.#booksTotal = Object.keys(value?.publishedBooks ?? {}).length;
+    this.#lowestPrice = Object.values(this.volume?.publishedBooks ?? {})
+      .map(book => book.price)
+      .reduce<number | undefined>((result, price) => {
+        if (price == null) {
+          return result;
+        }
+        if (result == null || price < result) {
+          return price;
+        }
+        return result;
+      }, undefined);
   }
-
-  getPublishedBooksCheapestPrice(): number | null {
-    return Object.values(this.volume?.publishedBooks ?? {}).reduce<number | null>((price, book) => {
-      if (book.price && price === null) {
-        return book.price;
-      }
-      if (price && book.price && book.price < price) {
-        return book.price;
-      }
-      return price;
-    }, null);
+  get volume(): VolumeDTO | null | undefined {
+    return this.#volume;
   }
+  #volume?: VolumeDTO | null;
+
+  get booksTotal(): number | undefined {
+    return this.#booksTotal;
+  }
+  #booksTotal?: number;
+
+  get lowestPrice(): number | undefined {
+    return this.#lowestPrice;
+  }
+  #lowestPrice?: number;
 }

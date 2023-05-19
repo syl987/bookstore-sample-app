@@ -32,6 +32,7 @@ import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
 // TODO check translations
+// TODO move page descriptions to route data?
 // TODO kick unnecessary texts
 // TODO check better translation file formats
 // TODO check splitting translation files

@@ -3,6 +3,7 @@ import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from 
 import { Observable, of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { requireAuth } from 'src/app/helpers/auth.helpers';
+import { toActionErrorMessage, toActionSuccessMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError, internalError } from 'src/app/models/error.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
@@ -112,101 +113,28 @@ export class UserBooksEffects implements OnRunEffects {
     );
   });
 
-  readonly loadErrorToast = createEffect(
+  readonly successToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.loadERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error loading book.`)),
+        ofType(UserBooksActions.createSUCCESS, UserBooksActions.editDraftSUCCESS, UserBooksActions.publishSUCCESS, UserBooksActions.deleteSUCCESS),
+        tap(action => this.toastService.showSuccessToast(toActionSuccessMessage(action, [['publish', $localize`Book successfully published.`]]))),
       );
     },
     { dispatch: false },
   );
 
-  readonly loadAllErrorToast = createEffect(
+  readonly errorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(UserBooksActions.loadAllERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error loading books.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly createSuccessToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(UserBooksActions.createSUCCESS),
-        tap(_ => this.toastService.showSuccessToast($localize`Book successfully created.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly createErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(UserBooksActions.createERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error creating book.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly deleteSuccessToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(UserBooksActions.deleteSUCCESS),
-        tap(_ => this.toastService.showSuccessToast($localize`Book successfully deleted.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly deleteErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(UserBooksActions.deleteERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error deleting book.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly editDraftSuccessToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(UserBooksActions.editDraftSUCCESS),
-        tap(_ => this.toastService.showSuccessToast($localize`Book successfully updated.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly editDraftErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(UserBooksActions.editDraftERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error updating book.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly publishSuccessToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(UserBooksActions.publishSUCCESS),
-        tap(_ => this.toastService.showSuccessToast($localize`Book successfully published.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  readonly publishErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(UserBooksActions.publishERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error publishing book.`)),
+        ofType(
+          UserBooksActions.loadERROR,
+          UserBooksActions.loadAllERROR,
+          UserBooksActions.createERROR,
+          UserBooksActions.deleteERROR,
+          UserBooksActions.editDraftERROR,
+          UserBooksActions.publishERROR,
+        ),
+        tap(action => this.toastService.showSuccessToast(toActionErrorMessage(action, [['publish', $localize`Error publishing book.`]]))),
       );
     },
     { dispatch: false },
