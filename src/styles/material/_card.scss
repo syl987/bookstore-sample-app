@@ -1,7 +1,15 @@
+@use '@angular/material' as mat;
+
 .mat-mdc-card {
   border-radius: $border-radius !important;
 }
 
-a.active > .mat-mdc-card {
-  box-shadow: 0px 2px 1px -1px lighten($primary, 10%), 0px 1px 1px 0px lighten($primary, 20%), 0px 1px 4px 4px lighten($primary, 30%);
+a .mat-mdc-card,
+button .mat-mdc-card {
+  @include mat.elevation-transition();
+}
+
+a:hover .mat-mdc-card,
+button:hover .mat-mdc-card {
+  @include mat.elevation(4);
 }

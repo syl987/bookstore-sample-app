@@ -13,7 +13,7 @@
 
   <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-2m">
     <div class="row">
-      <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="col-sm-6 col-md-4 col-xl-3">
         <mat-form-field class="w-100 mb-s">
           <mat-label i18n>Condition</mat-label>
           <select matNativeControl formControlName="condition">
@@ -27,7 +27,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="col-sm-6 col-md-4 col-xl-3">
         <mat-form-field class="w-100 mb-s">
           <mat-label i18n>Price</mat-label>
           <input type="number" matInput formControlName="price" min="0" max="500" />
@@ -35,11 +35,13 @@
           <mat-error>{{ form.get('price') | validationError }}</mat-error>
         </mat-form-field>
       </div>
+    </div>
 
-      <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-8 col-xl-6">
         <mat-form-field class="w-100 mb-s">
           <mat-label i18n>Description</mat-label>
-          <textarea matInput formControlName="description" rows="3" minlength="100"></textarea>
+          <textarea matInput formControlName="description" minlength="24" maxlength="254" cdkTextareaAutosize></textarea>
           <mat-error>{{ form.get('description') | validationError }}</mat-error>
         </mat-form-field>
       </div>
