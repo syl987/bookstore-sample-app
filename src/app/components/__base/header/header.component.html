@@ -30,7 +30,7 @@
       <mat-divider vertical class="mx-2xs" style="height: 32px" />
     </ng-container>
 
-    <button mat-button color="primary" [matMenuTriggerFor]="languageMenu" class="me-n2xs" [disabled]="!localized" i18n>Language</button>
+    <button mat-button color="primary" [matMenuTriggerFor]="languageMenu" [disabled]="!localized" i18n>Language</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -46,7 +46,7 @@
 </ng-template>
 
 <ng-template #mobile>
-  <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="ms-nxs me-3xs" i18n-aria-label>
+  <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="me-3xs" i18n-aria-label>
     <mat-icon fontIcon="fa-bars" class="fs-large align-bottom" />
   </button>
 
