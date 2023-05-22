@@ -10,33 +10,36 @@ export type AuthProviderId = typeof ProviderId.GOOGLE;
  * @description Required due to typing inconsistencies with firebase `User` object
  */
 export interface AuthUser extends UserInfo, Pick<User, 'emailVerified' | 'isAnonymous' | 'providerData' | 'tenantId'> {
-  metadata: {
-    createdAt: string;
-    lastLoginAt: string;
+  /** Additional metadata around user creation and sign-in times. */
+  readonly metadata: {
+    /** Time the user was created. */
+    readonly createdAt: string;
+    /** Time the user last signed in. */
+    readonly lastLoginAt: string;
   };
 }
 
 export interface AuthConfig {
   /** URL to redirect to if authentication is required to access. */
-  loginUrl: string;
+  readonly loginUrl: string;
   /** URL to redirect to after a successful login. */
-  afterLoginUrl: string;
+  readonly afterLoginUrl: string;
   /** URL to redirect to when un-authenticated. */
-  afterLogoutUrl: string;
+  readonly afterLogoutUrl: string;
   /** Define endpoints to be excluded from authentication checks and authorization headers. */
-  bearerExcluded: HttpEndpointUrl[];
+  readonly bearerExcluded: HttpEndpointUrl[];
   /** Define endpoints to exclude from `bearerExcluded` config. */
-  bearerIncluded: HttpEndpointUrl[];
+  readonly bearerIncluded: HttpEndpointUrl[];
   /** Messages to display after being un-authenticated. */
-  messages: {
+  readonly messages: {
     /* Message to display on manual logout. */
-    logout: string;
+    readonly logout: string;
     /* Message to display on refresh error. */
-    refreshError: string;
+    readonly refreshError: string;
     /* Message to display on request if the auth token was not found. */
-    tokenNotFound: string;
+    readonly tokenNotFound: string;
     /* Message to display on response error status 401. */
-    response401: string;
+    readonly response401: string;
   };
 }
 

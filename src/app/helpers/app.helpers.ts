@@ -9,7 +9,7 @@ import { APP_LANGUAGES, AppLanguage } from '../models/app.models';
  *
  * @returns `AppLanguage` with matching locale id or `undefined` if none was found.
  */
-export function getCurrentAppLanguage(): Readonly<AppLanguage> | undefined {
+export function getCurrentAppLanguage(): AppLanguage | undefined {
   const segment = window.location.pathname.split('/').at(1);
 
   return APP_LANGUAGES.find(language => language.locale === segment);
