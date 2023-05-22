@@ -27,10 +27,12 @@
         <button mat-button color="primary" (click)="logout()" i18n>Logout</button>
       </ng-container>
 
-      <mat-divider vertical class="mx-2xs" style="height: 32px" />
+      <mat-divider *ngIf="currentLang" vertical class="mx-2xs" style="height: 32px" />
     </ng-container>
 
-    <button mat-button color="primary" [matMenuTriggerFor]="languageMenu" [disabled]="!localized" i18n>Language</button>
+    <button mat-icon-button *ngIf="currentLang" color="primary" [matMenuTriggerFor]="languageMenu" aria-label="Language" i18n-aria-label>
+      <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
 
