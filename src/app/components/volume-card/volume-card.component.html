@@ -9,12 +9,12 @@
   <mat-card-content class="py-2xs">
     <p class="mb-xs">{{ volume.volumeInfo.description | slice : 0 : 92 }}...</p>
 
-    <ng-container *ngIf="booksTotal as t">
+    <ng-container *ngIf="booksTotal as n">
       <mat-divider />
 
       <p class="text-muted mt-xs mb-2xs">
         <ng-container i18n
-          >{ t, plural, =1 { One book available for {{ lowestPrice | currency }}} other {{{ t }} books available starting from {{ lowestPrice | currency }}} }</ng-container
+          >{ n, plural, =1 { One book available for {{ lowestPrice | currency }}} other {{{ n }} books available starting from {{ lowestPrice | currency }}} }</ng-container
         >
       </p>
     </ng-container>

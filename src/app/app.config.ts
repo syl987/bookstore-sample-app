@@ -38,6 +38,8 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO check splitting translation files
 // TODO check layout details
 
+// TODO bug: on first page load, language selector is not shown
+
 // TODO resolve navigation between book and volume
 // TODO header search
 // TODO volume and book details with breadcrumb history via navigation state
