@@ -7,9 +7,3 @@ export type FirebaseUploadResponseMetadata = Pick<FullMetadata, 'bucket' | 'full
 export interface FirebaseUploadData extends Pick<UploadTaskSnapshot, 'state' | 'bytesTransferred' | 'totalBytes'> {
   metadata: FirebaseUploadResponseMetadata;
 }
-
-export type FirebaseUploadProgressData = Pick<UploadTaskSnapshot, 'bytesTransferred' | 'totalBytes'>;
-
-export type FirebaseUploadResponseData = Pick<UploadTaskSnapshot, 'bytesTransferred' | 'totalBytes'> & {
-  metadata: FirebaseUploadResponseMetadata;
-};
