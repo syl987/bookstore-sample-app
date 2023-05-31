@@ -50,8 +50,11 @@ export function toActionSuccessMessage(action: Action, extras?: [string, string]
   if (['create', 'update', 'edit'].some(s => action.type.includes(s))) {
     return $localize`Data successfully saved.`;
   }
-  if (['delete', 'remove'].some(s => action.type.includes(s))) {
-    return $localize`Data successfully removed.`;
+  if (['delete'].some(s => action.type.includes(s))) {
+    return $localize`Data successfully deleted.`;
+  }
+  if (['remove'].some(s => action.type.includes(s))) {
+    return $localize`File successfully removed.`;
   }
   if (['upload'].some(s => action.type.includes(s))) {
     return $localize`File successfully uploaded.`;
@@ -78,8 +81,11 @@ export function toActionErrorMessage(action: Action, extras?: [string, string][]
   if (['create', 'update', 'edit'].some(s => action.type.includes(s))) {
     return $localize`Error saving data`;
   }
-  if (['delete', 'remove'].some(s => action.type.includes(s))) {
-    return $localize`Error removing data`;
+  if (['delete'].some(s => action.type.includes(s))) {
+    return $localize`Error deleting data`;
+  }
+  if (['remove'].some(s => action.type.includes(s))) {
+    return $localize`Error removing file`;
   }
   if (['upload'].some(s => action.type.includes(s))) {
     return $localize`Error uploading file.`;
