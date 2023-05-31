@@ -8,8 +8,6 @@ export function toFirebaseUploadData(snapshot: UploadTaskSnapshot): FirebaseUplo
     bytesTransferred: snapshot.bytesTransferred,
     totalBytes: snapshot.totalBytes,
     metadata: {
-      contentType: snapshot.metadata.contentType,
-      contentEncoding: snapshot.metadata.contentEncoding,
       bucket: snapshot.metadata.bucket,
       fullPath: snapshot.metadata.fullPath,
       size: snapshot.metadata.size,
