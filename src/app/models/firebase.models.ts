@@ -7,4 +7,6 @@ export type FirebaseUploadResponseMetadata = FirebaseUploadRequestMetadata & Pic
 export interface FirebaseUploadData extends Pick<UploadTaskSnapshot, 'state' | 'bytesTransferred' | 'totalBytes'> {
   /** Before the upload completes, contains the metadata sent to the server. After the upload completes, contains the metadata sent back from the server. */
   metadata: FirebaseUploadResponseMetadata;
+  /** After the upload completes, contains the URL to access the resource. */
+  downloadUrl?: string;
 }

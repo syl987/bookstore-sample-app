@@ -31,7 +31,7 @@ export const UserBooksActions = createActionGroup({
 
     'upload image': props<{ bookId: string; file: Blob }>(),
     'upload image PROGRESS': props<{ uploadData: FirebaseUploadData }>(),
-    'upload image SUCCESS': props<{ uploadData: FirebaseUploadData; downloadUrl: string }>(),
+    'upload image SUCCESS': props<{ uploadData: FirebaseUploadData }>(),
     'upload image ERROR': props<{ error: ResponseError }>(),
 
     'remove images': props<{ bookId: string }>(),

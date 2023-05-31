@@ -111,12 +111,7 @@ export class UserBooksEffects implements OnRunEffects {
               case 'running':
                 return of(UserBooksActions.uploadImagePROGRESS({ uploadData: res }));
               case 'success':
-                if (!this.authService.uid) {
-                  return of(UserBooksActions.uploadImageERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
-                }
-                return this.firebaseApi
-                  .getUserBookImageDownloadUrl(this.authService.uid, bookId)
-                  .pipe(map(downloadUrl => UserBooksActions.uploadImageSUCCESS({ uploadData: res, downloadUrl })));
+                return of(UserBooksActions.uploadImageSUCCESS({ uploadData: res }));
 
               // TODO test if error case is needed
 
