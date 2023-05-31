@@ -6,7 +6,7 @@ import { requireAuth } from 'src/app/helpers/auth.helpers';
 import { toActionErrorMessage, toActionSuccessMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError, internalError } from 'src/app/models/error.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
-import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
+import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -143,7 +143,7 @@ export class UserBooksEffects implements OnRunEffects {
   constructor(
     private readonly actions: Actions,
     private readonly authService: AuthService,
-    private readonly firebaseApi: FirebaseDatabaseService,
+    private readonly firebaseApi: FirebaseApiService,
     private readonly toastService: ToastService,
   ) {}
 

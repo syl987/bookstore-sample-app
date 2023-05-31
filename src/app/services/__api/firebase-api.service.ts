@@ -15,7 +15,7 @@ import { FirebaseFileService } from './firebase-file.service';
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseDatabaseService {
+export class FirebaseApiService {
   constructor(private readonly database: Database, private readonly fileService: FirebaseFileService) {}
 
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {

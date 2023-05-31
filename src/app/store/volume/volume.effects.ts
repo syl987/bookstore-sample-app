@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError } from 'src/app/models/error.models';
-import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
+import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { VolumeActions } from './volume.actions';
@@ -52,5 +52,5 @@ export class VolumesEffects {
     { dispatch: false },
   );
 
-  constructor(private readonly actions: Actions, private readonly firebaseApi: FirebaseDatabaseService, private readonly toastService: ToastService) {}
+  constructor(private readonly actions: Actions, private readonly firebaseApi: FirebaseApiService, private readonly toastService: ToastService) {}
 }
