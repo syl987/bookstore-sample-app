@@ -79,16 +79,16 @@ export function toActionErrorMessage(action: Action, extras?: [string, string][]
     return $localize`Error loading data.`;
   }
   if (['create', 'update', 'edit'].some(s => action.type.includes(s))) {
-    return $localize`Error saving data`;
+    return $localize`Error saving data.`;
   }
   if (['delete'].some(s => action.type.includes(s))) {
-    return $localize`Error deleting data`;
+    return $localize`Error deleting data.`;
   }
   if (['remove'].some(s => action.type.includes(s))) {
-    return $localize`Error removing file`;
+    return $localize`Error removing file.`;
   }
   if (['upload'].some(s => action.type.includes(s))) {
     return $localize`Error uploading file.`;
   }
-  return $localize`Unknown Error`;
+  return $localize`Unknown Error.`;
 }
