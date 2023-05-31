@@ -5,7 +5,7 @@ import { concatMap, from, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
 import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
-import { FirebaseUploadData, FirebaseUploadRequestMetadata } from 'src/app/models/firebase.models';
+import { FirebaseUploadData } from 'src/app/models/firebase.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
 import { FirebaseFileService } from './firebase-file.service';
@@ -57,14 +57,15 @@ export class FirebaseApiService {
     );
   }
 
-  uploadUserBookImage(uid: string, id: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
+  uploadUserBookImage(uid: string, bookId: string, file: Blob): Observable<FirebaseUploadData> {
     // TODO also update user book object in database
-    return this.fileService.uploadImage(`userBooks/${uid}/${id}`, data, options);
+    return this.fileService.uploadFile(`userBooks/${uid}/${bookId}`, file);
   }
 
-  deleteUserBookImage(uid: string, id: string): Observable<void> {
+  removeUserBookImage(uid: string, bookId: string): Observable<void> {
     // TODO also update user book object in database
-    return this.fileService.deleteImage(`userBooks/${uid}/${id}`);
+    // TODO add image name
+    return this.fileService.removeObject(`userBooks/${uid}/${bookId}`);
   }
 
   publishUserBook(uid: string, id: string): Observable<UserBookDTO> {

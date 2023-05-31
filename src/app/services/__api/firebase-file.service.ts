@@ -10,7 +10,7 @@ import { FirebaseUploadData, FirebaseUploadRequestMetadata } from 'src/app/model
 export class FirebaseFileService {
   constructor(private readonly storage: Storage) {}
 
-  uploadImage(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
+  uploadFile(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
     const reference = ref(this.storage, path);
     const task = uploadBytesResumable(reference, data, options);
     return new Observable(subscriber => {
@@ -22,7 +22,7 @@ export class FirebaseFileService {
     });
   }
 
-  deleteImage(path: string): Observable<void> {
+  removeObject(path: string): Observable<void> {
     const reference = ref(this.storage, path);
     const task = deleteObject(reference);
     return from(task);
