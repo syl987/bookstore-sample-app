@@ -125,6 +125,21 @@ export class UserBooksEffects implements OnRunEffects {
     );
   });
 
+  readonly removeImages = createEffect(() => {
+    return this.actions.pipe(
+      ofType(UserBooksActions.removeImages),
+      exhaustMap(({ bookId }) => {
+        if (!this.authService.uid) {
+          return of(UserBooksActions.removeImagesERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+        }
+        return this.firebaseApi.removeUserBookImages(this.authService.uid, bookId).pipe(
+          map(_ => UserBooksActions.removeImagesSUCCESS()),
+          catchError(err => of(UserBooksActions.removeImagesERROR({ error: firebaseError({ err }) }))),
+        );
+      }),
+    );
+  });
+
   readonly publish = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.publish),

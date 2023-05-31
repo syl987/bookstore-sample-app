@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { Database, get, push, ref, remove, set, update } from '@angular/fire/database';
-import { concatMap, from, Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { from, Observable, throwError } from 'rxjs';
+import { concatMap, map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
 import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { FirebaseUploadData } from 'src/app/models/firebase.models';
@@ -57,15 +57,17 @@ export class FirebaseApiService {
     );
   }
 
-  uploadUserBookImage(uid: string, bookId: string, file: Blob): Observable<FirebaseUploadData> {
+  uploadUserBookImage(uid: string, bookId: string, file: Blob): Observable<FirebaseUploadData & { downloadUrl: string }> {
+    const path = `userBooks/${uid}/${bookId}`;
     // TODO also update user book object in database
-    return this.fileService.uploadFile(`userBooks/${uid}/${bookId}`, file);
+    // TODO check correct path for file
+    return this.fileService.uploadFile(path, file).pipe(concatMap(res => this.fileService.getDownloadURL(path).pipe(map(downloadUrl => ({ ...res, downloadUrl })))));
   }
 
-  removeUserBookImage(uid: string, bookId: string): Observable<void> {
+  removeUserBookImages(uid: string, bookId: string): Observable<void> {
+    const path = `userBooks/${uid}/${bookId}`;
     // TODO also update user book object in database
-    // TODO add image name
-    return this.fileService.removeObject(`userBooks/${uid}/${bookId}`);
+    return this.fileService.removeObject(path);
   }
 
   publishUserBook(uid: string, id: string): Observable<UserBookDTO> {

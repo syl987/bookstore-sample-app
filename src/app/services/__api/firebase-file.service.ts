@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { deleteObject, ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
+import { deleteObject, getDownloadURL, ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
 import { from, Observable } from 'rxjs';
 import { toFirebaseUploadData } from 'src/app/helpers/firebase.helpers';
 import { FirebaseUploadData, FirebaseUploadRequestMetadata } from 'src/app/models/firebase.models';
@@ -20,6 +20,12 @@ export class FirebaseFileService {
         complete: subscriber.complete,
       });
     });
+  }
+
+  getDownloadURL(path: string): Observable<string> {
+    const reference = ref(this.storage, path);
+    const task = getDownloadURL(reference);
+    return from(task);
   }
 
   removeObject(path: string): Observable<void> {
