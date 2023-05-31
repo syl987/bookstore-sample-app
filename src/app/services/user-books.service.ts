@@ -5,6 +5,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { concatMap, shareReplay, take } from 'rxjs/operators';
 
 import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
+import { FirebaseUploadData } from '../models/firebase.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import { UserBooksActions } from '../store/user-books/user-books.actions';
 import { userBooksFeature } from '../store/user-books/user-books.reducer';
@@ -20,6 +21,10 @@ interface IUserBooksService {
   delete(id: string, book: UserBookDTO): Observable<void>;
   /** Edit data of an unpublished book. */
   editDraft(id: string, book: UserBookDTO): Observable<UserBookDTO>;
+  /** Upload an image of an unpublished book. Also emits on progress data. */
+  uploadImage(bookId: string, file: Blob): Observable<FirebaseUploadData>;
+  /** Delete all images of an unpublished book. */
+  deleteImages(bookId: string): Observable<void>;
   /** Publish a book. */
   publish(id: string, book: UserBookDTO): Observable<UserBookDTO>;
   /** Buy a book. */
@@ -55,6 +60,9 @@ export class UserBooksService implements IUserBooksService {
   readonly publishError$ = this.store.select(userBooksFeature.selectPublishError);
 
   constructor(private readonly store: Store, private readonly actions: Actions) {}
+  deleteImages(bookId: string): Observable<void> {
+    throw new Error('Method not implemented.');
+  }
 
   load(id: string): Observable<UserBookDTO> {
     this.store.dispatch(UserBooksActions.load({ id }));
@@ -137,6 +145,45 @@ export class UserBooksService implements IUserBooksService {
       concatMap(action => {
         if (action.type === UserBooksActions.editDraftSUCCESS.type) {
           return of(action.book);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
+  }
+
+  uploadImage(bookId: string, file: Blob): Observable<FirebaseUploadData> {
+    this.store.dispatch(UserBooksActions.uploadImage({ bookId, file }));
+
+    const result = this.actions.pipe(
+      ofType(UserBooksActions.uploadImagePROGRESS, UserBooksActions.uploadImageSUCCESS, UserBooksActions.uploadImageERROR),
+      take(1),
+      concatMap(action => {
+        if (action.type === UserBooksActions.uploadImagePROGRESS.type) {
+          return of(action.uploadData);
+        }
+        if (action.type === UserBooksActions.uploadImageSUCCESS.type) {
+          return of(action.uploadData);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
+  }
+
+  deleteImage(bookId: string): Observable<void> {
+    this.store.dispatch(UserBooksActions.removeImages({ bookId }));
+
+    const result = this.actions.pipe(
+      ofType(UserBooksActions.removeImagesSUCCESS, UserBooksActions.removeImagesERROR),
+      take(1),
+      concatMap(action => {
+        if (action.type === UserBooksActions.removeImagesSUCCESS.type) {
+          return of(undefined);
         }
         return throwError(() => action.error);
       }),
