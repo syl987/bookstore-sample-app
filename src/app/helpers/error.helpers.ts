@@ -73,10 +73,10 @@ export function toActionErrorMessage(action: Action, extras?: [string, string][]
     return $localize`Error loading data.`;
   }
   if (['create', 'update', 'edit'].some(s => action.type.includes(s))) {
-    return $localize`Error saving data`;
+    return $localize`Error saving data.`;
   }
   if (['delete', 'remove'].some(s => action.type.includes(s))) {
-    return $localize`Error removing data`;
+    return $localize`Error removing data.`;
   }
-  return $localize`Unknown Error`;
+  return $localize`Unknown Error.`;
 }
