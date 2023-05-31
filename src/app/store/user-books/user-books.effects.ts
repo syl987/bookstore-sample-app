@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
-import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
+import { EMPTY, Observable, of } from 'rxjs';
+import { catchError, concatMap, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { requireAuth } from 'src/app/helpers/auth.helpers';
 import { toActionErrorMessage, toActionSuccessMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError, internalError } from 'src/app/models/error.models';
@@ -93,6 +93,33 @@ export class UserBooksEffects implements OnRunEffects {
         return this.firebaseApi.editUserBookDraft(this.authService.uid, id, data).pipe(
           map(res => UserBooksActions.editDraftSUCCESS({ book: res })),
           catchError(err => of(UserBooksActions.editDraftERROR({ error: firebaseError({ err }) }))),
+        );
+      }),
+    );
+  });
+
+  readonly uploadImage = createEffect(() => {
+    return this.actions.pipe(
+      ofType(UserBooksActions.uploadImage),
+      exhaustMap(({ id, data }) => {
+        if (!this.authService.uid) {
+          return of(UserBooksActions.uploadImageERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+        }
+        return this.firebaseApi.uploadUserBookImage(this.authService.uid, id, data).pipe(
+          concatMap(res => {
+            switch (res.state) {
+              case 'running':
+                return of(UserBooksActions.uploadImagePROGRESS({ response: res }));
+              case 'success':
+                return of(UserBooksActions.uploadImageSUCCESS({ response: res }));
+
+              // TODO test if error case is needed
+
+              default:
+                return EMPTY;
+            }
+          }),
+          catchError(err => of(UserBooksActions.uploadImageERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
