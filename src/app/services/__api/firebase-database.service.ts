@@ -5,7 +5,10 @@ import { concatMap, from, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
 import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
+import { FirebaseUploadData, FirebaseUploadRequestMetadata } from 'src/app/models/firebase.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
+
+import { FirebaseFileService } from './firebase-file.service';
 
 // TODO evaluate how to implement volume search+detail duality on database and store levels
 
@@ -13,7 +16,7 @@ import { VolumeDTO } from 'src/app/models/volume.models';
   providedIn: 'root',
 })
 export class FirebaseDatabaseService {
-  constructor(private readonly database: Database) {}
+  constructor(private readonly database: Database, private readonly fileService: FirebaseFileService) {}
 
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {
     const reference = ref(this.database, `userBooks/${uid}/${id}`);
@@ -52,6 +55,16 @@ export class FirebaseDatabaseService {
         return from(result).pipe(concatMap(_ => this.getUserBook(uid, id)));
       }),
     );
+  }
+
+  uploadUserBookImage(uid: string, id: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
+    // TODO also update user book object in database
+    return this.fileService.uploadImage(`userBooks/${uid}/${id}`, data, options);
+  }
+
+  deleteUserBookImage(uid: string, id: string): Observable<void> {
+    // TODO also update user book object in database
+    return this.fileService.deleteImage(`userBooks/${uid}/${id}`);
   }
 
   publishUserBook(uid: string, id: string): Observable<UserBookDTO> {

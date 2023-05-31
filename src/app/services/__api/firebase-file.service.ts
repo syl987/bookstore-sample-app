@@ -7,11 +7,11 @@ import { FirebaseUploadData, FirebaseUploadRequestMetadata } from 'src/app/model
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseStorageService {
+export class FirebaseFileService {
   constructor(private readonly storage: Storage) {}
 
-  uploadUserBookImage(uid: string, id: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
-    const reference = ref(this.storage, `userBooks/${uid}/${id}`);
+  uploadImage(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
+    const reference = ref(this.storage, path);
     const task = uploadBytesResumable(reference, data, options);
     return new Observable(subscriber => {
       task.on('state_changed', {
@@ -22,8 +22,8 @@ export class FirebaseStorageService {
     });
   }
 
-  deleteUserBookImage(uid: string, id: string): Observable<void> {
-    const reference = ref(this.storage, `userBooks/${uid}/${id}`);
+  deleteImage(path: string): Observable<void> {
+    const reference = ref(this.storage, path);
     const task = deleteObject(reference);
     return from(task);
   }
