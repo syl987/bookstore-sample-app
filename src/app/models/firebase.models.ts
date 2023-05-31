@@ -2,7 +2,7 @@ import { FullMetadata, UploadMetadata, UploadTaskSnapshot } from '@angular/fire/
 
 export type FirebaseUploadRequestMetadata = Pick<UploadMetadata, 'contentType' | 'contentEncoding'>;
 
-export type FirebaseUploadResponseMetadata = Pick<FullMetadata, 'bucket' | 'fullPath' | 'size'>;
+export type FirebaseUploadResponseMetadata = FirebaseUploadRequestMetadata & Pick<FullMetadata, 'bucket' | 'fullPath' | 'size'>;
 
 export interface FirebaseUploadData extends Pick<UploadTaskSnapshot, 'state' | 'bytesTransferred' | 'totalBytes'> {
   /** Before the upload completes, contains the metadata sent to the server. After the upload completes, contains the metadata sent back from the server. */

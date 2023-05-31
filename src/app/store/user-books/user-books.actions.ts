@@ -30,8 +30,8 @@ export const UserBooksActions = createActionGroup({
     'edit draft ERROR': props<{ error: ResponseError }>(),
 
     'upload image': props<{ bookId: string; file: Blob }>(),
-    'upload image PROGRESS': props<{ response: FirebaseUploadData }>(),
-    'upload image SUCCESS': props<{ response: FirebaseUploadData }>(),
+    'upload image PROGRESS': props<{ uploadData: FirebaseUploadData }>(),
+    'upload image SUCCESS': props<{ uploadData: FirebaseUploadData; downloadUrl: string }>(),
     'upload image ERROR': props<{ error: ResponseError }>(),
 
     'remove images': props<{ bookId: string }>(),

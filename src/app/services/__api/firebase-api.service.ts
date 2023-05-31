@@ -57,11 +57,17 @@ export class FirebaseApiService {
     );
   }
 
-  uploadUserBookImage(uid: string, bookId: string, file: Blob): Observable<FirebaseUploadData & { downloadUrl: string }> {
+  uploadUserBookImage(uid: string, bookId: string, file: Blob): Observable<FirebaseUploadData> {
     const path = `userBooks/${uid}/${bookId}`;
     // TODO also update user book object in database
     // TODO check correct path for file
-    return this.fileService.uploadFile(path, file).pipe(concatMap(res => this.fileService.getDownloadURL(path).pipe(map(downloadUrl => ({ ...res, downloadUrl })))));
+    return this.fileService.uploadFile(path, file).pipe(concatMap(res => this.fileService.getDownloadUrl(path).pipe(map(downloadUrl => ({ ...res, downloadUrl })))));
+  }
+
+  getUserBookImageDownloadUrl(uid: string, bookId: string): Observable<string> {
+    const path = `userBooks/${uid}/${bookId}`;
+    // TODO add file name to path
+    return this.fileService.getDownloadUrl(path);
   }
 
   removeUserBookImages(uid: string, bookId: string): Observable<void> {

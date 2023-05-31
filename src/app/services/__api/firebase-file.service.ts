@@ -22,7 +22,7 @@ export class FirebaseFileService {
     });
   }
 
-  getDownloadURL(path: string): Observable<string> {
+  getDownloadUrl(path: string): Observable<string> {
     const reference = ref(this.storage, path);
     const task = getDownloadURL(reference);
     return from(task);
