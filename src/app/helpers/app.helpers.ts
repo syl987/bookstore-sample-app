@@ -1,16 +1,17 @@
+import { inject, LOCALE_ID } from '@angular/core';
+
 import { APP_LANGUAGES, AppLanguage } from '../models/app.models';
 
 /**
- * Get current application language based on the first href path segment.
+ * Get current application language based on the current LOCALE_ID.
  *
- * Only a localized build contains the locale id as the first path segment.
- *
- * Same applies to the angular dev server as it only supports one locale.
- *
- * @returns `AppLanguage` with matching locale id or `undefined` if none was found.
+ * @returns `AppLanguage` with matching locale id.
  */
-export function getCurrentAppLanguage(): AppLanguage | undefined {
-  const segment = window.location.pathname.split('/').at(1);
+export function getCurrentAppLanguage(locale = inject(LOCALE_ID)): AppLanguage {
+  const lang = APP_LANGUAGES.find(language => language.locale === locale);
 
-  return APP_LANGUAGES.find(language => language.locale === segment);
+  if (!lang) {
+    throw new Error('Internal Error: Invalid locale definition.');
+  }
+  return lang;
 }
