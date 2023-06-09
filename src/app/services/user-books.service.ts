@@ -22,9 +22,9 @@ interface IUserBooksService {
   /** Edit data of an unpublished book. */
   editDraft(id: string, book: UserBookDTO): Observable<UserBookDTO>;
   /** Upload an image of an unpublished book. Also emits on progress data. */
-  uploadImage(bookId: string, file: Blob): Observable<FirebaseUploadData>;
+  uploadPhoto(bookId: string, file: Blob): Observable<FirebaseUploadData>;
   /** Remove all images of an unpublished book. */
-  removeAllImages(bookId: string): Observable<void>;
+  removeAllPhotos(bookId: string): Observable<void>;
   /** Publish a book. */
   publish(id: string, book: UserBookDTO): Observable<UserBookDTO>;
   /** Buy a book. */
@@ -151,17 +151,17 @@ export class UserBooksService implements IUserBooksService {
     return result;
   }
 
-  uploadImage(bookId: string, file: File): Observable<FirebaseUploadData> {
-    this.store.dispatch(UserBooksActions.uploadImage({ bookId, file }));
+  uploadPhoto(bookId: string, file: File): Observable<FirebaseUploadData> {
+    this.store.dispatch(UserBooksActions.uploadPhoto({ bookId, file }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.uploadImagePROGRESS, UserBooksActions.uploadImageSUCCESS, UserBooksActions.uploadImageERROR),
+      ofType(UserBooksActions.uploadPhotoPROGRESS, UserBooksActions.uploadPhotoSUCCESS, UserBooksActions.uploadPhotoERROR),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.uploadImagePROGRESS.type) {
+        if (action.type === UserBooksActions.uploadPhotoPROGRESS.type) {
           return of(action.uploadData);
         }
-        if (action.type === UserBooksActions.uploadImageSUCCESS.type) {
+        if (action.type === UserBooksActions.uploadPhotoSUCCESS.type) {
           return of(action.uploadData);
         }
         return throwError(() => action.error);
@@ -172,14 +172,14 @@ export class UserBooksService implements IUserBooksService {
     return result;
   }
 
-  removeAllImages(bookId: string): Observable<void> {
-    this.store.dispatch(UserBooksActions.removeAllImages({ bookId }));
+  removeAllPhotos(bookId: string): Observable<void> {
+    this.store.dispatch(UserBooksActions.removeAllPhotos({ bookId }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.removeAllImagesSUCCESS, UserBooksActions.removeAllImagesERROR),
+      ofType(UserBooksActions.removeAllPhotosSUCCESS, UserBooksActions.removeAllPhotosERROR),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.removeAllImagesSUCCESS.type) {
+        if (action.type === UserBooksActions.removeAllPhotosSUCCESS.type) {
           return of(undefined);
         }
         return throwError(() => action.error);

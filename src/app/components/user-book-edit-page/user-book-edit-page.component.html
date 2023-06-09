@@ -12,11 +12,11 @@
   <!-- </a> -->
 
   <div class="mt-m">
-    <input type="file" class="d-none" accept="img/*" #picker (change)="uploadImage($any($event.target).files[0])" />
+    <input type="file" class="d-none" accept="img/*" #picker (change)="uploadPhoto($any($event.target).files[0])" />
 
     <div class="app-gap-x-2xs mb-2m">
       <button mat-flat-button color="primary" (click)="picker.click()">Upload Image</button>
-      <button mat-stroked-button color="warn" (click)="removeAllImages()">Remove All</button>
+      <button mat-stroked-button color="warn" (click)="removeAllPhotos()">Remove All</button>
     </div>
   </div>
 

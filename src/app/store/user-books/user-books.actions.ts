@@ -29,14 +29,14 @@ export const UserBooksActions = createActionGroup({
     'edit draft SUCCESS': props<{ book: UserBookDTO }>(),
     'edit draft ERROR': props<{ error: ResponseError }>(),
 
-    'upload image': props<{ bookId: string; file: File }>(),
-    'upload image PROGRESS': props<{ uploadData: FirebaseUploadData }>(),
-    'upload image SUCCESS': props<{ uploadData: FirebaseUploadData }>(),
-    'upload image ERROR': props<{ error: ResponseError }>(),
+    'upload photo': props<{ bookId: string; file: File }>(),
+    'upload photo PROGRESS': props<{ uploadData: FirebaseUploadData }>(),
+    'upload photo SUCCESS': props<{ uploadData: FirebaseUploadData }>(),
+    'upload photo ERROR': props<{ error: ResponseError }>(),
 
-    'remove all images': props<{ bookId: string }>(),
-    'remove all images SUCCESS': emptyProps(),
-    'remove all images ERROR': props<{ error: ResponseError }>(),
+    'remove all photos': props<{ bookId: string }>(),
+    'remove all photos SUCCESS': emptyProps(),
+    'remove all photos ERROR': props<{ error: ResponseError }>(),
 
     'publish': props<{ id: string }>(),
     'publish SUCCESS': props<{ book: UserBookDTO }>(),

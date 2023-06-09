@@ -57,7 +57,7 @@ export class FirebaseApiService {
     );
   }
 
-  uploadUserBookImage(uid: string, bookId: string, file: Blob): Observable<FirebaseUploadData> {
+  uploadUserBookPhoto(uid: string, bookId: string, file: Blob): Observable<FirebaseUploadData> {
     const path = `userBooks/${uid}/${bookId}`;
     // TODO also update user book object in database
     // TODO check correct path for file
@@ -71,7 +71,7 @@ export class FirebaseApiService {
     );
   }
 
-  removeUserBookImages(uid: string, bookId: string): Observable<void> {
+  removeAllUserBookPhotos(uid: string, bookId: string): Observable<void> {
     const path = `userBooks/${uid}/${bookId}`;
     // TODO also update user book object in database
     return this.fileService.removeObject(path);
