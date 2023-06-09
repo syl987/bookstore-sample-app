@@ -53,6 +53,9 @@ export function toActionSuccessMessage(action: Action, extras?: [string, string]
   if (['delete', 'remove'].some(s => action.type.includes(s))) {
     return $localize`Data successfully removed.`;
   }
+  if (['upload'].some(s => action.type.includes(s))) {
+    return $localize`File successfully uploaded.`;
+  }
   return $localize`Operation successful.`;
 }
 
@@ -77,6 +80,9 @@ export function toActionErrorMessage(action: Action, extras?: [string, string][]
   }
   if (['delete', 'remove'].some(s => action.type.includes(s))) {
     return $localize`Error removing data.`;
+  }
+  if (['upload'].some(s => action.type.includes(s))) {
+    return $localize`Error uploading file.`;
   }
   return $localize`Unknown Error.`;
 }

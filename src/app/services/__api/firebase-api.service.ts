@@ -12,7 +12,7 @@ import { VolumeDTO } from 'src/app/models/volume.models';
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseDatabaseService {
+export class FirebaseApiService {
   constructor(private readonly database: Database) {}
 
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {

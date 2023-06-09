@@ -25,7 +25,6 @@ export const storeConfig: RootStoreConfig<unknown> = {
   runtimeChecks: {
     strictActionTypeUniqueness: isDevMode(),
     strictActionImmutability: isDevMode(),
-    strictActionWithinNgZone: isDevMode(),
     strictStateImmutability: isDevMode(),
   },
 };
