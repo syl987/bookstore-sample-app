@@ -57,16 +57,37 @@ export class FirebaseApiService {
     );
   }
 
-  uploadUserBookPhoto(uid: string, bookId: string, file: Blob): Observable<FirebaseUploadData> {
-    const path = `userBooks/${uid}/${bookId}`;
-    // TODO also update user book object in database
-    // TODO check correct path for file
-    return this.fileService.uploadFile(path, file).pipe(
-      concatMap(res => {
-        if (res.status === 'complete') {
-          return this.fileService.getDownloadUrl(path).pipe(map(downloadUrl => ({ ...res, downloadUrl })));
+  uploadUserBookPhoto(uid: string, bookId: string, file: File): Observable<FirebaseUploadData> {
+    return this.getUserBook(uid, bookId).pipe(
+      concatMap(book => {
+        if (book.status !== BookStatus.DRAFT) {
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
         }
-        return of(res);
+        // TODO decide on path
+        // TODO rename image to photo
+        // TODO also save thumbnail as base64
+        // TODO use BookImageDTO for saving photos
+        // TODO adapt book model to support photo ids
+        const photoIndex = book.photos?.length ?? 0;
+        const path = `userBooks/${uid}/${bookId}/photos/${photoIndex}`;
+        return this.fileService.uploadFile(path, file, {}).pipe(
+          concatMap(res => {
+            if (res.status === 'complete') {
+              return this.fileService.getDownloadUrl(path).pipe(
+                concatMap(downloadUrl => {
+                  const data: FirebaseUploadData = { ...res, downloadUrl };
+                  const changes: { [path: string]: any } = {
+                    [`userBooks/${uid}/${bookId}/photos/${photoIndex}`]: downloadUrl, // TODO add prop
+                  };
+                  const reference = ref(this.database);
+                  const result = update(reference, changes);
+                  return from(result).pipe(map(_ => data));
+                }),
+              );
+            }
+            return of(res);
+          }),
+        );
       }),
     );
   }
