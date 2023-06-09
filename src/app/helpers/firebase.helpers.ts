@@ -2,9 +2,9 @@ import { UploadTaskSnapshot } from '@angular/fire/storage';
 
 import { FirebaseUploadData } from '../models/firebase.models';
 
-export function toFirebaseUploadData(snapshot: UploadTaskSnapshot): FirebaseUploadData {
+export function toFirebaseUploadData(snapshot: UploadTaskSnapshot, complete?: boolean): FirebaseUploadData {
   return {
-    state: snapshot.state,
+    status: complete ? 'complete' : 'progress',
     bytesTransferred: snapshot.bytesTransferred,
     totalBytes: snapshot.totalBytes,
     metadata: {

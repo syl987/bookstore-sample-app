@@ -63,7 +63,7 @@ export class FirebaseApiService {
     // TODO check correct path for file
     return this.fileService.uploadFile(path, file).pipe(
       concatMap(res => {
-        if (res.state === 'success') {
+        if (res.status === 'complete') {
           return this.fileService.getDownloadUrl(path).pipe(map(downloadUrl => ({ ...res, downloadUrl })));
         }
         return of(res);

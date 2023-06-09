@@ -107,14 +107,11 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.uploadUserBookImage(this.authService.uid, bookId, file).pipe(
           concatMap(res => {
-            switch (res.state) {
-              case 'running':
+            switch (res.status) {
+              case 'progress':
                 return of(UserBooksActions.uploadImagePROGRESS({ uploadData: res }));
-              case 'success':
+              case 'complete':
                 return of(UserBooksActions.uploadImageSUCCESS({ uploadData: res }));
-
-              // TODO test if error case is needed
-
               default:
                 return EMPTY;
             }

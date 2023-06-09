@@ -15,9 +15,9 @@ export class FirebaseFileService {
     const task = uploadBytesResumable(reference, data, options);
     return new Observable(subscriber => {
       task.on('state_changed', {
-        next: snapshot => subscriber.next(toFirebaseUploadData(snapshot)),
-        error: subscriber.error,
-        complete: subscriber.complete,
+        next: snapshot => subscriber.next(toFirebaseUploadData(snapshot, snapshot.bytesTransferred === snapshot.totalBytes)),
+        error: err => subscriber.error(err),
+        complete: () => subscriber.complete(),
       });
     });
   }
