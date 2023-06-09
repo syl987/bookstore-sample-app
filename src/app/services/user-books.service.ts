@@ -23,8 +23,8 @@ interface IUserBooksService {
   editDraft(id: string, book: UserBookDTO): Observable<UserBookDTO>;
   /** Upload an image of an unpublished book. Also emits on progress data. */
   uploadImage(bookId: string, file: Blob): Observable<FirebaseUploadData>;
-  /** Delete all images of an unpublished book. */
-  deleteImages(bookId: string): Observable<void>;
+  /** Remove all images of an unpublished book. */
+  removeAllImages(bookId: string): Observable<void>;
   /** Publish a book. */
   publish(id: string, book: UserBookDTO): Observable<UserBookDTO>;
   /** Buy a book. */
@@ -60,9 +60,6 @@ export class UserBooksService implements IUserBooksService {
   readonly publishError$ = this.store.select(userBooksFeature.selectPublishError);
 
   constructor(private readonly store: Store, private readonly actions: Actions) {}
-  deleteImages(bookId: string): Observable<void> {
-    throw new Error('Method not implemented.');
-  }
 
   load(id: string): Observable<UserBookDTO> {
     this.store.dispatch(UserBooksActions.load({ id }));
@@ -175,14 +172,14 @@ export class UserBooksService implements IUserBooksService {
     return result;
   }
 
-  deleteImage(bookId: string): Observable<void> {
-    this.store.dispatch(UserBooksActions.removeImages({ bookId }));
+  removeAllImages(bookId: string): Observable<void> {
+    this.store.dispatch(UserBooksActions.removeAllImages({ bookId }));
 
     const result = this.actions.pipe(
-      ofType(UserBooksActions.removeImagesSUCCESS, UserBooksActions.removeImagesERROR),
+      ofType(UserBooksActions.removeAllImagesSUCCESS, UserBooksActions.removeAllImagesERROR),
       take(1),
       concatMap(action => {
-        if (action.type === UserBooksActions.removeImagesSUCCESS.type) {
+        if (action.type === UserBooksActions.removeAllImagesSUCCESS.type) {
           return of(undefined);
         }
         return throwError(() => action.error);

@@ -150,4 +150,12 @@ export class UserBookEditPageComponent {
       )
       .subscribe(_ => this.router.navigateByUrl('/user/books'));
   }
+
+  uploadImage(file: File): void {
+    this.userBooksService.uploadImage(this.id, file);
+  }
+
+  removeAllImages(): void {
+    this.userBooksService.removeAllImages(this.id);
+  }
 }

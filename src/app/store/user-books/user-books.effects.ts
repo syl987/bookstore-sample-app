@@ -125,16 +125,16 @@ export class UserBooksEffects implements OnRunEffects {
     );
   });
 
-  readonly removeImages = createEffect(() => {
+  readonly removeAllImages = createEffect(() => {
     return this.actions.pipe(
-      ofType(UserBooksActions.removeImages),
+      ofType(UserBooksActions.removeAllImages),
       exhaustMap(({ bookId }) => {
         if (!this.authService.uid) {
-          return of(UserBooksActions.removeImagesERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.removeAllImagesERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
         return this.firebaseApi.removeUserBookImages(this.authService.uid, bookId).pipe(
-          map(_ => UserBooksActions.removeImagesSUCCESS()),
-          catchError(err => of(UserBooksActions.removeImagesERROR({ error: firebaseError({ err }) }))),
+          map(_ => UserBooksActions.removeAllImagesSUCCESS()),
+          catchError(err => of(UserBooksActions.removeAllImagesERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );

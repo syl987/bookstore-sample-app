@@ -34,9 +34,9 @@ export const UserBooksActions = createActionGroup({
     'upload image SUCCESS': props<{ uploadData: FirebaseUploadData }>(),
     'upload image ERROR': props<{ error: ResponseError }>(),
 
-    'remove images': props<{ bookId: string }>(),
-    'remove images SUCCESS': emptyProps(),
-    'remove images ERROR': props<{ error: ResponseError }>(),
+    'remove all images': props<{ bookId: string }>(),
+    'remove all images SUCCESS': emptyProps(),
+    'remove all images ERROR': props<{ error: ResponseError }>(),
 
     'publish': props<{ id: string }>(),
     'publish SUCCESS': props<{ book: UserBookDTO }>(),
