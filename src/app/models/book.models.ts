@@ -15,13 +15,19 @@ export enum BookCondition {
 
 // TODO published book model
 
+export interface BookImageDTO {
+  id: string;
+  downloadUrl: string;
+  thumbnailData: string;
+}
+
 export interface BookDTO {
   id: string;
   uid: string;
   status: BookStatus;
   description?: string | null;
   condition?: BookCondition | null;
-  imageUrl?: string | null;
+  images?: BookImageDTO[] | null;
   price?: number | null;
 }
 
