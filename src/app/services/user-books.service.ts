@@ -151,7 +151,7 @@ export class UserBooksService implements IUserBooksService {
     return result;
   }
 
-  uploadImage(bookId: string, file: Blob): Observable<FirebaseUploadData> {
+  uploadImage(bookId: string, file: File): Observable<FirebaseUploadData> {
     this.store.dispatch(UserBooksActions.uploadImage({ bookId, file }));
 
     const result = this.actions.pipe(

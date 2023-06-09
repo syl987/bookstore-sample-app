@@ -29,7 +29,7 @@ export const UserBooksActions = createActionGroup({
     'edit draft SUCCESS': props<{ book: UserBookDTO }>(),
     'edit draft ERROR': props<{ error: ResponseError }>(),
 
-    'upload image': props<{ bookId: string; file: Blob }>(),
+    'upload image': props<{ bookId: string; file: File }>(),
     'upload image PROGRESS': props<{ uploadData: FirebaseUploadData }>(),
     'upload image SUCCESS': props<{ uploadData: FirebaseUploadData }>(),
     'upload image ERROR': props<{ error: ResponseError }>(),
