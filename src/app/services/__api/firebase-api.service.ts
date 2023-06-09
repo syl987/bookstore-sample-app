@@ -4,12 +4,13 @@ import { Database, get, push, ref, remove, set, update } from '@angular/fire/dat
 import { from, Observable, of, throwError } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
-import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
+import { BookDTO, BookPhotoDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { FirebaseUploadData } from 'src/app/models/firebase.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
 import { FirebaseFileService } from './firebase-file.service';
 
+// TODO also save thumbnail as base64
 // TODO evaluate how to implement volume search+detail duality on database and store levels
 
 @Injectable({
@@ -63,25 +64,28 @@ export class FirebaseApiService {
         if (book.status !== BookStatus.DRAFT) {
           throw new FirebaseError('custom:invalid_status', 'Invalid status.');
         }
-        // TODO decide on path
-        // TODO rename image to photo
-        // TODO also save thumbnail as base64
-        // TODO use BookImageDTO for saving photos
-        // TODO adapt book model to support photo ids
-        const photoIndex = book.photos?.length ?? 0;
-        const path = `userBooks/${uid}/${bookId}/photos/${photoIndex}`;
-        return this.fileService.uploadFile(path, file, {}).pipe(
+        const reference = ref(this.database);
+        const generatedId: string = push(reference).key!;
+        const path = `userBooks/${uid}/${bookId}/photos/${generatedId}`; // TODO generic file name + correct extension
+
+        // TODO also save original?
+        // TODO also save thumbnail?
+
+        return this.fileService.uploadFile(path, file).pipe(
           concatMap(res => {
             if (res.status === 'complete') {
               return this.fileService.getDownloadUrl(path).pipe(
                 concatMap(downloadUrl => {
-                  const data: FirebaseUploadData = { ...res, downloadUrl };
-                  const changes: { [path: string]: any } = {
-                    [`userBooks/${uid}/${bookId}/photos/${photoIndex}`]: downloadUrl, // TODO add prop
+                  const photo: BookPhotoDTO = {
+                    id: generatedId,
+                    downloadUrl,
                   };
-                  const reference = ref(this.database);
+                  const changes: { [path: string]: any } = {
+                    [`userBooks/${uid}/${bookId}/photos/${generatedId}`]: photo,
+                  };
                   const result = update(reference, changes);
-                  return from(result).pipe(map(_ => data));
+
+                  return from(result).pipe(map(_ => ({ ...res, downloadUrl })));
                 }),
               );
             }

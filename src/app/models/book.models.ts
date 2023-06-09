@@ -16,8 +16,8 @@ export enum BookCondition {
 // TODO published book model
 
 export interface BookPhotoDTO {
+  id: string;
   downloadUrl: string;
-  // thumbnailData: string; // TODO shrink image
 }
 
 export interface BookDTO {
