@@ -37,7 +37,7 @@
           },
           "configurations": {
             "serve": {
-              "localize": ["en"]
+              "localize": ["de"]
             },
             "production": {
               "budgets": [

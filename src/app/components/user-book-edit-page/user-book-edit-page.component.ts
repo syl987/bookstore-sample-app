@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule, getCurrencySymbol } from '@angular/common';
+import { ChangeDetectionStrategy, Component, DEFAULT_CURRENCY_CODE, Inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -66,9 +66,12 @@ export class UserBookEditPageComponent {
     price: new FormControl<number | null>(null),
   });
 
+  readonly currencySymbol = getCurrencySymbol(this.currency, 'narrow');
+
   private readonly _resetFields = new BehaviorSubject<void>(undefined);
 
   constructor(
+    @Inject(DEFAULT_CURRENCY_CODE) private readonly currency: string,
     private readonly fb: FormBuilder,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
