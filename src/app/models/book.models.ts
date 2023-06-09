@@ -17,7 +17,7 @@ export enum BookCondition {
 
 export interface BookPhotoDTO {
   downloadUrl: string;
-  thumbnailData: string;
+  // thumbnailData: string; // TODO shrink image
 }
 
 export interface BookDTO {
