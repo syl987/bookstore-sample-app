@@ -4,7 +4,7 @@ import { Database, get, push, ref, remove, set, update } from '@angular/fire/dat
 import { from, Observable, of, throwError } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
-import { BookDTO, BookPhotoDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
+import { BookDTO, BookPhotoDTO, BookStatus, UserBookCreateDTO, UserBookDTO } from 'src/app/models/book.models';
 import { FirebaseUploadData } from 'src/app/models/firebase.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
@@ -32,7 +32,7 @@ export class FirebaseApiService {
   }
 
   createUserBook(uid: string, volume: VolumeDTO): Observable<UserBookDTO> {
-    const book: Pick<UserBookDTO, 'uid' | 'status' | 'volume'> = { uid, status: BookStatus.DRAFT, volume };
+    const book: UserBookCreateDTO = { uid, status: BookStatus.DRAFT, volume };
 
     const result = push(ref(this.database))
       .then(snap => snap.key!)
