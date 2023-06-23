@@ -4,7 +4,7 @@ import { Database, get, push, ref, remove, set, update } from '@angular/fire/dat
 import { concatMap, from, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
-import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
+import { BookDTO, BookStatus, UserBookCreateDTO, UserBookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
 // TODO evaluate how to implement volume search+detail duality on database and store levels
@@ -28,7 +28,7 @@ export class FirebaseApiService {
   }
 
   createUserBook(uid: string, volume: VolumeDTO): Observable<UserBookDTO> {
-    const book: Pick<UserBookDTO, 'uid' | 'status' | 'volume'> = { uid, status: BookStatus.DRAFT, volume };
+    const book: UserBookCreateDTO = { uid, status: BookStatus.DRAFT, volume };
 
     const result = push(ref(this.database))
       .then(snap => snap.key!)
