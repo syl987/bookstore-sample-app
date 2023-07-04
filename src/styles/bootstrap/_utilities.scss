@@ -3,16 +3,6 @@
 @import 'bootstrap/scss/utilities';
 
 $custom-utilities: (
-  'overflow-x': (
-    // new
-    property: overflow-x,
-    values: auto hidden visible scroll,
-  ),
-  'overflow-y': (
-    // new
-    property: overflow-y,
-    values: auto hidden visible scroll,
-  ),
   'cursor': (
     // new
     property: cursor,
