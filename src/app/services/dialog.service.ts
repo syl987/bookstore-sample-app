@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
-import { CropImageDialogComponent, CropImageDialogData } from '../components/crop-image-dialog/crop-image-dialog.component';
+import { ImageCropDialogComponent, ImageCropDialogData } from '../components/image-crop-dialog/image-crop-dialog.component';
 import { UserBookCreateDialogComponent } from '../components/user-book-create-dialog/user-book-create-dialog.component';
 import { UserBookDeleteDialogComponent } from '../components/user-book-delete-dialog/user-book-delete-dialog.component';
 import { UserBookPublishDialogComponent } from '../components/user-book-publish-dialog/user-book-publish-dialog.component';
@@ -17,10 +17,10 @@ import { UserBookDTO } from '../models/book.models';
 export class DialogService {
   constructor(private readonly dialog: MatDialog) {}
 
-  openCropImageDialog(file: File): MatDialogRef<CropImageDialogComponent, Blob | null | undefined> {
-    const data: CropImageDialogData = { file };
+  openImageCropDialog(file: File): MatDialogRef<ImageCropDialogComponent, Blob | null | undefined> {
+    const data: ImageCropDialogData = { file };
 
-    return this.dialog.open(CropImageDialogComponent, { data, maxWidth: 768 });
+    return this.dialog.open(ImageCropDialogComponent, { data, maxWidth: 768 });
   }
 
   openUserSessionInfoDialog(user: AuthUser): MatDialogRef<UserSessionInfoDialogComponent, void> {
