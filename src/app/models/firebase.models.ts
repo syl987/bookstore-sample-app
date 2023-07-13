@@ -4,7 +4,14 @@ export type FirebaseUploadRequestMetadata = Pick<UploadMetadata, 'contentType' |
 
 export type FirebaseUploadResponseMetadata = FirebaseUploadRequestMetadata & Pick<FullMetadata, 'bucket' | 'fullPath' | 'size'>;
 
-export interface FirebaseUploadData extends Pick<UploadTaskSnapshot, 'bytesTransferred' | 'totalBytes'> {
+export interface FirebaseUploadData extends Pick<UploadTaskSnapshot, 'totalBytes'> {
+  /** Contains the metadata sent back from the server. */
+  metadata: FirebaseUploadResponseMetadata;
+  /** The URL to access the resource. */
+  downloadUrl?: string;
+}
+
+export interface FirebaseUploadDataWithProgress extends Pick<UploadTaskSnapshot, 'bytesTransferred' | 'totalBytes'> {
   /** Whether the task is complete or in progress. */
   status: 'progress' | 'complete';
   /** Before the upload completes, contains the metadata sent to the server. After the upload completes, contains the metadata sent back from the server. */

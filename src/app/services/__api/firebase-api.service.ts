@@ -5,7 +5,7 @@ import { from, Observable, of, throwError } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
 import { BookDTO, BookPhotoDTO, BookStatus, UserBookCreateDTO, UserBookDTO } from 'src/app/models/book.models';
-import { FirebaseUploadData } from 'src/app/models/firebase.models';
+import { FirebaseUploadDataWithProgress } from 'src/app/models/firebase.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
 import { FirebaseFileService } from './firebase-file.service';
@@ -58,7 +58,7 @@ export class FirebaseApiService {
     );
   }
 
-  uploadUserBookPhoto(uid: string, bookId: string, file: File): Observable<FirebaseUploadData> {
+  uploadUserBookPhoto(uid: string, bookId: string, file: File): Observable<FirebaseUploadDataWithProgress> {
     return this.getUserBook(uid, bookId).pipe(
       concatMap(book => {
         if (book.status !== BookStatus.DRAFT) {
@@ -71,7 +71,7 @@ export class FirebaseApiService {
         // TODO also save original?
         // TODO also save thumbnail?
 
-        return this.fileService.uploadFile(path, file).pipe(
+        return this.fileService.uploadFileWithProgress(path, file).pipe(
           concatMap(res => {
             if (res.status === 'complete') {
               return this.fileService.getDownloadUrl(path).pipe(
