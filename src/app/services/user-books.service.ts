@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of, throwError } from 'rxjs';
 import { concatMap, shareReplay, take } from 'rxjs/operators';
 
-import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
+import { BookPhotoUploadData, UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
 import { FirebaseUploadData } from '../models/firebase.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import { UserBooksActions } from '../store/user-books/user-books.actions';
@@ -21,8 +21,8 @@ interface IUserBooksService {
   delete(id: string, book: UserBookDTO): Observable<void>;
   /** Edit data of an unpublished book. */
   editDraft(id: string, book: UserBookDTO): Observable<UserBookDTO>;
-  /** Upload an image of an unpublished book. Also emits on progress data. */
-  uploadPhoto(bookId: string, file: Blob): Observable<FirebaseUploadData>;
+  /** Upload an image of an unpublished book with a thumbnail. Also emits on progress data. */
+  uploadPhoto(bookId: string, data: BookPhotoUploadData): Observable<FirebaseUploadData>;
   /** Remove all images of an unpublished book. */
   removeAllPhotos(bookId: string): Observable<void>;
   /** Publish a book. */
@@ -151,8 +151,8 @@ export class UserBooksService implements IUserBooksService {
     return result;
   }
 
-  uploadPhoto(bookId: string, file: File): Observable<FirebaseUploadData> {
-    this.store.dispatch(UserBooksActions.uploadPhoto({ bookId, file }));
+  uploadPhoto(bookId: string, data: BookPhotoUploadData): Observable<FirebaseUploadData> {
+    this.store.dispatch(UserBooksActions.uploadPhoto({ bookId, data }));
 
     const result = this.actions.pipe(
       ofType(UserBooksActions.uploadPhotoPROGRESS, UserBooksActions.uploadPhotoSUCCESS, UserBooksActions.uploadPhotoERROR),

@@ -20,6 +20,11 @@ export interface BookPhotoDTO {
   downloadUrl: string;
 }
 
+export interface BookPhotoUploadData {
+  image: Blob;
+  /* thumbnail: Blob; */
+}
+
 export interface BookDTO {
   id: string;
   uid: string;

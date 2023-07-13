@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { UserBookDTO, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { BookPhotoUploadData, UserBookDTO, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { ResponseError } from 'src/app/models/error.models';
 import { FirebaseUploadData } from 'src/app/models/firebase.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
@@ -29,7 +29,7 @@ export const UserBooksActions = createActionGroup({
     'edit draft SUCCESS': props<{ book: UserBookDTO }>(),
     'edit draft ERROR': props<{ error: ResponseError }>(),
 
-    'upload photo': props<{ bookId: string; file: File }>(),
+    'upload photo': props<{ bookId: string; data: BookPhotoUploadData }>(),
     'upload photo PROGRESS': props<{ uploadData: FirebaseUploadData }>(),
     'upload photo SUCCESS': props<{ uploadData: FirebaseUploadData }>(),
     'upload photo ERROR': props<{ error: ResponseError }>(),
