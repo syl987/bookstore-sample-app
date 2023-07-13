@@ -151,8 +151,14 @@ export class UserBookEditPageComponent {
       .subscribe(_ => this.router.navigateByUrl('/user/books'));
   }
 
-  uploadPhoto(file: File): void {
-    this.userBooksService.uploadPhoto(this.id, file);
+  openImageCropDialog(file: File): void {
+    const dialogRef = this.dialogService.openCropImageDialog(file);
+
+    dialogRef.beforeClosed().subscribe(result => {
+      if (result) {
+        this.userBooksService.uploadPhoto(this.id, result);
+      }
+    });
   }
 
   removeAllPhotos(): void {
