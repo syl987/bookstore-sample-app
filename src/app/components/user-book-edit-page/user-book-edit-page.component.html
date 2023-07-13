@@ -11,14 +11,22 @@
   <app-volume-card *ngIf="book$ | async as book" [volume]="book.volume" />
   <!-- </a> -->
 
-  <div class="mt-m">
+  <div class="my-m">
+    <h3>Custom photos</h3>
+
+    <div *ngIf="book$ | async as book" class="app-gap-x-xs mb-s">
+      <img *ngFor="let photo of getBookPhotos(book)" [src]="photo.imageUrl" alt="book photo" height="96" />
+    </div>
+
     <input type="file" class="d-none" accept="image/*" #picker (change)="openImageCropDialog($any($event.target).files[0]); picker.type = ''; picker.type = 'file'" />
 
-    <div class="app-gap-x-2xs mb-2m">
-      <button mat-flat-button color="primary" (click)="picker.click()">Upload Image</button>
+    <div class="app-gap-x-2xs">
+      <button mat-stroked-button color="primary" (click)="picker.click()">Upload Image</button>
       <button mat-stroked-button color="warn" (click)="removeAllPhotos()">Remove All</button>
     </div>
   </div>
+
+  <mat-divider></mat-divider>
 
   <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-2m">
     <div class="row">

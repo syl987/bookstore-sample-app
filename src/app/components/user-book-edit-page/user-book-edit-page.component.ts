@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, DEFAULT_CURRENCY_CODE, Inject } fro
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { isTrue } from 'src/app/functions/typeguard.functions';
-import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { BookCondition, BookDTO, BookPhotoDTO, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { ValidationErrorPipe } from 'src/app/pipes/validation-error.pipe';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -32,6 +33,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
     CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatDividerModule,
     MatInputModule,
     MatSelectModule,
     TitleBarComponent,
@@ -163,5 +165,9 @@ export class UserBookEditPageComponent {
 
   removeAllPhotos(): void {
     this.userBooksService.removeAllPhotos(this.id);
+  }
+
+  getBookPhotos(book: BookDTO): BookPhotoDTO[] {
+    return Object.values(book.photos ?? {});
   }
 }
