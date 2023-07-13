@@ -22,7 +22,7 @@ interface IUserBooksService {
   /** Edit data of an unpublished book. */
   editDraft(id: string, book: UserBookDTO): Observable<UserBookDTO>;
   /** Upload an image of an unpublished book. Also emits on progress data. */
-  uploadPhoto(bookId: string, file: Blob): Observable<FirebaseUploadData>;
+  uploadPhoto(bookId: string, data: Blob): Observable<FirebaseUploadData>;
   /** Remove all images of an unpublished book. */
   removeAllPhotos(bookId: string): Observable<void>;
   /** Publish a book. */
@@ -151,8 +151,8 @@ export class UserBooksService implements IUserBooksService {
     return result;
   }
 
-  uploadPhoto(bookId: string, file: File): Observable<FirebaseUploadData> {
-    this.store.dispatch(UserBooksActions.uploadPhoto({ bookId, file }));
+  uploadPhoto(bookId: string, data: Blob): Observable<FirebaseUploadData> {
+    this.store.dispatch(UserBooksActions.uploadPhoto({ bookId, data }));
 
     const result = this.actions.pipe(
       ofType(UserBooksActions.uploadPhotoPROGRESS, UserBooksActions.uploadPhotoSUCCESS, UserBooksActions.uploadPhotoERROR),

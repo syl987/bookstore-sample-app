@@ -58,7 +58,7 @@ export class FirebaseApiService {
     );
   }
 
-  uploadUserBookPhoto(uid: string, bookId: string, file: File): Observable<FirebaseUploadDataWithProgress> {
+  uploadUserBookPhoto(uid: string, bookId: string, data: Blob): Observable<FirebaseUploadDataWithProgress> {
     return this.getUserBook(uid, bookId).pipe(
       concatMap(book => {
         if (book.status !== BookStatus.DRAFT) {
@@ -71,7 +71,7 @@ export class FirebaseApiService {
         // TODO also save original?
         // TODO also save thumbnail?
 
-        return this.fileService.uploadFileWithProgress(path, file).pipe(
+        return this.fileService.uploadFileWithProgress(path, data).pipe(
           concatMap(res => {
             if (res.status === 'complete') {
               return this.fileService.getDownloadUrl(path).pipe(

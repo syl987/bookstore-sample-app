@@ -101,11 +101,11 @@ export class UserBooksEffects implements OnRunEffects {
   readonly uploadPhoto = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.uploadPhoto),
-      exhaustMap(({ bookId, file }) => {
+      exhaustMap(({ bookId, data }) => {
         if (!this.authService.uid) {
           return of(UserBooksActions.uploadPhotoERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.uploadUserBookPhoto(this.authService.uid, bookId, file).pipe(
+        return this.firebaseApi.uploadUserBookPhoto(this.authService.uid, bookId, data).pipe(
           concatMap(res => {
             switch (res.status) {
               case 'progress':
