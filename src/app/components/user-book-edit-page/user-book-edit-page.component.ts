@@ -152,7 +152,7 @@ export class UserBookEditPageComponent {
   }
 
   openImageCropDialog(file: File): void {
-    const dialogRef = this.dialogService.openCropImageDialog(file);
+    const dialogRef = this.dialogService.openImageCropDialog(file);
 
     dialogRef.beforeClosed().subscribe(result => {
       if (result) {
