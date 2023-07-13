@@ -78,7 +78,7 @@ export class FirebaseApiService {
                 concatMap(downloadUrl => {
                   const photo: BookPhotoDTO = {
                     id: generatedId,
-                    downloadUrl,
+                    imageUrl: downloadUrl,
                   };
                   const changes: { [path: string]: any } = {
                     [`userBooks/${uid}/${bookId}/photos/${generatedId}`]: photo,

@@ -17,7 +17,7 @@ export enum BookCondition {
 
 export interface BookPhotoDTO {
   id: string;
-  downloadUrl: string;
+  imageUrl: string;
 }
 
 export interface BookDTO {
