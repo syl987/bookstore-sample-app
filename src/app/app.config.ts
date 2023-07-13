@@ -2,7 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 import { APP_INITIALIZER, ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, isDevMode } from '@angular/core';
-import { FirebaseOptions, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
@@ -18,6 +18,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 import { routes } from './app.routes';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
@@ -31,7 +32,6 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO hide firebase secrets with file replacements
 // TODO check translations
 // TODO move page descriptions to route data?
 // TODO kick unnecessary texts
@@ -55,17 +55,6 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO impressum page
 // TODO footer link to my github or some other page
 // TODO copyright year as static options
-
-const firebaseOptions: FirebaseOptions = {
-  apiKey: 'AIzaSyDrisPHet7H7y-G9GjVoJZFReIp-xqgnjo',
-  authDomain: 'sample-app-a00e0.firebaseapp.com',
-  databaseURL: 'https://sample-app-a00e0-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'sample-app-a00e0',
-  storageBucket: 'sample-app-a00e0.appspot.com',
-  messagingSenderId: '996177241422',
-  appId: '1:996177241422:web:c989fc969fe444ed99ea1f',
-  measurementId: 'G-1MVY64K4ZT',
-};
 
 const appOptions: AppOptions = {
   applicationName: 'Bookstore Sample App',
@@ -109,7 +98,7 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
 
     importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(firebaseOptions)),
+      provideFirebaseApp(() => initializeApp(environment.firebaseOptions)),
       provideAuth(() => getAuth()),
       provideFunctions(() => getFunctions()),
       provideDatabase(() => getDatabase()),
