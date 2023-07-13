@@ -17,7 +17,7 @@ import { UserBookDTO } from '../models/book.models';
 export class DialogService {
   constructor(private readonly dialog: MatDialog) {}
 
-  openImageCropDialog(file: File): MatDialogRef<ImageCropDialogComponent, Blob | null | undefined> {
+  openImageCropDialog(file: File): MatDialogRef<ImageCropDialogComponent, Blob | undefined> {
     const data: ImageCropDialogData = { file };
 
     return this.dialog.open(ImageCropDialogComponent, { data, maxWidth: 768 });
