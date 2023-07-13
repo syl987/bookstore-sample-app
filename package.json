@@ -37,6 +37,7 @@
     "@ngrx/store": "^16.0.1",
     "@ngrx/store-devtools": "^16.0.1",
     "base64-blob": "^1.4.1",
+    "base64-buffer-thumbnail-no-cache": "^1.0.2",
     "bootstrap": "^5.2.3",
     "flagpack": "^1.0.5",
     "font-awesome": "^4.7.0",
