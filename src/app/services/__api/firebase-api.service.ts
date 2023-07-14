@@ -73,21 +73,17 @@ export class FirebaseApiService {
 
         return this.fileService.uploadFileWithProgress(path, data).pipe(
           concatMap(res => {
-            if (res.status === 'complete') {
-              return this.fileService.getDownloadUrl(path).pipe(
-                concatMap(downloadUrl => {
-                  const photo: BookPhotoDTO = {
-                    id: generatedId,
-                    imageUrl: downloadUrl,
-                  };
-                  const changes: { [path: string]: any } = {
-                    [`userBooks/${uid}/${bookId}/photos/${generatedId}`]: photo,
-                  };
-                  const result = update(reference, changes);
+            if (res.snapshot.bytesTransferred === res.snapshot.totalBytes) {
+              const photo: BookPhotoDTO = {
+                id: generatedId,
+                imageUrl: res.downloadUrl!,
+              };
+              const changes: { [path: string]: any } = {
+                [`userBooks/${uid}/${bookId}/photos/${generatedId}`]: photo,
+              };
+              const result = update(reference, changes);
 
-                  return from(result).pipe(map(_ => ({ ...res, downloadUrl })));
-                }),
-              );
+              return from(result).pipe(map(_ => res));
             }
             return of(res);
           }),
