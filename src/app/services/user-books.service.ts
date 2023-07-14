@@ -55,6 +55,13 @@ export class UserBooksService implements IUserBooksService {
   readonly editDraftPending$ = this.store.select(userBooksFeature.selectEditDraftPending);
   readonly editDraftError$ = this.store.select(userBooksFeature.selectEditDraftError);
 
+  readonly uploadPhotoPending$ = this.store.select(userBooksFeature.selectUploadPhotoPending);
+  readonly uploadPhotoProgress$ = this.store.select(userBooksFeature.selectUploadPhotoProgress);
+  readonly uploadPhotoError$ = this.store.select(userBooksFeature.selectUploadPhotoError);
+
+  readonly removeAllPhotosPending$ = this.store.select(userBooksFeature.selectRemoveAllPhotosPending);
+  readonly removeAllPhotosError$ = this.store.select(userBooksFeature.selectRemoveAllPhotosError);
+
   readonly publishPending$ = this.store.select(userBooksFeature.selectPublishPending);
   readonly publishError$ = this.store.select(userBooksFeature.selectPublishError);
 

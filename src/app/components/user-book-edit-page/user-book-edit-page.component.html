@@ -22,7 +22,9 @@
     <input type="file" class="d-none" accept="image/*" #picker (change)="openImageCropDialog($any($event.target).files[0]); picker.type = ''; picker.type = 'file'" />
 
     <div class="app-gap-x-2xs">
-      <button mat-stroked-button color="primary" (click)="picker.click()">TODO translate: Upload Image</button>
+      <button mat-stroked-button color="primary" (click)="picker.click()" [spinning]="uploadPhotoPending$ | async" [disabled]="uploadPhotoPending$ | async">
+        TODO translate: Upload Image
+      </button>
       <button mat-stroked-button color="warn" (click)="removeAllPhotos()">TODO translate: Remove All</button>
     </div>
   </div>

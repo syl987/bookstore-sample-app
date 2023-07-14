@@ -52,6 +52,9 @@ export class UserBookEditPageComponent {
 
   readonly editDraftPending$ = this.userBooksService.editDraftPending$;
   readonly publishPending$ = this.userBooksService.publishPending$;
+  readonly uploadPhotoPending$ = this.userBooksService.uploadPhotoPending$;
+  readonly uploadPhotoProgress$ = this.userBooksService.uploadPhotoProgress$;
+  readonly removeAllPhotosPending$ = this.userBooksService.removeAllPhotosPending$;
   readonly deletePending$ = this.userBooksService.deletePending$;
 
   readonly editDraftDisabled$ = this.editDraftPending$.pipe(map(pending => pending || this.form.disabled)); // TODO false on startup

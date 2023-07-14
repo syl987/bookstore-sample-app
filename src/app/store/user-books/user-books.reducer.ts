@@ -97,7 +97,7 @@ export const reducer = createReducer(
   })),
   on(UserBooksActions.uploadPhoto, state => ({
     ...state,
-    uploadPhoto: { ...state.uploadPhoto, pending: true, progress: undefined, error: undefined },
+    uploadPhoto: { ...state.uploadPhoto, pending: true, progress: 0, error: undefined },
   })),
   on(UserBooksActions.uploadPhotoPROGRESS, (state, { uploadData }) => ({
     ...state,
