@@ -11,7 +11,9 @@ export interface FirebaseUploadData {
 
 export interface FirebaseUploadDataWithProgress {
   /** Data about the current state of the upload task. */
-  snapshot: UploadTaskSnapshot;
+  snapshot: Pick<UploadTaskSnapshot, 'state' | 'metadata' | 'bytesTransferred' | 'totalBytes'>;
   /** After the upload completes, contains the URL to access the resource. */
   downloadUrl?: string;
+  /** Whether all data has been uploaded. */
+  complete: boolean;
 }

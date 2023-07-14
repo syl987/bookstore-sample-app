@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { deleteObject, getDownloadURL, ref, Storage, uploadBytes, uploadBytesResumable } from '@angular/fire/storage';
 import { from, Observable, of } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
+import { toFirebaseUploadDataWithProgress } from 'src/app/helpers/firebase.helpers';
 import { FirebaseUploadData, FirebaseUploadDataWithProgress, FirebaseUploadRequestMetadata } from 'src/app/models/firebase.models';
 
 @Injectable({
@@ -21,13 +22,13 @@ export class FirebaseFileService {
     const task = uploadBytesResumable(reference, data, options);
     return new Observable<FirebaseUploadDataWithProgress>(subscriber => {
       task.on('state_changed', {
-        next: snapshot => subscriber.next({ snapshot }),
+        next: snapshot => subscriber.next(toFirebaseUploadDataWithProgress(snapshot)),
         error: err => subscriber.error(err),
         complete: () => subscriber.complete(),
       });
     }).pipe(
       concatMap(uploadData => {
-        if (uploadData.snapshot.bytesTransferred === uploadData.snapshot.totalBytes) {
+        if (uploadData.complete) {
           return from(getDownloadURL(reference).then(downloadUrl => ({ ...uploadData, downloadUrl })));
         }
         return of(uploadData);
