@@ -1,8 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, EMPTY, Observable, throwError } from 'rxjs';
 
 import { isBearerExcluded } from '../helpers/auth.helpers';
 import { AUTH_CONFIG, AuthConfig } from '../models/auth.models';

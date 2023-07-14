@@ -1,8 +1,7 @@
 import { HttpRequest } from '@angular/common/http';
 import { Actions, EffectNotification, ofType } from '@ngrx/effects';
 import { AuthProvider, GoogleAuthProvider, User } from 'firebase/auth';
-import { Observable } from 'rxjs';
-import { exhaustMap, takeUntil } from 'rxjs/operators';
+import { exhaustMap, Observable, takeUntil } from 'rxjs';
 import { matchesEndpointUrl } from 'src/app/functions/http.functions';
 
 import { AuthConfig, AuthProviderId, AuthUser } from '../models/auth.models';

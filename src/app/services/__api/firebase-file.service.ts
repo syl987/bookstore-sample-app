@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { deleteObject, getDownloadURL, ref, Storage, uploadBytes, uploadBytesResumable } from '@angular/fire/storage';
-import { from, Observable, of } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { concatMap, from, Observable, of } from 'rxjs';
 import { toFirebaseUploadDataWithProgress } from 'src/app/helpers/firebase.helpers';
 import { FirebaseUploadData, FirebaseUploadDataWithProgress, FirebaseUploadRequestMetadata } from 'src/app/models/firebase.models';
 
