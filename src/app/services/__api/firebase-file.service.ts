@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { deleteObject, getDownloadURL, ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
-import { from, Observable } from 'rxjs';
-import { toFirebaseUploadData } from 'src/app/helpers/firebase.helpers';
-import { FirebaseUploadData, FirebaseUploadRequestMetadata } from 'src/app/models/firebase.models';
+import { deleteObject, getDownloadURL, ref, Storage, uploadBytes, uploadBytesResumable } from '@angular/fire/storage';
+import { from, Observable, of } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
+import { FirebaseUploadData, FirebaseUploadDataWithProgress, FirebaseUploadRequestMetadata } from 'src/app/models/firebase.models';
 
 @Injectable({
   providedIn: 'root',
@@ -12,20 +12,27 @@ export class FirebaseFileService {
 
   uploadFile(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
     const reference = ref(this.storage, path);
+    const task = uploadBytes(reference, data, options);
+    return from(task.then(result => getDownloadURL(reference).then(downloadUrl => ({ metadata: result.metadata, downloadUrl }))));
+  }
+
+  uploadFileWithProgress(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadDataWithProgress> {
+    const reference = ref(this.storage, path);
     const task = uploadBytesResumable(reference, data, options);
-    return new Observable(subscriber => {
+    return new Observable<FirebaseUploadDataWithProgress>(subscriber => {
       task.on('state_changed', {
-        next: snapshot => subscriber.next(toFirebaseUploadData(snapshot, snapshot.bytesTransferred === snapshot.totalBytes)),
+        next: snapshot => subscriber.next({ snapshot }),
         error: err => subscriber.error(err),
         complete: () => subscriber.complete(),
       });
-    });
-  }
-
-  getDownloadUrl(path: string): Observable<string> {
-    const reference = ref(this.storage, path);
-    const task = getDownloadURL(reference);
-    return from(task);
+    }).pipe(
+      concatMap(uploadData => {
+        if (uploadData.snapshot.bytesTransferred === uploadData.snapshot.totalBytes) {
+          return from(getDownloadURL(reference).then(downloadUrl => ({ ...uploadData, downloadUrl })));
+        }
+        return of(uploadData);
+      }),
+    );
   }
 
   removeObject(path: string): Observable<void> {
