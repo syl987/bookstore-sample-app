@@ -12,17 +12,18 @@
   <!-- </a> -->
 
   <div class="my-m">
-    <h3>Custom photos</h3>
+    <h3>TODO translate: Custom photos</h3>
 
     <div *ngIf="book$ | async as book" class="app-gap-x-xs mb-s">
+      <span>TODO translate: alt</span>
       <img *ngFor="let photo of getObjectValues(book.photos)" [src]="photo.imageUrl" alt="book photo" height="96" />
     </div>
 
     <input type="file" class="d-none" accept="image/*" #picker (change)="openImageCropDialog($any($event.target).files[0]); picker.type = ''; picker.type = 'file'" />
 
     <div class="app-gap-x-2xs">
-      <button mat-stroked-button color="primary" (click)="picker.click()">Upload Image</button>
-      <button mat-stroked-button color="warn" (click)="removeAllPhotos()">Remove All</button>
+      <button mat-stroked-button color="primary" (click)="picker.click()">TODO translate: Upload Image</button>
+      <button mat-stroked-button color="warn" (click)="removeAllPhotos()">TODO translate: Remove All</button>
     </div>
   </div>
 

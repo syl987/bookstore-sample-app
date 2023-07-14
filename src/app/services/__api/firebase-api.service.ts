@@ -66,7 +66,7 @@ export class FirebaseApiService {
         }
         const reference = ref(this.database);
         const generatedId: string = push(reference).key!;
-        const path = `userBooks/${uid}/${bookId}/photos/${generatedId}`; // TODO generic file name + correct extension
+        const path = `userBooks/${uid}/${bookId}/photos/${generatedId}/medium`; // TODO generic file name + correct extension
 
         // TODO also save original?
         // TODO also save thumbnail?
@@ -93,9 +93,18 @@ export class FirebaseApiService {
   }
 
   removeAllUserBookPhotos(uid: string, bookId: string): Observable<void> {
+    const reference = ref(this.database);
     const path = `userBooks/${uid}/${bookId}`;
-    // TODO also update user book object in database
-    return this.fileService.removeObject(path);
+
+    return this.fileService.removeObject(path).pipe(
+      concatMap(_ => {
+        const changes: { [path: string]: any } = {
+          [`userBooks/${uid}/${bookId}/photos`]: null,
+        };
+        const result = update(reference, changes);
+        return from(result);
+      }),
+    );
   }
 
   publishUserBook(uid: string, id: string): Observable<UserBookDTO> {
