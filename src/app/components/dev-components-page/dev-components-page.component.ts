@@ -6,8 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { timer } from 'rxjs';
-import { auditTime, map } from 'rxjs/operators';
+import { auditTime, map, timer } from 'rxjs';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { ToastService } from 'src/app/services/toast.service';
 

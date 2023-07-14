@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, of, throwError } from 'rxjs';
-import { concatMap, shareReplay, take } from 'rxjs/operators';
+import { concatMap, Observable, of, shareReplay, take, throwError } from 'rxjs';
 
 import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
