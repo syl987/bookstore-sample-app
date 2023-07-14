@@ -15,7 +15,7 @@
     <h3>Custom photos</h3>
 
     <div *ngIf="book$ | async as book" class="app-gap-x-xs mb-s">
-      <img *ngFor="let photo of getBookPhotos(book)" [src]="photo.imageUrl" alt="book photo" height="96" />
+      <img *ngFor="let photo of getObjectValues(book.photos)" [src]="photo.imageUrl" alt="book photo" height="96" />
     </div>
 
     <input type="file" class="d-none" accept="image/*" #picker (change)="openImageCropDialog($any($event.target).files[0]); picker.type = ''; picker.type = 'file'" />

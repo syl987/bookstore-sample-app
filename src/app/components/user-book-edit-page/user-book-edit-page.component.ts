@@ -10,8 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { concatMap, filter, map } from 'rxjs/operators';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
+import { getObjectValues } from 'src/app/functions/object.functions';
 import { isTrue } from 'src/app/functions/typeguard.functions';
-import { BookCondition, BookDTO, BookPhotoDTO, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
+import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { ValidationErrorPipe } from 'src/app/pipes/validation-error.pipe';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -67,6 +68,8 @@ export class UserBookEditPageComponent {
     condition: new FormControl<BookCondition | null>(null),
     price: new FormControl<number | null>(null),
   });
+
+  readonly getObjectValues = getObjectValues;
 
   readonly currencySymbol = getCurrencySymbol(this.currency, 'narrow');
 
@@ -165,9 +168,5 @@ export class UserBookEditPageComponent {
 
   removeAllPhotos(): void {
     this.userBooksService.removeAllPhotos(this.id);
-  }
-
-  getBookPhotos(book: BookDTO): BookPhotoDTO[] {
-    return Object.values(book.photos ?? {});
   }
 }
