@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
-import { EMPTY, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { requireAuth } from 'src/app/helpers/auth.helpers';
 import { toActionErrorMessage, toActionSuccessMessage } from 'src/app/helpers/error.helpers';
@@ -107,14 +107,10 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.uploadUserBookPhoto(this.authService.uid, bookId, data).pipe(
           concatMap(res => {
-            switch (res.status) {
-              case 'progress':
-                return of(UserBooksActions.uploadPhotoPROGRESS({ uploadData: res }));
-              case 'complete':
-                return of(UserBooksActions.uploadPhotoSUCCESS({ uploadData: res }));
-              default:
-                return EMPTY;
+            if (res.complete) {
+              return of(UserBooksActions.uploadPhotoSUCCESS({ uploadData: res }));
             }
+            return of(UserBooksActions.uploadPhotoPROGRESS({ uploadData: res }));
           }),
           catchError(err => of(UserBooksActions.uploadPhotoERROR({ error: firebaseError({ err }) }))),
         );

@@ -73,7 +73,7 @@ export class FirebaseApiService {
 
         return this.fileService.uploadFileWithProgress(path, data).pipe(
           concatMap(res => {
-            if (res.snapshot.bytesTransferred === res.snapshot.totalBytes) {
+            if (res.complete) {
               const photo: BookPhotoDTO = {
                 id: generatedId,
                 imageUrl: res.downloadUrl!,
