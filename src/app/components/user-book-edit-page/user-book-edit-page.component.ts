@@ -25,6 +25,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 // TODO navigate to user books after an action
 // TODO delete book (if not sold)
 // TODO add support for 404
+// TODO bug: change detection not fired after photo upload
 
 @Component({
   selector: 'app-user-book-edit-page',
