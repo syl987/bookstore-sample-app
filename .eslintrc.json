@@ -59,6 +59,7 @@
         "guard-for-in": "warn",
         "no-bitwise": "warn",
         "no-caller": "warn",
+        "no-console": "off", // enable to find unnecessary occurrences
         "no-else-return": "warn",
         "no-eval": "warn",
         "no-extend-native": "warn",
