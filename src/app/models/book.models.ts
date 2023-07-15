@@ -16,11 +16,6 @@ export enum BookCondition {
 
 // TODO published book model
 
-export interface BookPhotoDTO {
-  id: string;
-  imageUrl: string;
-}
-
 export interface BookDTO {
   id: string;
   uid: string;
