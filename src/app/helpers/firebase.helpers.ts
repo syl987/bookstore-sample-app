@@ -10,6 +10,6 @@ export function toFirebaseUploadDataWithProgress(snapshot: UploadTaskSnapshot): 
       bytesTransferred: snapshot.bytesTransferred,
       totalBytes: snapshot.totalBytes,
     },
-    complete: snapshot.bytesTransferred === snapshot.totalBytes,
+    complete: false,
   };
 }

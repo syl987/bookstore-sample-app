@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { deleteObject, getDownloadURL, ref, Storage, uploadBytes, uploadBytesResumable } from '@angular/fire/storage';
-import { concatMap, from, Observable, of } from 'rxjs';
+import { concatMap, from, map, Observable, of, retry, startWith } from 'rxjs';
 import { toFirebaseUploadDataWithProgress } from 'src/app/helpers/firebase.helpers';
 import { FirebaseUploadData, FirebaseUploadDataWithProgress, FirebaseUploadRequestMetadata } from 'src/app/models/firebase.models';
 
@@ -27,8 +27,23 @@ export class FirebaseFileService {
       });
     }).pipe(
       concatMap(uploadData => {
-        if (uploadData.complete) {
-          return from(getDownloadURL(reference).then(downloadUrl => ({ ...uploadData, downloadUrl })));
+        if (uploadData.snapshot.bytesTransferred === uploadData.snapshot.totalBytes) {
+          // workaround: often times, the download url call needs to be delayed by varying time length to succeed
+          return new Observable<string>(subscriber => {
+            setTimeout(async () => {
+              try {
+                subscriber.next(await getDownloadURL(reference));
+                subscriber.complete();
+              } catch (e) {
+                subscriber.error(e);
+              }
+            }, 250);
+          }).pipe(
+            retry(4),
+            map(downloadUrl => ({ ...uploadData, downloadUrl, complete: true })),
+            // pass the last emitted upload data unchanged to indicate 100% completion just in time
+            startWith(uploadData),
+          );
         }
         return of(uploadData);
       }),
