@@ -4,8 +4,9 @@ import { Database, get, push, ref, remove, set, update } from '@angular/fire/dat
 import { concatMap, from, map, Observable, of, throwError } from 'rxjs';
 import { getObjectValues } from 'src/app/functions/object.functions';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
-import { BookDTO, BookPhotoDTO, BookStatus, UserBookCreateDTO, UserBookDTO } from 'src/app/models/book.models';
+import { BookDTO, BookStatus, UserBookCreateDTO, UserBookDTO } from 'src/app/models/book.models';
 import { FirebaseUploadDataWithProgress } from 'src/app/models/firebase.models';
+import { ImageDTO } from 'src/app/models/image.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
 import { FirebaseFileService } from './firebase-file.service';
@@ -74,9 +75,9 @@ export class FirebaseApiService {
         return this.fileService.uploadFileWithProgress(path, data).pipe(
           concatMap(res => {
             if (res.complete) {
-              const photo: BookPhotoDTO = {
+              const photo: ImageDTO = {
                 id: generatedId,
-                imageUrl: res.downloadUrl!,
+                src: res.downloadUrl!,
               };
               const changes: { [path: string]: any } = {
                 [`userBooks/${uid}/${bookId}/photos/${generatedId}`]: photo,

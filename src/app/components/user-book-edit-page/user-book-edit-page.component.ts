@@ -19,6 +19,7 @@ import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 // TODO implement view offers or add navigation to volume, if published books exist
@@ -38,6 +39,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
     MatInputModule,
     MatSelectModule,
     TitleBarComponent,
+    ImageUploadComponent,
     VolumeCardComponent,
     ButtonSpinnerDirective,
     ValidationErrorPipe,
