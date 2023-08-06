@@ -129,7 +129,7 @@ export class FirebaseApiService {
           description: book.description,
           condition: book.condition,
           price: book.price,
-          /* imageUrl: book.imageUrl, */
+          photos: book.photos,
         };
         let changes: { [path: string]: any } = {
           [`userBooks/${uid}/${id}/status`]: BookStatus.PUBLISHED,
