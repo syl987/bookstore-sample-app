@@ -168,7 +168,7 @@ export class UserBooksEffects implements OnRunEffects {
           UserBooksActions.editDraftERROR,
           UserBooksActions.publishERROR,
         ),
-        tap(action => this.toastService.showSuccessToast(toActionErrorMessage(action, [['publish', $localize`Error publishing book.`]]))),
+        tap(action => this.toastService.showErrorToast(toActionErrorMessage(action, [['publish', $localize`Error publishing book.`]]))),
       );
     },
     { dispatch: false },
