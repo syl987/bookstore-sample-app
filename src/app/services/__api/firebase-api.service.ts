@@ -67,10 +67,7 @@ export class FirebaseApiService {
         }
         const reference = ref(this.database);
         const generatedId: string = push(reference).key!;
-        const path = `userBooks/${uid}/${bookId}/photos/${generatedId}/medium`; // TODO generic file name + correct extension
-
-        // TODO also save original?
-        // TODO also save thumbnail?
+        const path = `userBooks/${uid}/${bookId}/photos/${generatedId}`;
 
         return this.fileService.uploadFileWithProgress(path, data).pipe(
           concatMap(res => {
