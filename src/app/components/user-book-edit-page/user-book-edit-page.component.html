@@ -11,6 +11,24 @@
   <app-volume-card *ngIf="book$ | async as book" [volume]="book.volume" />
   <!-- </a> -->
 
+  <div class="my-m">
+    <h3 i18n>Custom photos</h3>
+
+    <input type="file" class="d-none" accept="image/*" #picker (change)="openImageCropDialog($any($event.target).files[0]); picker.type = ''; picker.type = 'file'" />
+
+    <app-image-upload
+      *ngIf="book$ | async as book"
+      [images]="getObjectValues(book.photos)"
+      [readonly]="book.status !== BookStatus.DRAFT"
+      [uploading]="uploadPhotoPending$ | async"
+      defaultAlt="photo"
+      (fileSelect)="picker.click()"
+      (removeAll)="removeAllPhotos()"
+    />
+  </div>
+
+  <mat-divider></mat-divider>
+
   <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-2m">
     <div class="row">
       <div class="col-sm-6 col-md-4 col-xl-3">

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
-import { catchError, exhaustMap, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, concatMap, exhaustMap, map, Observable, of, switchMap, tap } from 'rxjs';
 import { requireAuth } from 'src/app/helpers/auth.helpers';
 import { toActionErrorMessage, toActionSuccessMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError, internalError } from 'src/app/models/error.models';
@@ -90,6 +90,41 @@ export class UserBooksEffects implements OnRunEffects {
         return this.firebaseApi.editUserBookDraft(this.authService.uid, id, data).pipe(
           map(res => UserBooksActions.editDraftSUCCESS({ book: res })),
           catchError(err => of(UserBooksActions.editDraftERROR({ error: firebaseError({ err }) }))),
+        );
+      }),
+    );
+  });
+
+  readonly uploadPhoto = createEffect(() => {
+    return this.actions.pipe(
+      ofType(UserBooksActions.uploadPhoto),
+      exhaustMap(({ bookId, data }) => {
+        if (!this.authService.uid) {
+          return of(UserBooksActions.uploadPhotoERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+        }
+        return this.firebaseApi.uploadUserBookPhoto(this.authService.uid, bookId, data).pipe(
+          concatMap(res => {
+            if (res.complete) {
+              return of(UserBooksActions.uploadPhotoSUCCESS({ uploadData: res }));
+            }
+            return of(UserBooksActions.uploadPhotoPROGRESS({ uploadData: res }));
+          }),
+          catchError(err => of(UserBooksActions.uploadPhotoERROR({ error: firebaseError({ err }) }))),
+        );
+      }),
+    );
+  });
+
+  readonly removeAllPhotos = createEffect(() => {
+    return this.actions.pipe(
+      ofType(UserBooksActions.removeAllPhotos),
+      exhaustMap(({ bookId }) => {
+        if (!this.authService.uid) {
+          return of(UserBooksActions.removeAllPhotosERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+        }
+        return this.firebaseApi.removeAllUserBookPhotos(this.authService.uid, bookId).pipe(
+          map(_ => UserBooksActions.removeAllPhotosSUCCESS()),
+          catchError(err => of(UserBooksActions.removeAllPhotosERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );

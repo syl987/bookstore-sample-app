@@ -1,3 +1,4 @@
+import { ImageDTO } from './image.models';
 import { VolumeDTO } from './volume.models';
 
 export enum BookStatus {
@@ -21,7 +22,7 @@ export interface BookDTO {
   status: BookStatus;
   description?: string | null;
   condition?: BookCondition | null;
-  imageUrl?: string | null;
+  photos?: { [id: string]: ImageDTO } | null;
   price?: number | null;
 }
 
