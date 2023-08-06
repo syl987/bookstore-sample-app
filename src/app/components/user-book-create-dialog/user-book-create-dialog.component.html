@@ -1,20 +1,19 @@
-<h1 mat-dialog-title>New Book</h1>
+<h1 mat-dialog-title i18n>Create a new book</h1>
 
 <div mat-dialog-content>
   <div class="row">
     <mat-form-field floatLabel="always" class="col-sm-8 col-md-6 mt-2xs">
-      <mat-label>Search volume</mat-label>
-      <input matInput [formControl]="searchControl" placeholder="Title, author, text,..." />
+      <mat-label i18n>Search</mat-label>
+      <input matInput [formControl]="searchControl" placeholder="Title, author, text,..." i18n-placeholder />
       <mat-spinner *ngIf="searchPending$ | async" matSuffix diameter="24" class="me-s" />
     </mat-form-field>
   </div>
 
-  <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="py-0">
+  <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="mx-ns py-0">
     <mat-list-option *ngFor="let volume of results$ | async | slice : 0 : 7" [value]="volume" class="text-truncate">
-      <img *ngIf="volume.volumeInfo.imageLinks" [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="Book thumbnail" height="44" width="44" class="me-s" />
-      <span class="fw-bold">{{ volume.volumeInfo.title }}</span>
-
-      <span *ngIf="volume.volumeInfo.subtitle" class="text-muted ms-2xs">&nbsp;{{ volume.volumeInfo.subtitle }}</span>
+      <img *ngIf="volume.volumeInfo.imageLinks" [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-s" i18n-alt />
+      <span class="fw-semibold">{{ volume.volumeInfo.title }}</span>
+      <span *ngIf="volume.volumeInfo.authors?.length" class="text-muted ms-3xs">&nbsp;{{ volume.volumeInfo.authors | array }}</span>
     </mat-list-option>
   </mat-selection-list>
 </div>
@@ -27,7 +26,7 @@
     [spinning]="createPending$ | async"
     [disabled]="list.selectedOptions.isEmpty() || (createPending$ | async)"
   >
-    Create Book
+    <ng-container i18n>Create Book</ng-container>
   </button>
-  <button mat-stroked-button mat-dialog-close>Close</button>
+  <button mat-stroked-button mat-dialog-close i18n>Close</button>
 </div>

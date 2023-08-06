@@ -2,7 +2,7 @@
 $fp-prefix: 'fp' !default;
 $fp-prepend: false !default;
 // countries
-$fp-countries: 'us';
+$fp-countries: 'de', 'us';
 // sizes
 $fp-size: calc(24px * 3 / 4); // set 24px icon width for 4x3 variants
 $fp-size-md: false;

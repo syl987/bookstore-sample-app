@@ -4,6 +4,19 @@
 
 .mat-toolbar-row {
   @include app-container-fluid;
+
+  [mat-button]:first-child {
+    margin-left: -8px;
+  }
+  [mat-button]:last-child {
+    margin-right: -8px;
+  }
+  [mat-icon-button]:first-child {
+    margin-left: -12px;
+  }
+  [mat-icon-button]:last-child {
+    margin-right: -12px;
+  }
 }
 
 .mat-toolbar .mat-mdc-form-field ::ng-deep .mat-mdc-text-field-wrapper::after,

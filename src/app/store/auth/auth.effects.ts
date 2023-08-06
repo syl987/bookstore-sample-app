@@ -2,8 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Auth, authState, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { from, of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, from, map, of } from 'rxjs';
 import { toResponseErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError } from 'src/app/models/error.models';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -74,7 +73,7 @@ export class AuthEffects {
     () => {
       return this.actions.pipe(
         ofType(AuthActions.unauthenticated),
-        map(_ => this.dialogService.closeAllDialogs()),
+        map(_ => this.dialogService.closeAll()),
       );
     },
     { dispatch: false },

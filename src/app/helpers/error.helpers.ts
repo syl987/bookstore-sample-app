@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { FirebaseError } from '@angular/fire/app';
+import { Action } from '@ngrx/store';
 
 import { ResponseError, ResponseErrorType } from '../models/error.models';
 
@@ -27,5 +28,61 @@ function getMessage(error: ResponseError): string | undefined {
  * Get an appropriate error message for display based on the provided `ResponseError` object.
  */
 export function toResponseErrorMessage(error: ResponseError): string {
-  return getMessage(error)?.trim() || `Unknown error`;
+  return getMessage(error)?.trim() || $localize`Unknown error`;
+}
+
+/**
+ * Get a generic success message based on common `Action.type` keywords.
+ *
+ * Define custom keyword / message pairs if needed.
+ */
+export function toActionSuccessMessage(action: Action, extras?: [string, string][]): string {
+  if (extras?.length) {
+    for (const [keyword, message] of extras) {
+      if (action.type.includes(keyword)) {
+        return message;
+      }
+    }
+  }
+  if (['load'].some(s => action.type.includes(s))) {
+    return $localize`Data successfully loaded.`;
+  }
+  if (['create', 'update', 'edit'].some(s => action.type.includes(s))) {
+    return $localize`Data successfully saved.`;
+  }
+  if (['delete', 'remove'].some(s => action.type.includes(s))) {
+    return $localize`Data successfully removed.`;
+  }
+  if (['upload'].some(s => action.type.includes(s))) {
+    return $localize`File successfully uploaded.`;
+  }
+  return $localize`Operation successful.`;
+}
+
+/**
+ * Get a generic error message based on common `Action.type` keywords.
+ *
+ * Define custom keyword / message pairs if needed.
+ */
+export function toActionErrorMessage(action: Action, extras?: [string, string][]): string {
+  if (extras?.length) {
+    for (const [keyword, message] of extras) {
+      if (action.type.includes(keyword)) {
+        return message;
+      }
+    }
+  }
+  if (['load'].some(s => action.type.includes(s))) {
+    return $localize`Error loading data.`;
+  }
+  if (['create', 'update', 'edit'].some(s => action.type.includes(s))) {
+    return $localize`Error saving data.`;
+  }
+  if (['delete', 'remove'].some(s => action.type.includes(s))) {
+    return $localize`Error removing data.`;
+  }
+  if (['upload'].some(s => action.type.includes(s))) {
+    return $localize`Error uploading file.`;
+  }
+  return $localize`Unknown Error.`;
 }

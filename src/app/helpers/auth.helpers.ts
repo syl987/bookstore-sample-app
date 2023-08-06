@@ -1,8 +1,7 @@
 import { HttpRequest } from '@angular/common/http';
 import { Actions, EffectNotification, ofType } from '@ngrx/effects';
 import { AuthProvider, GoogleAuthProvider, User } from 'firebase/auth';
-import { Observable } from 'rxjs';
-import { exhaustMap, takeUntil } from 'rxjs/operators';
+import { exhaustMap, Observable, takeUntil } from 'rxjs';
 import { matchesEndpointUrl } from 'src/app/functions/http.functions';
 
 import { AuthConfig, AuthProviderId, AuthUser } from '../models/auth.models';
@@ -45,18 +44,21 @@ export function getAuthProvider(providerId: AuthProviderId): AuthProvider {
 /**
  * Map firebase auth user object to app auth user object.
  */
-export function toAuthUser(firebaseUser: User | null): AuthUser | null {
-  if (!firebaseUser) {
+export function toAuthUser(user: User | null): AuthUser | null {
+  if (!user) {
     return null;
   }
   return {
-    uid: firebaseUser.uid,
-    displayName: firebaseUser.displayName,
-    email: firebaseUser.email,
-    emailVerified: firebaseUser.emailVerified,
-    phoneNumber: firebaseUser.phoneNumber,
-    photoURL: firebaseUser.photoURL,
-    providerData: firebaseUser.providerData,
-    metadata: firebaseUser.metadata,
+    uid: user.uid,
+    displayName: user.displayName,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+    photoURL: user.photoURL,
+    providerId: user.providerId,
+    emailVerified: user.emailVerified,
+    isAnonymous: user.isAnonymous,
+    providerData: user.providerData,
+    metadata: user.metadata as any, // incorrect firebase typing
+    tenantId: user.tenantId,
   };
 }

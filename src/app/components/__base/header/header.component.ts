@@ -11,8 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
-import { BehaviorSubject, of } from 'rxjs';
-import { delay, distinctUntilChanged, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, delay, distinctUntilChanged, map, of, tap } from 'rxjs';
+import { getCurrentAppLanguage } from 'src/app/helpers/app.helpers';
 import { APP_LANGUAGES, APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
@@ -64,7 +64,7 @@ export class HeaderComponent {
 
   readonly APP_LANGUAGES = APP_LANGUAGES;
 
-  readonly localized = window.location.pathname.split('/').at(1)?.length === 2; // TODO find a better way, check if the first path seqment is a locale id
+  readonly currentLang = getCurrentAppLanguage();
 
   @Output() readonly sidenavToggle = new EventEmitter<void>();
 

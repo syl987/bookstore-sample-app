@@ -1,6 +1,6 @@
-<a *ngIf="backUrl" mat-button [routerLink]="backUrl" class="align-self-center mt-2xs ms-n2xs me-2xs">
+<a *ngIf="backUrl" mat-button [routerLink]="backUrl" class="align-self-center mt-2xs ms-n2xs">
   <mat-icon fontIcon="fa-arrow-left" />
-  Back
+  <span i18n>Back</span>
 </a>
 
 <h1 class="flex-grow-1">{{ title$ | async }}</h1>

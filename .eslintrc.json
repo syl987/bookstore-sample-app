@@ -59,6 +59,7 @@
         "guard-for-in": "warn",
         "no-bitwise": "warn",
         "no-caller": "warn",
+        "no-console": "off", // enable to find unnecessary occurrences
         "no-else-return": "warn",
         "no-eval": "warn",
         "no-extend-native": "warn",
@@ -72,6 +73,7 @@
         "no-new-wrappers": "warn",
         "no-octal-escape": "warn",
         "no-proto": "warn",
+        "no-restricted-imports": ["warn", { "paths": ["rxjs/operators"], "patterns": [] }],
         "no-script-url": "warn",
         "no-undef-init": "warn",
         "no-unneeded-ternary": "warn",
@@ -100,10 +102,7 @@
         "@typescript-eslint/no-extraneous-class": "off", // strict override: support angular annotated empty classes
         "@typescript-eslint/no-non-null-assertion": "off", // recommended override: useful with angular and specs at times
         "@typescript-eslint/no-useless-constructor": "off", // strict overide: needed in annotated angular classes
-        "@typescript-eslint/parameter-properties": [
-          "warn",
-          { "prefer": "parameter-property", "allow": ["readonly", "protected readonly", "private readonly"] }
-        ],
+        "@typescript-eslint/parameter-properties": ["warn", { "prefer": "parameter-property", "allow": ["readonly", "protected readonly", "private readonly"] }],
         "@typescript-eslint/prefer-nullish-coalescing": "off", // recommended override: sometimes intended
         "@typescript-eslint/prefer-readonly": "warn",
 

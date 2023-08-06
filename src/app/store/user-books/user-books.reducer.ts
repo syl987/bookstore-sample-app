@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { BookStatus, UserBookDTO } from 'src/app/models/book.models';
-import { OperationState } from 'src/app/models/store.models';
+import { OperationState, OperationStateWithProgress } from 'src/app/models/store.models';
 
 import { selectRouteParam } from '../router/router.selectors';
 import { UserBooksActions } from './user-books.actions';
@@ -13,6 +13,8 @@ export interface State extends EntityState<UserBookDTO> {
   create: OperationState;
   remove: OperationState;
   editDraft: OperationState;
+  uploadPhoto: OperationStateWithProgress;
+  removeAllPhotos: OperationState;
   publish: OperationState;
 }
 
@@ -26,6 +28,8 @@ const initialState: State = adapter.getInitialState({
   create: { pending: false },
   remove: { pending: false },
   editDraft: { pending: false },
+  uploadPhoto: { pending: false },
+  removeAllPhotos: { pending: false },
   publish: { pending: false },
 });
 
@@ -91,6 +95,34 @@ export const reducer = createReducer(
     ...state,
     editDraft: { ...state.editDraft, pending: false, error },
   })),
+  on(UserBooksActions.uploadPhoto, state => ({
+    ...state,
+    uploadPhoto: { ...state.uploadPhoto, pending: true, progress: 0, error: undefined },
+  })),
+  on(UserBooksActions.uploadPhotoPROGRESS, (state, { uploadData }) => ({
+    ...state,
+    uploadPhoto: { ...state.uploadPhoto, pending: true, progress: uploadData.snapshot.bytesTransferred / uploadData.snapshot.totalBytes, error: undefined },
+  })),
+  on(UserBooksActions.uploadPhotoSUCCESS, state => ({
+    ...state,
+    uploadPhoto: { ...state.uploadPhoto, pending: false, progress: undefined, error: undefined },
+  })),
+  on(UserBooksActions.uploadPhotoERROR, (state, { error }) => ({
+    ...state,
+    uploadPhoto: { ...state.uploadPhoto, pending: false, progress: undefined, error },
+  })),
+  on(UserBooksActions.removeAllPhotos, state => ({
+    ...state,
+    removeAllPhotos: { ...state.removeAllPhotos, pending: true, error: undefined },
+  })),
+  on(UserBooksActions.removeAllPhotosSUCCESS, state => ({
+    ...state,
+    removeAllPhotos: { ...state.removeAllPhotos, pending: false, error: undefined },
+  })),
+  on(UserBooksActions.removeAllPhotosERROR, (state, { error }) => ({
+    ...state,
+    removeAllPhotos: { ...state.removeAllPhotos, pending: false, error },
+  })),
   on(UserBooksActions.publish, state => ({
     ...state,
     publish: { ...state.publish, pending: true, error: undefined },
@@ -108,19 +140,13 @@ export const reducer = createReducer(
 export const userBooksFeature = createFeature({
   name: userBooksFeatureKey,
   reducer,
-  extraSelectors: ({ selectUserBooksState, selectEntities, selectLoad, selectCreate, selectRemove, selectEditDraft, selectPublish }) => ({
+  extraSelectors: ({ selectUserBooksState, selectEntities, selectLoad, selectCreate, selectRemove, selectEditDraft, selectUploadPhoto, selectRemoveAllPhotos, selectPublish }) => ({
     selectAll: createSelector(selectUserBooksState, adapter.getSelectors().selectAll),
     selectTotal: createSelector(selectUserBooksState, adapter.getSelectors().selectTotal),
 
-    selectAllDraft: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
-      books.filter(b => b.status === BookStatus.DRAFT),
-    ),
-    selectAllPublished: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
-      books.filter(b => b.status === BookStatus.PUBLISHED),
-    ),
-    selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books =>
-      books.filter(b => b.status === BookStatus.SOLD),
-    ),
+    selectAllDraft: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.DRAFT)),
+    selectAllPublished: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.PUBLISHED)),
+    selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.SOLD)),
 
     selectByRoute: createSelector(selectEntities, selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
 
@@ -135,6 +161,13 @@ export const userBooksFeature = createFeature({
 
     selectEditDraftPending: createSelector(selectEditDraft, ({ pending }) => pending),
     selectEditDraftError: createSelector(selectEditDraft, ({ error }) => error),
+
+    selectUploadPhotoPending: createSelector(selectUploadPhoto, ({ pending }) => pending),
+    selectUploadPhotoProgress: createSelector(selectUploadPhoto, ({ progress }) => progress),
+    selectUploadPhotoError: createSelector(selectUploadPhoto, ({ error }) => error),
+
+    selectRemoveAllPhotosPending: createSelector(selectRemoveAllPhotos, ({ pending }) => pending),
+    selectRemoveAllPhotosError: createSelector(selectRemoveAllPhotos, ({ error }) => error),
 
     selectPublishPending: createSelector(selectPublish, ({ pending }) => pending),
     selectPublishError: createSelector(selectPublish, ({ error }) => error),

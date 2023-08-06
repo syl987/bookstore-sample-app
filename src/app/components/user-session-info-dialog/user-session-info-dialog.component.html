@@ -1,34 +1,34 @@
-<h3 mat-dialog-title>Session Info</h3>
+<h3 mat-dialog-title i18n>Session Info</h3>
 
 <div mat-dialog-content>
   <dl class="row pt-xs mb-ns">
     <div class="col-sm-6">
-      <dt>Name</dt>
+      <dt i18n>Name</dt>
       <dd>{{ user.displayName || '-' }}</dd>
     </div>
     <div class="col-sm-6">
-      <dt>Login Providers</dt>
-      <dd>{{ getAuthProviders(user) || '-' }}</dd>
-    </div>
-    <div class="col-sm-6">
-      <dt>Email</dt>
+      <dt i18n>Email</dt>
       <dd>{{ user.email || '-' }}</dd>
     </div>
     <div class="col-sm-6">
-      <dt>Email Verified</dt>
+      <dt i18n>Email Verified</dt>
       <dd>{{ user.emailVerified | boolean : 'YesNo' || '-' }}</dd>
     </div>
     <div class="col-sm-6">
-      <dt>Registration</dt>
+      <dt i18n>Login Providers</dt>
+      <dd>{{ getAuthProviders(user) || '-' }}</dd>
+    </div>
+    <div class="col-sm-6">
+      <dt i18n>Registration</dt>
       <dd>{{ (user.metadata.createdAt | date) || '-' }}</dd>
     </div>
     <div class="col-sm-6">
-      <dt>Last Login</dt>
+      <dt i18n>Last Login</dt>
       <dd>{{ (user.metadata.lastLoginAt | date) || '-' }}</dd>
     </div>
   </dl>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-stroked-button mat-dialog-close>Close</button>
+  <button mat-stroked-button mat-dialog-close i18n>Close</button>
 </div>

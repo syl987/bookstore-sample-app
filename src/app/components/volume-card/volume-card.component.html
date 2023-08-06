@@ -1,6 +1,6 @@
 <mat-card *ngIf="volume">
   <mat-card-header>
-    <img mat-card-sm-image [src]="volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" />
+    <img mat-card-sm-image [src]="volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" i18n-alt />
     <mat-card-title>{{ volume.volumeInfo.title }}</mat-card-title>
     <mat-card-subtitle>{{ volume.volumeInfo.authors }}</mat-card-subtitle>
     <mat-card-subtitle>{{ volume.volumeInfo.publishedDate | date : 'yyyy' }} {{ volume.volumeInfo.publisher }}</mat-card-subtitle>
@@ -9,10 +9,14 @@
   <mat-card-content class="py-2xs">
     <p class="mb-xs">{{ volume.volumeInfo.description | slice : 0 : 92 }}...</p>
 
-    <ng-container *ngIf="getPublishedBooksTotal() as total">
+    <ng-container *ngIf="booksTotal as n">
       <mat-divider />
 
-      <p class="mt-xs mb-2xs fs-small">Contains {{ total }} books starting from {{ getPublishedBooksCheapestPrice() | currency }}</p>
+      <p class="text-muted mt-xs mb-2xs">
+        <ng-container i18n
+          >{ n, plural, =1 { One book available for {{ lowestPrice | currency }}} other {{{ n }} books available starting from {{ lowestPrice | currency }}} }</ng-container
+        >
+      </p>
     </ng-container>
 
     <ng-content />

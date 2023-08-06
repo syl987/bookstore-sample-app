@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError } from 'src/app/models/error.models';
-import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
+import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { VolumeActions } from './volume.actions';
@@ -41,25 +41,15 @@ export class VolumesEffects {
     );
   });
 
-  readonly loadErrorToast = createEffect(
+  readonly errorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.loadERROR),
-        tap(_ => this.toastService.showErrorToast(`Error loading volume.`)),
+        ofType(VolumeActions.loadERROR, VolumeActions.loadAllERROR),
+        tap(action => this.toastService.showSuccessToast(toActionErrorMessage(action))),
       );
     },
     { dispatch: false },
   );
 
-  readonly loadAllErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(VolumeActions.loadAllERROR),
-        tap(_ => this.toastService.showErrorToast(`Error loading volumes.`)),
-      );
-    },
-    { dispatch: false },
-  );
-
-  constructor(private readonly actions: Actions, private readonly firebaseApi: FirebaseDatabaseService, private readonly toastService: ToastService) {}
+  constructor(private readonly actions: Actions, private readonly firebaseApi: FirebaseApiService, private readonly toastService: ToastService) {}
 }

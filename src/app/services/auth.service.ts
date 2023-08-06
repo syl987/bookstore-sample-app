@@ -3,8 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Auth, user } from '@angular/fire/auth';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 import { toAuthUser } from '../helpers/auth.helpers';
 import { AuthProviderId, AuthUser } from '../models/auth.models';
@@ -50,9 +49,7 @@ export class AuthService {
 
     // set logout pending stream
     this.actions.pipe(ofType(AuthActions.logout), takeUntilDestroyed()).subscribe(_ => this._logoutPending.next(true));
-    this.actions
-      .pipe(ofType(AuthActions.logoutSUCCESS, AuthActions.logoutERROR, AuthActions.authResetState), takeUntilDestroyed())
-      .subscribe(_ => this._logoutPending.next(false));
+    this.actions.pipe(ofType(AuthActions.logoutSUCCESS, AuthActions.logoutERROR, AuthActions.authResetState), takeUntilDestroyed()).subscribe(_ => this._logoutPending.next(false));
   }
 
   /**

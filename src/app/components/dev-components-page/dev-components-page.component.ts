@@ -6,8 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { timer } from 'rxjs';
-import { auditTime, map } from 'rxjs/operators';
+import { auditTime, map, timer } from 'rxjs';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -40,18 +39,18 @@ export class DevComponentsPageComponent {
 
     const dialogRef = this.dialog.open(DevExampleDialogComponent, { data, maxWidth: '512px' });
 
-    dialogRef.beforeClosed().subscribe(result => result === 'action' && this.toastService.showSuccessToast(`Dialog action dispatched.`));
+    dialogRef.beforeClosed().subscribe(result => result === 'action' && this.toastService.showSuccessToast('Dialog action dispatched.'));
   }
 
   showSuccessToast(): void {
-    this.toastService.showSuccessToast(`Short success message (5 seconds).`);
+    this.toastService.showSuccessToast('Short success message (5 seconds).');
   }
 
   showErrorToast(): void {
-    this.toastService.showErrorToast(`Short error message (7 seconds).`);
+    this.toastService.showErrorToast('Short error message (7 seconds).');
   }
 
   showInfoToast(): void {
-    this.toastService.showInfoToast(`Short info message (custom 9 seconds).`, { duration: 9000 });
+    this.toastService.showInfoToast('Short info message (custom 9 seconds).', { duration: 9000 });
   }
 }

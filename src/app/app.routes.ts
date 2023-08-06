@@ -13,23 +13,23 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    title: `Login`,
+    title: $localize`Login`,
     ...canActivate(() => redirectLoggedInTo('/home')),
     loadComponent: () => import('./components/login-page/login-page.component').then(m => m.LoginPageComponent),
   },
   {
     path: 'home',
-    title: `Home`,
+    title: $localize`Home`,
     loadComponent: () => import('./components/home-page/home-page.component').then(m => m.HomePageComponent),
   },
   {
     path: 'search',
-    title: `Search`,
+    title: $localize`Search`,
     loadComponent: () => import('./components/search-page/search-page.component').then(m => m.SearchPageComponent),
   },
   {
     path: 'volumes/:volumeId',
-    title: `Volume Details`,
+    title: $localize`Volume Details`,
     loadComponent: () => import('./components/volume-detail-page/volume-detail-page.component').then(m => m.VolumeDetailPageComponent),
   },
   {
@@ -38,12 +38,12 @@ export const routes: Routes = [
     children: [
       {
         path: 'books',
-        title: `My Books`,
+        title: $localize`My Books`,
         loadComponent: () => import('./components/user-book-list-page/user-book-list-page.component').then(m => m.UserBookListPageComponent),
       },
       {
         path: 'books/:bookId/edit',
-        title: `Edit Book Details`,
+        title: $localize`Edit Book Details`,
         loadComponent: () => import('./components/user-book-edit-page/user-book-edit-page.component').then(m => m.UserBookEditPageComponent),
       },
     ],

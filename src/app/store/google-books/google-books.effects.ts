@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { httpError } from 'src/app/models/error.models';
 import { GoogleBooksApiService } from 'src/app/services/__api/google-books-api.service';
 

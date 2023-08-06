@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, of, throwError } from 'rxjs';
-import { concatMap, shareReplay, take } from 'rxjs/operators';
+import { concatMap, Observable, of, shareReplay, take, takeWhile, throwError } from 'rxjs';
 
 import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
+import { FirebaseUploadDataWithProgress } from '../models/firebase.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import { UserBooksActions } from '../store/user-books/user-books.actions';
 import { userBooksFeature } from '../store/user-books/user-books.reducer';
@@ -20,6 +20,10 @@ interface IUserBooksService {
   delete(id: string, book: UserBookDTO): Observable<void>;
   /** Edit data of an unpublished book. */
   editDraft(id: string, book: UserBookDTO): Observable<UserBookDTO>;
+  /** Upload an image of an unpublished book. Also emits on progress data. */
+  uploadPhoto(bookId: string, data: Blob): Observable<FirebaseUploadDataWithProgress>;
+  /** Remove all images of an unpublished book. */
+  removeAllPhotos(bookId: string): Observable<void>;
   /** Publish a book. */
   publish(id: string, book: UserBookDTO): Observable<UserBookDTO>;
   /** Buy a book. */
@@ -50,6 +54,13 @@ export class UserBooksService implements IUserBooksService {
 
   readonly editDraftPending$ = this.store.select(userBooksFeature.selectEditDraftPending);
   readonly editDraftError$ = this.store.select(userBooksFeature.selectEditDraftError);
+
+  readonly uploadPhotoPending$ = this.store.select(userBooksFeature.selectUploadPhotoPending);
+  readonly uploadPhotoProgress$ = this.store.select(userBooksFeature.selectUploadPhotoProgress);
+  readonly uploadPhotoError$ = this.store.select(userBooksFeature.selectUploadPhotoError);
+
+  readonly removeAllPhotosPending$ = this.store.select(userBooksFeature.selectRemoveAllPhotosPending);
+  readonly removeAllPhotosError$ = this.store.select(userBooksFeature.selectRemoveAllPhotosError);
 
   readonly publishPending$ = this.store.select(userBooksFeature.selectPublishPending);
   readonly publishError$ = this.store.select(userBooksFeature.selectPublishError);
@@ -137,6 +148,54 @@ export class UserBooksService implements IUserBooksService {
       concatMap(action => {
         if (action.type === UserBooksActions.editDraftSUCCESS.type) {
           return of(action.book);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
+  }
+
+  uploadPhoto(bookId: string, data: Blob): Observable<FirebaseUploadDataWithProgress> {
+    this.store.dispatch(UserBooksActions.uploadPhoto({ bookId, data }));
+
+    let success = false;
+
+    const result = this.actions.pipe(
+      ofType(UserBooksActions.uploadPhotoPROGRESS, UserBooksActions.uploadPhotoSUCCESS, UserBooksActions.uploadPhotoERROR),
+      // take 1 success action, pass all progress action until then
+      takeWhile(action => {
+        if (!success && action.type === UserBooksActions.uploadPhotoSUCCESS.type) {
+          success = true;
+          return true;
+        }
+        return !success;
+      }),
+      concatMap(action => {
+        if (action.type === UserBooksActions.uploadPhotoPROGRESS.type) {
+          return of(action.uploadData);
+        }
+        if (action.type === UserBooksActions.uploadPhotoSUCCESS.type) {
+          return of(action.uploadData);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
+  }
+
+  removeAllPhotos(bookId: string): Observable<void> {
+    this.store.dispatch(UserBooksActions.removeAllPhotos({ bookId }));
+
+    const result = this.actions.pipe(
+      ofType(UserBooksActions.removeAllPhotosSUCCESS, UserBooksActions.removeAllPhotosERROR),
+      take(1),
+      concatMap(action => {
+        if (action.type === UserBooksActions.removeAllPhotosSUCCESS.type) {
+          return of(undefined);
         }
         return throwError(() => action.error);
       }),

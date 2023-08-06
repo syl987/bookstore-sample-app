@@ -4,8 +4,8 @@ export enum HttpContentType {
 }
 
 export interface HttpEndpointUrl {
-  url: string | RegExp;
-  httpMethods?: HttpMethods[];
+  readonly url: string | RegExp;
+  readonly httpMethods?: HttpMethods[];
 }
 
 export type HttpMethods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH';

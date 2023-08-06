@@ -6,7 +6,9 @@
     "bookstore-sample-app": {
       "i18n": {
         "sourceLocale": { "code": "en" },
-        "locales": {}
+        "locales": {
+          "de": "src/locale/messages.de.json"
+        }
       },
       "projectType": "application",
       "root": "",
@@ -29,13 +31,19 @@
             },
             "allowedCommonJsDependencies": ["b64-to-blob"],
             "scripts": [],
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.any.ts"
+              }
+            ],
             "i18nDuplicateTranslation": "error",
             "i18nMissingTranslation": "error",
             "localize": true
           },
           "configurations": {
             "serve": {
-              "localize": ["en"]
+              "localize": ["de"]
             },
             "production": {
               "budgets": [
@@ -80,7 +88,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "format": "json",
-            "outputPath": "src/locales",
+            "outputPath": "src/locale",
             "browserTarget": "bookstore-sample-app:build"
           }
         },

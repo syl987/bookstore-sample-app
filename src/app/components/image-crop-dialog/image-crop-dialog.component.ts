@@ -5,29 +5,27 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { base64ToBlob } from 'base64-blob';
 import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
 
-export interface CropImageDialogData {
+export interface ImageCropDialogData {
   file: File;
 }
 
 @Component({
-  selector: 'app-crop-image-dialog',
+  selector: 'app-image-crop-dialog',
   standalone: true,
   imports: [CommonModule, ImageCropperModule, MatButtonModule, MatDialogModule],
-  templateUrl: './crop-image-dialog.component.html',
+  templateUrl: './image-crop-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CropImageDialogComponent {
+export class ImageCropDialogComponent {
   readonly file = this.data.file;
 
-  result?: Blob | null;
+  loadError?: boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private readonly data: CropImageDialogData) {}
+  result?: Blob;
+
+  constructor(@Inject(MAT_DIALOG_DATA) private readonly data: ImageCropDialogData) {}
 
   async setResult(event: ImageCroppedEvent): Promise<void> {
-    this.result = event.base64 ? await base64ToBlob(event.base64) : null;
-  }
-
-  loadImageFailed(): void {
-    // TODO implement
+    this.result = event.base64 ? await base64ToBlob(event.base64) : undefined;
   }
 }

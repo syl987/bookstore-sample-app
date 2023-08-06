@@ -1,6 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { UserBookDTO, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { ResponseError } from 'src/app/models/error.models';
+import { FirebaseUploadDataWithProgress } from 'src/app/models/firebase.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
 
 // TODO buy actions
@@ -27,6 +28,15 @@ export const UserBooksActions = createActionGroup({
     'edit draft': props<{ id: string; data: UserBookEditDraftDTO }>(),
     'edit draft SUCCESS': props<{ book: UserBookDTO }>(),
     'edit draft ERROR': props<{ error: ResponseError }>(),
+
+    'upload photo': props<{ bookId: string; data: Blob }>(),
+    'upload photo PROGRESS': props<{ uploadData: FirebaseUploadDataWithProgress }>(),
+    'upload photo SUCCESS': props<{ uploadData: FirebaseUploadDataWithProgress }>(),
+    'upload photo ERROR': props<{ error: ResponseError }>(),
+
+    'remove all photos': props<{ bookId: string }>(),
+    'remove all photos SUCCESS': emptyProps(),
+    'remove all photos ERROR': props<{ error: ResponseError }>(),
 
     'publish': props<{ id: string }>(),
     'publish SUCCESS': props<{ book: UserBookDTO }>(),

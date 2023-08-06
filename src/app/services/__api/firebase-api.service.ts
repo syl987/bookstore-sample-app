@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { Database, get, push, ref, remove, set, update } from '@angular/fire/database';
-import { concatMap, from, Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { concatMap, from, map, Observable, of, throwError } from 'rxjs';
+import { getObjectValues } from 'src/app/functions/object.functions';
 import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers';
-import { BookDTO, BookStatus, UserBookDTO } from 'src/app/models/book.models';
+import { BookDTO, BookStatus, UserBookCreateDTO, UserBookDTO } from 'src/app/models/book.models';
+import { FirebaseUploadDataWithProgress } from 'src/app/models/firebase.models';
+import { ImageDTO } from 'src/app/models/image.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
+
+import { FirebaseFileService } from './firebase-file.service';
 
 // TODO evaluate how to implement volume search+detail duality on database and store levels
 
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseDatabaseService {
-  constructor(private readonly database: Database) {}
+export class FirebaseApiService {
+  constructor(private readonly database: Database, private readonly fileService: FirebaseFileService) {}
 
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {
     const reference = ref(this.database, `userBooks/${uid}/${id}`);
@@ -24,11 +28,11 @@ export class FirebaseDatabaseService {
   getUserBooks(uid: string): Observable<UserBookDTO[]> {
     const reference = ref(this.database, `userBooks/${uid}`);
     const result = get(reference).then(snap => snap.val());
-    return from(result).pipe(map(entityMap => Object.values(entityMap ?? {})));
+    return from(result).pipe(map(getObjectValues));
   }
 
   createUserBook(uid: string, volume: VolumeDTO): Observable<UserBookDTO> {
-    const book: Pick<UserBookDTO, 'uid' | 'status' | 'volume'> = { uid, status: BookStatus.DRAFT, volume };
+    const book: UserBookCreateDTO = { uid, status: BookStatus.DRAFT, volume };
 
     const result = push(ref(this.database))
       .then(snap => snap.key!)
@@ -54,6 +58,59 @@ export class FirebaseDatabaseService {
     );
   }
 
+  uploadUserBookPhoto(uid: string, bookId: string, data: Blob): Observable<FirebaseUploadDataWithProgress> {
+    return this.getUserBook(uid, bookId).pipe(
+      concatMap(book => {
+        if (book.status !== BookStatus.DRAFT) {
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
+        }
+        const reference = ref(this.database);
+        const generatedId: string = push(reference).key!;
+        const path = `userBooks/${uid}/${bookId}/photos/${generatedId}`;
+
+        return this.fileService.uploadFileWithProgress(path, data).pipe(
+          concatMap(res => {
+            if (res.complete) {
+              const photo: ImageDTO = {
+                id: generatedId,
+                src: res.downloadUrl!,
+              };
+              const changes: { [path: string]: any } = {
+                [`userBooks/${uid}/${bookId}/photos/${generatedId}`]: photo,
+              };
+              const result = update(reference, changes);
+
+              return from(result).pipe(map(_ => res));
+            }
+            return of(res);
+          }),
+        );
+      }),
+    );
+  }
+
+  removeAllUserBookPhotos(uid: string, bookId: string): Observable<void> {
+    const reference = ref(this.database);
+    const path = `userBooks/${uid}/${bookId}`;
+
+    return this.getUserBook(uid, bookId).pipe(
+      concatMap(book => {
+        if (book.status !== BookStatus.DRAFT) {
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
+        }
+        return this.fileService.removeObject(path).pipe(
+          concatMap(_ => {
+            const changes: { [path: string]: any } = {
+              [`userBooks/${uid}/${bookId}/photos`]: null,
+            };
+            const result = update(reference, changes);
+            return from(result);
+          }),
+        );
+      }),
+    );
+  }
+
   publishUserBook(uid: string, id: string): Observable<UserBookDTO> {
     return this.getUserBook(uid, id).pipe(
       concatMap(book => {
@@ -72,15 +129,20 @@ export class FirebaseDatabaseService {
           description: book.description,
           condition: book.condition,
           price: book.price,
-          /* imageUrl: book.imageUrl, */
+          photos: book.photos,
         };
-        const changes: { [path: string]: any } = {
+        let changes: { [path: string]: any } = {
           [`userBooks/${uid}/${id}/status`]: BookStatus.PUBLISHED,
           [`volumes/${book.volume.id}/id`]: book.volume.id,
           [`volumes/${book.volume.id}/volumeInfo`]: book.volume.volumeInfo,
-          [`volumes/${book.volume.id}/searchInfo`]: book.volume.searchInfo,
           [`volumes/${book.volume.id}/publishedBooks/${id}`]: publishedBook,
         };
+        if (book.volume.searchInfo) {
+          changes = {
+            ...changes,
+            [`volumes/${book.volume.id}/searchInfo`]: book.volume.searchInfo,
+          };
+        }
         const reference = ref(this.database);
         const result = update(reference, changes);
         return from(result).pipe(concatMap(_ => this.getUserBook(uid, id)));
@@ -89,6 +151,7 @@ export class FirebaseDatabaseService {
   }
 
   deleteUserBook(uid: string, id: string): Observable<void> {
+    // TODO also delete related files
     // TODO allow deletion if published and also delete the volume if not related to any books
     return this.getUserBook(uid, id).pipe(
       concatMap(book => {
@@ -111,6 +174,6 @@ export class FirebaseDatabaseService {
   getVolumes(): Observable<VolumeDTO[]> {
     const reference = ref(this.database, `volumes`);
     const result = get(reference).then(snap => snap.val());
-    return from(result).pipe(map(entityMap => Object.values(entityMap ?? {})));
+    return from(result).pipe(map(getObjectValues));
   }
 }
