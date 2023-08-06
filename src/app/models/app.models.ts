@@ -8,6 +8,8 @@ export interface AppOptions {
   readonly applicationName: string;
   /** Name of the legal copyright holder for display in the footer. */
   readonly copyrightName: string;
+  /** Year of the last update for display in the footer. */
+  readonly copyrightYear: string;
 }
 
 export const APP_OPTIONS = new InjectionToken<AppOptions>('APP_OPTIONS');
