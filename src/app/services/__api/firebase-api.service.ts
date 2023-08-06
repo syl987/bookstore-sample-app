@@ -11,7 +11,6 @@ import { VolumeDTO } from 'src/app/models/volume.models';
 
 import { FirebaseFileService } from './firebase-file.service';
 
-// TODO also save thumbnail as base64
 // TODO evaluate how to implement volume search+detail duality on database and store levels
 
 @Injectable({

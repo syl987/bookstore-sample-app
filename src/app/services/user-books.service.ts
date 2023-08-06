@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { concatMap, Observable, of, shareReplay, take, throwError } from 'rxjs';
+import { concatMap, Observable, of, shareReplay, take, takeWhile, throwError } from 'rxjs';
 
 import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
 import { FirebaseUploadDataWithProgress } from '../models/firebase.models';
@@ -160,9 +160,18 @@ export class UserBooksService implements IUserBooksService {
   uploadPhoto(bookId: string, data: Blob): Observable<FirebaseUploadDataWithProgress> {
     this.store.dispatch(UserBooksActions.uploadPhoto({ bookId, data }));
 
+    let success = false;
+
     const result = this.actions.pipe(
       ofType(UserBooksActions.uploadPhotoPROGRESS, UserBooksActions.uploadPhotoSUCCESS, UserBooksActions.uploadPhotoERROR),
-      take(1),
+      // take 1 success action, pass all progress action until then
+      takeWhile(action => {
+        if (!success && action.type === UserBooksActions.uploadPhotoSUCCESS.type) {
+          success = true;
+          return true;
+        }
+        return !success;
+      }),
       concatMap(action => {
         if (action.type === UserBooksActions.uploadPhotoPROGRESS.type) {
           return of(action.uploadData);

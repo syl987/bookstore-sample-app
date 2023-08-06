@@ -7,7 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, concatMap, filter, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, concatMap, filter, map, of, tap } from 'rxjs';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { getObjectValues } from 'src/app/functions/object.functions';
 import { isTrue } from 'src/app/functions/typeguard.functions';
@@ -49,7 +49,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookEditPageComponent {
-  readonly id: string = this.route.snapshot.params['bookId'];
+  id: string = this.route.snapshot.params['bookId'];
 
   readonly book$ = this.userBooksService.entityByRoute$;
 
@@ -94,6 +94,7 @@ export class UserBookEditPageComponent {
       .pipe(takeUntilDestroyed())
       .subscribe(id => {
         if (id) {
+          this.id = id;
           this.userBooksService.load(id);
         }
       });
@@ -164,11 +165,23 @@ export class UserBookEditPageComponent {
   openImageCropDialog(file: File): void {
     const dialogRef = this.dialogService.openImageCropDialog(file);
 
-    dialogRef.beforeClosed().subscribe(result => {
-      if (result) {
-        this.userBooksService.uploadPhoto(this.id, result);
-      }
-    });
+    dialogRef
+      .beforeClosed()
+      .pipe(
+        concatMap(result => {
+          if (result) {
+            return this.userBooksService.uploadPhoto(this.id, result).pipe(
+              tap(uploadData => {
+                if (uploadData.complete) {
+                  this.userBooksService.load(this.id);
+                }
+              }),
+            );
+          }
+          return of(null);
+        }),
+      )
+      .subscribe();
   }
 
   removeAllPhotos(): void {
