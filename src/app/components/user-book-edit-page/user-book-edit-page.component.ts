@@ -66,6 +66,7 @@ export class UserBookEditPageComponent {
 
   readonly deleteDisabled$ = combineLatest([this.deletePending$, this.book$]).pipe(map(([pending, book]) => pending || book?.status !== BookStatus.DRAFT));
 
+  readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;
 
   readonly form = this.fb.nonNullable.group({

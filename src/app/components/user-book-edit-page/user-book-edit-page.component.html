@@ -19,6 +19,7 @@
     <app-image-upload
       *ngIf="book$ | async as book"
       [images]="getObjectValues(book.photos)"
+      [readonly]="book.status !== BookStatus.DRAFT"
       [uploading]="uploadPhotoPending$ | async"
       defaultAlt="photo"
       (fileSelect)="picker.click()"
