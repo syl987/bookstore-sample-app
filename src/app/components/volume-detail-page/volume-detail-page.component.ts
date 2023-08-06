@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { BookDTO } from 'src/app/models/book.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
@@ -27,17 +28,25 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeDetailPageComponent {
+  id: string = this.route.snapshot.params['volumeId'];
+
   readonly volume$ = this.volumeService.entitiyByRoute$;
 
   readonly loggedIn$ = this.authService.loggedIn$;
   readonly uid$ = this.authService.user$;
 
-  constructor(private readonly authService: AuthService, private readonly routerService: RouterService, private readonly volumeService: VolumeService) {
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly authService: AuthService,
+    private readonly routerService: RouterService,
+    private readonly volumeService: VolumeService,
+  ) {
     this.routerService
       .selectRouteParam('volumeId')
       .pipe(takeUntilDestroyed())
       .subscribe(id => {
         if (id) {
+          this.id = id;
           this.volumeService.load(id);
         }
       });
