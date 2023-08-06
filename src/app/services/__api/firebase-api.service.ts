@@ -93,13 +93,20 @@ export class FirebaseApiService {
     const reference = ref(this.database);
     const path = `userBooks/${uid}/${bookId}`;
 
-    return this.fileService.removeObject(path).pipe(
-      concatMap(_ => {
-        const changes: { [path: string]: any } = {
-          [`userBooks/${uid}/${bookId}/photos`]: null,
-        };
-        const result = update(reference, changes);
-        return from(result);
+    return this.getUserBook(uid, bookId).pipe(
+      concatMap(book => {
+        if (book.status !== BookStatus.DRAFT) {
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
+        }
+        return this.fileService.removeObject(path).pipe(
+          concatMap(_ => {
+            const changes: { [path: string]: any } = {
+              [`userBooks/${uid}/${bookId}/photos`]: null,
+            };
+            const result = update(reference, changes);
+            return from(result);
+          }),
+        );
       }),
     );
   }
