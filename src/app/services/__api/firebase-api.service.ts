@@ -74,13 +74,18 @@ export class FirebaseApiService {
           price: book.price,
           /* imageUrl: book.imageUrl, */
         };
-        const changes: { [path: string]: any } = {
+        let changes: { [path: string]: any } = {
           [`userBooks/${uid}/${id}/status`]: BookStatus.PUBLISHED,
           [`volumes/${book.volume.id}/id`]: book.volume.id,
           [`volumes/${book.volume.id}/volumeInfo`]: book.volume.volumeInfo,
-          [`volumes/${book.volume.id}/searchInfo`]: book.volume.searchInfo,
           [`volumes/${book.volume.id}/publishedBooks/${id}`]: publishedBook,
         };
+        if (book.volume.searchInfo) {
+          changes = {
+            ...changes,
+            [`volumes/${book.volume.id}/searchInfo`]: book.volume.searchInfo,
+          };
+        }
         const reference = ref(this.database);
         const result = update(reference, changes);
         return from(result).pipe(concatMap(_ => this.getUserBook(uid, id)));

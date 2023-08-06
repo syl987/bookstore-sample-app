@@ -55,9 +55,7 @@ export class UserBooksEffects implements OnRunEffects {
         const volume: VolumeDTO = {
           id: volumeData.id,
           volumeInfo: volumeData.volumeInfo,
-          searchInfo: {
-            textSnippet: volumeData.searchInfo?.textSnippet ?? null,
-          },
+          searchInfo: volumeData.searchInfo,
         };
         return this.firebaseApi.createUserBook(currentUid, volume).pipe(
           map(res => UserBooksActions.createSUCCESS({ book: res })),
