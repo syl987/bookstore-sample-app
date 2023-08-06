@@ -14,6 +14,7 @@ import { ImageDTO } from 'src/app/models/image.models';
 export class ImageUploadComponent {
   @Input() images?: ImageDTO[] | null;
 
+  @Input() readonly?: boolean | null;
   @Input() uploading?: boolean | null;
   /* @Input() progress?: number | null; */
 
