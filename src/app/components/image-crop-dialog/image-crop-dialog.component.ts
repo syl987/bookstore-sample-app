@@ -19,15 +19,13 @@ export interface ImageCropDialogData {
 export class ImageCropDialogComponent {
   readonly file = this.data.file;
 
+  loadError?: boolean;
+
   result?: Blob;
 
   constructor(@Inject(MAT_DIALOG_DATA) private readonly data: ImageCropDialogData) {}
 
   async setResult(event: ImageCroppedEvent): Promise<void> {
     this.result = event.base64 ? await base64ToBlob(event.base64) : undefined;
-  }
-
-  loadImageFailed(): void {
-    // TODO implement
   }
 }

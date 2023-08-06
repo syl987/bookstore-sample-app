@@ -4,14 +4,14 @@
   <image-cropper
     [imageFile]="file"
     format="png"
-    [aspectRatio]="1"
-    [resizeToWidth]="256"
-    [resizeToHeight]="256"
-    [cropperMinWidth]="256"
-    [cropperMinHeight]="256"
+    [maintainAspectRatio]="false"
+    [resizeToWidth]="1024"
+    [resizeToHeight]="1024"
+    [cropperMinWidth]="512"
+    [cropperMinHeight]="512"
     [onlyScaleDown]="true"
     (imageCropped)="setResult($event)"
-    (loadImageFailed)="loadImageFailed()"
+    (loadImageFailed)="loadError = true"
   />
 </div>
 
