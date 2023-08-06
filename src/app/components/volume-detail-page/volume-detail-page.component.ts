@@ -52,6 +52,10 @@ export class VolumeDetailPageComponent {
       });
   }
 
+  showPhotos(book: BookDTO): void {
+    throw new Error('Method not implemented.');
+  }
+
   buyBook(book: BookDTO): void {
     throw new Error('Method not implemented.');
   }
