@@ -21,5 +21,6 @@ export class VolumeOfferListComponent {
 
   publishedBooks: readonly BookDTO[] = [];
 
+  @Output() readonly showPhotos = new EventEmitter<BookDTO>();
   @Output() readonly buy = new EventEmitter<BookDTO>();
 }

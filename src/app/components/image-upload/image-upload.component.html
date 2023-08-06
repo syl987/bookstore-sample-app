@@ -3,6 +3,6 @@
 </div>
 
 <div class="d-flex flex-wrap app-gap-x-2xs">
-  <button mat-stroked-button color="primary" (click)="fileSelect.emit()" [spinning]="uploading" [disabled]="uploading" i18n>Upload Image</button>
-  <button mat-stroked-button color="warn" (click)="removeAll.emit()" i18n>Remove All</button>
+  <button mat-stroked-button color="primary" (click)="fileSelect.emit()" [spinning]="uploading" [disabled]="readonly || uploading" i18n>Upload Image</button>
+  <button mat-stroked-button color="warn" (click)="removeAll.emit()" [disabled]="readonly" i18n>Remove All</button>
 </div>

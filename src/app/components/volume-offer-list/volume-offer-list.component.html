@@ -19,12 +19,20 @@
     <td mat-cell *matCellDef="let book">{{ book.description }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="actions">
+  <ng-container matColumnDef="photos">
     <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let book"><button mat-stroked-button (click)="buy.emit(book)" disabled i18n>Show Photos</button></td>
-    <td mat-cell *matCellDef="let book"><button mat-button color="primary" (click)="buy.emit(book)" disabled i18n>Buy</button></td>
+    <td mat-cell *matCellDef="let book">
+      <button mat-button (click)="showPhotos.emit(book)" disabled i18n>Show Photos</button>
+    </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['index', 'condition', 'price', 'description', 'actions']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['index', 'condition', 'price', 'description', 'actions']"></tr>
+  <ng-container matColumnDef="buy">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let book">
+      <button mat-button color="primary" (click)="buy.emit(book)" disabled i18n>Buy</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['index', 'condition', 'price', 'description', 'photos', 'buy']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['index', 'condition', 'price', 'description', 'photos', 'buy']"></tr>
 </table>
