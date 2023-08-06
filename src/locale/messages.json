@@ -61,6 +61,7 @@
     "1848505234856789345": "{VAR_PLURAL, plural, =1 {One book available for {INTERPOLATION}} other {{INTERPOLATION_1} books available starting from {INTERPOLATION}}}",
     "7627684715997003807": "List of offers for the selected volume.",
     "5479564170549712160": "List of offers",
+    "1570895358481558340": "Show Photos",
     "2149165958319691680": "Buy",
     "2657043015926552641": "Unknown error",
     "7780017052846519905": "Data successfully loaded.",

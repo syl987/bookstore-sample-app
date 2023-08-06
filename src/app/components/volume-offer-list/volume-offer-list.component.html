@@ -21,7 +21,8 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let book"><button mat-button color="primary" (click)="buy.emit(book)" i18n>Buy</button></td>
+    <td mat-cell *matCellDef="let book"><button mat-stroked-button (click)="buy.emit(book)" disabled i18n>Show Photos</button></td>
+    <td mat-cell *matCellDef="let book"><button mat-button color="primary" (click)="buy.emit(book)" disabled i18n>Buy</button></td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="['index', 'condition', 'price', 'description', 'actions']"></tr>
