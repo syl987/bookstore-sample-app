@@ -3,9 +3,11 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatCarouselModule } from '@nunomeirelesjumia/material-carousel';
+import { ImageDTO } from 'src/app/models/image.models';
 
 export interface CarouselDialogData {
   title: string;
+  images: ImageDTO[];
 }
 
 @Component({

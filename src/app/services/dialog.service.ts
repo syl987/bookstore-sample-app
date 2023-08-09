@@ -7,7 +7,7 @@ import { ImageCropDialogComponent, ImageCropDialogData } from '../components/ima
 import { UserBookCreateDialogComponent } from '../components/user-book-create-dialog/user-book-create-dialog.component';
 import { UserSessionInfoDialogComponent, UserSessionInfoDialogData } from '../components/user-session-info-dialog/user-session-info-dialog.component';
 import { AuthUser } from '../models/auth.models';
-import { UserBookDTO } from '../models/book.models';
+import { BookDTO, UserBookDTO } from '../models/book.models';
 
 // TODO refactor some as generic confirmation dialog
 
@@ -55,10 +55,10 @@ export class DialogService {
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
   }
 
-  openVolumeOfferPhotosDialog(): MatDialogRef<CarouselDialogComponent, boolean | undefined> {
+  openVolumeOfferPhotosDialog(book: BookDTO): MatDialogRef<CarouselDialogComponent, boolean | undefined> {
     const data: CarouselDialogData = {
       title: $localize`Delete selected book`,
-      // TODO images
+      images: Object.values(book.photos ?? {}),
     };
 
     return this.dialog.open(CarouselDialogComponent, { data, maxWidth: 768 });
