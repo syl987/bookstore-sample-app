@@ -57,7 +57,7 @@ export class DialogService {
 
   openVolumeOfferPhotosDialog(book: BookDTO): MatDialogRef<CarouselDialogComponent, boolean | undefined> {
     const data: CarouselDialogData = {
-      title: $localize`Delete selected book`,
+      title: $localize`Book offer photos`,
       images: Object.values(book.photos ?? {}),
     };
 
