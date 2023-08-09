@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+import { CarouselDialogComponent, CarouselDialogData } from '../components/carousel-dialog/carousel-dialog.component';
 import { ConfirmationDialogComponent, ConfirmationDialogData } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { ImageCropDialogComponent, ImageCropDialogData } from '../components/image-crop-dialog/image-crop-dialog.component';
 import { UserBookCreateDialogComponent } from '../components/user-book-create-dialog/user-book-create-dialog.component';
@@ -52,6 +53,15 @@ export class DialogService {
     };
 
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
+  }
+
+  openVolumeOfferPhotosDialog(): MatDialogRef<CarouselDialogComponent, boolean | undefined> {
+    const data: CarouselDialogData = {
+      title: $localize`Delete selected book`,
+      // TODO images
+    };
+
+    return this.dialog.open(CarouselDialogComponent, { data, maxWidth: 768 });
   }
 
   closeAllDialog(): void {
