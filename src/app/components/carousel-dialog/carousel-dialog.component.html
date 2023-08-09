@@ -1,15 +1,9 @@
 <h3 mat-dialog-title>{{ data.title }}</h3>
 
 <div mat-dialog-content>
-  <mat-carousel *ngIf="data.images.length; else empty">
-    <mat-carousel-slide *ngFor="let image of data.images">
-      <img [src]="image.src" [alt]="image.alt" />
-    </mat-carousel-slide>
+  <mat-carousel [hideIndicators]="false">
+    <mat-carousel-slide *ngFor="let image of data.images" [image]="image.src" />
   </mat-carousel>
-
-  <ng-template #empty>
-    <!-- TODO -->
-  </ng-template>
 </div>
 
 <div mat-dialog-actions>
