@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+import { CarouselDialogComponent, CarouselDialogData } from '../components/carousel-dialog/carousel-dialog.component';
 import { ConfirmationDialogComponent, ConfirmationDialogData } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { ImageCropDialogComponent, ImageCropDialogData } from '../components/image-crop-dialog/image-crop-dialog.component';
 import { UserBookCreateDialogComponent } from '../components/user-book-create-dialog/user-book-create-dialog.component';
 import { UserSessionInfoDialogComponent, UserSessionInfoDialogData } from '../components/user-session-info-dialog/user-session-info-dialog.component';
 import { AuthUser } from '../models/auth.models';
-import { UserBookDTO } from '../models/book.models';
+import { BookDTO, UserBookDTO } from '../models/book.models';
 
 // TODO refactor some as generic confirmation dialog
 
@@ -52,6 +53,15 @@ export class DialogService {
     };
 
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
+  }
+
+  openVolumeOfferPhotosDialog(book: BookDTO): MatDialogRef<CarouselDialogComponent, boolean | undefined> {
+    const data: CarouselDialogData = {
+      title: $localize`Delete selected book`,
+      images: Object.values(book.photos ?? {}),
+    };
+
+    return this.dialog.open(CarouselDialogComponent, { data, maxWidth: 768 });
   }
 
   closeAllDialog(): void {

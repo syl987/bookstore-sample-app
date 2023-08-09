@@ -23,4 +23,8 @@ export class VolumeOfferListComponent {
 
   @Output() readonly showPhotos = new EventEmitter<BookDTO>();
   @Output() readonly buy = new EventEmitter<BookDTO>();
+
+  getPhotosTotal(book: BookDTO): number {
+    return Object.keys(book.photos ?? {}).length;
+  }
 }

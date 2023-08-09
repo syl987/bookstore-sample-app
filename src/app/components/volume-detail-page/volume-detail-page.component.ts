@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookDTO } from 'src/app/models/book.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
+import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
@@ -40,6 +41,7 @@ export class VolumeDetailPageComponent {
     private readonly authService: AuthService,
     private readonly routerService: RouterService,
     private readonly volumeService: VolumeService,
+    private readonly dialogService: DialogService,
   ) {
     this.routerService
       .selectRouteParam('volumeId')
@@ -53,7 +55,7 @@ export class VolumeDetailPageComponent {
   }
 
   showPhotos(book: BookDTO): void {
-    throw new Error('Method not implemented.');
+    this.dialogService.openVolumeOfferPhotosDialog(book);
   }
 
   buyBook(book: BookDTO): void {

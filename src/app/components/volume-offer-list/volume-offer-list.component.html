@@ -19,20 +19,16 @@
     <td mat-cell *matCellDef="let book">{{ book.description }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="photos">
+  <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let book" class="text-nowrap">
-      <button mat-button (click)="showPhotos.emit(book)" disabled i18n>Show Photos</button>
+      <div class="app-gap-x-2xs">
+        <button mat-button color="primary" (click)="showPhotos.emit(book)" [disabled]="!getPhotosTotal(book)" i18n>Show Photos</button>
+        <button mat-button color="accent" (click)="buy.emit(book)" disabled i18n>Buy</button>
+      </div>
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="buy">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let book" class="text-nowrap">
-      <button mat-button color="primary" (click)="buy.emit(book)" disabled i18n>Buy</button>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="['number', 'condition', 'price', 'description', 'photos', 'buy']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['number', 'condition', 'price', 'description', 'photos', 'buy']"></tr>
+  <tr mat-header-row *matHeaderRowDef="['number', 'condition', 'price', 'description', 'actions']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['number', 'condition', 'price', 'description', 'actions']"></tr>
 </table>
