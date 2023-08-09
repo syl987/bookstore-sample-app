@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+import { ConfirmationDialogComponent, ConfirmationDialogData } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { ImageCropDialogComponent, ImageCropDialogData } from '../components/image-crop-dialog/image-crop-dialog.component';
 import { UserBookCreateDialogComponent } from '../components/user-book-create-dialog/user-book-create-dialog.component';
-import { UserBookDeleteDialogComponent } from '../components/user-book-delete-dialog/user-book-delete-dialog.component';
-import { UserBookPublishDialogComponent } from '../components/user-book-publish-dialog/user-book-publish-dialog.component';
 import { UserSessionInfoDialogComponent, UserSessionInfoDialogData } from '../components/user-session-info-dialog/user-session-info-dialog.component';
 import { AuthUser } from '../models/auth.models';
 import { UserBookDTO } from '../models/book.models';
@@ -33,12 +32,26 @@ export class DialogService {
     return this.dialog.open(UserBookCreateDialogComponent, { maxWidth: 768 });
   }
 
-  openUserBookPublishDialog(): MatDialogRef<UserBookPublishDialogComponent, boolean | undefined> {
-    return this.dialog.open(UserBookPublishDialogComponent, { maxWidth: 568 });
+  openUserBookPublishDialog(): MatDialogRef<ConfirmationDialogComponent, boolean | undefined> {
+    const data: ConfirmationDialogData = {
+      title: $localize`Publish selected book`,
+      description: $localize`Once published, a book cannot be changed anymore. It will become visible to other users who will be able to buy it.`,
+      action: $localize`Publish Book`,
+      color: 'accent',
+    };
+
+    return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
   }
 
-  openUserBookDeleteDialog(): MatDialogRef<UserBookDeleteDialogComponent, boolean | undefined> {
-    return this.dialog.open(UserBookDeleteDialogComponent, { maxWidth: 568 });
+  openUserBookDeleteDialog(): MatDialogRef<ConfirmationDialogComponent, boolean | undefined> {
+    const data: ConfirmationDialogData = {
+      title: $localize`Delete selected book`,
+      description: $localize`Once deleted, a book cannot be found any more. All references will be removed.`,
+      action: $localize`Delete Book`,
+      color: 'warn',
+    };
+
+    return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
   }
 
   closeAll(): void {
