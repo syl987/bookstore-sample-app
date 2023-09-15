@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MatCarouselModule } from '@nunomeirelesjumia/material-carousel';
+import { MatCarouselModule } from '@magloft/material-carousel';
 import { ImageDTO } from 'src/app/models/image.models';
 
 export interface CarouselDialogData {
