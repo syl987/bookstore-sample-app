@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
 import { BookDTO } from 'src/app/models/book.models';
+import { ImageDTO } from 'src/app/models/image.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -49,7 +50,11 @@ export class VolumeOfferDetailPageComponent {
       });
   }
 
-  buyOffer(offer: BookDTO): void {
+  getOfferPhotos(offer: BookDTO): ImageDTO[] {
+    return Object.values(offer.photos ?? {});
+  }
+
+  buyBookOffer(offer: BookDTO): void {
     throw new Error('Method not implemented.');
   }
 }

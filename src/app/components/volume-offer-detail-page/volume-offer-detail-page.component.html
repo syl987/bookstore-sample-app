@@ -1,7 +1,36 @@
 <div class="container">
-  <app-title-bar backUrl="/search" />
+  <app-title-bar [backUrl]="'/volumes/' + id">
+    <button *ngIf="offer$ | async as offer" mat-stroked-button color="accent" (click)="buyBookOffer(offer)" i18n>Buy Book</button>
+  </app-title-bar>
 
   <p i18n>Details for the selected book offer.</p>
 
-  <p>volume-offer-detail-page works!</p>
+  <div *ngIf="volume$ | async as volume">
+    <app-volume-card [volume]="volume" />
+
+    <div *ngIf="offer$ | async as offer" class="mt-2m">
+      <dl class="row">
+        <div class="col-12 mb-2xs">
+          <dt>Description</dt>
+          <dd>{{ offer.description }}</dd>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <dt>Condition</dt>
+          <dd>{{ offer.condition | bookCondition }}</dd>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <dt>Price</dt>
+          <dd>{{ offer.price | currency }}</dd>
+        </div>
+      </dl>
+
+      <h3 i18n>Available Photos</h3>
+
+      <div class="d-flex flex-wrap">
+        <img *ngFor="let photo of getOfferPhotos(offer)" [src]="photo.src" [alt]="photo.alt" class="me-s mb-s" style="max-width: 256px; max-height: 256px" />
+
+        <p *ngIf="!getOfferPhotos(offer).length" class="text-muted fs-small mt-nxs">No photos were uploaded for this offer.</p>
+      </div>
+    </div>
+  </div>
 </div>
