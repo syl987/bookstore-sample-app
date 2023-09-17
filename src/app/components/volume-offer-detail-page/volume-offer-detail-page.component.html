@@ -29,7 +29,7 @@
       <div class="d-flex flex-wrap">
         <img *ngFor="let photo of getOfferPhotos(offer)" [src]="photo.src" [alt]="photo.alt" class="me-s mb-s" style="max-height: 256px" />
 
-        <p *ngIf="!getOfferPhotos(offer).length" class="text-muted fs-small mt-nxs">No photos were uploaded for this offer.</p>
+        <p *ngIf="!getOfferPhotos(offer).length" class="text-muted fs-small mt-nxs" i18n>No photos were uploaded for this offer.</p>
       </div>
     </div>
   </div>
