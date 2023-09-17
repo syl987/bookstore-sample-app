@@ -4,7 +4,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { BookDTO } from 'src/app/models/book.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -52,13 +51,5 @@ export class VolumeDetailPageComponent {
           this.volumeService.load(id);
         }
       });
-  }
-
-  showPhotos(book: BookDTO): void {
-    this.dialogService.openVolumeOfferPhotosDialog(book);
-  }
-
-  buyBook(book: BookDTO): void {
-    throw new Error('Method not implemented.');
   }
 }
