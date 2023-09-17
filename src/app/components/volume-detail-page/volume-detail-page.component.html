@@ -6,7 +6,7 @@
   <div *ngIf="volume$ | async as volume">
     <app-volume-card [volume]="volume" />
 
-    <h3 class="mt-2m mb-2xs" i18n>List of offers</h3>
+    <h3 class="mt-2m mb-2xs" i18n>List of book offers</h3>
 
     <div class="overflow-x-auto">
       <app-volume-offer-list [volume]="volume" />

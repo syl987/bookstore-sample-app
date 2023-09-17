@@ -11,15 +11,15 @@
     <div *ngIf="offer$ | async as offer" class="mt-2m">
       <dl class="row">
         <div class="col-12 mb-2xs">
-          <dt>Description</dt>
+          <dt i18n>Description</dt>
           <dd>{{ offer.description }}</dd>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <dt>Condition</dt>
+          <dt i18n>Condition</dt>
           <dd>{{ offer.condition | bookCondition }}</dd>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <dt>Price</dt>
+          <dt i18n>Price</dt>
           <dd>{{ offer.price | currency }}</dd>
         </div>
       </dl>
