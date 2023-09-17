@@ -3,6 +3,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { concatMap, Observable, of, shareReplay, take, throwError } from 'rxjs';
 
+import { BookDTO } from '../models/book.models';
 import { VolumeDTO } from '../models/volume.models';
 import { VolumeActions } from '../store/volume/volume.actions';
 import { volumeFeature } from '../store/volume/volume.reducer';
@@ -14,6 +15,8 @@ interface IVolumeService {
   loadAll(): Observable<VolumeDTO[]>;
   /** Filter all loaded volumes with published books by title. */
   filter(query: string): void;
+  /** Buy a book offer. */
+  buyOffer(volumeId: string, offerId: string): Observable<BookDTO>;
 }
 
 @Injectable({
@@ -72,5 +75,23 @@ export class VolumeService implements IVolumeService {
 
   filter(query: string): void {
     this.store.dispatch(VolumeActions.filter({ query }));
+  }
+
+  buyOffer(volumeId: string, offerId: string): Observable<BookDTO> {
+    this.store.dispatch(VolumeActions.buyOffer({ volumeId, offerId }));
+
+    const result = this.actions.pipe(
+      ofType(VolumeActions.buyOfferSUCCESS, VolumeActions.buyOfferERROR),
+      take(1),
+      concatMap(action => {
+        if (action.type === VolumeActions.buyOfferSUCCESS.type) {
+          return of(action.book);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
   }
 }

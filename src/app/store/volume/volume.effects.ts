@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
-import { firebaseError } from 'src/app/models/error.models';
+import { firebaseError, internalError } from 'src/app/models/error.models';
 import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { VolumeActions } from './volume.actions';
@@ -51,5 +52,25 @@ export class VolumesEffects {
     { dispatch: false },
   );
 
-  constructor(private readonly actions: Actions, private readonly firebaseApi: FirebaseApiService, private readonly toastService: ToastService) {}
+  readonly buyOffer = createEffect(() => {
+    return this.actions.pipe(
+      ofType(VolumeActions.buyOffer),
+      exhaustMap(({ volumeId, offerId }) => {
+        if (!this.authService.uid) {
+          return of(VolumeActions.buyOfferERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+        }
+        return this.firebaseApi.buyOffer(this.authService.uid, volumeId, offerId).pipe(
+          map(res => VolumeActions.buyOfferSUCCESS({ book: res })),
+          catchError(err => of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }))),
+        );
+      }),
+    );
+  });
+
+  constructor(
+    private readonly actions: Actions,
+    private readonly authService: AuthService,
+    private readonly firebaseApi: FirebaseApiService,
+    private readonly toastService: ToastService,
+  ) {}
 }

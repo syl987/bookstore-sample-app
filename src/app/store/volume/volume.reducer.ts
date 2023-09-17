@@ -13,6 +13,7 @@ export const volumeFeatureKey = 'volumes';
 export interface State extends EntityState<VolumeDTO> {
   filter: { query: string; ids: string[] | number[] };
   load: OperationState;
+  buyOffer: OperationState;
 }
 
 const adapter = createEntityAdapter<VolumeDTO>({
@@ -23,6 +24,7 @@ const adapter = createEntityAdapter<VolumeDTO>({
 const initialState: State = adapter.getInitialState({
   filter: { query: '', ids: [] },
   load: { pending: false },
+  buyOffer: { pending: false },
 });
 
 export const reducer = createReducer(
@@ -59,12 +61,24 @@ export const reducer = createReducer(
     ...state,
     filter: { ...state.filter, query, ids: filterVolumes(query, state) },
   })),
+  on(VolumeActions.buyOffer, state => ({
+    ...state,
+    buy: { ...state.buyOffer, pending: true, error: undefined },
+  })),
+  on(VolumeActions.buyOfferSUCCESS, (state, { book }) => ({
+    ...adapter.upsertOne(book, state),
+    buy: { ...state.buyOffer, pending: false, error: undefined },
+  })),
+  on(VolumeActions.buyOfferERROR, (state, { error }) => ({
+    ...state,
+    buy: { ...state.buyOffer, pending: false, error },
+  })),
 );
 
 export const volumeFeature = createFeature({
   name: volumeFeatureKey,
   reducer,
-  extraSelectors: ({ selectVolumesState, selectEntities, selectFilter, selectLoad }) => ({
+  extraSelectors: ({ selectVolumesState, selectEntities, selectFilter, selectLoad, selectBuyOffer }) => ({
     selectAll: createSelector(selectVolumesState, adapter.getSelectors().selectAll),
     selectEntities: createSelector(selectVolumesState, adapter.getSelectors().selectEntities),
     selectIds: createSelector(selectVolumesState, adapter.getSelectors().selectIds),
@@ -78,5 +92,8 @@ export const volumeFeature = createFeature({
 
     selectLoadPending: createSelector(selectLoad, ({ pending }) => pending),
     selectLoadError: createSelector(selectLoad, ({ error }) => error),
+
+    selectBuyPending: createSelector(selectBuyOffer, ({ pending }) => pending),
+    selectBuyError: createSelector(selectBuyOffer, ({ error }) => error),
   }),
 });

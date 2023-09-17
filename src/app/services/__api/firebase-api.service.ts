@@ -150,6 +150,10 @@ export class FirebaseApiService {
     );
   }
 
+  buyOffer(uid: string, volumeId: string, offerId: string): Observable<UserBookDTO> {
+    return throwError(() => new Error('Not implemented.')); // TODO implement
+  }
+
   deleteUserBook(uid: string, id: string): Observable<void> {
     // TODO also delete related files
     // TODO allow deletion if published and also delete the volume if not related to any books
