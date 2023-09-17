@@ -29,6 +29,7 @@ function getBookOfferById(arg: [VolumeDTO | undefined, string | undefined]): Boo
 })
 export class VolumeOfferDetailPageComponent {
   id: string = this.route.snapshot.params['volumeId'];
+  offerId: string = this.route.snapshot.params['offerId'];
 
   readonly volume$ = this.volumeService.entitiyByRoute$;
   readonly offer$ = combineLatest([this.volume$, this.routerService.selectRouteParam('offerId')]).pipe(map(getBookOfferById));
@@ -48,6 +49,14 @@ export class VolumeOfferDetailPageComponent {
           this.volumeService.load(id);
         }
       });
+    this.routerService
+      .selectRouteParam('offerId')
+      .pipe(takeUntilDestroyed())
+      .subscribe(offerId => {
+        if (offerId) {
+          this.offerId = offerId;
+        }
+      });
   }
 
   getOfferPhotos(offer: BookDTO): ImageDTO[] {
@@ -55,6 +64,13 @@ export class VolumeOfferDetailPageComponent {
   }
 
   buyBookOffer(offer: BookDTO): void {
-    throw new Error('Method not implemented.');
+    this.dialogService
+      .openUserBookBuyDialog()
+      .beforeClosed()
+      .subscribe(result => {
+        if (result) {
+          this.volumeService.buyOffer(this.id, this.offerId);
+        }
+      });
   }
 }

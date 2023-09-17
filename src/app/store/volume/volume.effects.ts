@@ -55,11 +55,11 @@ export class VolumesEffects {
   readonly buyOffer = createEffect(() => {
     return this.actions.pipe(
       ofType(VolumeActions.buyOffer),
-      exhaustMap(({ volumeId, offerId }) => {
+      exhaustMap(({ id, offerId }) => {
         if (!this.authService.uid) {
           return of(VolumeActions.buyOfferERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.buyOffer(this.authService.uid, volumeId, offerId).pipe(
+        return this.firebaseApi.buyBookOffer(this.authService.uid, id, offerId).pipe(
           map(res => VolumeActions.buyOfferSUCCESS({ book: res })),
           catchError(err => of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }))),
         );

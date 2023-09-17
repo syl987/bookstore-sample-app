@@ -150,8 +150,8 @@ export class FirebaseApiService {
     );
   }
 
-  buyOffer(uid: string, volumeId: string, offerId: string): Observable<UserBookDTO> {
-    return throwError(() => new Error('Not implemented.')); // TODO implement
+  buyBookOffer(uid: string, id: string, offerId: string): Observable<UserBookDTO> {
+    throw new Error('Not implemented.'); // TODO implement
   }
 
   deleteUserBook(uid: string, id: string): Observable<void> {

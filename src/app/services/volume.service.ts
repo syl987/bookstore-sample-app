@@ -16,7 +16,7 @@ interface IVolumeService {
   /** Filter all loaded volumes with published books by title. */
   filter(query: string): void;
   /** Buy a book offer. */
-  buyOffer(volumeId: string, offerId: string): Observable<BookDTO>;
+  buyOffer(id: string, offerId: string): Observable<BookDTO>;
 }
 
 @Injectable({
@@ -77,8 +77,8 @@ export class VolumeService implements IVolumeService {
     this.store.dispatch(VolumeActions.filter({ query }));
   }
 
-  buyOffer(volumeId: string, offerId: string): Observable<BookDTO> {
-    this.store.dispatch(VolumeActions.buyOffer({ volumeId, offerId }));
+  buyOffer(id: string, offerId: string): Observable<BookDTO> {
+    this.store.dispatch(VolumeActions.buyOffer({ id, offerId }));
 
     const result = this.actions.pipe(
       ofType(VolumeActions.buyOfferSUCCESS, VolumeActions.buyOfferERROR),
