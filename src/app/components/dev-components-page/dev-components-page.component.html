@@ -17,8 +17,7 @@
   <mat-divider class="mb-s" />
 
   <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
-  <p><u>This line of text will render as underlined</u></p>
-  <p><small>This line of text is meant to be treated as fine print.</small></p>
+  <p><u>This line of text will render as underlined.</u></p>
   <p><strong>This line rendered as bold text.</strong></p>
   <!-- <p><em>This line rendered as italicized text.</em></p> -->
 
@@ -26,11 +25,7 @@
   <p><code>This line rendered as code-formatted text.</code></p>
   <pre>This line rendered as preformatted text.</pre>
 
-  <mat-divider class="mb-s" />
-
-  <p class="text-uppercase">This line rendered as uppercase text.</p>
-  <p class="text-lowercase">This line rendered as lowercase text.</p>
-  <p class="text-capitalize">This line rendered as capitalize text.</p>
+  <mat-divider />
 
   <h2>Button</h2>
 
@@ -70,47 +65,23 @@
     </button>
   </div>
 
-  <h2>Toast</h2>
+  <mat-divider />
 
-  <div class="app-gap-x-2xs mb-s">
+  <h2>Overlay</h2>
+
+  <h3>Dialog</h3>
+
+  <button mat-flat-button color="primary" (click)="openExampleDialog()">Open Dialog</button>
+
+  <h3>Toast Message</h3>
+
+  <div class="app-gap-x-2xs mb-m">
     <button mat-flat-button color="primary" (click)="showSuccessToast()">Show Success</button>
     <button mat-stroked-button color="primary" (click)="showInfoToast()">Show Info</button>
     <button mat-stroked-button color="warn" (click)="showErrorToast()">Show Error</button>
   </div>
 
-  <h2>Dialog</h2>
-
-  <button mat-flat-button color="primary" (click)="openExampleDialog()">Open Dialog</button>
-
-  <h2>Spinner</h2>
-
-  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
-    <mat-spinner diameter="16" />
-    <mat-spinner diameter="24" />
-    <mat-spinner diameter="32" />
-    <mat-spinner diameter="40" />
-  </div>
-
-  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
-    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async" />
-  </div>
-
-  <h3>Button with Spinner</h3>
-
-  <div class="app-gap-x-2xs mb-s">
-    <button mat-flat-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Primary</button>
-    <button mat-stroked-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Secondary</button>
-  </div>
-
-  <!-- <h3>Button with Progress Indicator</h3>
-
-    <div class="app-gap-x-2xs mb-s">
-        <button mat-flat-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Primary</button>
-        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Secondary</button>
-    </div> -->
+  <mat-divider />
 
   <h2>Icons</h2>
 
@@ -140,6 +111,38 @@
     <!-- <mat-icon fontSet="fp" fontIcon="es" /> -->
   </div>
 
+  <h3>Spinner</h3>
+
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
+    <mat-spinner diameter="16" />
+    <mat-spinner diameter="24" />
+    <mat-spinner diameter="32" />
+    <mat-spinner diameter="40" />
+  </div>
+
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
+    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async" />
+  </div>
+
+  <h4>Button with Spinner</h4>
+
+  <div class="app-gap-x-2xs mb-s">
+    <button mat-flat-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Primary</button>
+    <button mat-stroked-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Secondary</button>
+  </div>
+
+  <!-- <h3>Button with Progress Indicator</h3>
+
+    <div class="app-gap-x-2xs mb-s">
+        <button mat-flat-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Primary</button>
+        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Secondary</button>
+    </div> -->
+
+  <mat-divider />
+
   <h2>Text</h2>
 
   <p class="fs-large">Large text (large) for unknown usage.</p>
@@ -152,16 +155,18 @@
 
   <p class="fs-xsmall">Legal text (xsmall).</p>
 
+  <mat-divider />
+
   <h2>Field</h2>
 
-  <dl class="row mb-s">
+  <dl class="row">
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Name</dt>
       <dd>Michael Jackson</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Address</dt>
-      <dd>Main Street 4<br />D-12345 Munich</dd>
+      <dd>Main Street 4<br />D-12345 Some City</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Email</dt>
@@ -172,14 +177,24 @@
       <dd>+49 151 / 987 654 321</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
-      <dt>Last Login</dt>
-      <dd>{{ '2023-05-16' | date }}</dd>
+      <dt>Date of Birth</dt>
+      <dd>{{ '1958-08-29' | date }}</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
-      <dt>Secrets</dt>
+      <dt>Dark Secrets</dt>
       <dd>-</dd>
     </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Number of Songs</dt>
+      <dd>{{ 1423 | number }}</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Net Worth</dt>
+      <dd>{{ 0 | currency }}</dd>
+    </div>
   </dl>
+
+  <mat-divider />
 
   <h2>List</h2>
 
@@ -233,6 +248,8 @@
     </div>
   </div>
 
+  <mat-divider />
+
   <h2>Utilities</h2>
 
   <h3>Text Alignment</h3>
@@ -270,6 +287,12 @@
   <p class="text-muted">.text-muted</p>
   <p class="text-reset">.text-reset (inherited color)</p>
 
+  <h3>Text Transform</h3>
+
+  <p class="text-uppercase">This line rendered as uppercase text.</p>
+  <p class="text-lowercase">This line rendered as lowercase text.</p>
+  <p class="text-capitalize">This line rendered as capitalize text.</p>
+
   <h3>Screen Readers</h3>
 
   <p>
@@ -301,6 +324,8 @@
     <div class="border border-primary px-m py-3xs">Block Element</div>
     <div class="border border-primary px-m py-3xs">Block Element</div>
   </div>
+
+  <mat-divider />
 
   <h2>Grid</h2>
 
