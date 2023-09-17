@@ -27,7 +27,7 @@
       <h3 i18n>Available Photos</h3>
 
       <div class="d-flex flex-wrap">
-        <img *ngFor="let photo of getOfferPhotos(offer)" [src]="photo.src" [alt]="photo.alt" class="me-s mb-s" style="max-width: 256px; max-height: 256px" />
+        <img *ngFor="let photo of getOfferPhotos(offer)" [src]="photo.src" [alt]="photo.alt" class="me-s mb-s" style="max-height: 256px" />
 
         <p *ngIf="!getOfferPhotos(offer).length" class="text-muted fs-small mt-nxs">No photos were uploaded for this offer.</p>
       </div>
