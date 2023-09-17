@@ -151,6 +151,8 @@ export class FirebaseApiService {
   }
 
   buyBookOffer(uid: string, id: string, offerId: string): Observable<{ volume: VolumeDTO; book: UserBookDTO }> {
+    // TODO adapt store if volume is removed OR adapt translations if not
+
     throw new Error('Not implemented.'); // TODO implement
   }
 
