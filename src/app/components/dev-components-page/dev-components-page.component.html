@@ -17,20 +17,13 @@
   <mat-divider class="mb-s" />
 
   <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
-  <p><u>This line of text will render as underlined</u></p>
-  <p><small>This line of text is meant to be treated as fine print.</small></p>
+  <p><u>This line of text will render as underlined.</u></p>
   <p><strong>This line rendered as bold text.</strong></p>
   <!-- <p><em>This line rendered as italicized text.</em></p> -->
 
   <p><samp>This line rendered as program output sample.</samp></p>
   <p><code>This line rendered as code-formatted text.</code></p>
   <pre>This line rendered as preformatted text.</pre>
-
-  <mat-divider class="mb-s" />
-
-  <p class="text-uppercase">This line rendered as uppercase text.</p>
-  <p class="text-lowercase">This line rendered as lowercase text.</p>
-  <p class="text-capitalize">This line rendered as capitalize text.</p>
 
   <mat-divider />
 
@@ -173,7 +166,7 @@
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Address</dt>
-      <dd>Main Street 4<br />D-12345 Munich</dd>
+      <dd>Main Street 4<br />D-12345 Some City</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Email</dt>
@@ -184,12 +177,20 @@
       <dd>+49 151 / 987 654 321</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
-      <dt>Last Login</dt>
-      <dd>{{ '2023-05-16' | date }}</dd>
+      <dt>Date of Birth</dt>
+      <dd>{{ '1958-08-29' | date }}</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
-      <dt>Secrets</dt>
+      <dt>Dark Secrets</dt>
       <dd>-</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Number of Songs</dt>
+      <dd>{{ 1423 | number }}</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Net Worth</dt>
+      <dd>{{ 0 | currency }}</dd>
     </div>
   </dl>
 
@@ -285,6 +286,12 @@
   <p class="text-white" style="background-color: gray">.text-white (inverse body color)</p>
   <p class="text-muted">.text-muted</p>
   <p class="text-reset">.text-reset (inherited color)</p>
+
+  <h3>Text Transform</h3>
+
+  <p class="text-uppercase">This line rendered as uppercase text.</p>
+  <p class="text-lowercase">This line rendered as lowercase text.</p>
+  <p class="text-capitalize">This line rendered as capitalize text.</p>
 
   <h3>Screen Readers</h3>
 
