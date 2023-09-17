@@ -143,20 +143,6 @@
 
   <mat-divider />
 
-  <h2>Text</h2>
-
-  <p class="fs-large">Large text (large) for unknown usage.</p>
-
-  <p class="fs-normal">Regular text (normal) with some very important information included.</p>
-
-  <p>Default paragraph text (normal) with some very important information included.</p>
-
-  <p class="fs-small">Footnote text (small).</p>
-
-  <p class="fs-xsmall">Legal text (xsmall).</p>
-
-  <mat-divider />
-
   <h2>Field</h2>
 
   <dl class="row">
@@ -196,60 +182,6 @@
 
   <mat-divider />
 
-  <h2>List</h2>
-
-  <p class="mb-0">You can use negative margins to offset list item content padding of 16px.</p>
-
-  <div class="row">
-    <div class="col-md-6 col-lg-3">
-      <h4>Default List</h4>
-      <mat-list>
-        <mat-list-item lines="3">
-          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
-          <span matListItemTitle>Title</span>
-          <span matListItemLine>Description</span>
-          <span matListItemLine>Second line</span>
-          <span matListItemMeta>Meta info</span>
-        </mat-list-item>
-        <mat-list-item lines="2">
-          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
-          <span matListItemTitle>Title</span>
-          <span matListItemLine>Description</span>
-          <span matListItemMeta>Meta info</span>
-        </mat-list-item>
-      </mat-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Navigation List</h4>
-      <mat-nav-list>
-        <a mat-list-item routerLink="/dev">first link</a>
-        <a mat-list-item routerLink="/dev">some other link</a>
-        <a mat-list-item routerLink="/dev" disabled>disabled link</a>
-      </mat-nav-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Action List</h4>
-      <mat-action-list>
-        <button mat-list-item (click)="showInfoToast()">first action</button>
-        <button mat-list-item (click)="showInfoToast()">some other action</button>
-        <button mat-list-item disabled>disabled action</button>
-      </mat-action-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Selection List</h4>
-      <mat-selection-list>
-        <mat-list-option>first option</mat-list-option>
-        <mat-list-option>some other option</mat-list-option>
-        <mat-list-option disabled>disabled option</mat-list-option>
-      </mat-selection-list>
-    </div>
-  </div>
-
-  <mat-divider />
-
   <h2>Utilities</h2>
 
   <h3>Text Alignment</h3>
@@ -259,39 +191,42 @@
     wrapped. This text is also very long and will be wrapped immediately. This text is also very long and will be wrapped very immediately. This text is also very long and will be
     wrapped now.
   </p>
-  <p class="text-start">Left (start) aligned text on all viewport sizes.</p>
-  <p class="text-center">Center aligned text on all viewport sizes.</p>
-  <p class="text-end">Right (end) aligned text on all viewport sizes.</p>
+  <p class="text-start mb-0">Left (start) aligned text on all viewport sizes.</p>
+  <p class="text-center mb-0">Center aligned text on all viewport sizes.</p>
+  <p class="text-end mb-0">Right (end) aligned text on all viewport sizes.</p>
+
+  <h3>Text Size</h3>
+
+  <p class="fs-large mb-0">Large text (large).</p>
+  <p class="fs-normal mb-0">Regular text (normal). Default paragraph text size.</p>
+  <p class="fs-small mb-0">Footnote text (small).</p>
+  <p class="fs-xsmall mb-0">Legal text (xsmall).</p>
 
   <h3>Text Wrap</h3>
 
   <div class="text-wrap" style="width: 6rem; background-color: aquamarine">This text should wrap.</div>
-
   <div class="text-nowrap" style="width: 8rem; background-color: burlywood">This text should overflow the parent.</div>
-
   <div class="text-truncate" style="max-width: 11rem; background-color: darkkhaki">Truncate block: Praeterea iter est quasdam res quas ex communi.</div>
-
   <span class="text-truncate" style="max-width: 11rem; display: inline-block; background-color: wheat">Truncate inline: Praeterea iter est quasdam res quas ex communi.</span>
-
   <p class="text-break">Break word: mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
 
   <h3>Text Colors</h3>
 
-  <p class="text-primary">.text-primary (mat-primary)</p>
-  <p class="text-accent">.text-accent (mat-accent)</p>
-  <p class="text-success">.text-success</p>
-  <p class="text-warn">.text-warn (mat-warn)</p>
-  <p class="text-info">.text-info</p>
-  <p class="text-body">.text-body (primary body color)</p>
-  <p class="text-white" style="background-color: gray">.text-white (inverse body color)</p>
-  <p class="text-muted">.text-muted</p>
-  <p class="text-reset">.text-reset (inherited color)</p>
+  <p class="text-primary mb-0">.text-primary (mat-primary)</p>
+  <p class="text-accent mb-0">.text-accent (mat-accent)</p>
+  <p class="text-success mb-0">.text-success</p>
+  <p class="text-warn mb-0">.text-warn (mat-warn)</p>
+  <p class="text-info mb-0">.text-info</p>
+  <p class="text-body mb-0">.text-body (primary body color)</p>
+  <p class="text-white mb-0" style="background-color: gray">.text-white (inverse body color)</p>
+  <p class="text-muted mb-0">.text-muted</p>
+  <p class="text-reset mb-0">.text-reset (inherited color)</p>
 
   <h3>Text Transform</h3>
 
-  <p class="text-uppercase">This line rendered as uppercase text.</p>
-  <p class="text-lowercase">This line rendered as lowercase text.</p>
-  <p class="text-capitalize">This line rendered as capitalize text.</p>
+  <p class="text-uppercase mb-0">This line rendered as uppercase text.</p>
+  <p class="text-lowercase mb-0">This line rendered as lowercase text.</p>
+  <p class="text-capitalize mb-0">This line rendered as capitalize text.</p>
 
   <h3>Screen Readers</h3>
 

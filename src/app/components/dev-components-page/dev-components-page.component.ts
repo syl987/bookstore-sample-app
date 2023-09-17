@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { auditTime, map, timer } from 'rxjs';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
@@ -16,7 +15,7 @@ import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-
 @Component({
   selector: 'app-dev-components-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatListModule, MatProgressSpinnerModule, TitleBarComponent, ButtonSpinnerDirective],
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatProgressSpinnerModule, TitleBarComponent, ButtonSpinnerDirective],
   templateUrl: './dev-components-page.component.html',
   styleUrls: ['./dev-components-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
