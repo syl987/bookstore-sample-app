@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+import { RouteParam, RouteQueryParam } from '../models/router.models';
 import * as RouterSelectors from '../store/router/router.selectors';
 
 @Injectable({
@@ -14,11 +15,11 @@ export class RouterService {
 
   constructor(private readonly store: Store) {}
 
-  selectRouteParam(param: 'volumeId' | 'bookId'): Observable<string | undefined> {
+  selectRouteParam(param: RouteParam): Observable<string | undefined> {
     return this.store.select(RouterSelectors.selectRouteParam(param));
   }
 
-  selectQueryParam(param: never): Observable<string | undefined> {
+  selectQueryParam(param: RouteQueryParam): Observable<string | undefined> {
     return this.store.select(RouterSelectors.selectQueryParam(param));
   }
 }
