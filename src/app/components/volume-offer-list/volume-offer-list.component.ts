@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { comparePublishedBooks } from 'src/app/helpers/book.helpers';
@@ -20,9 +20,6 @@ export class VolumeOfferListComponent {
   }
 
   publishedBooks: readonly BookDTO[] = [];
-
-  @Output() readonly showPhotos = new EventEmitter<BookDTO>();
-  @Output() readonly buy = new EventEmitter<BookDTO>();
 
   getPhotosTotal(book: BookDTO): number {
     return Object.keys(book.photos ?? {}).length;
