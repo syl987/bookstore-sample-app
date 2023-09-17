@@ -32,6 +32,8 @@
   <p class="text-lowercase">This line rendered as lowercase text.</p>
   <p class="text-capitalize">This line rendered as capitalize text.</p>
 
+  <mat-divider />
+
   <h2>Button</h2>
 
   <div class="app-gap-x-2xs mb-s">
@@ -70,47 +72,23 @@
     </button>
   </div>
 
-  <h2>Toast</h2>
+  <mat-divider />
 
-  <div class="app-gap-x-2xs mb-s">
+  <h2>Overlay</h2>
+
+  <h3>Dialog</h3>
+
+  <button mat-flat-button color="primary" (click)="openExampleDialog()">Open Dialog</button>
+
+  <h3>Toast Message</h3>
+
+  <div class="app-gap-x-2xs mb-m">
     <button mat-flat-button color="primary" (click)="showSuccessToast()">Show Success</button>
     <button mat-stroked-button color="primary" (click)="showInfoToast()">Show Info</button>
     <button mat-stroked-button color="warn" (click)="showErrorToast()">Show Error</button>
   </div>
 
-  <h2>Dialog</h2>
-
-  <button mat-flat-button color="primary" (click)="openExampleDialog()">Open Dialog</button>
-
-  <h2>Spinner</h2>
-
-  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
-    <mat-spinner diameter="16" />
-    <mat-spinner diameter="24" />
-    <mat-spinner diameter="32" />
-    <mat-spinner diameter="40" />
-  </div>
-
-  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
-    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async" />
-  </div>
-
-  <h3>Button with Spinner</h3>
-
-  <div class="app-gap-x-2xs mb-s">
-    <button mat-flat-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Primary</button>
-    <button mat-stroked-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Secondary</button>
-  </div>
-
-  <!-- <h3>Button with Progress Indicator</h3>
-
-    <div class="app-gap-x-2xs mb-s">
-        <button mat-flat-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Primary</button>
-        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Secondary</button>
-    </div> -->
+  <mat-divider />
 
   <h2>Icons</h2>
 
@@ -140,6 +118,38 @@
     <!-- <mat-icon fontSet="fp" fontIcon="es" /> -->
   </div>
 
+  <h3>Spinner</h3>
+
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
+    <mat-spinner diameter="16" />
+    <mat-spinner diameter="24" />
+    <mat-spinner diameter="32" />
+    <mat-spinner diameter="40" />
+  </div>
+
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
+    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async" />
+  </div>
+
+  <h4>Button with Spinner</h4>
+
+  <div class="app-gap-x-2xs mb-s">
+    <button mat-flat-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Primary</button>
+    <button mat-stroked-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Secondary</button>
+  </div>
+
+  <!-- <h3>Button with Progress Indicator</h3>
+
+    <div class="app-gap-x-2xs mb-s">
+        <button mat-flat-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Primary</button>
+        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Secondary</button>
+    </div> -->
+
+  <mat-divider />
+
   <h2>Text</h2>
 
   <p class="fs-large">Large text (large) for unknown usage.</p>
@@ -152,9 +162,11 @@
 
   <p class="fs-xsmall">Legal text (xsmall).</p>
 
+  <mat-divider />
+
   <h2>Field</h2>
 
-  <dl class="row mb-s">
+  <dl class="row">
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Name</dt>
       <dd>Michael Jackson</dd>
@@ -180,6 +192,8 @@
       <dd>-</dd>
     </div>
   </dl>
+
+  <mat-divider />
 
   <h2>List</h2>
 
@@ -232,6 +246,8 @@
       </mat-selection-list>
     </div>
   </div>
+
+  <mat-divider />
 
   <h2>Utilities</h2>
 
@@ -301,6 +317,8 @@
     <div class="border border-primary px-m py-3xs">Block Element</div>
     <div class="border border-primary px-m py-3xs">Block Element</div>
   </div>
+
+  <mat-divider />
 
   <h2>Grid</h2>
 
