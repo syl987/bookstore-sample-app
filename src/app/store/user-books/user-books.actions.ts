@@ -4,8 +4,6 @@ import { ResponseError } from 'src/app/models/error.models';
 import { FirebaseUploadDataWithProgress } from 'src/app/models/firebase.models';
 import { GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
 
-// TODO buy actions
-
 export const UserBooksActions = createActionGroup({
   source: 'UserBooks',
   events: {

@@ -26,8 +26,6 @@ interface IUserBooksService {
   removeAllPhotos(bookId: string): Observable<void>;
   /** Publish a book. */
   publish(id: string, book: UserBookDTO): Observable<UserBookDTO>;
-  /** Buy a book. */
-  buy(id: string, book: UserBookDTO): Observable<UserBookDTO>;
 }
 
 @Injectable({
@@ -221,9 +219,5 @@ export class UserBooksService implements IUserBooksService {
     );
     result.subscribe();
     return result;
-  }
-
-  buy(id: string): Observable<UserBookDTO> {
-    throw new Error('Method not implemented.');
   }
 }

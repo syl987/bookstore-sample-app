@@ -3,11 +3,10 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ConfirmationDialogComponent, ConfirmationDialogData } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { ImageCropDialogComponent, ImageCropDialogData } from '../components/image-crop-dialog/image-crop-dialog.component';
-import { SlideshowDialogComponent, SlideshowDialogData } from '../components/slideshow-dialog/slideshow-dialog.component';
 import { UserBookCreateDialogComponent } from '../components/user-book-create-dialog/user-book-create-dialog.component';
 import { UserSessionInfoDialogComponent, UserSessionInfoDialogData } from '../components/user-session-info-dialog/user-session-info-dialog.component';
 import { AuthUser } from '../models/auth.models';
-import { BookDTO, UserBookDTO } from '../models/book.models';
+import { UserBookDTO } from '../models/book.models';
 
 // TODO refactor some as generic confirmation dialog
 
@@ -53,15 +52,6 @@ export class DialogService {
     };
 
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
-  }
-
-  openVolumeOfferPhotosDialog(book: BookDTO): MatDialogRef<SlideshowDialogComponent, boolean | undefined> {
-    const data: SlideshowDialogData = {
-      title: $localize`Book offer photos`,
-      images: Object.values(book.photos ?? {}),
-    };
-
-    return this.dialog.open(SlideshowDialogComponent, { data, maxWidth: 768 });
   }
 
   closeAllDialog(): void {
