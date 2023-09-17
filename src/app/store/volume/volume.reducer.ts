@@ -65,8 +65,8 @@ export const reducer = createReducer(
     ...state,
     buy: { ...state.buyOffer, pending: true, error: undefined },
   })),
-  on(VolumeActions.buyOfferSUCCESS, (state, { book }) => ({
-    ...adapter.upsertOne(book, state),
+  on(VolumeActions.buyOfferSUCCESS, (state, { volume }) => ({
+    ...adapter.upsertOne(volume, state),
     buy: { ...state.buyOffer, pending: false, error: undefined },
   })),
   on(VolumeActions.buyOfferERROR, (state, { error }) => ({
