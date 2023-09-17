@@ -19,6 +19,11 @@
     <td mat-cell *matCellDef="let book">{{ book.description }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="photos">
+    <th mat-header-cell *matHeaderCellDef i18n>Photos</th>
+    <td mat-cell *matCellDef="let book">{{ getPhotosTotal(book) || '-' }}</td>
+  </ng-container>
+
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let book" class="text-nowrap">
@@ -29,6 +34,6 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['number', 'condition', 'price', 'description', 'actions']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['number', 'condition', 'price', 'description', 'actions']"></tr>
+  <tr mat-header-row *matHeaderRowDef="['number', 'condition', 'price', 'description', 'photos', 'actions']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['number', 'condition', 'price', 'description', 'photos', 'actions']"></tr>
 </table>
