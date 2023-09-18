@@ -150,12 +150,12 @@ export class FirebaseApiService {
     );
   }
 
-  buyBookOffer(uid: string, id: string, offerId: string): Observable<{ volume: VolumeDTO | null; soldBook: UserBookDTO; boughtBook: UserBookDTO }> {
+  buyBookOffer(uid: string, id: string, offerId: string): Observable<{ volume: VolumeDTO | null; book: UserBookDTO }> {
     // 1a. load volume
     // 1b. load user book
     // 2a. update user book (status, buyer uid), create new bought user book as copy
     // 2b. remove book from volume or the whole volume if empty
-    // 3abc. load all data and return
+    // 3ab. load both and return
 
     return forkJoin([
       this.getVolume(id), // load affected volume
@@ -187,11 +187,10 @@ export class FirebaseApiService {
           concatMap(_ => {
             return forkJoin([
               from(get(ref(this.database, `volumes/${id}`)).then(snap => snap.val())), // load updated volume
-              from(get(ref(this.database, `userBooks/${uid}/${userBook.id}`)).then(snap => snap.val())), // load updated bought book
-              from(get(ref(this.database, `userBooks/${userBook.uid}/${userBook.id}`)).then(snap => snap.val())), // load updated sold book
+              from(get(ref(this.database, `userBooks/${uid}/${userBook.id}`)).then(snap => snap.val())), // load bought book
             ]).pipe(
-              map(([volumeOrNull, boughtBook, soldBook]) => {
-                return { volume: volumeOrNull, boughtBook, soldBook };
+              map(([volumeOrNull, boughtBook]) => {
+                return { volume: volumeOrNull, book: boughtBook };
               }),
             );
           }),

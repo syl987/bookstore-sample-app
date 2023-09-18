@@ -19,7 +19,7 @@ export const VolumeActions = createActionGroup({
     'filter': props<{ query: string }>(),
 
     'buy offer': props<{ id: string; offerId: string }>(),
-    'buy offer SUCCESS': props<{ id: string; volume: VolumeDTO | null; soldBook: UserBookDTO; boughtBook: UserBookDTO }>(),
+    'buy offer SUCCESS': props<{ id: string; volume: VolumeDTO | null; book: UserBookDTO }>(),
     'buy offer ERROR': props<{ error: ResponseError }>(),
   },
 });

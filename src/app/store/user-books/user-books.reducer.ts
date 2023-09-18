@@ -136,8 +136,8 @@ export const reducer = createReducer(
     ...state,
     publish: { ...state.publish, pending: false, error },
   })),
-  on(VolumeActions.buyOfferSUCCESS, (state, { soldBook, boughtBook }) => ({
-    ...adapter.upsertMany([soldBook, boughtBook], state),
+  on(VolumeActions.buyOfferSUCCESS, (state, { book }) => ({
+    ...adapter.upsertOne(book, state),
   })),
 );
 

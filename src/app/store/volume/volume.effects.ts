@@ -42,11 +42,11 @@ export class VolumesEffects {
     );
   });
 
-  readonly errorToast = createEffect(
+  readonly crudErrorToast = createEffect(
     () => {
       return this.actions.pipe(
         ofType(VolumeActions.loadERROR, VolumeActions.loadAllERROR),
-        tap(action => this.toastService.showSuccessToast(toActionErrorMessage(action))),
+        tap(action => this.toastService.showErrorToast(toActionErrorMessage(action))),
       );
     },
     { dispatch: false },
@@ -60,12 +60,32 @@ export class VolumesEffects {
           return of(VolumeActions.buyOfferERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
         return this.firebaseApi.buyBookOffer(this.authService.uid, id, offerId).pipe(
-          map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, soldBook: res.soldBook, boughtBook: res.boughtBook })),
+          map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, book: res.book })),
           catchError(err => of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
   });
+
+  readonly buyOfferSuccessToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(VolumeActions.buyOfferSUCCESS),
+        tap(action => this.toastService.showSuccessToast(toActionErrorMessage(action, [['buy offer', $localize`Book successfully bought.`]]))),
+      );
+    },
+    { dispatch: false },
+  );
+
+  readonly buyOfferErrorToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(VolumeActions.buyOfferERROR),
+        tap(action => this.toastService.showErrorToast(toActionErrorMessage(action, [['buy offer', $localize`Error buying book.`]]))),
+      );
+    },
+    { dispatch: false },
+  );
 
   constructor(
     private readonly actions: Actions,

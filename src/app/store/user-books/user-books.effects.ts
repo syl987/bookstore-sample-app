@@ -155,7 +155,7 @@ export class UserBooksEffects implements OnRunEffects {
     { dispatch: false },
   );
 
-  readonly errorToast = createEffect(
+  readonly crudErrorToast = createEffect(
     () => {
       return this.actions.pipe(
         ofType(

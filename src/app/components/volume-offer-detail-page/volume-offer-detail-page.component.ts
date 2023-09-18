@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
 import { BookDTO } from 'src/app/models/book.models';
 import { ImageDTO } from 'src/app/models/image.models';
@@ -36,6 +36,7 @@ export class VolumeOfferDetailPageComponent {
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly routerService: RouterService,
     private readonly volumeService: VolumeService,
     private readonly dialogService: DialogService,
@@ -64,13 +65,16 @@ export class VolumeOfferDetailPageComponent {
   }
 
   buyBookOffer(offer: BookDTO): void {
-    this.dialogService
-      .openUserBookBuyDialog()
-      .beforeClosed()
-      .subscribe(result => {
-        if (result) {
-          this.volumeService.buyOffer(this.id, this.offerId);
-        }
-      });
+    const dialogRef = this.dialogService.openUserBookBuyDialog();
+
+    dialogRef.beforeClosed().subscribe(result => {
+      if (result) {
+        // TODO move to effects?
+        // eslint-disable-next-line rxjs/no-nested-subscribe
+        this.volumeService.buyOffer(this.id, this.offerId).subscribe(book => {
+          this.router.navigateByUrl(`/user/books`);
+        });
+      }
+    });
   }
 }

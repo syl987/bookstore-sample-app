@@ -3,7 +3,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { concatMap, Observable, of, shareReplay, take, throwError } from 'rxjs';
 
-import { BookDTO } from '../models/book.models';
+import { BookDTO, UserBookDTO } from '../models/book.models';
 import { VolumeDTO } from '../models/volume.models';
 import { VolumeActions } from '../store/volume/volume.actions';
 import { volumeFeature } from '../store/volume/volume.reducer';
@@ -77,7 +77,7 @@ export class VolumeService implements IVolumeService {
     this.store.dispatch(VolumeActions.filter({ query }));
   }
 
-  buyOffer(id: string, offerId: string): Observable<BookDTO> {
+  buyOffer(id: string, offerId: string): Observable<UserBookDTO> {
     this.store.dispatch(VolumeActions.buyOffer({ id, offerId }));
 
     const result = this.actions.pipe(
