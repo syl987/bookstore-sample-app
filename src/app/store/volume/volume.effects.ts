@@ -42,16 +42,6 @@ export class VolumesEffects {
     );
   });
 
-  readonly crudErrorToast = createEffect(
-    () => {
-      return this.actions.pipe(
-        ofType(VolumeActions.loadERROR, VolumeActions.loadAllERROR),
-        tap(action => this.toastService.showErrorToast(toActionErrorMessage(action))),
-      );
-    },
-    { dispatch: false },
-  );
-
   readonly buyOffer = createEffect(() => {
     return this.actions.pipe(
       ofType(VolumeActions.buyOffer),
@@ -67,7 +57,7 @@ export class VolumesEffects {
     );
   });
 
-  readonly buyOfferSuccessToast = createEffect(
+  readonly successToast = createEffect(
     () => {
       return this.actions.pipe(
         ofType(VolumeActions.buyOfferSUCCESS),
@@ -77,10 +67,10 @@ export class VolumesEffects {
     { dispatch: false },
   );
 
-  readonly buyOfferErrorToast = createEffect(
+  readonly errorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.buyOfferERROR),
+        ofType(VolumeActions.loadERROR, VolumeActions.loadAllERROR, VolumeActions.buyOfferERROR),
         tap(action => this.toastService.showErrorToast(toActionErrorMessage(action, [['buy offer', $localize`Error buying book.`]]))),
       );
     },
