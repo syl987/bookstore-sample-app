@@ -45,7 +45,7 @@ export class VolumesEffects {
     () => {
       return this.actions.pipe(
         ofType(VolumeActions.loadERROR, VolumeActions.loadAllERROR),
-        tap(action => this.toastService.showSuccessToast(toActionErrorMessage(action))),
+        tap(action => this.toastService.showErrorToast(toActionErrorMessage(action))),
       );
     },
     { dispatch: false },
