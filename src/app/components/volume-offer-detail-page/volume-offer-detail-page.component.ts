@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, concatMap, filter, map } from 'rxjs';
+import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookDTO } from 'src/app/models/book.models';
 import { ImageDTO } from 'src/app/models/image.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
@@ -65,16 +66,15 @@ export class VolumeOfferDetailPageComponent {
   }
 
   buyBookOffer(offer: BookDTO): void {
-    const dialogRef = this.dialogService.openUserBookBuyDialog();
-
-    dialogRef.beforeClosed().subscribe(result => {
-      if (result) {
-        // TODO move to effects?
-        // eslint-disable-next-line rxjs/no-nested-subscribe
-        this.volumeService.buyOffer(this.id, this.offerId).subscribe(book => {
-          this.router.navigateByUrl(`/user/books`);
-        });
-      }
-    });
+    this.dialogService
+      .openUserBookBuyDialog()
+      .beforeClosed()
+      .pipe(
+        filter(isTrue),
+        concatMap(_ => this.volumeService.buyOffer(this.id, offer.id)),
+      )
+      .subscribe(_ => {
+        this.router.navigateByUrl(`/user/books`);
+      });
   }
 }
