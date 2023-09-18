@@ -163,6 +163,12 @@ export class FirebaseApiService {
       this.getUserBook(uid, id), // load user book to be sold
     ]).pipe(
       concatMap(([volume, userBook]) => {
+        if (volume.publishedBooks?.[offerId].status !== BookStatus.PUBLISHED) {
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
+        }
+        if (userBook.status !== BookStatus.PUBLISHED) {
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
+        }
         const book: UserBookDTO = {
           ...userBook,
           status: BookStatus.SOLD,
@@ -177,7 +183,7 @@ export class FirebaseApiService {
 
         return forkJoin([
           from(update(ref(this.database), changes)), // update sold user book, create bought user book
-          from(remove(ref(this.database, `volumes/${id}` + hasOtherOffers ? `/publishedBooks/${offerId}` : ''))), // delete offer or volume (if empty)
+          from(remove(ref(this.database, `volumes/${id}` + hasOtherOffers ? `/publishedBooks/${offerId}` : ''))), // delete the offer or the whole volume (if empty)
         ]).pipe(
           concatMap(_ => {
             return forkJoin([
@@ -185,8 +191,8 @@ export class FirebaseApiService {
               from(get(ref(this.database, `userBooks/${uid}/${userBook.id}`)).then(snap => snap.val())), // load updated bought book
               from(get(ref(this.database, `userBooks/${userBook.uid}/${userBook.id}`)).then(snap => snap.val())), // load updated sold book
             ]).pipe(
-              map(([updatedVolume, boughtBook, soldBook]) => {
-                return { volume: updatedVolume, boughtBook, soldBook };
+              map(([volumeOrNull, boughtBook, soldBook]) => {
+                return { volume: volumeOrNull, boughtBook, soldBook };
               }),
             );
           }),
