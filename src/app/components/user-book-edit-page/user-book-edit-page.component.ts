@@ -7,10 +7,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, concatMap, filter, map, of, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, concatMap, filter, map, tap } from 'rxjs';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { getObjectValues } from 'src/app/functions/object.functions';
-import { isTrue } from 'src/app/functions/typeguard.functions';
+import { isTrue, isTruthy } from 'src/app/functions/typeguard.functions';
 import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { ValidationErrorPipe } from 'src/app/pipes/validation-error.pipe';
@@ -157,29 +157,26 @@ export class UserBookEditPageComponent {
       .openUserBookDeleteDialog()
       .beforeClosed()
       .pipe(
-        filter(isTrue), // ignore close without result
+        filter(isTrue),
         concatMap(_ => this.userBooksService.delete(this.id)),
       )
       .subscribe(_ => this.router.navigateByUrl('/user/books'));
   }
 
   openImageCropDialog(file: File): void {
-    const dialogRef = this.dialogService.openImageCropDialog(file);
-
-    dialogRef
+    this.dialogService
+      .openImageCropDialog(file)
       .beforeClosed()
       .pipe(
+        filter(isTruthy),
         concatMap(result => {
-          if (result) {
-            return this.userBooksService.uploadPhoto(this.id, result).pipe(
-              tap(uploadData => {
-                if (uploadData.complete) {
-                  this.userBooksService.load(this.id);
-                }
-              }),
-            );
-          }
-          return of(null);
+          return this.userBooksService.uploadPhoto(this.id, result).pipe(
+            tap(uploadData => {
+              if (uploadData.complete) {
+                this.userBooksService.load(this.id);
+              }
+            }),
+          );
         }),
       )
       .subscribe();
