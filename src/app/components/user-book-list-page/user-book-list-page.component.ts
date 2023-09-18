@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
+import { isTruthy } from 'src/app/functions/typeguard.functions';
 import { DialogService } from 'src/app/services/dialog.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
@@ -28,12 +30,12 @@ export class UserBookListPageComponent implements OnInit {
   }
 
   openBookCreateDialog(): void {
-    const dialogRef = this.dialogService.openUserBookCreateDialog();
-
-    dialogRef.beforeClosed().subscribe(book => {
-      if (book) {
+    this.dialogService
+      .openUserBookCreateDialog()
+      .beforeClosed()
+      .pipe(filter(isTruthy))
+      .subscribe(book => {
         this.router.navigateByUrl('/user/books/' + book.id + '/edit');
-      }
-    });
+      });
   }
 }

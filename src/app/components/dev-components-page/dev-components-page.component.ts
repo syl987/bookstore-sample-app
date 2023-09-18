@@ -36,9 +36,10 @@ export class DevComponentsPageComponent {
   openExampleDialog(): void {
     const data: ExampleDevDialogData = { text: 'Example dialog beautiful content.' };
 
-    const dialogRef = this.dialog.open(DevExampleDialogComponent, { data, maxWidth: '512px' });
-
-    dialogRef.beforeClosed().subscribe(result => result === 'action' && this.toastService.showSuccessToast('Dialog action dispatched.'));
+    this.dialog
+      .open(DevExampleDialogComponent, { data, maxWidth: '512px' })
+      .beforeClosed()
+      .subscribe(result => result === 'action' && this.toastService.showSuccessToast('Dialog action dispatched.'));
   }
 
   showSuccessToast(): void {
