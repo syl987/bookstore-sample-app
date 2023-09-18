@@ -60,7 +60,7 @@ export class VolumesEffects {
           return of(VolumeActions.buyOfferERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
         return this.firebaseApi.buyBookOffer(this.authService.uid, id, offerId).pipe(
-          map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, boughtBook: res.boughtBook, soldBook: res.soldBook })),
+          map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, soldBook: res.soldBook, boughtBook: res.boughtBook })),
           catchError(err => of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }))),
         );
       }),
