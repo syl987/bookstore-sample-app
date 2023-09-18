@@ -151,52 +151,62 @@ export class FirebaseApiService {
   }
 
   buyBookOffer(uid: string, id: string, offerId: string): Observable<{ volume: VolumeDTO | null; book: UserBookDTO }> {
-    // 1a. load volume
-    // 1b. load user book
-    // 2a. update user book (status, buyer uid), create new bought user book as copy
-    // 2b. remove book from volume or the whole volume if empty
-    // 3ab. load both and return
+    // 1. load volume
+    // 2. load user book
+    // 3a. update user book (status, buyer uid), create new bought user book as copy
+    // 3b. remove book from volume or the whole volume if empty
+    // 4ab. load both and return
 
-    return forkJoin([
-      this.getVolume(id), // load affected volume
-      this.getUserBook(uid, id), // load user book to be sold
-    ]).pipe(
-      concatMap(([volume, userBook]) => {
-        if (volume.publishedBooks?.[offerId].status !== BookStatus.PUBLISHED) {
-          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
-        }
-        if (userBook.status !== BookStatus.PUBLISHED) {
-          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
-        }
-        const book: UserBookDTO = {
-          ...userBook,
-          status: BookStatus.SOLD,
-          buyerUid: uid,
-        };
-        const changes: { [path: string]: any } = {
-          [`userBooks/${userBook.uid}/${userBook.id}/status`]: BookStatus.SOLD,
-          [`userBooks/${userBook.uid}/${userBook.id}/buyerUid`]: uid,
-          [`userBooks/${uid}/${userBook.id}`]: book,
-        };
-        const hasOtherOffers = Object.keys(volume.publishedBooks ?? {}).length > 1;
+    return this.getVolume(id) // load affected volume
+      .pipe(
+        concatMap(volume => {
+          const sellerUid = volume.publishedBooks?.[offerId].uid;
 
-        return forkJoin([
-          from(update(ref(this.database), changes)), // update sold user book, create bought user book
-          from(remove(ref(this.database, `volumes/${id}` + hasOtherOffers ? `/publishedBooks/${offerId}` : ''))), // delete the offer or the whole volume (if empty)
-        ]).pipe(
-          concatMap(_ => {
-            return forkJoin([
-              from(get(ref(this.database, `volumes/${id}`)).then(snap => snap.val())), // load updated volume
-              from(get(ref(this.database, `userBooks/${uid}/${userBook.id}`)).then(snap => snap.val())), // load bought book
-            ]).pipe(
-              map(([volumeOrNull, boughtBook]) => {
-                return { volume: volumeOrNull, book: boughtBook };
+          if (!sellerUid) {
+            throw new FirebaseError('custom:invalid_data', 'Invalid offer id.');
+          }
+          return this.getUserBook(sellerUid, offerId) // load user book to be sold
+            .pipe(
+              concatMap(userBook => {
+                console.log(volume);
+                console.log(userBook);
+                if (volume.publishedBooks?.[offerId].status !== BookStatus.PUBLISHED) {
+                  throw new FirebaseError('custom:invalid_status', 'Invalid status.');
+                }
+                if (userBook.status !== BookStatus.PUBLISHED) {
+                  throw new FirebaseError('custom:invalid_status', 'Invalid status.');
+                }
+                const book: UserBookDTO = {
+                  ...userBook,
+                  status: BookStatus.SOLD,
+                  buyerUid: uid,
+                };
+                const changes: { [path: string]: any } = {
+                  [`userBooks/${userBook.uid}/${userBook.id}/status`]: BookStatus.SOLD,
+                  [`userBooks/${userBook.uid}/${userBook.id}/buyerUid`]: uid,
+                  [`userBooks/${uid}/${userBook.id}`]: book,
+                };
+                const hasOtherOffers = Object.keys(volume.publishedBooks ?? {}).length > 1;
+
+                return forkJoin([
+                  from(update(ref(this.database), changes)), // update sold user book, create bought user book
+                  from(remove(ref(this.database, `volumes/${id}` + hasOtherOffers ? `/publishedBooks/${offerId}` : ''))), // delete the offer or the whole volume (if empty)
+                ]).pipe(
+                  concatMap(_ => {
+                    return forkJoin([
+                      from(get(ref(this.database, `volumes/${id}`)).then(snap => snap.val())), // load updated volume
+                      from(get(ref(this.database, `userBooks/${uid}/${userBook.id}`)).then(snap => snap.val())), // load bought book
+                    ]).pipe(
+                      map(([volumeOrNull, boughtBook]) => {
+                        return { volume: volumeOrNull, book: boughtBook };
+                      }),
+                    );
+                  }),
+                );
               }),
             );
-          }),
-        );
-      }),
-    );
+        }),
+      );
   }
 
   deleteUserBook(uid: string, id: string): Observable<void> {
