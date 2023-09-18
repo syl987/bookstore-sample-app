@@ -22,6 +22,7 @@ export class UserBookListPageComponent implements OnInit {
   readonly userBooksDraft$ = this.userBooksService.entitiesDraft$;
   readonly userBooksPublished$ = this.userBooksService.entitiesPublished$;
   readonly userBooksSold$ = this.userBooksService.entitiesSold$;
+  readonly userBooksBought$ = this.userBooksService.entitiesBought$;
 
   constructor(private readonly router: Router, private readonly userBooksService: UserBooksService, private readonly dialogService: DialogService) {}
 
