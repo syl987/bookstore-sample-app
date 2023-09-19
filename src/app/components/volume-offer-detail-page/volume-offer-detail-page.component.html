@@ -1,6 +1,6 @@
 <div class="container">
   <app-title-bar [backUrl]="'/volumes/' + id">
-    <button *ngIf="offer$ | async as offer" mat-stroked-button color="accent" (click)="buyBookOffer(offer)" i18n>Buy Book</button>
+    <button *ngIf="offer$ | async as offer" mat-stroked-button color="accent" (click)="buyBookOffer(offer)" [disabled]="isUserBook$ | async" i18n>Buy Book</button>
   </app-title-bar>
 
   <p i18n>Details for the selected book offer.</p>

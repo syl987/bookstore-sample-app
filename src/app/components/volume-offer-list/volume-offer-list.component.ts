@@ -24,6 +24,8 @@ export class VolumeOfferListComponent {
   publishedBooks: readonly BookDTO[] = [];
   volumeId?: string;
 
+  @Input() uid?: string | null;
+
   getPhotosTotal(book: BookDTO): number {
     return Object.keys(book.photos ?? {}).length;
   }
