@@ -67,6 +67,59 @@
 
   <mat-divider />
 
+  <h2>Input</h2>
+
+  <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()">
+    <div class="row">
+      <div class="col-sm-4 col-md-3 col-xl-2">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Email</mat-label>
+          <input type="text" matInput formControlName="email" email />
+          <mat-error>{{ form.get('email') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-4 col-md-3 col-xl-2">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Price</mat-label>
+          <input type="number" matInput formControlName="number" min="2" max="14" />
+          <span matTextSuffix class="text-nowrap text-muted ms-2xs">{{ 0 | number : '.2-2' | slice : 1 }} {{ currencySymbol }}</span>
+          <mat-error>{{ form.get('number') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-4 col-md-3 col-xl-2">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Fruits</mat-label>
+          <select matNativeControl formControlName="select">
+            <option></option>
+            <option value="apples">Apples</option>
+            <option value="orages">Oranges</option>
+          </select>
+          <mat-error>{{ form.get('select') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 col-xl-6">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="area" required minlength="3" maxlength="255" cdkTextareaAutosize></textarea>
+          <mat-error>{{ form.get('area') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="app-gap-x-2xs mb-2m">
+      <button type="submit" mat-flat-button color="primary">Submit</button>
+      <button type="button" mat-stroked-button color="accent" (click)="invalidateForm()">Invalidate</button>
+      <button type="reset" mat-stroked-button [disabled]="form.disabled">Reset</button>
+    </div>
+  </form>
+
+  <mat-divider />
+
   <h2>Overlay</h2>
 
   <h3>Dialog</h3>
