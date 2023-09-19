@@ -23,7 +23,7 @@ export const routes: Routes = [
   },
   {
     path: 'search',
-    title: $localize`Search`,
+    title: $localize`Books`,
     loadComponent: () => import('./components/search-page/search-page.component').then(m => m.SearchPageComponent),
   },
   {
