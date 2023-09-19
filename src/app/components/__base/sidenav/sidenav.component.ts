@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, isDevMode, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
 import { APP_NAV_LINKS } from 'src/app/models/app.models';
@@ -20,7 +20,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class SidenavComponent {
   readonly user$ = this.authService.user$;
 
-  readonly LINKS = APP_NAV_LINKS.filter(link => !link.dev || isDevMode());
+  readonly LINKS = APP_NAV_LINKS;
   readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
 
   @Output() readonly navigated = new EventEmitter<void>();

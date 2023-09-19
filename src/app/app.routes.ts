@@ -1,4 +1,3 @@
-import { isDevMode } from '@angular/core';
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { Routes } from '@angular/router';
 
@@ -59,15 +58,12 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'dev',
+    title: `Component Collection`,
+    loadComponent: () => import('./components/dev-components-page/dev-components-page.component').then(m => m.DevComponentsPageComponent),
+  },
+  {
     path: '**',
     redirectTo: '/home',
   },
 ];
-
-if (isDevMode()) {
-  routes.splice(routes.length - 1, 0, {
-    path: 'dev',
-    title: `Component Collection`,
-    loadComponent: () => import('./components/dev-components-page/dev-components-page.component').then(m => m.DevComponentsPageComponent),
-  });
-}

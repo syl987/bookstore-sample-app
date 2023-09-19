@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Inject, Output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -58,7 +58,7 @@ export class HeaderComponent {
     query: new FormControl<string>(''),
   });
 
-  readonly LINKS = APP_NAV_LINKS.filter(link => !link.dev || isDevMode());
+  readonly LINKS = APP_NAV_LINKS;
   readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
   readonly USER_LINKS = this.LINKS.filter(link => link.user);
 

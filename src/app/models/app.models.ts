@@ -24,15 +24,13 @@ export interface AppNavLink {
   readonly path: string;
   /** Whether authentication as existing user is required (default: false). */
   readonly user?: boolean;
-  /** Whether to hide in non-development builds (default: false). */
-  readonly dev?: boolean;
 }
 
 export const APP_NAV_LINKS: readonly AppNavLink[] = [
   { label: $localize`Home`, path: '/home' },
   { label: $localize`Search`, path: '/search' },
   { label: $localize`My Books`, path: '/user/books', user: true },
-  { label: 'Dev', path: '/dev', dev: true },
+  { label: 'Dev', path: '/dev' },
 ];
 
 export interface AppLanguage {
