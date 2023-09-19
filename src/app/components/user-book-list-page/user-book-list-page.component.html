@@ -27,7 +27,7 @@
 
   <div class="row">
     <div *ngFor="let book of userBooksPublished$ | async" class="col-md-6 col-xl-4 mb-m">
-      <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
+      <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
         <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
       </a>
     </div>
@@ -41,7 +41,7 @@
 
   <div class="row">
     <div *ngFor="let book of userBooksSold$ | async" class="col-md-6 col-xl-4 mb-m">
-      <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
+      <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
         <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
       </a>
     </div>
@@ -55,7 +55,7 @@
 
   <div class="row">
     <div *ngFor="let book of userBooksBought$ | async" class="col-md-6 col-xl-4 mb-m">
-      <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
+      <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
         <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
       </a>
     </div>

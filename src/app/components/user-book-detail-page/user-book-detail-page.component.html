@@ -1,0 +1,42 @@
+<div class="container">
+  <app-title-bar backUrl="/user/books">
+    <!-- <button mat-stroked-button disabled>View Offers</button> -->
+    <button mat-stroked-button color="accent" disabled i18n>Publish Book</button>
+    <button mat-stroked-button color="warn" disabled i18n>Delete Book</button>
+  </app-title-bar>
+
+  <p [ngSwitch]="(book$ | async)?.status">
+    Details for the selected book.
+    <ng-container *ngSwitch="BookStatus.PUBLISHED">This book has been published and is available for other users to buy it.</ng-container>
+    <ng-container *ngSwitch="BookStatus.SOLD">This book is no longer visible to other users.</ng-container>
+  </p>
+
+  <div *ngIf="book$ | async as book">
+    <app-volume-card [volume]="book.volume" />
+
+    <div class="mt-2m">
+      <dl class="row">
+        <div class="col-12 mb-2xs">
+          <dt i18n>Description</dt>
+          <dd>{{ book.description }}</dd>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <dt i18n>Condition</dt>
+          <dd>{{ book.condition | bookCondition }}</dd>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <dt i18n>Price</dt>
+          <dd>{{ book.price | currency }}</dd>
+        </div>
+      </dl>
+
+      <h3 i18n>Available Photos</h3>
+
+      <div class="d-flex flex-wrap">
+        <img *ngFor="let photo of getBookPhotos(book)" [src]="photo.src" [alt]="photo.alt" class="me-s mb-s" style="max-height: 256px" />
+
+        <p *ngIf="!getBookPhotos(book).length" class="text-muted fs-small mt-nxs" i18n>No photos were uploaded.</p>
+      </div>
+    </div>
+  </div>
+</div>

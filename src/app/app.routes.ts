@@ -51,6 +51,11 @@ export const routes: Routes = [
         title: $localize`Edit Book Details`,
         loadComponent: () => import('./components/user-book-edit-page/user-book-edit-page.component').then(m => m.UserBookEditPageComponent),
       },
+      {
+        path: 'books/:bookId',
+        title: $localize`View Book Details`,
+        loadComponent: () => import('./components/user-book-detail-page/user-book-detail-page.component').then(m => m.UserBookDetailPageComponent),
+      },
     ],
   },
   {
