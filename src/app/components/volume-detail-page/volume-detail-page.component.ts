@@ -4,9 +4,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
-import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
@@ -33,14 +33,13 @@ export class VolumeDetailPageComponent {
   readonly volume$ = this.volumeService.entitiyByRoute$;
 
   readonly loggedIn$ = this.authService.loggedIn$;
-  readonly uid$ = this.authService.user$;
+  readonly uid$ = this.authService.user$.pipe(map(user => user?.uid));
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly authService: AuthService,
     private readonly routerService: RouterService,
     private readonly volumeService: VolumeService,
-    private readonly dialogService: DialogService,
   ) {
     this.routerService
       .selectRouteParam('volumeId')
