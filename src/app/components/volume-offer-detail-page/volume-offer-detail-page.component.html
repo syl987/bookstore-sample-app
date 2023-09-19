@@ -3,7 +3,7 @@
     <button *ngIf="offer$ | async as offer" mat-stroked-button color="accent" (click)="buyBookOffer(offer)" [disabled]="isUserBook$ | async" i18n>Buy Book</button>
   </app-title-bar>
 
-  <p i18n>Details for the selected book offer. <span *ngIf="isUserBook$ | async" class="text-accent">This is your own offer, thus you cannot buy it.</span></p>
+  <p i18n>Details for the selected book offer. <span *ngIf="isUserBook$ | async" class="text-info">This is your own offer, thus you cannot buy it.</span></p>
 
   <div *ngIf="volume$ | async as volume">
     <app-volume-card [volume]="volume" />
