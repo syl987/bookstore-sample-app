@@ -64,7 +64,7 @@
     "8298333184054476827": "Registration",
     "6338378562333277926": "Letzter Login",
     "123010868147850959": "Benutzer",
-    "1848505234856789345": "{VAR_PLURAL, plural, =1 {Ein Buch für {INTERPOLATION} verfügbar} other {{VAR_PLURAL} Bücher ab {INTERPOLATION} verfügbar}}",
+    "4162209846692442047": "{VAR_PLURAL, plural, =1 {Ein Buch für {INTERPOLATION} verfügbar.} other {{INTERPOLATION_1} Bücher ab {INTERPOLATION} verfügbar.}}",
     "2895028737142036295": "Liste der verfügbaren Buchangebote zum ausgewählten Buchband.",
     "5877541543547848488": "Liste der Buchangebote",
     "7907361170986009552": "Buch kaufen",
