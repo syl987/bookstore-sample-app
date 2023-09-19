@@ -30,6 +30,8 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// TODO force login on buy
+
 // TODO check translations
 // TODO move page descriptions to route data?
 // TODO kick unnecessary texts
