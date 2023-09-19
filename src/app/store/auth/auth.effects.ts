@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Auth, authState, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, exhaustMap, from, map, of } from 'rxjs';
+import { catchError, concatMap, exhaustMap, from, map, of, skipWhile } from 'rxjs';
 import { toResponseErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError } from 'src/app/models/error.models';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -22,6 +22,8 @@ export class AuthEffects {
         }
         return AuthActions.unauthenticated();
       }),
+      // prevent on-logout navigation on init (if not authenticated)
+      skipWhile(action => action.type === AuthActions.unauthenticated.type),
     );
   });
 
