@@ -5,10 +5,11 @@
     <button mat-stroked-button color="warn" disabled i18n>Delete Book</button>
   </app-title-bar>
 
-  <p [ngSwitch]="(book$ | async)?.status">
+  <p>
     <ng-container i18n>Details for the selected book.</ng-container>
-    <span *ngSwitch="BookStatus.PUBLISHED" i18n>This book has been published and is available for other users to buy it.</span>
-    <span *ngSwitch="BookStatus.SOLD" i18n>This book is no longer visible to other users.</span>
+    <span>&nbsp;</span>
+    <span *ngIf="(book$ | async)?.status === BookStatus.PUBLISHED" i18n>This book has been published and is available for other users to buy it.</span>
+    <span *ngIf="(book$ | async)?.status === BookStatus.SOLD" i18n>This book is no longer visible to other users.</span>
   </p>
 
   <div *ngIf="book$ | async as book">
