@@ -1,23 +1,157 @@
 <div class="container">
   <app-title-bar />
 
-  <div class="row">
-    <div class="col-md-6">
-      <h2>Tech-Stack</h2>
-      <dl>
-        <dt>Angular</dt>
-        <dd>Clean and consistent application structure. Heavily using rxjs' Observables and SCSS for styling.</dd>
-        <dt>Ngrx</dt>
-        <dd>Application State and View fully decoupled! View all events in the browser console in real-time.</dd>
-        <dt>Material Components</dt>
-        <dd>View built with native angular components.</dd>
-        <dt>Firebase</dt>
-        <dd>Using authentication, nosql database, file storage and web hosting modules.</dd>
-        <dt>Bootstrap</dt>
-        <dd>Consistent global syntax for CSS helpers.</dd>
-        <dt>Prettier + Eslint</dt>
-        <dd>Beautiful and consistent code using custom config.</dd>
-      </dl>
+  <h2 class="mt-0">Tech-Stack</h2>
+
+  <p>These technologies are the backbone of the application.</p>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4 col-xl-3">
+      <mat-card class="text-center mb-m">
+        <img mat-card-image src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular logo" class="mb-nxs" height="140" />
+
+        <mat-card-header class="mb-2xs">
+          <mat-card-title>Angular</mat-card-title>
+          <mat-card-subtitle>Main Framework</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>Clean and consistent application structure. Heavily using rxjs' Observables and SCSS for styling.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-md-6 col-lg-4 col-xl-3">
+      <mat-card class="text-center mb-m">
+        <img mat-card-image src="https://ngrx.io/assets/images/badge.svg" alt="Ngrx logo" class="pt-s" height="128" />
+
+        <mat-card-header class="mb-2xs">
+          <mat-card-title>NGRX</mat-card-title>
+          <mat-card-subtitle>State Management, Logic</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>Application State and View fully decoupled! View all events in the browser console in real-time.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-md-6 col-lg-4 col-xl-3">
+      <mat-card class="text-center mb-m">
+        <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" class="pt-3xs mt-3xs mb-n3xs" style="height: 128px">
+          <defs>
+            <linearGradient gradientTransform="matrix(2.67 0 0 -2.67 317.23 -1808)" gradientUnits="userSpaceOnUse" id="dd" x1="-108.63" x2="-58.56" y1="-692.24" y2="-742.31">
+              <stop offset="0" stop-color="#fff" stop-opacity=".1"></stop>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+            </linearGradient>
+            <linearGradient gradientUnits="userSpaceOnUse" id="bb" x1="56.9" x2="48.9" y1="102.54" y2="98.36">
+              <stop offset="0" stop-color="#a52714"></stop>
+              <stop offset=".4" stop-color="#a52714" stop-opacity=".5"></stop>
+              <stop offset=".8" stop-color="#a52714" stop-opacity="0"></stop>
+            </linearGradient>
+            <linearGradient gradientUnits="userSpaceOnUse" id="cc" x1="90.89" x2="87.31" y1="90.91" y2="87.33">
+              <stop offset="0" stop-color="#a52714" stop-opacity=".8"></stop>
+              <stop offset=".5" stop-color="#a52714" stop-opacity=".21"></stop>
+              <stop offset="1" stop-color="#a52714" stop-opacity="0"></stop>
+            </linearGradient>
+            <clipPath id="aa">
+              <path
+                d="M143.41 47.34a4 4 0 00-6.77-2.16L115.88 66 99.54 34.89a4 4 0 00-7.08 0l-8.93 17-22.4-41.77a4 4 0 00-7.48 1.28L32 150l57.9 32.46a12 12 0 0011.7 0L160 150z"
+              ></path>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#aa)">
+            <path d="M32 150L53.66 11.39a4 4 0 017.48-1.27l22.4 41.78 8.93-17a4 4 0 017.08 0L160 150z" fill="#ffa000"></path>
+            <path d="M106 9L0 0v192l32-42L106 9z" fill="url(#bb)" opacity=".12"></path>
+            <path d="M106.83 96.01l-23.3-44.12L32 150l74.83-53.99z" fill="#f57c00"></path>
+            <path d="M0 0h192v192H0z" fill="url(#cc)" opacity=".2"></path>
+            <path d="M160 150L143.41 47.34a4 4 0 00-6.77-2.16L32 150l57.9 32.47a12 12 0 0011.7 0z" fill="#ffca28"></path>
+            <path
+              d="M143.41 47.34a4 4 0 00-6.77-2.16L115.88 66 99.54 34.89a4 4 0 00-7.08 0l-8.93 17-22.4-41.77a4 4 0 00-7.48 1.28L32 150h-.08l.07.08.57.28L115.83 67l20.78-20.8a4 4 0 016.78 2.16l16.45 101.74.16-.1zM32.19 149.81L53.66 12.39a4 4 0 017.48-1.28l22.4 41.78 8.93-17a4 4 0 017.08 0l16 30.43z"
+              fill="#fff"
+              fill-opacity=".2"
+            ></path>
+            <path
+              d="M101.6 181.49a12 12 0 01-11.7 0l-57.76-32.4-.14.91 57.9 32.46a12 12 0 0011.7 0L160 150l-.15-.92z"
+              fill="#a52714"
+              opacity=".2"
+              style="isolation: isolate"
+            ></path>
+            <path
+              d="M143.41 47.34a4 4 0 00-6.77-2.16L115.88 66 99.54 34.89a4 4 0 00-7.08 0l-8.93 17-22.4-41.77a4 4 0 00-7.48 1.28L32 150l57.9 32.46a12 12 0 0011.7 0L160 150z"
+              fill="url(#dd)"
+            ></path>
+          </g>
+        </svg>
+
+        <mat-card-header class="mb-2xs">
+          <mat-card-title>Firebase</mat-card-title>
+          <mat-card-subtitle>Backend Services</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>Using authentication, noSQL realtime database, file storage and web hosting services.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-md-6 col-lg-4 col-xl-3">
+      <mat-card class="text-center mb-m">
+        <img mat-card-image src="https://material.angular.io/assets/img/angular-material-logo.svg" alt="Angular Material logo" class="pt-s" height="128" />
+
+        <mat-card-header class="mb-2xs">
+          <mat-card-title>Material</mat-card-title>
+          <mat-card-subtitle>Angular Components</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>Native Angular components with customized theming, typography and general appearence.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-md-6 col-lg-4 col-xl-3">
+      <mat-card class="text-center mb-m">
+        <img
+          mat-card-image
+          src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo-shadow.png"
+          alt="Bootstrap logo"
+          class="mx-auto mt-2xs mb-n2xs"
+          width="155"
+          height="128"
+        />
+
+        <mat-card-header class="mb-2xs">
+          <mat-card-title>Bootstrap</mat-card-title>
+          <mat-card-subtitle>Grid, Helpers, Typography</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>Consistent global syntax for grid, helpers and typography. Using its variables as center piece.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-md-6 col-lg-4 col-xl-3">
+      <mat-card class="text-center mb-m">
+        <img
+          mat-card-image
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/ESLint_logo.svg/192px-ESLint_logo.svg.png"
+          alt="Eslint logo"
+          class="mx-auto pt-s px-2xs"
+          width="145"
+          height="128"
+        />
+
+        <mat-card-header class="mb-2xs">
+          <mat-card-title>Eslint + Prettier</mat-card-title>
+          <mat-card-subtitle>Linting, Formatting</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>Semi-automated code quality tooling for correctness, appearence and consistency.</p>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 

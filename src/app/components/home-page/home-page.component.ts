@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 
@@ -14,7 +15,7 @@ import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, TitleBarComponent],
+  imports: [CommonModule, TitleBarComponent, MatCardModule],
   templateUrl: './home-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
