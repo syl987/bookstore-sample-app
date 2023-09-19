@@ -27,7 +27,10 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let book" class="text-nowrap">
-      <div class="app-gap-x-2xs"></div>
+      <div class="app-gap-x-2xs pull-right">
+        <a *ngIf="uid !== book.uid" mat-button color="primary" [routerLink]="['/volumes', volumeId, 'offer', book.id]" i18n>Proceed</a>
+        <a *ngIf="uid === book.uid" mat-button color="primary" [routerLink]="['/volumes', volumeId, 'offer', book.id]" i18n>View</a>
+      </div>
     </td>
   </ng-container>
 

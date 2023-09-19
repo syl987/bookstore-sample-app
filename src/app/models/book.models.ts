@@ -24,6 +24,7 @@ export interface BookDTO {
   condition?: BookCondition | null;
   photos?: { [id: string]: ImageDTO } | null;
   price?: number | null;
+  buyerUid?: string | null;
 }
 
 export interface UserBookDTO extends BookDTO {

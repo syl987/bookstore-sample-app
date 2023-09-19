@@ -47,3 +47,17 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="(userBooksBought$ | async)?.length" class="container">
+  <h2 i18n>Bought</h2>
+
+  <p i18n>This is your list of the books that you bought from other users.</p>
+
+  <div class="row">
+    <div *ngFor="let book of userBooksBought$ | async" class="col-md-6 col-xl-4 mb-m">
+      <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
+        <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+      </a>
+    </div>
+  </div>
+</div>

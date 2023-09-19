@@ -4,6 +4,7 @@ import { BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { OperationState, OperationStateWithProgress } from 'src/app/models/store.models';
 
 import { selectRouteParam } from '../router/router.selectors';
+import { VolumeActions } from '../volume/volume.actions';
 import { UserBooksActions } from './user-books.actions';
 
 export const userBooksFeatureKey = 'userBooks';
@@ -135,6 +136,9 @@ export const reducer = createReducer(
     ...state,
     publish: { ...state.publish, pending: false, error },
   })),
+  on(VolumeActions.buyOfferSUCCESS, (state, { book }) => ({
+    ...adapter.upsertOne(book, state),
+  })),
 );
 
 export const userBooksFeature = createFeature({
@@ -146,7 +150,8 @@ export const userBooksFeature = createFeature({
 
     selectAllDraft: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.DRAFT)),
     selectAllPublished: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.PUBLISHED)),
-    selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.SOLD)),
+    selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.SOLD && !b.buyerUid)),
+    selectAllBought: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.SOLD && b.buyerUid)),
 
     selectByRoute: createSelector(selectEntities, selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
 

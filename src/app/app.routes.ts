@@ -33,6 +33,11 @@ export const routes: Routes = [
     loadComponent: () => import('./components/volume-detail-page/volume-detail-page.component').then(m => m.VolumeDetailPageComponent),
   },
   {
+    path: 'volumes/:volumeId/offer/:offerId',
+    title: $localize`Book Offer Details`,
+    loadComponent: () => import('./components/volume-offer-detail-page/volume-offer-detail-page.component').then(m => m.VolumeOfferDetailPageComponent),
+  },
+  {
     path: 'user',
     ...canActivate(() => redirectUnauthorizedTo('/login')),
     children: [

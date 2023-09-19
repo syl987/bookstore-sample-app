@@ -43,6 +43,17 @@ export class DialogService {
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
   }
 
+  openUserBookBuyDialog(): MatDialogRef<ConfirmationDialogComponent, boolean | undefined> {
+    const data: ConfirmationDialogData = {
+      title: $localize`Buy selected book`,
+      description: $localize`Buying a book will make you the new owner. The offer will no longer be available to other users. You can always review your list of bought books in your "My Books" section.`,
+      action: $localize`Buy Book`,
+      color: 'accent',
+    };
+
+    return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
+  }
+
   openUserBookDeleteDialog(): MatDialogRef<ConfirmationDialogComponent, boolean | undefined> {
     const data: ConfirmationDialogData = {
       title: $localize`Delete selected book`,

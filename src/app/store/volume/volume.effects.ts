@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
-import { firebaseError } from 'src/app/models/error.models';
+import { firebaseError, internalError } from 'src/app/models/error.models';
 import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { VolumeActions } from './volume.actions';
@@ -41,15 +42,45 @@ export class VolumesEffects {
     );
   });
 
-  readonly errorToast = createEffect(
+  readonly buyOffer = createEffect(() => {
+    return this.actions.pipe(
+      ofType(VolumeActions.buyOffer),
+      exhaustMap(({ id, offerId }) => {
+        if (!this.authService.uid) {
+          return of(VolumeActions.buyOfferERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+        }
+        return this.firebaseApi.buyBookOffer(this.authService.uid, id, offerId).pipe(
+          map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, book: res.book })),
+          catchError(err => of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }))),
+        );
+      }),
+    );
+  });
+
+  readonly successToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.loadERROR, VolumeActions.loadAllERROR),
-        tap(action => this.toastService.showErrorToast(toActionErrorMessage(action))),
+        ofType(VolumeActions.buyOfferSUCCESS),
+        tap(action => this.toastService.showSuccessToast(toActionErrorMessage(action, [['buy offer', $localize`Book successfully bought.`]]))),
       );
     },
     { dispatch: false },
   );
 
-  constructor(private readonly actions: Actions, private readonly firebaseApi: FirebaseApiService, private readonly toastService: ToastService) {}
+  readonly errorToast = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(VolumeActions.loadERROR, VolumeActions.loadAllERROR, VolumeActions.buyOfferERROR),
+        tap(action => this.toastService.showErrorToast(toActionErrorMessage(action, [['buy offer', $localize`Error buying book.`]]))),
+      );
+    },
+    { dispatch: false },
+  );
+
+  constructor(
+    private readonly actions: Actions,
+    private readonly authService: AuthService,
+    private readonly firebaseApi: FirebaseApiService,
+    private readonly toastService: ToastService,
+  ) {}
 }
