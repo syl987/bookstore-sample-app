@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, concatMap, filter, map } from 'rxjs';
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookDTO } from 'src/app/models/book.models';
-import { ImageDTO } from 'src/app/models/image.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,6 +15,7 @@ import { VolumeService } from 'src/app/services/volume.service';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
+import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-fields.component';
 
 function getBookOfferById(arg: [VolumeDTO | undefined, string | undefined]): BookDTO | undefined {
   const [volume, offerId] = arg;
@@ -25,7 +25,7 @@ function getBookOfferById(arg: [VolumeDTO | undefined, string | undefined]): Boo
 @Component({
   selector: 'app-volume-offer-detail-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, VolumeCardComponent, BookConditionPipe, TitleBarComponent],
+  imports: [CommonModule, MatButtonModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent, BookConditionPipe],
   templateUrl: './volume-offer-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -54,10 +54,6 @@ export class VolumeOfferDetailPageComponent {
           this.volumeService.load(id);
         }
       });
-  }
-
-  getOfferPhotos(offer: BookDTO): ImageDTO[] {
-    return Object.values(offer.photos ?? {});
   }
 
   buyBookOffer(offer: BookDTO): void {

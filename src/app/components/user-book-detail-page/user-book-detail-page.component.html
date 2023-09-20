@@ -12,32 +12,9 @@
     <span *ngIf="(book$ | async)?.status === BookStatus.SOLD" i18n>This book is no longer visible to other users.</span>
   </p>
 
-  <div *ngIf="book$ | async as book">
-    <app-volume-card [volume]="book.volume" />
+  <ng-container *ngIf="book$ | async as book">
+    <app-volume-card [volume]="book.volume" class="mb-m" />
 
-    <div class="mt-2m">
-      <dl class="row">
-        <div class="col-12 mb-2xs">
-          <dt i18n>Description</dt>
-          <dd>{{ book.description }}</dd>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <dt i18n>Condition</dt>
-          <dd>{{ book.condition | bookCondition }}</dd>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <dt i18n>Price</dt>
-          <dd>{{ book.price | currency }}</dd>
-        </div>
-      </dl>
-
-      <h3 i18n>Available Photos</h3>
-
-      <div class="d-flex flex-wrap">
-        <img *ngFor="let photo of getBookPhotos(book)" [src]="photo.src" [alt]="photo.alt" class="me-s mb-s" style="max-height: 256px" />
-
-        <p *ngIf="!getBookPhotos(book).length" class="text-muted fs-small mt-nxs" i18n>No photos were uploaded.</p>
-      </div>
-    </div>
-  </div>
+    <app-volume-offer-fields [offer]="book" />
+  </ng-container>
 </div>
