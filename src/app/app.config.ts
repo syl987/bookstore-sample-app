@@ -30,26 +30,10 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO force login on buy
+// TODO redirect to login on buy and other user actions
 
-// TODO check translations
-// TODO move page descriptions to route data?
-// TODO kick unnecessary texts
-// TODO check better translation file formats
 // TODO check splitting translation files
-// TODO check layout details
-
-// TODO bug: on first page load, language selector is not shown
-
 // TODO resolve navigation between book and volume
-// TODO header search
-// TODO volume and book details with breadcrumb history via navigation state
-// TODO list books as table, kick accordion
-// TODO upload book image
-
-// TODO update angular fire
-// TODO consider material grid-list with breakpoint observer instead of bootstrap grid
-// TODO add $localize function and x18n tags to all language strings
 // TODO consider using signals, check how to integrate with ngrx
 
 // TODO impressum page
