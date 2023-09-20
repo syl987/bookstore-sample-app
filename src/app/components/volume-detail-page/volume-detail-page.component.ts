@@ -23,7 +23,7 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
 @Component({
   selector: 'app-volume-detail-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatTableModule, VolumeCardComponent, BookConditionPipe, TitleBarComponent, VolumeOfferListComponent],
+  imports: [CommonModule, MatButtonModule, MatTableModule, TitleBarComponent, VolumeCardComponent, VolumeOfferListComponent, BookConditionPipe],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

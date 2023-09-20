@@ -15,7 +15,7 @@ import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, TitleBarComponent, MatCardModule],
+  imports: [CommonModule, MatCardModule, TitleBarComponent],
   templateUrl: './home-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
