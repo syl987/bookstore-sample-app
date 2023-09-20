@@ -1,4 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Inject, Output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -31,6 +32,7 @@ const FAKE_RESPONSE_TIME = 750;
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
+    OverlayModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
@@ -65,6 +67,8 @@ export class HeaderComponent {
   readonly APP_LANGUAGES = APP_LANGUAGES;
 
   readonly currentLang = getCurrentAppLanguage();
+
+  searchOverlayOpen = false;
 
   @Output() readonly sidenavToggle = new EventEmitter<void>();
 

@@ -1,5 +1,5 @@
 <mat-toolbar class="mat-elevation-z8">
-  <mat-toolbar-row>
+  <mat-toolbar-row cdkOverlayOrigin #searchOverlayTrigger="cdkOverlayOrigin">
     <ng-container *ngIf="desktop$ | async; else mobile">
       <div class="text-primary fs-large me-s">{{ options.applicationName }}</div>
 
@@ -55,4 +55,27 @@
   <div class="text-primary fs-normal text-truncate me-s">{{ options.applicationName }}</div>
 
   <span class="ms-2xs me-auto"></span>
+
+  <button mat-icon-button color="primary" (click)="searchOverlayOpen = !searchOverlayOpen" class="me-n3xs" aria-label="Search" i18n-aria-label>
+    <mat-icon fontIcon="fa-search" style="scale: 0.75" />
+  </button>
+
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOpen]="searchOverlayOpen"
+    [cdkConnectedOverlayOrigin]="searchOverlayTrigger"
+    [cdkConnectedOverlayPositions]="[{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top', panelClass: 'app-search-overlay' }]"
+  >
+    <form [formGroup]="form" (ngSubmit)="search(); searchOverlayOpen = false" class="w-100">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-icon fontIcon="fa-search" inline class="text-primary" matPrefix />
+        <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
+        <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen = false" class="me-3xs" matSuffix>
+          <mat-icon fontIcon="fa-times" style="scale: 0.75" />
+        </button>
+      </mat-form-field>
+    </form>
+  </ng-template>
+
+  <mat-divider vertical class="mx-2xs" style="height: 32px" />
 </ng-template>

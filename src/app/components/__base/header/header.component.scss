@@ -62,6 +62,11 @@
     height: 64px; // matches toolbar height for desktop layout
     padding-top: 21px !important;
     padding-bottom: 19px !important;
+
+    // match mobile toolbar breakpoint
+    @media (max-width: 599px) {
+      height: 56px; // matches toolbar height for mobile layout
+    }
   }
 
   .mdc-line-ripple {
@@ -70,5 +75,35 @@
 
   .mat-mdc-form-field-subscript-wrapper {
     height: 0;
+  }
+}
+
+::ng-deep .app-search-overlay {
+  // 36px = button(48px - 12px)
+  left: 36px + 4px !important;
+  // 53px = button(48px - 12px) + divider(8px + 1px + 8px)
+  right: 53px - 8px + 4px !important;
+
+  // align with container paddings
+  margin-left: app-spacer(s);
+  margin-right: app-spacer(s);
+
+  @media (min-width: app-grid-breakpoint('sm')) {
+    margin-left: app-spacer(m);
+    margin-right: app-spacer(m);
+  }
+
+  @media (min-width: app-grid-breakpoint('xl')) {
+    margin-left: app-spacer(2m);
+    margin-right: app-spacer(2m);
+  }
+
+  // center input element within the form field
+  // match mobile toolbar breakpoint
+  @media (max-width: 599px) {
+    .mat-mdc-form-field-infix {
+      margin-top: -4px;
+      margin-bottom: 4px;
+    }
   }
 }
