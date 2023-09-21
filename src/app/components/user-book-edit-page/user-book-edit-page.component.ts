@@ -22,12 +22,6 @@ import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
-// TODO implement view offers or add navigation to volume, if published books exist
-// TODO navigate to user books after an action
-// TODO delete book (if not sold)
-// TODO add support for 404
-// TODO bug: change detection not fired after photo upload
-
 @Component({
   selector: 'app-user-book-edit-page',
   standalone: true,

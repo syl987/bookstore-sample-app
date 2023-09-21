@@ -14,12 +14,6 @@ import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list.component';
 
-// TODO loading spinner
-// TODO buy book => create a confirmation page
-// TODO navigate to user books => create a success dialog
-// TODO add support for 404
-// TODO use async pipe in templates to be able to react to logout change
-
 @Component({
   selector: 'app-volume-detail-page',
   standalone: true,

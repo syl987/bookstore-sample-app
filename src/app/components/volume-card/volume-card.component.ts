@@ -4,8 +4,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
-// TODO loading appearence
-
 @Component({
   selector: 'app-volume-card',
   standalone: true,

@@ -8,8 +8,6 @@ import { VolumeService } from 'src/app/services/volume.service';
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
-// TODO open as firebase database stream
-
 @Component({
   selector: 'app-volume-search-page',
   standalone: true,

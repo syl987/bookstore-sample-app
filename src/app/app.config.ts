@@ -39,6 +39,37 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO impressum page
 // TODO footer link to my github or some other page
 
+// welcome
+// TODO display some welcome message or banner
+// TODO display some data protection policy
+
+// search
+// TODO open as firebase database stream
+
+// volume detail
+// TODO loading spinner
+// TODO buy book => create a confirmation page
+// TODO navigate to user books => create a success dialog
+// TODO add support for 404
+// TODO use async pipe in templates to be able to react to logout change
+
+// volume card
+// TODO loading appearence
+
+// user book edit
+// TODO implement view offers or add navigation to volume, if published books exist
+// TODO navigate to user books after an action
+// TODO delete book (if not sold)
+// TODO add support for 404
+// TODO bug: change detection not fired after photo upload
+
+// sidenav
+// TODO add close button or support ESC key
+
+// image upload
+// placeholder img
+// progress
+
 const appOptions: AppOptions = {
   applicationName: 'Bookstore Sample App',
   copyrightName: 'Igor Milly',
