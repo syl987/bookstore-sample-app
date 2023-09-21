@@ -9,7 +9,7 @@ import { googleBooksFeature } from '../store/google-books/google-books.reducer';
 })
 export class GoogleBooksService {
   readonly searchQuery$ = this.store.select(googleBooksFeature.selectSearchQuery);
-  readonly searchList$ = this.store.select(googleBooksFeature.selectSearchList); // TODO rename as results?
+  readonly searchList$ = this.store.select(googleBooksFeature.selectSearchList);
 
   readonly searchResults$ = this.store.select(googleBooksFeature.selectSearchResults);
   readonly searchResultsTotal$ = this.store.select(googleBooksFeature.selectSearchResultsTotal);

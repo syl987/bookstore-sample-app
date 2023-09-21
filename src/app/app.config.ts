@@ -31,12 +31,19 @@ import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
 // general
-// TODO redirect to login on buy and other user actions
+// TODO change accent color to green
+// TODO redirect to login on buy and other actions requiring login
 // TODO consider using signals, check how to integrate with ngrx
 // TODO impressum / legal dislaimer page
 // TODO make some data protection policy page
 // TODO footer link to my github or some other page
 // TODO use async pipe in templates to be able to react to logout change
+// TODO gap helper conflicts with negative link margin in the title-bar
+// TODO check any other todos within the code base
+
+// routing
+// TODO keep same page after login
+// TODO guard and keep same page or redirect after logout
 
 // volume search
 // TODO open as firebase database stream
@@ -54,6 +61,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO navigate to user books after an action
 // TODO delete book (if not sold)
 // TODO bug: change detection not fired after photo upload
+// TODO check file delete feature works properly
 
 // user book edit / detail
 // TODO add support for 404

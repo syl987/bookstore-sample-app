@@ -1,9 +1,6 @@
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { Routes } from '@angular/router';
 
-// TODO keep same page after login
-// TODO guard and keep same page or redirect after logout
-
 export const routes: Routes = [
   {
     path: '',
