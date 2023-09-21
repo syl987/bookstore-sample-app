@@ -62,9 +62,6 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO add support for 404
 // TODO resolve navigation between book and volume => nope, need to just display offer list
 
-// sidenav
-// TODO add close button or support ESC key
-
 // image upload
 // TODO placeholder img
 // TODO progress

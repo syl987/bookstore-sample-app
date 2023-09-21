@@ -35,3 +35,7 @@
     <button mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
   </mat-action-list>
 </ng-template>
+
+<button mat-icon-button color="primary" (click)="navigated.emit()" class="position-absolute top-0 end-0 m-3xs" aria-label="Close" i18n-aria-label>
+  <mat-icon fontIcon="fa-times" class="align-top" style="scale: 0.75" />
+</button>
