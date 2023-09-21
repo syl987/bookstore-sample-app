@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { RouteParam, RouteQueryParam } from '../models/router.models';
+import { NavigationState, RouteParam, RouteQueryParam } from '../models/router.models';
 import * as RouterSelectors from '../store/router/router.selectors';
 
 @Injectable({
@@ -13,7 +14,11 @@ export class RouterService {
   readonly title$ = this.store.select(RouterSelectors.selectTitle);
   readonly fragment$ = this.store.select(RouterSelectors.selectFragment);
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store, private readonly router: Router) {}
+
+  getCurrentNavigationState(): NavigationState {
+    return (this.router.getCurrentNavigation()?.extras.state ?? {}) as NavigationState;
+  }
 
   selectRouteParam(param: RouteParam): Observable<string | undefined> {
     return this.store.select(RouterSelectors.selectRouteParam(param));
