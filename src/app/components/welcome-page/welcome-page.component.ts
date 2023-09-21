@@ -8,10 +8,10 @@ import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 // TODO display some data protection policy
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-welcome-page',
   standalone: true,
   imports: [CommonModule, MatCardModule, TitleBarComponent],
-  templateUrl: './home-page.component.html',
+  templateUrl: './welcome-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePageComponent {}
+export class WelcomePageComponent {}

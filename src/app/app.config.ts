@@ -48,7 +48,7 @@ const appOptions: AppOptions = {
 const authConfig: AuthConfig = {
   loginUrl: '/login',
   afterLoginUrl: '/',
-  afterLogoutUrl: '/home',
+  afterLogoutUrl: '/welcome',
   bearerExcluded: [{ url: 'https://www.googleapis.com/books/v1/volumes' }],
   bearerIncluded: [],
   messages: {

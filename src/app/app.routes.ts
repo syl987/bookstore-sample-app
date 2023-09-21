@@ -8,18 +8,18 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/home',
+    redirectTo: '/welcome',
   },
   {
     path: 'login',
     title: $localize`Login`,
-    ...canActivate(() => redirectLoggedInTo('/home')),
+    ...canActivate(() => redirectLoggedInTo('/welcome')),
     loadComponent: () => import('./components/login-page/login-page.component').then(m => m.LoginPageComponent),
   },
   {
-    path: 'home',
-    title: $localize`Home`,
-    loadComponent: () => import('./components/home-page/home-page.component').then(m => m.HomePageComponent),
+    path: 'welcome',
+    title: $localize`Welcome`,
+    loadComponent: () => import('./components/welcome-page/welcome-page.component').then(m => m.WelcomePageComponent),
   },
   {
     path: 'search',
@@ -64,6 +64,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/home',
+    redirectTo: '/welcome',
   },
 ];
