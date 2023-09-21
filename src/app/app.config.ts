@@ -34,12 +34,9 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO redirect to login on buy and other user actions
 // TODO consider using signals, check how to integrate with ngrx
 // TODO impressum / legal dislaimer page
+// TODO make some data protection policy page
 // TODO footer link to my github or some other page
 // TODO use async pipe in templates to be able to react to logout change
-
-// welcome
-// TODO display some welcome message or banner
-// TODO display some data protection policy
 
 // volume search
 // TODO change search page path to /volumes (header link active on volume detail)
