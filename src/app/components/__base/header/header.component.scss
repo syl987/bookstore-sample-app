@@ -19,6 +19,7 @@
   }
 }
 
+::ng-deep .cdk-overlay-pane.app-search-overlay .mat-mdc-form-field .mat-mdc-text-field-wrapper::after,
 .mat-toolbar .mat-mdc-form-field ::ng-deep .mat-mdc-text-field-wrapper::after,
 .mat-toolbar .mat-mdc-button::after {
   content: '';
@@ -33,6 +34,7 @@
   transition: width 0.3s;
 }
 
+::ng-deep .cdk-overlay-pane.app-search-overlay .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper::after,
 .mat-toolbar .mat-mdc-form-field.mat-focused ::ng-deep .mat-mdc-text-field-wrapper::after,
 .mat-toolbar .mat-mdc-button.active::after {
   width: calc(100% - 16px);
@@ -50,6 +52,7 @@
   }
 }
 
+::ng-deep .cdk-overlay-pane.app-search-overlay .mat-mdc-form-field .mat-mdc-text-field-wrapper,
 .mat-toolbar .mat-mdc-button,
 .mat-toolbar .mat-mdc-icon-button,
 :host .mat-toolbar .mat-mdc-icon-button ::ng-deep .mat-mdc-button-persistent-ripple {
