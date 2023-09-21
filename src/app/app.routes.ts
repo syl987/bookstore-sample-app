@@ -13,7 +13,7 @@ export const routes: Routes = [
   {
     path: 'login',
     title: $localize`Login`,
-    ...canActivate(() => redirectLoggedInTo('/welcome')),
+    ...canActivate(() => redirectLoggedInTo('/volumes/search')),
     loadComponent: () => import('./components/login-page/login-page.component').then(m => m.LoginPageComponent),
   },
   {
