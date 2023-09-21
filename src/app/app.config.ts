@@ -42,6 +42,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO display some data protection policy
 
 // volume search
+// TODO change search page path to /volumes (header link active on volume detail)
 // TODO open as firebase database stream
 
 // volume detail
