@@ -3,7 +3,7 @@
 
   <p i18n>Browse the available book offers for the selected volume.</p>
 
-  <div *ngIf="volume$ | async as volume">
+  <ng-container *ngIf="volume$ | async as volume">
     <app-volume-card [volume]="volume" />
 
     <h3 class="mt-2m mb-2xs" i18n>List of book offers</h3>
@@ -11,5 +11,5 @@
     <div class="overflow-x-auto">
       <app-volume-offer-list [volume]="volume" [uid]="uid$ | async" />
     </div>
-  </div>
+  </ng-container>
 </div>
