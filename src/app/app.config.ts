@@ -30,20 +30,18 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
+// general
 // TODO redirect to login on buy and other user actions
-
-// TODO check splitting translation files
-// TODO resolve navigation between book and volume
 // TODO consider using signals, check how to integrate with ngrx
-
-// TODO impressum page
+// TODO impressum / legal dislaimer page
 // TODO footer link to my github or some other page
+// TODO use async pipe in templates to be able to react to logout change
 
 // welcome
 // TODO display some welcome message or banner
 // TODO display some data protection policy
 
-// search
+// volume search
 // TODO open as firebase database stream
 
 // volume detail
@@ -51,24 +49,25 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO buy book => create a confirmation page
 // TODO navigate to user books => create a success dialog
 // TODO add support for 404
-// TODO use async pipe in templates to be able to react to logout change
 
 // volume card
 // TODO loading appearence
 
 // user book edit
-// TODO implement view offers or add navigation to volume, if published books exist
 // TODO navigate to user books after an action
 // TODO delete book (if not sold)
-// TODO add support for 404
 // TODO bug: change detection not fired after photo upload
+
+// user book edit / detail
+// TODO add support for 404
+// TODO resolve navigation between book and volume => nope, need to just display offer list
 
 // sidenav
 // TODO add close button or support ESC key
 
 // image upload
-// placeholder img
-// progress
+// TODO placeholder img
+// TODO progress
 
 const appOptions: AppOptions = {
   applicationName: 'Bookstore Sample App',
