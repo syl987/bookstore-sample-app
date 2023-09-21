@@ -102,7 +102,7 @@ export class HeaderComponent {
       )
       .subscribe(query => {
         this.volumeService.filter(query);
-        this.router.navigateByUrl('/volumes/search');
+        this.router.navigateByUrl('/volumes');
       });
   }
 

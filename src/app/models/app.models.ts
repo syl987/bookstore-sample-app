@@ -28,7 +28,7 @@ export interface AppNavLink {
 
 export const APP_NAV_LINKS: readonly AppNavLink[] = [
   { label: $localize`Welcome`, path: '/welcome' },
-  { label: $localize`Books`, path: '/volumes/search' },
+  { label: $localize`Books`, path: '/volumes' },
   { label: $localize`My Books`, path: '/user/books', user: true },
   { label: 'Dev', path: '/dev' },
 ];

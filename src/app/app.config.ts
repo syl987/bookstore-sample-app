@@ -39,7 +39,6 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO use async pipe in templates to be able to react to logout change
 
 // volume search
-// TODO change search page path to /volumes (header link active on volume detail)
 // TODO open as firebase database stream
 
 // volume detail
@@ -72,7 +71,7 @@ const appOptions: AppOptions = {
 
 const authConfig: AuthConfig = {
   loginUrl: '/login',
-  afterLoginUrl: '/volumes/search',
+  afterLoginUrl: '/volumes',
   afterLogoutUrl: '/welcome',
   bearerExcluded: [{ url: 'https://www.googleapis.com/books/v1/volumes' }],
   bearerIncluded: [],

@@ -13,7 +13,7 @@ export const routes: Routes = [
   {
     path: 'login',
     title: $localize`Login`,
-    ...canActivate(() => redirectLoggedInTo('/volumes/search')),
+    ...canActivate(() => redirectLoggedInTo('/volumes')),
     loadComponent: () => import('./components/login-page/login-page.component').then(m => m.LoginPageComponent),
   },
   {
@@ -22,7 +22,7 @@ export const routes: Routes = [
     loadComponent: () => import('./components/welcome-page/welcome-page.component').then(m => m.WelcomePageComponent),
   },
   {
-    path: 'volumes/search',
+    path: 'volumes',
     title: $localize`Books`,
     loadComponent: () => import('./components/volume-search-page/volume-search-page.component').then(m => m.VolumeSearchPageComponent),
   },
