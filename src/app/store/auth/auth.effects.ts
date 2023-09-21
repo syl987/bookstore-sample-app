@@ -16,14 +16,13 @@ import { AuthActions } from './auth.actions';
 export class AuthEffects {
   readonly authenticated = createEffect(() => {
     return authState(this.auth).pipe(
-      map(state => {
-        if (state) {
+      skipWhile(user => !user), // prevent on-logout navigation on init (if not authenticated)
+      map(user => {
+        if (user) {
           return AuthActions.authenticated();
         }
         return AuthActions.unauthenticated();
       }),
-      // prevent on-logout navigation on init (if not authenticated)
-      skipWhile(action => action.type === AuthActions.unauthenticated.type),
     );
   });
 
