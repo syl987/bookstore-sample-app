@@ -19,6 +19,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 })
 export class SearchPageComponent implements OnInit {
   readonly volumesFiltered$ = this.volumeService.entitiesFiltered$;
+  readonly volumesFilteredEmpty$ = this.volumeService.entitiesFiltered$.pipe(map(v => !v.length));
 
   readonly noFilterQuery$ = this.volumeService.filterQuery$.pipe(map(q => !q.length));
 
