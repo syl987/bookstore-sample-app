@@ -11,13 +11,13 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 // TODO open as firebase database stream
 
 @Component({
-  selector: 'app-search-page',
+  selector: 'app-volume-search-page',
   standalone: true,
   imports: [CommonModule, RouterModule, MatButtonModule, TitleBarComponent, VolumeCardComponent],
-  templateUrl: './search-page.component.html',
+  templateUrl: './volume-search-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchPageComponent implements OnInit {
+export class VolumeSearchPageComponent implements OnInit {
   readonly volumesFiltered$ = this.volumeService.entitiesFiltered$;
   readonly volumesFilteredEmpty$ = this.volumeService.entitiesFiltered$.pipe(map(v => !v.length));
 

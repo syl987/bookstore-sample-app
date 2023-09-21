@@ -22,9 +22,9 @@ export const routes: Routes = [
     loadComponent: () => import('./components/welcome-page/welcome-page.component').then(m => m.WelcomePageComponent),
   },
   {
-    path: 'search',
+    path: 'volumes/search',
     title: $localize`Books`,
-    loadComponent: () => import('./components/search-page/search-page.component').then(m => m.SearchPageComponent),
+    loadComponent: () => import('./components/volume-search-page/volume-search-page.component').then(m => m.VolumeSearchPageComponent),
   },
   {
     path: 'volumes/:volumeId',
