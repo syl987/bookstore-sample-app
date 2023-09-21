@@ -22,7 +22,7 @@ export class FirebaseApiService {
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {
     const reference = ref(this.database, `userBooks/${uid}/${id}`);
     const result = get(reference).then(snap => snap.val());
-    return from(result).pipe(map(entity => entity ?? throwError(() => new FirebaseError('custom:no_data', 'No data available.'))));
+    return from(result).pipe(concatMap(entity => (entity ? of(entity) : throwError(() => new FirebaseError('custom:no_data', 'No data available.')))));
   }
 
   getUserBooks(uid: string): Observable<UserBookDTO[]> {
@@ -229,7 +229,7 @@ export class FirebaseApiService {
   getVolume(id: string): Observable<VolumeDTO> {
     const reference = ref(this.database, `volumes/${id}`);
     const result = get(reference).then(snap => snap.val());
-    return from(result).pipe(map(entity => entity ?? throwError(() => new FirebaseError('custom:no_data', 'No data available.'))));
+    return from(result).pipe(concatMap(entity => (entity ? of(entity) : throwError(() => new FirebaseError('custom:no_data', 'No data available.')))));
   }
 
   getVolumes(): Observable<VolumeDTO[]> {
