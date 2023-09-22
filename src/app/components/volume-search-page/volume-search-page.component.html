@@ -1,6 +1,6 @@
 <div class="container">
   <app-title-bar>
-    <button mat-stroked-button (click)="clearSearch()" [disabled]="noFilterQuery$ | async" i18n>Clear Search</button>
+    <button mat-stroked-button (click)="clearSearch()" [disabled]="filterQueryEmpty$ | async" i18n>Clear Search</button>
   </app-title-bar>
 
   <p i18n>Explore books available for purchase.</p>

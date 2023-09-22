@@ -21,7 +21,7 @@ export class VolumeSearchPageComponent implements OnInit {
 
   readonly volumesFilteredEmpty$ = combineLatest([this.volumesFiltered$, this.volumesLoadPending$]).pipe(map(([v, p]) => !v.length && !p));
 
-  readonly noFilterQuery$ = this.volumeService.filterQuery$.pipe(map(q => !q.length));
+  readonly filterQueryEmpty$ = this.volumeService.filterQuery$.pipe(map(q => !q.length));
 
   constructor(private readonly volumeService: VolumeService) {}
 
