@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-import { map } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 import { VolumeService } from 'src/app/services/volume.service';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
@@ -17,7 +17,9 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 })
 export class VolumeSearchPageComponent implements OnInit {
   readonly volumesFiltered$ = this.volumeService.entitiesFiltered$;
-  readonly volumesFilteredEmpty$ = this.volumeService.entitiesFiltered$.pipe(map(v => !v.length));
+  readonly volumesLoadPending$ = this.volumeService.loadPending$;
+
+  readonly volumesFilteredEmpty$ = combineLatest([this.volumesFiltered$, this.volumesLoadPending$]).pipe(map(([v, p]) => !v.length && !p));
 
   readonly noFilterQuery$ = this.volumeService.filterQuery$.pipe(map(q => !q.length));
 
