@@ -15,7 +15,7 @@ export interface State extends EntityState<UserBookDTO> {
   remove: OperationState;
   editDraft: OperationState;
   uploadPhoto: OperationStateWithProgress;
-  removeAllPhotos: OperationState;
+  removePhoto: OperationState;
   publish: OperationState;
 }
 
@@ -30,13 +30,13 @@ const initialState: State = adapter.getInitialState({
   remove: { pending: false },
   editDraft: { pending: false },
   uploadPhoto: { pending: false },
-  removeAllPhotos: { pending: false },
+  removePhoto: { pending: false },
   publish: { pending: false },
 });
 
 export const reducer = createReducer(
   initialState,
-  on(UserBooksActions.load, state => ({
+  on(UserBooksActions.load, UserBooksActions.loadAll, state => ({
     ...state,
     load: { ...state.load, pending: true, error: undefined },
   })),
@@ -44,19 +44,11 @@ export const reducer = createReducer(
     ...adapter.upsertOne(book, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadERROR, (state, { error }) => ({
-    ...state,
-    load: { ...state.load, pending: false, error },
-  })),
-  on(UserBooksActions.loadAll, state => ({
-    ...state,
-    load: { ...state.load, pending: true, error: undefined },
-  })),
   on(UserBooksActions.loadAllSUCCESS, (state, { books }) => ({
     ...adapter.upsertMany(books, state),
     load: { ...state.load, pending: false, error: undefined },
   })),
-  on(UserBooksActions.loadAllERROR, (state, { error }) => ({
+  on(UserBooksActions.loadERROR, UserBooksActions.loadAllERROR, (state, { error }) => ({
     ...state,
     load: { ...state.load, pending: false, error },
   })),
@@ -112,17 +104,17 @@ export const reducer = createReducer(
     ...state,
     uploadPhoto: { ...state.uploadPhoto, pending: false, progress: undefined, error },
   })),
-  on(UserBooksActions.removeAllPhotos, state => ({
+  on(UserBooksActions.removePhoto, UserBooksActions.removeAllPhotos, state => ({
     ...state,
-    removeAllPhotos: { ...state.removeAllPhotos, pending: true, error: undefined },
+    removePhoto: { ...state.removePhoto, pending: true, error: undefined },
   })),
-  on(UserBooksActions.removeAllPhotosSUCCESS, state => ({
+  on(UserBooksActions.removePhotoSUCCESS, UserBooksActions.removeAllPhotosSUCCESS, state => ({
     ...state,
-    removeAllPhotos: { ...state.removeAllPhotos, pending: false, error: undefined },
+    removePhoto: { ...state.removePhoto, pending: false, error: undefined },
   })),
-  on(UserBooksActions.removeAllPhotosERROR, (state, { error }) => ({
+  on(UserBooksActions.removePhotoERROR, UserBooksActions.removeAllPhotosERROR, (state, { error }) => ({
     ...state,
-    removeAllPhotos: { ...state.removeAllPhotos, pending: false, error },
+    removePhoto: { ...state.removePhoto, pending: false, error },
   })),
   on(UserBooksActions.publish, state => ({
     ...state,
@@ -144,7 +136,7 @@ export const reducer = createReducer(
 export const userBooksFeature = createFeature({
   name: userBooksFeatureKey,
   reducer,
-  extraSelectors: ({ selectUserBooksState, selectEntities, selectLoad, selectCreate, selectRemove, selectEditDraft, selectUploadPhoto, selectRemoveAllPhotos, selectPublish }) => ({
+  extraSelectors: ({ selectUserBooksState, selectEntities, selectLoad, selectCreate, selectRemove, selectEditDraft, selectUploadPhoto, selectRemovePhoto, selectPublish }) => ({
     selectAll: createSelector(selectUserBooksState, adapter.getSelectors().selectAll),
     selectTotal: createSelector(selectUserBooksState, adapter.getSelectors().selectTotal),
 
@@ -171,8 +163,8 @@ export const userBooksFeature = createFeature({
     selectUploadPhotoProgress: createSelector(selectUploadPhoto, ({ progress }) => progress),
     selectUploadPhotoError: createSelector(selectUploadPhoto, ({ error }) => error),
 
-    selectRemoveAllPhotosPending: createSelector(selectRemoveAllPhotos, ({ pending }) => pending),
-    selectRemoveAllPhotosError: createSelector(selectRemoveAllPhotos, ({ error }) => error),
+    selectRemovePhotoPending: createSelector(selectRemovePhoto, ({ pending }) => pending),
+    selectRemovePhotoError: createSelector(selectRemovePhoto, ({ error }) => error),
 
     selectPublishPending: createSelector(selectPublish, ({ pending }) => pending),
     selectPublishError: createSelector(selectPublish, ({ error }) => error),

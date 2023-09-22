@@ -55,4 +55,10 @@ export class FirebaseFileService {
     const task = listAll(reference).then(result => result.items.forEach(item => deleteObject(ref(this.storage, item.fullPath))));
     return from(task);
   }
+
+  deleteFile(path: string): Observable<void> {
+    const reference = ref(this.storage, path);
+    const task = deleteObject(reference);
+    return from(task);
+  }
 }

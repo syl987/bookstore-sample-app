@@ -58,8 +58,8 @@ export class UserBooksService implements IUserBooksService {
   readonly uploadPhotoProgress$ = this.store.select(userBooksFeature.selectUploadPhotoProgress);
   readonly uploadPhotoError$ = this.store.select(userBooksFeature.selectUploadPhotoError);
 
-  readonly removeAllPhotosPending$ = this.store.select(userBooksFeature.selectRemoveAllPhotosPending);
-  readonly removeAllPhotosError$ = this.store.select(userBooksFeature.selectRemoveAllPhotosError);
+  readonly removePhotoPending$ = this.store.select(userBooksFeature.selectRemovePhotoPending);
+  readonly removePhotoError$ = this.store.select(userBooksFeature.selectRemovePhotoError);
 
   readonly publishPending$ = this.store.select(userBooksFeature.selectPublishPending);
   readonly publishError$ = this.store.select(userBooksFeature.selectPublishError);
@@ -177,6 +177,24 @@ export class UserBooksService implements IUserBooksService {
         }
         if (action.type === UserBooksActions.uploadPhotoSUCCESS.type) {
           return of(action.uploadData);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
+  }
+
+  removePhoto(bookId: string, photoId: string): Observable<void> {
+    this.store.dispatch(UserBooksActions.removePhoto({ bookId, photoId }));
+
+    const result = this.actions.pipe(
+      ofType(UserBooksActions.removePhotoSUCCESS, UserBooksActions.removePhotoERROR),
+      take(1),
+      concatMap(action => {
+        if (action.type === UserBooksActions.removePhotoSUCCESS.type) {
+          return of(undefined);
         }
         return throwError(() => action.error);
       }),

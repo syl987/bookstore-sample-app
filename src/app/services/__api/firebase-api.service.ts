@@ -110,6 +110,25 @@ export class FirebaseApiService {
     );
   }
 
+  removeUserBookPhoto(uid: string, bookId: string, photoId: string): Observable<void> {
+    return this.getUserBook(uid, bookId).pipe(
+      concatMap(book => {
+        if (book.status !== BookStatus.DRAFT) {
+          throw new FirebaseError('custom:invalid_status', 'Invalid status.');
+        }
+        const path = `userBooks/${uid}/${bookId}/photos/${photoId}`;
+
+        return this.fileService.deleteFile(path).pipe(
+          concatMap(_ => {
+            const reference = ref(this.database, `userBooks/${uid}/${bookId}/photos/${bookId}`);
+            const result = remove(reference);
+            return from(result);
+          }),
+        );
+      }),
+    );
+  }
+
   publishUserBook(uid: string, id: string): Observable<UserBookDTO> {
     return this.getUserBook(uid, id).pipe(
       concatMap(book => {
