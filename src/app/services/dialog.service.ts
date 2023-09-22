@@ -85,7 +85,7 @@ export class DialogService {
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
   }
 
-  closeAllDialog(): void {
+  closeAllDialogs(): void {
     return this.dialog.closeAll();
   }
 }

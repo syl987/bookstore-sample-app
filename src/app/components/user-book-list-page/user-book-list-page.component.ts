@@ -30,7 +30,7 @@ export class UserBookListPageComponent implements OnInit {
     this.userBooksService.loadAll();
   }
 
-  openBookCreateDialog(): void {
+  createBook(): void {
     this.dialogService
       .openUserBookCreateDialog()
       .beforeClosed()

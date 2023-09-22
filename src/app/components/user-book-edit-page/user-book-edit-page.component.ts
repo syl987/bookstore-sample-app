@@ -7,7 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, concatMap, filter, map, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, concatMap, filter, map } from 'rxjs';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { getObjectValues } from 'src/app/functions/object.functions';
 import { isTrue, isTruthy } from 'src/app/functions/typeguard.functions';
@@ -157,23 +157,19 @@ export class UserBookEditPageComponent {
       .subscribe(_ => this.router.navigateByUrl('/user/books'));
   }
 
-  openImageCropDialog(file: File): void {
+  cropAndUploadImage(file: File): void {
     this.dialogService
       .openImageCropDialog(file)
       .beforeClosed()
       .pipe(
         filter(isTruthy),
-        concatMap(result => {
-          return this.userBooksService.uploadPhoto(this.id, result).pipe(
-            tap(uploadData => {
-              if (uploadData.complete) {
-                this.userBooksService.load(this.id);
-              }
-            }),
-          );
-        }),
+        concatMap(result => this.userBooksService.uploadPhoto(this.id, result)),
       )
-      .subscribe();
+      .subscribe(uploadData => {
+        if (uploadData.complete) {
+          this.userBooksService.load(this.id);
+        }
+      });
   }
 
   removeAllPhotos(): void {

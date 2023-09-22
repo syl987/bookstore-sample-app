@@ -41,6 +41,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO loading spinner to all pages
 
 // user book edit
+// TODO upload button spinner
 // TODO navigate to user books after an action
 // TODO delete book (if not sold)
 // TODO bug: change detection not fired after photo upload
@@ -65,6 +66,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO guard and keep same page or redirect after logout
 
 // image upload
+// TODO kick readonly format
 // TODO placeholder img
 // TODO progress
 
