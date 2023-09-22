@@ -87,17 +87,18 @@ export class FirebaseApiService {
     );
   }
 
-  removeAllUserBookPhotos(uid: string, bookId: string): Observable<void> {
-    const reference = ref(this.database);
-    const path = `userBooks/${uid}/${bookId}`;
-
+  removeUserBookPhotos(uid: string, bookId: string): Observable<void> {
     return this.getUserBook(uid, bookId).pipe(
       concatMap(book => {
         if (book.status !== BookStatus.DRAFT) {
           throw new FirebaseError('custom:invalid_status', 'Invalid status.');
         }
-        return this.fileService.removeObject(path).pipe(
+        const path = `userBooks/${uid}/${bookId}/photos`;
+
+        return this.fileService.deleteFiles(path).pipe(
           concatMap(_ => {
+            const reference = ref(this.database);
+
             const changes: { [path: string]: any } = {
               [`userBooks/${uid}/${bookId}/photos`]: null,
             };

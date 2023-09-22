@@ -122,7 +122,7 @@ export class UserBooksEffects implements OnRunEffects {
         if (!this.authService.uid) {
           return of(UserBooksActions.removeAllPhotosERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.removeAllUserBookPhotos(this.authService.uid, bookId).pipe(
+        return this.firebaseApi.removeUserBookPhotos(this.authService.uid, bookId).pipe(
           map(_ => UserBooksActions.removeAllPhotosSUCCESS()),
           catchError(err => of(UserBooksActions.removeAllPhotosERROR({ error: firebaseError({ err }) }))),
         );
