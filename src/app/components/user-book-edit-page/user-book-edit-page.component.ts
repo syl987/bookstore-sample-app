@@ -177,6 +177,15 @@ export class UserBookEditPageComponent {
   }
 
   removeAllPhotos(): void {
-    this.userBooksService.removeAllPhotos(this.id);
+    this.dialogService
+      .openUserBookDeleteAllPhotosDialog()
+      .beforeClosed()
+      .pipe(
+        filter(isTrue),
+        concatMap(_ => this.userBooksService.removeAllPhotos(this.id)),
+      )
+      .subscribe(_ => {
+        this.userBooksService.load(this.id);
+      });
   }
 }

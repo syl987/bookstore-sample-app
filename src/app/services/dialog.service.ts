@@ -63,6 +63,17 @@ export class DialogService {
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
   }
 
+  openUserBookDeleteAllPhotosDialog(): MatDialogRef<ConfirmationDialogComponent, boolean | undefined> {
+    const data: ConfirmationDialogData = {
+      title: $localize`Delete all book photos`,
+      description: $localize`All photos with references for this book will be deleted.`,
+      action: $localize`Delete All Photos`,
+      color: 'warn',
+    };
+
+    return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
+  }
+
   openLoginRequiredDialog(): MatDialogRef<ConfirmationDialogComponent, boolean | undefined> {
     const data: ConfirmationDialogData = {
       title: $localize`Login required`,
