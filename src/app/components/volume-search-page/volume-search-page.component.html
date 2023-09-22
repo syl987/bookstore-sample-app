@@ -10,6 +10,6 @@
       <a routerLink="/volumes/{{ volume.id }}" class="text-reset text-decoration-none"><app-volume-card [volume]="volume" /></a>
     </div>
 
-    <p *ngIf="volumesFilteredEmpty$ | async" class="text-muted fs-small" i18n>No volumes were found.</p>
+    <p *ngIf="volumesFilteredEmpty$ | async" class="text-muted fs-small" i18n>No books were found.</p>
   </div>
 </div>
