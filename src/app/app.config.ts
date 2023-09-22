@@ -39,22 +39,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO use async pipe in templates to be able to react to logout change
 // TODO gap helper conflicts with negative link margin in the title-bar
 // TODO check any other todos within the code base
-
-// routing
-// TODO keep same page after login
-// TODO guard and keep same page or redirect after logout
-
-// volume search
-// TODO open as firebase database stream
-
-// volume detail
-// TODO loading spinner
-// TODO buy book => create a confirmation page
-// TODO navigate to user books => create a success dialog
-// TODO add support for 404
-
-// volume card
-// TODO loading appearence
+// TODO loading spinner to all pages
 
 // user book edit
 // TODO navigate to user books after an action
@@ -65,6 +50,20 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // user book edit / detail
 // TODO add support for 404
 // TODO resolve navigation between book and volume => nope, need to just display offer list
+
+// volume detail / offer detail
+// TODO add support for 404
+// TODO on buy: navigate to user books => create a success dialog
+
+// volume search
+// TODO open as firebase database stream
+
+// volume card
+// TODO loading appearence
+
+// routing
+// TODO keep same page after login
+// TODO guard and keep same page or redirect after logout
 
 // image upload
 // TODO placeholder img

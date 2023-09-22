@@ -298,11 +298,11 @@ $cyans: (
 // fusv-enable
 
 // scss-docs-start theme-color-variables
-$primary: rgb(63, 81, 181); // equals material primary
-$accent: rgb(0, 150, 136); // equals material accent
+$primary: rgb(63, 81, 181); // equals mat-primary
+$accent: rgb(0, 150, 136); // equals mat-accent
 $success: $green !default;
 $info: $primary;
-$warn: rgb(244, 67, 54); // equals material warn
+$warn: rgb(244, 67, 54); // equals mat-warn
 $light: $gray-100 !default;
 $dark: $gray-900 !default;
 // scss-docs-end theme-color-variables
