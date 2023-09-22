@@ -57,6 +57,16 @@ export class VolumeOfferDetailPageComponent {
   }
 
   buyBookOffer(offer: BookDTO): void {
+    if (!this.authService.user) {
+      this.dialogService
+        .openLoginRequiredDialog()
+        .beforeClosed()
+        .pipe(filter(isTrue))
+        .subscribe(_ => {
+          this.router.navigateByUrl(`/login`);
+        });
+      return;
+    }
     this.dialogService
       .openUserBookBuyDialog()
       .beforeClosed()

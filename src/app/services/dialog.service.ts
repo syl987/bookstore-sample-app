@@ -63,6 +63,17 @@ export class DialogService {
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
   }
 
+  openLoginRequiredDialog(): MatDialogRef<ConfirmationDialogComponent, boolean | undefined> {
+    const data: ConfirmationDialogData = {
+      title: $localize`Login required`,
+      description: $localize`This action requires a user to be logged in. Would you like to be redirected to the login page?`,
+      action: $localize`Redirect to Login`,
+      color: 'primary',
+    };
+
+    return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
+  }
+
   closeAllDialog(): void {
     return this.dialog.closeAll();
   }

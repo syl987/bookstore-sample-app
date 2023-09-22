@@ -31,7 +31,6 @@ import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
 // general
-// TODO redirect to login on buy and other actions requiring login
 // TODO consider using signals, check how to integrate with ngrx
 // TODO impressum / legal dislaimer page
 // TODO make some data protection policy page
