@@ -37,6 +37,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO footer link to my github or some other page
 // TODO use async pipe in templates to be able to react to logout change
 // TODO gap helper conflicts with negative link margin in the title-bar
+// TODO allow book deletion if published and also delete the volume if not related to any books
 // TODO check any other todos within the code base
 // TODO loading spinner to all pages
 

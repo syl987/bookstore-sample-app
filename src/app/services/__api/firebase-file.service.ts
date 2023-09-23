@@ -11,14 +11,14 @@ export class FirebaseFileService {
   constructor(private readonly storage: Storage) {}
 
   uploadFile(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
-    const reference = ref(this.storage, path);
-    const task = uploadBytes(reference, data, options);
-    return from(task.then(result => getDownloadURL(reference).then(downloadUrl => ({ metadata: result.metadata, downloadUrl }))));
+    const task = uploadBytes(ref(this.storage, path), data, options);
+
+    return from(task.then(result => getDownloadURL(ref(this.storage, path)).then(downloadUrl => ({ metadata: result.metadata, downloadUrl }))));
   }
 
   uploadFileWithProgress(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadDataWithProgress> {
-    const reference = ref(this.storage, path);
-    const task = uploadBytesResumable(reference, data, options);
+    const task = uploadBytesResumable(ref(this.storage, path), data, options);
+
     return new Observable<FirebaseUploadDataWithProgress>(subscriber => {
       task.on('state_changed', {
         next: snapshot => subscriber.next(toFirebaseUploadDataWithProgress(snapshot)),
@@ -32,7 +32,7 @@ export class FirebaseFileService {
           return new Observable<string>(subscriber => {
             setTimeout(async () => {
               try {
-                subscriber.next(await getDownloadURL(reference));
+                subscriber.next(await getDownloadURL(ref(this.storage, path)));
                 subscriber.complete();
               } catch (e) {
                 subscriber.error(e);
@@ -51,14 +51,15 @@ export class FirebaseFileService {
   }
 
   deleteFiles(path: string): Observable<void> {
-    const reference = ref(this.storage, path);
-    const task = listAll(reference).then(result => result.items.forEach(item => deleteObject(ref(this.storage, item.fullPath))));
+    const task = listAll(ref(this.storage, path)).then(result => {
+      result.items.forEach(item => deleteObject(ref(this.storage, item.fullPath)));
+    });
     return from(task);
   }
 
   deleteFile(path: string): Observable<void> {
-    const reference = ref(this.storage, path);
-    const task = deleteObject(reference);
+    const task = deleteObject(ref(this.storage, path));
+
     return from(task);
   }
 }
