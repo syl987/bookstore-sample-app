@@ -136,25 +136,17 @@ export class FirebaseApiService {
           throw new FirebaseError('custom:publish_user_book_error', 'Invalid data.', errors);
         }
         const publishedBook: BookDTO = {
-          id: book.id,
-          uid: book.uid,
+          ...book,
           status: BookStatus.PUBLISHED,
-          description: book.description,
-          condition: book.condition,
-          price: book.price,
-          photos: book.photos,
         };
-        let changes: { [path: string]: any } = {
+        const changes: { [path: string]: any } = {
           [`userBooks/${uid}/${id}/status`]: BookStatus.PUBLISHED,
           [`volumes/${book.volume.id}/id`]: book.volume.id,
           [`volumes/${book.volume.id}/volumeInfo`]: book.volume.volumeInfo,
           [`volumes/${book.volume.id}/publishedBooks/${id}`]: publishedBook,
         };
         if (book.volume.searchInfo) {
-          changes = {
-            ...changes,
-            [`volumes/${book.volume.id}/searchInfo`]: book.volume.searchInfo,
-          };
+          changes[`volumes/${book.volume.id}/searchInfo`] = book.volume.searchInfo;
         }
         const result = update(ref(this.database), changes);
 
