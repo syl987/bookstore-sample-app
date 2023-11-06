@@ -1,7 +1,7 @@
 <table *ngIf="publishedBooks.length; else empty" mat-table [dataSource]="publishedBooks" style="background-color: inherit">
   <ng-container matColumnDef="number">
     <th mat-header-cell *matHeaderCellDef>#</th>
-    <td mat-cell *matCellDef="let book; index as i" class="fw-semibold">{{ i + 1 }}</td>
+    <td mat-cell *matCellDef="let book; index as i" class="fw-semibold text-end">{{ i + 1 }}</td>
   </ng-container>
 
   <ng-container matColumnDef="condition">
@@ -11,7 +11,7 @@
 
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef i18n>Price</th>
-    <td mat-cell *matCellDef="let book">{{ book.price | currency }}</td>
+    <td mat-cell *matCellDef="let book" class="text-end">{{ book.price | currency }}</td>
   </ng-container>
 
   <ng-container matColumnDef="description">
@@ -21,7 +21,7 @@
 
   <ng-container matColumnDef="photos">
     <th mat-header-cell *matHeaderCellDef i18n>Photos</th>
-    <td mat-cell *matCellDef="let book">{{ getPhotosTotal(book) || '-' }}</td>
+    <td mat-cell *matCellDef="let book" class="text-end">{{ getPhotosTotal(book) || '-' }}</td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
