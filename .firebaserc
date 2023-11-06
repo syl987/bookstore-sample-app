@@ -3,7 +3,7 @@
     "sample-app-a00e0": {
       "hosting": {
         "bookstore-sample-app": [
-          "sample-app-a00e0"
+          "bookstore-sample-app"
         ]
       }
     }
