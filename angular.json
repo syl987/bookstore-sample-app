@@ -105,7 +105,7 @@
             "ssr": false,
             "browserTarget": "bookstore-sample-app:build:production",
             "firebaseProject": "sample-app-a00e0",
-            "firebaseHostingSite": "sample-app-a00e0"
+            "firebaseHostingSite": "bookstore-sample-app"
           }
         }
       }
