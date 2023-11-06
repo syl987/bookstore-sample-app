@@ -3,7 +3,6 @@ import { APP_INITIALIZER, ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvid
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
-import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
@@ -112,7 +111,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       provideFirebaseApp(() => initializeApp(environment.firebaseOptions)),
       provideAuth(() => getAuth()),
-      provideFunctions(() => getFunctions()),
       provideDatabase(() => getDatabase()),
       provideStorage(() => getStorage()),
 
