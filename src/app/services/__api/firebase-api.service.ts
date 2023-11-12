@@ -7,6 +7,7 @@ import { getPublishUserBookValidationErrors } from 'src/app/helpers/book.helpers
 import { BookDTO, BookStatus, UserBookCreateDTO, UserBookDTO } from 'src/app/models/book.models';
 import { FirebaseUploadDataWithProgress } from 'src/app/models/firebase.models';
 import { ImageDTO } from 'src/app/models/image.models';
+import { ErrorLog } from 'src/app/models/logger.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
 import { FirebaseFileService } from './firebase-file.service';
@@ -237,5 +238,13 @@ export class FirebaseApiService {
             );
         }),
       );
+  }
+
+  logError(uid: string, data: object): Observable<void> {
+    const log: ErrorLog = { uid, timestamp: new Date().toISOString(), data };
+
+    const result = push(ref(this.database, `errorLogs/${uid}`), log).then(_ => undefined);
+
+    return from(result);
   }
 }

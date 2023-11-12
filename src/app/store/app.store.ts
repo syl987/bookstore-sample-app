@@ -6,6 +6,7 @@ import { metaReducers } from './app.meta-reducers';
 import { AuthEffects } from './auth/auth.effects';
 import { GoogleBooksEffects } from './google-books/google-books.effects';
 import * as fromGoogleBooks from './google-books/google-books.reducer';
+import { LoggerEffects } from './logger/logger.effects';
 import { UserBooksEffects } from './user-books/user-books.effects';
 import * as fromUserBooks from './user-books/user-books.reducer';
 import { VolumesEffects } from './volume/volume.effects';
@@ -18,7 +19,7 @@ export const reducers: ActionReducerMap<unknown> = {
   [fromVolume.volumeFeatureKey]: fromVolume.reducer,
 };
 
-export const effects = [AuthEffects, GoogleBooksEffects, UserBooksEffects, VolumesEffects];
+export const effects = [AuthEffects, LoggerEffects, GoogleBooksEffects, UserBooksEffects, VolumesEffects];
 
 export const storeConfig: RootStoreConfig<unknown> = {
   metaReducers,
