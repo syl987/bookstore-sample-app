@@ -27,7 +27,11 @@ export class UserBookDetailPageComponent {
   readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;
 
-  constructor(private readonly route: ActivatedRoute, private readonly routerService: RouterService, private readonly userBooksService: UserBooksService) {
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly routerService: RouterService,
+    private readonly userBooksService: UserBooksService,
+  ) {
     this.routerService
       .selectRouteParam('bookId')
       .pipe(takeUntilDestroyed())

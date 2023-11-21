@@ -25,7 +25,11 @@ export class SidenavComponent {
 
   @Output() readonly navigated = new EventEmitter<void>();
 
-  constructor(private readonly router: Router, private readonly authService: AuthService, private readonly dialogService: DialogService) {}
+  constructor(
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly dialogService: DialogService,
+  ) {}
 
   navigateToLogin(): void {
     this.router.navigateByUrl('/login');

@@ -53,5 +53,9 @@ export class LoggerEffects {
     );
   });
 
-  constructor(private readonly actions: Actions, private readonly authService: AuthService, private readonly firebaseApi: FirebaseApiService) {}
+  constructor(
+    private readonly actions: Actions,
+    private readonly authService: AuthService,
+    private readonly firebaseApi: FirebaseApiService,
+  ) {}
 }

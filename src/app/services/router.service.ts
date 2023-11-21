@@ -14,7 +14,10 @@ export class RouterService {
   readonly title$ = this.store.select(RouterSelectors.selectTitle);
   readonly fragment$ = this.store.select(RouterSelectors.selectFragment);
 
-  constructor(private readonly store: Store, private readonly router: Router) {}
+  constructor(
+    private readonly store: Store,
+    private readonly router: Router,
+  ) {}
 
   getCurrentNavigationState(): NavigationState {
     return (this.router.getCurrentNavigation()?.extras.state ?? {}) as NavigationState;
