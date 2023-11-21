@@ -1,7 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx --no-install pretty-quick --staged
+npx --no-install lint-staged
 
 node scripts/update-build-data.js
 
