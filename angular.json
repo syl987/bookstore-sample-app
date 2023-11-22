@@ -101,8 +101,11 @@
         "deploy": {
           "builder": "@angular/fire:deploy",
           "options": {
-            "version": 2,
-            "browserTarget": "bookstore-sample-app:build:production"
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "bookstore-sample-app:build:production",
+            "firebaseProject": "sample-app-a00e0",
+            "firebaseHostingSite": "bookstore-sample-app"
           }
         }
       }
