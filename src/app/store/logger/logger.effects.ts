@@ -42,10 +42,12 @@ export class LoggerEffects {
     return this.actions.pipe(
       ofType(LoggerActions.logError),
       concatMap(({ data }) => {
-        if (!this.authService.uid) {
+        const uid = this.authService.uid();
+
+        if (!uid) {
           return of(LoggerActions.logErrorERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.logError(this.authService.uid, data).pipe(
+        return this.firebaseApi.logError(uid, data).pipe(
           map(_ => LoggerActions.logErrorSUCCESS()),
           catchError(error => of(LoggerActions.logErrorERROR({ error }))),
         );

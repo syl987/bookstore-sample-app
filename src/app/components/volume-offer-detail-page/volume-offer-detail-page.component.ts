@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, concatMap, filter, map } from 'rxjs';
+import { concatMap, filter } from 'rxjs';
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
@@ -17,9 +17,8 @@ import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-fields.component';
 
-function getBookOfferById(arg: [VolumeDTO | undefined, string | undefined]): BookDTO | undefined {
-  const [volume, offerId] = arg;
-  return volume && volume.publishedBooks && offerId ? volume.publishedBooks[offerId] : undefined;
+function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undefined {
+  return offerId ? volume?.publishedBooks?.[offerId] : undefined;
 }
 
 @Component({
@@ -32,10 +31,11 @@ function getBookOfferById(arg: [VolumeDTO | undefined, string | undefined]): Boo
 export class VolumeOfferDetailPageComponent {
   id: string = this.route.snapshot.params['volumeId'];
 
-  readonly volume$ = this.volumeService.entitiyByRoute$;
-  readonly offer$ = combineLatest([this.volume$, this.routerService.selectRouteParam('offerId')]).pipe(map(getBookOfferById));
+  readonly volume = this.volumeService.entitiyByRoute;
 
-  readonly isUserBook$ = combineLatest([this.offer$, this.authService.user$]).pipe(map(([offer, user]) => offer?.uid === user?.uid));
+  readonly offer = computed(() => getBookOfferById(this.volumeService.entitiyByRoute(), this.routerService.routeParams()['offerId']));
+
+  readonly isUserBook = computed(() => this.offer()?.uid === this.authService.uid());
 
   constructor(
     private readonly route: ActivatedRoute,

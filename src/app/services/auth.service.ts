@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { computed, Injectable } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Auth, user } from '@angular/fire/auth';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -15,32 +15,19 @@ import { AuthActions } from '../store/auth/auth.actions';
 export class AuthService {
   readonly user$: Observable<AuthUser | null> = user(this.auth).pipe(map(toAuthUser));
 
-  readonly loggedIn$ = this.user$.pipe(map(u => !!u));
-  readonly loggedOut$ = this.user$.pipe(map(u => !u));
+  readonly user = toSignal(this.user$);
+  readonly uid = computed(() => this.user()?.uid);
+
+  readonly loggedIn = computed(() => !!this.user());
+  readonly loggedOut = computed(() => !this.user());
 
   private readonly _loginPending = new BehaviorSubject<boolean>(false);
-  readonly loginPending$ = this._loginPending.asObservable();
+  readonly loginPending = toSignal(this._loginPending.asObservable(), { requireSync: true });
 
   private readonly _logoutPending = new BehaviorSubject<boolean>(false);
-  readonly logoutPending$ = this._loginPending.asObservable();
-
-  get user(): AuthUser | null {
-    return this.#user ?? null;
-  }
-  #user?: AuthUser | null;
-
-  get uid(): string | null {
-    return this.#uid ?? null;
-  }
-  #uid?: string;
+  readonly logoutPending = toSignal(this._loginPending.asObservable(), { requireSync: true });
 
   constructor(private readonly store: Store, private readonly actions: Actions, private readonly auth: Auth) {
-    // set user and uid props
-    this.user$.pipe(takeUntilDestroyed()).subscribe(u => {
-      this.#user = u;
-      this.#uid = u?.uid;
-    });
-
     // set login pending stream
     this.actions.pipe(ofType(AuthActions.loginWithProvider), takeUntilDestroyed()).subscribe(_ => this._loginPending.next(true));
     this.actions

@@ -22,7 +22,7 @@ import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-
 export class UserBookDetailPageComponent {
   id: string = this.route.snapshot.params['bookId'];
 
-  readonly book$ = this.userBooksService.entityByRoute$;
+  readonly book = this.userBooksService.entityByRoute;
 
   readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;

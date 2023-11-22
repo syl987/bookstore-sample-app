@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ViewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -25,13 +25,13 @@ const DEBOUNCE_TIME = 500;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookCreateDialogComponent implements AfterViewInit {
-  readonly results$ = this.googleBooksService.searchResults$;
+  readonly results = this.googleBooksService.searchResults;
 
-  readonly searchQuery$ = this.googleBooksService.searchQuery$;
-  readonly searchPending$ = this.googleBooksService.searchPending$;
-  readonly searchError$ = this.googleBooksService.searchError$;
+  readonly searchQuery = this.googleBooksService.searchQuery;
+  readonly searchPending = this.googleBooksService.searchPending;
+  readonly searchError = this.googleBooksService.searchError;
 
-  readonly createPending$ = this.userBooksService.createPending$;
+  readonly createPending = this.userBooksService.createPending;
 
   readonly searchControl = new FormControl<string>('', { nonNullable: true });
 
@@ -48,11 +48,13 @@ export class UserBookCreateDialogComponent implements AfterViewInit {
       this.googleBooksService.searchVolumes(query);
     });
 
-    this.searchQuery$.pipe(take(1), takeUntilDestroyed()).subscribe(query => {
-      if (query) {
-        this.searchControl.setValue(query, { emitEvent: false });
-      }
-    });
+    toObservable(this.googleBooksService.searchQuery)
+      .pipe(take(1), takeUntilDestroyed())
+      .subscribe(query => {
+        if (query) {
+          this.searchControl.setValue(query, { emitEvent: false });
+        }
+      });
   }
 
   ngAfterViewInit(): void {

@@ -32,37 +32,37 @@ interface IUserBooksService {
   providedIn: 'root',
 })
 export class UserBooksService implements IUserBooksService {
-  readonly entities$ = this.store.select(userBooksFeature.selectAll);
-  readonly entitiesTotal$ = this.store.select(userBooksFeature.selectTotal);
+  readonly entities = this.store.selectSignal(userBooksFeature.selectAll);
+  readonly entitiesTotal = this.store.selectSignal(userBooksFeature.selectTotal);
 
-  readonly entitiesDraft$ = this.store.select(userBooksFeature.selectAllDraft);
-  readonly entitiesPublished$ = this.store.select(userBooksFeature.selectAllPublished);
-  readonly entitiesSold$ = this.store.select(userBooksFeature.selectAllSold);
-  readonly entitiesBought$ = this.store.select(userBooksFeature.selectAllBought);
+  readonly entitiesDraft = this.store.selectSignal(userBooksFeature.selectAllDraft);
+  readonly entitiesPublished = this.store.selectSignal(userBooksFeature.selectAllPublished);
+  readonly entitiesSold = this.store.selectSignal(userBooksFeature.selectAllSold);
+  readonly entitiesBought = this.store.selectSignal(userBooksFeature.selectAllBought);
 
-  readonly entityByRoute$ = this.store.select(userBooksFeature.selectByRoute);
+  readonly entityByRoute = this.store.selectSignal(userBooksFeature.selectByRoute);
 
-  readonly loadPending$ = this.store.select(userBooksFeature.selectLoadPending);
-  readonly loadError$ = this.store.select(userBooksFeature.selectLoadError);
+  readonly loadPending = this.store.selectSignal(userBooksFeature.selectLoadPending);
+  readonly loadError = this.store.selectSignal(userBooksFeature.selectLoadError);
 
-  readonly createPending$ = this.store.select(userBooksFeature.selectCreatePending);
-  readonly createError$ = this.store.select(userBooksFeature.selectCreateError);
+  readonly createPending = this.store.selectSignal(userBooksFeature.selectCreatePending);
+  readonly createError = this.store.selectSignal(userBooksFeature.selectCreateError);
 
-  readonly deletePending$ = this.store.select(userBooksFeature.selectDeletePending);
-  readonly deleteError$ = this.store.select(userBooksFeature.selectDeleteError);
+  readonly deletePending = this.store.selectSignal(userBooksFeature.selectDeletePending);
+  readonly deleteError = this.store.selectSignal(userBooksFeature.selectDeleteError);
 
-  readonly editDraftPending$ = this.store.select(userBooksFeature.selectEditDraftPending);
-  readonly editDraftError$ = this.store.select(userBooksFeature.selectEditDraftError);
+  readonly editDraftPending = this.store.selectSignal(userBooksFeature.selectEditDraftPending);
+  readonly editDraftError = this.store.selectSignal(userBooksFeature.selectEditDraftError);
 
-  readonly uploadPhotoPending$ = this.store.select(userBooksFeature.selectUploadPhotoPending);
-  readonly uploadPhotoProgress$ = this.store.select(userBooksFeature.selectUploadPhotoProgress);
-  readonly uploadPhotoError$ = this.store.select(userBooksFeature.selectUploadPhotoError);
+  readonly uploadPhotoPending = this.store.selectSignal(userBooksFeature.selectUploadPhotoPending);
+  readonly uploadPhotoProgress = this.store.selectSignal(userBooksFeature.selectUploadPhotoProgress);
+  readonly uploadPhotoError = this.store.selectSignal(userBooksFeature.selectUploadPhotoError);
 
-  readonly removePhotoPending$ = this.store.select(userBooksFeature.selectRemovePhotoPending);
-  readonly removePhotoError$ = this.store.select(userBooksFeature.selectRemovePhotoError);
+  readonly removePhotoPending = this.store.selectSignal(userBooksFeature.selectRemovePhotoPending);
+  readonly removePhotoError = this.store.selectSignal(userBooksFeature.selectRemovePhotoError);
 
-  readonly publishPending$ = this.store.select(userBooksFeature.selectPublishPending);
-  readonly publishError$ = this.store.select(userBooksFeature.selectPublishError);
+  readonly publishPending = this.store.selectSignal(userBooksFeature.selectPublishPending);
+  readonly publishError = this.store.selectSignal(userBooksFeature.selectPublishError);
 
   constructor(private readonly store: Store, private readonly actions: Actions) {}
 
