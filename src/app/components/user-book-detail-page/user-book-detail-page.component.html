@@ -8,13 +8,17 @@
   <p>
     <ng-container i18n>Details for the selected book.</ng-container>
     <span>&nbsp;</span>
-    <span *ngIf="(book$ | async)?.status === BookStatus.PUBLISHED" i18n>This book has been published and is available for other users to buy it.</span>
-    <span *ngIf="(book$ | async)?.status === BookStatus.SOLD" i18n>This book is no longer visible to other users.</span>
+    @if ((book$ | async)?.status === BookStatus.PUBLISHED) {
+      <span i18n>This book has been published and is available for other users to buy it.</span>
+    }
+    @if ((book$ | async)?.status === BookStatus.SOLD) {
+      <span i18n>This book is no longer visible to other users.</span>
+    }
   </p>
 
-  <ng-container *ngIf="book$ | async as book">
+  @if (book$ | async; as book) {
     <app-volume-card [volume]="book.volume" class="mb-m" />
 
     <app-volume-offer-fields [offer]="book" />
-  </ng-container>
+  }
 </div>

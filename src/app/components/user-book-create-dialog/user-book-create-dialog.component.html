@@ -5,16 +5,24 @@
     <mat-form-field floatLabel="always" class="col-sm-8 col-md-6 mt-2xs">
       <mat-label i18n>Search</mat-label>
       <input matInput [formControl]="searchControl" placeholder="Title, author, text,..." i18n-placeholder />
-      <mat-spinner *ngIf="searchPending$ | async" matSuffix diameter="24" class="me-s" />
+      @if (searchPending$ | async) {
+        <mat-spinner matSuffix diameter="24" class="me-s" />
+      }
     </mat-form-field>
   </div>
 
   <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="mx-ns py-0">
-    <mat-list-option *ngFor="let volume of results$ | async | slice : 0 : 7" [value]="volume" class="text-truncate">
-      <img *ngIf="volume.volumeInfo.imageLinks" [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-s" i18n-alt />
-      <span class="fw-semibold">{{ volume.volumeInfo.title }}</span>
-      <span *ngIf="volume.volumeInfo.authors?.length" class="text-muted ms-3xs">&nbsp;{{ volume.volumeInfo.authors | array }}</span>
-    </mat-list-option>
+    @for (volume of results$ | async | slice: 0 : 7; track volume.id) {
+      <mat-list-option [value]="volume" class="text-truncate">
+        @if (volume.volumeInfo.imageLinks) {
+          <img [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-s" i18n-alt />
+        }
+        <span class="fw-semibold">{{ volume.volumeInfo.title }}</span>
+        @if (volume.volumeInfo.authors) {
+          <span class="text-muted ms-3xs">&nbsp;{{ volume.volumeInfo.authors | array }}</span>
+        }
+      </mat-list-option>
+    }
   </mat-selection-list>
 </div>
 

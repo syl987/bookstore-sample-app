@@ -6,10 +6,13 @@
   <p i18n>Explore books available for purchase.</p>
 
   <div class="row">
-    <div *ngFor="let volume of volumesFiltered$ | async" class="col-md-6 col-xl-4 mb-m">
-      <a routerLink="/volumes/{{ volume.id }}" class="text-reset text-decoration-none"><app-volume-card [volume]="volume" /></a>
-    </div>
-
-    <p *ngIf="volumesFilteredEmpty$ | async" class="text-muted fs-small" i18n>No books were found.</p>
+    @for (volume of volumesFiltered$ | async; track volume.id) {
+      <div class="col-md-6 col-xl-4 mb-m">
+        <a routerLink="/volumes/{{ volume.id }}" class="text-reset text-decoration-none"><app-volume-card [volume]="volume" /></a>
+      </div>
+    }
+    @if (volumesFilteredEmpty$ | async) {
+      <p class="text-muted fs-small" i18n>No books were found.</p>
+    }
   </div>
 </div>

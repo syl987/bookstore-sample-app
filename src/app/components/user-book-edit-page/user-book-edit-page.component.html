@@ -6,7 +6,7 @@
 
   <p i18n>Carefully fill in the book details. Once published, this data cannot be changed anymore.</p>
 
-  <ng-container *ngIf="book$ | async as book">
+  @if (book$ | async; as book) {
     <app-volume-card [volume]="book.volume" class="mb-m" />
 
     <div class="mb-m">
@@ -68,5 +68,5 @@
         <button type="reset" mat-stroked-button [disabled]="form.disabled" i18n>Clear</button>
       </div>
     </form>
-  </ng-container>
+  }
 </div>
