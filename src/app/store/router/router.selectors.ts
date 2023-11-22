@@ -5,4 +5,4 @@ import { MemoizedSelector } from '@ngrx/store';
 
 export const selectUrl = getRouterSelectors().selectUrl as MemoizedSelector<object, string | undefined>;
 
-export const { selectTitle, selectFragment, selectRouteParam, selectQueryParam } = getRouterSelectors();
+export const { selectTitle, selectFragment, selectRouteParam, selectRouteParams, selectQueryParam, selectQueryParams } = getRouterSelectors();

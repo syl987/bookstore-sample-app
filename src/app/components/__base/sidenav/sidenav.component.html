@@ -1,4 +1,4 @@
-@if (user$ | async; as user) {
+@if (user(); as user) {
   <div class="d-flex flex-column align-items-center mt-3m mb-s">
     <img [src]="user?.photoURL || 'favicon.ico'" alt="user" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border" i18n-alt />
     {{ user?.displayName }}

@@ -5,14 +5,14 @@
     <mat-form-field floatLabel="always" class="col-sm-8 col-md-6 mt-2xs">
       <mat-label i18n>Search</mat-label>
       <input matInput [formControl]="searchControl" placeholder="Title, author, text,..." i18n-placeholder />
-      @if (searchPending$ | async) {
+      @if (searchPending()) {
         <mat-spinner matSuffix diameter="24" class="me-s" />
       }
     </mat-form-field>
   </div>
 
   <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="mx-ns py-0">
-    @for (volume of results$ | async | slice: 0 : 7; track volume.id) {
+    @for (volume of results() | slice: 0 : 7; track volume.id) {
       <mat-list-option [value]="volume" class="text-truncate">
         @if (volume.volumeInfo.imageLinks) {
           <img [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-s" i18n-alt />
@@ -31,8 +31,8 @@
     mat-flat-button
     color="primary"
     (click)="createUserBook(list.selectedOptions.selected[0].value)"
-    [spinning]="createPending$ | async"
-    [disabled]="list.selectedOptions.isEmpty() || (createPending$ | async)"
+    [spinning]="createPending()"
+    [disabled]="list.selectedOptions.isEmpty() || createPending()"
   >
     <ng-container i18n>Create Book</ng-container>
   </button>

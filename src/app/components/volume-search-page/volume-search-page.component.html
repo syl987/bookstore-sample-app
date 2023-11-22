@@ -1,17 +1,17 @@
 <div class="container">
   <app-title-bar>
-    <button mat-stroked-button (click)="clearSearch()" [disabled]="filterQueryEmpty$ | async" i18n>Clear Search</button>
+    <button mat-stroked-button (click)="clearSearch()" [disabled]="filterQueryEmpty()" i18n>Clear Search</button>
   </app-title-bar>
 
   <p i18n>Explore books available for purchase.</p>
 
   <div class="row">
-    @for (volume of volumesFiltered$ | async; track volume.id) {
+    @for (volume of volumesFiltered(); track volume.id) {
       <div class="col-md-6 col-xl-4 mb-m">
         <a routerLink="/volumes/{{ volume.id }}" class="text-reset text-decoration-none"><app-volume-card [volume]="volume" /></a>
       </div>
     }
-    @if (volumesFilteredEmpty$ | async) {
+    @if (volumesFilteredEmpty()) {
       <p class="text-muted fs-small" i18n>No books were found.</p>
     }
   </div>
