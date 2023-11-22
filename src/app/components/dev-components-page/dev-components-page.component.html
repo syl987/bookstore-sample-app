@@ -83,7 +83,7 @@
         <mat-form-field class="w-100 mb-s">
           <mat-label>Price</mat-label>
           <input type="number" matInput formControlName="number" min="2" max="14" />
-          <span matTextSuffix class="text-nowrap text-muted ms-2xs">{{ 0 | number : '.2-2' | slice : 1 }} {{ currencySymbol }}</span>
+          <span matTextSuffix class="text-nowrap text-muted ms-2xs">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
           <mat-error>{{ form.get('number') | validationError }}</mat-error>
         </mat-form-field>
       </div>
@@ -209,7 +209,7 @@
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Email</dt>
-      <dd>michael.jackson@some-domain.com</dd>
+      <dd>michael.jackson&#64;some-domain.com</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Phone Number</dt>
