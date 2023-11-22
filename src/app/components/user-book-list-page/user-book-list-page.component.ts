@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
@@ -20,10 +19,10 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookListPageComponent implements OnInit {
-  readonly userBooksDraft = toSignal(this.userBooksService.entitiesDraft$, { requireSync: true });
-  readonly userBooksPublished = toSignal(this.userBooksService.entitiesPublished$, { requireSync: true });
-  readonly userBooksSold = toSignal(this.userBooksService.entitiesSold$, { requireSync: true });
-  readonly userBooksBought = toSignal(this.userBooksService.entitiesBought$, { requireSync: true });
+  readonly userBooksDraft = this.userBooksService.entitiesDraft;
+  readonly userBooksPublished = this.userBooksService.entitiesPublished;
+  readonly userBooksSold = this.userBooksService.entitiesSold;
+  readonly userBooksBought = this.userBooksService.entitiesBought;
 
   constructor(private readonly router: Router, private readonly userBooksService: UserBooksService, private readonly dialogService: DialogService) {}
 

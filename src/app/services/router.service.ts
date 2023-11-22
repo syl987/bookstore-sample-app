@@ -10,9 +10,9 @@ import * as RouterSelectors from '../store/router/router.selectors';
   providedIn: 'root',
 })
 export class RouterService {
-  readonly url$ = this.store.select(RouterSelectors.selectUrl);
-  readonly title$ = this.store.select(RouterSelectors.selectTitle);
-  readonly fragment$ = this.store.select(RouterSelectors.selectFragment);
+  readonly url = this.store.selectSignal(RouterSelectors.selectUrl);
+  readonly title = this.store.selectSignal(RouterSelectors.selectTitle);
+  readonly fragment = this.store.selectSignal(RouterSelectors.selectFragment);
 
   constructor(private readonly store: Store, private readonly router: Router) {}
 

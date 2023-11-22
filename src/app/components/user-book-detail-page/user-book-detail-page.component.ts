@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute } from '@angular/router';
 import { BookCondition, BookStatus } from 'src/app/models/book.models';
@@ -22,7 +22,7 @@ import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-
 export class UserBookDetailPageComponent {
   id: string = this.route.snapshot.params['bookId'];
 
-  readonly book = toSignal(this.userBooksService.entityByRoute$);
+  readonly book = this.userBooksService.entityByRoute;
 
   readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;

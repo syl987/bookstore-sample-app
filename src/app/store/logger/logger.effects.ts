@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, of } from 'rxjs';
 import { firebaseError, internalError } from 'src/app/models/error.models';
 import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
@@ -41,11 +41,12 @@ export class LoggerEffects {
   readonly logError = createEffect(() => {
     return this.actions.pipe(
       ofType(LoggerActions.logError),
-      concatMap(({ data }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      concatMap(([{ data }, user]) => {
+        if (!user?.uid) {
           return of(LoggerActions.logErrorERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.logError(this.authService.uid, data).pipe(
+        return this.firebaseApi.logError(user.uid, data).pipe(
           map(_ => LoggerActions.logErrorSUCCESS()),
           catchError(error => of(LoggerActions.logErrorERROR({ error }))),
         );

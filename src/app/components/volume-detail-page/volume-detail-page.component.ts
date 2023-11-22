@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterService } from 'src/app/services/router.service';
@@ -24,10 +23,10 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
 export class VolumeDetailPageComponent {
   id: string = this.route.snapshot.params['volumeId'];
 
-  readonly volume = toSignal(this.volumeService.entitiyByRoute$, { requireSync: true });
+  readonly volume = this.volumeService.entitiyByRoute;
 
-  readonly loggedIn = toSignal(this.authService.loggedIn$, { initialValue: false });
-  readonly uid = toSignal(this.authService.user$.pipe(map(user => user?.uid)));
+  readonly loggedIn = this.authService.loggedIn;
+  readonly uid = this.authService.uid;
 
   constructor(
     private readonly route: ActivatedRoute,

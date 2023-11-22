@@ -1,6 +1,6 @@
 import { CommonModule, getCurrencySymbol } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, Inject } from '@angular/core';
-import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -45,14 +45,14 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 export class UserBookEditPageComponent {
   id: string = this.route.snapshot.params['bookId'];
 
-  readonly book = toSignal(this.userBooksService.entityByRoute$, { requireSync: true });
+  readonly book = this.userBooksService.entityByRoute;
 
-  readonly editDraftPending = toSignal(this.userBooksService.editDraftPending$, { requireSync: true });
-  readonly publishPending = toSignal(this.userBooksService.publishPending$, { requireSync: true });
-  readonly uploadPhotoPending = toSignal(this.userBooksService.uploadPhotoPending$, { requireSync: true });
-  readonly uploadPhotoProgress = toSignal(this.userBooksService.uploadPhotoProgress$, { requireSync: true });
-  readonly removePhotoPending = toSignal(this.userBooksService.removePhotoPending$, { requireSync: true });
-  readonly deletePending = toSignal(this.userBooksService.deletePending$, { requireSync: true });
+  readonly editDraftPending = this.userBooksService.editDraftPending;
+  readonly publishPending = this.userBooksService.publishPending;
+  readonly uploadPhotoPending = this.userBooksService.uploadPhotoPending;
+  readonly uploadPhotoProgress = this.userBooksService.uploadPhotoProgress;
+  readonly removePhotoPending = this.userBooksService.removePhotoPending;
+  readonly deletePending = this.userBooksService.deletePending;
 
   readonly editDraftDisabled = computed(() => this.editDraftPending() || this.form.disabled); // TODO false on startup
 

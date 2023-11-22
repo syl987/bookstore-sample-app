@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError, internalError } from 'src/app/models/error.models';
@@ -45,11 +45,12 @@ export class VolumesEffects {
   readonly buyOffer = createEffect(() => {
     return this.actions.pipe(
       ofType(VolumeActions.buyOffer),
-      exhaustMap(({ id, offerId }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      exhaustMap(([{ id, offerId }, user]) => {
+        if (!user?.uid) {
           return of(VolumeActions.buyOfferERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.buyBookOffer(this.authService.uid, id, offerId).pipe(
+        return this.firebaseApi.buyBookOffer(user.uid, id, offerId).pipe(
           map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, book: res.book })),
           catchError(err => of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }))),
         );

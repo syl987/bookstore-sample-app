@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, Observable, of, switchMap, tap } from 'rxjs';
 import { requireAuth } from 'src/app/helpers/auth.helpers';
 import { toActionErrorMessage, toActionSuccessMessage } from 'src/app/helpers/error.helpers';
@@ -16,11 +16,12 @@ export class UserBooksEffects implements OnRunEffects {
   readonly load = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.load),
-      switchMap(({ id }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      switchMap(([{ id }, user]) => {
+        if (!user?.uid) {
           return of(UserBooksActions.loadERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.getUserBook(this.authService.uid, id).pipe(
+        return this.firebaseApi.getUserBook(user.uid, id).pipe(
           map(book => UserBooksActions.loadSUCCESS({ book })),
           catchError(err => of(UserBooksActions.loadERROR({ error: firebaseError({ err }) }))),
         );
@@ -31,11 +32,12 @@ export class UserBooksEffects implements OnRunEffects {
   readonly loadAll = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.loadAll),
-      switchMap(_ => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      switchMap(([_, user]) => {
+        if (!user?.uid) {
           return of(UserBooksActions.loadAllERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.getUserBooks(this.authService.uid).pipe(
+        return this.firebaseApi.getUserBooks(user.uid).pipe(
           map(books => UserBooksActions.loadAllSUCCESS({ books })),
           catchError(err => of(UserBooksActions.loadAllERROR({ error: firebaseError({ err }) }))),
         );
@@ -46,18 +48,18 @@ export class UserBooksEffects implements OnRunEffects {
   readonly create = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.create),
-      exhaustMap(({ volumeData }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      exhaustMap(([{ volumeData }, user]) => {
+        if (!user?.uid) {
           return of(UserBooksActions.createERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        const currentUid = this.authService.uid;
 
         const volume: VolumeDTO = {
           id: volumeData.id,
           volumeInfo: volumeData.volumeInfo,
           searchInfo: volumeData.searchInfo,
         };
-        return this.firebaseApi.createUserBook(currentUid, volume).pipe(
+        return this.firebaseApi.createUserBook(user.uid, volume).pipe(
           map(res => UserBooksActions.createSUCCESS({ book: res })),
           catchError(err => of(UserBooksActions.createERROR({ error: firebaseError({ err }) }))),
         );
@@ -68,11 +70,12 @@ export class UserBooksEffects implements OnRunEffects {
   readonly delete = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.delete),
-      exhaustMap(({ id }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      exhaustMap(([{ id }, user]) => {
+        if (!user?.uid) {
           return of(UserBooksActions.deleteERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.deleteUserBook(this.authService.uid, id).pipe(
+        return this.firebaseApi.deleteUserBook(user.uid, id).pipe(
           map(_ => UserBooksActions.deleteSUCCESS({ id })),
           catchError(err => of(UserBooksActions.deleteERROR({ error: firebaseError({ err }) }))),
         );
@@ -83,11 +86,12 @@ export class UserBooksEffects implements OnRunEffects {
   readonly editDraft = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.editDraft),
-      exhaustMap(({ id, data }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      exhaustMap(([{ id, data }, user]) => {
+        if (!user?.uid) {
           return of(UserBooksActions.editDraftERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.editUserBookDraft(this.authService.uid, id, data).pipe(
+        return this.firebaseApi.editUserBookDraft(user.uid, id, data).pipe(
           map(res => UserBooksActions.editDraftSUCCESS({ book: res })),
           catchError(err => of(UserBooksActions.editDraftERROR({ error: firebaseError({ err }) }))),
         );
@@ -98,11 +102,12 @@ export class UserBooksEffects implements OnRunEffects {
   readonly uploadPhoto = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.uploadPhoto),
-      exhaustMap(({ bookId, data }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      exhaustMap(([{ bookId, data }, user]) => {
+        if (!user?.uid) {
           return of(UserBooksActions.uploadPhotoERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.uploadUserBookPhoto(this.authService.uid, bookId, data).pipe(
+        return this.firebaseApi.uploadUserBookPhoto(user.uid, bookId, data).pipe(
           concatMap(res => {
             if (res.complete) {
               return of(UserBooksActions.uploadPhotoSUCCESS({ uploadData: res }));
@@ -118,11 +123,12 @@ export class UserBooksEffects implements OnRunEffects {
   readonly removePhoto = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.removePhoto),
-      exhaustMap(({ bookId, photoId }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      exhaustMap(([{ bookId, photoId }, user]) => {
+        if (!user?.uid) {
           return of(UserBooksActions.removePhotoERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.removeUserBookPhoto(this.authService.uid, bookId, photoId).pipe(
+        return this.firebaseApi.removeUserBookPhoto(user.uid, bookId, photoId).pipe(
           map(_ => UserBooksActions.removePhotoSUCCESS()),
           catchError(err => of(UserBooksActions.removePhotoERROR({ error: firebaseError({ err }) }))),
         );
@@ -133,11 +139,12 @@ export class UserBooksEffects implements OnRunEffects {
   readonly removeAllPhotos = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.removeAllPhotos),
-      exhaustMap(({ bookId }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      exhaustMap(([{ bookId }, user]) => {
+        if (!user?.uid) {
           return of(UserBooksActions.removeAllPhotosERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.removeUserBookPhotos(this.authService.uid, bookId).pipe(
+        return this.firebaseApi.removeUserBookPhotos(user.uid, bookId).pipe(
           map(_ => UserBooksActions.removeAllPhotosSUCCESS()),
           catchError(err => of(UserBooksActions.removeAllPhotosERROR({ error: firebaseError({ err }) }))),
         );
@@ -148,11 +155,12 @@ export class UserBooksEffects implements OnRunEffects {
   readonly publish = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.publish),
-      exhaustMap(({ id }) => {
-        if (!this.authService.uid) {
+      concatLatestFrom(() => this.authService.user$),
+      exhaustMap(([{ id }, user]) => {
+        if (!user?.uid) {
           return of(UserBooksActions.publishERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
         }
-        return this.firebaseApi.publishUserBook(this.authService.uid, id).pipe(
+        return this.firebaseApi.publishUserBook(user.uid, id).pipe(
           map(res => UserBooksActions.publishSUCCESS({ book: res })),
           catchError(err => of(UserBooksActions.publishERROR({ error: firebaseError({ err }) }))),
         );

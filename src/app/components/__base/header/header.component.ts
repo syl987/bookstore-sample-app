@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Inject, Output, signal } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -83,9 +83,11 @@ export class HeaderComponent {
     private readonly dialogService: DialogService,
     private readonly destroy: DestroyRef,
   ) {
-    this.volumeService.filterQuery$.pipe(takeUntilDestroyed()).subscribe(query => {
-      this.form.get('query')!.setValue(query, { emitEvent: false });
-    });
+    toObservable(this.volumeService.filterQuery)
+      .pipe(takeUntilDestroyed())
+      .subscribe(query => {
+        this.form.get('query')!.setValue(query, { emitEvent: false });
+      });
   }
 
   openUserSessionInfoDialog(user: AuthUser): void {

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, OnInit } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { VolumeService } from 'src/app/services/volume.service';
@@ -16,12 +15,12 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeSearchPageComponent implements OnInit {
-  readonly volumesFiltered = toSignal(this.volumeService.entitiesFiltered$, { requireSync: true });
-  readonly volumesLoadPending = toSignal(this.volumeService.loadPending$, { requireSync: true });
+  readonly volumesFiltered = this.volumeService.entitiesFiltered;
+  readonly volumesLoadPending = this.volumeService.loadPending;
 
   readonly volumesFilteredEmpty = computed(() => !this.volumesFiltered().length && !this.volumesLoadPending());
 
-  readonly filterQuery = toSignal(this.volumeService.filterQuery$, { requireSync: true });
+  readonly filterQuery = this.volumeService.filterQuery;
   readonly filterQueryEmpty = computed(() => !this.filterQuery().length);
 
   constructor(private readonly volumeService: VolumeService) {}

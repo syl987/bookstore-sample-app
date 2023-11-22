@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, concatMap, filter, map } from 'rxjs';
@@ -32,9 +32,9 @@ function getBookOfferById(arg: [VolumeDTO | undefined, string | undefined]): Boo
 export class VolumeOfferDetailPageComponent {
   id: string = this.route.snapshot.params['volumeId'];
 
-  readonly volume = toSignal(this.volumeService.entitiyByRoute$, { requireSync: true });
+  readonly volume = this.volumeService.entitiyByRoute;
 
-  readonly offer$ = combineLatest([this.volumeService.entitiyByRoute$, this.routerService.selectRouteParam('offerId')]).pipe(map(getBookOfferById));
+  readonly offer$ = combineLatest([toObservable(this.volumeService.entitiyByRoute), this.routerService.selectRouteParam('offerId')]).pipe(map(getBookOfferById));
 
   readonly offer = toSignal(this.offer$, { requireSync: true });
   readonly user = toSignal(this.authService.user$);

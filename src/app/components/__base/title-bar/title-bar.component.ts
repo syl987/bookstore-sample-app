@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -16,7 +15,7 @@ import { RouterService } from 'src/app/services/router.service';
   host: { class: 'd-flex flex-wrap' },
 })
 export class TitleBarComponent {
-  readonly title = toSignal(this.routerService.title$, { requireSync: true });
+  readonly title = this.routerService.title;
 
   @Input() backUrl?: string | null;
 
