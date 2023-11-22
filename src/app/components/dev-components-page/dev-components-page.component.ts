@@ -43,14 +43,14 @@ export class DevComponentsPageComponent {
     map(value => !!value),
   );
 
-  readonly disabled = toSignal(this.disabled$, { requireSync: true });
+  readonly disabled = toSignal(this.disabled$, { initialValue: false });
 
   readonly progress$ = timer(0, 35).pipe(
     map(value => value % 100),
     auditTime(140),
   );
 
-  readonly progress = toSignal(this.progress$, { requireSync: true });
+  readonly progress = toSignal(this.progress$, { initialValue: 0 });
 
   readonly form = new FormGroup({
     email: new FormControl(),

@@ -26,8 +26,8 @@ export class VolumeDetailPageComponent {
 
   readonly volume = toSignal(this.volumeService.entitiyByRoute$, { requireSync: true });
 
-  readonly loggedIn = toSignal(this.authService.loggedIn$, { requireSync: true });
-  readonly uid = toSignal(this.authService.user$.pipe(map(user => user?.uid)), { requireSync: true });
+  readonly loggedIn = toSignal(this.authService.loggedIn$, { initialValue: false });
+  readonly uid = toSignal(this.authService.user$.pipe(map(user => user?.uid)));
 
   constructor(
     private readonly route: ActivatedRoute,

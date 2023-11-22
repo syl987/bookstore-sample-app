@@ -19,7 +19,7 @@ import { DialogService } from 'src/app/services/dialog.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavComponent {
-  readonly user = toSignal(this.authService.user$, { requireSync: true });
+  readonly user = toSignal(this.authService.user$);
 
   readonly USER_LINKS = APP_NAV_LINKS.filter(link => link.user);
   readonly PUBLIC_LINKS = APP_NAV_LINKS.filter(link => !link.user);

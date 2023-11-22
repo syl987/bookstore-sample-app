@@ -37,7 +37,7 @@ export class VolumeOfferDetailPageComponent {
   readonly offer$ = combineLatest([this.volumeService.entitiyByRoute$, this.routerService.selectRouteParam('offerId')]).pipe(map(getBookOfferById));
 
   readonly offer = toSignal(this.offer$, { requireSync: true });
-  readonly user = toSignal(this.authService.user$, { requireSync: true });
+  readonly user = toSignal(this.authService.user$);
 
   readonly isUserBook = computed(() => this.offer()?.uid === this.user()?.uid);
 
