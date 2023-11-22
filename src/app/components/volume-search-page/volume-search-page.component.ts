@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, OnInit } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-import { combineLatest, map } from 'rxjs';
 import { VolumeService } from 'src/app/services/volume.service';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
@@ -16,12 +16,13 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeSearchPageComponent implements OnInit {
-  readonly volumesFiltered$ = this.volumeService.entitiesFiltered$;
-  readonly volumesLoadPending$ = this.volumeService.loadPending$;
+  readonly volumesFiltered = toSignal(this.volumeService.entitiesFiltered$, { requireSync: true });
+  readonly volumesLoadPending = toSignal(this.volumeService.loadPending$, { requireSync: true });
 
-  readonly volumesFilteredEmpty$ = combineLatest([this.volumesFiltered$, this.volumesLoadPending$]).pipe(map(([v, p]) => !v.length && !p));
+  readonly volumesFilteredEmpty = computed(() => !this.volumesFiltered().length && !this.volumesLoadPending());
 
-  readonly filterQueryEmpty$ = this.volumeService.filterQuery$.pipe(map(q => !q.length));
+  readonly filterQuery = toSignal(this.volumeService.filterQuery$, { requireSync: true });
+  readonly filterQueryEmpty = computed(() => !this.filterQuery().length);
 
   constructor(private readonly volumeService: VolumeService) {}
 

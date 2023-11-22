@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, concatMap, filter, map } from 'rxjs';
@@ -32,10 +32,14 @@ function getBookOfferById(arg: [VolumeDTO | undefined, string | undefined]): Boo
 export class VolumeOfferDetailPageComponent {
   id: string = this.route.snapshot.params['volumeId'];
 
-  readonly volume$ = this.volumeService.entitiyByRoute$;
-  readonly offer$ = combineLatest([this.volume$, this.routerService.selectRouteParam('offerId')]).pipe(map(getBookOfferById));
+  readonly volume = toSignal(this.volumeService.entitiyByRoute$, { requireSync: true });
 
-  readonly isUserBook$ = combineLatest([this.offer$, this.authService.user$]).pipe(map(([offer, user]) => offer?.uid === user?.uid));
+  readonly offer$ = combineLatest([this.volumeService.entitiyByRoute$, this.routerService.selectRouteParam('offerId')]).pipe(map(getBookOfferById));
+
+  readonly offer = toSignal(this.offer$, { requireSync: true });
+  readonly user = toSignal(this.authService.user$, { requireSync: true });
+
+  readonly isUserBook = computed(() => this.offer()?.uid === this.user()?.uid);
 
   constructor(
     private readonly route: ActivatedRoute,

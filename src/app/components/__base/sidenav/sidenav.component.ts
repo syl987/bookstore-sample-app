@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -18,7 +19,7 @@ import { DialogService } from 'src/app/services/dialog.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavComponent {
-  readonly user$ = this.authService.user$;
+  readonly user = toSignal(this.authService.user$, { requireSync: true });
 
   readonly USER_LINKS = APP_NAV_LINKS.filter(link => link.user);
   readonly PUBLIC_LINKS = APP_NAV_LINKS.filter(link => !link.user);
