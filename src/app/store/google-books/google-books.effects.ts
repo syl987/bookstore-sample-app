@@ -21,5 +21,8 @@ export class GoogleBooksEffects {
     );
   });
 
-  constructor(private readonly actions: Actions, private readonly googleBooksApi: GoogleBooksApiService) {}
+  constructor(
+    private readonly actions: Actions,
+    private readonly googleBooksApi: GoogleBooksApiService,
+  ) {}
 }
