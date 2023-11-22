@@ -61,7 +61,11 @@ export class DevComponentsPageComponent {
 
   readonly currencySymbol = getCurrencySymbol(this.currency, 'narrow');
 
-  constructor(@Inject(DEFAULT_CURRENCY_CODE) private readonly currency: string, private readonly dialog: MatDialog, private readonly toastService: ToastService) {}
+  constructor(
+    @Inject(DEFAULT_CURRENCY_CODE) private readonly currency: string,
+    private readonly dialog: MatDialog,
+    private readonly toastService: ToastService,
+  ) {}
 
   openExampleDialog(): void {
     const data: ExampleDevDialogData = { text: 'Example dialog beautiful content.' };
