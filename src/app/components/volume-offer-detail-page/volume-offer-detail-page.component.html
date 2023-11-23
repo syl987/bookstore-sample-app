@@ -1,17 +1,21 @@
 <div class="container">
   <app-title-bar [backUrl]="'/volumes/' + id">
-    <button *ngIf="offer() as offer" mat-stroked-button color="accent" (click)="buyBookOffer(offer)" [disabled]="isUserBook()" i18n>Buy Book</button>
+    @if (offer(); as offer) {
+      <button mat-stroked-button color="accent" (click)="buyBookOffer(offer)" [disabled]="isUserBook()" i18n>Buy Book</button>
+    }
   </app-title-bar>
 
   <p>
     <ng-container i18n>Details for the selected book offer.</ng-container>
     <span>&nbsp;</span>
-    <span *ngIf="isUserBook()" class="text-info" i18n>This is your own offer, thus you cannot buy it.</span>
+    @if (isUserBook()) {
+      <span class="text-info" i18n>This is your own offer, thus you cannot buy it.</span>
+    }
   </p>
 
-  <ng-container *ngIf="volume() as volume">
+  @if (volume(); as volume) {
     <app-volume-card [volume]="volume" class="mb-m" />
 
     <app-volume-offer-fields [offer]="offer()" />
-  </ng-container>
+  }
 </div>

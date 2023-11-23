@@ -1,35 +1,69 @@
 <mat-toolbar class="mat-elevation-z8">
   <mat-toolbar-row cdkOverlayOrigin #searchOverlayTrigger="cdkOverlayOrigin">
-    <ng-container *ngIf="desktop(); else mobile">
+    @if (desktop()) {
       <div class="text-primary fs-large me-s">{{ options.applicationName }}</div>
 
-      <a mat-button *ngFor="let link of PUBLIC_LINKS" color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
-
+      @for (link of PUBLIC_LINKS; track link.path) {
+        <a mat-button color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+      }
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
           <mat-icon fontIcon="fa-search" inline class="text-primary" matPrefix />
           <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
-          <mat-spinner *ngIf="searching()" diameter="24" class="me-s" matSuffix />
+          @if (searching()) {
+            <mat-spinner diameter="24" class="me-s" matSuffix />
+          }
         </mat-form-field>
       </form>
 
       <span class="ms-2xs me-auto"></span>
 
-      <ng-container *ngIf="user() as user; else public">
+      @if (user(); as user) {
         <button mat-button (click)="openUserSessionInfoDialog(user)">
           <app-header-user-info [user]="user" />
         </button>
 
         <mat-divider vertical class="mx-2xs" style="height: 32px" />
 
-        <a mat-button *ngFor="let link of USER_LINKS" color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
-
+        @for (link of USER_LINKS; track link.path) {
+          <a mat-button color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+        }
         <button mat-button color="primary" (click)="logout()" i18n>Logout</button>
-      </ng-container>
-
+      } @else {
+        <a mat-button color="primary" routerLink="/login" routerLinkActive="active" i18n>Login</a>
+      }
       <mat-divider vertical class="mx-2xs" style="height: 32px" />
-    </ng-container>
+    } @else {
+      <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="me-3xs" i18n-aria-label>
+        <mat-icon fontIcon="fa-bars" class="fs-large align-bottom" />
+      </button>
 
+      <div class="text-primary fs-normal text-truncate me-s">{{ options.applicationName }}</div>
+
+      <span class="ms-2xs me-auto"></span>
+
+      <button mat-icon-button color="primary" (click)="searchOverlayOpen.set(!searchOverlayOpen())" class="me-n3xs" aria-label="Search" i18n-aria-label>
+        <mat-icon fontIcon="fa-search" style="scale: 0.75" />
+      </button>
+
+      <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOpen]="searchOverlayOpen()"
+        [cdkConnectedOverlayOrigin]="searchOverlayTrigger"
+        [cdkConnectedOverlayPositions]="[{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top', panelClass: 'app-search-overlay' }]"
+      >
+        <form [formGroup]="form" (ngSubmit)="search(); searchOverlayOpen.set(false)" class="w-100">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-icon fontIcon="fa-search" inline class="text-primary" matPrefix />
+            <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
+            <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen.set(false)" class="me-3xs" matSuffix>
+              <mat-icon fontIcon="fa-times" style="scale: 0.75" />
+            </button>
+          </mat-form-field>
+        </form>
+      </ng-template>
+      <mat-divider vertical class="mx-2xs" style="height: 32px" />
+    }
     <button mat-icon-button color="primary" [matMenuTriggerFor]="languageMenu" aria-label="Language" i18n-aria-label>
       <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />
     </button>
@@ -37,45 +71,10 @@
 </mat-toolbar>
 
 <mat-menu xPosition="before" #languageMenu="matMenu">
-  <a mat-menu-item *ngFor="let language of APP_LANGUAGES" href="/{{ language.locale }}/">
-    <mat-icon fontSet="fp" [fontIcon]="language.icon" />
-    {{ language.label }}
-  </a>
+  @for (language of APP_LANGUAGES; track language.locale) {
+    <a mat-menu-item href="/{{ language.locale }}/">
+      <mat-icon fontSet="fp" [fontIcon]="language.icon" />
+      {{ language.label }}
+    </a>
+  }
 </mat-menu>
-
-<ng-template #public>
-  <a mat-button color="primary" routerLink="/login" routerLinkActive="active" i18n>Login</a>
-</ng-template>
-
-<ng-template #mobile>
-  <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="me-3xs" i18n-aria-label>
-    <mat-icon fontIcon="fa-bars" class="fs-large align-bottom" />
-  </button>
-
-  <div class="text-primary fs-normal text-truncate me-s">{{ options.applicationName }}</div>
-
-  <span class="ms-2xs me-auto"></span>
-
-  <button mat-icon-button color="primary" (click)="searchOverlayOpen.set(!searchOverlayOpen)" class="me-n3xs" aria-label="Search" i18n-aria-label>
-    <mat-icon fontIcon="fa-search" style="scale: 0.75" />
-  </button>
-
-  <ng-template
-    cdkConnectedOverlay
-    [cdkConnectedOverlayOpen]="searchOverlayOpen()"
-    [cdkConnectedOverlayOrigin]="searchOverlayTrigger"
-    [cdkConnectedOverlayPositions]="[{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top', panelClass: 'app-search-overlay' }]"
-  >
-    <form [formGroup]="form" (ngSubmit)="search(); searchOverlayOpen.set(false)" class="w-100">
-      <mat-form-field appearance="fill" class="w-100">
-        <mat-icon fontIcon="fa-search" inline class="text-primary" matPrefix />
-        <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
-        <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen.set(false)" class="me-3xs" matSuffix>
-          <mat-icon fontIcon="fa-times" style="scale: 0.75" />
-        </button>
-      </mat-form-field>
-    </form>
-  </ng-template>
-
-  <mat-divider vertical class="mx-2xs" style="height: 32px" />
-</ng-template>

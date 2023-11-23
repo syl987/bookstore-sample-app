@@ -6,58 +6,65 @@
   <p i18n>This is a collection of your books.</p>
 </div>
 
-<div *ngIf="userBooksDraft()?.length" class="container">
-  <h2 i18n>Draft</h2>
+<div class="container">
+  @if (userBooksDraft().length) {
+    <h2 i18n>Draft</h2>
 
-  <p i18n>These books are not publicly visible and can be edited.</p>
+    <p i18n>These books are not publicly visible and can be edited.</p>
 
-  <div class="row">
-    <div *ngFor="let book of userBooksDraft()" class="col-md-6 col-xl-4 mb-m">
-      <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
-        <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-      </a>
+    <div class="row">
+      @for (book of userBooksDraft(); track book.id) {
+        <div class="col-md-6 col-xl-4 mb-m">
+          <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
+            <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+          </a>
+        </div>
+      }
     </div>
-  </div>
-</div>
+  }
+  @if (userBooksPublished().length) {
+    <h2 i18n>Published</h2>
 
-<div *ngIf="userBooksPublished()?.length" class="container">
-  <h2 i18n>Published</h2>
+    <p i18n>These books are publicly visible and available for buying. Changes are not possible.</p>
 
-  <p i18n>These books are publicly visible and available for buying. Changes are not possible.</p>
-
-  <div class="row">
-    <div *ngFor="let book of userBooksPublished()" class="col-md-6 col-xl-4 mb-m">
-      <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
-        <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-      </a>
+    <div class="row">
+      @for (book of userBooksPublished(); track book.id) {
+        <div class="col-md-6 col-xl-4 mb-m">
+          <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
+            <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+          </a>
+        </div>
+      }
     </div>
-  </div>
-</div>
+  }
+  @if (userBooksSold().length) {
+    <h2 i18n>Sold</h2>
 
-<div *ngIf="userBooksSold()?.length" class="container">
-  <h2 i18n>Sold</h2>
+    <p i18n>Sold books are not publicly visible, but they will remain listed here. Changes are not possible.</p>
 
-  <p i18n>Sold books are not publicly visible, but they will remain listed here. Changes are not possible.</p>
-
-  <div class="row">
-    <div *ngFor="let book of userBooksSold()" class="col-md-6 col-xl-4 mb-m">
-      <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
-        <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-      </a>
+    <div class="row">
+      @for (book of userBooksSold(); track book.id) {
+        <div class="col-md-6 col-xl-4 mb-m">
+          <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
+            <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+          </a>
+        </div>
+      }
     </div>
-  </div>
-</div>
+  }
+  @if (userBooksBought().length) {
+    <h2 i18n>Bought</h2>
 
-<div *ngIf="userBooksBought()?.length" class="container">
-  <h2 i18n>Bought</h2>
+    <p i18n>This is your list of the books that you bought from other users.</p>
 
-  <p i18n>This is your list of the books that you bought from other users.</p>
-
-  <div class="row">
-    <div *ngFor="let book of userBooksBought()" class="col-md-6 col-xl-4 mb-m">
-      <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
-        <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-      </a>
+    <div class="row">
+      @for (book of userBooksBought(); track book.id) {
+        <div class="col-md-6 col-xl-4 mb-m">
+          <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
+            <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+          </a>
+        </div>
+      }
     </div>
-  </div>
+  }
 </div>
