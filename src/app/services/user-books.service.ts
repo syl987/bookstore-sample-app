@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, of, throwError } from 'rxjs';
-import { concatMap, shareReplay, take } from 'rxjs/operators';
+import { concatMap, Observable, of, shareReplay, take, takeWhile, throwError } from 'rxjs';
 
 import { UserBookDTO, UserBookEditDraftDTO } from '../models/book.models';
+import { FirebaseUploadDataWithProgress } from '../models/firebase.models';
 import { GoogleBooksVolumeDTO } from '../models/google-books.models';
 import { UserBooksActions } from '../store/user-books/user-books.actions';
 import { userBooksFeature } from '../store/user-books/user-books.reducer';
@@ -20,41 +20,54 @@ interface IUserBooksService {
   delete(id: string, book: UserBookDTO): Observable<void>;
   /** Edit data of an unpublished book. */
   editDraft(id: string, book: UserBookDTO): Observable<UserBookDTO>;
+  /** Upload an image of an unpublished book. Also emits on progress data. */
+  uploadPhoto(bookId: string, data: Blob): Observable<FirebaseUploadDataWithProgress>;
+  /** Remove all images of an unpublished book. */
+  removeAllPhotos(bookId: string): Observable<void>;
   /** Publish a book. */
   publish(id: string, book: UserBookDTO): Observable<UserBookDTO>;
-  /** Buy a book. */
-  buy(id: string, book: UserBookDTO): Observable<UserBookDTO>;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserBooksService implements IUserBooksService {
-  readonly entities$ = this.store.select(userBooksFeature.selectAll);
-  readonly entitiesTotal$ = this.store.select(userBooksFeature.selectTotal);
+  readonly entities = this.store.selectSignal(userBooksFeature.selectAll);
+  readonly entitiesTotal = this.store.selectSignal(userBooksFeature.selectTotal);
 
-  readonly entitiesDraft$ = this.store.select(userBooksFeature.selectAllDraft);
-  readonly entitiesPublished$ = this.store.select(userBooksFeature.selectAllPublished);
-  readonly entitiesSold$ = this.store.select(userBooksFeature.selectAllSold);
+  readonly entitiesDraft = this.store.selectSignal(userBooksFeature.selectAllDraft);
+  readonly entitiesPublished = this.store.selectSignal(userBooksFeature.selectAllPublished);
+  readonly entitiesSold = this.store.selectSignal(userBooksFeature.selectAllSold);
+  readonly entitiesBought = this.store.selectSignal(userBooksFeature.selectAllBought);
 
-  readonly entityByRoute$ = this.store.select(userBooksFeature.selectByRoute);
+  readonly entityByRoute = this.store.selectSignal(userBooksFeature.selectByRoute);
 
-  readonly loadPending$ = this.store.select(userBooksFeature.selectLoadPending);
-  readonly loadError$ = this.store.select(userBooksFeature.selectLoadError);
+  readonly loadPending = this.store.selectSignal(userBooksFeature.selectLoadPending);
+  readonly loadError = this.store.selectSignal(userBooksFeature.selectLoadError);
 
-  readonly createPending$ = this.store.select(userBooksFeature.selectCreatePending);
-  readonly createError$ = this.store.select(userBooksFeature.selectCreateError);
+  readonly createPending = this.store.selectSignal(userBooksFeature.selectCreatePending);
+  readonly createError = this.store.selectSignal(userBooksFeature.selectCreateError);
 
-  readonly deletePending$ = this.store.select(userBooksFeature.selectDeletePending);
-  readonly deleteError$ = this.store.select(userBooksFeature.selectDeleteError);
+  readonly deletePending = this.store.selectSignal(userBooksFeature.selectDeletePending);
+  readonly deleteError = this.store.selectSignal(userBooksFeature.selectDeleteError);
 
-  readonly editDraftPending$ = this.store.select(userBooksFeature.selectEditDraftPending);
-  readonly editDraftError$ = this.store.select(userBooksFeature.selectEditDraftError);
+  readonly editDraftPending = this.store.selectSignal(userBooksFeature.selectEditDraftPending);
+  readonly editDraftError = this.store.selectSignal(userBooksFeature.selectEditDraftError);
 
-  readonly publishPending$ = this.store.select(userBooksFeature.selectPublishPending);
-  readonly publishError$ = this.store.select(userBooksFeature.selectPublishError);
+  readonly uploadPhotoPending = this.store.selectSignal(userBooksFeature.selectUploadPhotoPending);
+  readonly uploadPhotoProgress = this.store.selectSignal(userBooksFeature.selectUploadPhotoProgress);
+  readonly uploadPhotoError = this.store.selectSignal(userBooksFeature.selectUploadPhotoError);
 
-  constructor(private readonly store: Store, private readonly actions: Actions) {}
+  readonly removePhotoPending = this.store.selectSignal(userBooksFeature.selectRemovePhotoPending);
+  readonly removePhotoError = this.store.selectSignal(userBooksFeature.selectRemovePhotoError);
+
+  readonly publishPending = this.store.selectSignal(userBooksFeature.selectPublishPending);
+  readonly publishError = this.store.selectSignal(userBooksFeature.selectPublishError);
+
+  constructor(
+    private readonly store: Store,
+    private readonly actions: Actions,
+  ) {}
 
   load(id: string): Observable<UserBookDTO> {
     this.store.dispatch(UserBooksActions.load({ id }));
@@ -146,6 +159,72 @@ export class UserBooksService implements IUserBooksService {
     return result;
   }
 
+  uploadPhoto(bookId: string, data: Blob): Observable<FirebaseUploadDataWithProgress> {
+    this.store.dispatch(UserBooksActions.uploadPhoto({ bookId, data }));
+
+    let success = false;
+
+    const result = this.actions.pipe(
+      ofType(UserBooksActions.uploadPhotoPROGRESS, UserBooksActions.uploadPhotoSUCCESS, UserBooksActions.uploadPhotoERROR),
+      // take 1 success action, pass all progress action until then
+      takeWhile(action => {
+        if (!success && action.type === UserBooksActions.uploadPhotoSUCCESS.type) {
+          success = true;
+          return true;
+        }
+        return !success;
+      }),
+      concatMap(action => {
+        if (action.type === UserBooksActions.uploadPhotoPROGRESS.type) {
+          return of(action.uploadData);
+        }
+        if (action.type === UserBooksActions.uploadPhotoSUCCESS.type) {
+          return of(action.uploadData);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
+  }
+
+  removePhoto(bookId: string, photoId: string): Observable<void> {
+    this.store.dispatch(UserBooksActions.removePhoto({ bookId, photoId }));
+
+    const result = this.actions.pipe(
+      ofType(UserBooksActions.removePhotoSUCCESS, UserBooksActions.removePhotoERROR),
+      take(1),
+      concatMap(action => {
+        if (action.type === UserBooksActions.removePhotoSUCCESS.type) {
+          return of(undefined);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
+  }
+
+  removeAllPhotos(bookId: string): Observable<void> {
+    this.store.dispatch(UserBooksActions.removeAllPhotos({ bookId }));
+
+    const result = this.actions.pipe(
+      ofType(UserBooksActions.removeAllPhotosSUCCESS, UserBooksActions.removeAllPhotosERROR),
+      take(1),
+      concatMap(action => {
+        if (action.type === UserBooksActions.removeAllPhotosSUCCESS.type) {
+          return of(undefined);
+        }
+        return throwError(() => action.error);
+      }),
+      shareReplay(1),
+    );
+    result.subscribe();
+    return result;
+  }
+
   publish(id: string): Observable<UserBookDTO> {
     this.store.dispatch(UserBooksActions.publish({ id }));
 
@@ -162,9 +241,5 @@ export class UserBooksService implements IUserBooksService {
     );
     result.subscribe();
     return result;
-  }
-
-  buy(id: string): Observable<UserBookDTO> {
-    throw new Error('Method not implemented.');
   }
 }

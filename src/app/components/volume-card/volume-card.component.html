@@ -1,20 +1,24 @@
-<mat-card *ngIf="volume">
-  <mat-card-header>
-    <img mat-card-sm-image [src]="volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" i18n-alt />
-    <mat-card-title>{{ volume.volumeInfo.title }}</mat-card-title>
-    <mat-card-subtitle>{{ volume.volumeInfo.authors }}</mat-card-subtitle>
-    <mat-card-subtitle>{{ volume.volumeInfo.publishedDate | date : 'yyyy' }} {{ volume.volumeInfo.publisher }}</mat-card-subtitle>
-  </mat-card-header>
+@if (volume) {
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-sm-image [src]="volume.volumeInfo.imageLinks.thumbnail" alt="user" class="order-first me-s" i18n-alt />
+      <mat-card-title>{{ volume.volumeInfo.title }}</mat-card-title>
+      <mat-card-subtitle>{{ volume.volumeInfo.authors }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ volume.volumeInfo.publishedDate | date : 'yyyy' }} {{ volume.volumeInfo.publisher }}</mat-card-subtitle>
+    </mat-card-header>
 
-  <mat-card-content class="py-2xs">
-    <p class="mb-xs">{{ volume.volumeInfo.description | slice : 0 : 92 }}...</p>
+    <mat-card-content class="py-2xs">
+      <p class="mb-xs">{{ volume.volumeInfo.description | slice : 0 : 92 }}...</p>
 
-    <ng-container *ngIf="getPublishedBooksTotal() as total">
-      <mat-divider />
+      @if (booksTotal; as n) {
+        <mat-divider />
 
-      <p class="mt-xs mb-2xs fs-small" i18n>Contains {{ total }} books starting from {{ getPublishedBooksCheapestPrice() | currency }}</p>
-    </ng-container>
-
+        <p class="text-muted mt-xs mb-2xs">
+          <ng-container i18n
+            >{ n, plural, =1 { One book available for {{ lowestPrice | currency }}.} other {{{ n }} books available starting from {{ lowestPrice | currency }}.} }</ng-container>
+        </p>
+      }
     <ng-content />
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
+}

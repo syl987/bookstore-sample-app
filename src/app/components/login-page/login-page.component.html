@@ -1,4 +1,4 @@
-<div class="px-s align-self-center mx-auto" style="width: 298px; max-width: 100%; margin-bottom: 112px">
+<div class="px-s align-self-center mx-auto" style="width: 320px; max-width: 100%; margin-bottom: 112px">
   <!-- <h1 class="text-center mb-s">Login</h1> -->
 
   <div class="d-flex flex-column py-s">
@@ -9,7 +9,5 @@
     </div>
   </div>
 
-  <button mat-stroked-button color="primary" [spinning]="loginPending$ | async" [disabled]="loginPending$ | async" (click)="loginWithGoogle()" class="w-100">
-    Login with Google
-  </button>
+  <button mat-stroked-button color="primary" [spinning]="loginPending()" [disabled]="loginPending()" (click)="loginWithGoogle()" class="w-100">Login with Google</button>
 </div>

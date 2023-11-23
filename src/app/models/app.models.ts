@@ -5,9 +5,11 @@ import { InjectionToken } from '@angular/core';
  */
 export interface AppOptions {
   /** Application name to display in header and other places. */
-  applicationName: string;
+  readonly applicationName: string;
   /** Name of the legal copyright holder for display in the footer. */
-  copyrightName: string;
+  readonly copyrightName: string;
+  /** Year of the last update for display in the footer. */
+  readonly copyrightYear: string;
 }
 
 export const APP_OPTIONS = new InjectionToken<AppOptions>('APP_OPTIONS');
@@ -17,32 +19,30 @@ export const APP_OPTIONS = new InjectionToken<AppOptions>('APP_OPTIONS');
  */
 export interface AppNavLink {
   /** Display name. */
-  label: string;
+  readonly label: string;
   /** Full router path. */
-  path: string;
+  readonly path: string;
   /** Whether authentication as existing user is required (default: false). */
-  user?: boolean;
-  /** Whether to hide in non-development builds (default: false). */
-  dev?: boolean;
+  readonly user?: boolean;
 }
 
-export const APP_NAV_LINKS: readonly Readonly<AppNavLink>[] = [
-  { label: $localize`Home`, path: '/home' },
-  { label: $localize`Search`, path: '/search' },
+export const APP_NAV_LINKS: readonly AppNavLink[] = [
+  { label: $localize`Welcome`, path: '/welcome' },
+  { label: $localize`Books`, path: '/volumes' },
   { label: $localize`My Books`, path: '/user/books', user: true },
-  { label: 'Dev', path: '/dev', dev: true },
+  { label: 'Dev', path: '/dev' },
 ];
 
 export interface AppLanguage {
   /** Display name. */
-  label: string;
+  readonly label: string;
   /** Locale id. */
-  locale: string;
+  readonly locale: string;
   /** Flagpack icon class. */
-  icon: string;
+  readonly icon: string;
 }
 
-export const APP_LANGUAGES: readonly Readonly<AppLanguage>[] = [
+export const APP_LANGUAGES: readonly AppLanguage[] = [
   { label: 'English', locale: 'en', icon: 'us' },
   { label: 'Deutsch', locale: 'de', icon: 'de' },
   { label: 'Español', locale: 'es', icon: 'es' },

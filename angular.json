@@ -31,13 +31,19 @@
             },
             "allowedCommonJsDependencies": ["b64-to-blob"],
             "scripts": [],
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.any.ts"
+              }
+            ],
             "i18nDuplicateTranslation": "error",
             "i18nMissingTranslation": "error",
             "localize": true
           },
           "configurations": {
             "serve": {
-              "localize": ["en"]
+              "localize": ["de"]
             },
             "production": {
               "budgets": [
@@ -70,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "bookstore-sample-app:build:production,serve"
+              "buildTarget": "bookstore-sample-app:build:production,serve"
             },
             "development": {
-              "browserTarget": "bookstore-sample-app:build:development,serve"
+              "buildTarget": "bookstore-sample-app:build:development,serve"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +89,7 @@
           "options": {
             "format": "json",
             "outputPath": "src/locale",
-            "browserTarget": "bookstore-sample-app:build"
+            "buildTarget": "bookstore-sample-app:build"
           }
         },
         "lint": {
@@ -95,11 +101,8 @@
         "deploy": {
           "builder": "@angular/fire:deploy",
           "options": {
-            "prerender": false,
-            "ssr": false,
-            "browserTarget": "bookstore-sample-app:build:production",
-            "firebaseProject": "sample-app-a00e0",
-            "firebaseHostingSite": "sample-app-a00e0"
+            "version": 2,
+            "browserTarget": "bookstore-sample-app:build:production"
           }
         }
       }

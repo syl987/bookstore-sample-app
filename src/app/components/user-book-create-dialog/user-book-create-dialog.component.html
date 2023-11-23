@@ -1,25 +1,40 @@
-<h1 mat-dialog-title i18n>Create a New Book</h1>
+<h1 mat-dialog-title i18n>Create a new book</h1>
 
 <div mat-dialog-content>
   <div class="row">
     <mat-form-field floatLabel="always" class="col-sm-8 col-md-6 mt-2xs">
       <mat-label i18n>Search</mat-label>
       <input matInput [formControl]="searchControl" placeholder="Title, author, text,..." i18n-placeholder />
-      <mat-spinner *ngIf="searchPending$ | async" matSuffix diameter="24" class="me-s" />
+      @if (searchPending()) {
+        <mat-spinner matSuffix diameter="24" class="me-s" />
+      }
     </mat-form-field>
   </div>
 
-  <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="py-0">
-    <mat-list-option *ngFor="let volume of results$ | async | slice : 0 : 7" [value]="volume" class="text-truncate">
-      <img *ngIf="volume.volumeInfo.imageLinks" [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="Book thumbnail" height="44" width="44" class="me-s" i18n-alt />
-      <span class="fw-bold">{{ volume.volumeInfo.title }}</span>
-
-      <span *ngIf="volume.volumeInfo.subtitle" class="text-muted ms-2xs">&nbsp;{{ volume.volumeInfo.subtitle }}</span>
-    </mat-list-option>
+  <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="mx-ns py-0">
+    @for (volume of results() | slice: 0 : 7; track volume.id) {
+      <mat-list-option [value]="volume" class="text-truncate">
+        @if (volume.volumeInfo.imageLinks) {
+          <img [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-s" i18n-alt />
+        }
+        <span class="fw-semibold">{{ volume.volumeInfo.title }}</span>
+        @if (volume.volumeInfo.authors) {
+          <span class="text-muted ms-3xs">&nbsp;{{ volume.volumeInfo.authors | array }}</span>
+        }
+      </mat-list-option>
+    }
   </mat-selection-list>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-flat-button color="primary" (click)="createUserBook()" [spinning]="createPending$ | async" [disabled]="createDisabled$ | async" i18n>Create Book</button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="createUserBook(list.selectedOptions.selected[0].value)"
+    [spinning]="createPending()"
+    [disabled]="list.selectedOptions.isEmpty() || createPending()"
+  >
+    <ng-container i18n>Create Book</ng-container>
+  </button>
   <button mat-stroked-button mat-dialog-close i18n>Close</button>
 </div>

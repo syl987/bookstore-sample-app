@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import { BookDTO } from 'src/app/models/book.models';
+import { ActivatedRoute } from '@angular/router';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterService } from 'src/app/services/router.service';
@@ -13,37 +13,35 @@ import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list.component';
 
-// TODO loading spinner
-// TODO buy book => create a confirmation page
-// TODO navigate to user books => create a success dialog
-// TODO add support for 404
-// TODO use async pipe in templates to be able to react to logout change
-
 @Component({
   selector: 'app-volume-detail-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatTableModule, VolumeCardComponent, BookConditionPipe, TitleBarComponent, VolumeOfferListComponent],
+  imports: [CommonModule, MatButtonModule, MatTableModule, TitleBarComponent, VolumeCardComponent, VolumeOfferListComponent, BookConditionPipe],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeDetailPageComponent {
-  readonly volume$ = this.volumeService.entitiyByRoute$;
+  id: string = this.route.snapshot.params['volumeId'];
 
-  readonly loggedIn$ = this.authService.loggedIn$;
-  readonly uid$ = this.authService.user$;
+  readonly volume = this.volumeService.entitiyByRoute;
 
-  constructor(private readonly authService: AuthService, private readonly routerService: RouterService, private readonly volumeService: VolumeService) {
+  readonly loggedIn = this.authService.loggedIn;
+  readonly uid = this.authService.uid;
+
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly authService: AuthService,
+    private readonly routerService: RouterService,
+    private readonly volumeService: VolumeService,
+  ) {
     this.routerService
       .selectRouteParam('volumeId')
       .pipe(takeUntilDestroyed())
       .subscribe(id => {
         if (id) {
+          this.id = id;
           this.volumeService.load(id);
         }
       });
-  }
-
-  buyBook(book: BookDTO): void {
-    throw new Error('Method not implemented.');
   }
 }

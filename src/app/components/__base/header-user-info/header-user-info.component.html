@@ -1,16 +1,10 @@
 <div class="position-relative">
   <div class="d-flex align-items-center">
-    <div *ngIf="user.displayName" class="fs-small fw-normal text-truncate" style="max-width: 256px">{{ user.displayName }}</div>
-    <img
-      *ngIf="user.photoURL"
-      [src]="user.photoURL"
-      alt="user picture"
-      width="40"
-      height="40"
-      class="ms-s rounded-circle"
-      (error)="photo.classList.add('visually-hidden')"
-      i18n-alt
-      #photo
-    />
+    @if (user.displayName) {
+      <div class="fs-small fw-normal text-truncate" style="max-width: 256px">{{ user.displayName }}</div>
+    }
+    @if (user.photoURL) {
+      <img [src]="user.photoURL" alt="user" width="40" height="40" class="ms-s rounded-circle" (error)="photo.classList.add('cdk-visually-hidden')" i18n-alt #photo />
+    }
   </div>
 </div>

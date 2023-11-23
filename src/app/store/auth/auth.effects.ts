@@ -2,8 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Auth, authState, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { from, of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, from, map, of, skipWhile } from 'rxjs';
 import { toResponseErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError } from 'src/app/models/error.models';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -17,8 +16,9 @@ import { AuthActions } from './auth.actions';
 export class AuthEffects {
   readonly authenticated = createEffect(() => {
     return authState(this.auth).pipe(
-      map(state => {
-        if (state) {
+      skipWhile(user => !user), // prevent on-logout navigation on init (if not authenticated)
+      map(user => {
+        if (user) {
           return AuthActions.authenticated();
         }
         return AuthActions.unauthenticated();

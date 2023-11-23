@@ -17,8 +17,7 @@
   <mat-divider class="mb-s" />
 
   <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
-  <p><u>This line of text will render as underlined</u></p>
-  <p><small>This line of text is meant to be treated as fine print.</small></p>
+  <p><u>This line of text will render as underlined.</u></p>
   <p><strong>This line rendered as bold text.</strong></p>
   <!-- <p><em>This line rendered as italicized text.</em></p> -->
 
@@ -26,11 +25,7 @@
   <p><code>This line rendered as code-formatted text.</code></p>
   <pre>This line rendered as preformatted text.</pre>
 
-  <mat-divider class="mb-s" />
-
-  <p class="text-uppercase">This line rendered as uppercase text.</p>
-  <p class="text-lowercase">This line rendered as lowercase text.</p>
-  <p class="text-capitalize">This line rendered as capitalize text.</p>
+  <mat-divider />
 
   <h2>Button</h2>
 
@@ -70,47 +65,76 @@
     </button>
   </div>
 
-  <h2>Toast</h2>
+  <mat-divider />
 
-  <div class="app-gap-x-2xs mb-s">
+  <h2>Forms</h2>
+
+  <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()">
+    <div class="row">
+      <div class="col-sm-4 col-md-3 col-xl-2">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Email</mat-label>
+          <input type="text" matInput formControlName="email" email />
+          <mat-error>{{ form.get('email') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-4 col-md-3 col-xl-2">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Price</mat-label>
+          <input type="number" matInput formControlName="number" min="2" max="14" />
+          <span matTextSuffix class="text-nowrap text-muted ms-2xs">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
+          <mat-error>{{ form.get('number') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-4 col-md-3 col-xl-2">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Fruits</mat-label>
+          <select matNativeControl formControlName="select">
+            <option></option>
+            <option value="apples">Apples</option>
+            <option value="orages">Oranges</option>
+          </select>
+          <mat-error>{{ form.get('select') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 col-xl-6">
+        <mat-form-field class="w-100 mb-s">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="area" required minlength="3" maxlength="255" cdkTextareaAutosize></textarea>
+          <mat-error>{{ form.get('area') | validationError }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="app-gap-x-2xs mb-2m">
+      <button type="submit" mat-flat-button color="primary">Submit</button>
+      <button type="button" mat-stroked-button color="accent" (click)="invalidateForm()">Invalidate</button>
+      <button type="reset" mat-stroked-button [disabled]="form.disabled">Reset</button>
+    </div>
+  </form>
+
+  <mat-divider />
+
+  <h2>Overlay</h2>
+
+  <h3>Dialog</h3>
+
+  <button mat-flat-button color="primary" (click)="openExampleDialog()">Open Dialog</button>
+
+  <h3>Toast Message</h3>
+
+  <div class="app-gap-x-2xs mb-m">
     <button mat-flat-button color="primary" (click)="showSuccessToast()">Show Success</button>
     <button mat-stroked-button color="primary" (click)="showInfoToast()">Show Info</button>
     <button mat-stroked-button color="warn" (click)="showErrorToast()">Show Error</button>
   </div>
 
-  <h2>Dialog</h2>
-
-  <button mat-flat-button color="primary" (click)="openExampleDialog()">Open Dialog</button>
-
-  <h2>Spinner</h2>
-
-  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
-    <mat-spinner diameter="16" />
-    <mat-spinner diameter="24" />
-    <mat-spinner diameter="32" />
-    <mat-spinner diameter="40" />
-  </div>
-
-  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
-    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async" />
-  </div>
-
-  <h3>Button with Spinner</h3>
-
-  <div class="app-gap-x-2xs mb-s">
-    <button mat-flat-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Primary</button>
-    <button mat-stroked-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Secondary</button>
-  </div>
-
-  <!-- <h3>Button with Progress Indicator</h3>
-
-    <div class="app-gap-x-2xs mb-s">
-        <button mat-flat-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Primary</button>
-        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Secondary</button>
-    </div> -->
+  <mat-divider />
 
   <h2>Icons</h2>
 
@@ -140,96 +164,76 @@
     <mat-icon fontSet="fp" fontIcon="es" />
   </div>
 
-  <h2>Text</h2>
+  <h3>Spinner</h3>
 
-  <p class="fs-large">Large text (large) for unknown usage.</p>
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
+    <mat-spinner diameter="16" />
+    <mat-spinner diameter="24" />
+    <mat-spinner diameter="32" />
+    <mat-spinner diameter="40" />
+  </div>
 
-  <p class="fs-normal">Regular text (normal) with some very important information included.</p>
+  <div class="d-flex app-gap-x-2xs align-items-end mb-s">
+    <mat-progress-spinner diameter="16" color="warn" [value]="progress()" />
+    <mat-progress-spinner diameter="24" color="warn" [value]="progress()" />
+    <mat-progress-spinner diameter="32" color="warn" [value]="progress()" />
+    <mat-progress-spinner diameter="40" color="warn" [value]="progress()" />
+  </div>
 
-  <p>Default paragraph text (normal) with some very important information included.</p>
+  <h4>Button with Spinner</h4>
 
-  <p class="fs-small">Footnote text (small).</p>
+  <div class="app-gap-x-2xs mb-s">
+    <button mat-flat-button color="primary" [spinning]="disabled()" [disabled]="disabled()">Primary</button>
+    <button mat-stroked-button color="primary" [spinning]="disabled()" [disabled]="disabled()">Secondary</button>
+  </div>
 
-  <p class="fs-xsmall">Legal text (xsmall).</p>
+  <!-- <h3>Button with Progress Indicator</h3>
+
+    <div class="app-gap-x-2xs mb-s">
+        <button mat-flat-button color="primary"  mode="determinate" [value]="progress" [spinning]="true" disabled>Primary</button>
+        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress" [spinning]="true" disabled>Secondary</button>
+    </div> -->
+
+  <mat-divider />
 
   <h2>Field</h2>
 
-  <dl class="row mb-s">
+  <dl class="row">
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Name</dt>
       <dd>Michael Jackson</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Address</dt>
-      <dd>Main Street 4<br />D-12345 Munich</dd>
+      <dd>Main Street 4<br />D-12345 Some City</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Email</dt>
-      <dd>michael.jackson@some-domain.com</dd>
+      <dd>michael.jackson&#64;some-domain.com</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
       <dt>Phone Number</dt>
       <dd>+49 151 / 987 654 321</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
-      <dt>Last Login</dt>
-      <dd>{{ '2023-05-16' | date }}</dd>
+      <dt>Date of Birth</dt>
+      <dd>{{ '1958-08-29' | date }}</dd>
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3">
-      <dt>Secrets</dt>
+      <dt>Dark Secrets</dt>
       <dd>-</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Number of Songs</dt>
+      <dd>{{ 1423 | number }}</dd>
+    </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <dt>Net Worth</dt>
+      <dd>{{ 0 | currency }}</dd>
     </div>
   </dl>
 
-  <h2>List</h2>
-
-  <div class="row">
-    <div class="col-md-6 col-lg-3">
-      <h4>Default List</h4>
-      <mat-list>
-        <mat-list-item lines="3">
-          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
-          <span matListItemTitle>Title</span>
-          <span matListItemLine>Description</span>
-          <span matListItemLine>Second line</span>
-          <span matListItemMeta>Meta info</span>
-        </mat-list-item>
-        <mat-list-item lines="2">
-          <mat-icon matListItemIcon fontIcon="fa-folder-open-o fa-2x" />
-          <span matListItemTitle>Title</span>
-          <span matListItemLine>Description</span>
-          <span matListItemMeta>Meta info</span>
-        </mat-list-item>
-      </mat-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Navigation List</h4>
-      <mat-nav-list>
-        <a mat-list-item routerLink="/dev">first link</a>
-        <a mat-list-item routerLink="/dev">some other link</a>
-        <a mat-list-item routerLink="/dev" disabled>disabled link</a>
-      </mat-nav-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Action List</h4>
-      <mat-action-list>
-        <button mat-list-item (click)="showInfoToast()">first action</button>
-        <button mat-list-item (click)="showInfoToast()">some other action</button>
-        <button mat-list-item disabled>disabled action</button>
-      </mat-action-list>
-    </div>
-
-    <div class="col-md-6 col-lg-3">
-      <h4>Selection List</h4>
-      <mat-selection-list>
-        <mat-list-option>first option</mat-list-option>
-        <mat-list-option>some other option</mat-list-option>
-        <mat-list-option disabled>disabled option</mat-list-option>
-      </mat-selection-list>
-    </div>
-  </div>
+  <mat-divider />
 
   <h2>Utilities</h2>
 
@@ -240,44 +244,48 @@
     wrapped. This text is also very long and will be wrapped immediately. This text is also very long and will be wrapped very immediately. This text is also very long and will be
     wrapped now.
   </p>
-  <p class="text-start">Left (start) aligned text on all viewport sizes.</p>
-  <p class="text-center">Center aligned text on all viewport sizes.</p>
-  <p class="text-end">Right (end) aligned text on all viewport sizes.</p>
+  <p class="text-start mb-0">Left (start) aligned text on all viewport sizes.</p>
+  <p class="text-center mb-0">Center aligned text on all viewport sizes.</p>
+  <p class="text-end mb-0">Right (end) aligned text on all viewport sizes.</p>
+
+  <h3>Text Size</h3>
+
+  <p class="fs-large mb-0">Large text (large).</p>
+  <p class="fs-normal mb-0">Regular text (normal). Default paragraph text size.</p>
+  <p class="fs-small mb-0">Footnote text (small).</p>
+  <p class="fs-xsmall mb-0">Legal text (xsmall).</p>
 
   <h3>Text Wrap</h3>
 
   <div class="text-wrap" style="width: 6rem; background-color: aquamarine">This text should wrap.</div>
-
   <div class="text-nowrap" style="width: 8rem; background-color: burlywood">This text should overflow the parent.</div>
-
   <div class="text-truncate" style="max-width: 11rem; background-color: darkkhaki">Truncate block: Praeterea iter est quasdam res quas ex communi.</div>
-
   <span class="text-truncate" style="max-width: 11rem; display: inline-block; background-color: wheat">Truncate inline: Praeterea iter est quasdam res quas ex communi.</span>
-
   <p class="text-break">Break word: mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
 
   <h3>Text Colors</h3>
 
-  <p class="text-primary">.text-primary (mat-primary)</p>
-  <p class="text-accent">.text-accent (mat-accent)</p>
-  <p class="text-success">.text-success</p>
-  <p class="text-warn">.text-warn (mat-warn)</p>
-  <p class="text-info">.text-info</p>
-  <p class="text-body">.text-body (primary body color)</p>
-  <p class="text-white" style="background-color: gray">.text-white (inverse body color)</p>
-  <p class="text-muted">.text-muted</p>
-  <p class="text-reset">.text-reset (inherited color)</p>
+  <p class="text-primary mb-0">.text-primary (mat-primary)</p>
+  <p class="text-accent mb-0">.text-accent (mat-accent)</p>
+  <p class="text-success mb-0">.text-success</p>
+  <p class="text-warn mb-0">.text-warn (mat-warn)</p>
+  <p class="text-info mb-0">.text-info</p>
+  <p class="text-body mb-0">.text-body (primary body color)</p>
+  <p class="text-white mb-0" style="background-color: gray">.text-white (inverse body color)</p>
+  <p class="text-muted mb-0">.text-muted</p>
+  <p class="text-reset mb-0">.text-reset (inherited color)</p>
+
+  <h3>Text Transform</h3>
+
+  <p class="text-uppercase mb-0">This line rendered as uppercase text.</p>
+  <p class="text-lowercase mb-0">This line rendered as lowercase text.</p>
+  <p class="text-capitalize mb-0">This line rendered as capitalize text.</p>
 
   <h3>Screen Readers</h3>
 
   <p>
     Expose to screen readers only:
-    <span class="visually-hidden">visually-hidden</span>
-  </p>
-
-  <p>
-    Display normally when focused, expose only to screen readers otherwise:
-    <button mat-flat-button color="primary" class="visually-hidden-focusable">visually-hidden</button>
+    <span class="cdk-visually-hidden">visually-hidden</span>
   </p>
 
   <h3>Spacing</h3>
@@ -304,6 +312,8 @@
     <div class="border border-primary px-m py-3xs">Block Element</div>
     <div class="border border-primary px-m py-3xs">Block Element</div>
   </div>
+
+  <mat-divider />
 
   <h2>Grid</h2>
 

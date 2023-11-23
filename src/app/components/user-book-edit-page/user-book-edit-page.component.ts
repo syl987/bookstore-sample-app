@@ -1,15 +1,16 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule, getCurrencySymbol } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, Inject } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest } from 'rxjs';
-import { concatMap, filter, map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, concatMap, filter } from 'rxjs';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
-import { isTrue } from 'src/app/functions/typeguard.functions';
+import { getObjectValues } from 'src/app/functions/object.functions';
+import { isTrue, isTruthy } from 'src/app/functions/typeguard.functions';
 import { BookCondition, BookStatus, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { ValidationErrorPipe } from 'src/app/pipes/validation-error.pipe';
@@ -18,12 +19,8 @@ import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
-
-// TODO implement view offers or add navigation to volume, if published books exist
-// TODO navigate to user books after an action
-// TODO delete book (if not sold)
-// TODO add support for 404
 
 @Component({
   selector: 'app-user-book-edit-page',
@@ -32,9 +29,11 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
     CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatDividerModule,
     MatInputModule,
     MatSelectModule,
     TitleBarComponent,
+    ImageUploadComponent,
     VolumeCardComponent,
     ButtonSpinnerDirective,
     ValidationErrorPipe,
@@ -44,20 +43,23 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookEditPageComponent {
-  readonly id: string = this.route.snapshot.params['bookId'];
+  id: string = this.route.snapshot.params['bookId'];
 
-  readonly book$ = this.userBooksService.entityByRoute$;
+  readonly book = this.userBooksService.entityByRoute;
 
-  readonly editDraftPending$ = this.userBooksService.editDraftPending$;
-  readonly publishPending$ = this.userBooksService.publishPending$;
-  readonly deletePending$ = this.userBooksService.deletePending$;
+  readonly editDraftPending = this.userBooksService.editDraftPending;
+  readonly publishPending = this.userBooksService.publishPending;
+  readonly uploadPhotoPending = this.userBooksService.uploadPhotoPending;
+  readonly uploadPhotoProgress = this.userBooksService.uploadPhotoProgress;
+  readonly removePhotoPending = this.userBooksService.removePhotoPending;
+  readonly deletePending = this.userBooksService.deletePending;
 
-  readonly editDraftDisabled$ = this.editDraftPending$.pipe(map(pending => pending || this.form.disabled)); // TODO false on startup
+  readonly editDraftDisabled = computed(() => this.editDraftPending() || this.form.disabled); // TODO false on startup
 
-  readonly publishDisabled$ = combineLatest([this.publishPending$, this.book$]).pipe(map(([publishing, book]) => publishing || book?.status !== BookStatus.DRAFT));
+  readonly publishDisabled = computed(() => this.publishPending() || this.book()?.status !== BookStatus.DRAFT);
+  readonly deleteDisabled = computed(() => this.deletePending() || this.book()?.status !== BookStatus.DRAFT);
 
-  readonly deleteDisabled$ = combineLatest([this.deletePending$, this.book$]).pipe(map(([pending, book]) => pending || book?.status !== BookStatus.DRAFT));
-
+  readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;
 
   readonly form = this.fb.nonNullable.group({
@@ -66,9 +68,14 @@ export class UserBookEditPageComponent {
     price: new FormControl<number | null>(null),
   });
 
-  private readonly _resetFields = new BehaviorSubject<void>(undefined);
+  readonly getObjectValues = getObjectValues;
+
+  readonly currencySymbol = getCurrencySymbol(this.currency, 'narrow');
+
+  private readonly _resetFields$ = new BehaviorSubject<void>(undefined);
 
   constructor(
+    @Inject(DEFAULT_CURRENCY_CODE) private readonly currency: string,
     private readonly fb: FormBuilder,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
@@ -81,11 +88,12 @@ export class UserBookEditPageComponent {
       .pipe(takeUntilDestroyed())
       .subscribe(id => {
         if (id) {
+          this.id = id;
           this.userBooksService.load(id);
         }
       });
 
-    combineLatest([this.book$, this._resetFields])
+    combineLatest([toObservable(this.book), this._resetFields$])
       .pipe(takeUntilDestroyed())
       .subscribe(([book]) => {
         this.form.setValue({
@@ -111,7 +119,7 @@ export class UserBookEditPageComponent {
   }
 
   discardChanges(): void {
-    this._resetFields.next();
+    this._resetFields$.next();
   }
 
   publishBook(): void {
@@ -142,9 +150,37 @@ export class UserBookEditPageComponent {
       .openUserBookDeleteDialog()
       .beforeClosed()
       .pipe(
-        filter(isTrue), // ignore close without result
+        filter(isTrue),
         concatMap(_ => this.userBooksService.delete(this.id)),
       )
       .subscribe(_ => this.router.navigateByUrl('/user/books'));
+  }
+
+  cropAndUploadImage(file: File): void {
+    this.dialogService
+      .openImageCropDialog(file)
+      .beforeClosed()
+      .pipe(
+        filter(isTruthy),
+        concatMap(result => this.userBooksService.uploadPhoto(this.id, result)),
+      )
+      .subscribe(uploadData => {
+        if (uploadData.complete) {
+          this.userBooksService.load(this.id);
+        }
+      });
+  }
+
+  removeAllPhotos(): void {
+    this.dialogService
+      .openUserBookDeleteAllPhotosDialog()
+      .beforeClosed()
+      .pipe(
+        filter(isTrue),
+        concatMap(_ => this.userBooksService.removeAllPhotos(this.id)),
+      )
+      .subscribe(_ => {
+        this.userBooksService.load(this.id);
+      });
   }
 }

@@ -1,11 +1,8 @@
-import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
-import localeDe from '@angular/common/locales/de';
-import { APP_INITIALIZER, ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, isDevMode, LOCALE_ID } from '@angular/core';
-import { FirebaseOptions, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { APP_INITIALIZER, ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, isDevMode } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
-import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
@@ -18,6 +15,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 import { routes } from './app.routes';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
@@ -31,48 +29,57 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// TODO check translations
-// TODO move page descriptions to route data?
-// TODO kick unnecessary texts
-// TODO check better translation file formats
-// TODO check splitting translation files
-// TODO check layout details
-
-// TODO resolve navigation between book and volume
-// TODO header search
-// TODO volume and book details with breadcrumb history via navigation state
-// TODO list books as table, kick accordion
-// TODO upload book image
-
-// TODO update angular fire
-// TODO consider material grid-list with breakpoint observer instead of bootstrap grid
-// TODO add $localize function and x18n tags to all language strings
+// general
 // TODO consider using signals, check how to integrate with ngrx
-
-// TODO impressum page
+// TODO impressum / legal dislaimer page
+// TODO make some data protection policy page
 // TODO footer link to my github or some other page
-// TODO copyright year as static options
+// TODO use async pipe in templates to be able to react to logout change
+// TODO gap helper conflicts with negative link margin in the title-bar
+// TODO allow book deletion if published and also delete the volume if not related to any books
+// TODO check any other todos within the code base
+// TODO loading spinner to all pages
 
-const firebaseOptions: FirebaseOptions = {
-  apiKey: 'AIzaSyDrisPHet7H7y-G9GjVoJZFReIp-xqgnjo',
-  authDomain: 'sample-app-a00e0.firebaseapp.com',
-  databaseURL: 'https://sample-app-a00e0-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'sample-app-a00e0',
-  storageBucket: 'sample-app-a00e0.appspot.com',
-  messagingSenderId: '996177241422',
-  appId: '1:996177241422:web:c989fc969fe444ed99ea1f',
-  measurementId: 'G-1MVY64K4ZT',
-};
+// user book edit
+// TODO upload button spinner
+// TODO navigate to user books after an action
+// TODO delete book (if not sold)
+// TODO bug: change detection not fired after photo upload
+// TODO check file delete feature works properly
+
+// user book edit / detail
+// TODO add support for 404
+// TODO resolve navigation between book and volume => nope, need to just display offer list
+
+// volume detail / offer detail
+// TODO add support for 404
+// TODO on buy: navigate to user books => create a success dialog
+
+// volume search
+// TODO open as firebase database stream
+
+// volume card
+// TODO loading appearence
+
+// routing
+// TODO keep same page after login
+// TODO guard and keep same page or redirect after logout
+
+// image upload
+// TODO kick readonly format
+// TODO placeholder img
+// TODO progress
 
 const appOptions: AppOptions = {
   applicationName: 'Bookstore Sample App',
   copyrightName: 'Igor Milly',
+  copyrightYear: '2023',
 };
 
 const authConfig: AuthConfig = {
   loginUrl: '/login',
-  afterLoginUrl: '/',
-  afterLogoutUrl: '/login',
+  afterLoginUrl: '/volumes',
+  afterLogoutUrl: '/welcome',
   bearerExcluded: [{ url: 'https://www.googleapis.com/books/v1/volumes' }],
   bearerIncluded: [],
   messages: {
@@ -90,10 +97,6 @@ function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
   };
 }
 
-function registerLocales(): () => void {
-  return () => registerLocaleData(localeDe);
-}
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
@@ -103,12 +106,11 @@ export const appConfig: ApplicationConfig = {
     provideStore(reducers, storeConfig),
     provideEffects(effects),
     provideRouterStore(routerStoreConfig),
-    provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
+    provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode(), connectInZone: true }),
 
     importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(firebaseOptions)),
+      provideFirebaseApp(() => initializeApp(environment.firebaseOptions)),
       provideAuth(() => getAuth()),
-      provideFunctions(() => getFunctions()),
       provideDatabase(() => getDatabase()),
       provideStorage(() => getStorage()),
 
@@ -116,12 +118,10 @@ export const appConfig: ApplicationConfig = {
       MatSnackBarModule, // used centrally
     ),
 
-    { provide: LOCALE_ID, useValue: 'de' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: APP_OPTIONS, useValue: appOptions },
     { provide: AUTH_CONFIG, useValue: authConfig },
     { provide: APP_INITIALIZER, useFactory: registerIconFonts, deps: [MatIconRegistry], multi: true },
-    { provide: APP_INITIALIZER, useFactory: registerLocales, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
     /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */

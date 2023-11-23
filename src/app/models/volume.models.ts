@@ -38,8 +38,8 @@ export interface VolumeDTO {
     infoLink: string;
     canonicalVolumeLink: string;
   };
-  searchInfo: {
-    textSnippet: string | null;
+  searchInfo?: {
+    textSnippet: string;
   };
   publishedBooks?: {
     [id: string]: BookDTO;

@@ -1,0 +1,5 @@
+@import 'shared';
+
+:host > :not(:last-child) {
+  margin-right: app-spacer(2xs);
+}

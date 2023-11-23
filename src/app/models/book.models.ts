@@ -1,3 +1,4 @@
+import { ImageDTO } from './image.models';
 import { VolumeDTO } from './volume.models';
 
 export enum BookStatus {
@@ -13,20 +14,21 @@ export enum BookCondition {
   DAMAGED = 'DAMAGED',
 }
 
-// TODO published book model
-
 export interface BookDTO {
   id: string;
   uid: string;
   status: BookStatus;
   description?: string | null;
   condition?: BookCondition | null;
-  imageUrl?: string | null;
+  photos?: { [id: string]: ImageDTO } | null;
   price?: number | null;
+  buyerUid?: string | null;
 }
 
 export interface UserBookDTO extends BookDTO {
   volume: VolumeDTO;
 }
+
+export type UserBookCreateDTO = Pick<UserBookDTO, 'uid' | 'status' | 'volume'>;
 
 export type UserBookEditDraftDTO = Pick<UserBookDTO, 'condition' | 'description' | 'price'>;

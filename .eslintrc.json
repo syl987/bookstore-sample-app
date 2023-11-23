@@ -59,6 +59,7 @@
         "guard-for-in": "warn",
         "no-bitwise": "warn",
         "no-caller": "warn",
+        "no-console": "off", // enable to find unnecessary occurrences
         "no-else-return": "warn",
         "no-eval": "warn",
         "no-extend-native": "warn",
@@ -72,6 +73,7 @@
         "no-new-wrappers": "warn",
         "no-octal-escape": "warn",
         "no-proto": "warn",
+        "no-restricted-imports": ["warn", { "paths": ["rxjs/operators"], "patterns": [] }],
         "no-script-url": "warn",
         "no-undef-init": "warn",
         "no-unneeded-ternary": "warn",

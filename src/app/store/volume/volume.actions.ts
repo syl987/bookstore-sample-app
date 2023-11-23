@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { UserBookDTO } from 'src/app/models/book.models';
 import { ResponseError } from 'src/app/models/error.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
@@ -16,5 +17,9 @@ export const VolumeActions = createActionGroup({
     'apply filter INTERNAL': emptyProps(),
 
     'filter': props<{ query: string }>(),
+
+    'buy offer': props<{ id: string; offerId: string }>(),
+    'buy offer SUCCESS': props<{ id: string; volume: VolumeDTO | null; book: UserBookDTO }>(),
+    'buy offer ERROR': props<{ error: ResponseError }>(),
   },
 });

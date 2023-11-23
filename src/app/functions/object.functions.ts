@@ -51,3 +51,24 @@ export function getProperty<T extends object>(object: T, key: keyof T): T[keyof 
 export function getNestedProperty(object: object, keys: string): any {
   return keys.split('.').reduce((result, key) => (result as any)[key], object);
 }
+
+/**
+ * Returns an array of object entries.
+ */
+export function getObjectEntries<T extends object>(object?: T | null): [string, T[keyof T]][] {
+  return Object.entries(object ?? {});
+}
+
+/**
+ * Returns an array of object values.
+ */
+export function getObjectValues<T extends object>(object?: T | null): T[keyof T][] {
+  return Object.values(object ?? {});
+}
+
+/**
+ * Returns an array of object keys.
+ */
+export function getObjectKeys(object?: object | null): string[] {
+  return Object.keys(object ?? {});
+}

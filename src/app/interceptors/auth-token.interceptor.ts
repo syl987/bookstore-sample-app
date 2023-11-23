@@ -2,8 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Inject, Injectable } from '@angular/core';
 import { Auth, idToken } from '@angular/fire/auth';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable } from 'rxjs';
-import { concatMap, first } from 'rxjs/operators';
+import { concatMap, EMPTY, first, Observable } from 'rxjs';
 
 import { isBearerExcluded } from '../helpers/auth.helpers';
 import { AUTH_CONFIG, AuthConfig } from '../models/auth.models';
@@ -11,7 +10,11 @@ import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
-  constructor(@Inject(AUTH_CONFIG) private readonly config: AuthConfig, private readonly store: Store, private readonly auth: Auth) {}
+  constructor(
+    @Inject(AUTH_CONFIG) private readonly config: AuthConfig,
+    private readonly store: Store,
+    private readonly auth: Auth,
+  ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (isBearerExcluded(request, this.config)) {

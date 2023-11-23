@@ -1,14 +1,18 @@
-<ng-container *ngIf="book.condition || book.price != null">
+@if (book.condition != null || book.price != null) {
   <mat-divider />
 
   <dl class="row pt-xs mb-0">
-    <div *ngIf="book.condition" class="col-6">
-      <dt i18n>Condition</dt>
-      <dd>{{ book.condition | bookCondition }}</dd>
-    </div>
-    <div *ngIf="book.price" class="col-6">
-      <dt i18n>Price</dt>
-      <dd>{{ book.price | currency }}</dd>
-    </div>
+    @if (book.condition != null) {
+      <div class="col-6">
+        <dt i18n>Condition</dt>
+        <dd>{{ book.condition | bookCondition }}</dd>
+      </div>
+    }
+    @if (book.price != null) {
+      <div class="col-6">
+        <dt i18n>Price</dt>
+        <dd>{{ book.price | currency }}</dd>
+      </div>
+    }
   </dl>
-</ng-container>
+}

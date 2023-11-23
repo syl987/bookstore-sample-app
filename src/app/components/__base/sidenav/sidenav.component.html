@@ -1,37 +1,48 @@
-<ng-container *ngIf="user$ | async as user; else public">
+@if (user(); as user) {
   <div class="d-flex flex-column align-items-center mt-3m mb-s">
-    <img [src]="user?.photoURL || 'favicon.ico'" alt="user picture" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border" i18n-alt />
+    <img [src]="user?.photoURL || 'favicon.ico'" alt="user" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border" i18n-alt />
     {{ user?.displayName }}
   </div>
 
-  <mat-nav-list dense class="py-2xs">
-    <a mat-list-item *ngFor="let link of LINKS" [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
+  <mat-nav-list>
+    @for (link of PUBLIC_LINKS; track link.path) {
+      <a mat-list-item [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
+    }
   </mat-nav-list>
 
-  <mat-divider />
+  <mat-divider class="mx-s" />
 
-  <mat-action-list dense class="py-2xs">
+  <mat-nav-list class="pb-0">
+    @for (link of USER_LINKS; track link.path) {
+      <a mat-list-item [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
+    }
+  </mat-nav-list>
+
+  <mat-action-list class="pt-0">
     <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()" i18n>Session Info</button>
-
     <button mat-list-item (click)="logout(); navigated.emit()" i18n>Logout</button>
   </mat-action-list>
-</ng-container>
-
-<ng-template #public>
+} @else {
   <div class="d-flex flex-column align-items-center mt-3m mb-s">
     <div class="mb-2xs p-3xs border rounded-circle" style="width: 128px; height: 128px">
       <div class="d-flex flex-column justify-content-center align-items-center rounded-circle w-100 h-100 bg-light" style="color: lightgrey; font-size: 56px">?</div>
     </div>
+
     <div i18n>Anonymous User</div>
   </div>
 
-  <mat-nav-list dense class="py-2xs">
-    <a mat-list-item *ngFor="let link of PUBLIC_LINKS" [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
+  <mat-nav-list>
+    @for (link of PUBLIC_LINKS; track link.path) {
+      <a mat-list-item [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
+    }
   </mat-nav-list>
 
-  <mat-divider />
+  <mat-divider class="mx-s" />
 
-  <mat-action-list dense class="py-2xs">
+  <mat-action-list>
     <button mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
   </mat-action-list>
-</ng-template>
+}
+<button mat-icon-button color="primary" (click)="navigated.emit()" class="position-absolute top-0 end-0 m-3xs" aria-label="Close" i18n-aria-label>
+  <mat-icon fontIcon="fa-times" class="align-top" style="scale: 0.75" />
+</button>

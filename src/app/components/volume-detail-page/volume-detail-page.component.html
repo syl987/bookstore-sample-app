@@ -1,15 +1,15 @@
 <div class="container">
-  <app-title-bar backUrl="/search" />
+  <app-title-bar backUrl="/volumes" />
 
-  <p i18n>List of offers for the selected volume.</p>
+  <p i18n>Browse the available book offers for the selected volume.</p>
 
-  <div *ngIf="volume$ | async as volume">
+  @if (volume(); as volume) {
     <app-volume-card [volume]="volume" />
 
-    <h3 i18n>List of offers</h3>
+    <h3 class="mt-2m mb-2xs" i18n>List of book offers</h3>
 
     <div class="overflow-x-auto">
-      <app-volume-offer-list [volume]="volume" (buy)="buyBook($event)" />
+      <app-volume-offer-list [volume]="volume" [uid]="uid()" />
     </div>
-  </div>
+  }
 </div>

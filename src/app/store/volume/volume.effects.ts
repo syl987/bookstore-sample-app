@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { firebaseError } from 'src/app/models/error.models';
-import { FirebaseDatabaseService } from 'src/app/services/__api/firebase-database.service';
+import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
+import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
+import { firebaseError, internalError } from 'src/app/models/error.models';
+import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { VolumeActions } from './volume.actions';
@@ -41,25 +42,47 @@ export class VolumesEffects {
     );
   });
 
-  readonly loadErrorToast = createEffect(
+  readonly buyOffer = createEffect(() => {
+    return this.actions.pipe(
+      ofType(VolumeActions.buyOffer),
+      exhaustMap(({ id, offerId }) => {
+        const uid = this.authService.uid();
+
+        if (!uid) {
+          return of(VolumeActions.buyOfferERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+        }
+        return this.firebaseApi.buyBookOffer(uid, id, offerId).pipe(
+          map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, book: res.book })),
+          catchError(err => of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }))),
+        );
+      }),
+    );
+  });
+
+  readonly successToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.loadERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error loading volume.`)),
+        ofType(VolumeActions.buyOfferSUCCESS),
+        tap(action => this.toastService.showSuccessToast(toActionErrorMessage(action, [['buy offer', $localize`Book successfully bought.`]]))),
       );
     },
     { dispatch: false },
   );
 
-  readonly loadAllErrorToast = createEffect(
+  readonly errorToast = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(VolumeActions.loadAllERROR),
-        tap(_ => this.toastService.showErrorToast($localize`Error loading volumes.`)),
+        ofType(VolumeActions.loadERROR, VolumeActions.loadAllERROR, VolumeActions.buyOfferERROR),
+        tap(action => this.toastService.showErrorToast(toActionErrorMessage(action, [['buy offer', $localize`Error buying book.`]]))),
       );
     },
     { dispatch: false },
   );
 
-  constructor(private readonly actions: Actions, private readonly firebaseApi: FirebaseDatabaseService, private readonly toastService: ToastService) {}
+  constructor(
+    private readonly actions: Actions,
+    private readonly authService: AuthService,
+    private readonly firebaseApi: FirebaseApiService,
+    private readonly toastService: ToastService,
+  ) {}
 }
