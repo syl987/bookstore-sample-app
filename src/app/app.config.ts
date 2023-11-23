@@ -106,7 +106,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(reducers, storeConfig),
     provideEffects(effects),
     provideRouterStore(routerStoreConfig),
-    provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode() }),
+    provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode(), connectInZone: true }),
 
     importProvidersFrom(
       provideFirebaseApp(() => initializeApp(environment.firebaseOptions)),
