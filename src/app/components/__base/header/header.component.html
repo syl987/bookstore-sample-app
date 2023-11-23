@@ -64,6 +64,10 @@
       </ng-template>
       <mat-divider vertical class="mx-2xs" style="height: 32px" />
     }
+    @for (language of APP_LANGUAGES; track language.locale) {
+      <!-- fix: preload all flag icons -->
+      <mat-icon fontSet="fp" [fontIcon]="language.icon" style="display: none" />
+    }
     <button mat-icon-button color="primary" [matMenuTriggerFor]="languageMenu" aria-label="Language" i18n-aria-label>
       <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />
     </button>
