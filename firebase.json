@@ -32,6 +32,10 @@
         {
           "source": "/de/**",
           "destination": "/de/index.html"
+        },
+        {
+          "source": "/es/**",
+          "destination": "/es/index.html"
         }
       ],
       "i18n": {
