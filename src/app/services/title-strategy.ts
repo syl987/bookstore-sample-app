@@ -6,10 +6,7 @@ import { APP_OPTIONS, AppOptions } from '../models/app.models';
 
 @Injectable()
 export class AppTitleStrategy extends TitleStrategy {
-  constructor(
-    @Inject(APP_OPTIONS) readonly options: AppOptions,
-    private readonly title: Title,
-  ) {
+  constructor(@Inject(APP_OPTIONS) readonly options: AppOptions, private readonly title: Title) {
     super();
   }
 

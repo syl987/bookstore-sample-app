@@ -47,10 +47,4 @@ Thumbs.db
 .runtimeconfig.json
 
 # Custom
-/.husky
 .browserslistrc
-.editorconfig
-.eslintignore
-.gitattributes
-.gitignore
-.prettierignore

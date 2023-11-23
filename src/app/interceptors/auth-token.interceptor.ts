@@ -10,11 +10,7 @@ import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
-  constructor(
-    @Inject(AUTH_CONFIG) private readonly config: AuthConfig,
-    private readonly store: Store,
-    private readonly auth: Auth,
-  ) {}
+  constructor(@Inject(AUTH_CONFIG) private readonly config: AuthConfig, private readonly store: Store, private readonly auth: Auth) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (isBearerExcluded(request, this.config)) {

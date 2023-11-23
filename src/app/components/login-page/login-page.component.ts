@@ -17,10 +17,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginPageComponent {
   readonly loginPending = this.authService.loginPending;
 
-  constructor(
-    @Inject(APP_OPTIONS) readonly options: AppOptions,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(@Inject(APP_OPTIONS) readonly options: AppOptions, private readonly authService: AuthService) {}
 
   loginWithGoogle(): void {
     this.authService.loginWithProvider(ProviderId.GOOGLE);
