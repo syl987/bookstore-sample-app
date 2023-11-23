@@ -44,11 +44,7 @@ export class ButtonSpinnerDirective implements OnInit {
     return this.spinnerRef.instance.strokeWidth;
   }
 
-  constructor(
-    private readonly _elementRef: ElementRef,
-    private readonly _viewContainerRef: ViewContainerRef,
-    private readonly _renderer: Renderer2,
-  ) {
+  constructor(private readonly _elementRef: ElementRef, private readonly _viewContainerRef: ViewContainerRef, private readonly _renderer: Renderer2) {
     this.spinnerRef.instance.diameter = 20; // dependent on style positioning
   }
 

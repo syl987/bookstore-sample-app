@@ -10,7 +10,7 @@
   </div>
 
   <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="mx-ns py-0">
-    <mat-list-option *ngFor="let volume of results() | slice: 0 : 7" [value]="volume" class="text-truncate">
+    <mat-list-option *ngFor="let volume of results() | slice : 0 : 7" [value]="volume" class="text-truncate">
       <img *ngIf="volume.volumeInfo.imageLinks" [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-s" i18n-alt />
       <span class="fw-semibold">{{ volume.volumeInfo.title }}</span>
       <span *ngIf="volume.volumeInfo.authors?.length" class="text-muted ms-3xs">&nbsp;{{ volume.volumeInfo.authors | array }}</span>

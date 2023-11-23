@@ -16,10 +16,7 @@ import { FirebaseFileService } from './firebase-file.service';
   providedIn: 'root',
 })
 export class FirebaseApiService {
-  constructor(
-    private readonly database: Database,
-    private readonly fileService: FirebaseFileService,
-  ) {}
+  constructor(private readonly database: Database, private readonly fileService: FirebaseFileService) {}
 
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {
     const result = get(ref(this.database, `userBooks/${uid}/${id}`)).then(snap => snap.val());

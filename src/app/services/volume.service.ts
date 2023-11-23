@@ -35,10 +35,7 @@ export class VolumeService implements IVolumeService {
   readonly loadPending = this.store.selectSignal(volumeFeature.selectLoadPending);
   readonly loadError = this.store.selectSignal(volumeFeature.selectLoadError);
 
-  constructor(
-    private readonly store: Store,
-    private readonly actions: Actions,
-  ) {}
+  constructor(private readonly store: Store, private readonly actions: Actions) {}
 
   load(id: string): Observable<VolumeDTO> {
     this.store.dispatch(VolumeActions.load({ id }));

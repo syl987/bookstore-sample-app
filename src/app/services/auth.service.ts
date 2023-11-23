@@ -27,11 +27,7 @@ export class AuthService {
   private readonly _logoutPending = new BehaviorSubject<boolean>(false);
   readonly logoutPending = toSignal(this._loginPending.asObservable(), { requireSync: true });
 
-  constructor(
-    private readonly store: Store,
-    private readonly actions: Actions,
-    private readonly auth: Auth,
-  ) {
+  constructor(private readonly store: Store, private readonly actions: Actions, private readonly auth: Auth) {
     // set login pending stream
     this.actions.pipe(ofType(AuthActions.loginWithProvider), takeUntilDestroyed()).subscribe(_ => this._loginPending.next(true));
     this.actions

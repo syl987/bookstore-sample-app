@@ -24,11 +24,7 @@ export class UserBookListPageComponent implements OnInit {
   readonly userBooksSold = this.userBooksService.entitiesSold;
   readonly userBooksBought = this.userBooksService.entitiesBought;
 
-  constructor(
-    private readonly router: Router,
-    private readonly userBooksService: UserBooksService,
-    private readonly dialogService: DialogService,
-  ) {}
+  constructor(private readonly router: Router, private readonly userBooksService: UserBooksService, private readonly dialogService: DialogService) {}
 
   ngOnInit(): void {
     this.userBooksService.loadAll();
