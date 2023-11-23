@@ -15,7 +15,7 @@ import { RouterService } from 'src/app/services/router.service';
   host: { class: 'd-flex flex-wrap' },
 })
 export class TitleBarComponent {
-  readonly title$ = this.routerService.title$;
+  readonly title = this.routerService.title;
 
   @Input() backUrl?: string | null;
 

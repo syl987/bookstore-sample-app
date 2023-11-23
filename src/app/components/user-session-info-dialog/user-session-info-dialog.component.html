@@ -6,22 +6,17 @@
       <dt i18n>Name</dt>
       <dd>{{ user.displayName || '-' }}</dd>
     </div>
+
     <div class="col-sm-6">
       <dt i18n>Email</dt>
       <dd>{{ user.email || '-' }}</dd>
     </div>
-    <div class="col-sm-6">
-      <dt i18n>Email Verified</dt>
-      <dd>{{ user.emailVerified | boolean : 'YesNo' || '-' }}</dd>
-    </div>
+
     <div class="col-sm-6">
       <dt i18n>Login Providers</dt>
       <dd>{{ getAuthProviders(user) || '-' }}</dd>
     </div>
-    <div class="col-sm-6">
-      <dt i18n>Registration</dt>
-      <dd>{{ (user.metadata.createdAt | date) || '-' }}</dd>
-    </div>
+
     <div class="col-sm-6">
       <dt i18n>Last Login</dt>
       <dd>{{ (user.metadata.lastLoginAt | date) || '-' }}</dd>

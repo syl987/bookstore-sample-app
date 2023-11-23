@@ -174,24 +174,24 @@
   </div>
 
   <div class="d-flex app-gap-x-2xs align-items-end mb-s">
-    <mat-progress-spinner diameter="16" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="24" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="32" color="warn" [value]="progress$ | async" />
-    <mat-progress-spinner diameter="40" color="warn" [value]="progress$ | async" />
+    <mat-progress-spinner diameter="16" color="warn" [value]="progress()" />
+    <mat-progress-spinner diameter="24" color="warn" [value]="progress()" />
+    <mat-progress-spinner diameter="32" color="warn" [value]="progress()" />
+    <mat-progress-spinner diameter="40" color="warn" [value]="progress()" />
   </div>
 
   <h4>Button with Spinner</h4>
 
   <div class="app-gap-x-2xs mb-s">
-    <button mat-flat-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Primary</button>
-    <button mat-stroked-button color="primary" [spinning]="disabled$ | async" [disabled]="disabled$ | async">Secondary</button>
+    <button mat-flat-button color="primary" [spinning]="disabled()" [disabled]="disabled()">Primary</button>
+    <button mat-stroked-button color="primary" [spinning]="disabled()" [disabled]="disabled()">Secondary</button>
   </div>
 
   <!-- <h3>Button with Progress Indicator</h3>
 
     <div class="app-gap-x-2xs mb-s">
-        <button mat-flat-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Primary</button>
-        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress$ | async" [spinning]="true" disabled>Secondary</button>
+        <button mat-flat-button color="primary"  mode="determinate" [value]="progress" [spinning]="true" disabled>Primary</button>
+        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress" [spinning]="true" disabled>Secondary</button>
     </div> -->
 
   <mat-divider />

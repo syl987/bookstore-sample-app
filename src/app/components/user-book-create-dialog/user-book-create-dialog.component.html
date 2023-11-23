@@ -5,12 +5,12 @@
     <mat-form-field floatLabel="always" class="col-sm-8 col-md-6 mt-2xs">
       <mat-label i18n>Search</mat-label>
       <input matInput [formControl]="searchControl" placeholder="Title, author, text,..." i18n-placeholder />
-      <mat-spinner *ngIf="searchPending$ | async" matSuffix diameter="24" class="me-s" />
+      <mat-spinner *ngIf="searchPending()" matSuffix diameter="24" class="me-s" />
     </mat-form-field>
   </div>
 
   <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="mx-ns py-0">
-    <mat-list-option *ngFor="let volume of results$ | async | slice : 0 : 7" [value]="volume" class="text-truncate">
+    <mat-list-option *ngFor="let volume of results() | slice : 0 : 7" [value]="volume" class="text-truncate">
       <img *ngIf="volume.volumeInfo.imageLinks" [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-s" i18n-alt />
       <span class="fw-semibold">{{ volume.volumeInfo.title }}</span>
       <span *ngIf="volume.volumeInfo.authors?.length" class="text-muted ms-3xs">&nbsp;{{ volume.volumeInfo.authors | array }}</span>
@@ -23,8 +23,8 @@
     mat-flat-button
     color="primary"
     (click)="createUserBook(list.selectedOptions.selected[0].value)"
-    [spinning]="createPending$ | async"
-    [disabled]="list.selectedOptions.isEmpty() || (createPending$ | async)"
+    [spinning]="createPending()"
+    [disabled]="list.selectedOptions.isEmpty() || createPending()"
   >
     <ng-container i18n>Create Book</ng-container>
   </button>

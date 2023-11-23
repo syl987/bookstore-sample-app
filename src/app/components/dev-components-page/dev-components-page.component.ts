@@ -1,5 +1,6 @@
 import { CommonModule, getCurrencySymbol } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DEFAULT_CURRENCY_CODE, Inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -42,10 +43,14 @@ export class DevComponentsPageComponent {
     map(value => !!value),
   );
 
-  readonly progress$ = timer(1000, 35).pipe(
+  readonly disabled = toSignal(this.disabled$, { initialValue: false });
+
+  readonly progress$ = timer(0, 35).pipe(
     map(value => value % 100),
     auditTime(140),
   );
+
+  readonly progress = toSignal(this.progress$, { initialValue: 0 });
 
   readonly form = new FormGroup({
     email: new FormControl(),

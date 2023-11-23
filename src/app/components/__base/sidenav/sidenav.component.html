@@ -1,4 +1,4 @@
-<ng-container *ngIf="user$ | async as user; else public">
+<ng-container *ngIf="user() as user; else public">
   <div class="d-flex flex-column align-items-center mt-3m mb-s">
     <img [src]="user?.photoURL || 'favicon.ico'" alt="user picture" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border" i18n-alt />
     {{ user?.displayName }}
