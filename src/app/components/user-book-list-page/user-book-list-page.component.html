@@ -7,7 +7,7 @@
 </div>
 
 <div class="container">
-  @if (userBooksDraft()?.length) {
+  @if (userBooksDraft().length) {
     <h2 i18n>Draft</h2>
 
     <p i18n>These books are not publicly visible and can be edited.</p>
@@ -22,7 +22,7 @@
       }
     </div>
   }
-  @if (userBooksPublished()?.length) {
+  @if (userBooksPublished().length) {
     <h2 i18n>Published</h2>
 
     <p i18n>These books are publicly visible and available for buying. Changes are not possible.</p>
@@ -37,7 +37,7 @@
       }
     </div>
   }
-  @if (userBooksSold()?.length) {
+  @if (userBooksSold().length) {
     <h2 i18n>Sold</h2>
 
     <p i18n>Sold books are not publicly visible, but they will remain listed here. Changes are not possible.</p>
@@ -52,7 +52,7 @@
       }
     </div>
   }
-  @if (userBooksBought()?.length) {
+  @if (userBooksBought().length) {
     <h2 i18n>Bought</h2>
 
     <p i18n>This is your list of the books that you bought from other users.</p>
