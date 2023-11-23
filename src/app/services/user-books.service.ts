@@ -64,7 +64,10 @@ export class UserBooksService implements IUserBooksService {
   readonly publishPending = this.store.selectSignal(userBooksFeature.selectPublishPending);
   readonly publishError = this.store.selectSignal(userBooksFeature.selectPublishError);
 
-  constructor(private readonly store: Store, private readonly actions: Actions) {}
+  constructor(
+    private readonly store: Store,
+    private readonly actions: Actions,
+  ) {}
 
   load(id: string): Observable<UserBookDTO> {
     this.store.dispatch(UserBooksActions.load({ id }));

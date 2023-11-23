@@ -17,7 +17,10 @@ export class RouterService {
   readonly routeParams: Signal<RouteParams> = this.store.selectSignal(RouterSelectors.selectRouteParams);
   readonly queryParams: Signal<QueryParams> = this.store.selectSignal(RouterSelectors.selectQueryParams);
 
-  constructor(private readonly store: Store, private readonly router: Router) {}
+  constructor(
+    private readonly store: Store,
+    private readonly router: Router,
+  ) {}
 
   getCurrentNavigationState(): NavigationState {
     return (this.router.getCurrentNavigation()?.extras.state ?? {}) as NavigationState;
