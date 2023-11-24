@@ -10,9 +10,12 @@
       <div class="col-md-6 col-xl-4 mb-m">
         <a routerLink="/volumes/{{ volume.id }}" class="text-reset text-decoration-none"><app-volume-card [volume]="volume" /></a>
       </div>
-    }
-    @if (volumesFilteredEmpty()) {
-      <p class="text-muted fs-small" i18n>No books were found.</p>
+    } @empty {
+      @if (volumesLoading()) {
+        <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label></mat-spinner>
+      } @else {
+        <p class="text-center text-muted py-2xs" i18n>No books were found.</p>
+      }
     }
   </div>
 </div>

@@ -14,13 +14,11 @@
     </div>
   </dl>
 
-  <h3 i18n>Available Photos</h3>
-
-  <div class="d-flex flex-wrap">
-    @for (photo of getOfferPhotos(offer); track photo.id) {
+  @for (photo of getOfferPhotos(offer); track photo.id) {
+    <div class="d-flex flex-wrap">
       <img [src]="photo.src" [alt]="photo.alt" class="me-s mb-s" style="max-height: 256px" />
-    } @empty {
-      <p class="text-muted fs-small mt-nxs" i18n>No photos were uploaded.</p>
-    }
-  </div>
+    </div>
+  } @empty {
+    <p class="text-center text-muted py-2xs" i18n>No photos were uploaded.</p>
+  }
 }

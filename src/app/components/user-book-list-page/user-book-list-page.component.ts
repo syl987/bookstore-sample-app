@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 import { isTruthy } from 'src/app/functions/typeguard.functions';
@@ -14,7 +15,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 @Component({
   selector: 'app-user-book-list-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, TitleBarComponent, VolumeCardComponent, UserBookCardContentComponent],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, UserBookCardContentComponent],
   templateUrl: './user-book-list-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -23,6 +24,8 @@ export class UserBookListPageComponent implements OnInit {
   readonly userBooksPublished = this.userBooksService.entitiesPublished;
   readonly userBooksSold = this.userBooksService.entitiesSold;
   readonly userBooksBought = this.userBooksService.entitiesBought;
+
+  readonly userBooksLoading = this.userBooksService.loadPending;
 
   constructor(
     private readonly router: Router,

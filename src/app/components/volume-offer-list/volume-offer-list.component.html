@@ -1,46 +1,48 @@
 @if (publishedBooks.length) {
-  <table mat-table [dataSource]="publishedBooks" style="background-color: inherit">
-    <ng-container matColumnDef="number">
-      <th mat-header-cell *matHeaderCellDef>#</th>
-      <td mat-cell *matCellDef="let book; index as i" class="fw-semibold text-end">{{ i + 1 }}</td>
-    </ng-container>
+  <div class="overflow-x-auto">
+    <table mat-table [dataSource]="publishedBooks" style="background-color: inherit">
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let book; index as i" class="fw-semibold text-end">{{ i + 1 }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="condition">
-      <th mat-header-cell *matHeaderCellDef i18n>Condition</th>
-      <td mat-cell *matCellDef="let book">{{ book.condition | bookCondition }}</td>
-    </ng-container>
+      <ng-container matColumnDef="condition">
+        <th mat-header-cell *matHeaderCellDef i18n>Condition</th>
+        <td mat-cell *matCellDef="let book">{{ book.condition | bookCondition }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef class="text-end" i18n>Price</th>
-      <td mat-cell *matCellDef="let book" class="text-end">{{ book.price | currency }}</td>
-    </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef class="text-end" i18n>Price</th>
+        <td mat-cell *matCellDef="let book" class="text-end">{{ book.price | currency }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef style="min-width: 250px" i18n>Description</th>
-      <td mat-cell *matCellDef="let book">{{ book.description | slice: 0 : 84 }} {{ book.description.length > 92 ? '[...]' : '' }}</td>
-    </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef style="min-width: 250px" i18n>Description</th>
+        <td mat-cell *matCellDef="let book">{{ book.description | slice: 0 : 84 }} {{ book.description.length > 92 ? '[...]' : '' }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="photos">
-      <th mat-header-cell *matHeaderCellDef class="text-end" i18n>Photos</th>
-      <td mat-cell *matCellDef="let book" class="text-end">{{ getPhotosTotal(book) || '-' }}</td>
-    </ng-container>
+      <ng-container matColumnDef="photos">
+        <th mat-header-cell *matHeaderCellDef class="text-end" i18n>Photos</th>
+        <td mat-cell *matCellDef="let book" class="text-end">{{ getPhotosTotal(book) || '-' }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let book" class="text-nowrap">
-        <div class="app-gap-x-2xs pull-right">
-          @if (uid !== book.uid) {
-            <a mat-button color="primary" [routerLink]="['/volumes', volumeId, 'offer', book.id]" i18n>Proceed</a>
-          } @else {
-            <a mat-button color="primary" [routerLink]="['/volumes', volumeId, 'offer', book.id]" i18n>View</a>
-          }
-        </div>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let book" class="text-nowrap">
+          <div class="app-gap-x-2xs pull-right">
+            @if (uid !== book.uid) {
+              <a mat-button color="primary" [routerLink]="['/volumes', volumeId, 'offer', book.id]" i18n>Proceed</a>
+            } @else {
+              <a mat-button color="primary" [routerLink]="['/volumes', volumeId, 'offer', book.id]" i18n>View</a>
+            }
+          </div>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="['number', 'condition', 'price', 'description', 'photos', 'actions']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['number', 'condition', 'price', 'description', 'photos', 'actions']"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="['number', 'condition', 'price', 'description', 'photos', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['number', 'condition', 'price', 'description', 'photos', 'actions']"></tr>
+    </table>
+  </div>
 } @else {
-  <p class="text-muted fs-small" i18n>No offers have been published yet.</p>
+  <p class="text-center text-muted py-2xs" i18n>No offers have been published yet.</p>
 }

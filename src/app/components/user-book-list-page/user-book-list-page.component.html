@@ -4,10 +4,8 @@
   </app-title-bar>
 
   <p i18n>This is a collection of your books.</p>
-</div>
 
-<div class="container">
-  @if (userBooksDraft().length) {
+  @if (!userBooksLoading()) {
     <h2 i18n>Draft</h2>
 
     <p i18n>These books are not publicly visible and can be edited.</p>
@@ -19,10 +17,11 @@
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
           </a>
         </div>
+      } @empty {
+        <p class="text-center text-muted py-2xs" i18n>No books were found.</p>
       }
     </div>
-  }
-  @if (userBooksPublished().length) {
+
     <h2 i18n>Published</h2>
 
     <p i18n>These books are publicly visible and available for buying. Changes are not possible.</p>
@@ -34,10 +33,11 @@
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
           </a>
         </div>
+      } @empty {
+        <p class="text-center text-muted py-2xs" i18n>No books were found.</p>
       }
     </div>
-  }
-  @if (userBooksSold().length) {
+
     <h2 i18n>Sold</h2>
 
     <p i18n>Sold books are not publicly visible, but they will remain listed here. Changes are not possible.</p>
@@ -49,10 +49,11 @@
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
           </a>
         </div>
+      } @empty {
+        <p class="text-center text-muted py-2xs" i18n>No books were found.</p>
       }
     </div>
-  }
-  @if (userBooksBought().length) {
+
     <h2 i18n>Bought</h2>
 
     <p i18n>This is your list of the books that you bought from other users.</p>
@@ -64,7 +65,11 @@
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
           </a>
         </div>
+      } @empty {
+        <p class="text-center text-muted py-2xs" i18n>No books were found.</p>
       }
     </div>
+  } @else {
+    <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label></mat-spinner>
   }
 </div>

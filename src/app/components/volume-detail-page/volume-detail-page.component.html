@@ -11,9 +11,7 @@
     <p i18n>Select a book offer to proceed.</p>
 
     @defer {
-      <div class="overflow-x-auto">
-        <app-volume-offer-list [volume]="volume" [uid]="uid()" />
-      </div>
+      <app-volume-offer-list [volume]="volume" [uid]="uid()" />
     }
   } @else if (volumeLoading()) {
     <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label></mat-spinner>
