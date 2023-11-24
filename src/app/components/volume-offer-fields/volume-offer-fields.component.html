@@ -14,7 +14,7 @@
     </div>
   </dl>
 
-  @for (photo of getOfferPhotos(offer); track photo.id) {
+  @for (photo of getOfferPhotos(offer); track photo) {
     <div class="d-flex flex-wrap">
       <img [src]="photo.src" [alt]="photo.alt" class="me-s mb-s" style="max-height: 256px" />
     </div>

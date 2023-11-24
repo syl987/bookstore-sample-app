@@ -6,7 +6,7 @@
   <p i18n>Explore books available for purchase.</p>
 
   <div class="row">
-    @for (volume of volumesFiltered(); track volume.id) {
+    @for (volume of volumesFiltered(); track volume) {
       <div class="col-md-6 col-xl-4 mb-m">
         <a routerLink="/volumes/{{ volume.id }}" class="text-reset text-decoration-none"><app-volume-card [volume]="volume" /></a>
       </div>

@@ -11,7 +11,7 @@
     <p i18n>These books are not publicly visible and can be edited.</p>
 
     <div class="row">
-      @for (book of userBooksDraft(); track book.id) {
+      @for (book of userBooksDraft(); track book) {
         <div class="col-md-6 col-xl-4 mb-m">
           <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
@@ -27,7 +27,7 @@
     <p i18n>These books are publicly visible and available for buying. Changes are not possible.</p>
 
     <div class="row">
-      @for (book of userBooksPublished(); track book.id) {
+      @for (book of userBooksPublished(); track book) {
         <div class="col-md-6 col-xl-4 mb-m">
           <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
@@ -43,7 +43,7 @@
     <p i18n>Sold books are not publicly visible, but they will remain listed here. Changes are not possible.</p>
 
     <div class="row">
-      @for (book of userBooksSold(); track book.id) {
+      @for (book of userBooksSold(); track book) {
         <div class="col-md-6 col-xl-4 mb-m">
           <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
@@ -59,7 +59,7 @@
     <p i18n>This is your list of the books that you bought from other users.</p>
 
     <div class="row">
-      @for (book of userBooksBought(); track book.id) {
+      @for (book of userBooksBought(); track book) {
         <div class="col-md-6 col-xl-4 mb-m">
           <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
