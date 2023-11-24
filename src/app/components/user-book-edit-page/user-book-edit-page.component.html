@@ -12,13 +12,12 @@
     <div class="mb-m">
       <h3 i18n>Custom photos</h3>
 
-      <input type="file" class="d-none" accept="image/*" #picker (change)="cropAndUploadImage($any($event.target).files[0]); picker.type = ''; picker.type = 'file'" />
+      <input type="file" class="d-none" accept="image/*" #picker (change)="cropAndUploadPhoto($any($event.target).files[0]); picker.type = ''; picker.type = 'file'" />
 
       <app-image-upload
         [images]="getObjectValues(book.photos)"
         [readonly]="book.status !== BookStatus.DRAFT"
         [uploading]="uploadPhotoPending()"
-        defaultAlt="photo"
         (fileSelect)="picker.click()"
         (removeAll)="removeAllPhotos()"
       />

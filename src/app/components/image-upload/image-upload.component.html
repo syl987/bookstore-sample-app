@@ -1,6 +1,6 @@
 <div class="d-flex flex-wrap app-gap-x-2xs mb-2xs">
   @for (image of images; track image) {
-    <img [src]="image.src" [alt]="image.alt ?? defaultAlt" class="rounded mb-2xs" height="96" />
+    <img [src]="image.src" alt="photo" class="rounded mb-2xs" height="96" i18n-alt />
   }
 </div>
 

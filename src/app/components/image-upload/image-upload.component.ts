@@ -18,8 +18,6 @@ export class ImageUploadComponent {
   @Input() uploading?: boolean | null;
   /* @Input() progress?: number | null; */
 
-  @Input() defaultAlt?: string | null;
-
   /* @Input() placeholderSrc?: string | null; */
   /* @Input() placeholderAlt?: string | null; */
 

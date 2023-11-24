@@ -159,7 +159,7 @@ export class UserBookEditPageComponent {
       .subscribe(_ => this.router.navigateByUrl('/user/books'));
   }
 
-  cropAndUploadImage(file: File): void {
+  cropAndUploadPhoto(file: File): void {
     this.dialogService
       .openImageCropDialog(file)
       .beforeClosed()
