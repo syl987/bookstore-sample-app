@@ -8,6 +8,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatIconRegistry } from '@angular/material/icon';
+import { MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS } from '@angular/material/progress-spinner';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { PreloadAllModules, provideRouter, TitleStrategy, withPreloading } from '@angular/router';
@@ -25,6 +26,7 @@ import { APP_OPTIONS, AppOptions } from './models/app.models';
 import { AUTH_CONFIG, AuthConfig } from './models/auth.models';
 import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
+import { progressSpinnerOptions } from './options/progress-spinner.options';
 import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
@@ -127,6 +129,7 @@ export const appConfig: ApplicationConfig = {
     /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: dialogOptions },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: formFieldOptions },
+    { provide: MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS, useValue: progressSpinnerOptions },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: snackBarOptions },
     /* { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipOptions }, */
     { provide: ErrorStateMatcher, useClass: DirtyOrTouchedMatcher },
