@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, concatMap, filter } from 'rxjs';
@@ -31,6 +32,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
     MatButtonModule,
     MatDividerModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     TitleBarComponent,
     ImageUploadComponent,
@@ -46,6 +48,7 @@ export class UserBookEditPageComponent {
   id: string = this.route.snapshot.params['bookId'];
 
   readonly book = this.userBooksService.entityByRoute;
+  readonly bookLoading = this.userBooksService.loadPending;
 
   readonly editDraftPending = this.userBooksService.editDraftPending;
   readonly publishPending = this.userBooksService.publishPending;

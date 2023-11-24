@@ -20,5 +20,7 @@
     <app-volume-card [volume]="book.volume" class="mb-m" />
 
     <app-volume-offer-fields [offer]="book" />
+  } @else if (bookLoading()) {
+    <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label></mat-spinner>
   }
 </div>

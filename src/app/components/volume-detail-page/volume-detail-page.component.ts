@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,7 +16,7 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
 @Component({
   selector: 'app-volume-detail-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, TitleBarComponent, VolumeCardComponent, VolumeOfferListComponent, BookConditionPipe],
+  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferListComponent, BookConditionPipe],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -23,6 +24,7 @@ export class VolumeDetailPageComponent {
   id: string = this.route.snapshot.params['volumeId'];
 
   readonly volume = this.volumeService.entitiyByRoute;
+  readonly volumeLoading = this.volumeService.loadPending;
 
   readonly loggedIn = this.authService.loggedIn;
   readonly uid = this.authService.uid;

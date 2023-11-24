@@ -68,5 +68,7 @@
         <button type="reset" mat-stroked-button [disabled]="form.disabled" i18n>Clear</button>
       </div>
     </form>
+  } @else if (bookLoading()) {
+    <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label></mat-spinner>
   }
 </div>

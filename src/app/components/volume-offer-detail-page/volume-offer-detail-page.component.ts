@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { concatMap, filter } from 'rxjs';
 import { isTrue } from 'src/app/functions/typeguard.functions';
@@ -24,7 +25,7 @@ function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undef
 @Component({
   selector: 'app-volume-offer-detail-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent, BookConditionPipe],
+  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent, BookConditionPipe],
   templateUrl: './volume-offer-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -32,6 +33,7 @@ export class VolumeOfferDetailPageComponent {
   id: string = this.route.snapshot.params['volumeId'];
 
   readonly volume = this.volumeService.entitiyByRoute;
+  readonly volumeLoading = this.volumeService.loadPending;
 
   readonly offer = computed(() => getBookOfferById(this.volumeService.entitiyByRoute(), this.routerService.routeParams()['offerId']));
 

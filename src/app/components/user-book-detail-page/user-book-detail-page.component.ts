@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 import { BookCondition, BookStatus } from 'src/app/models/book.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
@@ -15,7 +16,7 @@ import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-
 @Component({
   selector: 'app-user-book-detail-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent, BookConditionPipe],
+  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent, BookConditionPipe],
   templateUrl: './user-book-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -23,6 +24,7 @@ export class UserBookDetailPageComponent {
   id: string = this.route.snapshot.params['bookId'];
 
   readonly book = this.userBooksService.entityByRoute;
+  readonly bookLoading = this.userBooksService.loadPending;
 
   readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;
