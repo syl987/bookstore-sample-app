@@ -11,7 +11,7 @@
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef i18n>Price</th>
+      <th mat-header-cell *matHeaderCellDef class="text-end" i18n>Price</th>
       <td mat-cell *matCellDef="let book" class="text-end">{{ book.price | currency }}</td>
     </ng-container>
 
@@ -21,7 +21,7 @@
     </ng-container>
 
     <ng-container matColumnDef="photos">
-      <th mat-header-cell *matHeaderCellDef i18n>Photos</th>
+      <th mat-header-cell *matHeaderCellDef class="text-end" i18n>Photos</th>
       <td mat-cell *matCellDef="let book" class="text-end">{{ getPhotosTotal(book) || '-' }}</td>
     </ng-container>
 
