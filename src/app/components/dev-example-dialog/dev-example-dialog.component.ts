@@ -8,7 +8,7 @@ export interface ExampleDevDialogData {
 }
 
 @Component({
-  selector: 'ib-dev-example-dialog',
+  selector: 'app-dev-example-dialog',
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatDialogModule],
   templateUrl: './dev-example-dialog.component.html',
