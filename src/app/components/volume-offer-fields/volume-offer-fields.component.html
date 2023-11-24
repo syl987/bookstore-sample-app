@@ -14,11 +14,13 @@
     </div>
   </dl>
 
+  <mat-divider class="mb-m" />
+
   @for (photo of getOfferPhotos(offer); track photo) {
     <div class="d-flex flex-wrap">
       <img [src]="photo.src" [alt]="photo.alt" class="me-s mb-s" style="max-height: 256px" />
     </div>
   } @empty {
-    <p class="text-center text-muted py-2xs" i18n>No photos were uploaded.</p>
+    <p class="text-center text-muted" i18n>No photos were uploaded.</p>
   }
 }
