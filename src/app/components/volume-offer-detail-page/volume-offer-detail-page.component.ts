@@ -37,7 +37,7 @@ export class VolumeOfferDetailPageComponent {
 
   readonly offer = computed(() => getBookOfferById(this.volumeService.entitiyByRoute(), this.routerService.routeParams()['offerId']));
 
-  readonly isUserBook = computed(() => this.offer()?.uid === this.authService.uid());
+  readonly isUserBook = computed(() => this.authService.uid() && this.offer()?.uid === this.authService.uid());
 
   constructor(
     private readonly route: ActivatedRoute,
