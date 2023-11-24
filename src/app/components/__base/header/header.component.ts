@@ -46,7 +46,7 @@ const FAKE_RESPONSE_TIME = 750;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  readonly user = toSignal(this.authService.user$);
+  readonly user = this.authService.user;
 
   readonly desktop$ = this.observer.observe([Breakpoints.WebLandscape]).pipe(
     map(({ matches }) => matches),

@@ -3,19 +3,17 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Auth, user } from '@angular/fire/auth';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 import { toAuthUser } from '../helpers/auth.helpers';
-import { AuthProviderId, AuthUser } from '../models/auth.models';
+import { AuthProviderId } from '../models/auth.models';
 import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  readonly user$: Observable<AuthUser | null> = user(this.auth).pipe(map(toAuthUser));
-
-  readonly user = toSignal(this.user$);
+  readonly user = toSignal(user(this.auth).pipe(map(toAuthUser)));
   readonly uid = computed(() => this.user()?.uid);
 
   private readonly _loginPending = new BehaviorSubject<boolean>(false);
