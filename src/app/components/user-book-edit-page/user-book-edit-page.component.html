@@ -24,7 +24,7 @@
       />
     </div>
 
-    <mat-divider></mat-divider>
+    <mat-divider />
 
     <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-2m">
       <div class="row">
@@ -69,6 +69,6 @@
       </div>
     </form>
   } @else if (bookLoading()) {
-    <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label></mat-spinner>
+    <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label />
   }
 </div>
