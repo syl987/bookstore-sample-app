@@ -79,6 +79,7 @@
     "8264342786105800599": "Hinweis: die Anwendung befindet sich in der aktiven Entwicklungsphase, es kann jederzeit zu Änderungen kommen.",
     "4488776574416340582": "Tech-Stack",
     "7467735561325107076": "Diese Technologien bilden das Fundament der Anwendung und ihres Entwicklungsprozesses.",
+    "8899789872737748427": "Version {$START_BOLD_TEXT}17{$CLOSE_BOLD_TEXT}, aufbauend auf signals, control flows, standalone components, lazy loading, etc.",
     "8284692255756420476": "Strukturiert, konsistent und skalierbar. Mit standalone components und lazy loading.",
     "363425374727843207": "State und View lose gekoppelt. Alle Events können in der Konsole nachvollzogen werden.",
     "8947632013701175412": "Komplexe, reaktive Verarbeitung der API-Anfragen und interner Anwendungsdaten zur Anzeige.",
