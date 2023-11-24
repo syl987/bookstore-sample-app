@@ -59,7 +59,7 @@ export class VolumeOfferDetailPageComponent {
   }
 
   buyBookOffer(offer: BookDTO): void {
-    if (!this.authService.user) {
+    if (!this.authService.user()) {
       this.dialogService
         .openLoginRequiredDialog()
         .beforeClosed()
