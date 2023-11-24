@@ -6,7 +6,9 @@
   @if (volume(); as volume) {
     <app-volume-card [volume]="volume" />
 
-    <h3 class="mt-2m mb-2xs" i18n>List of book offers</h3>
+    <h2 class="mt-2m" i18n>List of book offers</h2>
+
+    <p i18n>Select a book offer to proceed.</p>
 
     <div class="overflow-x-auto">
       <app-volume-offer-list [volume]="volume" [uid]="uid()" />
