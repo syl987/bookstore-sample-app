@@ -18,9 +18,6 @@ export class AuthService {
   readonly user = toSignal(this.user$);
   readonly uid = computed(() => this.user()?.uid);
 
-  readonly loggedIn = computed(() => !!this.user());
-  readonly loggedOut = computed(() => !this.user());
-
   private readonly _loginPending = new BehaviorSubject<boolean>(false);
   readonly loginPending = toSignal(this._loginPending.asObservable(), { requireSync: true });
 

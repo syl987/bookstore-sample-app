@@ -26,7 +26,6 @@ export class VolumeDetailPageComponent {
   readonly volume = this.volumeService.entitiyByRoute;
   readonly volumeLoading = this.volumeService.loadPending;
 
-  readonly loggedIn = this.authService.loggedIn;
   readonly uid = this.authService.uid;
 
   constructor(
