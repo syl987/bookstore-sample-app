@@ -58,6 +58,5 @@ export class ButtonSpinnerDirective implements OnInit {
     const spinnerEl: Element = this.spinnerRef.instance._elementRef.nativeElement;
 
     this._renderer.appendChild(this._elementRef.nativeElement, spinnerEl);
-    spinnerEl.setAttribute('aria_label', 'processing');
   }
 }
