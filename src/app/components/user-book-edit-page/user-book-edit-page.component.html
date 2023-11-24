@@ -10,7 +10,7 @@
     <app-volume-card [volume]="book.volume" class="mb-m" />
 
     <div class="mb-m">
-      <h3 i18n>Custom photos</h3>
+      <h2 class="h3" i18n>Custom photos</h2>
 
       <input type="file" class="d-none" accept="image/*" #picker (change)="cropAndUploadPhoto($any($event.target).files[0]); picker.type = ''; picker.type = 'file'" />
 
