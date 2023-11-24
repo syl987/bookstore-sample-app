@@ -10,8 +10,10 @@
 
     <p i18n>Select a book offer to proceed.</p>
 
-    <div class="overflow-x-auto">
-      <app-volume-offer-list [volume]="volume" [uid]="uid()" />
-    </div>
+    @defer {
+      <div class="overflow-x-auto">
+        <app-volume-offer-list [volume]="volume" [uid]="uid()" />
+      </div>
+    }
   }
 </div>
