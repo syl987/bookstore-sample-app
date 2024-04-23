@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { UserBookDTO } from 'src/app/models/book.models';
 import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
@@ -12,5 +12,5 @@ import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookCardContentComponent {
-  @Input({ required: true }) book!: UserBookDTO;
+  readonly book = input.required<UserBookDTO>();
 }
