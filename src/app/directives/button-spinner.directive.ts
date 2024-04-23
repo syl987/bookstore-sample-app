@@ -1,6 +1,5 @@
-import { BooleanInput, coerceBooleanProperty, NumberInput } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { ComponentRef, Directive, ElementRef, Input, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 /**
@@ -30,18 +29,18 @@ export class ButtonSpinnerDirective implements OnInit {
   }
   #spinning = false;
 
-  @Input() set color(value: ThemePalette) {
+  @Input() set color(value: string | null | undefined) {
     this.spinnerRef.instance.color = value;
   }
-  get color(): ThemePalette {
+  get color(): string | null | undefined {
     return this.spinnerRef.instance.color;
   }
 
   @Input() set strokeWidth(value: NumberInput) {
-    this.spinnerRef.instance.strokeWidth = value;
+    this.spinnerRef.instance.strokeWidth = coerceNumberProperty(value);
   }
   get strokeWidth(): number {
-    return this.spinnerRef.instance.strokeWidth;
+    return this.spinnerRef.instance.strokeWidth as number;
   }
 
   constructor(
