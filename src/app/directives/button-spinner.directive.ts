@@ -1,5 +1,5 @@
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
-import { ComponentRef, Directive, ElementRef, Input, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, Input, input, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 /**
@@ -15,19 +15,18 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 export class ButtonSpinnerDirective implements OnInit {
   private readonly spinnerRef: ComponentRef<MatProgressSpinner> = this._viewContainerRef.createComponent(MatProgressSpinner, { index: 0 });
 
-  @Input({ required: true }) set spinning(value: BooleanInput) {
-    this.#spinning = coerceBooleanProperty(value);
+  readonly spinning = input.required<boolean, BooleanInput>({
+    transform: value => {
+      const result = coerceBooleanProperty(value);
 
-    if (this.#spinning) {
-      this._elementRef.nativeElement.classList.add('is-spinning');
-    } else {
-      this._elementRef.nativeElement.classList.remove('is-spinning');
-    }
-  }
-  get spinning(): boolean {
-    return this.#spinning;
-  }
-  #spinning = false;
+      if (result) {
+        this._elementRef.nativeElement.classList.add('is-spinning');
+      } else {
+        this._elementRef.nativeElement.classList.remove('is-spinning');
+      }
+      return result;
+    },
+  });
 
   @Input() set color(value: string | null | undefined) {
     this.spinnerRef.instance.color = value;
