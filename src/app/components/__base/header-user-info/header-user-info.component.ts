@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { AuthUser } from 'src/app/models/auth.models';
 
 @Component({
@@ -10,5 +10,5 @@ import { AuthUser } from 'src/app/models/auth.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderUserInfoComponent {
-  @Input({ required: true }) user!: AuthUser;
+  readonly user = input.required<AuthUser>();
 }
