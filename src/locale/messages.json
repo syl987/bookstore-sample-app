@@ -79,7 +79,7 @@
     "8264342786105800599": "Note: the application is currently under active development as changes can occurr on a daily basis.",
     "4488776574416340582": "Tech-Stack",
     "7467735561325107076": "These technologies are the backbone of the application and its development process.",
-    "8899789872737748427": "Version {$START_BOLD_TEXT}17{$CLOSE_BOLD_TEXT}, leveraging signals, control flows, standalone components, lazy loading, etc.",
+    "1060198282151284736": " Version {$START_BOLD_TEXT}{$INTERPOLATION}{$CLOSE_BOLD_TEXT}, leveraging signals, control flows, standalone components, lazy loading, etc. ",
     "363425374727843207": "Application State and View fully decoupled! View all events in the browser console in real-time.",
     "8947632013701175412": "Complex reactive processing of API requests and application data for display purposes.",
     "7461545333012630284": "Using authentication, NoSQL realtime database, file storage and web hosting services.",
