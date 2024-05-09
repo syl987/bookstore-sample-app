@@ -15,7 +15,7 @@
     "browsers": "browserslist --coverage && browserslist",
     "browsers:update": "browserslist --update-db",
     "analyze": "ng build --stats-json && webpack-bundle-analyzer dist/bookstore-sample-app/en/stats.json",
-    "prepare": "husky install &"
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -69,7 +69,7 @@
     "eslint-plugin-rxjs": "^5.0.3",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "eslint-plugin-unused-imports": "^3.0.0",
-    "husky": "^8.0.3",
+    "husky": "^9.0.11",
     "lint-staged": "^15.1.0",
     "prettier": "^3.1.0",
     "typescript": "~5.2.2",
