@@ -1,5 +1,6 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { ImageDTO } from 'src/app/models/image.models';
@@ -12,14 +13,12 @@ import { ImageDTO } from 'src/app/models/image.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageUploadComponent {
-  @Input() images?: ImageDTO[] | null;
+  readonly images = input<ImageDTO[], ImageDTO[] | null | undefined>([], { transform: value => value ?? [] });
 
-  @Input() readonly?: boolean | null;
-  @Input() uploading?: boolean | null;
-  /* @Input() progress?: number | null; */
+  readonly readonly = input<boolean, BooleanInput>(false, { transform: coerceBooleanProperty });
+  readonly uploading = input<boolean, BooleanInput>(false, { transform: coerceBooleanProperty });
 
-  /* @Input() placeholderSrc?: string | null; */
-  /* @Input() placeholderAlt?: string | null; */
+  /* readonly progress = input<boolean, BooleanInput>(false, { transform: coerceBooleanProperty }); */
 
   readonly fileSelect = output<void>();
 

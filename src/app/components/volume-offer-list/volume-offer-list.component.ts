@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
@@ -16,15 +16,11 @@ import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeOfferListComponent {
-  @Input({ required: true }) set volume(value: VolumeDTO | null | undefined) {
-    this.publishedBooks = Object.values(value?.publishedBooks ?? {}).sort(comparePublishedBooks);
-    this.volumeId = value?.id;
-  }
+  readonly volume = input.required<VolumeDTO | null>();
 
-  publishedBooks: readonly BookDTO[] = [];
-  volumeId?: string;
+  readonly publishedBooks = computed(() => Object.values(this.volume()?.publishedBooks ?? {}).sort(comparePublishedBooks));
 
-  @Input() uid?: string | null;
+  readonly uid = input<string | null>();
 
   getPhotosTotal(book: BookDTO): number {
     return Object.keys(book.photos ?? {}).length;

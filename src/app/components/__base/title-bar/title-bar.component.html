@@ -1,4 +1,4 @@
-@if (backUrl) {
+@if (backUrl(); as backUrl) {
   <a mat-button [routerLink]="backUrl" class="align-self-center mt-2xs ms-n2xs">
     <mat-icon fontIcon="fa-arrow-left" />
     <span i18n>Back</span>

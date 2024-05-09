@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -17,7 +17,7 @@ import { RouterService } from 'src/app/services/router.service';
 export class TitleBarComponent {
   readonly title = this.routerService.title;
 
-  @Input() backUrl?: string | null;
+  readonly backUrl = input<string | null>();
 
   constructor(private readonly routerService: RouterService) {}
 }

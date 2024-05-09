@@ -1,17 +1,17 @@
-@if (book.condition != null || book.price != null) {
+@if (book().condition != null || book().price != null) {
   <mat-divider />
 
   <dl class="row pt-xs mb-0">
-    @if (book.condition != null) {
+    @if (book().condition != null) {
       <div class="col-6">
         <dt i18n>Condition</dt>
-        <dd>{{ book.condition | bookCondition }}</dd>
+        <dd>{{ book().condition | bookCondition }}</dd>
       </div>
     }
-    @if (book.price != null) {
+    @if (book().price != null) {
       <div class="col-6">
         <dt i18n>Price</dt>
-        <dd>{{ book.price | currency }}</dd>
+        <dd>{{ book().price | currency }}</dd>
       </div>
     }
   </dl>
