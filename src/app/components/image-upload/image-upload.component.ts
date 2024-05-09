@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { ImageDTO } from 'src/app/models/image.models';
@@ -21,8 +21,8 @@ export class ImageUploadComponent {
   /* @Input() placeholderSrc?: string | null; */
   /* @Input() placeholderAlt?: string | null; */
 
-  @Output() readonly fileSelect = new EventEmitter<File>();
+  readonly fileSelect = output<void>();
 
-  /* @Output() readonly remove = new EventEmitter<ImageDTO>(); */
-  @Output() readonly removeAll = new EventEmitter<void>();
+  /* readonly remove = output<ImageDTO>(); */
+  readonly removeAll = output<void>();
 }

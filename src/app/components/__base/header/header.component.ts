@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Inject, Output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, Inject, output, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -71,7 +71,7 @@ export class HeaderComponent {
 
   readonly searchOverlayOpen = signal(false);
 
-  @Output() readonly sidenavToggle = new EventEmitter<void>();
+  readonly sidenavToggle = output<void>();
 
   constructor(
     @Inject(APP_OPTIONS) readonly options: AppOptions,
