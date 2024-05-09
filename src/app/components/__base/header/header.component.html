@@ -8,7 +8,7 @@
       }
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
-          <mat-icon fontIcon="fa-search" inline class="text-primary" matPrefix />
+          <mat-icon fontIcon="fa-search" inline class="text-primary align-top me-2xs" matTextPrefix />
           <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
           @if (searching()) {
             <mat-spinner diameter="24" class="me-s" matSuffix />
@@ -54,7 +54,7 @@
       >
         <form [formGroup]="form" (ngSubmit)="search(); searchOverlayOpen.set(false)" class="w-100">
           <mat-form-field appearance="fill" class="w-100">
-            <mat-icon fontIcon="fa-search" inline class="text-primary" matPrefix />
+            <mat-icon fontIcon="fa-search" inline class="text-primary align-top me-2xs" matTextPrefix />
             <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
             <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen.set(false)" class="me-3xs" matSuffix>
               <mat-icon fontIcon="fa-times" style="scale: 0.75" />

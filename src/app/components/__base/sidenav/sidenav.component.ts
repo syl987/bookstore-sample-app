@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -23,7 +23,7 @@ export class SidenavComponent {
   readonly USER_LINKS = APP_NAV_LINKS.filter(link => link.user);
   readonly PUBLIC_LINKS = APP_NAV_LINKS.filter(link => !link.user);
 
-  @Output() readonly navigated = new EventEmitter<void>();
+  readonly navigated = output<void>();
 
   constructor(
     private readonly router: Router,

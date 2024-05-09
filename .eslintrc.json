@@ -100,6 +100,7 @@
         "@typescript-eslint/no-empty-interface": "off", // recommended overide: useful with inheritence and libraries
         "@typescript-eslint/no-explicit-any": "off", // strict override: useful with libraries and generic data
         "@typescript-eslint/no-extraneous-class": "off", // strict override: support angular annotated empty classes
+        "@typescript-eslint/no-invalid-void-type": "off", // strict override: allow angular void outputs
         "@typescript-eslint/no-non-null-assertion": "off", // recommended override: useful with angular and specs at times
         "@typescript-eslint/no-useless-constructor": "off", // strict overide: needed in annotated angular classes
         "@typescript-eslint/parameter-properties": ["warn", { "prefer": "parameter-property", "allow": ["readonly", "protected readonly", "private readonly"] }],

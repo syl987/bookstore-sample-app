@@ -9,6 +9,7 @@ import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
   standalone: true,
   imports: [CommonModule, MatCardModule, TitleBarComponent],
   templateUrl: './welcome-page.component.html',
+  styleUrls: ['./welcome-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomePageComponent {

@@ -1,6 +1,6 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { ImageDTO } from 'src/app/models/image.models';
@@ -20,8 +20,8 @@ export class ImageUploadComponent {
 
   /* readonly progress = input<boolean, BooleanInput>(false, { transform: coerceBooleanProperty }); */
 
-  @Output() readonly fileSelect = new EventEmitter<File>();
+  readonly fileSelect = output<void>();
 
-  /* @Output() readonly remove = new EventEmitter<ImageDTO>(); */
-  @Output() readonly removeAll = new EventEmitter<void>();
+  /* readonly remove = output<ImageDTO>(); */
+  readonly removeAll = output<void>();
 }
