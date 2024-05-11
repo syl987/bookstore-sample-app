@@ -73,7 +73,7 @@
 <mat-menu xPosition="before" #languageMenu="matMenu">
   @for (language of APP_LANGUAGES; track language.locale) {
     <a mat-menu-item href="/{{ language.locale }}/">
-      <mat-icon fontSet="fp" [fontIcon]="language.icon" />
+      <mat-icon fontSet="fp" [fontIcon]="language.icon" style="height: initial" />
       {{ language.label }}
     </a>
   }
