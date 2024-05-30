@@ -38,7 +38,6 @@
               "includePaths": ["node_modules/", "src/styles/shared"]
             },
             "allowedCommonJsDependencies": ["b64-to-blob"],
-            "scripts": [],
             "fileReplacements": [
               {
                 "replace": "src/environments/environment.ts",
@@ -47,7 +46,8 @@
             ],
             "i18nDuplicateTranslation": "error",
             "i18nMissingTranslation": "error",
-            "localize": true
+            "localize": true,
+            "scripts": []
           },
           "configurations": {
             "serve": {
@@ -117,10 +117,10 @@
   },
   "schematics": {
     "@schematics/angular:component": {
+      "skipTests": true,
       "standalone": true,
       "changeDetection": "OnPush",
       "inlineStyle": true,
-      "skipTests": true,
       "style": "scss"
     },
     "@schematics/angular:directive": {
@@ -134,14 +134,17 @@
     "@schematics/angular:service": {
       "skipTests": true
     },
-    "@schematics/angular:interceptor": {
-      "skipTests": true
-    },
     "@schematics/angular:resolver": {
       "skipTests": true
     },
     "@schematics/angular:guard": {
       "skipTests": true
+    },
+    "@schematics/angular:interceptor": {
+      "skipTests": true
+    },
+    "@schematics/angular:module": {
+      "commonModule": false
     },
     "@schematics/angular:class": {
       "skipTests": true,
@@ -153,50 +156,49 @@
     "@schematics/angular:interface": {
       "type": "models"
     },
-    "@ngrx/schematics:container": {
-      "changeDetection": "OnPush",
-      "inlineStyle": true,
-      "style": "scss",
-      "lintFix": true
-    },
     "@ngrx/schematics:store": {
       "statePath": "store",
       "stateInterface": "State"
     },
     "@ngrx/schematics:action": {
-      "skipTest": true,
       "creators": true,
       "flat": false,
       "api": true
     },
     "@ngrx/schematics:reducer": {
+      "skipTests": true,
       "creators": true,
       "flat": false,
-      "api": true,
-      "skipTests": true
+      "api": true
     },
     "@ngrx/schematics:effect": {
+      "skipTests": true,
       "creators": false,
       "flat": false,
-      "api": true,
-      "skipTests": true
+      "api": true
     },
     "@ngrx/schematics:selector": {
+      "skipTests": true,
       "creators": true,
       "flat": false,
-      "api": true,
-      "spec": false
+      "api": true
     },
     "@ngrx/schematics:entity": {
+      "skipTests": true,
       "creators": true,
-      "flat": false,
-      "skipTests": true
+      "flat": false
     },
     "@ngrx/schematics:feature": {
+      "skipTests": true,
       "creators": true,
       "flat": false,
-      "api": true,
-      "skipTests": true
+      "api": true
+    },
+    "@ngrx/schematics:container": {
+      "testDepth": "unit",
+      "changeDetection": "OnPush",
+      "inlineStyle": true,
+      "style": "scss"
     },
     "@angular-eslint/schematics:application": {
       "setParserOptionsProject": true
