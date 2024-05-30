@@ -9,7 +9,7 @@ import { HttpEndpointUrl } from '../models/http.models';
  *
  * Uses `'='` to join a key with its value and `'&'` to separate key-value pairs. Joins array values with a comma.
  */
-export function toXwwwEncodedString(object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null): string {
+export function toXwwwEncodedString(object?: Record<string, string | number | boolean | (string | number | boolean)[] | null | undefined> | null): string {
   if (object == null) {
     return '';
   }
@@ -35,7 +35,7 @@ export function encodeXwwwComponent(uriComponent: string | number | boolean): st
 /**
  * Converts an object to `FormData`, omitting `undefined` and empty string values.
  */
-export function toFormData(object?: { [key: string]: string | Blob | null | undefined } | null): FormData {
+export function toFormData(object?: Record<string, string | Blob | null | undefined> | null): FormData {
   if (object == null) {
     return new FormData();
   }
@@ -50,9 +50,7 @@ export function toFormData(object?: { [key: string]: string | Blob | null | unde
 /**
  * Converts an http params compatible object, omitting `undefined` and empty string values.
  */
-export function toUrlParams(object?: { [key: string]: string | number | boolean | (string | number | boolean)[] | null | undefined } | null): {
-  [param: string]: string | string[];
-} {
+export function toUrlParams(object?: Record<string, string | number | boolean | (string | number | boolean)[] | null | undefined> | null): Record<string, string | string[]> {
   if (object == null) {
     return {};
   }

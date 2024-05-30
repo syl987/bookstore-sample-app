@@ -10,10 +10,6 @@ export interface HttpEndpointUrl {
 
 export type HttpMethods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH';
 
-export interface HttpUrlEncodedParams {
-  [param: string]: string | number | boolean;
-}
+export type HttpUrlEncodedParams = Record<string, string | number | boolean>;
 
-export interface HttpRequestParams {
-  [param: string]: string | number | boolean | (string | number | boolean)[] | undefined;
-}
+export type HttpRequestParams = Record<string, string | number | boolean | (string | number | boolean)[] | undefined>;

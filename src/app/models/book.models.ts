@@ -20,7 +20,7 @@ export interface BookDTO {
   status: BookStatus;
   description?: string | null;
   condition?: BookCondition | null;
-  photos?: { [id: string]: ImageDTO } | null;
+  photos?: Record<string, ImageDTO> | null;
   price?: number | null;
   buyerUid?: string | null;
 }

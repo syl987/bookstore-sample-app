@@ -49,7 +49,7 @@ export class FirebaseApiService {
         if (book.status !== BookStatus.DRAFT) {
           throw new FirebaseError('custom:invalid_status', 'Invalid status.');
         }
-        const changes: { [path: string]: any } = {
+        const changes: Record<string, any> = {
           [`userBooks/${uid}/${id}/description`]: data.description,
           [`userBooks/${uid}/${id}/condition`]: data.condition,
           [`userBooks/${uid}/${id}/price`]: data.price,
@@ -77,7 +77,7 @@ export class FirebaseApiService {
                 id: key,
                 src: res.downloadUrl!,
               };
-              const changes: { [path: string]: any } = {
+              const changes: Record<string, any> = {
                 [`userBooks/${uid}/${bookId}/photos/${key}`]: photo,
               };
               const result = update(ref(this.database), changes);
@@ -99,7 +99,7 @@ export class FirebaseApiService {
         }
         return this.fileService.deleteFiles(`userBooks/${uid}/${bookId}/photos`).pipe(
           concatMap(_ => {
-            const changes: { [path: string]: any } = {
+            const changes: Record<string, any> = {
               [`userBooks/${uid}/${bookId}/photos`]: null,
             };
             const result = update(ref(this.database), changes);
@@ -143,7 +143,7 @@ export class FirebaseApiService {
           ...book,
           status: BookStatus.PUBLISHED,
         };
-        const changes: { [path: string]: any } = {
+        const changes: Record<string, any> = {
           [`userBooks/${uid}/${id}/status`]: BookStatus.PUBLISHED,
           [`volumes/${book.volume.id}/id`]: book.volume.id,
           [`volumes/${book.volume.id}/volumeInfo`]: book.volume.volumeInfo,
@@ -219,7 +219,7 @@ export class FirebaseApiService {
                   status: BookStatus.SOLD,
                   buyerUid: uid,
                 };
-                const changes: { [path: string]: any } = {
+                const changes: Record<string, any> = {
                   [`userBooks/${userBook.uid}/${offerId}/status`]: BookStatus.SOLD,
                   [`userBooks/${userBook.uid}/${offerId}/buyerUid`]: uid,
                 };

@@ -138,7 +138,7 @@ export class UserBookEditPageComponent {
         error: err => {
           // TODO customize typing
           // reliably retrieve error details
-          const errors: { [key: string]: ValidationErrors | null } = err?.err?.customData ?? {};
+          const errors: Record<string, ValidationErrors | null> = err?.err?.customData ?? {};
 
           this.form.controls.description.setErrors(errors['description']);
           this.form.controls.condition.setErrors(errors['condition']);

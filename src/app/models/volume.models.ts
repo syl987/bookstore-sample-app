@@ -41,7 +41,5 @@ export interface VolumeDTO {
   searchInfo?: {
     textSnippet: string;
   };
-  publishedBooks?: {
-    [id: string]: BookDTO;
-  };
+  publishedBooks?: Record<string, BookDTO> | null;
 }
