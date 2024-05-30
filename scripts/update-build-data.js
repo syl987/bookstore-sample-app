@@ -9,4 +9,4 @@ let fileContent = `var build = {
 };
 `;
 
-fs.writeFileSync('public/js/build.js', fileContent);
+fs.writeFileSync('public/build.js', fileContent);
