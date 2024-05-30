@@ -107,12 +107,12 @@ export const appConfig: ApplicationConfig = {
     provideRouterStore(routerStoreConfig),
     provideStoreDevtools({ maxAge: 50, logOnly: !isDevMode(), connectInZone: true }),
 
-    importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(environment.firebaseOptions)),
-      provideAuth(() => getAuth()),
-      provideDatabase(() => getDatabase()),
-      provideStorage(() => getStorage()),
+    provideFirebaseApp(() => initializeApp(environment.firebaseOptions)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideStorage(() => getStorage()),
 
+    importProvidersFrom(
       MatDialogModule, // used centrally
       MatSnackBarModule, // used centrally
     ),
