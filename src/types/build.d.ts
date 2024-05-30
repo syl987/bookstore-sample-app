@@ -1,7 +1,7 @@
 /**
  * Dynamic build variables injectend into the app via `index.html`.
  *
- * @see `/src/assets/js/build.js` file for details.
+ * @see `/public/js/build.js` file for details.
  */
 declare const build: {
   /** Current version as read from package.json. */
