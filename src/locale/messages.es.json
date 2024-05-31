@@ -79,7 +79,7 @@
     "8264342786105800599": "Nota: la aplicación se encuentra actualmente en desarrollo activo ya que pueden ocurrir cambios diariamente.",
     "4488776574416340582": "Tech-Stack",
     "7467735561325107076": "Estas tecnologías son la columna vertebral de la aplicación y su proceso de desarrollo.",
-    "1060198282151284736": " Versión {$START_BOLD_TEXT}{$INTERPOLATION}{$CLOSE_BOLD_TEXT}, usando señales, control flows, standalone components, lazy loading, etc. ",
+    "6314982654307943386": "Usando señales, control flows, standalone components, lazy loading, etc.",
     "8284692255756420476": "Bien estructurado, consistente y escalable. Usando componentes independientes con carga diferida.",
     "363425374727843207": "¡Estado y vista de la aplicación completamente desacoplados! Vea los eventos en la consola del navegador en tiempo real.",
     "8947632013701175412": "Procesamiento reactivo complejo de solicitudes de API y datos de aplicaciones para fines de visualización.",
