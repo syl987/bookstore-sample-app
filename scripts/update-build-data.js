@@ -1,5 +1,4 @@
 // @ts-check
-
 import fs from 'fs';
 
 import packageJson from '../package.json' assert { type: 'json' };
