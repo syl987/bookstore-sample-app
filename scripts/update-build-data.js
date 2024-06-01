@@ -1,7 +1,10 @@
 // @ts-check
 import fs from 'fs';
+import { createRequire } from 'module';
 
-import packageJson from '../package.json' assert { type: 'json' };
+const require = createRequire(import.meta.url);
+
+const packageJson = require('../package.json');
 
 let today = new Date().toISOString().substring(0, 10);
 
