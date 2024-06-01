@@ -1,7 +1,7 @@
 <mat-toolbar class="mat-elevation-z8">
   <mat-toolbar-row cdkOverlayOrigin #searchOverlayTrigger="cdkOverlayOrigin">
     @if (desktop()) {
-      <div class="text-primary fs-large me-s">{{ options.applicationName }}</div>
+      <div class="text-primary fs-large fw-bold me-s">{{ options.applicationName }}</div>
 
       @for (link of PUBLIC_LINKS; track link.path) {
         <a mat-button color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
