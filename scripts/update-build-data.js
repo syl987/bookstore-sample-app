@@ -1,10 +1,13 @@
-let fs = require('fs');
+// @ts-check
 
-let version = require('../package.json').version;
+import fs from 'fs';
+
+import packageJson from '../package.json' assert { type: 'json' };
+
 let today = new Date().toISOString().substring(0, 10);
 
 let fileContent = `var build = {
-  version: '${version}',
+  version: '${packageJson.version}',
   date: '${today}',
 };
 `;
