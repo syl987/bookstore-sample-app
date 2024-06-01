@@ -14,14 +14,13 @@ $light-theme: mat.define-theme(
       tertiary: $tertiary-palette,
     ),
     typography: (
-      brand-family: 'Inter',
       plain-family: 'Inter',
       bold-weight: 700,
-      medium-weight: 700,
+      medium-weight: 600,
       regular-weight: 400,
     ),
     density: (
-      scale: -1,
+      scale: 0,
     ),
   )
 );
