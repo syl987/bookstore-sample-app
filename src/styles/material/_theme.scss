@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+
+$primary-palette: mat.$blue-palette;
+$tertiary-palette: mat.$green-palette;
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+
+// Define a light theme
+$light-theme: mat.define-theme(
+  (
+    color: (
+      primary: $primary-palette,
+      tertiary: $tertiary-palette,
+    ),
+    typography: (
+      brand-family: 'Inter',
+      plain-family: 'Inter',
+      bold-weight: 700,
+      medium-weight: 700,
+      regular-weight: 400,
+    ),
+    density: (
+      scale: -1,
+    ),
+  )
+);
