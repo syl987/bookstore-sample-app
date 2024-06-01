@@ -135,7 +135,11 @@
     },
     {
       "files": ["scripts/**/*.js"],
-      "extends": ["eslint:recommended", "prettier"]
+      "extends": ["eslint:recommended", "prettier"],
+      "env": {
+        "browser": false,
+        "type": "module"
+      }
     }
   ]
 }
