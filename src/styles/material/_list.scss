@@ -40,9 +40,9 @@ button.mat-mdc-list-item:not(:focus) {
   background-attachment: initial;
   background-origin: initial;
   background-clip: initial;
-  background-color: mat.get-color-from-palette($app-primary, 50);
+  background-color: mat.get-color-from-palette($primary-palette, 50);
 } */
 
 /* .mat-mdc-list-item.active {
-  background-color: mat.get-color-from-palette($app-primary, 50);
+  background-color: mat.get-color-from-palette($primary-palette, 50);
 } */

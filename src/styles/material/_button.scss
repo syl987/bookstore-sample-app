@@ -9,16 +9,16 @@
 
 .mat-mdc-outlined-button {
   &.mat-primary:not([disabled]) {
-    background-color: rgba(mat.m2-get-color-from-palette($app-primary), 0.08);
-    border-color: mat.m2-get-color-from-palette($app-primary);
+    background-color: rgba(mat.m2-get-color-from-palette($primary-palette), 0.08);
+    border-color: mat.m2-get-color-from-palette($primary-palette);
   }
   &.mat-accent:not([disabled]) {
-    background-color: rgba(mat.m2-get-color-from-palette($app-accent), 0.08);
-    border-color: mat.m2-get-color-from-palette($app-accent);
+    background-color: rgba(mat.m2-get-color-from-palette($accent-palette), 0.08);
+    border-color: mat.m2-get-color-from-palette($accent-palette);
   }
   &.mat-warn:not([disabled]) {
-    background-color: rgba(mat.m2-get-color-from-palette($app-warn), 0.08);
-    border-color: mat.m2-get-color-from-palette($app-warn);
+    background-color: rgba(mat.m2-get-color-from-palette($warn-palette), 0.08);
+    border-color: mat.m2-get-color-from-palette($warn-palette);
   }
   &[disabled] {
     background-color: rgba(0, 0, 0, 0.04);
