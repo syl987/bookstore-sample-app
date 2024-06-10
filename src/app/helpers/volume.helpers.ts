@@ -7,5 +7,5 @@ export function filterVolumes(query: string, state: EntityState<VolumeDTO>): str
   if (!query) {
     return state.ids;
   }
-  return (state.ids as any[]).filter(id => state.entities[id]?.volumeInfo.title.toLowerCase().includes(query));
+  return state.ids.filter(id => state.entities[id]?.volumeInfo.title.toLowerCase().includes(query)) as string[] | number[];
 }
