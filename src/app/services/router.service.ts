@@ -30,7 +30,7 @@ export class RouterService {
     return this.store.select(RouterSelectors.selectRouteParam(param));
   }
 
-  selectQueryParam(param: RouteQueryParam): Observable<string | undefined> {
+  selectQueryParam(param: RouteQueryParam): Observable<string | string[] | undefined> {
     return this.store.select(RouterSelectors.selectQueryParam(param));
   }
 }
