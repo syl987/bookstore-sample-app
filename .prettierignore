@@ -47,9 +47,8 @@ Thumbs.db
 .runtimeconfig.json
 
 # Custom
-/.nx/cache
 /.husky
-/public/**/*
+/public/**
 .browserslistrc
 .editorconfig
 .eslintignore

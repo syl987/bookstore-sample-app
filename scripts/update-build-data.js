@@ -1,4 +1,5 @@
 // @ts-check
+
 import fs from 'fs';
 import { createRequire } from 'module';
 

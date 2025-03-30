@@ -47,7 +47,6 @@ Thumbs.db
 .runtimeconfig.json
 
 # Custom
-/.nx/cache
 */environments/*
 !*/environments/environment.ts
 !*/environments/_env.models.ts
