@@ -32,7 +32,7 @@ import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
 // general
-// TODO impressum / legal dislaimer page
+// TODO imprint / legal disclaimer page
 // TODO make some data protection policy page
 // TODO footer link to my github or some other page
 // TODO gap helper conflicts with negative link margin in the title-bar
@@ -58,7 +58,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 // TODO open as firebase database stream
 
 // volume card
-// TODO loading appearence
+// TODO loading appearance
 
 // routing
 // TODO keep same page after login
