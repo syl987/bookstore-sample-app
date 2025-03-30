@@ -8,7 +8,7 @@ import { VolumeDTO } from 'src/app/models/volume.models';
   selector: 'app-volume-card',
   imports: [CommonModule, MatCardModule, MatDividerModule],
   templateUrl: './volume-card.component.html',
-  styles: ['.mat-mdc-card-sm-image { width: inherit; }'],
+  styles: '.mat-mdc-card-sm-image { width: inherit; }',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'd-block' },
 })

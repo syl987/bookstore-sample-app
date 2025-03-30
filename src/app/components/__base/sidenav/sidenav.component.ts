@@ -13,7 +13,7 @@ import { DialogService } from 'src/app/services/dialog.service';
   selector: 'app-sidenav',
   imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatListModule],
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss'],
+  styleUrl: './sidenav.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavComponent {

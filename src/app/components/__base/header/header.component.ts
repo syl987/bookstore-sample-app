@@ -41,7 +41,7 @@ const FAKE_RESPONSE_TIME = 750;
     HeaderUserInfoComponent,
   ],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {

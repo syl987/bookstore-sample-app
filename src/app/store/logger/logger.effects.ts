@@ -24,7 +24,7 @@ export class LoggerEffects {
         VolumeActions.buyOfferERROR,
       ),
       map(({ error }) => {
-        const err: unknown = (error as ReturnType<typeof firebaseError>)['err'];
+        const { err } = error as ReturnType<typeof firebaseError>;
 
         if (err && err instanceof FirebaseError) {
           error = {

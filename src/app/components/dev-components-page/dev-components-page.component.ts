@@ -33,7 +33,7 @@ import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-
     ValidationErrorPipe,
   ],
   templateUrl: './dev-components-page.component.html',
-  styleUrls: ['./dev-components-page.component.scss'],
+  styleUrl: './dev-components-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevComponentsPageComponent {

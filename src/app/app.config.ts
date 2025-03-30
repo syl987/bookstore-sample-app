@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, isDevMode, inject, provideAppInitializer } from '@angular/core';
+import { ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, inject, isDevMode, provideAppInitializer } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';

@@ -9,7 +9,7 @@ import { RouterService } from 'src/app/services/router.service';
   selector: 'app-title-bar',
   imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
   templateUrl: './title-bar.component.html',
-  styleUrls: ['./title-bar.component.scss'],
+  styleUrl: './title-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'd-flex flex-wrap' },
 })
