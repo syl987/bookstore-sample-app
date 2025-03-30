@@ -1,5 +1,3 @@
-npx --no-install lint-staged
-
 node scripts/update-build-data.js
 
 git add public/build.js
