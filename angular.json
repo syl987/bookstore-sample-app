@@ -179,7 +179,7 @@
     }
   },
   "cli": {
-    "schematicCollections": ["@angular-eslint/schematics", "@ngrx/schematics", "@schematics/angular"],
+    "schematicCollections": ["angular-eslint", "@ngrx/schematics", "@schematics/angular"],
     "packageManager": "npm",
     "analytics": false
   }
