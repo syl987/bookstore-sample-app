@@ -5,9 +5,7 @@
   "projects": {
     "bookstore-sample-app": {
       "i18n": {
-        "sourceLocale": {
-          "code": "en"
-        },
+        "sourceLocale": "en",
         "locales": {
           "de": "src/locale/messages.de.json",
           "es": "src/locale/messages.es.json"
@@ -29,7 +27,6 @@
             "browser": "src/main.ts",
             "polyfills": ["zone.js", "hammerjs"],
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
@@ -57,18 +54,6 @@
               "localize": ["de"]
             },
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "2mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
               "outputHashing": "all"
             },
             "development": {
@@ -112,17 +97,14 @@
   "schematics": {
     "@schematics/angular:component": {
       "skipTests": true,
-      "standalone": true,
       "changeDetection": "OnPush",
       "inlineStyle": true,
       "style": "scss"
     },
     "@schematics/angular:directive": {
-      "standalone": true,
       "skipTests": true
     },
     "@schematics/angular:pipe": {
-      "standalone": true,
       "skipTests": true
     },
     "@schematics/angular:service": {
@@ -155,13 +137,11 @@
       "stateInterface": "State"
     },
     "@ngrx/schematics:action": {
-      "creators": true,
       "flat": false,
       "api": true
     },
     "@ngrx/schematics:reducer": {
       "skipTests": true,
-      "creators": true,
       "flat": false,
       "api": true
     },
@@ -173,18 +153,15 @@
     },
     "@ngrx/schematics:selector": {
       "skipTests": true,
-      "creators": true,
       "flat": false,
       "api": true
     },
     "@ngrx/schematics:entity": {
       "skipTests": true,
-      "creators": true,
       "flat": false
     },
     "@ngrx/schematics:feature": {
       "skipTests": true,
-      "creators": true,
       "flat": false,
       "api": true
     },
