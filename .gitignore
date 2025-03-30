@@ -49,4 +49,3 @@ Thumbs.db
 # Custom
 */environments/*
 !*/environments/environment.ts
-!*/environments/_env.models.ts
