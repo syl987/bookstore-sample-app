@@ -11,7 +11,6 @@ export interface UserSessionInfoDialogData {
 
 @Component({
   selector: 'app-user-session-info-dialog',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatDialogModule, BooleanPipe],
   templateUrl: './user-session-info-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

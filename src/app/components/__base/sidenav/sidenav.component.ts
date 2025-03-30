@@ -11,7 +11,6 @@ import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-sidenav',
-  standalone: true,
   imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatListModule],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],

@@ -26,7 +26,6 @@ const FAKE_RESPONSE_TIME = 750;
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   imports: [
     CommonModule,
     RouterModule,

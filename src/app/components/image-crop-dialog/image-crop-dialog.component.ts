@@ -10,7 +10,6 @@ export interface ImageCropDialogData {
 
 @Component({
   selector: 'app-image-crop-dialog',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatDialogModule, ImageCropperComponent],
   templateUrl: './image-crop-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

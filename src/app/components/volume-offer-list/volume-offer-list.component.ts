@@ -10,7 +10,6 @@ import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 
 @Component({
   selector: 'app-volume-offer-list',
-  standalone: true,
   imports: [CommonModule, RouterModule, MatButtonModule, MatTableModule, BookConditionPipe],
   templateUrl: './volume-offer-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

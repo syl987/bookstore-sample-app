@@ -24,7 +24,6 @@ function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undef
 
 @Component({
   selector: 'app-volume-offer-detail-page',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent, BookConditionPipe],
   templateUrl: './volume-offer-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

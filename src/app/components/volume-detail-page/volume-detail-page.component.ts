@@ -15,7 +15,6 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
 
 @Component({
   selector: 'app-volume-detail-page',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferListComponent, BookConditionPipe],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

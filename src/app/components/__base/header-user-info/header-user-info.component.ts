@@ -4,7 +4,6 @@ import { AuthUser } from 'src/app/models/auth.models';
 
 @Component({
   selector: 'app-header-user-info',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './header-user-info.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

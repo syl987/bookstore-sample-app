@@ -6,7 +6,6 @@ import { VolumeDTO } from 'src/app/models/volume.models';
 
 @Component({
   selector: 'app-volume-card',
-  standalone: true,
   imports: [CommonModule, MatCardModule, MatDividerModule],
   templateUrl: './volume-card.component.html',
   styles: ['.mat-mdc-card-sm-image { width: inherit; }'],

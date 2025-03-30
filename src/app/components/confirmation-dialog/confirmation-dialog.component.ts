@@ -12,7 +12,6 @@ export interface ConfirmationDialogData {
 
 @Component({
   selector: 'app-confirmation-dialog',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatDialogModule],
   templateUrl: './confirmation-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

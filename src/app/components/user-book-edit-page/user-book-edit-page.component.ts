@@ -25,7 +25,6 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 @Component({
   selector: 'app-user-book-edit-page',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

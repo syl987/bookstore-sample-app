@@ -7,7 +7,6 @@ import { ImageDTO } from 'src/app/models/image.models';
 
 @Component({
   selector: 'app-image-upload',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, ButtonSpinnerDirective],
   templateUrl: './image-upload.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -14,7 +14,6 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 @Component({
   selector: 'app-user-book-list-page',
-  standalone: true,
   imports: [CommonModule, RouterModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, UserBookCardContentComponent],
   templateUrl: './user-book-list-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

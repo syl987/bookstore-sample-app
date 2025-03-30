@@ -7,7 +7,6 @@ import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-title-bar',
-  standalone: true,
   imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
   templateUrl: './title-bar.component.html',
   styleUrls: ['./title-bar.component.scss'],

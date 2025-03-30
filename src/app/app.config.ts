@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
-import { APP_INITIALIZER, ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, isDevMode } from '@angular/core';
+import { ApplicationConfig, DEFAULT_CURRENCY_CODE, importProvidersFrom, isDevMode, inject, provideAppInitializer } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
@@ -112,6 +112,11 @@ export const appConfig: ApplicationConfig = {
     provideDatabase(() => getDatabase()),
     provideStorage(() => getStorage()),
 
+    provideAppInitializer(() => {
+      const initializerFn = registerIconFonts(inject(MatIconRegistry));
+      return initializerFn();
+    }),
+
     importProvidersFrom(
       MatDialogModule, // used centrally
       MatSnackBarModule, // used centrally
@@ -120,7 +125,6 @@ export const appConfig: ApplicationConfig = {
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: APP_OPTIONS, useValue: appOptions },
     { provide: AUTH_CONFIG, useValue: authConfig },
-    { provide: APP_INITIALIZER, useFactory: registerIconFonts, deps: [MatIconRegistry], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
     /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */

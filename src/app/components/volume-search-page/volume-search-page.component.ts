@@ -10,7 +10,6 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 @Component({
   selector: 'app-volume-search-page',
-  standalone: true,
   imports: [CommonModule, RouterModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent],
   templateUrl: './volume-search-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

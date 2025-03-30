@@ -19,7 +19,6 @@ import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-
 
 @Component({
   selector: 'app-dev-components-page',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-page',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, ButtonSpinnerDirective],
   templateUrl: './login-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
