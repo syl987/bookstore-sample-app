@@ -22,7 +22,7 @@ export class SidenavComponent {
   readonly USER_LINKS = APP_NAV_LINKS.filter(link => link.user);
   readonly PUBLIC_LINKS = APP_NAV_LINKS.filter(link => !link.user);
 
-  readonly navigated = output<void>();
+  readonly navigated = output();
 
   constructor(
     private readonly router: Router,

@@ -19,8 +19,8 @@ export class ImageUploadComponent {
 
   /* readonly progress = input<boolean, BooleanInput>(false, { transform: coerceBooleanProperty }); */
 
-  readonly fileSelect = output<void>();
+  readonly fileSelect = output();
 
   /* readonly remove = output<ImageDTO>(); */
-  readonly removeAll = output<void>();
+  readonly removeAll = output();
 }

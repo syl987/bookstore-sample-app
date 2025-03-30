@@ -70,7 +70,7 @@ export class HeaderComponent {
 
   readonly searchOverlayOpen = signal(false);
 
-  readonly sidenavToggle = output<void>();
+  readonly sidenavToggle = output();
 
   constructor(
     @Inject(APP_OPTIONS) readonly options: AppOptions,
