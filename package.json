@@ -8,11 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "xi18n": "ng extract-i18n",
     "deploy": "npm run build && firebase deploy",
-    "lint": "ng lint",
-    "format": "prettier . --check",
+    "lint": "ng lint && prettier . --check",
     "fix": "ng lint --fix && prettier . --write",
-    "browsers": "browserslist --coverage && browserslist",
-    "browsers:update": "browserslist --update-db",
+    "browsers": "browserslist && browserslist --coverage",
     "analyze": "ng build --stats-json && webpack-bundle-analyzer dist/bookstore-sample-app/en/stats.json",
     "prepare": "husky"
   },
