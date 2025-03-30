@@ -29,6 +29,7 @@
     "@angular/router": "^19.2.4",
     "@ngrx/effects": "^19.0.1",
     "@ngrx/entity": "^19.0.1",
+    "@ngrx/operators": "^19.0.1",
     "@ngrx/router-store": "^19.0.1",
     "@ngrx/store": "^19.0.1",
     "@ngrx/store-devtools": "^19.0.1",
