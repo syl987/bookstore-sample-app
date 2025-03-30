@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ProviderId } from 'firebase/auth';
@@ -8,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-page',
-  imports: [CommonModule, MatButtonModule, ButtonSpinnerDirective],
+  imports: [MatButtonModule, ButtonSpinnerDirective],
   templateUrl: './login-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'flex-grow-1 d-flex flex-column justify-content-center' },

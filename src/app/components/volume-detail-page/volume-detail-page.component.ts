@@ -1,10 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
-import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
@@ -15,7 +13,7 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
 
 @Component({
   selector: 'app-volume-detail-page',
-  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferListComponent, BookConditionPipe],
+  imports: [MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferListComponent],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

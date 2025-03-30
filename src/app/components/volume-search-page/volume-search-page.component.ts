@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -10,7 +9,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 @Component({
   selector: 'app-volume-search-page',
-  imports: [CommonModule, RouterModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent],
+  imports: [RouterModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent],
   templateUrl: './volume-search-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

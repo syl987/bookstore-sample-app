@@ -1,6 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, Inject, output, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -27,7 +26,6 @@ const FAKE_RESPONSE_TIME = 750;
 @Component({
   selector: 'app-header',
   imports: [
-    CommonModule,
     RouterModule,
     ReactiveFormsModule,
     OverlayModule,

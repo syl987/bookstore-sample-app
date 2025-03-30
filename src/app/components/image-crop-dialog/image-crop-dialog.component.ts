@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -10,7 +9,7 @@ export interface ImageCropDialogData {
 
 @Component({
   selector: 'app-image-crop-dialog',
-  imports: [CommonModule, MatButtonModule, MatDialogModule, ImageCropperComponent],
+  imports: [MatButtonModule, MatDialogModule, ImageCropperComponent],
   templateUrl: './image-crop-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

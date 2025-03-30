@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CurrencyPipe, SlicePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
@@ -10,7 +10,7 @@ import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 
 @Component({
   selector: 'app-volume-offer-list',
-  imports: [CommonModule, RouterModule, MatButtonModule, MatTableModule, BookConditionPipe],
+  imports: [RouterModule, MatButtonModule, MatTableModule, BookConditionPipe, SlicePipe, CurrencyPipe],
   templateUrl: './volume-offer-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

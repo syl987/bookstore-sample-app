@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +19,7 @@ const DEBOUNCE_TIME = 500;
 
 @Component({
   selector: 'app-user-book-create-dialog',
-  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, MatListModule, MatProgressSpinnerModule, ButtonSpinnerDirective, ArrayPipe],
+  imports: [ReactiveFormsModule, MatButtonModule, MatDialogModule, MatInputModule, MatListModule, MatProgressSpinnerModule, ButtonSpinnerDirective, ArrayPipe, SlicePipe],
   templateUrl: './user-book-create-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,4 +1,4 @@
-import { CommonModule, getCurrencySymbol } from '@angular/common';
+import { CurrencyPipe, DatePipe, DecimalPipe, getCurrencySymbol, SlicePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DEFAULT_CURRENCY_CODE, Inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -20,7 +20,6 @@ import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-
 @Component({
   selector: 'app-dev-components-page',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatDividerModule,
@@ -31,6 +30,10 @@ import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-
     TitleBarComponent,
     ButtonSpinnerDirective,
     ValidationErrorPipe,
+    DecimalPipe,
+    CurrencyPipe,
+    SlicePipe,
+    DatePipe,
   ],
   templateUrl: './dev-components-page.component.html',
   styleUrl: './dev-components-page.component.scss',

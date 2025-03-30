@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,7 +7,6 @@ import { concatMap, filter } from 'rxjs';
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookDTO } from 'src/app/models/book.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
-import { BookConditionPipe } from 'src/app/pipes/book-condition.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
@@ -24,7 +22,7 @@ function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undef
 
 @Component({
   selector: 'app-volume-offer-detail-page',
-  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent, BookConditionPipe],
+  imports: [MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent],
   templateUrl: './volume-offer-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

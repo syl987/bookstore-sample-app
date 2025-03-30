@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { AuthUser } from 'src/app/models/auth.models';
-import { BooleanPipe } from 'src/app/pipes/boolean.pipe';
 
 export interface UserSessionInfoDialogData {
   user: AuthUser;
@@ -11,7 +10,7 @@ export interface UserSessionInfoDialogData {
 
 @Component({
   selector: 'app-user-session-info-dialog',
-  imports: [CommonModule, MatButtonModule, MatDialogModule, BooleanPipe],
+  imports: [MatButtonModule, MatDialogModule, DatePipe],
   templateUrl: './user-session-info-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,7 +6,7 @@ import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-title-bar',
-  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
+  imports: [RouterModule, MatButtonModule, MatIconModule],
   templateUrl: './title-bar.component.html',
   styleUrl: './title-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

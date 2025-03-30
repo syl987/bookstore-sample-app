@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,7 +10,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-sidenav',
-  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule, MatListModule],
+  imports: [RouterModule, MatButtonModule, MatIconModule, MatListModule],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

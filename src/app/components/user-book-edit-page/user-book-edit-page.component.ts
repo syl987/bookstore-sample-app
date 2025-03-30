@@ -1,4 +1,4 @@
-import { CommonModule, getCurrencySymbol } from '@angular/common';
+import { DecimalPipe, getCurrencySymbol, SlicePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, Inject } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
@@ -26,7 +26,6 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 @Component({
   selector: 'app-user-book-edit-page',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatDividerModule,
@@ -39,6 +38,8 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
     ButtonSpinnerDirective,
     ValidationErrorPipe,
     BookConditionPipe,
+    DecimalPipe,
+    SlicePipe,
   ],
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
