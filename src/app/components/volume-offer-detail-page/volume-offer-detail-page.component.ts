@@ -29,10 +29,10 @@ function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undef
 export class VolumeOfferDetailPageComponent {
   id: string = this.route.snapshot.params['volumeId'];
 
-  readonly volume = this.volumeService.entitiyByRoute;
+  readonly volume = this.volumeService.entityByRoute;
   readonly volumeLoading = this.volumeService.loadPending;
 
-  readonly offer = computed(() => getBookOfferById(this.volumeService.entitiyByRoute(), this.routerService.routeParams().offerId));
+  readonly offer = computed(() => getBookOfferById(this.volumeService.entityByRoute(), this.routerService.routeParams().offerId));
 
   readonly isUserBook = computed(() => this.authService.uid() && this.offer()?.uid === this.authService.uid());
 

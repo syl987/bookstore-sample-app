@@ -28,7 +28,7 @@ export class VolumeService implements IVolumeService {
 
   readonly entitiesFiltered = this.store.selectSignal(volumeFeature.selectAllFiltered);
 
-  readonly entitiyByRoute = this.store.selectSignal(volumeFeature.selectByRoute);
+  readonly entityByRoute = this.store.selectSignal(volumeFeature.selectByRoute);
 
   readonly filterQuery = this.store.selectSignal(volumeFeature.selectFilterQuery);
 

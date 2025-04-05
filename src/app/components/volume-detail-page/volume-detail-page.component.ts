@@ -20,7 +20,7 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
 export class VolumeDetailPageComponent {
   id: string = this.route.snapshot.params['volumeId'];
 
-  readonly volume = this.volumeService.entitiyByRoute;
+  readonly volume = this.volumeService.entityByRoute;
   readonly volumeLoading = this.volumeService.loadPending;
 
   readonly uid = this.authService.uid;
