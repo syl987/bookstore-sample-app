@@ -31,44 +31,6 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-// general
-// TODO imprint / legal disclaimer page
-// TODO make some data protection policy page
-// TODO footer link to my github or some other page
-// TODO gap helper conflicts with negative link margin in the title-bar
-// TODO allow book deletion if published and also delete the volume if not related to any books
-// TODO check any other todos within the code base
-
-// user book edit
-// TODO upload button spinner
-// TODO navigate to user books after an action
-// TODO delete book (if not sold)
-// TODO bug: change detection not fired after photo upload
-// TODO check file delete feature works properly
-
-// user book edit / detail
-// TODO add support for 404
-// TODO resolve navigation between book and volume => nope, need to just display offer list
-
-// volume detail / offer detail
-// TODO add support for 404
-// TODO on buy: navigate to user books => create a success dialog
-
-// volume search
-// TODO open as firebase database stream
-
-// volume card
-// TODO loading appearance
-
-// routing
-// TODO keep same page after login
-// TODO guard and keep same page or redirect after logout
-
-// image upload
-// TODO kick readonly format
-// TODO placeholder img
-// TODO progress
-
 const appOptions: AppOptions = {
   applicationName: 'Bookstore Sample App',
   copyrightName: 'Igor M.',
