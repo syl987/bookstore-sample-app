@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { AuthUser } from 'src/app/models/auth.models';
@@ -15,9 +15,14 @@ export interface UserSessionInfoDialogData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserSessionInfoDialogComponent {
+  readonly data = inject<UserSessionInfoDialogData>(MAT_DIALOG_DATA);
+
   readonly user = this.data.user;
 
-  constructor(@Inject(MAT_DIALOG_DATA) readonly data: UserSessionInfoDialogData) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   getAuthProviders(user: AuthUser): string {
     return user.providerData.map(p => p.providerId).join(', ');

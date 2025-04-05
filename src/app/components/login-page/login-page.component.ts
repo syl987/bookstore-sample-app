@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ProviderId } from 'firebase/auth';
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
@@ -13,12 +13,15 @@ import { AuthService } from 'src/app/services/auth.service';
   host: { class: 'flex-grow-1 d-flex flex-column justify-content-center' },
 })
 export class LoginPageComponent {
+  readonly options = inject<AppOptions>(APP_OPTIONS);
+  private readonly authService = inject(AuthService);
+
   readonly loginPending = this.authService.loginPending;
 
-  constructor(
-    @Inject(APP_OPTIONS) readonly options: AppOptions,
-    private readonly authService: AuthService,
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   loginWithGoogle(): void {
     this.authService.loginWithProvider(ProviderId.GOOGLE);

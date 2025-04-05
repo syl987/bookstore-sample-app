@@ -1,5 +1,5 @@
 import { DecimalPipe, getCurrencySymbol, SlicePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, inject } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,6 +45,14 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookEditPageComponent {
+  private readonly currency = inject(DEFAULT_CURRENCY_CODE);
+  private readonly fb = inject(FormBuilder);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly routerService = inject(RouterService);
+  private readonly userBooksService = inject(UserBooksService);
+  private readonly dialogService = inject(DialogService);
+
   id: string = this.route.snapshot.params['bookId'];
 
   readonly book = this.userBooksService.entityByRoute;
@@ -77,15 +85,10 @@ export class UserBookEditPageComponent {
 
   private readonly _resetFields$ = new BehaviorSubject<void>(undefined);
 
-  constructor(
-    @Inject(DEFAULT_CURRENCY_CODE) private readonly currency: string,
-    private readonly fb: FormBuilder,
-    private readonly route: ActivatedRoute,
-    private readonly router: Router,
-    private readonly routerService: RouterService,
-    private readonly userBooksService: UserBooksService,
-    private readonly dialogService: DialogService,
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.routerService
       .selectRouteParam('bookId')
       .pipe(takeUntilDestroyed())

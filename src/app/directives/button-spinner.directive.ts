@@ -1,5 +1,5 @@
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
-import { Directive, ElementRef, Input, input, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
+import { Directive, ElementRef, Input, input, OnInit, Renderer2, ViewContainerRef, inject } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 /**
@@ -13,6 +13,10 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
   host: { class: 'app-button-spinner' },
 })
 export class ButtonSpinnerDirective implements OnInit {
+  private readonly _elementRef = inject(ElementRef);
+  private readonly _viewContainerRef = inject(ViewContainerRef);
+  private readonly _renderer = inject(Renderer2);
+
   private readonly spinnerRef = this._viewContainerRef.createComponent(MatProgressSpinner, { index: 0 });
 
   readonly spinning = input.required<boolean, BooleanInput>({
@@ -42,11 +46,10 @@ export class ButtonSpinnerDirective implements OnInit {
     return this.spinnerRef.instance.strokeWidth as number;
   }
 
-  constructor(
-    private readonly _elementRef: ElementRef,
-    private readonly _viewContainerRef: ViewContainerRef,
-    private readonly _renderer: Renderer2,
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.spinnerRef.instance.diameter = 20; // dependent on style positioning
   }
 

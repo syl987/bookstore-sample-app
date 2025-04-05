@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
@@ -11,6 +11,11 @@ import { VolumeActions } from './volume.actions';
 
 @Injectable()
 export class VolumesEffects {
+  private readonly actions = inject(Actions);
+  private readonly authService = inject(AuthService);
+  private readonly firebaseApi = inject(FirebaseApiService);
+  private readonly toastService = inject(ToastService);
+
   readonly load = createEffect(() => {
     return this.actions.pipe(
       ofType(VolumeActions.load),
@@ -79,10 +84,8 @@ export class VolumesEffects {
     { dispatch: false },
   );
 
-  constructor(
-    private readonly actions: Actions,
-    private readonly authService: AuthService,
-    private readonly firebaseApi: FirebaseApiService,
-    private readonly toastService: ToastService,
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 }

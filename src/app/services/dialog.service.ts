@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ConfirmationDialogComponent, ConfirmationDialogData } from '../components/confirmation-dialog/confirmation-dialog.component';
@@ -12,7 +12,12 @@ import { UserBookDTO } from '../models/book.models';
   providedIn: 'root',
 })
 export class DialogService {
-  constructor(private readonly dialog: MatDialog) {}
+  private readonly dialog = inject(MatDialog);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   openImageCropDialog(file: File): MatDialogRef<ImageCropDialogComponent, Blob | undefined> {
     const data: ImageCropDialogData = { file };

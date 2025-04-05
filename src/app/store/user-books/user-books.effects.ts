@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, Observable, of, switchMap, tap } from 'rxjs';
 import { requireAuth } from 'src/app/helpers/auth.helpers';
@@ -13,6 +13,11 @@ import { UserBooksActions } from './user-books.actions';
 
 @Injectable()
 export class UserBooksEffects implements OnRunEffects {
+  private readonly actions = inject(Actions);
+  private readonly authService = inject(AuthService);
+  private readonly firebaseApi = inject(FirebaseApiService);
+  private readonly toastService = inject(ToastService);
+
   readonly load = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.load),
@@ -204,12 +209,10 @@ export class UserBooksEffects implements OnRunEffects {
     { dispatch: false },
   );
 
-  constructor(
-    private readonly actions: Actions,
-    private readonly authService: AuthService,
-    private readonly firebaseApi: FirebaseApiService,
-    private readonly toastService: ToastService,
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngrxOnRunEffects(resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {
     return requireAuth(this.actions, resolvedEffects$);

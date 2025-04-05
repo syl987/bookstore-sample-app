@@ -1,4 +1,4 @@
-import { computed, Injectable } from '@angular/core';
+import { computed, Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Auth, user } from '@angular/fire/auth';
 import { Actions, ofType } from '@ngrx/effects';
@@ -13,6 +13,10 @@ import { AuthActions } from '../store/auth/auth.actions';
   providedIn: 'root',
 })
 export class AuthService {
+  private readonly store = inject(Store);
+  private readonly actions = inject(Actions);
+  private readonly auth = inject(Auth);
+
   readonly user = toSignal(user(this.auth).pipe(map(toAuthUser)));
   readonly uid = computed(() => this.user()?.uid);
 
@@ -22,11 +26,10 @@ export class AuthService {
   private readonly _logoutPending = new BehaviorSubject<boolean>(false);
   readonly logoutPending = toSignal(this._loginPending.asObservable(), { requireSync: true });
 
-  constructor(
-    private readonly store: Store,
-    private readonly actions: Actions,
-    private readonly auth: Auth,
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     // set login pending stream
     this.actions.pipe(ofType(AuthActions.loginWithProvider), takeUntilDestroyed()).subscribe(_ => this._loginPending.next(true));
     this.actions

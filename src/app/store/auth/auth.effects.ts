@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Auth, authState, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -14,6 +14,13 @@ import { AuthActions } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
+  private readonly config = inject<AuthConfig>(AUTH_CONFIG);
+  private readonly actions = inject(Actions);
+  private readonly router = inject(Router);
+  private readonly auth = inject(Auth);
+  private readonly toastService = inject(ToastService);
+  private readonly dialogService = inject(DialogService);
+
   readonly authenticated = createEffect(() => {
     return authState(this.auth).pipe(
       skipWhile(user => !user), // prevent on-logout navigation on init (if not authenticated)
@@ -137,12 +144,8 @@ export class AuthEffects {
     { dispatch: false },
   );
 
-  constructor(
-    @Inject(AUTH_CONFIG) private readonly config: AuthConfig,
-    private readonly actions: Actions,
-    private readonly router: Router,
-    private readonly auth: Auth,
-    private readonly toastService: ToastService,
-    private readonly dialogService: DialogService,
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 }

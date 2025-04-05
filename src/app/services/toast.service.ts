@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 
 type ToastConfig = Pick<MatSnackBarConfig<never>, 'duration'>;
@@ -7,7 +7,12 @@ type ToastConfig = Pick<MatSnackBarConfig<never>, 'duration'>;
   providedIn: 'root',
 })
 export class ToastService {
-  constructor(private readonly snackbar: MatSnackBar) {}
+  private readonly snackbar = inject(MatSnackBar);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   showSuccessToast(message: string, options?: ToastConfig): MatSnackBarRef<SimpleSnackBar> {
     return this.snackbar.open(message, undefined, { duration: 5000, ...options, panelClass: 'success' });

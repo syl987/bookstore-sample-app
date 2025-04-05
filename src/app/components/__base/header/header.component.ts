@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, DestroyRef, Inject, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,6 +43,15 @@ const FAKE_RESPONSE_TIME = 750;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+  readonly options = inject<AppOptions>(APP_OPTIONS);
+  private readonly router = inject(Router);
+  private readonly builder = inject(FormBuilder);
+  private readonly observer = inject(BreakpointObserver);
+  private readonly authService = inject(AuthService);
+  private readonly volumeService = inject(VolumeService);
+  private readonly dialogService = inject(DialogService);
+  private readonly destroy = inject(DestroyRef);
+
   readonly user = this.authService.user;
 
   readonly desktop$ = this.observer.observe([Breakpoints.WebLandscape]).pipe(
@@ -70,16 +79,10 @@ export class HeaderComponent {
 
   readonly sidenavToggle = output();
 
-  constructor(
-    @Inject(APP_OPTIONS) readonly options: AppOptions,
-    private readonly router: Router,
-    private readonly builder: FormBuilder,
-    private readonly observer: BreakpointObserver,
-    private readonly authService: AuthService,
-    private readonly volumeService: VolumeService,
-    private readonly dialogService: DialogService,
-    private readonly destroy: DestroyRef,
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     toObservable(this.volumeService.filterQuery)
       .pipe(takeUntilDestroyed())
       .subscribe(query => {

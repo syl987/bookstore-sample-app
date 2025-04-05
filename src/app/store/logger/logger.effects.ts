@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, of } from 'rxjs';
@@ -12,6 +12,10 @@ import { LoggerActions } from './logger.actions';
 
 @Injectable()
 export class LoggerEffects {
+  private readonly actions = inject(Actions);
+  private readonly authService = inject(AuthService);
+  private readonly firebaseApi = inject(FirebaseApiService);
+
   readonly createErrorLog = createEffect(() => {
     return this.actions.pipe(
       ofType(
@@ -55,9 +59,8 @@ export class LoggerEffects {
     );
   });
 
-  constructor(
-    private readonly actions: Actions,
-    private readonly authService: AuthService,
-    private readonly firebaseApi: FirebaseApiService,
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 }

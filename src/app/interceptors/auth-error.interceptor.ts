@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, Observable, throwError } from 'rxjs';
 
@@ -9,10 +9,13 @@ import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable()
 export class AuthErrorInterceptor implements HttpInterceptor {
-  constructor(
-    @Inject(AUTH_CONFIG) private readonly config: AuthConfig,
-    private readonly store: Store,
-  ) {}
+  private readonly config = inject<AuthConfig>(AUTH_CONFIG);
+  private readonly store = inject(Store);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (isBearerExcluded(request, this.config)) {

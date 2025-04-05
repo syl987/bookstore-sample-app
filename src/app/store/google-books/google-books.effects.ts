@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { httpError } from 'src/app/models/error.models';
@@ -9,6 +9,9 @@ import { GoogleBooksActions } from './google-books.actions';
 
 @Injectable()
 export class GoogleBooksEffects {
+  private readonly actions = inject(Actions);
+  private readonly googleBooksApi = inject(GoogleBooksApiService);
+
   readonly search = createEffect(() => {
     return this.actions.pipe(
       ofType(GoogleBooksActions.search),
@@ -21,8 +24,8 @@ export class GoogleBooksEffects {
     );
   });
 
-  constructor(
-    private readonly actions: Actions,
-    private readonly googleBooksApi: GoogleBooksApiService,
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 }

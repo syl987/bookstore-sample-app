@@ -1,4 +1,4 @@
-import { Injectable, Signal } from '@angular/core';
+import { Injectable, Signal, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -10,6 +10,9 @@ import * as RouterSelectors from '../store/router/router.selectors';
   providedIn: 'root',
 })
 export class RouterService {
+  private readonly store = inject(Store);
+  private readonly router = inject(Router);
+
   readonly url = this.store.selectSignal(RouterSelectors.selectUrl);
   readonly title = this.store.selectSignal(RouterSelectors.selectTitle);
   readonly fragment = this.store.selectSignal(RouterSelectors.selectFragment);
@@ -17,10 +20,10 @@ export class RouterService {
   readonly routeParams: Signal<RouteParams> = this.store.selectSignal(RouterSelectors.selectRouteParams);
   readonly queryParams: Signal<QueryParams> = this.store.selectSignal(RouterSelectors.selectQueryParams);
 
-  constructor(
-    private readonly store: Store,
-    private readonly router: Router,
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   getCurrentNavigationState(): NavigationState {
     return (this.router.getCurrentNavigation()?.extras.state ?? {}) as NavigationState;

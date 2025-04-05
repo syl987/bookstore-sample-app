@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { concatMap, Observable, of, shareReplay, take, takeWhile, throwError } from 'rxjs';
@@ -32,6 +32,9 @@ interface IUserBooksService {
   providedIn: 'root',
 })
 export class UserBooksService implements IUserBooksService {
+  private readonly store = inject(Store);
+  private readonly actions = inject(Actions);
+
   readonly entities = this.store.selectSignal(userBooksFeature.selectAll);
   readonly entitiesTotal = this.store.selectSignal(userBooksFeature.selectTotal);
 
@@ -64,10 +67,10 @@ export class UserBooksService implements IUserBooksService {
   readonly publishPending = this.store.selectSignal(userBooksFeature.selectPublishPending);
   readonly publishError = this.store.selectSignal(userBooksFeature.selectPublishError);
 
-  constructor(
-    private readonly store: Store,
-    private readonly actions: Actions,
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   load(id: string): Observable<UserBookDTO> {
     this.store.dispatch(UserBooksActions.load({ id }));
