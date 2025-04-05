@@ -49,6 +49,8 @@
 - [ ] split user-books code as feature with lazy loading and providers
 - [ ] split volumes code as feature with lazy loading and providers
 - [ ] replace generated translations keys with custom strings
+- [ ] resolve sass deprecations
+- [ ] replace sass imports
 
 ### Low Priority
 
