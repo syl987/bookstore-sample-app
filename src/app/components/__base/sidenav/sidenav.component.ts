@@ -10,7 +10,12 @@ import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-sidenav',
-  imports: [RouterModule, MatButtonModule, MatIconModule, MatListModule],
+  imports: [
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+  ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

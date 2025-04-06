@@ -22,7 +22,13 @@ function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undef
 
 @Component({
   selector: 'app-volume-offer-detail-page',
-  imports: [MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent],
+  imports: [
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    TitleBarComponent,
+    VolumeCardComponent,
+    VolumeOfferFieldsComponent,
+  ],
   templateUrl: './volume-offer-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

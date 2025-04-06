@@ -98,7 +98,12 @@ module.exports = tseslint.config(
             },
             {
               name: '@angular/forms',
-              importNames: ['FormsModule', 'NgForm', 'NgModel', 'NgModelGroup'],
+              importNames: [
+                'FormsModule',
+                'NgForm',
+                'NgModel',
+                'NgModelGroup',
+              ],
               message: 'Please use reactive forms instead.',
             },
           ],
@@ -123,7 +128,18 @@ module.exports = tseslint.config(
 
       // ==== @typescript-eslint: supported rules ====
       '@typescript-eslint/await-thenable': 'warn', // from: recommended-type-checked-only
-      '@typescript-eslint/member-ordering': ['warn', { default: ['static-field', 'instance-field', 'constructor', 'static-method', 'instance-method'] }],
+      '@typescript-eslint/member-ordering': [
+        'warn',
+        {
+          default: [
+            'static-field',
+            'instance-field',
+            'constructor',
+            'static-method',
+            'instance-method',
+          ],
+        },
+      ],
       '@typescript-eslint/method-signature-style': ['warn', 'method'],
       '@typescript-eslint/no-deprecated': 'warn',
       '@typescript-eslint/no-empty-function': 'off', // stylistic override: sometimes needed

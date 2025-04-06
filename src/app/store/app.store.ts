@@ -19,7 +19,13 @@ export const reducers: ActionReducerMap<unknown> = {
   [fromVolume.volumeFeatureKey]: fromVolume.reducer,
 };
 
-export const effects = [AuthEffects, LoggerEffects, GoogleBooksEffects, UserBooksEffects, VolumesEffects];
+export const effects = [
+  AuthEffects,
+  LoggerEffects,
+  GoogleBooksEffects,
+  UserBooksEffects,
+  VolumesEffects,
+];
 
 export const storeConfig: RootStoreConfig<unknown> = {
   metaReducers,

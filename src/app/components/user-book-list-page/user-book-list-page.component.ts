@@ -13,7 +13,14 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 
 @Component({
   selector: 'app-user-book-list-page',
-  imports: [RouterModule, MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, UserBookCardContentComponent],
+  imports: [
+    RouterModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    TitleBarComponent,
+    VolumeCardComponent,
+    UserBookCardContentComponent,
+  ],
   templateUrl: './user-book-list-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -8,7 +8,13 @@ import { SidenavComponent } from './components/__base/sidenav/sidenav.component'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, MatSidenavModule, HeaderComponent, SidenavComponent, FooterComponent],
+  imports: [
+    RouterModule,
+    MatSidenavModule,
+    HeaderComponent,
+    SidenavComponent,
+    FooterComponent,
+  ],
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

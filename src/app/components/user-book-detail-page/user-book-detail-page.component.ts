@@ -13,7 +13,13 @@ import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-
 
 @Component({
   selector: 'app-user-book-detail-page',
-  imports: [MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferFieldsComponent],
+  imports: [
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    TitleBarComponent,
+    VolumeCardComponent,
+    VolumeOfferFieldsComponent,
+  ],
   templateUrl: './user-book-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

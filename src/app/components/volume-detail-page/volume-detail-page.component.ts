@@ -13,7 +13,13 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
 
 @Component({
   selector: 'app-volume-detail-page',
-  imports: [MatButtonModule, MatProgressSpinnerModule, TitleBarComponent, VolumeCardComponent, VolumeOfferListComponent],
+  imports: [
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    TitleBarComponent,
+    VolumeCardComponent,
+    VolumeOfferListComponent,
+  ],
   templateUrl: './volume-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
