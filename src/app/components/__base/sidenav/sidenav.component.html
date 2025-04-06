@@ -1,5 +1,5 @@
 @if (user(); as user) {
-  <div class="flex flex-column align-items-center mt-10 mb-4">
+  <div class="flex flex-column items-center mt-10 mb-4">
     <img [src]="user?.photoURL" alt="user" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2 p-1 border" i18n-alt />
     {{ user?.displayName }}
   </div>
@@ -23,9 +23,9 @@
     <button mat-list-item (click)="logout(); navigated.emit()" i18n>Logout</button>
   </mat-action-list>
 } @else {
-  <div class="flex flex-column align-items-center mt-10 mb-4">
+  <div class="flex flex-column items-center mt-10 mb-4">
     <div class="mb-2 p-1 border rounded-circle" style="width: 128px; height: 128px">
-      <div class="flex flex-column justify-content-center align-items-center rounded-circle w-100 h-100 bg-light" style="color: lightgrey; font-size: 56px">?</div>
+      <div class="flex flex-column justify-center items-center rounded-circle w-100 h-100 bg-light" style="color: lightgrey; font-size: 56px">?</div>
     </div>
 
     <div i18n>Anonymous User</div>
