@@ -3,10 +3,10 @@
     <app-sidenav (navigated)="sidenav.close()" />
   </mat-sidenav>
 
-  <mat-sidenav-content class="d-flex flex-column min-vh-100" role="main">
+  <mat-sidenav-content class="flex flex-column min-vh-100" role="main">
     <app-header (sidenavToggle)="sidenav.toggle()" />
 
-    <div class="flex-grow-1 d-flex flex-column">
+    <div class="flex-grow-1 flex flex-column">
       <router-outlet />
     </div>
 

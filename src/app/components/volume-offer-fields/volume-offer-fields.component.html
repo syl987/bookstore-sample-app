@@ -16,7 +16,7 @@
 
   <mat-divider class="mb-m" />
 
-  <div class="d-flex flex-wrap">
+  <div class="flex flex-wrap">
     @for (photo of getOfferPhotos(offer); track photo) {
       <a [href]="photo.src" target="_blank" class="me-s mb-s"><img [src]="photo.src" alt="photo" class="img-fluid rounded" style="max-height: 256px" i18n-alt /></a>
     } @empty {
