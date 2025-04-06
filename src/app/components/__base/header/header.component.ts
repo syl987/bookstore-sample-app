@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, DestroyRef, Inject, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,7 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { delay, distinctUntilChanged, map, of, tap } from 'rxjs';
 import { getCurrentAppLanguage } from 'src/app/helpers/app.helpers';
-import { APP_LANGUAGES, APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
+import { APP_LANGUAGES, APP_NAV_LINKS, APP_OPTIONS } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -43,6 +43,16 @@ const FAKE_RESPONSE_TIME = 750;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+  protected readonly router = inject(Router);
+  protected readonly builder = inject(FormBuilder);
+  protected readonly destroy = inject(DestroyRef);
+  protected readonly observer = inject(BreakpointObserver);
+  protected readonly authService = inject(AuthService);
+  protected readonly volumeService = inject(VolumeService);
+  protected readonly dialogService = inject(DialogService);
+
+  readonly options = inject(APP_OPTIONS);
+
   readonly user = this.authService.user;
 
   readonly desktop$ = this.observer.observe([Breakpoints.WebLandscape]).pipe(
@@ -70,16 +80,7 @@ export class HeaderComponent {
 
   readonly sidenavToggle = output();
 
-  constructor(
-    @Inject(APP_OPTIONS) readonly options: AppOptions,
-    private readonly router: Router,
-    private readonly builder: FormBuilder,
-    private readonly observer: BreakpointObserver,
-    private readonly authService: AuthService,
-    private readonly volumeService: VolumeService,
-    private readonly dialogService: DialogService,
-    private readonly destroy: DestroyRef,
-  ) {
+  constructor() {
     toObservable(this.volumeService.filterQuery)
       .pipe(takeUntilDestroyed())
       .subscribe(query => {

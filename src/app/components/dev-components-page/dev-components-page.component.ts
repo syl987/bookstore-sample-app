@@ -1,5 +1,5 @@
 import { CurrencyPipe, DatePipe, DecimalPipe, getCurrencySymbol, SlicePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DEFAULT_CURRENCY_CODE, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DEFAULT_CURRENCY_CODE, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,6 +40,10 @@ import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevComponentsPageComponent {
+  protected readonly currency = inject(DEFAULT_CURRENCY_CODE);
+  protected readonly dialog = inject(MatDialog);
+  protected readonly toastService = inject(ToastService);
+
   readonly disabled$ = timer(0, 3000).pipe(
     map(value => value % 2),
     map(value => !!value),
@@ -62,12 +66,6 @@ export class DevComponentsPageComponent {
   });
 
   readonly currencySymbol = getCurrencySymbol(this.currency, 'narrow');
-
-  constructor(
-    @Inject(DEFAULT_CURRENCY_CODE) private readonly currency: string,
-    private readonly dialog: MatDialog,
-    private readonly toastService: ToastService,
-  ) {}
 
   openExampleDialog(): void {
     const data: ExampleDevDialogData = { text: 'Example dialog beautiful content.' };

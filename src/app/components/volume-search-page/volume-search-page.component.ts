@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
@@ -14,13 +14,13 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeSearchPageComponent implements OnInit {
+  protected readonly volumeService = inject(VolumeService);
+
   readonly volumesFiltered = this.volumeService.entitiesFiltered;
   readonly volumesLoading = this.volumeService.loadPending;
 
   readonly filterQuery = this.volumeService.filterQuery;
   readonly filterQueryEmpty = computed(() => !this.filterQuery().length);
-
-  constructor(private readonly volumeService: VolumeService) {}
 
   ngOnInit(): void {
     this.volumeService.loadAll();

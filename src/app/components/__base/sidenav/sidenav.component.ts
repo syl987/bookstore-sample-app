@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -16,18 +16,16 @@ import { DialogService } from 'src/app/services/dialog.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavComponent {
+  protected readonly router = inject(Router);
+  protected readonly authService = inject(AuthService);
+  protected readonly dialogService = inject(DialogService);
+
   readonly user = this.authService.user;
 
   readonly USER_LINKS = APP_NAV_LINKS.filter(link => link.user);
   readonly PUBLIC_LINKS = APP_NAV_LINKS.filter(link => !link.user);
 
   readonly navigated = output();
-
-  constructor(
-    private readonly router: Router,
-    private readonly authService: AuthService,
-    private readonly dialogService: DialogService,
-  ) {}
 
   navigateToLogin(): void {
     this.router.navigateByUrl('/login');

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GoogleBooksListDTO, GoogleBooksVolumeDTO } from 'src/app/models/google-books.models';
 
@@ -7,9 +7,9 @@ import { GoogleBooksListDTO, GoogleBooksVolumeDTO } from 'src/app/models/google-
   providedIn: 'root',
 })
 export class GoogleBooksApiService {
-  readonly baseUrl = 'https://www.googleapis.com/books/v1';
+  protected readonly http = inject(HttpClient);
 
-  constructor(private readonly http: HttpClient) {}
+  readonly baseUrl = 'https://www.googleapis.com/books/v1';
 
   list(
     query: string,

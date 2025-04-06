@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router, RouterModule } from '@angular/router';
@@ -18,18 +18,16 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookListPageComponent implements OnInit {
+  protected readonly router = inject(Router);
+  protected readonly userBooksService = inject(UserBooksService);
+  protected readonly dialogService = inject(DialogService);
+
   readonly userBooksDraft = this.userBooksService.entitiesDraft;
   readonly userBooksPublished = this.userBooksService.entitiesPublished;
   readonly userBooksSold = this.userBooksService.entitiesSold;
   readonly userBooksBought = this.userBooksService.entitiesBought;
 
   readonly userBooksLoading = this.userBooksService.loadPending;
-
-  constructor(
-    private readonly router: Router,
-    private readonly userBooksService: UserBooksService,
-    private readonly dialogService: DialogService,
-  ) {}
 
   ngOnInit(): void {
     this.userBooksService.loadAll();

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { APP_OPTIONS } from 'src/app/models/app.models';
 
 @Component({
   selector: 'app-footer',
@@ -9,7 +9,7 @@ import { APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  readonly build = build;
+  readonly options = inject(APP_OPTIONS);
 
-  constructor(@Inject(APP_OPTIONS) readonly options: AppOptions) {}
+  readonly build = build;
 }

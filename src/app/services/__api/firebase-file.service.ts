@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { deleteObject, getDownloadURL, listAll, ref, Storage, uploadBytes, uploadBytesResumable } from '@angular/fire/storage';
 import { concatMap, from, map, Observable, of, retry, startWith } from 'rxjs';
 import { toFirebaseUploadDataWithProgress } from 'src/app/helpers/firebase.helpers';
@@ -8,7 +8,7 @@ import { FirebaseUploadData, FirebaseUploadDataWithProgress, FirebaseUploadReque
   providedIn: 'root',
 })
 export class FirebaseFileService {
-  constructor(private readonly storage: Storage) {}
+  protected readonly storage = inject(Storage);
 
   uploadFile(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
     const task = uploadBytes(ref(this.storage, path), data, options);

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { concatMap, Observable, of, shareReplay, take, throwError } from 'rxjs';
@@ -23,6 +23,9 @@ interface IVolumeService {
   providedIn: 'root',
 })
 export class VolumeService implements IVolumeService {
+  protected readonly store = inject(Store);
+  protected readonly actions = inject(Actions);
+
   readonly entities = this.store.selectSignal(volumeFeature.selectAll);
   readonly entitiesTotal = this.store.selectSignal(volumeFeature.selectTotal);
 
@@ -34,11 +37,6 @@ export class VolumeService implements IVolumeService {
 
   readonly loadPending = this.store.selectSignal(volumeFeature.selectLoadPending);
   readonly loadError = this.store.selectSignal(volumeFeature.selectLoadError);
-
-  constructor(
-    private readonly store: Store,
-    private readonly actions: Actions,
-  ) {}
 
   load(id: string): Observable<VolumeDTO> {
     this.store.dispatch(VolumeActions.load({ id }));

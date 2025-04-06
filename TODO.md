@@ -33,7 +33,7 @@
 - [ ] try replace any final observables and code subscriptions with signals
   - [ ] check for any mergeable streams using computed
 - [ ] use functional guards / resolvers / effects
-- [ ] use inject statements instead of constructors
+- [x] use inject statements instead of constructors
 - [ ] welcome-page content as array data (keep translatable)
 - [ ] update to material 3 with light theme + use more colors + adjust welcome page
 - [ ] add dark theme with material 3

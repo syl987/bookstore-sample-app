@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -18,6 +18,10 @@ import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookDetailPageComponent {
+  protected readonly route = inject(ActivatedRoute);
+  protected readonly routerService = inject(RouterService);
+  protected readonly userBooksService = inject(UserBooksService);
+
   id: string = this.route.snapshot.params['bookId'];
 
   readonly book = this.userBooksService.entityByRoute;
@@ -26,11 +30,7 @@ export class UserBookDetailPageComponent {
   readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly routerService: RouterService,
-    private readonly userBooksService: UserBooksService,
-  ) {
+  constructor() {
     this.routerService
       .selectRouteParam('bookId')
       .pipe(takeUntilDestroyed())

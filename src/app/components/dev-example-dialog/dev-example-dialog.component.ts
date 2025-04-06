@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
@@ -13,5 +13,5 @@ export interface ExampleDevDialogData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevExampleDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) readonly data: ExampleDevDialogData) {}
+  readonly data = inject<ExampleDevDialogData>(MAT_DIALOG_DATA);
 }

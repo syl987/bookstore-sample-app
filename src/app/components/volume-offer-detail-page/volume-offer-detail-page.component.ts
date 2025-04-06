@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -27,6 +27,13 @@ function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undef
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeOfferDetailPageComponent {
+  protected readonly route = inject(ActivatedRoute);
+  protected readonly router = inject(Router);
+  protected readonly authService = inject(AuthService);
+  protected readonly routerService = inject(RouterService);
+  protected readonly volumeService = inject(VolumeService);
+  protected readonly dialogService = inject(DialogService);
+
   id: string = this.route.snapshot.params['volumeId'];
 
   readonly volume = this.volumeService.entityByRoute;
@@ -36,14 +43,7 @@ export class VolumeOfferDetailPageComponent {
 
   readonly isUserBook = computed(() => this.authService.uid() && this.offer()?.uid === this.authService.uid());
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly router: Router,
-    private readonly authService: AuthService,
-    private readonly routerService: RouterService,
-    private readonly volumeService: VolumeService,
-    private readonly dialogService: DialogService,
-  ) {
+  constructor() {
     this.routerService
       .selectRouteParam('volumeId')
       .pipe(takeUntilDestroyed())

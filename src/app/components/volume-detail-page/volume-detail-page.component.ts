@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -18,6 +18,11 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeDetailPageComponent {
+  protected readonly route = inject(ActivatedRoute);
+  protected readonly authService = inject(AuthService);
+  protected readonly routerService = inject(RouterService);
+  protected readonly volumeService = inject(VolumeService);
+
   id: string = this.route.snapshot.params['volumeId'];
 
   readonly volume = this.volumeService.entityByRoute;
@@ -25,12 +30,7 @@ export class VolumeDetailPageComponent {
 
   readonly uid = this.authService.uid;
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly authService: AuthService,
-    private readonly routerService: RouterService,
-    private readonly volumeService: VolumeService,
-  ) {
+  constructor() {
     this.routerService
       .selectRouteParam('volumeId')
       .pipe(takeUntilDestroyed())

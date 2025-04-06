@@ -1,18 +1,16 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, Observable, throwError } from 'rxjs';
 
 import { isBearerExcluded } from '../helpers/auth.helpers';
-import { AUTH_CONFIG, AuthConfig } from '../models/auth.models';
+import { AUTH_CONFIG } from '../models/auth.models';
 import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable()
 export class AuthErrorInterceptor implements HttpInterceptor {
-  constructor(
-    @Inject(AUTH_CONFIG) private readonly config: AuthConfig,
-    private readonly store: Store,
-  ) {}
+  protected readonly config = inject(AUTH_CONFIG);
+  protected readonly store = inject(Store);
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (isBearerExcluded(request, this.config)) {
