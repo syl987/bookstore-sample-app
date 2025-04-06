@@ -70,7 +70,7 @@
   <h2>Forms</h2>
 
   <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()">
-    <div class="grid sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-4 mb-4">
+    <div class="mb-4 grid gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input type="text" matInput formControlName="email" email />
@@ -80,7 +80,7 @@
       <mat-form-field>
         <mat-label>Price</mat-label>
         <input type="number" matInput formControlName="number" min="2" max="14" />
-        <span matTextSuffix class="text-nowrap text-muted ms-2">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
+        <span matTextSuffix class="text-muted ms-2 text-nowrap">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
         <mat-error>{{ form.get('number') | validationError }}</mat-error>
       </mat-form-field>
 
@@ -95,7 +95,7 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field class="max-w-xs mb-4">
+    <mat-form-field class="mb-4 max-w-xs">
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="area" required minlength="3" maxlength="255" cdkTextareaAutosize></textarea>
       <mat-error>{{ form.get('area') | validationError }}</mat-error>
@@ -134,7 +134,7 @@
     icon.
   </p>
 
-  <div class="flex flex-wrap gap-2 mb-4">
+  <div class="mb-4 flex flex-wrap gap-2">
     <mat-icon fontIcon="fa-print" />
     <mat-icon fontIcon="fa-envelope-o" color="primary" />
     <mat-icon fontIcon="fa-phone" color="accent" />
@@ -156,14 +156,14 @@
 
   <h3>Spinner</h3>
 
-  <div class="flex flex-wrap gap-2 items-end">
+  <div class="flex flex-wrap items-end gap-2">
     <mat-spinner diameter="16" />
     <mat-spinner diameter="24" />
     <mat-spinner diameter="32" />
     <mat-spinner diameter="40" />
   </div>
 
-  <div class="flex flex-wrap gap-2 items-end">
+  <div class="flex flex-wrap items-end gap-2">
     <mat-progress-spinner diameter="16" color="warn" [value]="progress()" />
     <mat-progress-spinner diameter="24" color="warn" [value]="progress()" />
     <mat-progress-spinner diameter="32" color="warn" [value]="progress()" />
@@ -227,16 +227,16 @@
     wrapped. This text is also very long and will be wrapped immediately. This text is also very long and will be wrapped very immediately. This text is also very long and will be
     wrapped now.
   </p>
-  <p class="text-start mb-0">Left (start) aligned text on all viewport sizes.</p>
-  <p class="text-center mb-0">Center aligned text on all viewport sizes.</p>
-  <p class="text-end mb-0">Right (end) aligned text on all viewport sizes.</p>
+  <p class="mb-0 text-start">Left (start) aligned text on all viewport sizes.</p>
+  <p class="mb-0 text-center">Center aligned text on all viewport sizes.</p>
+  <p class="mb-0 text-end">Right (end) aligned text on all viewport sizes.</p>
 
   <h3>Text Size</h3>
 
-  <p class="text-lg mb-0">Large text (large).</p>
-  <p class="text-base mb-0">Regular text (normal). Default paragraph text size.</p>
-  <p class="text-sm mb-0">Footnote text (small).</p>
-  <p class="text-xs mb-0">Legal text (xsmall).</p>
+  <p class="mb-0 text-lg">Large text (large).</p>
+  <p class="mb-0 text-base">Regular text (normal). Default paragraph text size.</p>
+  <p class="mb-0 text-sm">Footnote text (small).</p>
+  <p class="mb-0 text-xs">Legal text (xsmall).</p>
 
   <h3>Text Wrap</h3>
 
@@ -254,15 +254,15 @@
   <p class="text-warn mb-0">.text-warn (mat-warn)</p>
   <p class="text-info mb-0">.text-info</p>
   <p class="text-body mb-0">.text-body (primary body color)</p>
-  <p class="text-white mb-0" style="background-color: gray">.text-white (inverse body color)</p>
+  <p class="mb-0 text-white" style="background-color: gray">.text-white (inverse body color)</p>
   <p class="text-muted mb-0">.text-muted</p>
-  <p class="text-inherit mb-0">.text-inherit (inherited color)</p>
+  <p class="mb-0 text-inherit">.text-inherit (inherited color)</p>
 
   <h3>Text Transform</h3>
 
-  <p class="uppercase mb-0">This line rendered as uppercase text.</p>
-  <p class="lowercase mb-0">This line rendered as lowercase text.</p>
-  <p class="capitalize mb-0">This line rendered as capitalize text.</p>
+  <p class="mb-0 uppercase">This line rendered as uppercase text.</p>
+  <p class="mb-0 lowercase">This line rendered as lowercase text.</p>
+  <p class="mb-0 capitalize">This line rendered as capitalize text.</p>
 
   <h3>Screen Readers</h3>
 
@@ -281,18 +281,18 @@
   <h4>Horizontal Gap</h4>
 
   <div class="flex flex-wrap gap-4">
-    <div class="border border-primary px-6 py-1">Inline Block</div>
-    <div class="border border-primary px-6 py-1">Inline Block</div>
-    <div class="border border-primary px-6 py-1">Inline Block</div>
-    <div class="border border-primary px-6 py-1">Inline Block</div>
+    <div class="border-primary border px-6 py-1">Inline Block</div>
+    <div class="border-primary border px-6 py-1">Inline Block</div>
+    <div class="border-primary border px-6 py-1">Inline Block</div>
+    <div class="border-primary border px-6 py-1">Inline Block</div>
   </div>
 
   <h4>Vertical Spacing</h4>
 
   <div class="inline-flex flex-col gap-4">
-    <div class="border border-primary px-6 py-1">Block Element</div>
-    <div class="border border-primary px-6 py-1">Block Element</div>
-    <div class="border border-primary px-6 py-1">Block Element</div>
-    <div class="border border-primary px-6 py-1">Block Element</div>
+    <div class="border-primary border px-6 py-1">Block Element</div>
+    <div class="border-primary border px-6 py-1">Block Element</div>
+    <div class="border-primary border px-6 py-1">Block Element</div>
+    <div class="border-primary border px-6 py-1">Block Element</div>
   </div>
 </div>

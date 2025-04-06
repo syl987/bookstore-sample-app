@@ -5,14 +5,14 @@
 
   <p i18n>Explore books available for purchase.</p>
 
-  <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
     @for (volume of volumesFiltered(); track volume) {
-      <a routerLink="/volumes/{{ volume.id }}" class="text-inherit text-decoration-none"><app-volume-card [volume]="volume" /></a>
+      <a routerLink="/volumes/{{ volume.id }}" class="text-decoration-none text-inherit"><app-volume-card [volume]="volume" /></a>
     } @empty {
       @if (volumesLoading()) {
         <mat-spinner class="mb-4" aria-label="Loading" i18n-aria-label />
       } @else {
-        <p class="col-span-full text-center text-muted py-2" i18n>No books were found.</p>
+        <p class="text-muted col-span-full py-2 text-center" i18n>No books were found.</p>
       }
     }
   </div>
