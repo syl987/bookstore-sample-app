@@ -1,5 +1,5 @@
 import { SlicePipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -41,7 +41,7 @@ export class UserBookCreateDialogComponent implements AfterViewInit {
 
   readonly searchControl = new FormControl<string>('', { nonNullable: true });
 
-  @ViewChild(MatSelectionList) list?: MatSelectionList;
+  readonly list = viewChild.required(MatSelectionList);
 
   constructor() {
     this.searchControl.valueChanges.pipe(debounceTime(DEBOUNCE_TIME), takeUntilDestroyed()).subscribe(query => {
@@ -58,9 +58,11 @@ export class UserBookCreateDialogComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.list!.selectedOptions.changed.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(_ => {
-      this.changeDetectorRef.markForCheck();
-    });
+    this.list()
+      .selectedOptions.changed.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(_ => {
+        this.changeDetectorRef.markForCheck();
+      });
     this.changeDetectorRef.markForCheck();
   }
 
