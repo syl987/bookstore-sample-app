@@ -54,7 +54,7 @@ export class LoggerEffects {
         }
         return this.firebaseApi.logError(uid, data).pipe(
           map(_ => LoggerActions.logErrorSUCCESS()),
-          catchError(error => of(LoggerActions.logErrorERROR({ error }))),
+          catchError((error: unknown) => of(LoggerActions.logErrorERROR({ error }))),
         );
       }),
     );

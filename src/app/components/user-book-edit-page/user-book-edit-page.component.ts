@@ -136,7 +136,7 @@ export class UserBookEditPageComponent {
       )
       .subscribe({
         next: _ => this.router.navigateByUrl('/user/books'),
-        error: err => {
+        error: (err: unknown) => {
           // TODO customize typing
           // reliably retrieve error details
           const errors: Record<string, ValidationErrors | null> = err?.err?.customData ?? {};

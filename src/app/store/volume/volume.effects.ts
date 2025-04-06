@@ -23,7 +23,7 @@ export class VolumesEffects {
       switchMap(({ id }) => {
         return this.firebaseApi.getVolume(id).pipe(
           map(volume => VolumeActions.loadSUCCESS({ volume })),
-          catchError(err => of(VolumeActions.loadERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(VolumeActions.loadERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -35,7 +35,7 @@ export class VolumesEffects {
       switchMap(_ => {
         return this.firebaseApi.getVolumes().pipe(
           map(res => VolumeActions.loadAllSUCCESS({ volumes: res })),
-          catchError(err => of(VolumeActions.loadAllERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(VolumeActions.loadAllERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -59,7 +59,7 @@ export class VolumesEffects {
         }
         return this.firebaseApi.buyBookOffer(uid, id, offerId).pipe(
           map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, book: res.book })),
-          catchError(err => of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
