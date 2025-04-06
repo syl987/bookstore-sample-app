@@ -46,7 +46,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 })
 export class UserBookEditPageComponent {
   protected readonly currency = inject(DEFAULT_CURRENCY_CODE);
-  protected readonly fb = inject(FormBuilder);
+  protected readonly builder = inject(FormBuilder);
   protected readonly route = inject(ActivatedRoute);
   protected readonly router = inject(Router);
   protected readonly routerService = inject(RouterService);
@@ -73,7 +73,7 @@ export class UserBookEditPageComponent {
   readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;
 
-  readonly form = this.fb.nonNullable.group({
+  readonly form = this.builder.nonNullable.group({
     description: new FormControl<string | null>(null),
     condition: new FormControl<BookCondition | null>(null),
     price: new FormControl<number | null>(null),

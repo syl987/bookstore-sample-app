@@ -26,8 +26,8 @@ const DEBOUNCE_TIME = 500;
 export class UserBookCreateDialogComponent implements AfterViewInit {
   protected readonly userBooksService = inject(UserBooksService);
   protected readonly googleBooksService = inject(GoogleBooksService);
-  protected readonly detector = inject(ChangeDetectorRef);
-  protected readonly destroy = inject(DestroyRef);
+  protected readonly changeDetectorRef = inject(ChangeDetectorRef);
+  protected readonly destroyRef = inject(DestroyRef);
 
   readonly dialogRef = inject<MatDialogRef<UserBookCreateDialogComponent, UserBookDTO | undefined>>(MatDialogRef);
 
@@ -58,10 +58,10 @@ export class UserBookCreateDialogComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.list!.selectedOptions.changed.pipe(takeUntilDestroyed(this.destroy)).subscribe(_ => {
-      this.detector.markForCheck();
+    this.list!.selectedOptions.changed.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(_ => {
+      this.changeDetectorRef.markForCheck();
     });
-    this.detector.markForCheck();
+    this.changeDetectorRef.markForCheck();
   }
 
   createUserBook(volume: GoogleBooksVolumeDTO): void {

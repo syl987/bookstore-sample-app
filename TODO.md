@@ -45,7 +45,7 @@
   - [ ] functions
   - [ ] map creators
   - [ ] property selectors
-- [ ] rename variables to match their type, i.g. destroyRef, changeDetectorRef
+- [x] rename variables to match their type, i.g. destroyRef, changeDetectorRef
 - [ ] split user-books code as feature with lazy loading and providers
 - [ ] split volumes code as feature with lazy loading and providers
 - [ ] replace generated translations keys with custom strings

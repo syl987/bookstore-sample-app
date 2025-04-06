@@ -13,20 +13,20 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
   host: { class: 'app-button-spinner' },
 })
 export class ButtonSpinnerDirective implements OnInit {
-  protected readonly _elementRef = inject(ElementRef);
-  protected readonly _viewContainerRef = inject(ViewContainerRef);
-  protected readonly _renderer = inject(Renderer2);
+  protected readonly elementRef = inject(ElementRef);
+  protected readonly viewContainerRef = inject(ViewContainerRef);
+  protected readonly renderer = inject(Renderer2);
 
-  protected readonly spinnerRef = this._viewContainerRef.createComponent(MatProgressSpinner, { index: 0 });
+  protected readonly spinnerRef = this.viewContainerRef.createComponent(MatProgressSpinner, { index: 0 });
 
   readonly spinning = input.required<boolean, BooleanInput>({
     transform: value => {
       const result = coerceBooleanProperty(value);
 
       if (result) {
-        this._elementRef.nativeElement.classList.add('is-spinning');
+        this.elementRef.nativeElement.classList.add('is-spinning');
       } else {
-        this._elementRef.nativeElement.classList.remove('is-spinning');
+        this.elementRef.nativeElement.classList.remove('is-spinning');
       }
       return result;
     },
@@ -55,6 +55,6 @@ export class ButtonSpinnerDirective implements OnInit {
 
     const spinnerEl: Element = this.spinnerRef.instance._elementRef.nativeElement;
 
-    this._renderer.appendChild(this._elementRef.nativeElement, spinnerEl);
+    this.renderer.appendChild(this.elementRef.nativeElement, spinnerEl);
   }
 }

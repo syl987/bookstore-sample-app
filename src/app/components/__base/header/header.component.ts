@@ -45,8 +45,8 @@ const FAKE_RESPONSE_TIME = 750;
 export class HeaderComponent {
   protected readonly router = inject(Router);
   protected readonly builder = inject(FormBuilder);
-  protected readonly destroy = inject(DestroyRef);
-  protected readonly observer = inject(BreakpointObserver);
+  protected readonly destroyRef = inject(DestroyRef);
+  protected readonly breakpointObserver = inject(BreakpointObserver);
   protected readonly authService = inject(AuthService);
   protected readonly volumeService = inject(VolumeService);
   protected readonly dialogService = inject(DialogService);
@@ -55,7 +55,7 @@ export class HeaderComponent {
 
   readonly user = this.authService.user;
 
-  readonly desktop$ = this.observer.observe([Breakpoints.WebLandscape]).pipe(
+  readonly desktop$ = this.breakpointObserver.observe([Breakpoints.WebLandscape]).pipe(
     map(({ matches }) => matches),
     distinctUntilChanged(),
   );
@@ -98,7 +98,7 @@ export class HeaderComponent {
         tap(_ => this.searching.set(true)),
         delay(FAKE_RESPONSE_TIME),
         tap(_ => this.searching.set(false)),
-        takeUntilDestroyed(this.destroy),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(query => {
         this.volumeService.filter(query);
