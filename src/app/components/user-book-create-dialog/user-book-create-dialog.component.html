@@ -17,7 +17,7 @@
         @if (volume.volumeInfo.imageLinks) {
           <img [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-4" i18n-alt />
         }
-        <span class="fw-semibold">{{ volume.volumeInfo.title }}</span>
+        <span class="font-semibold">{{ volume.volumeInfo.title }}</span>
         @if (volume.volumeInfo.authors) {
           <span class="text-muted ms-1">&nbsp;{{ volume.volumeInfo.authors | array }}</span>
         }

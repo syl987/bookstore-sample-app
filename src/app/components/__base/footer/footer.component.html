@@ -1,10 +1,10 @@
 <footer class="container-fluid flex flex-col-reverse flex-md-row items-center pt-8 pb-4">
-  <div class="text-center fs-small py-2">© {{ options.copyrightYear }} {{ options.copyrightName }} <span class="text-warn">(work in progress)</span></div>
+  <div class="text-center text-sm py-2">© {{ options.copyrightYear }} {{ options.copyrightName }} <span class="text-warn">(work in progress)</span></div>
 
   <!-- transparent vertical / horizontal separator -->
   <div class="mb-2 me-auto"></div>
 
   <!-- TODO proper link targets -->
 
-  <div class="fs-small">v{{ build.version }} / last updated: {{ build.date | date }}</div>
+  <div class="text-sm">v{{ build.version }} / last updated: {{ build.date | date }}</div>
 </footer>

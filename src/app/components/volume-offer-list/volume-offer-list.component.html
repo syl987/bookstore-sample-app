@@ -3,7 +3,7 @@
     <table mat-table [dataSource]="publishedBooks()" style="background-color: inherit">
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef>#</th>
-        <td mat-cell *matCellDef="let book; index as i" class="fw-semibold">{{ i + 1 }}</td>
+        <td mat-cell *matCellDef="let book; index as i" class="font-semibold">{{ i + 1 }}</td>
       </ng-container>
 
       <ng-container matColumnDef="condition">
