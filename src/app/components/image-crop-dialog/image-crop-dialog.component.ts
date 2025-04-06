@@ -22,11 +22,6 @@ export class ImageCropDialogComponent {
 
   result?: Blob;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   async setResult(event: ImageCroppedEvent): Promise<void> {
     this.result = event.blob ?? undefined; // TODO remove null conditional
   }

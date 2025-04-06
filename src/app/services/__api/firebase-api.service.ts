@@ -19,11 +19,6 @@ export class FirebaseApiService {
   private readonly database = inject(Database);
   private readonly fileService = inject(FirebaseFileService);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {
     const result = get(ref(this.database, `userBooks/${uid}/${id}`)).then(snap => snap.val());
 

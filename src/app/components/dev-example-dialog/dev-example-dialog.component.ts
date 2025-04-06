@@ -14,9 +14,4 @@ export interface ExampleDevDialogData {
 })
 export class DevExampleDialogComponent {
   readonly data = inject<ExampleDevDialogData>(MAT_DIALOG_DATA);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 }

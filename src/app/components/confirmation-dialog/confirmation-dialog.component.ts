@@ -17,9 +17,4 @@ export interface ConfirmationDialogData {
 })
 export class ConfirmationDialogComponent {
   readonly data = inject<ConfirmationDialogData>(MAT_DIALOG_DATA);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 }

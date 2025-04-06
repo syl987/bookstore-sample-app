@@ -43,9 +43,6 @@ export class VolumeOfferDetailPageComponent {
 
   readonly isUserBook = computed(() => this.authService.uid() && this.offer()?.uid === this.authService.uid());
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     this.routerService
       .selectRouteParam('volumeId')

@@ -14,11 +14,6 @@ import { UserBookDTO } from '../models/book.models';
 export class DialogService {
   private readonly dialog = inject(MatDialog);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   openImageCropDialog(file: File): MatDialogRef<ImageCropDialogComponent, Blob | undefined> {
     const data: ImageCropDialogData = { file };
 

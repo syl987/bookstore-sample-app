@@ -11,11 +11,6 @@ export class GoogleBooksApiService {
 
   readonly baseUrl = 'https://www.googleapis.com/books/v1';
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   list(
     query: string,
     params?: {

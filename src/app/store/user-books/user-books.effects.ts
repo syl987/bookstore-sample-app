@@ -209,11 +209,6 @@ export class UserBooksEffects implements OnRunEffects {
     { dispatch: false },
   );
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngrxOnRunEffects(resolvedEffects$: Observable<EffectNotification>): Observable<EffectNotification> {
     return requireAuth(this.actions, resolvedEffects$);
   }

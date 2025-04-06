@@ -19,11 +19,6 @@ export class UserSessionInfoDialogComponent {
 
   readonly user = this.data.user;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   getAuthProviders(user: AuthUser): string {
     return user.providerData.map(p => p.providerId).join(', ');
   }

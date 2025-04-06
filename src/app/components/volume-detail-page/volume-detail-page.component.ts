@@ -30,9 +30,6 @@ export class VolumeDetailPageComponent {
 
   readonly uid = this.authService.uid;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     this.routerService
       .selectRouteParam('volumeId')

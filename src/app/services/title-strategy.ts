@@ -2,15 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 
-import { APP_OPTIONS, AppOptions } from '../models/app.models';
+import { APP_OPTIONS } from '../models/app.models';
 
 @Injectable()
 export class AppTitleStrategy extends TitleStrategy {
-  readonly options = inject<AppOptions>(APP_OPTIONS);
+  readonly options = inject(APP_OPTIONS);
   private readonly title = inject(Title);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
 
   constructor() {
     super();

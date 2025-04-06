@@ -22,11 +22,6 @@ export class VolumeSearchPageComponent implements OnInit {
   readonly filterQuery = this.volumeService.filterQuery;
   readonly filterQueryEmpty = computed(() => !this.filterQuery().length);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.volumeService.loadAll();
   }

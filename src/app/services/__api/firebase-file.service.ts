@@ -10,11 +10,6 @@ import { FirebaseUploadData, FirebaseUploadDataWithProgress, FirebaseUploadReque
 export class FirebaseFileService {
   private readonly storage = inject(Storage);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   uploadFile(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
     const task = uploadBytes(ref(this.storage, path), data, options);
 

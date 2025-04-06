@@ -20,11 +20,6 @@ export class RouterService {
   readonly routeParams: Signal<RouteParams> = this.store.selectSignal(RouterSelectors.selectRouteParams);
   readonly queryParams: Signal<QueryParams> = this.store.selectSignal(RouterSelectors.selectQueryParams);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   getCurrentNavigationState(): NavigationState {
     return (this.router.getCurrentNavigation()?.extras.state ?? {}) as NavigationState;
   }

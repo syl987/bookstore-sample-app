@@ -13,7 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { delay, distinctUntilChanged, map, of, tap } from 'rxjs';
 import { getCurrentAppLanguage } from 'src/app/helpers/app.helpers';
-import { APP_LANGUAGES, APP_NAV_LINKS, APP_OPTIONS, AppOptions } from 'src/app/models/app.models';
+import { APP_LANGUAGES, APP_NAV_LINKS, APP_OPTIONS } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -43,7 +43,7 @@ const FAKE_RESPONSE_TIME = 750;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  readonly options = inject<AppOptions>(APP_OPTIONS);
+  readonly options = inject(APP_OPTIONS);
   private readonly router = inject(Router);
   private readonly builder = inject(FormBuilder);
   private readonly observer = inject(BreakpointObserver);
@@ -78,9 +78,6 @@ export class HeaderComponent {
   readonly searchOverlayOpen = signal(false);
 
   readonly sidenavToggle = output();
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
 
   constructor() {
     toObservable(this.volumeService.filterQuery)

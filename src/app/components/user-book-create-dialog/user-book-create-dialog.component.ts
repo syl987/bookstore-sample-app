@@ -42,9 +42,6 @@ export class UserBookCreateDialogComponent implements AfterViewInit {
 
   @ViewChild(MatSelectionList) list?: MatSelectionList;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     this.searchControl.valueChanges.pipe(debounceTime(DEBOUNCE_TIME), takeUntilDestroyed()).subscribe(query => {
       this.googleBooksService.searchVolumes(query);

@@ -27,11 +27,6 @@ export class SidenavComponent {
 
   readonly navigated = output();
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   navigateToLogin(): void {
     this.router.navigateByUrl('/login');
   }

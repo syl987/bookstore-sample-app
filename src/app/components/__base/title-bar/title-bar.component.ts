@@ -18,9 +18,4 @@ export class TitleBarComponent {
   readonly title = this.routerService.title;
 
   readonly backUrl = input<string | null>();
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 }

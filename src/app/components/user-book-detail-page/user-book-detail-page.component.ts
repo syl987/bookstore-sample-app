@@ -30,9 +30,6 @@ export class UserBookDetailPageComponent {
   readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     this.routerService
       .selectRouteParam('bookId')

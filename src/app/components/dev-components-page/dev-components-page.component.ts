@@ -67,11 +67,6 @@ export class DevComponentsPageComponent {
 
   readonly currencySymbol = getCurrencySymbol(this.currency, 'narrow');
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   openExampleDialog(): void {
     const data: ExampleDevDialogData = { text: 'Example dialog beautiful content.' };
 

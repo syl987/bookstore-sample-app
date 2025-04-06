@@ -85,9 +85,6 @@ export class UserBookEditPageComponent {
 
   private readonly _resetFields$ = new BehaviorSubject<void>(undefined);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     this.routerService
       .selectRouteParam('bookId')

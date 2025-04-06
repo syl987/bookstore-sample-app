@@ -9,12 +9,12 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { getAuthProvider } from '../../helpers/auth.helpers';
-import { AUTH_CONFIG, AuthConfig } from '../../models/auth.models';
+import { AUTH_CONFIG } from '../../models/auth.models';
 import { AuthActions } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
-  private readonly config = inject<AuthConfig>(AUTH_CONFIG);
+  private readonly config = inject(AUTH_CONFIG);
   private readonly actions = inject(Actions);
   private readonly router = inject(Router);
   private readonly auth = inject(Auth);
@@ -143,9 +143,4 @@ export class AuthEffects {
     },
     { dispatch: false },
   );
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 }

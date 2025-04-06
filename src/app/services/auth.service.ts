@@ -26,9 +26,6 @@ export class AuthService {
   private readonly _logoutPending = new BehaviorSubject<boolean>(false);
   readonly logoutPending = toSignal(this._loginPending.asObservable(), { requireSync: true });
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     // set login pending stream
     this.actions.pipe(ofType(AuthActions.loginWithProvider), takeUntilDestroyed()).subscribe(_ => this._loginPending.next(true));

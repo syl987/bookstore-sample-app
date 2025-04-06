@@ -19,11 +19,6 @@ export class GoogleBooksService {
   readonly searchPending = this.store.selectSignal(googleBooksFeature.selectSearchPending);
   readonly searchError = this.store.selectSignal(googleBooksFeature.selectSearchError);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   searchVolumes(query: string): void {
     this.store.dispatch(GoogleBooksActions.search({ query }));
   }

@@ -46,9 +46,6 @@ export class ButtonSpinnerDirective implements OnInit {
     return this.spinnerRef.instance.strokeWidth as number;
   }
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     this.spinnerRef.instance.diameter = 20; // dependent on style positioning
   }

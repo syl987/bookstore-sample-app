@@ -29,11 +29,6 @@ export class UserBookListPageComponent implements OnInit {
 
   readonly userBooksLoading = this.userBooksService.loadPending;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.userBooksService.loadAll();
   }

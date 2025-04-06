@@ -5,19 +5,14 @@ import { Store } from '@ngrx/store';
 import { concatMap, EMPTY, first, Observable } from 'rxjs';
 
 import { isBearerExcluded } from '../helpers/auth.helpers';
-import { AUTH_CONFIG, AuthConfig } from '../models/auth.models';
+import { AUTH_CONFIG } from '../models/auth.models';
 import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
-  private readonly config = inject<AuthConfig>(AUTH_CONFIG);
+  private readonly config = inject(AUTH_CONFIG);
   private readonly store = inject(Store);
   private readonly auth = inject(Auth);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (isBearerExcluded(request, this.config)) {
