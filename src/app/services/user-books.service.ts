@@ -32,8 +32,8 @@ interface IUserBooksService {
   providedIn: 'root',
 })
 export class UserBooksService implements IUserBooksService {
-  private readonly store = inject(Store);
-  private readonly actions = inject(Actions);
+  protected readonly store = inject(Store);
+  protected readonly actions = inject(Actions);
 
   readonly entities = this.store.selectSignal(userBooksFeature.selectAll);
   readonly entitiesTotal = this.store.selectSignal(userBooksFeature.selectTotal);

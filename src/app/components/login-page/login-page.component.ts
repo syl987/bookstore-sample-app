@@ -13,8 +13,9 @@ import { AuthService } from 'src/app/services/auth.service';
   host: { class: 'flex-grow-1 d-flex flex-column justify-content-center' },
 })
 export class LoginPageComponent {
+  protected readonly authService = inject(AuthService);
+
   readonly options = inject(APP_OPTIONS);
-  private readonly authService = inject(AuthService);
 
   readonly loginPending = this.authService.loginPending;
 

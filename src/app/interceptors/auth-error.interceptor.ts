@@ -9,8 +9,8 @@ import { AuthActions } from '../store/auth/auth.actions';
 
 @Injectable()
 export class AuthErrorInterceptor implements HttpInterceptor {
-  private readonly config = inject(AUTH_CONFIG);
-  private readonly store = inject(Store);
+  protected readonly config = inject(AUTH_CONFIG);
+  protected readonly store = inject(Store);
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (isBearerExcluded(request, this.config)) {

@@ -13,9 +13,9 @@ import { AuthActions } from '../store/auth/auth.actions';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly store = inject(Store);
-  private readonly actions = inject(Actions);
-  private readonly auth = inject(Auth);
+  protected readonly store = inject(Store);
+  protected readonly actions = inject(Actions);
+  protected readonly auth = inject(Auth);
 
   readonly user = toSignal(user(this.auth).pipe(map(toAuthUser)));
   readonly uid = computed(() => this.user()?.uid);

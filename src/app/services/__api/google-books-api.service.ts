@@ -7,7 +7,7 @@ import { GoogleBooksListDTO, GoogleBooksVolumeDTO } from 'src/app/models/google-
   providedIn: 'root',
 })
 export class GoogleBooksApiService {
-  private readonly http = inject(HttpClient);
+  protected readonly http = inject(HttpClient);
 
   readonly baseUrl = 'https://www.googleapis.com/books/v1';
 

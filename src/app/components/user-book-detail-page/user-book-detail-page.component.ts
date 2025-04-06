@@ -18,9 +18,9 @@ import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookDetailPageComponent {
-  private readonly route = inject(ActivatedRoute);
-  private readonly routerService = inject(RouterService);
-  private readonly userBooksService = inject(UserBooksService);
+  protected readonly route = inject(ActivatedRoute);
+  protected readonly routerService = inject(RouterService);
+  protected readonly userBooksService = inject(UserBooksService);
 
   id: string = this.route.snapshot.params['bookId'];
 

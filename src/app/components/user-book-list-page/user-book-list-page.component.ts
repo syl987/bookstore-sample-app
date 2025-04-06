@@ -18,9 +18,9 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookListPageComponent implements OnInit {
-  private readonly router = inject(Router);
-  private readonly userBooksService = inject(UserBooksService);
-  private readonly dialogService = inject(DialogService);
+  protected readonly router = inject(Router);
+  protected readonly userBooksService = inject(UserBooksService);
+  protected readonly dialogService = inject(DialogService);
 
   readonly userBooksDraft = this.userBooksService.entitiesDraft;
   readonly userBooksPublished = this.userBooksService.entitiesPublished;

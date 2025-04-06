@@ -8,7 +8,7 @@ import { FirebaseUploadData, FirebaseUploadDataWithProgress, FirebaseUploadReque
   providedIn: 'root',
 })
 export class FirebaseFileService {
-  private readonly storage = inject(Storage);
+  protected readonly storage = inject(Storage);
 
   uploadFile(path: string, data: Blob | Uint8Array | ArrayBuffer, options: FirebaseUploadRequestMetadata = {}): Observable<FirebaseUploadData> {
     const task = uploadBytes(ref(this.storage, path), data, options);

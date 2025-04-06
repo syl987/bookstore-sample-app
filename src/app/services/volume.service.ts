@@ -23,8 +23,8 @@ interface IVolumeService {
   providedIn: 'root',
 })
 export class VolumeService implements IVolumeService {
-  private readonly store = inject(Store);
-  private readonly actions = inject(Actions);
+  protected readonly store = inject(Store);
+  protected readonly actions = inject(Actions);
 
   readonly entities = this.store.selectSignal(volumeFeature.selectAll);
   readonly entitiesTotal = this.store.selectSignal(volumeFeature.selectTotal);

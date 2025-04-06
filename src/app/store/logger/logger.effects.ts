@@ -12,9 +12,9 @@ import { LoggerActions } from './logger.actions';
 
 @Injectable()
 export class LoggerEffects {
-  private readonly actions = inject(Actions);
-  private readonly authService = inject(AuthService);
-  private readonly firebaseApi = inject(FirebaseApiService);
+  protected readonly actions = inject(Actions);
+  protected readonly authService = inject(AuthService);
+  protected readonly firebaseApi = inject(FirebaseApiService);
 
   readonly createErrorLog = createEffect(() => {
     return this.actions.pipe(

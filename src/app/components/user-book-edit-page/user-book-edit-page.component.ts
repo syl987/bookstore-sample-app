@@ -45,13 +45,13 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookEditPageComponent {
-  private readonly currency = inject(DEFAULT_CURRENCY_CODE);
-  private readonly fb = inject(FormBuilder);
-  private readonly route = inject(ActivatedRoute);
-  private readonly router = inject(Router);
-  private readonly routerService = inject(RouterService);
-  private readonly userBooksService = inject(UserBooksService);
-  private readonly dialogService = inject(DialogService);
+  protected readonly currency = inject(DEFAULT_CURRENCY_CODE);
+  protected readonly fb = inject(FormBuilder);
+  protected readonly route = inject(ActivatedRoute);
+  protected readonly router = inject(Router);
+  protected readonly routerService = inject(RouterService);
+  protected readonly userBooksService = inject(UserBooksService);
+  protected readonly dialogService = inject(DialogService);
 
   id: string = this.route.snapshot.params['bookId'];
 

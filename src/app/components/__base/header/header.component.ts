@@ -43,14 +43,15 @@ const FAKE_RESPONSE_TIME = 750;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+  protected readonly router = inject(Router);
+  protected readonly builder = inject(FormBuilder);
+  protected readonly destroy = inject(DestroyRef);
+  protected readonly observer = inject(BreakpointObserver);
+  protected readonly authService = inject(AuthService);
+  protected readonly volumeService = inject(VolumeService);
+  protected readonly dialogService = inject(DialogService);
+
   readonly options = inject(APP_OPTIONS);
-  private readonly router = inject(Router);
-  private readonly builder = inject(FormBuilder);
-  private readonly observer = inject(BreakpointObserver);
-  private readonly authService = inject(AuthService);
-  private readonly volumeService = inject(VolumeService);
-  private readonly dialogService = inject(DialogService);
-  private readonly destroy = inject(DestroyRef);
 
   readonly user = this.authService.user;
 

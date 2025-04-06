@@ -12,7 +12,7 @@ import { UserBookDTO } from '../models/book.models';
   providedIn: 'root',
 })
 export class DialogService {
-  private readonly dialog = inject(MatDialog);
+  protected readonly dialog = inject(MatDialog);
 
   openImageCropDialog(file: File): MatDialogRef<ImageCropDialogComponent, Blob | undefined> {
     const data: ImageCropDialogData = { file };

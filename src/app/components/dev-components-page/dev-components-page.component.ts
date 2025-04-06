@@ -40,9 +40,9 @@ import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevComponentsPageComponent {
-  private readonly currency = inject(DEFAULT_CURRENCY_CODE);
-  private readonly dialog = inject(MatDialog);
-  private readonly toastService = inject(ToastService);
+  protected readonly currency = inject(DEFAULT_CURRENCY_CODE);
+  protected readonly dialog = inject(MatDialog);
+  protected readonly toastService = inject(ToastService);
 
   readonly disabled$ = timer(0, 3000).pipe(
     map(value => value % 2),

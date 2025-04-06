@@ -16,8 +16,8 @@ import { FirebaseFileService } from './firebase-file.service';
   providedIn: 'root',
 })
 export class FirebaseApiService {
-  private readonly database = inject(Database);
-  private readonly fileService = inject(FirebaseFileService);
+  protected readonly database = inject(Database);
+  protected readonly fileService = inject(FirebaseFileService);
 
   getUserBook(uid: string, id: string): Observable<UserBookDTO> {
     const result = get(ref(this.database, `userBooks/${uid}/${id}`)).then(snap => snap.val());

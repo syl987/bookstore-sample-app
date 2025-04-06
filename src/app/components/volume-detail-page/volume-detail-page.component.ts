@@ -18,10 +18,10 @@ import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeDetailPageComponent {
-  private readonly route = inject(ActivatedRoute);
-  private readonly authService = inject(AuthService);
-  private readonly routerService = inject(RouterService);
-  private readonly volumeService = inject(VolumeService);
+  protected readonly route = inject(ActivatedRoute);
+  protected readonly authService = inject(AuthService);
+  protected readonly routerService = inject(RouterService);
+  protected readonly volumeService = inject(VolumeService);
 
   id: string = this.route.snapshot.params['volumeId'];
 

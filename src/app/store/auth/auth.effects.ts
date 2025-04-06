@@ -14,12 +14,12 @@ import { AuthActions } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
-  private readonly config = inject(AUTH_CONFIG);
-  private readonly actions = inject(Actions);
-  private readonly router = inject(Router);
-  private readonly auth = inject(Auth);
-  private readonly toastService = inject(ToastService);
-  private readonly dialogService = inject(DialogService);
+  protected readonly config = inject(AUTH_CONFIG);
+  protected readonly actions = inject(Actions);
+  protected readonly router = inject(Router);
+  protected readonly auth = inject(Auth);
+  protected readonly toastService = inject(ToastService);
+  protected readonly dialogService = inject(DialogService);
 
   readonly authenticated = createEffect(() => {
     return authState(this.auth).pipe(

@@ -8,7 +8,7 @@ import { googleBooksFeature } from '../store/google-books/google-books.reducer';
   providedIn: 'root',
 })
 export class GoogleBooksService {
-  private readonly store = inject(Store);
+  protected readonly store = inject(Store);
 
   readonly searchQuery = this.store.selectSignal(googleBooksFeature.selectSearchQuery);
   readonly searchList = this.store.selectSignal(googleBooksFeature.selectSearchList);

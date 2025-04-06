@@ -9,8 +9,8 @@ import { GoogleBooksActions } from './google-books.actions';
 
 @Injectable()
 export class GoogleBooksEffects {
-  private readonly actions = inject(Actions);
-  private readonly googleBooksApi = inject(GoogleBooksApiService);
+  protected readonly actions = inject(Actions);
+  protected readonly googleBooksApi = inject(GoogleBooksApiService);
 
   readonly search = createEffect(() => {
     return this.actions.pipe(

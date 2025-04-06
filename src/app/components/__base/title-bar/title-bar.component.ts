@@ -13,7 +13,7 @@ import { RouterService } from 'src/app/services/router.service';
   host: { class: 'd-flex flex-wrap' },
 })
 export class TitleBarComponent {
-  private readonly routerService = inject(RouterService);
+  protected readonly routerService = inject(RouterService);
 
   readonly title = this.routerService.title;
 

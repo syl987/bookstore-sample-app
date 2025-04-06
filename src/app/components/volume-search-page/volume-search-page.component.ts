@@ -14,7 +14,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeSearchPageComponent implements OnInit {
-  private readonly volumeService = inject(VolumeService);
+  protected readonly volumeService = inject(VolumeService);
 
   readonly volumesFiltered = this.volumeService.entitiesFiltered;
   readonly volumesLoading = this.volumeService.loadPending;

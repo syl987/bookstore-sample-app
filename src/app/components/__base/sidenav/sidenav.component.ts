@@ -16,9 +16,9 @@ import { DialogService } from 'src/app/services/dialog.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavComponent {
-  private readonly router = inject(Router);
-  private readonly authService = inject(AuthService);
-  private readonly dialogService = inject(DialogService);
+  protected readonly router = inject(Router);
+  protected readonly authService = inject(AuthService);
+  protected readonly dialogService = inject(DialogService);
 
   readonly user = this.authService.user;
 

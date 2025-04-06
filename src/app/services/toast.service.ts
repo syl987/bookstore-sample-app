@@ -7,7 +7,7 @@ type ToastConfig = Pick<MatSnackBarConfig<never>, 'duration'>;
   providedIn: 'root',
 })
 export class ToastService {
-  private readonly snackbar = inject(MatSnackBar);
+  protected readonly snackbar = inject(MatSnackBar);
 
   showSuccessToast(message: string, options?: ToastConfig): MatSnackBarRef<SimpleSnackBar> {
     return this.snackbar.open(message, undefined, { duration: 5000, ...options, panelClass: 'success' });

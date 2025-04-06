@@ -24,11 +24,12 @@ const DEBOUNCE_TIME = 500;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookCreateDialogComponent implements AfterViewInit {
+  protected readonly userBooksService = inject(UserBooksService);
+  protected readonly googleBooksService = inject(GoogleBooksService);
+  protected readonly detector = inject(ChangeDetectorRef);
+  protected readonly destroy = inject(DestroyRef);
+
   readonly dialogRef = inject<MatDialogRef<UserBookCreateDialogComponent, UserBookDTO | undefined>>(MatDialogRef);
-  private readonly userBooksService = inject(UserBooksService);
-  private readonly googleBooksService = inject(GoogleBooksService);
-  private readonly detector = inject(ChangeDetectorRef);
-  private readonly destroy = inject(DestroyRef);
 
   readonly results = this.googleBooksService.searchResults;
 

@@ -27,12 +27,12 @@ function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undef
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeOfferDetailPageComponent {
-  private readonly route = inject(ActivatedRoute);
-  private readonly router = inject(Router);
-  private readonly authService = inject(AuthService);
-  private readonly routerService = inject(RouterService);
-  private readonly volumeService = inject(VolumeService);
-  private readonly dialogService = inject(DialogService);
+  protected readonly route = inject(ActivatedRoute);
+  protected readonly router = inject(Router);
+  protected readonly authService = inject(AuthService);
+  protected readonly routerService = inject(RouterService);
+  protected readonly volumeService = inject(VolumeService);
+  protected readonly dialogService = inject(DialogService);
 
   id: string = this.route.snapshot.params['volumeId'];
 

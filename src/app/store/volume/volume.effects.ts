@@ -11,10 +11,10 @@ import { VolumeActions } from './volume.actions';
 
 @Injectable()
 export class VolumesEffects {
-  private readonly actions = inject(Actions);
-  private readonly authService = inject(AuthService);
-  private readonly firebaseApi = inject(FirebaseApiService);
-  private readonly toastService = inject(ToastService);
+  protected readonly actions = inject(Actions);
+  protected readonly authService = inject(AuthService);
+  protected readonly firebaseApi = inject(FirebaseApiService);
+  protected readonly toastService = inject(ToastService);
 
   readonly load = createEffect(() => {
     return this.actions.pipe(

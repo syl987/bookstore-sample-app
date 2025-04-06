@@ -13,11 +13,11 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
   host: { class: 'app-button-spinner' },
 })
 export class ButtonSpinnerDirective implements OnInit {
-  private readonly _elementRef = inject(ElementRef);
-  private readonly _viewContainerRef = inject(ViewContainerRef);
-  private readonly _renderer = inject(Renderer2);
+  protected readonly _elementRef = inject(ElementRef);
+  protected readonly _viewContainerRef = inject(ViewContainerRef);
+  protected readonly _renderer = inject(Renderer2);
 
-  private readonly spinnerRef = this._viewContainerRef.createComponent(MatProgressSpinner, { index: 0 });
+  protected readonly spinnerRef = this._viewContainerRef.createComponent(MatProgressSpinner, { index: 0 });
 
   readonly spinning = input.required<boolean, BooleanInput>({
     transform: value => {

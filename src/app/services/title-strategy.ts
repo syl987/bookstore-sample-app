@@ -6,8 +6,9 @@ import { APP_OPTIONS } from '../models/app.models';
 
 @Injectable()
 export class AppTitleStrategy extends TitleStrategy {
+  protected readonly title = inject(Title);
+
   readonly options = inject(APP_OPTIONS);
-  private readonly title = inject(Title);
 
   constructor() {
     super();

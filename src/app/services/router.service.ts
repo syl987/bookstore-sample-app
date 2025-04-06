@@ -10,8 +10,8 @@ import * as RouterSelectors from '../store/router/router.selectors';
   providedIn: 'root',
 })
 export class RouterService {
-  private readonly store = inject(Store);
-  private readonly router = inject(Router);
+  protected readonly store = inject(Store);
+  protected readonly router = inject(Router);
 
   readonly url = this.store.selectSignal(RouterSelectors.selectUrl);
   readonly title = this.store.selectSignal(RouterSelectors.selectTitle);

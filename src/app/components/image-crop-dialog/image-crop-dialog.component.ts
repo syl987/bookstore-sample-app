@@ -14,7 +14,7 @@ export interface ImageCropDialogData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageCropDialogComponent {
-  private readonly data = inject<ImageCropDialogData>(MAT_DIALOG_DATA);
+  protected readonly data = inject<ImageCropDialogData>(MAT_DIALOG_DATA);
 
   readonly file = this.data.file;
 
