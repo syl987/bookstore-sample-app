@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { MetaReducer } from '@ngrx/store';
 
 import { AuthActions } from './auth/auth.actions';
