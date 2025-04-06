@@ -26,40 +26,32 @@
     <mat-divider />
 
     <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-8">
-      <div class="row">
-        <div class="col-sm-6 col-md-4 col-xl-3">
-          <mat-form-field class="w-100 mb-4">
-            <mat-label i18n>Condition</mat-label>
-            <select matNativeControl formControlName="condition">
-              <option></option>
-              <option [value]="BookCondition.NEW">{{ BookCondition.NEW | bookCondition }}</option>
-              <option [value]="BookCondition.VERY_GOOD">{{ BookCondition.VERY_GOOD | bookCondition }}</option>
-              <option [value]="BookCondition.VISIBLY_USED">{{ BookCondition.VISIBLY_USED | bookCondition }}</option>
-              <option [value]="BookCondition.DAMAGED">{{ BookCondition.DAMAGED | bookCondition }}</option>
-            </select>
-            <mat-error>{{ form.get('condition') | validationError }}</mat-error>
-          </mat-form-field>
-        </div>
+      <div class="flex flex-wrap gap-4">
+        <mat-form-field class="max-w-xs">
+          <mat-label i18n>Condition</mat-label>
+          <select matNativeControl formControlName="condition">
+            <option></option>
+            <option [value]="BookCondition.NEW">{{ BookCondition.NEW | bookCondition }}</option>
+            <option [value]="BookCondition.VERY_GOOD">{{ BookCondition.VERY_GOOD | bookCondition }}</option>
+            <option [value]="BookCondition.VISIBLY_USED">{{ BookCondition.VISIBLY_USED | bookCondition }}</option>
+            <option [value]="BookCondition.DAMAGED">{{ BookCondition.DAMAGED | bookCondition }}</option>
+          </select>
+          <mat-error>{{ form.get('condition') | validationError }}</mat-error>
+        </mat-form-field>
 
-        <div class="col-sm-6 col-md-4 col-xl-3">
-          <mat-form-field class="w-100 mb-4">
-            <mat-label i18n>Price</mat-label>
-            <input type="number" matInput formControlName="price" min="0" max="500" />
-            <span matTextSuffix class="text-nowrap text-muted ms-2">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
-            <mat-error>{{ form.get('price') | validationError }}</mat-error>
-          </mat-form-field>
-        </div>
+        <mat-form-field class="max-w-xs">
+          <mat-label i18n>Price</mat-label>
+          <input type="number" matInput formControlName="price" min="0" max="500" />
+          <span matTextSuffix class="text-nowrap text-muted ms-2">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
+          <mat-error>{{ form.get('price') | validationError }}</mat-error>
+        </mat-form-field>
       </div>
 
-      <div class="row">
-        <div class="col-md-8 col-xl-6">
-          <mat-form-field class="w-100 mb-4">
-            <mat-label i18n>Description</mat-label>
-            <textarea matInput formControlName="description" minlength="24" maxlength="254" cdkTextareaAutosize></textarea>
-            <mat-error>{{ form.get('description') | validationError }}</mat-error>
-          </mat-form-field>
-        </div>
-      </div>
+      <mat-form-field class="max-w-xs">
+        <mat-label i18n>Description</mat-label>
+        <textarea matInput formControlName="description" minlength="24" maxlength="254" cdkTextareaAutosize></textarea>
+        <mat-error>{{ form.get('description') | validationError }}</mat-error>
+      </mat-form-field>
 
       <div class="gap-x-2 mb-8">
         <button type="submit" mat-stroked-button color="primary" [spinning]="editDraftPending()" [disabled]="editDraftDisabled()" i18n>Save changes</button>

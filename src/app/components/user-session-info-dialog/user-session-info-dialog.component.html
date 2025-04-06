@@ -1,23 +1,23 @@
 <h3 mat-dialog-title i18n>Session Info</h3>
 
 <div mat-dialog-content>
-  <dl class="row pt-3 -mb-4">
-    <div class="col-sm-6">
+  <dl class="grid sm:grid-cols-2 pt-3 -mb-4">
+    <div>
       <dt i18n>Name</dt>
       <dd>{{ user.displayName || '-' }}</dd>
     </div>
 
-    <div class="col-sm-6">
+    <div>
       <dt i18n>Email</dt>
       <dd>{{ user.email || '-' }}</dd>
     </div>
 
-    <div class="col-sm-6">
+    <div>
       <dt i18n>Login Providers</dt>
       <dd>{{ getAuthProviders(user) || '-' }}</dd>
     </div>
 
-    <div class="col-sm-6">
+    <div>
       <dt i18n>Last Login</dt>
       <dd>{{ (user.metadata.lastLoginAt | date) || '-' }}</dd>
     </div>

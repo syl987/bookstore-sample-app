@@ -1,15 +1,15 @@
 @if (book().condition != null || book().price != null) {
   <mat-divider />
 
-  <dl class="row pt-3 mb-0">
+  <dl class="grid grid-cols-2 pt-3 mb-0">
     @if (book().condition != null) {
-      <div class="col-6">
+      <div>
         <dt i18n>Condition</dt>
         <dd>{{ book().condition | bookCondition }}</dd>
       </div>
     }
     @if (book().price != null) {
-      <div class="col-6">
+      <div>
         <dt i18n>Price</dt>
         <dd>{{ book().price | currency }}</dd>
       </div>

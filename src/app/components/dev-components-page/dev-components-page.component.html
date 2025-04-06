@@ -10,7 +10,7 @@
 
   <p>
     Paragraph text with proper
-    <span class="app-text-primary">primary color</span>
+    <span class="dev-text-primary">primary color</span>
     styling from a theme mixin and with some important text included. This text is also very long and will be wrapped.
   </p>
 
@@ -29,7 +29,7 @@
 
   <h2>Button</h2>
 
-  <div class="gap-x-2 mb-4">
+  <div class="flex flex-wrap gap-2">
     <button mat-flat-button color="primary">Primary</button>
     <button mat-stroked-button color="primary">Secondary</button>
     <button mat-stroked-button>Tertiary</button>
@@ -38,7 +38,7 @@
     <a mat-button color="primary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener">Link</a>
   </div>
 
-  <div class="gap-x-2 mb-4">
+  <div class="flex flex-wrap gap-2">
     <button mat-flat-button color="primary" disabled>Primary</button>
     <button mat-stroked-button color="primary" disabled>Secondary</button>
     <button mat-stroked-button disabled>Tertiary</button>
@@ -47,7 +47,7 @@
     <a mat-button color="primary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener" disabled>Link</a>
   </div>
 
-  <div class="gap-x-1 mb-4">
+  <div class="flex flex-wrap gap-1">
     <button mat-icon-button color="primary" aria-label="Primary">
       <mat-icon fontIcon="fa-globe" class="align-top" />
     </button>
@@ -70,48 +70,38 @@
   <h2>Forms</h2>
 
   <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()">
-    <div class="row">
-      <div class="col-sm-4 col-md-3 col-xl-2">
-        <mat-form-field class="w-100 mb-4">
-          <mat-label>Email</mat-label>
-          <input type="text" matInput formControlName="email" email />
-          <mat-error>{{ form.get('email') | validationError }}</mat-error>
-        </mat-form-field>
-      </div>
+    <div class="grid sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-4 mb-4">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="text" matInput formControlName="email" email />
+        <mat-error>{{ form.get('email') | validationError }}</mat-error>
+      </mat-form-field>
 
-      <div class="col-sm-4 col-md-3 col-xl-2">
-        <mat-form-field class="w-100 mb-4">
-          <mat-label>Price</mat-label>
-          <input type="number" matInput formControlName="number" min="2" max="14" />
-          <span matTextSuffix class="text-nowrap text-muted ms-2">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
-          <mat-error>{{ form.get('number') | validationError }}</mat-error>
-        </mat-form-field>
-      </div>
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input type="number" matInput formControlName="number" min="2" max="14" />
+        <span matTextSuffix class="text-nowrap text-muted ms-2">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
+        <mat-error>{{ form.get('number') | validationError }}</mat-error>
+      </mat-form-field>
 
-      <div class="col-sm-4 col-md-3 col-xl-2">
-        <mat-form-field class="w-100 mb-4">
-          <mat-label>Fruits</mat-label>
-          <select matNativeControl formControlName="select">
-            <option></option>
-            <option value="apples">Apples</option>
-            <option value="oranges">Oranges</option>
-          </select>
-          <mat-error>{{ form.get('select') | validationError }}</mat-error>
-        </mat-form-field>
-      </div>
+      <mat-form-field>
+        <mat-label>Fruits</mat-label>
+        <select matNativeControl formControlName="select">
+          <option></option>
+          <option value="apples">Apples</option>
+          <option value="oranges">Oranges</option>
+        </select>
+        <mat-error>{{ form.get('select') | validationError }}</mat-error>
+      </mat-form-field>
     </div>
 
-    <div class="row">
-      <div class="col-md-9 col-xl-6">
-        <mat-form-field class="w-100 mb-4">
-          <mat-label>Description</mat-label>
-          <textarea matInput formControlName="area" required minlength="3" maxlength="255" cdkTextareaAutosize></textarea>
-          <mat-error>{{ form.get('area') | validationError }}</mat-error>
-        </mat-form-field>
-      </div>
-    </div>
+    <mat-form-field class="max-w-xs mb-4">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="area" required minlength="3" maxlength="255" cdkTextareaAutosize></textarea>
+      <mat-error>{{ form.get('area') | validationError }}</mat-error>
+    </mat-form-field>
 
-    <div class="gap-x-2 mb-8">
+    <div class="flex flex-wrap gap-2">
       <button type="submit" mat-flat-button color="primary">Submit</button>
       <button type="button" mat-stroked-button color="accent" (click)="invalidateForm()">Invalidate</button>
       <button type="reset" mat-stroked-button [disabled]="form.disabled">Reset</button>
@@ -128,7 +118,7 @@
 
   <h3>Toast Message</h3>
 
-  <div class="gap-x-2 mb-6">
+  <div class="flex flex-wrap gap-2">
     <button mat-flat-button color="primary" (click)="showSuccessToast()">Show Success</button>
     <button mat-stroked-button color="primary" (click)="showInfoToast()">Show Info</button>
     <button mat-stroked-button color="warn" (click)="showErrorToast()">Show Error</button>
@@ -144,7 +134,7 @@
     icon.
   </p>
 
-  <div class="gap-x-2 mb-4">
+  <div class="flex flex-wrap gap-2 mb-4">
     <mat-icon fontIcon="fa-print" />
     <mat-icon fontIcon="fa-envelope-o" color="primary" />
     <mat-icon fontIcon="fa-phone" color="accent" />
@@ -158,7 +148,7 @@
     <mat-icon fontIcon="fa-thumb-tack" class="fa-rotate-90" />
   </div>
 
-  <div class="gap-x-2 mb-4">
+  <div class="flex flex-wrap gap-2">
     <mat-icon fontSet="fp" fontIcon="us" />
     <mat-icon fontSet="fp" fontIcon="de" />
     <mat-icon fontSet="fp" fontIcon="es" />
@@ -166,14 +156,14 @@
 
   <h3>Spinner</h3>
 
-  <div class="flex gap-x-2 items-end mb-4">
+  <div class="flex flex-wrap gap-2 items-end">
     <mat-spinner diameter="16" />
     <mat-spinner diameter="24" />
     <mat-spinner diameter="32" />
     <mat-spinner diameter="40" />
   </div>
 
-  <div class="flex gap-x-2 items-end mb-4">
+  <div class="flex flex-wrap gap-2 items-end">
     <mat-progress-spinner diameter="16" color="warn" [value]="progress()" />
     <mat-progress-spinner diameter="24" color="warn" [value]="progress()" />
     <mat-progress-spinner diameter="32" color="warn" [value]="progress()" />
@@ -182,52 +172,45 @@
 
   <h4>Button with Spinner</h4>
 
-  <div class="gap-x-2 mb-4">
+  <div class="flex flex-wrap gap-2">
     <button mat-flat-button color="primary" [spinning]="disabled()" [disabled]="disabled()">Primary</button>
     <button mat-stroked-button color="primary" [spinning]="disabled()" [disabled]="disabled()">Secondary</button>
   </div>
-
-  <!-- <h3>Button with Progress Indicator</h3>
-
-    <div class="gap-x-2 mb-4">
-        <button mat-flat-button color="primary"  mode="determinate" [value]="progress" [spinning]="true" disabled>Primary</button>
-        <button mat-stroked-button color="primary"  mode="determinate" [value]="progress" [spinning]="true" disabled>Secondary</button>
-    </div> -->
 
   <mat-divider />
 
   <h2>Field</h2>
 
-  <dl class="row">
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+  <dl class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div>
       <dt>Name</dt>
       <dd>Michael Jackson</dd>
     </div>
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+    <div>
       <dt>Address</dt>
       <dd>Main Street 4<br />D-12345 Some City</dd>
     </div>
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+    <div>
       <dt>Email</dt>
       <dd>michael.jackson&#64;some-domain.com</dd>
     </div>
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+    <div>
       <dt>Phone Number</dt>
       <dd>+49 151 / 987 654 321</dd>
     </div>
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+    <div>
       <dt>Date of Birth</dt>
       <dd>{{ '1958-08-29' | date }}</dd>
     </div>
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+    <div>
       <dt>Dark Secrets</dt>
       <dd>-</dd>
     </div>
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+    <div>
       <dt>Number of Songs</dt>
       <dd>{{ 1423 | number }}</dd>
     </div>
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+    <div>
       <dt>Net Worth</dt>
       <dd>{{ 0 | currency }}</dd>
     </div>
@@ -261,7 +244,7 @@
   <div class="text-nowrap" style="width: 8rem; background-color: burlywood">This text should overflow the parent.</div>
   <div class="truncate" style="max-width: 11rem; background-color: darkkhaki">Truncate block: Praeterea iter est quasdam res quas ex communi.</div>
   <span class="truncate" style="max-width: 11rem; display: inline-block; background-color: wheat">Truncate inline: Praeterea iter est quasdam res quas ex communi.</span>
-  <p class="text-break">Break word: mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+  <p class="wrap-break-word">Break word: mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
 
   <h3>Text Colors</h3>
 
@@ -277,9 +260,9 @@
 
   <h3>Text Transform</h3>
 
-  <p class="text-uppercase mb-0">This line rendered as uppercase text.</p>
-  <p class="text-lowercase mb-0">This line rendered as lowercase text.</p>
-  <p class="text-capitalize mb-0">This line rendered as capitalize text.</p>
+  <p class="uppercase mb-0">This line rendered as uppercase text.</p>
+  <p class="lowercase mb-0">This line rendered as lowercase text.</p>
+  <p class="capitalize mb-0">This line rendered as capitalize text.</p>
 
   <h3>Screen Readers</h3>
 
@@ -297,39 +280,19 @@
 
   <h4>Horizontal Gap</h4>
 
-  <div class="gap-x-6 mb-4">
-    <div class="inline-block border border-primary px-6 py-1 mb-4">Inline Block</div>
-    <div class="inline-block border border-primary px-6 py-1 mb-4">Inline Block</div>
-    <div class="inline-block border border-primary px-6 py-1 mb-4">Inline Block</div>
-    <div class="inline-block border border-primary px-6 py-1 mb-4">Inline Block</div>
+  <div class="flex flex-wrap gap-4">
+    <div class="border border-primary px-6 py-1">Inline Block</div>
+    <div class="border border-primary px-6 py-1">Inline Block</div>
+    <div class="border border-primary px-6 py-1">Inline Block</div>
+    <div class="border border-primary px-6 py-1">Inline Block</div>
   </div>
 
   <h4>Vertical Spacing</h4>
 
-  <div class="inline-block app-children-mb-6">
+  <div class="inline-flex flex-col gap-4">
     <div class="border border-primary px-6 py-1">Block Element</div>
     <div class="border border-primary px-6 py-1">Block Element</div>
     <div class="border border-primary px-6 py-1">Block Element</div>
     <div class="border border-primary px-6 py-1">Block Element</div>
-  </div>
-
-  <mat-divider />
-
-  <h2>Grid</h2>
-
-  <div class="row app-docs-grid-colored-row mb-4">
-    <div class="col-md-8 app-docs-grid-colored-col">.col-md-8</div>
-    <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
-  </div>
-
-  <div class="row app-docs-grid-colored-row mb-4">
-    <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
-    <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
-    <div class="col-6 col-md-4 app-docs-grid-colored-col">.col-6 .col-md-4</div>
-  </div>
-
-  <div class="row app-docs-grid-colored-row mb-4">
-    <div class="col-6 app-docs-grid-colored-col">.col-6</div>
-    <div class="col-6 app-docs-grid-colored-col">.col-6</div>
   </div>
 </div>

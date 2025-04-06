@@ -1,14 +1,14 @@
 @if (offer(); as offer) {
-  <dl class="row">
-    <div class="col-12 mb-2">
+  <dl>
+    <div class="max-w-xl">
       <dt i18n>Description</dt>
       <dd>{{ offer.description }}</dd>
     </div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="max-w-xs">
       <dt i18n>Condition</dt>
       <dd>{{ offer.condition | bookCondition }}</dd>
     </div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="max-w-xs">
       <dt i18n>Price</dt>
       <dd>{{ offer.price | currency }}</dd>
     </div>
