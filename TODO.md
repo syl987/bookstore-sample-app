@@ -38,6 +38,9 @@
 - [ ] update to material 3 with light theme + use more colors + adjust welcome page
 - [ ] add dark theme with material 3
 - [x] replace bootstrap with tailwindcss v4 + adjust welcome page
+  - [ ] migrate grid
+  - [ ] migrate font-size utilities
+  - [ ] migrate font-weight utilities
   - [ ] migrate custom utilities
 - [ ] setup stylelint
 - [ ] resolve deprecations
