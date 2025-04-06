@@ -1,11 +1,12 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+
 import { BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { OperationState, OperationStateWithProgress } from 'src/app/models/store.models';
 
+import { UserBooksActions } from './user-books.actions';
 import { selectRouteParam } from '../router/router.selectors';
 import { VolumeActions } from '../volume/volume.actions';
-import { UserBooksActions } from './user-books.actions';
 
 export const userBooksFeatureKey = 'userBooks';
 

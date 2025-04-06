@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { delay, distinctUntilChanged, map, of, tap } from 'rxjs';
+
 import { getCurrentAppLanguage } from 'src/app/helpers/app.helpers';
 import { APP_LANGUAGES, APP_NAV_LINKS, APP_OPTIONS } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';

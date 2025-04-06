@@ -1,12 +1,13 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+
 import { notUndefined } from 'src/app/functions/typeguard.functions';
 import { filterVolumes } from 'src/app/helpers/volume.helpers';
 import { OperationState } from 'src/app/models/store.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
-import { selectRouteParam } from '../router/router.selectors';
 import { VolumeActions } from './volume.actions';
+import { selectRouteParam } from '../router/router.selectors';
 
 export const volumeFeatureKey = 'volumes';
 

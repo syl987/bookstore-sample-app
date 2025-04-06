@@ -3,14 +3,15 @@ import { Auth, authState, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, from, map, of, skipWhile } from 'rxjs';
+
 import { toResponseErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError } from 'src/app/models/error.models';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ToastService } from 'src/app/services/toast.service';
 
+import { AuthActions } from './auth.actions';
 import { getAuthProvider } from '../../helpers/auth.helpers';
 import { AUTH_CONFIG } from '../../models/auth.models';
-import { AuthActions } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {

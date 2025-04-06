@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+
 import { AuthUser } from 'src/app/models/auth.models';
 
 @Component({

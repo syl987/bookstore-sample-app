@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { ProviderId, User, UserInfo } from 'firebase/auth';
+
 import { HttpEndpointUrl } from 'src/app/models/http.models';
 
 export type AuthProviderId = typeof ProviderId.GOOGLE;

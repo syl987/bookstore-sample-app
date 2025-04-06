@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
 import { removeHtmlXmlAnnotations } from 'src/app/functions/string.functions';
 
 /**

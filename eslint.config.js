@@ -6,7 +6,6 @@ const angular = require('angular-eslint');
 const imports = require('eslint-plugin-import');
 const ngrx = require('@ngrx/eslint-plugin/v9');
 const regexp = require('eslint-plugin-regexp');
-const simpleImportSort = require('eslint-plugin-simple-import-sort');
 const unusedImports = require('eslint-plugin-unused-imports');
 const prettier = require('eslint-config-prettier');
 
@@ -25,7 +24,6 @@ module.exports = tseslint.config(
       prettier,
     ],
     plugins: {
-      'simple-import-sort': simpleImportSort,
       'unused-imports': unusedImports,
     },
     processor: angular.processInlineTemplates,
@@ -43,21 +41,36 @@ module.exports = tseslint.config(
       },
     },
     rules: {
-      // ==== imports ====
+      // ==== import ====
       'import/first': 'warn',
       'import/newline-after-import': 'warn',
       'import/no-absolute-path': 'warn',
       'import/no-duplicates': 'warn',
       'import/no-useless-path-segments': 'warn',
-      'simple-import-sort/imports': 'warn',
-      'simple-import-sort/exports': 'warn',
-      'unused-imports/no-unused-imports': 'warn',
+      'import/order': [
+        'warn',
+        {
+          'groups': [
+            'external',
+            'internal',
+            'builtin',
+            ['parent', 'sibling'],
+            'index',
+            'unknown',
+          ],
+          'newlines-between': 'always',
+          'alphabetize': { order: 'asc' },
+        },
+      ],
 
       // ==== @ngrx ====
       '@ngrx/on-function-explicit-return-type': 'off', // recommended override: avoid ugly code by prettier
 
       // ==== regexp ====
       'regexp/sort-character-class-elements': 'warn',
+
+      // ==== unused-imports ====
+      'unused-imports/no-unused-imports': 'warn',
 
       // ==== eslint: possible problems ====
       'no-self-compare': 'warn',

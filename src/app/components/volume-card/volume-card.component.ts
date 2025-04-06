@@ -2,6 +2,7 @@ import { CurrencyPipe, DatePipe, SlicePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+
 import { VolumeDTO } from 'src/app/models/volume.models';
 
 @Component({

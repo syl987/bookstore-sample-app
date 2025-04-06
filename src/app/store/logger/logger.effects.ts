@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, of } from 'rxjs';
+
 import { firebaseError, internalError } from 'src/app/models/error.models';
 import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
+import { LoggerActions } from './logger.actions';
 import { UserBooksActions } from '../user-books/user-books.actions';
 import { VolumeActions } from '../volume/volume.actions';
-import { LoggerActions } from './logger.actions';
 
 @Injectable()
 export class LoggerEffects {

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+
 import { APP_OPTIONS } from 'src/app/models/app.models';
 
 @Component({

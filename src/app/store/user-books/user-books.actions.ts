@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+
 import { UserBookDTO, UserBookEditDraftDTO } from 'src/app/models/book.models';
 import { ResponseError } from 'src/app/models/error.models';
 import { FirebaseUploadDataWithProgress } from 'src/app/models/firebase.models';

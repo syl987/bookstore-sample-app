@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, input, inject } from '@angular/core
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+
 import { RouterService } from 'src/app/services/router.service';
 
 @Component({
