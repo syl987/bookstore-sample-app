@@ -12,7 +12,7 @@
 .mat-mdc-snack-bar-container.success .mdc-snackbar__label,
 .mat-mdc-snack-bar-container.error .mdc-snackbar__label,
 .mat-mdc-snack-bar-container.info .mdc-snackbar__label {
-  margin-left: app-spacer(2m); // icon spacing
+  margin-left: app-spacer(8); // icon spacing
 
   &::before {
     font-family: 'FontAwesome';
@@ -21,7 +21,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     position: absolute;
-    left: app-spacer(s);
+    left: app-spacer(4);
     width: 1.25em;
     text-align: center;
   }

@@ -88,17 +88,17 @@
   right: 53px - 8px + 4px !important;
 
   // align with container paddings
-  margin-left: app-spacer(s);
-  margin-right: app-spacer(s);
+  margin-left: app-spacer(4);
+  margin-right: app-spacer(4);
 
   @media (min-width: app-grid-breakpoint('sm')) {
-    margin-left: app-spacer(m);
-    margin-right: app-spacer(m);
+    margin-left: app-spacer(6);
+    margin-right: app-spacer(6);
   }
 
   @media (min-width: app-grid-breakpoint('xl')) {
-    margin-left: app-spacer(2m);
-    margin-right: app-spacer(2m);
+    margin-left: app-spacer(8);
+    margin-right: app-spacer(8);
   }
 
   // center input element within the form field
