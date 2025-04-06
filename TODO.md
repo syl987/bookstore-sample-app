@@ -38,6 +38,7 @@
 - [ ] update to material 3 with light theme + use more colors + adjust welcome page
 - [ ] add dark theme with material 3
 - [x] replace bootstrap with tailwindcss v4 + adjust welcome page
+  - [ ] migrate custom utilities
 - [ ] setup stylelint
 - [ ] resolve deprecations
 - [ ] create functions for each pipe + avoid injecting pipes

@@ -13,7 +13,7 @@
     <div class="row">
       @for (book of userBooksDraft(); track book) {
         <div class="col-md-6 col-xl-4 mb-6">
-          <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
+          <a routerLink="/user/books/{{ book.id }}/edit" class="text-inherit text-decoration-none">
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
           </a>
         </div>
@@ -29,7 +29,7 @@
     <div class="row">
       @for (book of userBooksPublished(); track book) {
         <div class="col-md-6 col-xl-4 mb-6">
-          <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
+          <a routerLink="/user/books/{{ book.id }}" class="text-inherit text-decoration-none">
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
           </a>
         </div>
@@ -45,7 +45,7 @@
     <div class="row">
       @for (book of userBooksSold(); track book) {
         <div class="col-md-6 col-xl-4 mb-6">
-          <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
+          <a routerLink="/user/books/{{ book.id }}" class="text-inherit text-decoration-none">
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
           </a>
         </div>
@@ -61,7 +61,7 @@
     <div class="row">
       @for (book of userBooksBought(); track book) {
         <div class="col-md-6 col-xl-4 mb-6">
-          <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
+          <a routerLink="/user/books/{{ book.id }}" class="text-inherit text-decoration-none">
             <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
           </a>
         </div>
