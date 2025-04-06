@@ -10,6 +10,7 @@ const config = {
   printWidth: 180,
   singleQuote: true,
   quoteProps: 'consistent',
+  plugins: ['prettier-plugin-tailwindcss'],
 };
 
 module.exports = config;
