@@ -1,14 +1,14 @@
 <mat-toolbar class="mat-elevation-z8">
   <mat-toolbar-row cdkOverlayOrigin #searchOverlayTrigger="cdkOverlayOrigin">
     @if (desktop()) {
-      <div class="text-primary text-lg me-4">{{ options.applicationName }}</div>
+      <div class="text-primary me-4 text-lg">{{ options.applicationName }}</div>
 
       @for (link of PUBLIC_LINKS; track link.path) {
         <a mat-button color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
       }
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
-          <mat-icon fontIcon="fa-search" inline class="text-primary align-top me-2" matTextPrefix />
+          <mat-icon fontIcon="fa-search" inline class="text-primary me-2 align-top" matTextPrefix />
           <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
           @if (searching()) {
             <mat-spinner diameter="24" class="me-4" matSuffix />
@@ -35,10 +35,10 @@
       <mat-divider vertical class="mx-2" style="height: 32px" />
     } @else {
       <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="me-1" i18n-aria-label>
-        <mat-icon fontIcon="fa-bars" class="text-lg align-bottom" />
+        <mat-icon fontIcon="fa-bars" class="align-bottom text-lg" />
       </button>
 
-      <div class="text-primary text-base truncate me-4">{{ options.applicationName }}</div>
+      <div class="text-primary me-4 truncate text-base">{{ options.applicationName }}</div>
 
       <span class="ms-2 me-auto"></span>
 
@@ -54,7 +54,7 @@
       >
         <form [formGroup]="form" (ngSubmit)="search(); searchOverlayOpen.set(false)" class="w-100">
           <mat-form-field appearance="fill" class="w-100">
-            <mat-icon fontIcon="fa-search" inline class="text-primary align-top me-2" matTextPrefix />
+            <mat-icon fontIcon="fa-search" inline class="text-primary me-2 align-top" matTextPrefix />
             <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
             <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen.set(false)" class="me-1" matSuffix>
               <mat-icon fontIcon="fa-times" style="scale: 0.75" />

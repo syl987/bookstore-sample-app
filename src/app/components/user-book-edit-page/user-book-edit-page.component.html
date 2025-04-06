@@ -42,7 +42,7 @@
         <mat-form-field class="max-w-xs">
           <mat-label i18n>Price</mat-label>
           <input type="number" matInput formControlName="price" min="0" max="500" />
-          <span matTextSuffix class="text-nowrap text-muted ms-2">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
+          <span matTextSuffix class="text-muted ms-2 text-nowrap">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
           <mat-error>{{ form.get('price') | validationError }}</mat-error>
         </mat-form-field>
       </div>
@@ -53,7 +53,7 @@
         <mat-error>{{ form.get('description') | validationError }}</mat-error>
       </mat-form-field>
 
-      <div class="gap-x-2 mb-8">
+      <div class="mb-8 gap-x-2">
         <button type="submit" mat-stroked-button color="primary" [spinning]="editDraftPending()" [disabled]="editDraftDisabled()" i18n>Save changes</button>
         <button type="button" mat-stroked-button (click)="discardChanges()" [disabled]="form.disabled" i18n>Reset</button>
         <button type="reset" mat-stroked-button [disabled]="form.disabled" i18n>Clear</button>
