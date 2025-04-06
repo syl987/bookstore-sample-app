@@ -8,12 +8,15 @@
   [mat-button]:first-child {
     margin-left: -8px;
   }
+
   [mat-button]:last-child {
     margin-right: -8px;
   }
+
   [mat-icon-button]:first-child {
     margin-left: -12px;
   }
+
   [mat-icon-button]:last-child {
     margin-right: -12px;
   }
@@ -23,14 +26,19 @@
 .mat-toolbar .mat-mdc-form-field ::ng-deep .mat-mdc-text-field-wrapper::after,
 .mat-toolbar .mat-mdc-button::after {
   content: '';
-  display: block;
+
   position: absolute;
   bottom: 0;
-  height: 4px;
-  background-color: $primary;
   left: 50%;
   transform: translateX(-50%);
+
+  display: block;
+
   width: 0;
+  height: 4px;
+
+  background-color: $primary;
+
   transition: width 0.3s;
 }
 
@@ -42,12 +50,12 @@
 }
 
 .mat-toolbar div {
-  height: 100% !important;
   display: flex;
   align-items: center;
+  height: 100% !important;
 
   // hardcoded mat-toolbar mobile breakpoint
-  @media (max-width: 599px) {
+  @media (width <= 599px) {
     line-height: 57px !important; // pull slightly down (header height is 56px on mobile)
   }
 }
@@ -67,7 +75,7 @@
     padding-bottom: 19px !important;
 
     // match mobile toolbar breakpoint
-    @media (max-width: 599px) {
+    @media (width <= 599px) {
       height: 56px; // matches toolbar height for mobile layout
     }
   }
@@ -82,28 +90,29 @@
 }
 
 ::ng-deep .app-search-overlay {
-  // 36px = button(48px - 12px)
-  left: 36px + 4px !important;
+
   // 53px = button(48px - 12px) + divider(8px + 1px + 8px)
   right: 53px - 8px + 4px !important;
+  // 36px = button(48px - 12px)
+  left: 36px + 4px !important;
+  margin-right: app-spacer(4);
 
   // align with container paddings
   margin-left: app-spacer(4);
-  margin-right: app-spacer(4);
 
   @media (min-width: app-grid-breakpoint('sm')) {
-    margin-left: app-spacer(6);
     margin-right: app-spacer(6);
+    margin-left: app-spacer(6);
   }
 
   @media (min-width: app-grid-breakpoint('xl')) {
-    margin-left: app-spacer(8);
     margin-right: app-spacer(8);
+    margin-left: app-spacer(8);
   }
 
   // center input element within the form field
   // match mobile toolbar breakpoint
-  @media (max-width: 599px) {
+  @media (width <= 599px) {
     .mat-mdc-form-field-infix {
       margin-top: -4px;
       margin-bottom: 4px;

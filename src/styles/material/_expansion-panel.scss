@@ -8,8 +8,8 @@
     }
 
     &:first-of-type {
-      border-top-right-radius: $border-radius !important;
       border-top-left-radius: $border-radius !important;
+      border-top-right-radius: $border-radius !important;
     }
 
     &:last-of-type {

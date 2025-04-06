@@ -11,7 +11,7 @@
 
 a .mat-mdc-card,
 button .mat-mdc-card {
-  @include mat.elevation-transition();
+  @include mat.elevation-transition;
 }
 
 a:hover .mat-mdc-card,
