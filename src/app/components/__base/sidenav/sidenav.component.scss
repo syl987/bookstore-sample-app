@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 @import 'shared';
 
 a.mdc-list-item,
@@ -9,12 +11,12 @@ button.mdc-list-item {
   }
 
   &.active {
-    background-color: lighten($primary, 45%) !important;
+    background-color: color.adjust($primary, $lightness: 45%) !important;
   }
 
   &:focus,
   &:hover {
-    background-color: lighten($primary, 49%) !important;
+    background-color: color.adjust($primary, $lightness: 49%) !important;
 
     &::before {
       background-color: transparent !important; // override material default

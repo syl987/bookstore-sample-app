@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .mat-mdc-snack-bar-container {
   .mdc-snackbar__surface {
     border-radius: $border-radius !important;
@@ -27,7 +29,7 @@
 
 .mat-mdc-snack-bar-container.success {
   .mdc-snackbar__surface {
-    background-color: lighten($success, 66);
+    background-color: color.adjust($success, $lightness: 66%);
     border: $success 1px solid;
   }
   .mdc-snackbar__label {
@@ -43,7 +45,7 @@
 
 .mat-mdc-snack-bar-container.error {
   .mdc-snackbar__surface {
-    background-color: lighten($warn, 40);
+    background-color: color.adjust($warn, $lightness: 40%);
     border: $warn 1px solid;
   }
   .mdc-snackbar__label {
@@ -59,7 +61,7 @@
 
 .mat-mdc-snack-bar-container.info {
   .mdc-snackbar__surface {
-    background-color: lighten($info, 49);
+    background-color: color.adjust($info, $lightness: 49%);
     border: $info 1px solid;
   }
   .mdc-snackbar__label {
