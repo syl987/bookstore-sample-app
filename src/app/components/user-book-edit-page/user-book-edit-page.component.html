@@ -7,9 +7,9 @@
   <p i18n>Carefully fill in the book details. Once published, this data cannot be changed anymore.</p>
 
   @if (book(); as book) {
-    <app-volume-card [volume]="book.volume" class="mb-m" />
+    <app-volume-card [volume]="book.volume" class="mb-6" />
 
-    <div class="mb-m">
+    <div class="mb-6">
       <h2 class="h3" i18n>Custom photos</h2>
 
       <input type="file" class="none" accept="image/*" #picker (change)="cropAndUploadPhoto($any($event.target).files[0]); picker.type = ''; picker.type = 'file'" />
@@ -25,10 +25,10 @@
 
     <mat-divider />
 
-    <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-2m">
+    <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-8">
       <div class="row">
         <div class="col-sm-6 col-md-4 col-xl-3">
-          <mat-form-field class="w-100 mb-s">
+          <mat-form-field class="w-100 mb-4">
             <mat-label i18n>Condition</mat-label>
             <select matNativeControl formControlName="condition">
               <option></option>
@@ -42,10 +42,10 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-xl-3">
-          <mat-form-field class="w-100 mb-s">
+          <mat-form-field class="w-100 mb-4">
             <mat-label i18n>Price</mat-label>
             <input type="number" matInput formControlName="price" min="0" max="500" />
-            <span matTextSuffix class="text-nowrap text-muted ms-2xs">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
+            <span matTextSuffix class="text-nowrap text-muted ms-2">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
             <mat-error>{{ form.get('price') | validationError }}</mat-error>
           </mat-form-field>
         </div>
@@ -53,7 +53,7 @@
 
       <div class="row">
         <div class="col-md-8 col-xl-6">
-          <mat-form-field class="w-100 mb-s">
+          <mat-form-field class="w-100 mb-4">
             <mat-label i18n>Description</mat-label>
             <textarea matInput formControlName="description" minlength="24" maxlength="254" cdkTextareaAutosize></textarea>
             <mat-error>{{ form.get('description') | validationError }}</mat-error>
@@ -61,13 +61,13 @@
         </div>
       </div>
 
-      <div class="app-gap-x-2xs mb-2m">
+      <div class="app-gap-x-2 mb-8">
         <button type="submit" mat-stroked-button color="primary" [spinning]="editDraftPending()" [disabled]="editDraftDisabled()" i18n>Save changes</button>
         <button type="button" mat-stroked-button (click)="discardChanges()" [disabled]="form.disabled" i18n>Reset</button>
         <button type="reset" mat-stroked-button [disabled]="form.disabled" i18n>Clear</button>
       </div>
     </form>
   } @else if (bookLoading()) {
-    <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label />
+    <mat-spinner class="mb-4" aria-label="Loading" i18n-aria-label />
   }
 </div>

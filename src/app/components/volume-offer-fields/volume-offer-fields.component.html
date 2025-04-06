@@ -1,6 +1,6 @@
 @if (offer(); as offer) {
   <dl class="row">
-    <div class="col-12 mb-2xs">
+    <div class="col-12 mb-2">
       <dt i18n>Description</dt>
       <dd>{{ offer.description }}</dd>
     </div>
@@ -14,11 +14,11 @@
     </div>
   </dl>
 
-  <mat-divider class="mb-m" />
+  <mat-divider class="mb-6" />
 
   <div class="flex flex-wrap">
     @for (photo of getOfferPhotos(offer); track photo) {
-      <a [href]="photo.src" target="_blank" class="me-s mb-s"><img [src]="photo.src" alt="photo" class="img-fluid rounded" style="max-height: 256px" i18n-alt /></a>
+      <a [href]="photo.src" target="_blank" class="me-4 mb-4"><img [src]="photo.src" alt="photo" class="img-fluid rounded" style="max-height: 256px" i18n-alt /></a>
     } @empty {
       <p class="text-center text-muted w-100" i18n>No photos were uploaded.</p>
     }

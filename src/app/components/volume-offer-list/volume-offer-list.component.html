@@ -35,7 +35,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let book" class="text-end">
-          <a mat-button color="primary" [routerLink]="['/volumes', volume()?.id, 'offer', book.id]" class="-me-2xs" i18n>View</a>
+          <a mat-button color="primary" [routerLink]="['/volumes', volume()?.id, 'offer', book.id]" class="-me-2" i18n>View</a>
         </td>
       </ng-container>
 
@@ -44,5 +44,5 @@
     </table>
   </div>
 } @else {
-  <p class="text-center text-muted py-2xs" i18n>No offers have been published yet.</p>
+  <p class="text-center text-muted py-2" i18n>No offers have been published yet.</p>
 }

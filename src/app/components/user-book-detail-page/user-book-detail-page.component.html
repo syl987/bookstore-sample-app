@@ -17,10 +17,10 @@
   </p>
 
   @if (book(); as book) {
-    <app-volume-card [volume]="book.volume" class="mb-m" />
+    <app-volume-card [volume]="book.volume" class="mb-6" />
 
     <app-volume-offer-fields [offer]="book" />
   } @else if (bookLoading()) {
-    <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label />
+    <mat-spinner class="mb-4" aria-label="Loading" i18n-aria-label />
   }
 </div>

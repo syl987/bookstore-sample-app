@@ -1,6 +1,6 @@
 @if (user(); as user) {
-  <div class="flex flex-column align-items-center mt-3m mb-s">
-    <img [src]="user?.photoURL" alt="user" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2xs p-3xs border" i18n-alt />
+  <div class="flex flex-column align-items-center mt-10 mb-4">
+    <img [src]="user?.photoURL" alt="user" width="128" height="128" class="rounded-circle fs-xsmall fw-normal mb-2 p-1 border" i18n-alt />
     {{ user?.displayName }}
   </div>
 
@@ -10,7 +10,7 @@
     }
   </mat-nav-list>
 
-  <mat-divider class="mx-s" />
+  <mat-divider class="mx-4" />
 
   <mat-nav-list class="pb-0">
     @for (link of USER_LINKS; track link.path) {
@@ -23,8 +23,8 @@
     <button mat-list-item (click)="logout(); navigated.emit()" i18n>Logout</button>
   </mat-action-list>
 } @else {
-  <div class="flex flex-column align-items-center mt-3m mb-s">
-    <div class="mb-2xs p-3xs border rounded-circle" style="width: 128px; height: 128px">
+  <div class="flex flex-column align-items-center mt-10 mb-4">
+    <div class="mb-2 p-1 border rounded-circle" style="width: 128px; height: 128px">
       <div class="flex flex-column justify-content-center align-items-center rounded-circle w-100 h-100 bg-light" style="color: lightgrey; font-size: 56px">?</div>
     </div>
 
@@ -37,12 +37,12 @@
     }
   </mat-nav-list>
 
-  <mat-divider class="mx-s" />
+  <mat-divider class="mx-4" />
 
   <mat-action-list>
     <button mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
   </mat-action-list>
 }
-<button mat-icon-button color="primary" (click)="navigated.emit()" class="position-absolute top-0 end-0 m-3xs" aria-label="Close" i18n-aria-label>
+<button mat-icon-button color="primary" (click)="navigated.emit()" class="position-absolute top-0 end-0 m-1" aria-label="Close" i18n-aria-label>
   <mat-icon fontIcon="fa-times" class="align-top" style="scale: 0.75" />
 </button>
