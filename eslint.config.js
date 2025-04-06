@@ -6,6 +6,7 @@ const angular = require('angular-eslint');
 const imports = require('eslint-plugin-import');
 const ngrx = require('@ngrx/eslint-plugin/v9');
 const regexp = require('eslint-plugin-regexp');
+const rxjs = require('eslint-plugin-rxjs-x');
 const unusedImports = require('eslint-plugin-unused-imports');
 const prettier = require('eslint-config-prettier');
 
@@ -21,6 +22,7 @@ module.exports = tseslint.config(
       imports.flatConfigs?.typescript,
       ngrx.configs.all,
       regexp.configs['flat/recommended'],
+      rxjs.configs.strict,
       prettier,
     ],
     plugins: {
