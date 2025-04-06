@@ -4,6 +4,6 @@ export const dialogOptions: MatDialogConfig = {
   autoFocus: 'dialog',
   hasBackdrop: true,
   restoreFocus: true,
-  panelClass: 'px-s',
+  panelClass: 'px-4',
   width: '100%',
 };
