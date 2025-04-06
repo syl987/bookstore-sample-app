@@ -28,6 +28,7 @@
 ## Technical Improvements
 
 - [ ] adjust eslint rules
+- [ ] replace font-awesome with something more solid
 - [ ] use signals api for everything - kick any unnecessary decorators
 - [ ] component init actions via resolvers + check execution conditions
 - [ ] try replace any final observables and code subscriptions with signals
@@ -37,7 +38,7 @@
 - [ ] welcome-page content as array data (keep translatable)
 - [ ] update to material 3 with light theme + use more colors + adjust welcome page
 - [ ] add dark theme with material 3
-- [ ] replace bootstrap with tailwindcss v4 + adjust welcome page
+- [x] replace bootstrap with tailwindcss v4 + adjust welcome page
 - [ ] setup stylelint
 - [ ] resolve deprecations
 - [ ] create functions for each pipe + avoid injecting pipes

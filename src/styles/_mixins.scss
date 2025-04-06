@@ -1,17 +1,17 @@
 // shared: mixins
 
 @mixin app-container-fluid {
-  padding-left: app-spacer(s);
-  padding-right: app-spacer(s);
+  padding-left: app-spacer(4);
+  padding-right: app-spacer(4);
 
   @media (min-width: app-grid-breakpoint('sm')) {
-    padding-left: app-spacer(m);
-    padding-right: app-spacer(m);
+    padding-left: app-spacer(6);
+    padding-right: app-spacer(6);
   }
 
   @media (min-width: app-grid-breakpoint('xl')) {
-    padding-left: app-spacer(2m);
-    padding-right: app-spacer(2m);
+    padding-left: app-spacer(8);
+    padding-right: app-spacer(8);
   }
 }
 

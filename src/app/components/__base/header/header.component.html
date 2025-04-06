@@ -1,29 +1,29 @@
 <mat-toolbar class="mat-elevation-z8">
   <mat-toolbar-row cdkOverlayOrigin #searchOverlayTrigger="cdkOverlayOrigin">
     @if (desktop()) {
-      <div class="text-primary fs-large me-s">{{ options.applicationName }}</div>
+      <div class="text-primary text-lg me-4">{{ options.applicationName }}</div>
 
       @for (link of PUBLIC_LINKS; track link.path) {
         <a mat-button color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
       }
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
-          <mat-icon fontIcon="fa-search" inline class="text-primary align-top me-2xs" matTextPrefix />
+          <mat-icon fontIcon="fa-search" inline class="text-primary align-top me-2" matTextPrefix />
           <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
           @if (searching()) {
-            <mat-spinner diameter="24" class="me-s" matSuffix />
+            <mat-spinner diameter="24" class="me-4" matSuffix />
           }
         </mat-form-field>
       </form>
 
-      <span class="ms-2xs me-auto"></span>
+      <span class="ms-2 me-auto"></span>
 
       @if (user(); as user) {
         <button mat-button (click)="openUserSessionInfoDialog(user)">
           <app-header-user-info [user]="user" />
         </button>
 
-        <mat-divider vertical class="mx-2xs" style="height: 32px" />
+        <mat-divider vertical class="mx-2" style="height: 32px" />
 
         @for (link of USER_LINKS; track link.path) {
           <a mat-button color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
@@ -32,17 +32,17 @@
       } @else {
         <a mat-button color="primary" routerLink="/login" routerLinkActive="active" i18n>Login</a>
       }
-      <mat-divider vertical class="mx-2xs" style="height: 32px" />
+      <mat-divider vertical class="mx-2" style="height: 32px" />
     } @else {
-      <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="me-3xs" i18n-aria-label>
-        <mat-icon fontIcon="fa-bars" class="fs-large align-bottom" />
+      <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="me-1" i18n-aria-label>
+        <mat-icon fontIcon="fa-bars" class="text-lg align-bottom" />
       </button>
 
-      <div class="text-primary fs-normal text-truncate me-s">{{ options.applicationName }}</div>
+      <div class="text-primary text-base truncate me-4">{{ options.applicationName }}</div>
 
-      <span class="ms-2xs me-auto"></span>
+      <span class="ms-2 me-auto"></span>
 
-      <button mat-icon-button color="primary" (click)="searchOverlayOpen.set(!searchOverlayOpen())" class="me-n3xs" aria-label="Search" i18n-aria-label>
+      <button mat-icon-button color="primary" (click)="searchOverlayOpen.set(!searchOverlayOpen())" class="-me-1" aria-label="Search" i18n-aria-label>
         <mat-icon fontIcon="fa-search" style="scale: 0.75" />
       </button>
 
@@ -54,15 +54,15 @@
       >
         <form [formGroup]="form" (ngSubmit)="search(); searchOverlayOpen.set(false)" class="w-100">
           <mat-form-field appearance="fill" class="w-100">
-            <mat-icon fontIcon="fa-search" inline class="text-primary align-top me-2xs" matTextPrefix />
+            <mat-icon fontIcon="fa-search" inline class="text-primary align-top me-2" matTextPrefix />
             <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
-            <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen.set(false)" class="me-3xs" matSuffix>
+            <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen.set(false)" class="me-1" matSuffix>
               <mat-icon fontIcon="fa-times" style="scale: 0.75" />
             </button>
           </mat-form-field>
         </form>
       </ng-template>
-      <mat-divider vertical class="mx-2xs" style="height: 32px" />
+      <mat-divider vertical class="mx-2" style="height: 32px" />
     }
     <button mat-icon-button color="primary" [matMenuTriggerFor]="languageMenu" aria-label="Language" i18n-aria-label>
       <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />

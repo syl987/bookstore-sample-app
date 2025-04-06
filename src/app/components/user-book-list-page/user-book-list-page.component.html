@@ -10,15 +10,13 @@
 
     <p i18n>These books are not publicly visible and can be edited.</p>
 
-    <div class="row">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
       @for (book of userBooksDraft(); track book) {
-        <div class="col-md-6 col-xl-4 mb-m">
-          <a routerLink="/user/books/{{ book.id }}/edit" class="text-reset text-decoration-none">
-            <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-          </a>
-        </div>
+        <a routerLink="/user/books/{{ book.id }}/edit" class="text-inherit text-decoration-none">
+          <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+        </a>
       } @empty {
-        <p class="text-center text-muted py-2xs" i18n>No books were found.</p>
+        <p class="col-span-full text-center text-muted py-2" i18n>No books were found.</p>
       }
     </div>
 
@@ -26,15 +24,13 @@
 
     <p i18n>These books are publicly visible and available for buying. Changes are not possible.</p>
 
-    <div class="row">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
       @for (book of userBooksPublished(); track book) {
-        <div class="col-md-6 col-xl-4 mb-m">
-          <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
-            <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-          </a>
-        </div>
+        <a routerLink="/user/books/{{ book.id }}" class="text-inherit text-decoration-none">
+          <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+        </a>
       } @empty {
-        <p class="text-center text-muted py-2xs" i18n>No books were found.</p>
+        <p class="col-span-full text-center text-muted py-2" i18n>No books were found.</p>
       }
     </div>
 
@@ -42,15 +38,13 @@
 
     <p i18n>Sold books are not publicly visible, but they will remain listed here. Changes are not possible.</p>
 
-    <div class="row">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
       @for (book of userBooksSold(); track book) {
-        <div class="col-md-6 col-xl-4 mb-m">
-          <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
-            <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-          </a>
-        </div>
+        <a routerLink="/user/books/{{ book.id }}" class="text-inherit text-decoration-none">
+          <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+        </a>
       } @empty {
-        <p class="text-center text-muted py-2xs" i18n>No books were found.</p>
+        <p class="col-span-full text-center text-muted py-2" i18n>No books were found.</p>
       }
     </div>
 
@@ -58,18 +52,16 @@
 
     <p i18n>This is your list of the books that you bought from other users.</p>
 
-    <div class="row">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
       @for (book of userBooksBought(); track book) {
-        <div class="col-md-6 col-xl-4 mb-m">
-          <a routerLink="/user/books/{{ book.id }}" class="text-reset text-decoration-none">
-            <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-          </a>
-        </div>
+        <a routerLink="/user/books/{{ book.id }}" class="text-inherit text-decoration-none">
+          <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+        </a>
       } @empty {
-        <p class="text-center text-muted py-2xs" i18n>No books were found.</p>
+        <p class="col-span-full text-center text-muted py-2" i18n>No books were found.</p>
       }
     </div>
   } @else {
-    <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label />
+    <mat-spinner class="mb-4" aria-label="Loading" i18n-aria-label />
   }
 </div>

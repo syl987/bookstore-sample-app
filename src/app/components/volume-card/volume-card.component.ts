@@ -10,7 +10,7 @@ import { VolumeDTO } from 'src/app/models/volume.models';
   templateUrl: './volume-card.component.html',
   styles: '.mat-mdc-card-sm-image { width: inherit; }',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'd-block' },
+  host: { class: 'block' },
 })
 export class VolumeCardComponent {
   readonly volume = input<VolumeDTO | null>();

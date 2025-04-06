@@ -1,12 +1,10 @@
-<footer class="container-fluid d-flex flex-column-reverse flex-md-row align-items-center pt-2m pb-s">
-  <div class="text-center fs-small py-2xs">© {{ options.copyrightYear }} {{ options.copyrightName }} <span class="text-warn">(work in progress)</span></div>
+<footer class="container-fluid flex flex-col-reverse md:flex-row items-center pt-8 pb-4">
+  <div class="text-center text-sm py-2">© {{ options.copyrightYear }} {{ options.copyrightName }} <span class="text-warn">(work in progress)</span></div>
 
   <!-- transparent vertical / horizontal separator -->
-  <div class="mb-2xs me-auto"></div>
+  <div class="mb-2 me-auto"></div>
 
   <!-- TODO proper link targets -->
-  <!-- <a mat-button routerLink="." class="text-muted fw-normal my-3xs">Legal Notice</a> -->
-  <!-- <a mat-button routerLink="." class="text-muted fw-normal my-3xs me-md-n2xs">Data Policy</a> -->
 
-  <div class="fs-small">v{{ build.version }} / last updated: {{ build.date | date }}</div>
+  <div class="text-sm">v{{ build.version }} / last updated: {{ build.date | date }}</div>
 </footer>

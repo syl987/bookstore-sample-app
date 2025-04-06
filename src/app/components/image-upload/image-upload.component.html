@@ -1,10 +1,10 @@
-<div class="d-flex flex-wrap app-gap-x-2xs mb-2xs">
+<div class="flex flex-wrap gap-x-2 mb-2">
   @for (image of images(); track image) {
-    <a [href]="image.src" target="_blank" class="mb-2xs"><img [src]="image.src" alt="photo" class="rounded" height="96" i18n-alt /></a>
+    <a [href]="image.src" target="_blank" class="mb-2"><img [src]="image.src" alt="photo" class="rounded" height="96" i18n-alt /></a>
   }
 </div>
 
-<div class="d-flex flex-wrap app-gap-x-2xs">
+<div class="flex flex-wrap gap-x-2">
   <button mat-stroked-button color="primary" (click)="fileSelect.emit()" [spinning]="uploading()" [disabled]="readonly() || uploading()" i18n>Upload Image</button>
   <button mat-stroked-button color="warn" (click)="removeAll.emit()" [disabled]="readonly() || !images().length" i18n>Remove All</button>
 </div>

@@ -1,25 +1,25 @@
 <h1 mat-dialog-title i18n>Create a new book</h1>
 
 <div mat-dialog-content>
-  <div class="row">
-    <mat-form-field floatLabel="always" class="col-sm-8 col-md-6 mt-2xs">
+  <div class="grid mt-2">
+    <mat-form-field floatLabel="always" class="max-w-xs">
       <mat-label i18n>Search</mat-label>
       <input matInput [formControl]="searchControl" placeholder="Title, author, text,..." i18n-placeholder />
       @if (searchPending()) {
-        <mat-spinner matSuffix diameter="24" class="me-s" />
+        <mat-spinner matSuffix diameter="24" class="me-4" />
       }
     </mat-form-field>
   </div>
 
-  <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="mx-ns py-0">
+  <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="-mx-4 py-0">
     @for (volume of results() | slice: 0 : 7; track volume) {
-      <mat-list-option [value]="volume" class="text-truncate">
+      <mat-list-option [value]="volume" class="truncate">
         @if (volume.volumeInfo.imageLinks) {
-          <img [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-s" i18n-alt />
+          <img [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-4" i18n-alt />
         }
-        <span class="fw-semibold">{{ volume.volumeInfo.title }}</span>
+        <span class="font-semibold">{{ volume.volumeInfo.title }}</span>
         @if (volume.volumeInfo.authors) {
-          <span class="text-muted ms-3xs">&nbsp;{{ volume.volumeInfo.authors | array }}</span>
+          <span class="text-muted ms-1">&nbsp;{{ volume.volumeInfo.authors | array }}</span>
         }
       </mat-list-option>
     }

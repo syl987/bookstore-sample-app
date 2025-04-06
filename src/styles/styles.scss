@@ -1,11 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import 'tailwindcss' important;
+
 @import 'variables';
 @import 'functions';
 @import 'mixins';
 
-@import 'bootstrap';
 @import 'material';
 @import 'fonts';
 
 @import 'common';
+
+.text-primary {
+  color: $primary;
+}
+.text-accent {
+  color: $accent;
+}
+.text-success {
+  color: $success;
+}
+.text-info {
+  color: $info;
+}
+.text-warn {
+  color: $warn;
+}
+.text-muted {
+  color: rgb(100, 100, 100);
+}

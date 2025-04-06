@@ -14,10 +14,10 @@
   </p>
 
   @if (volume(); as volume) {
-    <app-volume-card [volume]="volume" class="mb-m" />
+    <app-volume-card [volume]="volume" class="mb-6" />
 
     <app-volume-offer-fields [offer]="offer()" />
   } @else if (volumeLoading()) {
-    <mat-spinner class="mb-s" aria-label="Loading" i18n-aria-label />
+    <mat-spinner class="mb-4" aria-label="Loading" i18n-aria-label />
   }
 </div>

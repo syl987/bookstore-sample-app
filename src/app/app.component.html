@@ -1,12 +1,12 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav fixedInViewport role="navigation" class="px-2xs" style="min-width: 200px">
+  <mat-sidenav #sidenav fixedInViewport role="navigation" class="px-2" style="min-width: 200px">
     <app-sidenav (navigated)="sidenav.close()" />
   </mat-sidenav>
 
-  <mat-sidenav-content class="d-flex flex-column min-vh-100" role="main">
+  <mat-sidenav-content class="flex flex-col min-h-screen" role="main">
     <app-header (sidenavToggle)="sidenav.toggle()" />
 
-    <div class="flex-grow-1 d-flex flex-column">
+    <div class="grow flex flex-col">
       <router-outlet />
     </div>
 
