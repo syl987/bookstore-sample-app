@@ -11,7 +11,7 @@
     </mat-form-field>
   </div>
 
-  <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="mx-ns py-0">
+  <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="-mx-s py-0">
     @for (volume of results() | slice: 0 : 7; track volume) {
       <mat-list-option [value]="volume" class="text-truncate">
         @if (volume.volumeInfo.imageLinks) {
