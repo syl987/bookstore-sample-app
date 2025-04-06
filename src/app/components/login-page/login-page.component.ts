@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   imports: [MatButtonModule, ButtonSpinnerDirective],
   templateUrl: './login-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'flex-grow-1 flex flex-column justify-center' },
+  host: { class: 'grow flex flex-col justify-center' },
 })
 export class LoginPageComponent {
   protected readonly authService = inject(AuthService);
