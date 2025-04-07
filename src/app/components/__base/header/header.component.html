@@ -8,7 +8,7 @@
       }
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
-          <mat-icon fontIcon="fa-search" inline class="text-primary me-2 align-top" matTextPrefix />
+          <mat-icon inline class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
           <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
           @if (searching()) {
             <mat-spinner diameter="24" class="me-4" matSuffix />
@@ -35,7 +35,7 @@
       <mat-divider vertical class="mx-2" style="height: 32px" />
     } @else {
       <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="me-1" i18n-aria-label>
-        <mat-icon fontIcon="fa-bars" class="align-bottom text-lg" />
+        <mat-icon class="align-bottom text-lg">menu</mat-icon>
       </button>
 
       <div class="text-primary me-4 truncate text-base">{{ options.applicationName }}</div>
@@ -43,7 +43,7 @@
       <span class="ms-2 me-auto"></span>
 
       <button mat-icon-button color="primary" (click)="searchOverlayOpen.set(!searchOverlayOpen())" class="-me-1" aria-label="Search" i18n-aria-label>
-        <mat-icon fontIcon="fa-search" style="scale: 0.75" />
+        <mat-icon>search</mat-icon>
       </button>
 
       <ng-template
@@ -54,10 +54,10 @@
       >
         <form [formGroup]="form" (ngSubmit)="search(); searchOverlayOpen.set(false)" class="w-100">
           <mat-form-field appearance="fill" class="w-100">
-            <mat-icon fontIcon="fa-search" inline class="text-primary me-2 align-top" matTextPrefix />
+            <mat-icon inline class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
             <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
             <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen.set(false)" class="me-1" matSuffix>
-              <mat-icon fontIcon="fa-times" style="scale: 0.75" />
+              <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>
         </form>

@@ -19,8 +19,10 @@
   - [ ] check file delete feature works properly
 - [ ] add github link?
 - [ ] allow book deletion if published + delete the volume if not related to any books
+- [ ] add localization feature to the welcome-page
+- [ ] table actions sticky right
 
-## Maintainance Tasks
+## Maintenance Tasks
 
 - [ ] resolve any todo comments in code
 - [ ] resolve any commented code
@@ -28,9 +30,16 @@
 ## Technical Improvements
 
 - [ ] adjust eslint rules
-- [ ] wrap message on err object in internalError
-- [ ] replace font-awesome with something more solid
-- [ ] use signals api for everything - kick any unnecessary decorators
+- [ ] separate css/scss in angular.json per plugin
+  - [ ] material components
+  - [ ] cdk (if needed)
+  - [ ] tailwindcss
+  - [ ] flagpack
+  - [ ] styles
+- [ ] migrate snackbar icons
+- [x] wrap message on err object in internalError
+- [x] replace font-awesome with material icons
+- [x] use signals api for everything - kick any unnecessary decorators
 - [ ] component init actions via resolvers + check execution conditions
 - [ ] try replace any final observables and code subscriptions with signals
   - [ ] check for any mergeable streams using computed
@@ -40,7 +49,7 @@
 - [ ] update to material 3 with light theme + use more colors + adjust welcome page
 - [ ] add dark theme with material 3
 - [x] replace bootstrap with tailwindcss v4 + adjust welcome page
-- [ ] setup stylelint
+- [x] setup stylelint
 - [ ] resolve deprecations
 - [ ] create functions for each pipe + avoid injecting pipes
 - [ ] research and apply any ngrx syntax updates
@@ -53,6 +62,7 @@
 - [ ] replace generated translations keys with custom strings
 - [ ] resolve sass deprecations
 - [ ] replace sass imports
+- [ ] adjust layout, check align classes
 
 ### Low Priority
 
