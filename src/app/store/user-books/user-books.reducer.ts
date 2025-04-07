@@ -5,8 +5,8 @@ import { BookStatus, UserBookDTO } from 'src/app/models/book.models';
 import { OperationState, OperationStateWithProgress } from 'src/app/models/store.models';
 
 import { UserBooksActions } from './user-books.actions';
-import { selectRouteParam } from '../router/router.selectors';
 import { VolumeActions } from '../volume/volume.actions';
+import { getRouterSelectors } from '@ngrx/router-store';
 
 export const userBooksFeatureKey = 'userBooks';
 
@@ -146,7 +146,7 @@ export const userBooksFeature = createFeature({
     selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.SOLD && !b.buyerUid)),
     selectAllBought: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.SOLD && b.buyerUid)),
 
-    selectByRoute: createSelector(selectEntities, selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
+    selectByRoute: createSelector(selectEntities, getRouterSelectors().selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
 
     selectLoadPending: createSelector(selectLoad, ({ pending }) => pending),
     selectLoadError: createSelector(selectLoad, ({ error }) => error),
