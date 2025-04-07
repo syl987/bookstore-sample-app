@@ -20,6 +20,7 @@
 - [ ] add github link?
 - [ ] allow book deletion if published + delete the volume if not related to any books
 - [ ] add localization feature to the welcome-page
+- [ ] table actions sticky right
 
 ## Maintenance Tasks
 
