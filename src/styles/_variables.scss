@@ -1,15 +1,14 @@
 // shared: variables
 
 $app-container-max-width: 1320px;
-
 $app-background-color-light: #fafafa;
 
 // compatibility: bootstrap variables used before migration
-$primary: rgb(63, 81, 181); // equals mat-primary
-$accent: rgb(0, 150, 136); // equals mat-accent
+$primary: rgb(63 81 181); // equals mat-primary
+$accent: rgb(0 150 136); // equals mat-accent
 $success: #198754 !default;
 $info: $primary;
-$warn: rgb(244, 67, 54); // equals mat-warn
+$warn: rgb(244 67 54); // equals mat-warn
 $body-color: #212529 !default;
 $border-radius: 0.125rem;
 $font-family-base: 'Inter';
