@@ -33,7 +33,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles/styles.scss", "node_modules/material-icons/iconfont/sharp.css"],
+            "styles": ["src/styles/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["node_modules/", "src/styles/shared"]
             },
