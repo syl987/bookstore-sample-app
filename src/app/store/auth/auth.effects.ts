@@ -40,7 +40,7 @@ export class AuthEffects {
       exhaustMap(({ providerId }) =>
         from(signInWithPopup(this.auth, getAuthProvider(providerId))).pipe(
           map(_ => AuthActions.loginWithProviderSUCCESS()),
-          catchError(err => of(AuthActions.loginWithProviderERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(AuthActions.loginWithProviderERROR({ error: firebaseError({ err }) }))),
         ),
       ),
     );
@@ -52,7 +52,7 @@ export class AuthEffects {
       concatMap(_ =>
         from(this.auth.signOut()).pipe(
           map(() => AuthActions.logoutSUCCESS()),
-          catchError(err => of(AuthActions.logoutERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(AuthActions.logoutERROR({ error: firebaseError({ err }) }))),
         ),
       ),
     );

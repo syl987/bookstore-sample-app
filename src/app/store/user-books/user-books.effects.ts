@@ -30,7 +30,7 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.getUserBook(uid, id).pipe(
           map(book => UserBooksActions.loadSUCCESS({ book })),
-          catchError(err => of(UserBooksActions.loadERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(UserBooksActions.loadERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -47,7 +47,7 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.getUserBooks(uid).pipe(
           map(books => UserBooksActions.loadAllSUCCESS({ books })),
-          catchError(err => of(UserBooksActions.loadAllERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(UserBooksActions.loadAllERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -70,7 +70,7 @@ export class UserBooksEffects implements OnRunEffects {
         };
         return this.firebaseApi.createUserBook(uid, volume).pipe(
           map(res => UserBooksActions.createSUCCESS({ book: res })),
-          catchError(err => of(UserBooksActions.createERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(UserBooksActions.createERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -87,7 +87,7 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.deleteUserBook(uid, id).pipe(
           map(_ => UserBooksActions.deleteSUCCESS({ id })),
-          catchError(err => of(UserBooksActions.deleteERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(UserBooksActions.deleteERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -104,7 +104,7 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.editUserBookDraft(uid, id, data).pipe(
           map(res => UserBooksActions.editDraftSUCCESS({ book: res })),
-          catchError(err => of(UserBooksActions.editDraftERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(UserBooksActions.editDraftERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -126,7 +126,7 @@ export class UserBooksEffects implements OnRunEffects {
             }
             return of(UserBooksActions.uploadPhotoPROGRESS({ uploadData: res }));
           }),
-          catchError(err => of(UserBooksActions.uploadPhotoERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(UserBooksActions.uploadPhotoERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -143,7 +143,7 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.removeUserBookPhoto(uid, bookId, photoId).pipe(
           map(_ => UserBooksActions.removePhotoSUCCESS()),
-          catchError(err => of(UserBooksActions.removePhotoERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(UserBooksActions.removePhotoERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -160,7 +160,7 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.removeUserBookPhotos(uid, bookId).pipe(
           map(_ => UserBooksActions.removeAllPhotosSUCCESS()),
-          catchError(err => of(UserBooksActions.removeAllPhotosERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(UserBooksActions.removeAllPhotosERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
@@ -177,7 +177,7 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.publishUserBook(uid, id).pipe(
           map(res => UserBooksActions.publishSUCCESS({ book: res })),
-          catchError(err => of(UserBooksActions.publishERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => of(UserBooksActions.publishERROR({ error: firebaseError({ err }) }))),
         );
       }),
     );
