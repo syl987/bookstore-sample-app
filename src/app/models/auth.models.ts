@@ -8,7 +8,7 @@ export type AuthProviderId = typeof ProviderId.GOOGLE;
 /**
  * Authenticated user data.
  *
- * @description Required due to typing inconsistencies with firebase `User` object
+ * Required due to typing inconsistencies with firebase `User` object.
  */
 export interface AuthUser extends UserInfo, Pick<User, 'emailVerified' | 'isAnonymous' | 'providerData' | 'tenantId'> {
   /** Additional metadata around user creation and sign-in times. */

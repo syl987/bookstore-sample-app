@@ -44,7 +44,7 @@ export function getProperty<T extends object>(object: T, key: keyof T): T[keyof 
 /**
  * Returns a nested property value of an object by its dot-separated key chain.
  *
- * @param keys dot-separated chain of nested property names.
+ * @param keys - dot-separated chain of nested property names.
  *
  * @returns requested property value or `undefined`, if not found
  */

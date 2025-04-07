@@ -3,7 +3,7 @@ import { Comparer } from '@ngrx/entity';
 /**
  * Compare two objects by the specified string property in ascending order.
  *
- * @param propName name of the string property
+ * @param propName - name of the string property
  *
  * @experimental
  */
@@ -15,7 +15,7 @@ export function stringPropComparerAsc<T, P extends keyof T>(propName: P): T[P] e
 /**
  * Compare two objects by the specified string property in descending order.
  *
- * @param propName name of the string property
+ * @param propName - name of the string property
  *
  * @experimental
  */
