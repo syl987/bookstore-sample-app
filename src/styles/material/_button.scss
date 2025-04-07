@@ -9,22 +9,26 @@
 
 .mat-mdc-outlined-button {
   &.mat-primary:not([disabled]) {
-    background-color: rgba(mat.m2-get-color-from-palette($primary-palette), 0.08);
     border-color: mat.m2-get-color-from-palette($primary-palette);
+    background-color: rgba(mat.m2-get-color-from-palette($primary-palette), 0.08);
   }
+
   &.mat-accent:not([disabled]) {
-    background-color: rgba(mat.m2-get-color-from-palette($accent-palette), 0.08);
     border-color: mat.m2-get-color-from-palette($accent-palette);
+    background-color: rgba(mat.m2-get-color-from-palette($accent-palette), 0.08);
   }
+
   &.mat-warn:not([disabled]) {
-    background-color: rgba(mat.m2-get-color-from-palette($warn-palette), 0.08);
     border-color: mat.m2-get-color-from-palette($warn-palette);
+    background-color: rgba(mat.m2-get-color-from-palette($warn-palette), 0.08);
   }
+
   &[disabled] {
-    background-color: rgba(0, 0, 0, 0.04);
-    border-color: currentColor;
+    border-color: currentcolor;
+    background-color: rgb(0 0 0 / 4%);
   }
-  &:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
-    border-color: rgba(0, 0, 0, 0.32);
+
+  &:not(.mat-primary, .mat-accent, .mat-warn) {
+    border-color: rgb(0 0 0 / 32%);
   }
 }

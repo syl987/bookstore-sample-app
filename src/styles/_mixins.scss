@@ -1,25 +1,25 @@
 // shared: mixins
 
 @mixin app-container-fluid {
-  padding-left: app-spacer(4);
   padding-right: app-spacer(4);
+  padding-left: app-spacer(4);
 
   @media (min-width: app-grid-breakpoint('sm')) {
-    padding-left: app-spacer(6);
     padding-right: app-spacer(6);
+    padding-left: app-spacer(6);
   }
 
   @media (min-width: app-grid-breakpoint('xl')) {
-    padding-left: app-spacer(8);
     padding-right: app-spacer(8);
+    padding-left: app-spacer(8);
   }
 }
 
 @mixin app-container {
   width: $app-container-max-width;
   max-width: 100%;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 
   @include app-container-fluid;
 }

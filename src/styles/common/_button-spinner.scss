@@ -12,8 +12,8 @@
   }
 
   &:not(.is-spinning) .mat-mdc-progress-spinner {
-    opacity: 0;
     display: none;
+    opacity: 0;
   }
 
   .mat-mdc-progress-spinner {
