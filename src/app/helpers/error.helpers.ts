@@ -18,9 +18,9 @@ function getMessage(error: ResponseError): string | undefined {
       }
       return;
     case ResponseErrorType.INTERNAL:
-      return error.message;
+      return error.err.message;
     default:
-      return undefined;
+      return;
   }
 }
 

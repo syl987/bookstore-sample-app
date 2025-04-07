@@ -12,6 +12,6 @@ export const httpError = createAction(ResponseErrorType.HTTP, props<{ err: HttpE
 
 export const firebaseError = createAction(ResponseErrorType.FIREBASE, props<{ err: FirebaseError }>());
 
-export const internalError = createAction(ResponseErrorType.INTERNAL, props<{ message: string }>());
+export const internalError = createAction(ResponseErrorType.INTERNAL, props<{ err: Error }>());
 
 export type ResponseError = ReturnType<typeof httpError | typeof firebaseError | typeof internalError>;

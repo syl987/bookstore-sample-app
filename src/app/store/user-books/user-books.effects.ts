@@ -26,7 +26,7 @@ export class UserBooksEffects implements OnRunEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(UserBooksActions.loadERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.loadERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.getUserBook(uid, id).pipe(
           map(book => UserBooksActions.loadSUCCESS({ book })),
@@ -43,7 +43,7 @@ export class UserBooksEffects implements OnRunEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(UserBooksActions.loadAllERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.loadAllERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.getUserBooks(uid).pipe(
           map(books => UserBooksActions.loadAllSUCCESS({ books })),
@@ -60,7 +60,7 @@ export class UserBooksEffects implements OnRunEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(UserBooksActions.createERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.createERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
 
         const volume: VolumeDTO = {
@@ -83,7 +83,7 @@ export class UserBooksEffects implements OnRunEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(UserBooksActions.deleteERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.deleteERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.deleteUserBook(uid, id).pipe(
           map(_ => UserBooksActions.deleteSUCCESS({ id })),
@@ -100,7 +100,7 @@ export class UserBooksEffects implements OnRunEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(UserBooksActions.editDraftERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.editDraftERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.editUserBookDraft(uid, id, data).pipe(
           map(res => UserBooksActions.editDraftSUCCESS({ book: res })),
@@ -117,7 +117,7 @@ export class UserBooksEffects implements OnRunEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(UserBooksActions.uploadPhotoERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.uploadPhotoERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.uploadUserBookPhoto(uid, bookId, data).pipe(
           concatMap(res => {
@@ -139,7 +139,7 @@ export class UserBooksEffects implements OnRunEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(UserBooksActions.removePhotoERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.removePhotoERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.removeUserBookPhoto(uid, bookId, photoId).pipe(
           map(_ => UserBooksActions.removePhotoSUCCESS()),
@@ -156,7 +156,7 @@ export class UserBooksEffects implements OnRunEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(UserBooksActions.removeAllPhotosERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.removeAllPhotosERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.removeUserBookPhotos(uid, bookId).pipe(
           map(_ => UserBooksActions.removeAllPhotosSUCCESS()),
@@ -173,7 +173,7 @@ export class UserBooksEffects implements OnRunEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(UserBooksActions.publishERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(UserBooksActions.publishERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.publishUserBook(uid, id).pipe(
           map(res => UserBooksActions.publishSUCCESS({ book: res })),

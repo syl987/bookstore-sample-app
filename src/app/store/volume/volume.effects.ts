@@ -55,7 +55,7 @@ export class VolumesEffects {
         const uid = this.authService.uid();
 
         if (!uid) {
-          return of(VolumeActions.buyOfferERROR({ error: internalError({ message: $localize`User not logged in.` }) }));
+          return of(VolumeActions.buyOfferERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.buyBookOffer(uid, id, offerId).pipe(
           map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, book: res.book })),
