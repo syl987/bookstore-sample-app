@@ -90,9 +90,9 @@
 }
 
 ::ng-deep .app-search-overlay {
-
   // 53px = button(48px - 12px) + divider(8px + 1px + 8px)
   right: 53px - 8px + 4px !important;
+
   // 36px = button(48px - 12px)
   left: 36px + 4px !important;
   margin-right: app-spacer(4);
