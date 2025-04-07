@@ -54,7 +54,6 @@ const authConfig: AuthConfig = {
 
 function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
   return () => {
-    iconRegistry.registerFontClassAlias('fa', 'fa').setDefaultFontSetClass('fa', 'fa-fw'); // font-awesome v4.7.0
     iconRegistry.registerFontClassAlias('fp', 'fp'); // flagpack (4x3 variants)
   };
 }
