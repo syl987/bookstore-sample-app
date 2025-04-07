@@ -31,12 +31,12 @@
 
 - [ ] adjust eslint rules
 - [ ] separate css/scss in angular.json per plugin
-  - [x] material icons (if needed)
   - [ ] material components
   - [ ] cdk (if needed)
   - [ ] tailwindcss
   - [ ] flagpack
   - [ ] styles
+- [ ] migrate snackbar icons
 - [x] wrap message on err object in internalError
 - [x] replace font-awesome with material icons
 - [x] use signals api for everything - kick any unnecessary decorators
