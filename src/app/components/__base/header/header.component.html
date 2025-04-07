@@ -43,7 +43,7 @@
       <span class="ms-2 me-auto"></span>
 
       <button mat-icon-button color="primary" (click)="searchOverlayOpen.set(!searchOverlayOpen())" class="-me-1" aria-label="Search" i18n-aria-label>
-        <mat-icon style="scale: 0.75">search</mat-icon>
+        <mat-icon>search</mat-icon>
       </button>
 
       <ng-template
@@ -57,7 +57,7 @@
             <mat-icon inline class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
             <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
             <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen.set(false)" class="me-1" matSuffix>
-              <mat-icon fontIcon="fa-times" style="scale: 0.75" />
+              <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>
         </form>
