@@ -54,7 +54,12 @@ export class LoggerEffects {
         }
         return this.firebaseApi.logError(uid, data).pipe(
           map(_ => LoggerActions.logErrorSUCCESS()),
-          catchError((error: unknown) => of(LoggerActions.logErrorERROR({ error }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(LoggerActions.logErrorERROR({ error: firebaseError({ err }) }));
+            }
+            return of(VolumeActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );

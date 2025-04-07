@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { UserBooksActions } from './user-books.actions';
+import { FirebaseError } from 'firebase/app';
 
 @Injectable()
 export class UserBooksEffects implements OnRunEffects {
@@ -30,7 +31,12 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.getUserBook(uid, id).pipe(
           map(book => UserBooksActions.loadSUCCESS({ book })),
-          catchError((err: unknown) => of(UserBooksActions.loadERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(UserBooksActions.loadERROR({ error: firebaseError({ err }) }));
+            }
+            return of(UserBooksActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );
@@ -47,7 +53,12 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.getUserBooks(uid).pipe(
           map(books => UserBooksActions.loadAllSUCCESS({ books })),
-          catchError((err: unknown) => of(UserBooksActions.loadAllERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(UserBooksActions.loadAllERROR({ error: firebaseError({ err }) }));
+            }
+            return of(UserBooksActions.loadAllERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );
@@ -70,7 +81,12 @@ export class UserBooksEffects implements OnRunEffects {
         };
         return this.firebaseApi.createUserBook(uid, volume).pipe(
           map(res => UserBooksActions.createSUCCESS({ book: res })),
-          catchError((err: unknown) => of(UserBooksActions.createERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(UserBooksActions.createERROR({ error: firebaseError({ err }) }));
+            }
+            return of(UserBooksActions.createERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );
@@ -87,7 +103,12 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.deleteUserBook(uid, id).pipe(
           map(_ => UserBooksActions.deleteSUCCESS({ id })),
-          catchError((err: unknown) => of(UserBooksActions.deleteERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(UserBooksActions.deleteERROR({ error: firebaseError({ err }) }));
+            }
+            return of(UserBooksActions.deleteERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );
@@ -104,7 +125,12 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.editUserBookDraft(uid, id, data).pipe(
           map(res => UserBooksActions.editDraftSUCCESS({ book: res })),
-          catchError((err: unknown) => of(UserBooksActions.editDraftERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(UserBooksActions.editDraftERROR({ error: firebaseError({ err }) }));
+            }
+            return of(UserBooksActions.editDraftERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );
@@ -126,7 +152,12 @@ export class UserBooksEffects implements OnRunEffects {
             }
             return of(UserBooksActions.uploadPhotoPROGRESS({ uploadData: res }));
           }),
-          catchError((err: unknown) => of(UserBooksActions.uploadPhotoERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(UserBooksActions.uploadPhotoERROR({ error: firebaseError({ err }) }));
+            }
+            return of(UserBooksActions.uploadPhotoERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );
@@ -143,7 +174,12 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.removeUserBookPhoto(uid, bookId, photoId).pipe(
           map(_ => UserBooksActions.removePhotoSUCCESS()),
-          catchError((err: unknown) => of(UserBooksActions.removePhotoERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(UserBooksActions.removePhotoERROR({ error: firebaseError({ err }) }));
+            }
+            return of(UserBooksActions.removePhotoERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );
@@ -160,7 +196,12 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.removeUserBookPhotos(uid, bookId).pipe(
           map(_ => UserBooksActions.removeAllPhotosSUCCESS()),
-          catchError((err: unknown) => of(UserBooksActions.removeAllPhotosERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(UserBooksActions.removeAllPhotosERROR({ error: firebaseError({ err }) }));
+            }
+            return of(UserBooksActions.removeAllPhotosERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );
@@ -177,7 +218,12 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.publishUserBook(uid, id).pipe(
           map(res => UserBooksActions.publishSUCCESS({ book: res })),
-          catchError((err: unknown) => of(UserBooksActions.publishERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(UserBooksActions.publishERROR({ error: firebaseError({ err }) }));
+            }
+            return of(UserBooksActions.publishERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         );
       }),
     );

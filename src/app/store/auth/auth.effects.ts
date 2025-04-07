@@ -5,13 +5,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, from, map, of, skipWhile } from 'rxjs';
 
 import { toResponseErrorMessage } from 'src/app/helpers/error.helpers';
-import { firebaseError } from 'src/app/models/error.models';
+import { firebaseError, internalError } from 'src/app/models/error.models';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { AuthActions } from './auth.actions';
 import { getAuthProvider } from '../../helpers/auth.helpers';
 import { AUTH_CONFIG } from '../../models/auth.models';
+import { FirebaseError } from 'firebase/app';
 
 @Injectable()
 export class AuthEffects {
@@ -40,7 +41,12 @@ export class AuthEffects {
       exhaustMap(({ providerId }) =>
         from(signInWithPopup(this.auth, getAuthProvider(providerId))).pipe(
           map(_ => AuthActions.loginWithProviderSUCCESS()),
-          catchError((err: unknown) => of(AuthActions.loginWithProviderERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(AuthActions.loginWithProviderERROR({ error: firebaseError({ err }) }));
+            }
+            return of(AuthActions.logoutERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         ),
       ),
     );
@@ -52,7 +58,12 @@ export class AuthEffects {
       concatMap(_ =>
         from(this.auth.signOut()).pipe(
           map(() => AuthActions.logoutSUCCESS()),
-          catchError((err: unknown) => of(AuthActions.logoutERROR({ error: firebaseError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof FirebaseError) {
+              return of(AuthActions.logoutERROR({ error: firebaseError({ err }) }));
+            }
+            return of(AuthActions.logoutERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         ),
       ),
     );

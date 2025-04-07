@@ -23,6 +23,7 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
+import { FirebaseError } from 'firebase/app';
 
 @Component({
   selector: 'app-user-book-edit-page',
@@ -137,14 +138,17 @@ export class UserBookEditPageComponent {
       .subscribe({
         next: _ => this.router.navigateByUrl('/user/books'),
         error: (err: unknown) => {
-          // TODO customize typing
-          // reliably retrieve error details
-          const errors: Record<string, ValidationErrors | null> = err?.err?.customData ?? {};
+          // TODO kick casting to any, check correctness
+          if (err != null && (err as any).err instanceof FirebaseError) {
+            // TODO customize typing
+            // reliably retrieve error details
+            const errors: Record<string, ValidationErrors | null> = (err as any)?.err?.customData ?? {};
 
-          this.form.controls.description.setErrors(errors['description']);
-          this.form.controls.condition.setErrors(errors['condition']);
-          this.form.controls.price.setErrors(errors['price']);
-          this.form.markAllAsTouched();
+            this.form.controls.description.setErrors(errors['description']);
+            this.form.controls.condition.setErrors(errors['condition']);
+            this.form.controls.price.setErrors(errors['price']);
+            this.form.markAllAsTouched();
+          }
         },
       });
   }
