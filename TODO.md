@@ -28,6 +28,13 @@
 ## Technical Improvements
 
 - [ ] adjust eslint rules
+- [ ] separate css/scss in angular.json per plugin
+  - [ ] material icons (if needed)
+  - [ ] material components
+  - [ ] cdk (if needed)
+  - [ ] tailwindcss
+  - [ ] flagpack
+  - [ ] styles
 - [ ] wrap message on err object in internalError
 - [ ] replace font-awesome with something more solid
 - [ ] use signals api for everything - kick any unnecessary decorators
