@@ -62,6 +62,7 @@
 - [ ] replace generated translations keys with custom strings
 - [ ] resolve sass deprecations
 - [ ] replace sass imports
+- [ ] adjust layout, check align classes
 
 ### Low Priority
 
