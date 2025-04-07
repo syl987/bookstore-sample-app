@@ -4,6 +4,7 @@ const eslint = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const imports = require('eslint-plugin-import');
+const tsdoc = require('eslint-plugin-tsdoc');
 const ngrx = require('@ngrx/eslint-plugin/v9');
 const regexp = require('eslint-plugin-regexp');
 const rxjs = require('eslint-plugin-rxjs-x');
@@ -26,6 +27,7 @@ module.exports = tseslint.config(
       prettier,
     ],
     plugins: {
+      'tsdoc': tsdoc,
       'unused-imports': unusedImports,
     },
     processor: angular.processInlineTemplates,
@@ -73,6 +75,9 @@ module.exports = tseslint.config(
 
       // ==== rxjs ====
       'rxjs-x/no-ignored-error': 'off', // strict override: not useful
+
+      // ==== tsdoc ====
+      'tsdoc/syntax': 'warn',
 
       // ==== unused-imports ====
       'unused-imports/no-unused-imports': 'warn',
