@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Auth, authState, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { FirebaseError } from 'firebase/app';
 import { catchError, concatMap, exhaustMap, from, map, of, skipWhile } from 'rxjs';
 
 import { toResponseErrorMessage } from 'src/app/helpers/error.helpers';
@@ -12,7 +13,6 @@ import { ToastService } from 'src/app/services/toast.service';
 import { AuthActions } from './auth.actions';
 import { getAuthProvider } from '../../helpers/auth.helpers';
 import { AUTH_CONFIG } from '../../models/auth.models';
-import { FirebaseError } from 'firebase/app';
 
 @Injectable()
 export class AuthEffects {

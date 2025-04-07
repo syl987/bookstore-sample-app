@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FirebaseError } from 'firebase/app';
 import { BehaviorSubject, combineLatest, concatMap, filter } from 'rxjs';
 
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
@@ -23,7 +24,6 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
-import { FirebaseError } from 'firebase/app';
 
 @Component({
   selector: 'app-user-book-edit-page',

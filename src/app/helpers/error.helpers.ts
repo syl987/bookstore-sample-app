@@ -20,7 +20,7 @@ function getMessage(error: ResponseError): string | undefined {
     case ResponseErrorType.INTERNAL:
       return error.err.message;
     default:
-      return;
+      return undefined;
   }
 }
 

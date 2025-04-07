@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
+import { FirebaseError } from 'firebase/app';
 import { catchError, concatMap, exhaustMap, map, Observable, of, switchMap, tap } from 'rxjs';
 
 import { requireAuth } from 'src/app/helpers/auth.helpers';
@@ -11,7 +12,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { UserBooksActions } from './user-books.actions';
-import { FirebaseError } from 'firebase/app';
 
 @Injectable()
 export class UserBooksEffects implements OnRunEffects {

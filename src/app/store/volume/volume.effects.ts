@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { FirebaseError } from 'firebase/app';
 import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 
 import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
@@ -9,7 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { VolumeActions } from './volume.actions';
-import { FirebaseError } from 'firebase/app';
 
 @Injectable()
 export class VolumesEffects {
