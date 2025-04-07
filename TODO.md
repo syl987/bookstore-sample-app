@@ -29,15 +29,15 @@
 
 - [ ] adjust eslint rules
 - [ ] separate css/scss in angular.json per plugin
-  - [ ] material icons (if needed)
+  - [x] material icons (if needed)
   - [ ] material components
   - [ ] cdk (if needed)
   - [ ] tailwindcss
   - [ ] flagpack
   - [ ] styles
-- [ ] wrap message on err object in internalError
-- [ ] replace font-awesome with something more solid
-- [ ] use signals api for everything - kick any unnecessary decorators
+- [x] wrap message on err object in internalError
+- [x] replace font-awesome with material icons
+- [x] use signals api for everything - kick any unnecessary decorators
 - [ ] component init actions via resolvers + check execution conditions
 - [ ] try replace any final observables and code subscriptions with signals
   - [ ] check for any mergeable streams using computed
@@ -47,7 +47,7 @@
 - [ ] update to material 3 with light theme + use more colors + adjust welcome page
 - [ ] add dark theme with material 3
 - [x] replace bootstrap with tailwindcss v4 + adjust welcome page
-- [ ] setup stylelint
+- [x] setup stylelint
 - [ ] resolve deprecations
 - [ ] create functions for each pipe + avoid injecting pipes
 - [ ] research and apply any ngrx syntax updates
