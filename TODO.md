@@ -19,8 +19,9 @@
   - [ ] check file delete feature works properly
 - [ ] add github link?
 - [ ] allow book deletion if published + delete the volume if not related to any books
+- [ ] add localization feature to the welcome-page
 
-## Maintainance Tasks
+## Maintenance Tasks
 
 - [ ] resolve any todo comments in code
 - [ ] resolve any commented code
