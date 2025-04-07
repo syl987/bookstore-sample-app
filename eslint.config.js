@@ -71,6 +71,9 @@ module.exports = tseslint.config(
       // ==== regexp ====
       'regexp/sort-character-class-elements': 'warn',
 
+      // ==== rxjs ====
+      'rxjs-x/no-ignored-error': 'off', // strict override: not useful
+
       // ==== unused-imports ====
       'unused-imports/no-unused-imports': 'warn',
 

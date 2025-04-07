@@ -28,6 +28,7 @@
 ## Technical Improvements
 
 - [ ] adjust eslint rules
+- [ ] wrap message on err object in internalError
 - [ ] replace font-awesome with something more solid
 - [ ] use signals api for everything - kick any unnecessary decorators
 - [ ] component init actions via resolvers + check execution conditions
