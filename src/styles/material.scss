@@ -1,0 +1,287 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  --app-font-family-plain: 'Inter', 'Helvetica Neue', sans-serif;
+  --app-font-family-brand: 'Inter', 'Helvetica Neue', sans-serif;
+
+  scroll-behavior: smooth;
+
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$blue-palette,
+        tertiary: mat.$azure-palette,
+      ),
+      typography: 'Inter',
+      density: 0,
+    )
+  );
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--app-font-family-plain);
+  // font-family: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// MATERIAL VARIABLES AS CLASSES
+
+// TEXT COLOR
+
+.text-primary {
+  color: var(--mat-sys-primary);
+}
+
+.text-secondary {
+  color: var(--mat-sys-secondary);
+}
+
+.text-tertiary {
+  color: var(--mat-sys-tertiary);
+}
+
+.text-surface {
+  color: var(--mat-sys-surface);
+}
+
+.text-error {
+  color: var(--mat-sys-error);
+}
+
+.text-on-primary {
+  color: var(--mat-sys-on-primary);
+}
+
+.text-on-secondary {
+  color: var(--mat-sys-on-secondary);
+}
+
+.text-on-tertiary {
+  color: var(--mat-sys-on-tertiary);
+}
+
+.text-on-surface {
+  color: var(--mat-sys-on-surface);
+}
+
+.text-on-error {
+  color: var(--mat-sys-on-error);
+}
+
+.text-on-primary-container {
+  color: var(--mat-sys-on-primary-container);
+}
+
+.text-on-secondary-container {
+  color: var(--mat-sys-on-secondary-container);
+}
+
+.text-on-tertiary-container {
+  color: var(--mat-sys-on-tertiary-container);
+}
+
+.text-on-error-container {
+  color: var(--mat-sys-on-error-container);
+}
+
+.text-on-primary-fixed {
+  color: var(--mat-sys-on-primary-fixed);
+}
+
+.text-on-secondary-fixed {
+  color: var(--mat-sys-on-secondary-fixed);
+}
+
+.text-on-tertiary-fixed {
+  color: var(--mat-sys-on-tertiary-fixed);
+}
+
+// BACKGROUND COLOR
+
+.bg-primary {
+  background-color: var(--mat-sys-primary);
+}
+
+.bg-secondary {
+  background-color: var(--mat-sys-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--mat-sys-tertiary);
+}
+
+.bg-surface {
+  background-color: var(--mat-sys-surface);
+}
+
+.bg-error {
+  background-color: var(--mat-sys-error);
+}
+
+.bg-primary-container {
+  background-color: var(--mat-sys-primary-container);
+}
+
+.bg-secondary-container {
+  background-color: var(--mat-sys-secondary-container);
+}
+
+.bg-tertiary-container {
+  background-color: var(--mat-sys-tertiary-container);
+}
+
+.bg-error-container {
+  background-color: var(--mat-sys-error-container);
+}
+
+.bg-primary-fixed {
+  background-color: var(--mat-sys-primary-fixed);
+}
+
+.bg-primary-fixed-dim {
+  background-color: var(--mat-sys-primary-fixed-dim);
+}
+
+.bg-secondary-fixed {
+  background-color: var(--mat-sys-secondary-fixed);
+}
+
+.bg-secondary-fixed-dim {
+  background-color: var(--mat-sys-secondary-fixed-dim);
+}
+
+.bg-tertiary-fixed {
+  background-color: var(--mat-sys-tertiary-fixed);
+}
+
+.bg-tertiary-fixed-dim {
+  background-color: var(--mat-sys-tertiary-fixed-dim);
+}
+
+.bg-surface-dim {
+  background-color: var(--mat-sys-surface-dim);
+}
+
+.bg-surface-bright {
+  background-color: var(--mat-sys-surface-bright);
+}
+
+.bg-surface-container-lowest {
+  background-color: var(--mat-sys-surface-container-lowest);
+}
+
+.bg-surface-container-low {
+  background-color: var(--mat-sys-surface-container-low);
+}
+
+.bg-surface-container {
+  background-color: var(--mat-sys-surface-container);
+}
+
+.bg-surface-container-high {
+  background-color: var(--mat-sys-surface-container-high);
+}
+
+.bg-surface-container-highest {
+  background-color: var(--mat-sys-surface-container-highest);
+}
+
+// ELEVATION
+
+.mat-elevation-z0 {
+  box-shadow: var(--mat-sys-level0);
+}
+
+.mat-elevation-z1 {
+  box-shadow: var(--mat-sys-level1);
+}
+
+.mat-elevation-z2 {
+  box-shadow: var(--mat-sys-level2);
+}
+
+.mat-elevation-z3 {
+  box-shadow: var(--mat-sys-level3);
+}
+
+.mat-elevation-z4 {
+  box-shadow: var(--mat-sys-level4);
+}
+
+.mat-elevation-z5 {
+  box-shadow: var(--mat-sys-level5);
+}
+
+// TYPOGRAPHY
+
+.mat-display-small {
+  font: var(--mat-sys-display-small);
+}
+
+.mat-display-medium {
+  font: var(--mat-sys-display-medium);
+}
+
+.mat-display-large {
+  font: var(--mat-sys-display-large);
+}
+
+.mat-headline-small {
+  font: var(--mat-sys-headline-small);
+}
+
+.mat-headline-medium {
+  font: var(--mat-sys-headline-medium);
+}
+
+.mat-headline-large {
+  font: var(--mat-sys-headline-large);
+}
+
+.mat-title-small {
+  font: var(--mat-sys-title-small);
+}
+
+.mat-title-medium {
+  font: var(--mat-sys-title-medium);
+}
+
+.mat-title-large {
+  font: var(--mat-sys-title-large);
+}
+
+.mat-body-small {
+  font: var(--mat-sys-body-small);
+}
+
+.mat-body-medium {
+  font: var(--mat-sys-body-medium);
+}
+
+.mat-body-large {
+  font: var(--mat-sys-body-large);
+}
+
+.mat-label-small {
+  font: var(--mat-sys-label-small);
+}
+
+.mat-label-medium {
+  font: var(--mat-sys-label-medium);
+}
+
+.mat-label-large {
+  font: var(--mat-sys-label-large);
+}
