@@ -8,6 +8,7 @@ import { APP_NAV_LINKS } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -25,6 +26,8 @@ export class SidenavComponent {
   protected readonly router = inject(Router);
   protected readonly authService = inject(AuthService);
   protected readonly dialogService = inject(DialogService);
+
+  readonly themeService = inject(ThemeService);
 
   readonly user = this.authService.user;
 

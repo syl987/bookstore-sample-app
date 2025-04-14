@@ -64,9 +64,19 @@
       </ng-template>
       <mat-divider vertical class="mx-2" style="height: 32px" />
     }
-    <button mat-icon-button [matMenuTriggerFor]="languageMenu" aria-label="Language" i18n-aria-label>
-      <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />
-    </button>
+    <div class="flex gap-1">
+      <button mat-icon-button (click)="themeService.toggleTheme()" aria-label="Toggle Theme" class="pt-3">
+        @if (themeService.theme === 'dark') {
+          <mat-icon>dark_mode</mat-icon>
+        } @else {
+          <mat-icon>light_mode</mat-icon>
+        }
+      </button>
+
+      <button mat-icon-button [matMenuTriggerFor]="languageMenu" aria-label="Language" i18n-aria-label>
+        <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />
+      </button>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 

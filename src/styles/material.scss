@@ -8,7 +8,6 @@ html {
   @include mat.theme(
     (
       color: (
-        theme-type: light,
         primary: mat.$azure-palette,
         tertiary: mat.$orange-palette,
       ),
@@ -25,6 +24,7 @@ body {
 body {
   margin: 0;
   font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  color-scheme: light dark;
 }
 
 // MATERIAL VARIABLES AS CLASSES
