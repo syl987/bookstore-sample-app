@@ -7,10 +7,10 @@ $tokens: (
 $surface-tokens: (
   container-color: var(--mat-sys-surface-container),
   foreground-color: var(--mat-sys-on-surface),
-  state-layer-color: var(--mat-sys-surface-container),
+  state-layer-color: var(--mat-sys-on-surface-container),
   small-container-color: var(--mat-sys-surface-container),
   small-foreground-color: var(--mat-sys-on-surface),
-  small-state-layer-color: var(--mat-sys-surface-container),
+  small-state-layer-color: var(--mat-sys-on-surface-container),
 );
 
 $secondary-tokens: (
