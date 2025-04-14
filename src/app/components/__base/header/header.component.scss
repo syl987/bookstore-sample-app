@@ -95,19 +95,19 @@
 
   // 36px = button(48px - 12px)
   left: 36px + 4px !important;
-  margin-right: app-spacer(4);
+  margin-right: 16px;
 
   // align with container paddings
-  margin-left: app-spacer(4);
+  margin-left: 16px;
 
-  @media (min-width: app-grid-breakpoint('sm')) {
-    margin-right: app-spacer(6);
-    margin-left: app-spacer(6);
+  @media (min-width: 576px) {
+    margin-right: 24px;
+    margin-left: 24px;
   }
 
-  @media (min-width: app-grid-breakpoint('xl')) {
-    margin-right: app-spacer(8);
-    margin-left: app-spacer(8);
+  @media (min-width: 1200px) {
+    margin-right: 32px;
+    margin-left: 32px;
   }
 
   // center input element within the form field

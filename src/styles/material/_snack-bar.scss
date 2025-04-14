@@ -13,11 +13,11 @@
 .mat-mdc-snack-bar-container.success .mdc-snackbar__label,
 .mat-mdc-snack-bar-container.error .mdc-snackbar__label,
 .mat-mdc-snack-bar-container.info .mdc-snackbar__label {
-  margin-left: app-spacer(8); // icon spacing
+  margin-left: 32px; // icon spacing
 
   &::before {
     position: absolute;
-    left: app-spacer(4);
+    left: 16px;
 
     display: inline-block;
 
