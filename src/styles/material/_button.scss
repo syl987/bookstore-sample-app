@@ -1,4 +1,6 @@
-html {
+@use '@angular/material' as mat;
+
+@mixin custom-overrides {
   @include mat.button-overrides(
     (
       outlined-outline-color: var(--mat-sys-primary),
@@ -6,184 +8,210 @@ html {
   );
 }
 
-.primary {
-  @include mat.icon-button-overrides(
-    (
-      icon-color: var(--mat-sys-primary),
-      state-layer-color: var(--mat-sys-primary),
-      // ripple-color: var(--mat-sys-primary-container),
-    )
-  );
+@mixin custom-variants {
+  @include custom-button-variants;
+  @include custom-icon-button-variants;
+  @include custom-fab-variants;
 }
 
-.secondary {
-  @include mat.button-overrides(
-    (
-      filled-container-color: var(--mat-sys-secondary),
-      filled-label-text-color: var(--mat-sys-on-secondary),
-      filled-state-layer-color: var(--mat-sys-on-secondary),
-      outlined-label-text-color: var(--mat-sys-secondary),
-      outlined-state-layer-color: var(--mat-sys-secondary),
-      outlined-outline-color: var(--mat-sys-secondary),
-      // outlined-ripple-color: var(--mat-sys-secondary-container),
-      protected-label-text-color: var(--mat-sys-secondary),
-      protected-state-layer-color: var(--mat-sys-secondary),
-      // protected-ripple-color: var(--mat-sys-secondary-container),
-      text-label-text-color: var(--mat-sys-secondary),
-      text-state-layer-color: var(--mat-sys-secondary),
-      // text-ripple-color: var(--mat-sys-secondary-container),
-    )
-  );
-  @include mat.icon-button-overrides(
-    (
-      icon-color: var(--mat-sys-secondary),
-      state-layer-color: var(--mat-sys-secondary),
-      ripple-color: var(--mat-sys-secondary-container),
-    )
-  );
-  @include mat.fab-overrides(
-    (
-      container-color: var(--mat-sys-secondary-container),
-      foreground-color: var(--mat-sys-on-secondary-container),
-      state-layer-color: var(--mat-sys-on-secondary-container),
-      // ripple-color:var(--mat-sys-on-secondary-container),
-    )
-  );
-  @include mat.fab-overrides(
-    (
-      small-container-color: var(--mat-sys-secondary-container),
-      small-foreground-color: var(--mat-sys-on-secondary-container),
-      small-state-layer-color: var(--mat-sys-on-secondary-container),
-      // small-ripple-color:var(--mat-sys-on-secondary-container),
-    )
-  );
+@mixin custom-button-variants {
+  .surface {
+    @include mat.button-overrides(
+      (
+        filled-container-color: var(--mat-sys-on-surface),
+        filled-label-text-color: var(--mat-sys-surface),
+        filled-state-layer-color: var(--mat-sys-surface),
+        outlined-label-text-color: var(--mat-sys-on-surface),
+        outlined-state-layer-color: var(--mat-sys-on-surface),
+        outlined-outline-color: var(--mat-sys-on-surface),
+        // outlined-ripple-color: var(--mat-sys-on-surface-container),
+        protected-label-text-color: var(--mat-sys-on-surface),
+        protected-state-layer-color: var(--mat-sys-on-surface),
+        // protected-ripple-color: var(--mat-sys-on-surface-container),
+        text-label-text-color: var(--mat-sys-on-surface),
+        text-state-layer-color: var(--mat-sys-on-surface),
+        // text-ripple-color: var(--mat-sys-on-surface-container),
+      )
+    );
+  }
+  .secondary {
+    @include mat.button-overrides(
+      (
+        filled-container-color: var(--mat-sys-secondary),
+        filled-label-text-color: var(--mat-sys-on-secondary),
+        filled-state-layer-color: var(--mat-sys-on-secondary),
+        outlined-label-text-color: var(--mat-sys-secondary),
+        outlined-state-layer-color: var(--mat-sys-secondary),
+        outlined-outline-color: var(--mat-sys-secondary),
+        // outlined-ripple-color: var(--mat-sys-secondary-container),
+        protected-label-text-color: var(--mat-sys-secondary),
+        protected-state-layer-color: var(--mat-sys-secondary),
+        // protected-ripple-color: var(--mat-sys-secondary-container),
+        text-label-text-color: var(--mat-sys-secondary),
+        text-state-layer-color: var(--mat-sys-secondary),
+        // text-ripple-color: var(--mat-sys-secondary-container),
+      )
+    );
+  }
+  .tertiary {
+    @include mat.button-overrides(
+      (
+        filled-container-color: var(--mat-sys-tertiary),
+        filled-label-text-color: var(--mat-sys-on-tertiary),
+        filled-state-layer-color: var(--mat-sys-on-tertiary),
+        outlined-label-text-color: var(--mat-sys-tertiary),
+        outlined-state-layer-color: var(--mat-sys-tertiary),
+        outlined-outline-color: var(--mat-sys-tertiary),
+        // outlined-ripple-color: var(--mat-sys-tertiary-container),
+        protected-label-text-color: var(--mat-sys-tertiary),
+        protected-state-layer-color: var(--mat-sys-tertiary),
+        // protected-ripple-color: var(--mat-sys-tertiary-container),
+        text-label-text-color: var(--mat-sys-tertiary),
+        text-state-layer-color: var(--mat-sys-tertiary),
+        // text-ripple-color: var(--mat-sys-tertiary-container),
+      )
+    );
+  }
+  .error {
+    @include mat.button-overrides(
+      (
+        filled-container-color: var(--mat-sys-error),
+        filled-label-text-color: var(--mat-sys-on-error),
+        filled-state-layer-color: var(--mat-sys-on-error),
+        outlined-label-text-color: var(--mat-sys-error),
+        outlined-state-layer-color: var(--mat-sys-error),
+        outlined-outline-color: var(--mat-sys-error),
+        // outlined-ripple-color: var(--mat-sys-on-error),
+        protected-label-text-color: var(--mat-sys-error),
+        protected-state-layer-color: var(--mat-sys-error),
+        // protected-ripple-color: var(--mat-sys-on-error),
+        text-label-text-color: var(--mat-sys-error),
+        text-state-layer-color: var(--mat-sys-error),
+        // text-ripple-color: var(--mat-sys-on-error),
+      )
+    );
+  }
 }
 
-.tertiary {
-  @include mat.button-overrides(
-    (
-      filled-container-color: var(--mat-sys-tertiary),
-      filled-label-text-color: var(--mat-sys-on-tertiary),
-      filled-state-layer-color: var(--mat-sys-on-tertiary),
-      outlined-label-text-color: var(--mat-sys-tertiary),
-      outlined-state-layer-color: var(--mat-sys-tertiary),
-      outlined-outline-color: var(--mat-sys-tertiary),
-      // outlined-ripple-color: var(--mat-sys-tertiary-container),
-      protected-label-text-color: var(--mat-sys-tertiary),
-      protected-state-layer-color: var(--mat-sys-tertiary),
-      // protected-ripple-color: var(--mat-sys-tertiary-container),
-      text-label-text-color: var(--mat-sys-tertiary),
-      text-state-layer-color: var(--mat-sys-tertiary),
-      // text-ripple-color: var(--mat-sys-tertiary-container),
-    )
-  );
-  @include mat.icon-button-overrides(
-    (
-      icon-color: var(--mat-sys-tertiary),
-      state-layer-color: var(--mat-sys-tertiary),
-      // ripple-color: var(--mat-sys-tertiary-container),
-    )
-  );
-  @include mat.fab-overrides(
-    (
-      container-color: var(--mat-sys-tertiary-container),
-      foreground-color: var(--mat-sys-on-tertiary-container),
-      state-layer-color: var(--mat-sys-on-tertiary-container),
-      // ripple-color:var(--mat-sys-on-tertiary-container),
-    )
-  );
-  @include mat.fab-overrides(
-    (
-      small-container-color: var(--mat-sys-tertiary-container),
-      small-foreground-color: var(--mat-sys-on-tertiary-container),
-      small-state-layer-color: var(--mat-sys-on-tertiary-container),
-      // small-ripple-color:var(--mat-sys-on-tertiary-container),
-    )
-  );
+@mixin custom-icon-button-variants {
+  .primary {
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-primary),
+        state-layer-color: var(--mat-sys-primary),
+        // ripple-color: var(--mat-sys-primary-container),
+      )
+    );
+  }
+  .surface {
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-on-surface),
+        state-layer-color: var(--mat-sys-on-surface),
+        // ripple-color: var(--mat-sys-on-surface-container),
+      )
+    );
+  }
+  .secondary {
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-secondary),
+        state-layer-color: var(--mat-sys-secondary),
+        ripple-color: var(--mat-sys-secondary-container),
+      )
+    );
+  }
+  .tertiary {
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-tertiary),
+        state-layer-color: var(--mat-sys-tertiary),
+        // ripple-color: var(--mat-sys-tertiary-container),
+      )
+    );
+  }
+  .error {
+    @include mat.icon-button-overrides(
+      (
+        icon-color: var(--mat-sys-error),
+        state-layer-color: var(--mat-sys-error),
+        // ripple-color: var(--mat-sys-error-container),
+      )
+    );
+  }
 }
 
-.error {
-  @include mat.button-overrides(
-    (
-      filled-container-color: var(--mat-sys-error),
-      filled-label-text-color: var(--mat-sys-on-error),
-      filled-state-layer-color: var(--mat-sys-on-error),
-      outlined-label-text-color: var(--mat-sys-error),
-      outlined-state-layer-color: var(--mat-sys-error),
-      outlined-outline-color: var(--mat-sys-error),
-      // outlined-ripple-color: var(--mat-sys-on-error),
-      protected-label-text-color: var(--mat-sys-error),
-      protected-state-layer-color: var(--mat-sys-error),
-      // protected-ripple-color: var(--mat-sys-on-error),
-      text-label-text-color: var(--mat-sys-error),
-      text-state-layer-color: var(--mat-sys-error),
-      // text-ripple-color: var(--mat-sys-on-error),
-    )
-  );
-  @include mat.icon-button-overrides(
-    (
-      icon-color: var(--mat-sys-error),
-      state-layer-color: var(--mat-sys-error),
-      // ripple-color: var(--mat-sys-error-container),
-    )
-  );
-  @include mat.fab-overrides(
-    (
-      container-color: var(--mat-sys-error-container),
-      foreground-color: var(--mat-sys-on-error-container),
-      state-layer-color: var(--mat-sys-on-error-container),
-      // ripple-color:var(--mat-sys-on-error-container),
-    )
-  );
-  @include mat.fab-overrides(
-    (
-      small-container-color: var(--mat-sys-error-container),
-      small-foreground-color: var(--mat-sys-on-error-container),
-      small-state-layer-color: var(--mat-sys-on-error-container),
-      // small-ripple-color:var(--mat-sys-on-error-container),
-    )
-  );
-}
-
-.surface {
-  @include mat.button-overrides(
-    (
-      filled-container-color: var(--mat-sys-on-surface),
-      filled-label-text-color: var(--mat-sys-surface),
-      filled-state-layer-color: var(--mat-sys-surface),
-      outlined-label-text-color: var(--mat-sys-on-surface),
-      outlined-state-layer-color: var(--mat-sys-on-surface),
-      outlined-outline-color: var(--mat-sys-on-surface),
-      // outlined-ripple-color: var(--mat-sys-on-surface-container),
-      protected-label-text-color: var(--mat-sys-on-surface),
-      protected-state-layer-color: var(--mat-sys-on-surface),
-      // protected-ripple-color: var(--mat-sys-on-surface-container),
-      text-label-text-color: var(--mat-sys-on-surface),
-      text-state-layer-color: var(--mat-sys-on-surface),
-      // text-ripple-color: var(--mat-sys-on-surface-container),
-    )
-  );
-  @include mat.icon-button-overrides(
-    (
-      icon-color: var(--mat-sys-on-surface),
-      state-layer-color: var(--mat-sys-on-surface),
-      // ripple-color: var(--mat-sys-on-surface-container),
-    )
-  );
-  @include mat.fab-overrides(
-    (
-      container-color: var(--mat-sys-surface-container),
-      foreground-color: var(--mat-sys-on-surface),
-      state-layer-color: var(--mat-sys-surface-container),
-      // ripple-color:var(--mat-sys-surface-container),
-    )
-  );
-  @include mat.fab-overrides(
-    (
-      small-container-color: var(--mat-sys-surface-container),
-      small-foreground-color: var(--mat-sys-on-surface),
-      small-state-layer-color: var(--mat-sys-surface-container),
-      // small-ripple-color:var(--mat-sys-surface-container),
-    )
-  );
+@mixin custom-fab-variants {
+  .surface {
+    @include mat.fab-overrides(
+      (
+        container-color: var(--mat-sys-surface-container),
+        foreground-color: var(--mat-sys-on-surface),
+        state-layer-color: var(--mat-sys-surface-container),
+        // ripple-color:var(--mat-sys-surface-container),
+      )
+    );
+    @include mat.fab-overrides(
+      (
+        small-container-color: var(--mat-sys-surface-container),
+        small-foreground-color: var(--mat-sys-on-surface),
+        small-state-layer-color: var(--mat-sys-surface-container),
+        // small-ripple-color:var(--mat-sys-surface-container),
+      )
+    );
+  }
+  .secondary {
+    @include mat.fab-overrides(
+      (
+        container-color: var(--mat-sys-secondary-container),
+        foreground-color: var(--mat-sys-on-secondary-container),
+        state-layer-color: var(--mat-sys-on-secondary-container),
+        // ripple-color:var(--mat-sys-on-secondary-container),
+      )
+    );
+    @include mat.fab-overrides(
+      (
+        small-container-color: var(--mat-sys-secondary-container),
+        small-foreground-color: var(--mat-sys-on-secondary-container),
+        small-state-layer-color: var(--mat-sys-on-secondary-container),
+        // small-ripple-color:var(--mat-sys-on-secondary-container),
+      )
+    );
+  }
+  .tertiary {
+    @include mat.fab-overrides(
+      (
+        container-color: var(--mat-sys-tertiary-container),
+        foreground-color: var(--mat-sys-on-tertiary-container),
+        state-layer-color: var(--mat-sys-on-tertiary-container),
+        // ripple-color:var(--mat-sys-on-tertiary-container),
+      )
+    );
+    @include mat.fab-overrides(
+      (
+        small-container-color: var(--mat-sys-tertiary-container),
+        small-foreground-color: var(--mat-sys-on-tertiary-container),
+        small-state-layer-color: var(--mat-sys-on-tertiary-container),
+        // small-ripple-color:var(--mat-sys-on-tertiary-container),
+      )
+    );
+  }
+  .error {
+    @include mat.fab-overrides(
+      (
+        container-color: var(--mat-sys-error-container),
+        foreground-color: var(--mat-sys-on-error-container),
+        state-layer-color: var(--mat-sys-on-error-container),
+        // ripple-color:var(--mat-sys-on-error-container),
+      )
+    );
+    @include mat.fab-overrides(
+      (
+        small-container-color: var(--mat-sys-error-container),
+        small-foreground-color: var(--mat-sys-on-error-container),
+        small-state-layer-color: var(--mat-sys-on-error-container),
+        // small-ripple-color:var(--mat-sys-on-error-container),
+      )
+    );
+  }
 }
