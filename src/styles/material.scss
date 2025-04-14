@@ -28,7 +28,6 @@ html {
   @include mat.theme(
     (
       color: (
-        theme-type: light,
         primary: mat.$azure-palette,
         tertiary: mat.$orange-palette,
       ),
