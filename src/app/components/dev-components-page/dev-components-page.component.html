@@ -30,7 +30,7 @@
     Custom themes: surface, <span class="text-secondary">secondary</span>, <span class="text-tertiary">tertiary</span>, <span class="text-error">error</span>.
   </p>
 
-  <h3>Action Button with Icon</h3>
+  <h3>Button with Icon</h3>
 
   <div class="mb-3 flex flex-wrap gap-2">
     <button mat-flat-button><mat-icon class="align-top">check</mat-icon>Main</button>
@@ -70,7 +70,7 @@
     <button mat-button class="error"><mat-icon class="align-top">close</mat-icon>Miscellaneous</button>
   </div>
 
-  <h4>Action Button with Spinner</h4>
+  <h4>Button with Spinner</h4>
 
   <div class="flex flex-wrap gap-2">
     <button mat-flat-button [spinning]="disabled()" [disabled]="disabled()">Main</button>
@@ -104,7 +104,7 @@
     <button mat-button [spinning]="disabled()" [disabled]="disabled()" class="error">Miscellaneous</button>
   </div>
 
-  <h3>Fab Button</h3>
+  <h3>Fab</h3>
 
   <div class="mb-6 flex flex-wrap gap-4">
     <button mat-fab extended><mat-icon>home</mat-icon>Home</button>
@@ -149,7 +149,7 @@
     <button mat-icon-button class="error" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button>
   </div>
 
-  <h3>Anchor Button</h3>
+  <h3>Anchor</h3>
 
   <div class="-my-2 -ms-3 mb-2 flex flex-wrap gap-1">
     <a mat-button href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a>
@@ -217,8 +217,8 @@
 
     <div class="flex flex-wrap gap-2">
       <button type="submit" mat-flat-button>Submit</button>
-      <button type="button" mat-stroked-button (click)="invalidateForm()">Invalidate</button>
-      <button type="reset" mat-stroked-button [disabled]="form.disabled">Reset</button>
+      <button type="reset" mat-stroked-button class="surface" [disabled]="form.disabled">Reset</button>
+      <button type="button" mat-stroked-button class="error" (click)="invalidateForm()">Invalidate</button>
     </div>
   </form>
 
@@ -232,8 +232,8 @@
 
   <div class="flex flex-wrap gap-2">
     <button mat-flat-button (click)="showSuccessToast()">Show Success</button>
-    <button mat-stroked-button (click)="showInfoToast()">Show Info</button>
-    <button mat-stroked-button (click)="showErrorToast()">Show Error</button>
+    <button mat-stroked-button (click)="showInfoToast()" class="surface">Show Info</button>
+    <button mat-stroked-button (click)="showErrorToast()" class="error">Show Error</button>
   </div>
 
   <h2>Icons</h2>
