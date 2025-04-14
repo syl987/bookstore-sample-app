@@ -42,7 +42,7 @@
         <mat-form-field class="max-w-xs">
           <mat-label i18n>Price</mat-label>
           <input type="number" matInput formControlName="price" min="0" max="500" />
-          <span matTextSuffix class="text-muted ms-2 text-nowrap">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
+          <span matTextSuffix class="text-secondary ms-2 text-nowrap">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
           <mat-error>{{ form.get('price') | validationError }}</mat-error>
         </mat-form-field>
       </div>

@@ -4,7 +4,7 @@
   <h1>Heading h1 normal</h1>
   <h2>Heading h2 normal</h2>
   <h3>Heading h3 normal</h3>
-  <h4><s>Heading h4</s></h4>
+  <h4>Heading h4</h4>
   <h5><s>Heading h5</s></h5>
   <h6><s>Heading h6</s></h6>
 
@@ -23,7 +23,6 @@
 
   <p><samp>This line rendered as program output sample.</samp></p>
   <p><code>This line rendered as code-formatted text.</code></p>
-  <pre>This line rendered as preformatted text.</pre>
 
   <mat-divider />
 
@@ -80,7 +79,7 @@
       <mat-form-field>
         <mat-label>Price</mat-label>
         <input type="number" matInput formControlName="number" min="2" max="14" />
-        <span matTextSuffix class="text-muted ms-2 text-nowrap">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
+        <span matTextSuffix class="text-secondary ms-2 text-nowrap">{{ 0 | number: '.2-2' | slice: 1 }} {{ currencySymbol }}</span>
         <mat-error>{{ form.get('number') | validationError }}</mat-error>
       </mat-form-field>
 
@@ -241,15 +240,11 @@
 
   <h3>Text Colors</h3>
 
-  <p class="text-primary mb-0">.text-primary (mat-primary)</p>
-  <p class="text-accent mb-0">.text-accent (mat-accent)</p>
-  <p class="text-success mb-0">.text-success</p>
-  <p class="text-warn mb-0">.text-warn (mat-warn)</p>
-  <p class="text-info mb-0">.text-info</p>
-  <p class="text-body mb-0">.text-body (primary body color)</p>
-  <p class="mb-0 text-white" style="background-color: gray">.text-white (inverse body color)</p>
-  <p class="text-muted mb-0">.text-muted</p>
-  <p class="mb-0 text-inherit">.text-inherit (inherited color)</p>
+  <p class="text-primary mb-0">.text-primary (--mat-sys-primary)</p>
+  <p class="text-secondary mb-0">.text-secondary (--mat-sys-secondary)</p>
+  <p class="text-tertiary mb-0">.text-tertiary (--mat-sys-tertiary)</p>
+  <p class="text-surface mb-0">.text-surface (--mat-sys-surface)</p>
+  <p class="text-error mb-0">.text-error (--mat-sys-error)</p>
 
   <h3>Text Transform</h3>
 

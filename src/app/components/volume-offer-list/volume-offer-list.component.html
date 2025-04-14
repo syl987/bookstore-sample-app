@@ -22,7 +22,7 @@
           @if (uid() !== book.uid) {
             {{ book.description | slice: 0 : 84 }} {{ book.description.length > 84 ? '[...]' : '' }}
           } @else {
-            <span class="text-muted" i18n>This is your own offer, thus you cannot buy it.</span>
+            <span class="text-secondary" i18n>This is your own offer, thus you cannot buy it.</span>
           }
         </td>
       </ng-container>
@@ -44,5 +44,5 @@
     </table>
   </div>
 } @else {
-  <p class="text-muted py-2 text-center" i18n>No offers have been published yet.</p>
+  <p class="text-secondary py-2 text-center" i18n>No offers have been published yet.</p>
 }
