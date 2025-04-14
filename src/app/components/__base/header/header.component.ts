@@ -21,6 +21,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
 import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.component';
+import { ThemeService } from 'src/app/services/theme.service';
 
 const FAKE_RESPONSE_TIME = 750;
 
@@ -52,6 +53,7 @@ export class HeaderComponent {
   protected readonly volumeService = inject(VolumeService);
   protected readonly dialogService = inject(DialogService);
 
+  readonly themeService = inject(ThemeService);
   readonly options = inject(APP_OPTIONS);
 
   readonly user = this.authService.user;
