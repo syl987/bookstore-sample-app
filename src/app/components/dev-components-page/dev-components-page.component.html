@@ -209,11 +209,13 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field class="mb-4 max-w-xs">
-      <mat-label>Description</mat-label>
-      <textarea matInput formControlName="area" required minlength="3" maxlength="255" cdkTextareaAutosize></textarea>
-      <mat-error>{{ form.get('area') | validationError }}</mat-error>
-    </mat-form-field>
+    <div class="mb-4 grid gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
+      <mat-form-field class="col-span-2 mb-4">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="area" required minlength="3" maxlength="255" cdkTextareaAutosize></textarea>
+        <mat-error>{{ form.get('area') | validationError }}</mat-error>
+      </mat-form-field>
+    </div>
 
     <div class="flex flex-wrap gap-2">
       <button type="submit" mat-flat-button>Submit</button>
