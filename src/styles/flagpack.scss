@@ -1,6 +1,4 @@
-// config
-$fp-prefix: 'fp' !default;
-$fp-prepend: false !default;
+// Global flagpack config
 
 // countries
 $fp-countries: 'de', 'es', 'us';
@@ -11,7 +9,6 @@ $fp-size-md: false;
 $fp-size-lg: false;
 
 // styles
-$fp-enable-4x3: true !default;
 $fp-enable-1x1: false;
 $fp-enable-rounded: false;
 
