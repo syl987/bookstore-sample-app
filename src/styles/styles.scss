@@ -3,30 +3,4 @@
 @import 'variables';
 @import 'mixins';
 
-@import 'material';
-
 @import 'common';
-
-.text-primary {
-  color: $primary;
-}
-
-.text-accent {
-  color: $accent;
-}
-
-.text-success {
-  color: $success;
-}
-
-.text-info {
-  color: $info;
-}
-
-.text-warn {
-  color: $warn;
-}
-
-.text-muted {
-  color: rgb(100 100 100);
-}

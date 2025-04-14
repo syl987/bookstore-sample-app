@@ -1,7 +1,7 @@
 <div class="container">
   <app-title-bar [backUrl]="'/volumes/' + id">
     @if (offer(); as offer) {
-      <button mat-stroked-button color="accent" (click)="buyBookOffer(offer)" [disabled]="isUserBook()" i18n>Buy Book</button>
+      <button mat-stroked-button (click)="buyBookOffer(offer)" [disabled]="isUserBook()" i18n>Buy Book</button>
     }
   </app-title-bar>
 
@@ -9,7 +9,7 @@
     <ng-container i18n>Details for the selected book offer.</ng-container>
     <span>&nbsp;</span>
     @if (isUserBook()) {
-      <span class="text-info" i18n>This is your own offer, thus you cannot buy it.</span>
+      <span class="text-tertiary" i18n>This is your own offer, thus you cannot buy it.</span>
     }
   </p>
 

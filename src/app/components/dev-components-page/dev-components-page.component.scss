@@ -1,5 +1,5 @@
 @import 'shared';
 
 .dev-text-primary {
-  color: $primary;
+  color: var(--mat-sys-primary);
 }

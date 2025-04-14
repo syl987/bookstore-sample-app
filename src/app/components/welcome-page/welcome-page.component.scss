@@ -1,9 +1,0 @@
-@use '@angular/material' as mat;
-
-.mat-mdc-card {
-  @include mat.elevation-transition;
-}
-
-.mat-mdc-card:hover {
-  @include mat.elevation(4);
-}
