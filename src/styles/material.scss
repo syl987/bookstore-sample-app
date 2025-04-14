@@ -9,16 +9,16 @@
 @use 'material/progress-spinner';
 
 html {
-  --mat-sys-corner-extra-large: 8px / 50% !important;
-  --mat-sys-corner-extra-large-top: 8px 8px 0 0 / 50% !important;
-  --mat-sys-corner-extra-small: 2px / 50% !important;
-  --mat-sys-corner-extra-small-top: 2px 2px 0 0 / 50% !important;
-  --mat-sys-corner-large: 6px / 50% !important;
-  --mat-sys-corner-large-end: 0 6px 6px 0 / 50% !important;
-  --mat-sys-corner-large-start: 6px 0 0 6px / 50% !important;
-  --mat-sys-corner-large-top: 6px 6px 0 0 / 50% !important;
-  --mat-sys-corner-medium: 4px / 50% !important;
-  --mat-sys-corner-small: 3px / 50% !important;
+  --mat-sys-corner-extra-large: 10px !important;
+  --mat-sys-corner-extra-large-top: 10px 10px 0 0 !important;
+  --mat-sys-corner-extra-small: 2px !important;
+  --mat-sys-corner-extra-small-top: 2px 2px 0 0 !important;
+  --mat-sys-corner-large: 8px !important;
+  --mat-sys-corner-large-end: 0 8px 8px 0 !important;
+  --mat-sys-corner-large-start: 8px 0 0 8px !important;
+  --mat-sys-corner-large-top: 8px 8px 0 0 !important;
+  --mat-sys-corner-medium: 6px !important;
+  --mat-sys-corner-small: 4px !important;
 
   @include mat.theme(
     (
