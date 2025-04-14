@@ -7,14 +7,14 @@ import { inject, Injectable } from '@angular/core';
 export class ThemeService {
   protected readonly document = inject(DOCUMENT);
 
-  #theme: string = this._getDefaultTheme();
+  #theme = this._getDefaultTheme();
 
   get theme(): string {
     return this.#theme;
   }
 
   toggleTheme(): void {
-    if (this.#theme === 'dark') {
+    if (this.theme === 'dark') {
       this.document.body.style.colorScheme = 'light';
       this.#theme = 'light';
     } else {
