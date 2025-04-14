@@ -4,7 +4,7 @@
       <div class="text-primary me-4 text-lg">{{ options.applicationName }}</div>
 
       @for (link of PUBLIC_LINKS; track link.path) {
-        <a mat-button color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+        <a mat-button [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
       }
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
@@ -26,15 +26,15 @@
         <mat-divider vertical class="mx-2" style="height: 32px" />
 
         @for (link of USER_LINKS; track link.path) {
-          <a mat-button color="primary" [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+          <a mat-button [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
         }
-        <button mat-button color="primary" (click)="logout()" i18n>Logout</button>
+        <button mat-button (click)="logout()" i18n>Logout</button>
       } @else {
-        <a mat-button color="primary" routerLink="/login" routerLinkActive="active" i18n>Login</a>
+        <a mat-button routerLink="/login" routerLinkActive="active" i18n>Login</a>
       }
       <mat-divider vertical class="mx-2" style="height: 32px" />
     } @else {
-      <button mat-icon-button color="primary" (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="me-1" i18n-aria-label>
+      <button mat-icon-button (click)="sidenavToggle.emit()" aria-label="Toggle Navigation" class="me-1" i18n-aria-label>
         <mat-icon class="align-bottom text-lg">menu</mat-icon>
       </button>
 
@@ -42,7 +42,7 @@
 
       <span class="ms-2 me-auto"></span>
 
-      <button mat-icon-button color="primary" (click)="searchOverlayOpen.set(!searchOverlayOpen())" class="-me-1" aria-label="Search" i18n-aria-label>
+      <button mat-icon-button (click)="searchOverlayOpen.set(!searchOverlayOpen())" class="-me-1" aria-label="Search" i18n-aria-label>
         <mat-icon>search</mat-icon>
       </button>
 
@@ -56,7 +56,7 @@
           <mat-form-field appearance="fill" class="w-100">
             <mat-icon inline class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
             <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
-            <button type="button" mat-icon-button color="primary" (click)="searchOverlayOpen.set(false)" class="me-1" matSuffix>
+            <button type="button" mat-icon-button (click)="searchOverlayOpen.set(false)" class="me-1" matSuffix>
               <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>
@@ -64,7 +64,7 @@
       </ng-template>
       <mat-divider vertical class="mx-2" style="height: 32px" />
     }
-    <button mat-icon-button color="primary" [matMenuTriggerFor]="languageMenu" aria-label="Language" i18n-aria-label>
+    <button mat-icon-button [matMenuTriggerFor]="languageMenu" aria-label="Language" i18n-aria-label>
       <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />
     </button>
   </mat-toolbar-row>

@@ -1,7 +1,7 @@
 <div class="container">
   <app-title-bar backUrl="/user/books">
-    <button mat-stroked-button color="accent" (click)="publishBook()" [spinning]="publishPending()" [disabled]="publishDisabled()" i18n>Publish Book</button>
-    <button mat-stroked-button color="warn" (click)="deleteBook()" [spinning]="deletePending()" [disabled]="deleteDisabled()" i18n>Delete Book</button>
+    <button mat-stroked-button (click)="publishBook()" [spinning]="publishPending()" [disabled]="publishDisabled()" i18n>Publish Book</button>
+    <button mat-stroked-button (click)="deleteBook()" [spinning]="deletePending()" [disabled]="deleteDisabled()" i18n>Delete Book</button>
   </app-title-bar>
 
   <p i18n>Carefully fill in the book details. Once published, this data cannot be changed anymore.</p>
@@ -54,7 +54,7 @@
       </mat-form-field>
 
       <div class="mb-8 gap-x-2">
-        <button type="submit" mat-stroked-button color="primary" [spinning]="editDraftPending()" [disabled]="editDraftDisabled()" i18n>Save changes</button>
+        <button type="submit" mat-stroked-button [spinning]="editDraftPending()" [disabled]="editDraftDisabled()" i18n>Save changes</button>
         <button type="button" mat-stroked-button (click)="discardChanges()" [disabled]="form.disabled" i18n>Reset</button>
         <button type="reset" mat-stroked-button [disabled]="form.disabled" i18n>Clear</button>
       </div>

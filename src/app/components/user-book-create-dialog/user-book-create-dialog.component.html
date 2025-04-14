@@ -11,7 +11,7 @@
     </mat-form-field>
   </div>
 
-  <mat-selection-list color="primary" [multiple]="false" #list="matSelectionList" class="-mx-4 py-0">
+  <mat-selection-list [multiple]="false" #list="matSelectionList" class="-mx-4 py-0">
     @for (volume of results() | slice: 0 : 7; track volume) {
       <mat-list-option [value]="volume" class="truncate">
         @if (volume.volumeInfo.imageLinks) {
@@ -29,7 +29,6 @@
 <div mat-dialog-actions>
   <button
     mat-flat-button
-    color="primary"
     (click)="createUserBook(list.selectedOptions.selected[0].value)"
     [spinning]="createPending()"
     [disabled]="list.selectedOptions.isEmpty() || createPending()"
