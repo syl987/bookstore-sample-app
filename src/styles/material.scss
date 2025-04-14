@@ -19,6 +19,8 @@ html {
   );
 
   @include mat.button-overrides(button.$tokens);
+  @include mat.fab-overrides(fab.$tokens);
+  @include mat.icon-button-overrides(icon-button.$tokens);
 }
 
 html,

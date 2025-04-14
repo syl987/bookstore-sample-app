@@ -1,3 +1,9 @@
+$tokens: (
+  container-shape: 2px,
+  small-container-shape: 2px,
+  extended-container-shape: 2px,
+);
+
 $surface-tokens: (
   container-color: var(--mat-sys-surface-container),
   foreground-color: var(--mat-sys-on-surface),
