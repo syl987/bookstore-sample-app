@@ -1,11 +1,13 @@
-@if (backUrl(); as backUrl) {
-  <a mat-button [routerLink]="backUrl" class="align-center -ms-2 mt-2">
-    <mat-icon>arrow_back</mat-icon>
-    <span i18n>Back</span>
-  </a>
-}
-<h1 class="grow">{{ title() }}</h1>
+<div>
+  @if (backUrl(); as backUrl) {
+    <a mat-button [routerLink]="backUrl" class="align-center -ms-2 -mt-3">
+      <mat-icon>arrow_back</mat-icon>
+      <span i18n>Back</span>
+    </a>
+  }
+  <h1 class="grow">{{ title() }}</h1>
+</div>
 
-<div class="align-end mb-2 gap-x-2">
+<div class="flex gap-2">
   <ng-content select="[mat-stroked-button]" />
 </div>

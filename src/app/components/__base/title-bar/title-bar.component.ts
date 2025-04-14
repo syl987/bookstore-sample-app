@@ -11,7 +11,7 @@ import { RouterService } from 'src/app/services/router.service';
   templateUrl: './title-bar.component.html',
   styleUrl: './title-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'flex flex-wrap' },
+  host: { class: 'flex flex-wrap justify-between pt-6' },
 })
 export class TitleBarComponent {
   protected readonly routerService = inject(RouterService);
