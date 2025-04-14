@@ -34,7 +34,7 @@
   - [ ] material components
   - [ ] cdk (if needed)
   - [ ] tailwindcss
-  - [ ] flagpack
+  - [x] flagpack
   - [ ] styles
 - [ ] migrate snackbar icons
 - [x] wrap message on err object in internalError
@@ -46,7 +46,7 @@
 - [ ] use functional guards / resolvers / effects
 - [x] use inject statements instead of constructors
 - [ ] welcome-page content as array data (keep translatable)
-- [ ] update to material 3 with light theme + use more colors + adjust welcome page
+- [x] update to material 3 with light theme + use more colors + adjust welcome page
 - [ ] add dark theme with material 3
 - [x] replace bootstrap with tailwindcss v4 + adjust welcome page
 - [x] setup stylelint
