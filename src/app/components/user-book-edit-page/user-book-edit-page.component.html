@@ -1,7 +1,14 @@
 <div class="container">
   <app-title-bar backUrl="/user/books">
-    <button mat-stroked-button (click)="publishBook()" [spinning]="publishPending()" [disabled]="publishDisabled()" i18n>Publish Book</button>
-    <button mat-stroked-button (click)="deleteBook()" [spinning]="deletePending()" [disabled]="deleteDisabled()" i18n>Delete Book</button>
+    <button mat-stroked-button class="tertiary" (click)="publishBook()" [spinning]="publishPending()" [disabled]="publishDisabled()">
+      <mat-icon>publish</mat-icon>
+      <span i18n>Publish Book</span>
+    </button>
+
+    <button mat-stroked-button class="error" (click)="deleteBook()" [spinning]="deletePending()" [disabled]="deleteDisabled()">
+      <mat-icon>delete</mat-icon>
+      <span i18n>Delete Book</span>
+    </button>
   </app-title-bar>
 
   <p i18n>Carefully fill in the book details. Once published, this data cannot be changed anymore.</p>
@@ -25,7 +32,7 @@
 
     <mat-divider />
 
-    <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-8">
+    <form [formGroup]="form" (ngSubmit)="saveChanges()" class="mt-8 flex flex-col gap-4">
       <div class="flex flex-wrap gap-4">
         <mat-form-field class="max-w-xs">
           <mat-label i18n>Condition</mat-label>
@@ -53,10 +60,21 @@
         <mat-error>{{ form.get('description') | validationError }}</mat-error>
       </mat-form-field>
 
-      <div class="mb-8 gap-x-2">
-        <button type="submit" mat-stroked-button [spinning]="editDraftPending()" [disabled]="editDraftDisabled()" i18n>Save changes</button>
-        <button type="button" mat-stroked-button (click)="discardChanges()" [disabled]="form.disabled" i18n>Reset</button>
-        <button type="reset" mat-stroked-button [disabled]="form.disabled" i18n>Clear</button>
+      <div class="mb-8 flex flex-wrap gap-2">
+        <button type="submit" mat-flat-button [spinning]="editDraftPending()" [disabled]="editDraftDisabled()">
+          <mat-icon>save</mat-icon>
+          <span i18n>Save changes</span>
+        </button>
+
+        <button type="button" mat-stroked-button class="secondary" (click)="discardChanges()" [disabled]="form.disabled">
+          <mat-icon>undo</mat-icon>
+          <span i18n>Reset</span>
+        </button>
+
+        <button type="reset" mat-stroked-button class="secondary" [disabled]="form.disabled">
+          <mat-icon>clear</mat-icon>
+          <span i18n>Clear</span>
+        </button>
       </div>
     </form>
   } @else if (bookLoading()) {

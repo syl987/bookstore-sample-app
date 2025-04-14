@@ -1,8 +1,14 @@
 <div class="container">
   <app-title-bar backUrl="/user/books">
-    <!-- <button mat-stroked-button disabled>View Offers</button> -->
-    <button mat-stroked-button disabled i18n>Publish Book</button>
-    <button mat-stroked-button disabled i18n>Delete Book</button>
+    <button mat-stroked-button class="tertiary" disabled>
+      <mat-icon>publish</mat-icon>
+      <span i18n>Publish Book</span>
+    </button>
+
+    <button mat-stroked-button disabled class="error">
+      <mat-icon>delete</mat-icon>
+      <span i18n>Delete Book</span>
+    </button>
   </app-title-bar>
 
   <p>

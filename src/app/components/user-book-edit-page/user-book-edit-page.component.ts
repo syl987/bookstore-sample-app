@@ -24,6 +24,7 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-book-edit-page',
@@ -31,6 +32,7 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatDividerModule,
+    MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
     MatSelectModule,
