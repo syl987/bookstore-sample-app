@@ -13,3 +13,7 @@ $fp-enable-1x1: false;
 $fp-enable-rounded: false;
 
 @import 'flagpack/src/flagpack';
+
+.fp {
+  height: initial !important; // support 4x3 variants: override mat-icon height
+}
