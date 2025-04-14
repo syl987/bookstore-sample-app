@@ -1,10 +1,5 @@
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
+* {
+  box-sizing: border-box;
 }
 
 // Future-proof rule: in browsers that support :focus-visible, suppress the focus outline

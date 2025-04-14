@@ -3,20 +3,16 @@
 @use '@angular/material' as mat;
 
 html {
-  --app-font-family-plain: 'Inter', 'Helvetica Neue', sans-serif;
-  --app-font-family-brand: 'Inter', 'Helvetica Neue', sans-serif;
-
   scroll-behavior: smooth;
 
   @include mat.theme(
     (
       color: (
         theme-type: light,
-        primary: mat.$blue-palette,
-        tertiary: mat.$azure-palette,
+        primary: mat.$azure-palette,
+        tertiary: mat.$violet-palette,
       ),
       typography: 'Inter',
-      density: 0,
     )
   );
 }
@@ -28,12 +24,7 @@ body {
 
 body {
   margin: 0;
-  font-family: var(--app-font-family-plain);
-  // font-family: 'Inter', 'Helvetica Neue', sans-serif;
-}
-
-* {
-  box-sizing: border-box;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
 }
 
 // MATERIAL VARIABLES AS CLASSES
