@@ -1,7 +1,7 @@
 $tokens: (
-  container-shape: 999px,
-  small-container-shape: 999px,
-  extended-container-shape: 999px,
+  container-shape: var(--mat-sys-corner-full),
+  small-container-shape: var(--mat-sys-corner-full),
+  extended-container-shape: var(--mat-sys-corner-full),
 );
 
 $surface-tokens: (

@@ -1,10 +1,10 @@
 $tokens: (
-  filled-container-shape: 2px,
-  outlined-container-shape: 2px,
+  filled-container-shape: var(--mat-sys-corner-medium),
+  outlined-container-shape: var(--mat-sys-corner-medium),
   outlined-outline-color: primary,
   outlined-outline-width: 2px,
-  protected-container-shape: 2px,
-  text-container-shape: 2px,
+  protected-container-shape: var(--mat-sys-corner-medium),
+  text-container-shape: var(--mat-sys-corner-medium),
 );
 
 $surface-tokens: (
