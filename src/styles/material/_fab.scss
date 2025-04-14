@@ -1,0 +1,35 @@
+$surface-tokens: (
+  container-color: var(--mat-sys-surface-container),
+  foreground-color: var(--mat-sys-on-surface),
+  state-layer-color: var(--mat-sys-surface-container),
+  small-container-color: var(--mat-sys-surface-container),
+  small-foreground-color: var(--mat-sys-on-surface),
+  small-state-layer-color: var(--mat-sys-surface-container),
+);
+
+$secondary-tokens: (
+  container-color: var(--mat-sys-secondary-container),
+  foreground-color: var(--mat-sys-on-secondary-container),
+  state-layer-color: var(--mat-sys-on-secondary-container),
+  small-container-color: var(--mat-sys-secondary-container),
+  small-foreground-color: var(--mat-sys-on-secondary-container),
+  small-state-layer-color: var(--mat-sys-on-secondary-container),
+);
+
+$tertiary-tokens: (
+  container-color: var(--mat-sys-tertiary-container),
+  foreground-color: var(--mat-sys-on-tertiary-container),
+  state-layer-color: var(--mat-sys-on-tertiary-container),
+  small-container-color: var(--mat-sys-tertiary-container),
+  small-foreground-color: var(--mat-sys-on-tertiary-container),
+  small-state-layer-color: var(--mat-sys-on-tertiary-container),
+);
+
+$error-tokens: (
+  container-color: var(--mat-sys-error-container),
+  foreground-color: var(--mat-sys-on-error-container),
+  state-layer-color: var(--mat-sys-on-error-container),
+  small-container-color: var(--mat-sys-error-container),
+  small-foreground-color: var(--mat-sys-on-error-container),
+  small-state-layer-color: var(--mat-sys-on-error-container),
+);

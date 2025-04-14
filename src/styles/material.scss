@@ -3,11 +3,14 @@
 @use '@angular/material' as mat;
 
 @use 'material/button';
+@use 'material/fab';
+@use 'material/icon-button';
 
 html {
   @include mat.theme(
     (
       color: (
+        theme-type: light,
         primary: mat.$azure-palette,
         tertiary: mat.$orange-palette,
       ),
@@ -15,7 +18,7 @@ html {
     )
   );
 
-  @include button.custom-overrides;
+  @include mat.button-overrides(button.$tokens);
 }
 
 html,
@@ -29,7 +32,33 @@ body {
   color-scheme: light dark;
 }
 
-@include button.custom-variants;
+.primary {
+  @include mat.icon-button-overrides(icon-button.$primary-tokens);
+}
+
+.surface {
+  @include mat.button-overrides(button.$surface-tokens);
+  @include mat.fab-overrides(fab.$surface-tokens);
+  @include mat.icon-button-overrides(icon-button.$surface-tokens);
+}
+
+.secondary {
+  @include mat.button-overrides(button.$secondary-tokens);
+  @include mat.fab-overrides(fab.$secondary-tokens);
+  @include mat.icon-button-overrides(icon-button.$secondary-tokens);
+}
+
+.tertiary {
+  @include mat.button-overrides(button.$tertiary-tokens);
+  @include mat.fab-overrides(fab.$tertiary-tokens);
+  @include mat.icon-button-overrides(icon-button.$tertiary-tokens);
+}
+
+.error {
+  @include mat.button-overrides(button.$error-tokens);
+  @include mat.fab-overrides(fab.$error-tokens);
+  @include mat.icon-button-overrides(icon-button.$error-tokens);
+}
 
 // MATERIAL VARIABLES AS CLASSES
 
