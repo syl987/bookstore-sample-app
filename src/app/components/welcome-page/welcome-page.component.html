@@ -43,7 +43,7 @@
         </defs>
       </svg>
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>Angular {{ major }}</mat-card-title>
         <mat-card-subtitle>Main Framework</mat-card-subtitle>
       </mat-card-header>
@@ -56,7 +56,7 @@
     <mat-card class="text-center">
       <img mat-card-image src="https://ngrx.io/assets/images/badge.svg" alt="Ngrx logo" class="mx-auto pt-4" width="104" height="128" />
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>NGRX</mat-card-title>
         <mat-card-subtitle>State Management, Logic</mat-card-subtitle>
       </mat-card-header>
@@ -69,7 +69,7 @@
     <mat-card class="text-center">
       <img mat-card-image src="https://rxjs.dev/generated/images/marketing/home/Rx_Logo-512-512.png" alt="SASS logo" class="mx-auto px-2 pt-4" width="128" height="128" />
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>RXJS</mat-card-title>
         <mat-card-subtitle>Reactive Extensions</mat-card-subtitle>
       </mat-card-header>
@@ -121,7 +121,7 @@
         </g>
       </svg>
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>Firebase</mat-card-title>
         <mat-card-subtitle>Backend Services</mat-card-subtitle>
       </mat-card-header>
@@ -134,13 +134,26 @@
     <mat-card class="text-center">
       <img mat-card-image src="https://v16.material.angular.io/assets/img/angular-material-logo.svg" alt="Angular Material logo" class="mx-auto pt-4" width="112" height="112" />
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>Material 3</mat-card-title>
         <mat-card-subtitle>Angular Components</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>
         <p i18n>Native Angular components with customized theming, typography and general appearance.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="text-center">
+      <img mat-card-image src="https://iconape.com/wp-content/png_logo_vector/typescript.png" alt="TypeScript logo" class="mx-auto px-2 pt-4" width="128" height="128" />
+
+      <mat-card-header class="mb-2 block">
+        <mat-card-title>TypeScript</mat-card-title>
+        <mat-card-subtitle>JavaScript Extended</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p i18n>Strictly configured for null-safety, safe variable initialization and reliable use of types.</p>
       </mat-card-content>
     </mat-card>
 
@@ -154,7 +167,7 @@
         height="156"
       />
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>TailwindCSS</mat-card-title>
         <mat-card-subtitle>CSS utilities</mat-card-subtitle>
       </mat-card-header>
@@ -165,22 +178,9 @@
     </mat-card>
 
     <mat-card class="text-center">
-      <img mat-card-image src="https://iconape.com/wp-content/png_logo_vector/typescript.png" alt="TypeScript logo" class="mx-auto px-2 pt-4" width="128" height="128" />
-
-      <mat-card-header class="mb-2">
-        <mat-card-title>TypeScript</mat-card-title>
-        <mat-card-subtitle>JavaScript Extended</mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content>
-        <p i18n>Strictly configured for null-safety, safe variable initialization and reliable use of types.</p>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="text-center">
       <img mat-card-image src="https://sass-lang.com/assets/img/logos/logo.svg" alt="SASS logo" class="mx-auto pt-4" width="128" height="128" />
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>SCSS</mat-card-title>
         <mat-card-subtitle>CSS Extended</mat-card-subtitle>
       </mat-card-header>
@@ -200,7 +200,7 @@
         height="128"
       />
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>Eslint</mat-card-title>
         <mat-card-subtitle>Code Linting</mat-card-subtitle>
       </mat-card-header>
@@ -213,7 +213,7 @@
     <mat-card class="text-center">
       <img mat-card-image src="https://prettier.io/icon.png" alt="Eslint logo" class="mx-auto px-2 pt-4" width="128" height="128" />
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>Prettier</mat-card-title>
         <mat-card-subtitle>Code Formatting</mat-card-subtitle>
       </mat-card-header>
@@ -233,7 +233,7 @@
         height="128"
       />
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>Git</mat-card-title>
         <mat-card-subtitle>Version Management</mat-card-subtitle>
       </mat-card-header>
@@ -250,7 +250,7 @@
         ></path>
       </svg>
 
-      <mat-card-header class="mb-2">
+      <mat-card-header class="mb-2 block">
         <mat-card-title>Github</mat-card-title>
         <mat-card-subtitle>Code Management</mat-card-subtitle>
       </mat-card-header>
@@ -267,7 +267,7 @@
 
   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <mat-card class="text-center">
-      <mat-card-header class="mt-1 mb-2">
+      <mat-card-header class="mt-1 mb-2 block">
         <mat-card-title>Authentication</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -276,7 +276,7 @@
     </mat-card>
 
     <mat-card class="text-center">
-      <mat-card-header class="mt-1 mb-2">
+      <mat-card-header class="mt-1 mb-2 block">
         <mat-card-title>Internationalization</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -285,7 +285,7 @@
     </mat-card>
 
     <mat-card class="text-center">
-      <mat-card-header class="mt-1 mb-2">
+      <mat-card-header class="mt-1 mb-2 block">
         <mat-card-title>Responsive Design</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -294,7 +294,7 @@
     </mat-card>
 
     <mat-card class="text-center">
-      <mat-card-header class="mt-1 mb-2">
+      <mat-card-header class="mt-1 mb-2 block">
         <mat-card-title>NoSQL Database</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -303,7 +303,7 @@
     </mat-card>
 
     <mat-card class="text-center">
-      <mat-card-header class="mt-1 mb-2">
+      <mat-card-header class="mt-1 mb-2 block">
         <mat-card-title>File Upload</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -312,7 +312,7 @@
     </mat-card>
 
     <mat-card class="text-center">
-      <mat-card-header class="mt-1 mb-2">
+      <mat-card-header class="mt-1 mb-2 block">
         <mat-card-title>Forms</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -321,7 +321,7 @@
     </mat-card>
 
     <mat-card class="text-center">
-      <mat-card-header class="mt-1 mb-2">
+      <mat-card-header class="mt-1 mb-2 block">
         <mat-card-title>External API</mat-card-title>
       </mat-card-header>
       <mat-card-content>
