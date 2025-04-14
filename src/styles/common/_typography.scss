@@ -1,14 +1,25 @@
 h1 {
-  margin-top: $spacer * 1.5;
+  font: var(--mat-sys-headline-medium);
+  font-weight: 700;
 }
 
 h2 {
-  margin-top: $spacer * 1.5;
+  font: var(--mat-sys-title-large);
+  font-weight: 700;
+  margin-top: 1rem * 2;
+  margin-bottom: 1rem;
 }
 
 h3,
 h4,
 h5,
 h6 {
-  margin-top: $spacer * 1.25;
+  font: var(--mat-sys-title-medium);
+  font-weight: 700;
+  margin-top: 1rem * 1.5;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
 }

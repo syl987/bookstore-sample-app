@@ -1,12 +1,12 @@
 <div class="container">
   <app-title-bar />
 
-  <h1>Heading h1 normal</h1>
-  <h2>Heading h2 normal</h2>
-  <h3>Heading h3 normal</h3>
-  <h4>Heading h4</h4>
-  <h5><s>Heading h5</s></h5>
-  <h6><s>Heading h6</s></h6>
+  <!-- <h1>Heading h1</h1> -->
+  <h2>Heading h2</h2>
+  <h3>Heading h3</h3>
+  <!-- <h4><s>Heading h4</s></h4> -->
+  <!-- <h5><s>Heading h5</s></h5> -->
+  <!-- <h6><s>Heading h6</s></h6> -->
 
   <p>
     Paragraph text with proper
@@ -14,17 +14,13 @@
     styling from a theme mixin and with some important text included. This text is also very long and will be wrapped.
   </p>
 
-  <mat-divider class="mb-4" />
+  <p class="mb-0"><s>This line of text is meant to be treated as no longer accurate.</s></p>
+  <p class="mb-0"><u>This line of text will render as underlined.</u></p>
+  <p class="mb-0"><strong>This line rendered as bold text.</strong></p>
+  <!-- <p class="mb-0"><em>This line rendered as italicized text.</em></p> -->
 
-  <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
-  <p><u>This line of text will render as underlined.</u></p>
-  <p><strong>This line rendered as bold text.</strong></p>
-  <!-- <p><em>This line rendered as italicized text.</em></p> -->
-
-  <p><samp>This line rendered as program output sample.</samp></p>
-  <p><code>This line rendered as code-formatted text.</code></p>
-
-  <mat-divider />
+  <p class="mb-0"><samp>This line rendered as program output sample.</samp></p>
+  <p class="mb-0"><code>This line rendered as code-formatted text.</code></p>
 
   <h2>Button</h2>
 
@@ -63,8 +59,6 @@
       <mat-icon class="align-top">public</mat-icon>
     </button>
   </div>
-
-  <mat-divider />
 
   <h2>Forms</h2>
 
@@ -107,8 +101,6 @@
     </div>
   </form>
 
-  <mat-divider />
-
   <h2>Overlay</h2>
 
   <h3>Dialog</h3>
@@ -122,8 +114,6 @@
     <button mat-stroked-button color="primary" (click)="showInfoToast()">Show Info</button>
     <button mat-stroked-button color="warn" (click)="showErrorToast()">Show Error</button>
   </div>
-
-  <mat-divider />
 
   <h2>Icons</h2>
 
@@ -169,8 +159,6 @@
     <button mat-stroked-button color="primary" [spinning]="disabled()" [disabled]="disabled()">Secondary</button>
   </div>
 
-  <mat-divider />
-
   <h2>Field</h2>
 
   <dl class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -208,8 +196,6 @@
     </div>
   </dl>
 
-  <mat-divider />
-
   <h2>Utilities</h2>
 
   <h3>Text Alignment</h3>
@@ -243,7 +229,6 @@
   <p class="text-primary mb-0">.text-primary (--mat-sys-primary)</p>
   <p class="text-secondary mb-0">.text-secondary (--mat-sys-secondary)</p>
   <p class="text-tertiary mb-0">.text-tertiary (--mat-sys-tertiary)</p>
-  <p class="text-surface mb-0">.text-surface (--mat-sys-surface)</p>
   <p class="text-error mb-0">.text-error (--mat-sys-error)</p>
 
   <h3>Text Transform</h3>
