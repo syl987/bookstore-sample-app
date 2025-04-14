@@ -1,0 +1,25 @@
+@use '@angular/material' as mat;
+
+$list-tokens: (
+  active-indicator-shape: 0,
+  active-indicator-color: null,
+);
+
+$active-list-tokens: (
+  active-indicator-color: var(--mat-sys-surface-container),
+);
+
+a.mdc-list-item {
+  @include mat.list-overrides($list-tokens);
+
+  &.mdc-list-item--activated {
+    border-left: 5px solid var(--mat-sys-primary); // add active indicator
+    padding-left: 12px; // default: 16px
+
+    @include mat.list-overrides($active-list-tokens);
+
+    .mat-mdc-list-item-icon {
+      margin-inline-start: 0; // support active indicator with list-item-icon
+    }
+  }
+}

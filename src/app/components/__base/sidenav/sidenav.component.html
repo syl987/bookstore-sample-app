@@ -6,7 +6,7 @@
 
   <mat-nav-list>
     @for (link of PUBLIC_LINKS; track link.path) {
-      <a mat-list-item [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
+      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">{{ link.label }}</a>
     }
   </mat-nav-list>
 

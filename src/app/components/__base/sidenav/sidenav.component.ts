@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
 
-import { APP_NAV_LINKS } from 'src/app/models/app.models';
+import { APP_NAV_LINKS, AppNavLink } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -46,5 +46,9 @@ export class SidenavComponent {
 
   logout(): void {
     this.authService.logout();
+  }
+
+  isActive(link: AppNavLink): boolean {
+    return this.router.url.startsWith(link.path);
   }
 }
