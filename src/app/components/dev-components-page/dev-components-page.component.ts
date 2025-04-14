@@ -45,7 +45,7 @@ export class DevComponentsPageComponent {
   protected readonly dialog = inject(MatDialog);
   protected readonly toastService = inject(ToastService);
 
-  readonly disabled$ = timer(0, 3000).pipe(
+  readonly disabled$ = timer(0, 5000).pipe(
     map(value => value % 2),
     map(value => !!value),
   );

@@ -30,7 +30,7 @@
     Custom themes: surface, <span class="text-secondary">secondary</span>, <span class="text-tertiary">tertiary</span>, <span class="text-error">error</span>.
   </p>
 
-  <h3>Action Button</h3>
+  <h3>Action Button with Icon</h3>
 
   <div class="mb-3 flex flex-wrap gap-2">
     <button mat-flat-button><mat-icon class="align-top">check</mat-icon>Main</button>
@@ -68,6 +68,40 @@
     <button mat-flat-button class="error"><mat-icon class="align-top">close</mat-icon>Main</button>
     <button mat-stroked-button class="error"><mat-icon class="align-top">close</mat-icon>Alternative</button>
     <button mat-button class="error"><mat-icon class="align-top">close</mat-icon>Miscellaneous</button>
+  </div>
+
+  <h4>Action Button with Spinner</h4>
+
+  <div class="flex flex-wrap gap-2">
+    <button mat-flat-button [spinning]="disabled()" [disabled]="disabled()">Main</button>
+    <button mat-stroked-button [spinning]="disabled()" [disabled]="disabled()">Alternative</button>
+    <button mat-button [spinning]="disabled()" [disabled]="disabled()">Miscellaneous</button>
+  </div>
+
+  <mat-divider class="my-4 max-w-sm" />
+
+  <div class="mb-3 flex flex-wrap gap-2">
+    <button mat-flat-button [spinning]="disabled()" [disabled]="disabled()" class="surface">Main</button>
+    <button mat-stroked-button [spinning]="disabled()" [disabled]="disabled()" class="surface">Alternative</button>
+    <button mat-button [spinning]="disabled()" [disabled]="disabled()" class="surface">Miscellaneous</button>
+  </div>
+
+  <div class="mb-3 flex flex-wrap gap-2">
+    <button mat-flat-button [spinning]="disabled()" [disabled]="disabled()" class="secondary">Main</button>
+    <button mat-stroked-button [spinning]="disabled()" [disabled]="disabled()" class="secondary">Alternative</button>
+    <button mat-button [spinning]="disabled()" [disabled]="disabled()" class="secondary">Miscellaneous</button>
+  </div>
+
+  <div class="mb-3 flex flex-wrap gap-2">
+    <button mat-flat-button [spinning]="disabled()" [disabled]="disabled()" class="tertiary">Main</button>
+    <button mat-stroked-button [spinning]="disabled()" [disabled]="disabled()" class="tertiary">Alternative</button>
+    <button mat-button [spinning]="disabled()" [disabled]="disabled()" class="tertiary">Miscellaneous</button>
+  </div>
+
+  <div class="mb-3 flex flex-wrap gap-2">
+    <button mat-flat-button [spinning]="disabled()" [disabled]="disabled()" class="error">Main</button>
+    <button mat-stroked-button [spinning]="disabled()" [disabled]="disabled()" class="error">Alternative</button>
+    <button mat-button [spinning]="disabled()" [disabled]="disabled()" class="error">Miscellaneous</button>
   </div>
 
   <h3>Fab Button</h3>
@@ -125,6 +159,26 @@
     <a mat-button class="secondary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a>
     <a mat-button class="tertiary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a>
     <a mat-button class="error" href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a>
+  </div>
+
+  <h2>Spinner</h2>
+
+  <div class="mb-2 flex flex-wrap items-end gap-2">
+    <mat-spinner diameter="32" />
+    <mat-divider vertical class="mx-2 h-[28px] self-center"></mat-divider>
+    <mat-spinner diameter="32" class="surface" />
+    <mat-spinner diameter="32" class="secondary" />
+    <mat-spinner diameter="32" class="tertiary" />
+    <mat-spinner diameter="32" class="error" />
+  </div>
+
+  <div class="mb-2 flex flex-wrap items-end gap-2">
+    <mat-progress-spinner [value]="progress()" />
+    <mat-divider vertical class="mx-2 h-[28px] self-center"></mat-divider>
+    <mat-progress-spinner [value]="progress()" class="surface" />
+    <mat-progress-spinner [value]="progress()" class="secondary" />
+    <mat-progress-spinner [value]="progress()" class="tertiary" />
+    <mat-progress-spinner [value]="progress()" class="error" />
   </div>
 
   <h2>Forms</h2>
@@ -201,29 +255,6 @@
     <mat-icon fontSet="fp" fontIcon="us" />
     <mat-icon fontSet="fp" fontIcon="de" />
     <mat-icon fontSet="fp" fontIcon="es" />
-  </div>
-
-  <h3>Spinner</h3>
-
-  <div class="flex flex-wrap items-end gap-2">
-    <mat-spinner diameter="16" />
-    <mat-spinner diameter="24" />
-    <mat-spinner diameter="32" />
-    <mat-spinner diameter="40" />
-  </div>
-
-  <div class="flex flex-wrap items-end gap-2">
-    <mat-progress-spinner diameter="16" [value]="progress()" />
-    <mat-progress-spinner diameter="24" [value]="progress()" />
-    <mat-progress-spinner diameter="32" [value]="progress()" />
-    <mat-progress-spinner diameter="40" [value]="progress()" />
-  </div>
-
-  <h4>Button with Spinner</h4>
-
-  <div class="flex flex-wrap gap-2">
-    <button mat-flat-button [spinning]="disabled()" [disabled]="disabled()">Primary</button>
-    <button mat-stroked-button [spinning]="disabled()" [disabled]="disabled()">Secondary</button>
   </div>
 
   <h2>Field</h2>
