@@ -3,8 +3,6 @@
 @use '@angular/material' as mat;
 
 html {
-  scroll-behavior: smooth;
-
   @include mat.theme(
     (
       color: (
