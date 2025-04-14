@@ -24,60 +24,87 @@
 
   <h2>Button</h2>
 
+  <p>
+    Default <span class="text-primary">primary</span> theme, disabled state.
+    <br />
+    Custom themes: surface, <span class="text-secondary">secondary</span>, <span class="text-tertiary">tertiary</span>, <span class="text-error">error</span>.
+  </p>
+
   <h3>Action Button</h3>
 
-  <!-- <p>
-    With theme colors: <span class="text-primary">primary</span>, <span class="text-secondary">secondary</span>, <span class="text-tertiary">tertiary (success)</span>,
-    <span class="text-error">error</span>.
-  </p> -->
-
-  <div class="mb-2 flex flex-wrap gap-2">
+  <div class="mb-3 flex flex-wrap gap-2">
     <button mat-flat-button><mat-icon class="align-top">check</mat-icon>Main</button>
     <button mat-stroked-button><mat-icon class="align-top">check</mat-icon>Alternative</button>
     <button mat-button><mat-icon class="align-top">check</mat-icon>Miscellaneous</button>
   </div>
 
-  <!-- <div class="mb-2 flex flex-wrap gap-2">
-    <button mat-flat-button class="secondary"><mat-icon class="align-top">chevron_left</mat-icon>Main</button>
-    <button mat-stroked-button class="secondary"><mat-icon class="align-top">chevron_left</mat-icon>Alternative</button>
-    <button mat-button class="secondary"><mat-icon class="align-top">chevron_left</mat-icon>Miscellaneous</button>
-  </div> -->
-
-  <!-- <div class="mb-2 flex flex-wrap gap-2">
-    <button mat-flat-button class="tertiary"><mat-icon class="align-top">add</mat-icon>Main</button>
-    <button mat-stroked-button class="tertiary"><mat-icon class="align-top">add</mat-icon>Alternative</button>
-    <button mat-button class="tertiary"><mat-icon class="align-top">add</mat-icon>Miscellaneous</button>
-  </div> -->
-
-  <!-- <div class="mb-2 flex flex-wrap gap-2">
-    <button mat-flat-button class="error"><mat-icon class="align-top">close</mat-icon>Main</button>
-    <button mat-stroked-button class="error"><mat-icon class="align-top">close</mat-icon>Alternative</button>
-    <button mat-button class="error"><mat-icon class="align-top">close</mat-icon>Miscellaneous</button>
-  </div> -->
-
-  <div class="mb-2 flex flex-wrap gap-2">
+  <div class="mb-3 flex flex-wrap gap-2">
     <button mat-flat-button disabled><mat-icon class="align-top">remove</mat-icon>Main</button>
     <button mat-stroked-button disabled><mat-icon class="align-top">remove</mat-icon>Alternative</button>
     <button mat-button disabled><mat-icon class="align-top">remove</mat-icon>Miscellaneous</button>
+  </div>
+
+  <mat-divider class="my-4 max-w-md" />
+
+  <div class="mb-3 flex flex-wrap gap-2">
+    <button mat-flat-button class="surface"><mat-icon class="align-top">keyboard_arrow_up</mat-icon>Main</button>
+    <button mat-stroked-button class="surface"><mat-icon class="align-top">keyboard_arrow_up</mat-icon>Alternative</button>
+    <button mat-button class="surface"><mat-icon class="align-top">keyboard_arrow_up</mat-icon>Miscellaneous</button>
+  </div>
+
+  <div class="mb-3 flex flex-wrap gap-2">
+    <button mat-flat-button class="secondary"><mat-icon class="align-top">chevron_left</mat-icon>Main</button>
+    <button mat-stroked-button class="secondary"><mat-icon class="align-top">chevron_left</mat-icon>Alternative</button>
+    <button mat-button class="secondary"><mat-icon class="align-top">chevron_left</mat-icon>Miscellaneous</button>
+  </div>
+
+  <div class="mb-3 flex flex-wrap gap-2">
+    <button mat-flat-button class="tertiary"><mat-icon class="align-top">add</mat-icon>Main</button>
+    <button mat-stroked-button class="tertiary"><mat-icon class="align-top">add</mat-icon>Alternative</button>
+    <button mat-button class="tertiary"><mat-icon class="align-top">add</mat-icon>Miscellaneous</button>
+  </div>
+
+  <div class="mb-3 flex flex-wrap gap-2">
+    <button mat-flat-button class="error"><mat-icon class="align-top">close</mat-icon>Main</button>
+    <button mat-stroked-button class="error"><mat-icon class="align-top">close</mat-icon>Alternative</button>
+    <button mat-button class="error"><mat-icon class="align-top">close</mat-icon>Miscellaneous</button>
+  </div>
+
+  <h3>Fab Button</h3>
+
+  <div class="mb-2 flex flex-wrap gap-4">
+    <button mat-mini-fab aria-label="Fab"><mat-icon>home</mat-icon></button>
+    <button mat-mini-fab aria-label="Fab" disabled><mat-icon>home</mat-icon></button>
+    <mat-divider vertical class="mx-2 h-[36px] self-center"></mat-divider>
+    <button mat-mini-fab class="surface" aria-label="Fab"><mat-icon>home</mat-icon></button>
+    <button mat-mini-fab class="secondary" aria-label="Fab"><mat-icon>home</mat-icon></button>
+    <button mat-mini-fab class="tertiary" aria-label="Fab"><mat-icon>home</mat-icon></button>
+    <button mat-mini-fab class="error" aria-label="Fab"><mat-icon>home</mat-icon></button>
   </div>
 
   <h3>Icon Button</h3>
 
   <div class="-my-1 -ms-2 flex flex-wrap gap-1">
     <button mat-icon-button aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button>
-    <!-- <button mat-icon-button class="primary" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button> -->
-    <!-- <button mat-icon-button class="secondary" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button> -->
-    <!-- <button mat-icon-button class="tertiary" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button> -->
-    <!-- <button mat-icon-button class="error" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button> -->
     <button mat-icon-button aria-label="Icon" disabled><mat-icon class="align-top">public</mat-icon></button>
+    <mat-divider vertical class="mx-1 h-[28px] self-center"></mat-divider>
+    <button mat-icon-button class="primary" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button>
+    <button mat-icon-button class="surface" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button>
+    <button mat-icon-button class="secondary" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button>
+    <button mat-icon-button class="tertiary" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button>
+    <button mat-icon-button class="error" aria-label="Icon"><mat-icon class="align-top">public</mat-icon></button>
   </div>
 
   <h3>Anchor Button</h3>
 
-  <div class="-my-2 -ms-3 mb-2 flex flex-wrap gap-2">
+  <div class="-my-2 -ms-3 mb-2 flex flex-wrap gap-1">
     <a mat-button href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a>
-    <!-- <a mat-button class="secondary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a> -->
     <a mat-button href="https://www.google.com/" target="_blank" rel="noreferrer noopener" disabled><mat-icon class="align-top">link</mat-icon>Link</a>
+    <mat-divider vertical class="mx-2 h-[24px] self-center"></mat-divider>
+    <a mat-button class="surface" href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a>
+    <a mat-button class="secondary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a>
+    <a mat-button class="tertiary" href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a>
+    <a mat-button class="error" href="https://www.google.com/" target="_blank" rel="noreferrer noopener"><mat-icon class="align-top">link</mat-icon>Link</a>
   </div>
 
   <h2>Forms</h2>
