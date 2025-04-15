@@ -1,66 +1,79 @@
 <div class="container">
   <app-title-bar>
-    <button mat-stroked-button (click)="createBook()" i18n>Create Book</button>
+    <button mat-stroked-button class="tertiary" (click)="createBook()">
+      <mat-icon>create</mat-icon>
+      <span i18n>Create Book</span>
+    </button>
   </app-title-bar>
 
   <p i18n>This is a collection of your books.</p>
 
   @if (!userBooksLoading()) {
-    <h2 i18n>Books in Draft</h2>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="Books in Draft" i18n-label>
+        <div class="mx-0.5 mt-4 mb-8">
+          <p i18n>These books are not publicly visible and can be edited.</p>
 
-    <p i18n>These books are not publicly visible and can be edited.</p>
+          <div class="mx-0.5 mb-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            @for (book of userBooksDraft(); track book) {
+              <a [routerLink]="['/user/books', book.id, 'edit']" class="text-decoration-none text-inherit">
+                <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+              </a>
+            } @empty {
+              <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
+            }
+          </div>
+        </div>
+      </mat-tab>
 
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      @for (book of userBooksDraft(); track book) {
-        <a [routerLink]="['/user/books', book.id, 'edit']" class="text-decoration-none text-inherit">
-          <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-        </a>
-      } @empty {
-        <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
-      }
-    </div>
+      <mat-tab label="Published Books" i18n-label>
+        <div class="mx-0.5 mt-4 mb-8">
+          <p class="my-4" i18n>These books are publicly visible and available for buying. Changes are not possible.</p>
 
-    <h2 i18n>Published Books</h2>
+          <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            @for (book of userBooksPublished(); track book) {
+              <a [routerLink]="['/user/books', book.id]" class="text-decoration-none text-inherit">
+                <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+              </a>
+            } @empty {
+              <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
+            }
+          </div>
+        </div>
+      </mat-tab>
 
-    <p i18n>These books are publicly visible and available for buying. Changes are not possible.</p>
+      <mat-tab label="Sold Books" i18n-label>
+        <div class="mx-0.5 mt-4 mb-8">
+          <p class="my-4" i18n>Sold books are not publicly visible, but they will remain listed here. Changes are not possible.</p>
 
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      @for (book of userBooksPublished(); track book) {
-        <a [routerLink]="['/user/books', book.id]" class="text-decoration-none text-inherit">
-          <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-        </a>
-      } @empty {
-        <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
-      }
-    </div>
+          <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            @for (book of userBooksSold(); track book) {
+              <a [routerLink]="['/user/books', book.id]" class="text-decoration-none text-inherit">
+                <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+              </a>
+            } @empty {
+              <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
+            }
+          </div>
+        </div>
+      </mat-tab>
 
-    <h2 i18n>Sold Books</h2>
+      <mat-tab label="Bought Books" i18n-label>
+        <div class="mx-0.5 mt-4 mb-8">
+          <p class="my-4" i18n>This is your list of the books that you bought from other users.</p>
 
-    <p i18n>Sold books are not publicly visible, but they will remain listed here. Changes are not possible.</p>
-
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      @for (book of userBooksSold(); track book) {
-        <a [routerLink]="['/user/books', book.id]" class="text-decoration-none text-inherit">
-          <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-        </a>
-      } @empty {
-        <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
-      }
-    </div>
-
-    <h2 i18n>Bought Books</h2>
-
-    <p i18n>This is your list of the books that you bought from other users.</p>
-
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      @for (book of userBooksBought(); track book) {
-        <a [routerLink]="['/user/books', book.id]" class="text-decoration-none text-inherit">
-          <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
-        </a>
-      } @empty {
-        <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
-      }
-    </div>
+          <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            @for (book of userBooksBought(); track book) {
+              <a [routerLink]="['/user/books', book.id]" class="text-decoration-none text-inherit">
+                <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+              </a>
+            } @empty {
+              <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
+            }
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   } @else {
     <mat-spinner class="mb-4" aria-label="Loading" i18n-aria-label />
   }

@@ -11,13 +11,17 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { UserBookCardContentComponent } from '../user-book-card-content/user-book-card-content.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-book-list-page',
   imports: [
     RouterModule,
     MatButtonModule,
+    MatIconModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
     TitleBarComponent,
     VolumeCardComponent,
     UserBookCardContentComponent,
