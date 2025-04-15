@@ -9,8 +9,8 @@ import * as fromGoogleBooks from './google-books/google-books.reducer';
 import { LoggerEffects } from './logger/logger.effects';
 import { UserBooksEffects } from './user-books/user-books.effects';
 import * as fromUserBooks from './user-books/user-books.reducer';
-import { VolumesEffects } from './volume/volume.effects';
-import * as fromVolume from './volume/volume.reducer';
+import { VolumesEffects } from '../modules/volumes/store/volume/volume.effects';
+import * as fromVolume from '../modules/volumes/store/volume/volume.reducer';
 
 export const reducers: ActionReducerMap<unknown> = {
   router: routerReducer,

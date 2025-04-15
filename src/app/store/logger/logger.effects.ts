@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 
 import { LoggerActions } from './logger.actions';
 import { UserBooksActions } from '../user-books/user-books.actions';
-import { VolumeActions } from '../volume/volume.actions';
+import { VolumeActions } from '../../modules/volumes/store/volume/volume.actions';
 
 @Injectable()
 export class LoggerEffects {

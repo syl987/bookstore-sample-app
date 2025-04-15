@@ -15,7 +15,7 @@ import { VolumeService } from 'src/app/services/volume.service';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
-import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-fields.component';
+import { VolumeOfferFieldsComponent } from '../../modules/volumes/components/volume-offer-fields/volume-offer-fields.component';
 
 function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undefined {
   return offerId ? volume?.publishedBooks?.[offerId] : undefined;
