@@ -5,8 +5,8 @@ import { concatMap, Observable, of, shareReplay, take, throwError } from 'rxjs';
 
 import { BookDTO, UserBookDTO } from '../models/book.models';
 import { VolumeDTO } from '../models/volume.models';
-import { VolumeActions } from '../store/volume/volume.actions';
-import { volumeFeature } from '../store/volume/volume.reducer';
+import { VolumeActions } from '../modules/volumes/store/volume/volume.actions';
+import { volumeFeature } from '../modules/volumes/store/volume/volume.reducer';
 
 interface IVolumeService {
   /** Load a volume with published books. */

@@ -3,7 +3,7 @@ import { getRouterSelectors } from '@ngrx/router-store';
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 
 import { notUndefined } from 'src/app/functions/typeguard.functions';
-import { filterVolumes } from 'src/app/helpers/volume.helpers';
+import { filterVolumes } from 'src/app/modules/volumes/helpers/volume.helpers';
 import { OperationState } from 'src/app/models/store.models';
 import { VolumeDTO } from 'src/app/models/volume.models';
 
