@@ -27,7 +27,8 @@
   <p>
     Default <span class="text-primary">primary</span> theme, disabled state.
     <br />
-    Custom themes: surface, <span class="text-secondary">secondary</span>, <span class="text-tertiary">tertiary</span>, <span class="text-error">error</span>.
+    Custom themes: surface (composed), <span class="text-secondary">secondary (auto-generated)</span>, <span class="text-tertiary">tertiary (success)</span>,
+    <span class="text-error">error (warn)</span>.
   </p>
 
   <h3>Button with Icon</h3>
@@ -218,9 +219,9 @@
     </div>
 
     <div class="flex flex-wrap gap-2">
-      <button type="submit" mat-flat-button>Submit</button>
-      <button type="reset" mat-stroked-button class="surface" [disabled]="form.disabled">Reset</button>
-      <button type="button" mat-stroked-button class="error" (click)="invalidateForm()">Invalidate</button>
+      <button type="submit" mat-flat-button><mat-icon>check</mat-icon>Submit</button>
+      <button type="reset" mat-stroked-button class="secondary" [disabled]="form.disabled"><mat-icon>undo</mat-icon>Reset</button>
+      <button type="button" mat-stroked-button class="error" (click)="invalidateForm()"><mat-icon>error_outline</mat-icon>Invalidate</button>
     </div>
   </form>
 
@@ -233,7 +234,7 @@
   <h3>Toast Message</h3>
 
   <div class="flex flex-wrap gap-2">
-    <button mat-flat-button (click)="showSuccessToast()">Show Success</button>
+    <button mat-flat-button (click)="showSuccessToast()" class="tertiary">Show Success</button>
     <button mat-stroked-button (click)="showInfoToast()" class="surface">Show Info</button>
     <button mat-stroked-button (click)="showErrorToast()" class="error">Show Error</button>
   </div>
