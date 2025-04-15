@@ -7,12 +7,14 @@ import { VolumeService } from 'src/app/services/volume.service';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-volume-search-page',
   imports: [
     RouterModule,
     MatButtonModule,
+    MatIconModule,
     MatProgressSpinnerModule,
     TitleBarComponent,
     VolumeCardComponent,
