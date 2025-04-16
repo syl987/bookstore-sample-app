@@ -14,7 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 import { delay, distinctUntilChanged, map, of, tap } from 'rxjs';
 
 import { getCurrentAppLanguage } from 'src/app/helpers/app.helpers';
-import { APP_LANGUAGES, APP_NAV_LINKS, APP_OPTIONS } from 'src/app/models/app.models';
+import { APP_LANGUAGES, APP_LINKS, APP_OPTIONS } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -55,6 +55,7 @@ export class HeaderComponent {
 
   readonly themeService = inject(ThemeService);
   readonly options = inject(APP_OPTIONS);
+  readonly links = inject(APP_LINKS);
 
   readonly user = this.authService.user;
 
@@ -71,9 +72,8 @@ export class HeaderComponent {
     query: new FormControl<string>(''),
   });
 
-  readonly LINKS = APP_NAV_LINKS;
-  readonly PUBLIC_LINKS = this.LINKS.filter(link => !link.user);
-  readonly USER_LINKS = this.LINKS.filter(link => link.user);
+  readonly PUBLIC_LINKS = this.links.filter(l => !l.userSpecific);
+  readonly USER_LINKS = this.links.filter(l => l.userSpecific);
 
   readonly APP_LANGUAGES = APP_LANGUAGES;
 

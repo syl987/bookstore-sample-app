@@ -15,23 +15,25 @@ export interface AppOptions {
 export const APP_OPTIONS = new InjectionToken<AppOptions>('APP_OPTIONS');
 
 /**
- * App-specific router links.
+ * App-specific router link.
  */
-export interface AppNavLink {
+export interface AppLink {
   /** Display name. */
   readonly label: string;
-  /** Full router path. */
+  /** Router path. */
   readonly path: string;
+  /** Fragment for a specific router path. */
+  readonly fragment?: string;
   /** Whether authentication as existing user is required (default: false). */
-  readonly user?: boolean;
+  readonly userSpecific?: boolean;
 }
 
-export const APP_NAV_LINKS: readonly AppNavLink[] = [
-  { label: $localize`Welcome`, path: '/welcome' },
-  { label: $localize`Books`, path: '/volumes' },
-  { label: $localize`My Books`, path: '/user/books', user: true },
-  { label: 'Dev', path: '/dev' },
-];
+/**
+ * App-specific router links.
+ */
+export type AppLinks = readonly AppLink[];
+
+export const APP_LINKS = new InjectionToken<AppLinks>('APP_LINKS');
 
 export interface AppLanguage {
   /** Display name. */

@@ -5,20 +5,26 @@
   </div>
 
   <mat-nav-list>
-    @for (link of PUBLIC_LINKS; track link.path) {
-      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">{{ link.label }}</a>
+    @for (link of publicLinks; track link.path) {
+      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">
+        {{ link.label }}
+      </a>
     }
   </mat-nav-list>
 
   <mat-divider class="mx-4" />
 
-  <mat-nav-list class="pb-0">
-    @for (link of USER_LINKS; track link.path) {
-      <a mat-list-item [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
+  <mat-nav-list>
+    @for (link of userLinks; track link.path) {
+      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">
+        {{ link.label }}
+      </a>
     }
   </mat-nav-list>
 
-  <mat-action-list class="pt-0">
+  <mat-divider class="mx-4" />
+
+  <mat-action-list>
     <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()" i18n>Session Info</button>
 
     <button mat-list-item (click)="logout(); navigated.emit()" i18n>Logout</button>
@@ -33,8 +39,10 @@
   </div>
 
   <mat-nav-list>
-    @for (link of PUBLIC_LINKS; track link.path) {
-      <a mat-list-item [routerLink]="link.path" routerLinkActive="active" (click)="navigated.emit()">{{ link.label }}</a>
+    @for (link of publicLinks; track link.path) {
+      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">
+        {{ link.label }}
+      </a>
     }
   </mat-nav-list>
 
@@ -44,6 +52,6 @@
     <button mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
   </mat-action-list>
 }
-<button mat-icon-button (click)="navigated.emit()" class="position-absolute end-0 top-0 m-1" aria-label="Close" i18n-aria-label>
+<button mat-icon-button (click)="navigated.emit()" class="absolute end-0 top-0 m-2" aria-label="Close" i18n-aria-label>
   <mat-icon>close</mat-icon>
 </button>

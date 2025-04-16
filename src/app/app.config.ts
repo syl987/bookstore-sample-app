@@ -23,7 +23,7 @@ import { routes } from './app.routes';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { DirtyOrTouchedMatcher } from './matchers/dirty-or-touched-matcher';
-import { APP_OPTIONS, AppOptions } from './models/app.models';
+import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.models';
 import { AUTH_CONFIG, AuthConfig } from './models/auth.models';
 import { dialogOptions } from './options/dialog.options';
 import { formFieldOptions } from './options/form-field.options';
@@ -51,6 +51,13 @@ const authConfig: AuthConfig = {
     response401: $localize`Not authenticated`,
   },
 };
+
+const appLinks: AppLinks = [
+  { label: $localize`Welcome`, path: '/welcome' },
+  { label: $localize`Books`, path: '/volumes' },
+  { label: $localize`My Books`, path: '/user/books', userSpecific: true },
+  { label: 'Dev', path: '/dev' },
+];
 
 function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
   return () => {
@@ -87,6 +94,7 @@ export const appConfig: ApplicationConfig = {
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: APP_OPTIONS, useValue: appOptions },
     { provide: AUTH_CONFIG, useValue: authConfig },
+    { provide: APP_LINKS, useValue: appLinks },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
     /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */
