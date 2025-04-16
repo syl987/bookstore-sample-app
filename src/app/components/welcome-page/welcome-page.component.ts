@@ -124,8 +124,6 @@ const features: AppTechnicalFeature[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomePageComponent {
-  readonly major = VERSION.major;
-
   readonly techStack = techStack;
   readonly features = features;
 }
