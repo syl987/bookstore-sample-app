@@ -6,7 +6,7 @@
 
   <mat-nav-list>
     @for (link of publicLinks; track link.path) {
-      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">
+      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="a.isActive" (click)="navigated.emit()" #a="routerLinkActive">
         <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
         {{ link.label }}
       </a>
@@ -17,7 +17,7 @@
 
   <mat-nav-list>
     @for (link of userLinks; track link.path) {
-      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">
+      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="a.isActive" (click)="navigated.emit()" #a="routerLinkActive">
         <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
         {{ link.label }}
       </a>
@@ -48,7 +48,7 @@
 
   <mat-nav-list>
     @for (link of publicLinks; track link.path) {
-      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">
+      <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="a.isActive" (click)="navigated.emit()" #a="routerLinkActive">
         <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
         {{ link.label }}
       </a>
