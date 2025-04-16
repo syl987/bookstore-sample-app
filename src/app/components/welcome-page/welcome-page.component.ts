@@ -95,24 +95,24 @@ const features: AppTechnicalFeature[] = [
     description: $localize`The semi-dynamic application layout fully supports all common device sizes.`,
   },
   {
-    title: `NoSQL Database`,
-    description: $localize`Any changes by the user are persistently saved using Firebase realtime database.`,
+    title: `Dark Theme`,
+    description: $localize`Switch between light and dark theme at any time. Defaults to browser settings.`,
   },
   {
     title: `File Upload`,
     description: $localize`Select, crop and upload image files for display alongside with regular data.`,
   },
   {
-    title: `Forms with Validation`,
-    description: $localize`A variety of form fields with consistent offline and on-response validation.`,
+    title: `NoSQL Database`,
+    description: $localize`Any changes by the user are persistently saved using Firebase realtime database.`,
   },
   {
     title: `External API`,
     description: $localize`Find your favorite books with Google Books API and provide custom data.`,
   },
   {
-    title: `Dark Theme`,
-    description: $localize`Switch between light and dark theme at any time. Defaults to browser settings.`,
+    title: `Forms with Validation`,
+    description: $localize`A variety of form fields with consistent offline and on-response validation.`,
   },
 ];
 
