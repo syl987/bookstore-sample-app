@@ -52,3 +52,29 @@ export interface AppLanguage {
 export type AppLanguages = readonly AppLanguage[];
 
 export const APP_LANGUAGES = new InjectionToken<AppLanguages>('APP_LANGUAGES');
+
+/**
+ * Tech-stack item.
+ */
+export interface AppTechStackItem {
+  /** Display name. */
+  readonly title: string;
+  /** Short description. */
+  readonly subtitle: string;
+  /** Block description. */
+  readonly description: string;
+  /** Image URL. */
+  readonly image: string;
+  /** Image element classes. Intended for layout adjustments. */
+  readonly imageClass?: string;
+}
+
+/**
+ * App-specific technical feature.
+ */
+export interface AppTechnicalFeature {
+  /** Display name. */
+  readonly title: string;
+  /** Block description. */
+  readonly description: string;
+}
