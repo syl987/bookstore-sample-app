@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
 
-import { APP_LINKS } from 'src/app/models/app.models';
+import { APP_LINKS, APP_OPTIONS } from 'src/app/models/app.models';
 import { AuthUser } from 'src/app/models/auth.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -26,6 +26,7 @@ export class SidenavComponent {
   protected readonly authService = inject(AuthService);
   protected readonly dialogService = inject(DialogService);
 
+  readonly options = inject(APP_OPTIONS);
   readonly links = inject(APP_LINKS);
 
   readonly user = this.authService.user;

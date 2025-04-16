@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
 import { delay, distinctUntilChanged, map, of, tap } from 'rxjs';
 
 import { getCurrentAppLanguage } from 'src/app/helpers/app.helpers';
-import { APP_LANGUAGES, APP_OPTIONS } from 'src/app/models/app.models';
+import { APP_LANGUAGES } from 'src/app/models/app.models';
 import { VolumeService } from 'src/app/services/volume.service';
 
 import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.component';
@@ -55,7 +55,6 @@ export class HeaderComponent extends SidenavComponent {
 
   readonly themeService = inject(ThemeService);
   readonly languages = inject(APP_LANGUAGES);
-  readonly options = inject(APP_OPTIONS);
 
   readonly desktop$ = this.breakpointObserver.observe([Breakpoints.WebLandscape]).pipe(
     map(({ matches }) => matches),
