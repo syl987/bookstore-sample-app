@@ -1,17 +1,18 @@
-import { inject, LOCALE_ID } from '@angular/core';
-
-import { APP_LANGUAGES, AppLanguage } from '../models/app.models';
+import { AppLanguage, AppLanguages } from '../models/app.models';
 
 /**
- * Get current application language based on the current LOCALE_ID.
+ * Get current language by locale.
  *
+ * @param languages Available languages.
+ * @param locale Current locale id.
  * @returns `AppLanguage` with matching locale id.
+ * @throws If non has been matched.
  */
-export function getCurrentAppLanguage(locale = inject(LOCALE_ID)): AppLanguage {
-  const lang = APP_LANGUAGES.find(language => language.locale === locale);
+export function getCurrentAppLanguage(languages: AppLanguages, locale: string): AppLanguage {
+  const lang = languages.find(l => l.locale === locale);
 
   if (!lang) {
-    throw new Error('Internal Error: Invalid locale definition.');
+    throw new Error('Could not determine current locale.');
   }
   return lang;
 }

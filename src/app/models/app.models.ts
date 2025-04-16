@@ -35,6 +35,9 @@ export type AppLinks = readonly AppLink[];
 
 export const APP_LINKS = new InjectionToken<AppLinks>('APP_LINKS');
 
+/**
+ * Language available in the app.
+ */
 export interface AppLanguage {
   /** Display name. */
   readonly label: string;
@@ -44,8 +47,6 @@ export interface AppLanguage {
   readonly icon: string;
 }
 
-export const APP_LANGUAGES: readonly AppLanguage[] = [
-  { label: 'English', locale: 'en', icon: 'us' },
-  { label: 'Deutsch', locale: 'de', icon: 'de' },
-  { label: 'Español', locale: 'es', icon: 'es' },
-];
+export type AppLanguages = readonly AppLanguage[];
+
+export const APP_LANGUAGES = new InjectionToken<AppLanguages>('APP_LANGUAGES');

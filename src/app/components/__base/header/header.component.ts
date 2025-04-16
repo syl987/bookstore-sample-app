@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject, LOCALE_ID } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,11 +43,13 @@ const FAKE_RESPONSE_TIME = 750;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent extends SidenavComponent {
+  protected readonly locale = inject(LOCALE_ID);
   protected readonly destroyRef = inject(DestroyRef);
   protected readonly breakpointObserver = inject(BreakpointObserver);
   protected readonly volumeService = inject(VolumeService);
 
   readonly themeService = inject(ThemeService);
+  readonly languages = inject(APP_LANGUAGES);
   readonly options = inject(APP_OPTIONS);
 
   readonly desktop$ = this.breakpointObserver.observe([Breakpoints.WebLandscape]).pipe(
@@ -63,9 +65,7 @@ export class HeaderComponent extends SidenavComponent {
     query: new FormControl<string>('', { nonNullable: true }),
   });
 
-  readonly APP_LANGUAGES = APP_LANGUAGES;
-
-  readonly currentLang = getCurrentAppLanguage();
+  readonly currentLang = getCurrentAppLanguage(this.languages, this.locale);
 
   readonly searchOverlayOpen = signal(false);
 
