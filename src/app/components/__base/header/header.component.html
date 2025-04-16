@@ -3,9 +3,12 @@
     @if (desktop()) {
       <div class="text-primary me-4 text-lg">{{ options.applicationName }}</div>
 
-      @for (link of publicLinks; track link.path) {
-        <a mat-button [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
-      }
+      <nav mat-tab-nav-bar>
+        @for (link of publicLinks; track link.path) {
+          <a mat-tab-link [routerLink]="link.path" routerLinkActive [active]="a.isActive" class="px-3" #a="routerLinkActive">{{ link.label }}</a>
+        }
+      </nav>
+
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
           <mat-icon inline class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
@@ -19,18 +22,27 @@
       <span class="ms-2 me-auto"></span>
 
       @if (user(); as user) {
-        <button mat-button (click)="openUserSessionInfoDialog(user)">
-          <app-header-user-info [user]="user" />
-        </button>
+        <div mat-tab-nav-bar>
+          <button mat-tab-link (click)="openUserSessionInfoDialog(user)" class="px-3">
+            <app-header-user-info [user]="user" />
+          </button>
+        </div>
 
         <mat-divider vertical class="mx-2" style="height: 32px" />
 
-        @for (link of userLinks; track link.path) {
-          <a mat-button [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
-        }
-        <button mat-button (click)="logout()" i18n>Logout</button>
+        <nav mat-tab-nav-bar>
+          @for (link of userLinks; track link.path) {
+            <a mat-tab-link [routerLink]="link.path" routerLinkActive [active]="a.isActive" class="px-3" #a="routerLinkActive">{{ link.label }}</a>
+          }
+        </nav>
+
+        <div mat-tab-nav-bar>
+          <button mat-tab-link (click)="logout()" class="px-3" i18n>Logout</button>
+        </div>
       } @else {
-        <a mat-button routerLink="/login" routerLinkActive="active" i18n>Login</a>
+        <nav mat-tab-nav-bar>
+          <a mat-tab-link routerLink="/login" routerLinkActive [active]="a.isActive" class="px-3" i18n #a="routerLinkActive">Login</a>
+        </nav>
       }
       <mat-divider vertical class="mx-2" style="height: 32px" />
     } @else {

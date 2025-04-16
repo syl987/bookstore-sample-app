@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { delay, distinctUntilChanged, map, of, tap } from 'rxjs';
@@ -35,12 +36,14 @@ const FAKE_RESPONSE_TIME = 750;
     MatInputModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
     MatToolbarModule,
     HeaderUserInfoComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'app-header' },
 })
 export class HeaderComponent extends SidenavComponent {
   protected readonly locale = inject(LOCALE_ID);
