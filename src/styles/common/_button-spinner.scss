@@ -1,12 +1,14 @@
 .app-button-spinner {
   transition: background-color 0.3s ease-in-out;
 
+  .mat-icon,
   .mdc-button__label,
   .mat-mdc-progress-spinner {
     opacity: 100;
     transition: opacity 0.3s ease-in-out;
   }
 
+  &.is-spinning .mat-icon,
   &.is-spinning .mdc-button__label {
     opacity: 0;
   }
