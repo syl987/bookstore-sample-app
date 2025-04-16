@@ -4,9 +4,6 @@
 
 - [ ] add terms-of-use page
 - [ ] add data-policy page
-- [ ] update welcome-page wordings
-  - [ ] eslint 9 + text
-  - [ ] sass text
 - [ ] remove any work-in-progress info
 - [ ] on buy: navigate to user books => create a success dialog
 - [ ] volume / offer detail: add support for 404
@@ -17,9 +14,8 @@
   - [ ] navigate to user books after an action
   - [ ] delete book (if not sold)
   - [ ] check file delete feature works properly
-- [ ] add github link?
-- [ ] allow book deletion if published + delete the volume if not related to any books
-- [ ] add localization feature to the welcome-page
+- [ ] add github icon link
+- [ ] fully localize welcome-page
 - [ ] table actions sticky right
 
 ## Maintenance Tasks
@@ -30,13 +26,13 @@
 ## Technical Improvements
 
 - [ ] adjust eslint rules
-- [ ] separate css/scss in angular.json per plugin
+- [ ] separate css/scss in angular.json per plugin or merge back together
   - [x] material
   - [ ] cdk (if needed)
   - [x] tailwindcss
   - [x] flagpack
   - [ ] rename styles.scss as custom.scss
-- [ ] migrate snackbar icons
+- [x] migrate snackbar icons
 - [x] wrap message on err object in internalError
 - [x] replace font-awesome with material icons
 - [x] use signals api for everything - kick any unnecessary decorators
@@ -45,9 +41,9 @@
   - [ ] check for any mergeable streams using computed
 - [ ] use functional guards / resolvers / effects
 - [x] use inject statements instead of constructors
-- [ ] welcome-page content as array data (keep translatable)
+- [x] welcome-page content as array data (keep translatable)
 - [x] update to material 3 with light theme + use more colors + adjust welcome page
-- [ ] add dark theme with material 3
+- [x] add dark theme with material 3
 - [x] replace bootstrap with tailwindcss v4 + adjust welcome page
 - [x] setup stylelint
 - [ ] resolve deprecations
@@ -62,7 +58,7 @@
 - [ ] replace generated translations keys with custom strings
 - [ ] resolve sass deprecations
 - [ ] replace sass imports
-- [ ] adjust layout, check align classes
+- [x] adjust layout, check align classes
 
 ### Low Priority
 
@@ -78,4 +74,5 @@
 ## Bug Issues
 
 - [ ] change detection not fired after photo upload
-- [ ] gap helper conflicts with negative link margin in the title-bar
+- [x] gap helper conflicts with negative link margin in the title-bar
+- [ ] title-bar incorrect heading on navigation error
