@@ -10,18 +10,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { delay, distinctUntilChanged, map, of, tap } from 'rxjs';
 
 import { getCurrentAppLanguage } from 'src/app/helpers/app.helpers';
-import { APP_LANGUAGES, APP_LINKS, APP_OPTIONS } from 'src/app/models/app.models';
-import { AuthUser } from 'src/app/models/auth.models';
-import { AuthService } from 'src/app/services/auth.service';
-import { DialogService } from 'src/app/services/dialog.service';
+import { APP_LANGUAGES, APP_OPTIONS } from 'src/app/models/app.models';
 import { VolumeService } from 'src/app/services/volume.service';
 
 import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.component';
 import { ThemeService } from 'src/app/services/theme.service';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 const FAKE_RESPONSE_TIME = 750;
 
@@ -44,20 +42,14 @@ const FAKE_RESPONSE_TIME = 750;
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
-  protected readonly router = inject(Router);
+export class HeaderComponent extends SidenavComponent {
   protected readonly builder = inject(FormBuilder);
   protected readonly destroyRef = inject(DestroyRef);
   protected readonly breakpointObserver = inject(BreakpointObserver);
-  protected readonly authService = inject(AuthService);
   protected readonly volumeService = inject(VolumeService);
-  protected readonly dialogService = inject(DialogService);
 
   readonly themeService = inject(ThemeService);
   readonly options = inject(APP_OPTIONS);
-  readonly links = inject(APP_LINKS);
-
-  readonly user = this.authService.user;
 
   readonly desktop$ = this.breakpointObserver.observe([Breakpoints.WebLandscape]).pipe(
     map(({ matches }) => matches),
@@ -72,9 +64,6 @@ export class HeaderComponent {
     query: new FormControl<string>(''),
   });
 
-  readonly PUBLIC_LINKS = this.links.filter(l => !l.userSpecific);
-  readonly USER_LINKS = this.links.filter(l => l.userSpecific);
-
   readonly APP_LANGUAGES = APP_LANGUAGES;
 
   readonly currentLang = getCurrentAppLanguage();
@@ -83,16 +72,12 @@ export class HeaderComponent {
 
   readonly sidenavToggle = output();
 
-  constructor() {
+  ngOnInit(): void {
     toObservable(this.volumeService.filterQuery)
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(query => {
-        this.form.get('query')!.setValue(query, { emitEvent: false });
+        this.form.controls.query.setValue(query, { emitEvent: false });
       });
-  }
-
-  openUserSessionInfoDialog(user: AuthUser): void {
-    this.dialogService.openUserSessionInfoDialog(user);
   }
 
   search(): void {
@@ -107,9 +92,5 @@ export class HeaderComponent {
         this.volumeService.filter(query);
         this.router.navigateByUrl('/volumes');
       });
-  }
-
-  logout(): void {
-    this.authService.logout();
   }
 }

@@ -3,7 +3,7 @@
     @if (desktop()) {
       <div class="text-primary me-4 text-lg">{{ options.applicationName }}</div>
 
-      @for (link of PUBLIC_LINKS; track link.path) {
+      @for (link of publicLinks; track link.path) {
         <a mat-button [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
       }
       <form [formGroup]="form" (ngSubmit)="search()">
@@ -25,7 +25,7 @@
 
         <mat-divider vertical class="mx-2" style="height: 32px" />
 
-        @for (link of USER_LINKS; track link.path) {
+        @for (link of userLinks; track link.path) {
           <a mat-button [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
         }
         <button mat-button (click)="logout()" i18n>Logout</button>
