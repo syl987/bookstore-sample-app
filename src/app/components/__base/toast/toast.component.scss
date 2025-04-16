@@ -1,0 +1,14 @@
+.app-toast {
+  display: flex;
+
+  &__icon {
+    height: 24px;
+    align-self: center;
+    margin-left: 12px;
+    margin-right: -4px;
+  }
+}
+
+.mdc-snackbar__surface {
+  border: var(--mdc-snackbar-supporting-text-color) 2px solid;
+}

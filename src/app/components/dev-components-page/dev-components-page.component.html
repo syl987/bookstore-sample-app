@@ -221,7 +221,7 @@
     <div class="flex flex-wrap gap-2">
       <button type="submit" mat-flat-button><mat-icon>check</mat-icon>Submit</button>
       <button type="reset" mat-stroked-button class="app-secondary" [disabled]="form.disabled"><mat-icon>undo</mat-icon>Reset</button>
-      <button type="button" mat-stroked-button class="app-error" (click)="invalidateForm()"><mat-icon>error_outline</mat-icon>Invalidate</button>
+      <button type="button" mat-stroked-button class="app-error" (click)="invalidateForm()"><mat-icon>close</mat-icon>Invalidate</button>
     </div>
   </form>
 
@@ -234,9 +234,10 @@
   <h3>Toast Message</h3>
 
   <div class="flex flex-wrap gap-2">
-    <button mat-stroked-button (click)="showInfoToast()" class="app-primary">Show Info</button>
-    <button mat-stroked-button (click)="showSuccessToast()" class="app-tertiary">Show Success</button>
-    <button mat-stroked-button (click)="showErrorToast()" class="app-error">Show Error</button>
+    <button mat-stroked-button (click)="showInfoToast()" class="app-primary"><mat-icon>priority_high</mat-icon>Show Info</button>
+    <button mat-stroked-button (click)="showSuccessToast()" class="app-tertiary"><mat-icon>check</mat-icon>Show Success</button>
+    <button mat-stroked-button (click)="showErrorToast()" class="app-error"><mat-icon>close</mat-icon>Show Error</button>
+    <button mat-stroked-button (click)="showInfoToastWithAction()" class="app-surface"><mat-icon>question_mark</mat-icon>With Action</button>
   </div>
 
   <h2>Icons</h2>

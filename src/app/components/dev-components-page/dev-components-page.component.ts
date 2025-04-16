@@ -82,11 +82,17 @@ export class DevComponentsPageComponent {
   }
 
   showErrorToast(): void {
-    this.toastService.showErrorToast('Short error message (default 7 seconds).');
+    this.toastService.showErrorToast('Short error message (default 7 seconds).', { duration: 8 * 1000 });
   }
 
   showInfoToast(): void {
     this.toastService.showInfoToast('Short info message (custom 10 seconds).', { duration: 10 * 1000 });
+  }
+
+  showInfoToastWithAction(): void {
+    const toastRef = this.toastService.showInfoToast('Toast with action.', { action: { name: 'Execute', icon: 'check' } });
+
+    toastRef.onAction().subscribe(() => this.toastService.showSuccessToast('Toast action dispatched.'));
   }
 
   submitForm(): void {

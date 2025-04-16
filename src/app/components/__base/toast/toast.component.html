@@ -1,0 +1,16 @@
+<div class="app-toast__icon">
+  <mat-icon>{{ data.icon }}</mat-icon>
+</div>
+
+<div matSnackBarLabel>
+  {{ data.message }}
+</div>
+
+@if (hasAction) {
+  <div matSnackBarActions>
+    <button mat-button matSnackBarAction (click)="action()">
+      <mat-icon>{{ data.action!.icon }}</mat-icon>
+      {{ data.action!.name }}
+    </button>
+  </div>
+}

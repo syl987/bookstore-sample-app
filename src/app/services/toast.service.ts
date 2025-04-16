@@ -1,7 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
+import { ToastComponent, ToastData } from '../components/__base/toast/toast.component';
 
-type ToastConfig = Pick<MatSnackBarConfig<never>, 'duration'>;
+export interface ToastConfig extends Pick<MatSnackBarConfig<never>, 'duration'> {
+  action?: { name: string; icon: string };
+}
 
 @Injectable({
   providedIn: 'root',
@@ -9,15 +12,30 @@ type ToastConfig = Pick<MatSnackBarConfig<never>, 'duration'>;
 export class ToastService {
   protected readonly snackbar = inject(MatSnackBar);
 
-  showSuccessToast(message: string, options?: ToastConfig): MatSnackBarRef<SimpleSnackBar> {
-    return this.snackbar.open(message, undefined, { duration: 5000, ...options, panelClass: 'success' });
+  showInfoToast(message: string, options?: ToastConfig): MatSnackBarRef<ToastComponent> {
+    const data: ToastData = {
+      icon: 'priority_high',
+      message,
+      action: options?.action,
+    };
+    return this.snackbar.openFromComponent(ToastComponent, { duration: 9 * 1000, ...options, data, panelClass: 'app-primary' });
   }
 
-  showErrorToast(message: string, options?: ToastConfig): MatSnackBarRef<SimpleSnackBar> {
-    return this.snackbar.open(message, undefined, { duration: 7000, ...options, panelClass: 'error' });
+  showSuccessToast(message: string, options?: ToastConfig): MatSnackBarRef<ToastComponent> {
+    const data: ToastData = {
+      icon: 'check',
+      message,
+      action: options?.action,
+    };
+    return this.snackbar.openFromComponent(ToastComponent, { duration: 5 * 1000, ...options, data, panelClass: 'app-tertiary' });
   }
 
-  showInfoToast(message: string, options?: ToastConfig): MatSnackBarRef<SimpleSnackBar> {
-    return this.snackbar.open(message, undefined, { duration: 7000, ...options, panelClass: 'info' });
+  showErrorToast(message: string, options?: ToastConfig): MatSnackBarRef<ToastComponent> {
+    const data: ToastData = {
+      icon: 'close',
+      message,
+      action: options?.action,
+    };
+    return this.snackbar.openFromComponent(ToastComponent, { duration: 7 * 1000, ...options, data, panelClass: 'app-error' });
   }
 }
