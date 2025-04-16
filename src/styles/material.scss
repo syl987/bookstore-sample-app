@@ -4,6 +4,7 @@
 
 @use 'material/button';
 @use 'material/dialog';
+@use 'material/divider';
 @use 'material/fab';
 @use 'material/form-field';
 @use 'material/icon-button';
@@ -40,6 +41,7 @@ html {
 
   @include mat.button-overrides(button.$tokens);
   @include mat.dialog-overrides(dialog.$tokens);
+  @include mat.divider-overrides(divider.$tokens);
   @include mat.fab-overrides(fab.$tokens);
   @include mat.form-field-overrides(form-field.$tokens);
   @include mat.icon-button-overrides(icon-button.$tokens);
