@@ -1,5 +1,4 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject, LOCALE_ID } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +29,6 @@ const FAKE_RESPONSE_TIME = 750;
   imports: [
     RouterModule,
     ReactiveFormsModule,
-    OverlayModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,

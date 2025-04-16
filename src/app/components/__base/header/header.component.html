@@ -1,7 +1,7 @@
 <mat-toolbar class="mat-elevation-z2">
-  <mat-toolbar-row cdkOverlayOrigin #searchOverlayTrigger="cdkOverlayOrigin">
+  <mat-toolbar-row class="gap-1 sm:gap-2">
     @if (desktop()) {
-      <div class="text-primary me-4 text-xl">{{ options.applicationName }}</div>
+      <div class="text-primary text-xl">{{ options.applicationName }}</div>
 
       <nav mat-tab-nav-bar>
         @for (link of publicLinks; track link.path) {
@@ -10,7 +10,7 @@
       </nav>
 
       <form [formGroup]="form" (ngSubmit)="search()">
-        <mat-form-field appearance="fill" class="ms-2 min-w-3xs">
+        <mat-form-field appearance="fill" class="min-w-3xs">
           @if (searching()) {
             <mat-spinner diameter="24" class="mx-3" matPrefix />
           } @else {
@@ -29,31 +29,28 @@
           </button>
         </div>
 
-        <mat-divider vertical class="mx-2 h-8" />
+        <mat-divider vertical class="h-8" />
 
         <nav mat-tab-nav-bar>
           @for (link of userLinks; track link.path) {
             <a mat-tab-link [routerLink]="link.path" routerLinkActive [active]="a.isActive" class="px-3" #a="routerLinkActive">{{ link.label }}</a>
           }
-        </nav>
-
-        <div mat-tab-nav-bar>
           <button mat-tab-link (click)="logout()" class="px-3" i18n>Logout</button>
-        </div>
+        </nav>
       } @else {
         <nav mat-tab-nav-bar>
           <a mat-tab-link routerLink="/login" routerLinkActive [active]="a.isActive" class="px-3" i18n #a="routerLinkActive">Login</a>
         </nav>
       }
     } @else {
-      <button mat-icon-button (click)="sidenavToggle.emit()" class="-ms-2 me-2" aria-label="Toggle Navigation" i18n-aria-label>
+      <button mat-icon-button (click)="sidenavToggle.emit()" class="-ms-2 sm:me-1 md:me-2" aria-label="Toggle Navigation" i18n-aria-label>
         <mat-icon>menu</mat-icon>
       </button>
 
       @if (!searchOpen()) {
         <div class="text-primary truncate text-base sm:text-lg md:text-xl">{{ options.applicationName }}</div>
 
-        <span class="ms-2 me-auto"></span>
+        <span class="me-auto h-6"></span>
       } @else {
         <form [formGroup]="form" (ngSubmit)="search(); searchOpen.set(false); form.controls.query.setValue('')" class="grow">
           <mat-form-field appearance="fill" class="w-20 min-w-full">
@@ -69,21 +66,19 @@
         }
       </button>
     }
-    <mat-divider vertical class="mx-2 h-8" />
+    <mat-divider vertical class="h-8" />
 
-    <div class="flex gap-1">
-      <button mat-icon-button (click)="themeService.toggleTheme()" aria-label="Toggle Theme">
-        @if (themeService.theme === 'dark') {
-          <mat-icon>dark_mode</mat-icon>
-        } @else {
-          <mat-icon>light_mode</mat-icon>
-        }
-      </button>
+    <button mat-icon-button (click)="themeService.toggleTheme()" aria-label="Toggle Theme">
+      @if (themeService.theme === 'dark') {
+        <mat-icon>dark_mode</mat-icon>
+      } @else {
+        <mat-icon>light_mode</mat-icon>
+      }
+    </button>
 
-      <button mat-icon-button [matMenuTriggerFor]="languageMenu" class="-me-2" aria-label="Language" i18n-aria-label>
-        <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />
-      </button>
-    </div>
+    <button mat-icon-button [matMenuTriggerFor]="languageMenu" class="-me-2" aria-label="Language" i18n-aria-label>
+      <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
 
