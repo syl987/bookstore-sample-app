@@ -11,7 +11,7 @@
 
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
-          <mat-icon inline class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
+          <mat-icon class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
           <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
           @if (searching()) {
             <mat-spinner diameter="24" class="me-4" matSuffix />

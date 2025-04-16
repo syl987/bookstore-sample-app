@@ -1,5 +1,15 @@
 @use '@angular/material' as mat;
 
+$form-field-tokens: (
+  container-height: 64px,
+  container-vertical-padding: 20px,
+  filled-active-indicator-height: 0,
+  filled-container-color: transparent,
+  filled-container-shape: 0,
+  filled-focus-active-indicator-height: 0,
+  subscript-text-line-height: 0,
+);
+
 $tabs-tokens: (
   active-indicator-height: 3px,
   container-height: 64px,
@@ -7,7 +17,12 @@ $tabs-tokens: (
 );
 
 :host {
+  @include mat.form-field-overrides($form-field-tokens);
   @include mat.tabs-overrides($tabs-tokens);
+
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
+  }
 
   ::ng-deep .mdc-tab-indicator__content--underline {
     width: calc(100% - 16px); // value by visuals
