@@ -17,7 +17,7 @@
           <div class="mx-0.5 mb-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             @for (book of userBooksDraft(); track book) {
               <a [routerLink]="['/user/books', book.id, 'edit']" class="text-decoration-none text-inherit">
-                <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+                <app-volume-card [volume]="book.volume" class="h-full"><app-user-book-card-content [book]="book" /></app-volume-card>
               </a>
             } @empty {
               <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
@@ -33,7 +33,7 @@
           <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             @for (book of userBooksPublished(); track book) {
               <a [routerLink]="['/user/books', book.id]" class="text-decoration-none text-inherit">
-                <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+                <app-volume-card [volume]="book.volume" class="h-full"><app-user-book-card-content [book]="book" /></app-volume-card>
               </a>
             } @empty {
               <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
@@ -49,7 +49,7 @@
           <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             @for (book of userBooksSold(); track book) {
               <a [routerLink]="['/user/books', book.id]" class="text-decoration-none text-inherit">
-                <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+                <app-volume-card [volume]="book.volume" class="h-full"><app-user-book-card-content [book]="book" /></app-volume-card>
               </a>
             } @empty {
               <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
@@ -65,7 +65,7 @@
           <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             @for (book of userBooksBought(); track book) {
               <a [routerLink]="['/user/books', book.id]" class="text-decoration-none text-inherit">
-                <app-volume-card [volume]="book.volume"><app-user-book-card-content [book]="book" /></app-volume-card>
+                <app-volume-card [volume]="book.volume" class="h-full"><app-user-book-card-content [book]="book" /></app-volume-card>
               </a>
             } @empty {
               <p class="text-secondary col-span-full py-2 text-center" i18n>No books were found.</p>
