@@ -53,32 +53,32 @@ body {
   color-scheme: light dark;
 }
 
-.primary {
+.app-primary {
   @include mat.icon-button-overrides(icon-button.$primary-tokens);
 }
 
-.surface {
+.app-surface {
   @include mat.button-overrides(button.$surface-tokens);
   @include mat.fab-overrides(fab.$surface-tokens);
   @include mat.icon-button-overrides(icon-button.$surface-tokens);
   @include mat.progress-spinner-overrides(progress-spinner.$surface-tokens);
 }
 
-.secondary {
+.app-secondary {
   @include mat.button-overrides(button.$secondary-tokens);
   @include mat.fab-overrides(fab.$secondary-tokens);
   @include mat.icon-button-overrides(icon-button.$secondary-tokens);
   @include mat.progress-spinner-overrides(progress-spinner.$secondary-tokens);
 }
 
-.tertiary {
+.app-tertiary {
   @include mat.button-overrides(button.$tertiary-tokens);
   @include mat.fab-overrides(fab.$tertiary-tokens);
   @include mat.icon-button-overrides(icon-button.$tertiary-tokens);
   @include mat.progress-spinner-overrides(progress-spinner.$tertiary-tokens);
 }
 
-.error {
+.app-error {
   @include mat.button-overrides(button.$error-tokens);
   @include mat.fab-overrides(fab.$error-tokens);
   @include mat.icon-button-overrides(icon-button.$error-tokens);

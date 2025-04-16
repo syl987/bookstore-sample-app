@@ -1,11 +1,11 @@
 <div class="container">
   <app-title-bar backUrl="/user/books">
-    <button mat-stroked-button class="tertiary" (click)="publishBook()" [spinning]="publishPending()" [disabled]="publishDisabled()">
+    <button mat-stroked-button class="app-tertiary" (click)="publishBook()" [spinning]="publishPending()" [disabled]="publishDisabled()">
       <mat-icon>publish</mat-icon>
       <span i18n>Publish Book</span>
     </button>
 
-    <button mat-stroked-button class="error" (click)="deleteBook()" [spinning]="deletePending()" [disabled]="deleteDisabled()">
+    <button mat-stroked-button class="app-error" (click)="deleteBook()" [spinning]="deletePending()" [disabled]="deleteDisabled()">
       <mat-icon>delete</mat-icon>
       <span i18n>Delete Book</span>
     </button>
@@ -66,12 +66,12 @@
           <span i18n>Save changes</span>
         </button>
 
-        <button type="button" mat-stroked-button class="secondary" (click)="discardChanges()" [disabled]="form.disabled">
+        <button type="button" mat-stroked-button class="app-secondary" (click)="discardChanges()" [disabled]="form.disabled">
           <mat-icon>undo</mat-icon>
           <span i18n>Reset</span>
         </button>
 
-        <button type="reset" mat-stroked-button class="secondary" [disabled]="form.disabled">
+        <button type="reset" mat-stroked-button class="app-secondary" [disabled]="form.disabled">
           <mat-icon>clear</mat-icon>
           <span i18n>Clear</span>
         </button>
