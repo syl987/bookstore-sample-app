@@ -1,7 +1,7 @@
 <mat-toolbar class="mat-elevation-z2">
   <mat-toolbar-row cdkOverlayOrigin #searchOverlayTrigger="cdkOverlayOrigin">
     @if (desktop()) {
-      <div class="text-primary me-4 text-lg">{{ options.applicationName }}</div>
+      <div class="text-primary me-4 text-xl">{{ options.applicationName }}</div>
 
       <nav mat-tab-nav-bar>
         @for (link of publicLinks; track link.path) {
@@ -10,7 +10,7 @@
       </nav>
 
       <form [formGroup]="form" (ngSubmit)="search()">
-        <mat-form-field appearance="fill" style="min-width: 268px">
+        <mat-form-field appearance="fill" class="ms-2 min-w-3xs">
           @if (searching()) {
             <mat-spinner diameter="24" class="mx-3" matPrefix />
           } @else {
@@ -52,7 +52,7 @@
       </button>
 
       @if (!searchOpen()) {
-        <div class="text-primary truncate text-base sm:text-lg">{{ options.applicationName }}</div>
+        <div class="text-primary truncate text-base sm:text-lg md:text-xl">{{ options.applicationName }}</div>
 
         <span class="ms-2 me-auto"></span>
       } @else {

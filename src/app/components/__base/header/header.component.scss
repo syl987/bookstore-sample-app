@@ -26,8 +26,8 @@ $tabs-tokens: (
     height: 0;
   }
 
-  ::ng-deep .mat-mdc-text-field-wrapper {
-    margin-inline-start: -12px; // partially negate default padding
+  ::ng-deep .mdc-tab {
+    min-width: 56px; // value by visuals
   }
 
   ::ng-deep .mdc-tab-indicator__content--underline {
