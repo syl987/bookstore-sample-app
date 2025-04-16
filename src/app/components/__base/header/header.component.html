@@ -29,7 +29,7 @@
           </button>
         </div>
 
-        <mat-divider vertical class="mx-2" style="height: 32px" />
+        <mat-divider vertical class="mx-2 h-8" />
 
         <nav mat-tab-nav-bar>
           @for (link of userLinks; track link.path) {
@@ -45,7 +45,6 @@
           <a mat-tab-link routerLink="/login" routerLinkActive [active]="a.isActive" class="px-3" i18n #a="routerLinkActive">Login</a>
         </nav>
       }
-      <mat-divider vertical class="mx-2" style="height: 32px" />
     } @else {
       <button mat-icon-button (click)="sidenavToggle.emit()" class="-ms-2 me-2" aria-label="Toggle Navigation" i18n-aria-label>
         <mat-icon>menu</mat-icon>
@@ -70,6 +69,8 @@
         }
       </button>
     }
+    <mat-divider vertical class="mx-2 h-8" />
+
     <div class="flex gap-1">
       <button mat-icon-button (click)="themeService.toggleTheme()" aria-label="Toggle Theme">
         @if (themeService.theme === 'dark') {

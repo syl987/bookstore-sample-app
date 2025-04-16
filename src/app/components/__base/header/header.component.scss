@@ -13,7 +13,7 @@ $form-field-tokens: (
 );
 
 $tabs-tokens: (
-  active-indicator-height: 3px,
+  active-indicator-height: 4px,
   container-height: 64px,
   divider-height: 0,
 );
@@ -32,6 +32,10 @@ $tabs-tokens: (
 
   ::ng-deep .mdc-tab-indicator__content--underline {
     width: calc(100% - 16px); // value by visuals
+  }
+
+  ::ng-deep .mdc-tab--active {
+    background-color: var(--mat-sys-surface-container);
   }
 }
 
