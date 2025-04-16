@@ -21,6 +21,7 @@ import { VolumeService } from 'src/app/services/volume.service';
 import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.component';
 import { ThemeService } from 'src/app/services/theme.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
+import { AutofocusDirective } from 'src/app/directives/autofocus.directive';
 
 const FAKE_RESPONSE_TIME = 750;
 
@@ -39,6 +40,7 @@ const FAKE_RESPONSE_TIME = 750;
     MatTabsModule,
     MatToolbarModule,
     HeaderUserInfoComponent,
+    AutofocusDirective,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -70,7 +72,7 @@ export class HeaderComponent extends SidenavComponent {
 
   readonly currentLang = getCurrentAppLanguage(this.languages, this.locale);
 
-  readonly searchOverlayOpen = signal(false);
+  readonly searchOpen = signal(false);
 
   readonly sidenavToggle = output();
 

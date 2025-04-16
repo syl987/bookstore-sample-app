@@ -50,30 +50,29 @@
         <mat-icon>menu</mat-icon>
       </button>
 
-      <div class="text-primary me-4 truncate text-base">{{ options.applicationName }}</div>
+      @if (!searchOpen()) {
+        <div class="text-primary me-4 truncate text-base">{{ options.applicationName }}</div>
 
-      <span class="ms-2 me-auto"></span>
-
-      <button mat-icon-button (click)="searchOverlayOpen.set(!searchOverlayOpen())" aria-label="Search" i18n-aria-label>
-        <mat-icon>search</mat-icon>
-      </button>
-
-      <ng-template
-        cdkConnectedOverlay
-        [cdkConnectedOverlayOpen]="searchOverlayOpen()"
-        [cdkConnectedOverlayOrigin]="searchOverlayTrigger"
-        [cdkConnectedOverlayPositions]="[{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top', panelClass: 'app-search-overlay' }]"
-      >
-        <form [formGroup]="form" (ngSubmit)="search(); searchOverlayOpen.set(false)" class="w-100">
-          <mat-form-field appearance="fill" class="w-100">
-            <mat-icon inline class="text-primary me-2 align-bottom" matTextPrefix>search</mat-icon>
-            <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
-            <button type="button" mat-icon-button (click)="searchOverlayOpen.set(false)" class="me-1" matSuffix>
-              <mat-icon>close</mat-icon>
-            </button>
+        <span class="ms-2 me-auto"></span>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="search(); searchOpen.set(false); form.controls.query.setValue('')" class="grow">
+          <mat-form-field appearance="fill" class="-ms-2 w-full">
+            <mat-icon class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
+            <input matInput formControlName="query" placeholder="Search..." aria-label="Search" appAutofocus i18n-placeholder i18n-aria-label />
+            @if (searching()) {
+              <mat-spinner diameter="24" class="me-4" matSuffix />
+            }
           </mat-form-field>
         </form>
-      </ng-template>
+      }
+      <button mat-icon-button (click)="searchOpen.set(!searchOpen())" aria-label="Search" i18n-aria-label>
+        @if (!searchOpen()) {
+          <mat-icon>search</mat-icon>
+        } @else {
+          <mat-icon>close</mat-icon>
+        }
+      </button>
+
       <mat-divider vertical class="mx-2" style="height: 32px" />
     }
     <div class="flex gap-1">
