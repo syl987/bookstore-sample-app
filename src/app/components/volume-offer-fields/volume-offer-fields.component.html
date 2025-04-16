@@ -20,7 +20,7 @@
     @for (photo of getOfferPhotos(offer); track photo) {
       <a [href]="photo.src" target="_blank" class="me-4 mb-4"><img [src]="photo.src" alt="photo" class="img-fluid rounded" style="max-height: 256px" i18n-alt /></a>
     } @empty {
-      <p class="text-secondary w-100 text-center" i18n>No photos were uploaded.</p>
+      <p class="text-secondary w-full text-center" i18n>No photos were uploaded.</p>
     }
   </div>
 }
