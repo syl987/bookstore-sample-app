@@ -12,6 +12,7 @@
 @use 'material/progress-spinner';
 @use 'material/sidenav';
 @use 'material/snack-bar';
+@use 'material/toolbar';
 
 // fix: false border
 .mdc-notched-outline__notch {
@@ -50,6 +51,7 @@ html {
   @include mat.progress-spinner-overrides(progress-spinner.$tokens);
   @include mat.sidenav-overrides(sidenav.$tokens);
   @include mat.snack-bar-overrides(snack-bar.$tokens);
+  @include mat.toolbar-overrides(toolbar.$tokens);
 }
 
 html,
