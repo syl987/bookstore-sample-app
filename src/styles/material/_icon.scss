@@ -19,3 +19,7 @@ $tertiary-tokens: (
 $error-tokens: (
   color: var(--mat-sys-error),
 );
+
+.mdc-button .mat-icon {
+  color: inherit;
+}
