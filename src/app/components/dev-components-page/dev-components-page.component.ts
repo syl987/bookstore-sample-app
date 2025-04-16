@@ -78,15 +78,15 @@ export class DevComponentsPageComponent {
   }
 
   showSuccessToast(): void {
-    this.toastService.showSuccessToast('Short success message (5 seconds).');
+    this.toastService.showSuccessToast('Short success message (default 5 seconds).');
   }
 
   showErrorToast(): void {
-    this.toastService.showErrorToast('Short error message (7 seconds).');
+    this.toastService.showErrorToast('Short error message (default 7 seconds).');
   }
 
   showInfoToast(): void {
-    this.toastService.showInfoToast('Short info message (custom 9 seconds).', { duration: 9000 });
+    this.toastService.showInfoToast('Short info message (custom 10 seconds).', { duration: 10 * 1000 });
   }
 
   submitForm(): void {
