@@ -1,0 +1,33 @@
+$tokens: (
+  container-shape: var(--mat-sys-corner-large),
+);
+
+$primary-tokens: (
+  container-color: var(--mat-sys-primary-container),
+  supporting-text-color: var(--mat-sys-on-primary-container),
+  button-color: var(--mat-sys-primary),
+);
+
+$surface-tokens: (
+  container-color: var(--mat-sys-surface-container),
+  supporting-text-color: var(--mat-sys-on-surface-container),
+  button-color: var(--mat-sys-surface),
+);
+
+$secondary-tokens: (
+  container-color: var(--mat-sys-secondary-container),
+  supporting-text-color: var(--mat-sys-on-secondary-container),
+  button-color: var(--mat-sys-secondary),
+);
+
+$tertiary-tokens: (
+  container-color: var(--mat-sys-tertiary-container),
+  supporting-text-color: var(--mat-sys-on-tertiary-container),
+  button-color: var(--mat-sys-tertiary),
+);
+
+$error-tokens: (
+  container-color: var(--mat-sys-error-container),
+  supporting-text-color: var(--mat-sys-on-error-container),
+  button-color: var(--mat-sys-error),
+);

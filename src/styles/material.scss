@@ -7,6 +7,7 @@
 @use 'material/form-field';
 @use 'material/icon-button';
 @use 'material/progress-spinner';
+@use 'material/snack-bar';
 
 // fix: false border
 .mdc-notched-outline__notch {
@@ -40,6 +41,7 @@ html {
   @include mat.form-field-overrides(form-field.$tokens);
   @include mat.icon-button-overrides(icon-button.$tokens);
   @include mat.progress-spinner-overrides(progress-spinner.$tokens);
+  @include mat.snack-bar-overrides(snack-bar.$tokens);
 }
 
 html,
@@ -55,6 +57,7 @@ body {
 
 .app-primary {
   @include mat.icon-button-overrides(icon-button.$primary-tokens);
+  @include mat.snack-bar-overrides(snack-bar.$primary-tokens);
 }
 
 .app-surface {
@@ -62,6 +65,7 @@ body {
   @include mat.fab-overrides(fab.$surface-tokens);
   @include mat.icon-button-overrides(icon-button.$surface-tokens);
   @include mat.progress-spinner-overrides(progress-spinner.$surface-tokens);
+  @include mat.snack-bar-overrides(snack-bar.$surface-tokens);
 }
 
 .app-secondary {
@@ -69,6 +73,7 @@ body {
   @include mat.fab-overrides(fab.$secondary-tokens);
   @include mat.icon-button-overrides(icon-button.$secondary-tokens);
   @include mat.progress-spinner-overrides(progress-spinner.$secondary-tokens);
+  @include mat.snack-bar-overrides(snack-bar.$secondary-tokens);
 }
 
 .app-tertiary {
@@ -76,6 +81,7 @@ body {
   @include mat.fab-overrides(fab.$tertiary-tokens);
   @include mat.icon-button-overrides(icon-button.$tertiary-tokens);
   @include mat.progress-spinner-overrides(progress-spinner.$tertiary-tokens);
+  @include mat.snack-bar-overrides(snack-bar.$tertiary-tokens);
 }
 
 .app-error {
@@ -83,6 +89,7 @@ body {
   @include mat.fab-overrides(fab.$error-tokens);
   @include mat.icon-button-overrides(icon-button.$error-tokens);
   @include mat.progress-spinner-overrides(progress-spinner.$error-tokens);
+  @include mat.snack-bar-overrides(snack-bar.$error-tokens);
 }
 
 // MATERIAL VARIABLES AS CLASSES
