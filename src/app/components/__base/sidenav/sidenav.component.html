@@ -7,6 +7,7 @@
   <mat-nav-list>
     @for (link of publicLinks; track link.path) {
       <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">
+        <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
         {{ link.label }}
       </a>
     }
@@ -17,6 +18,7 @@
   <mat-nav-list>
     @for (link of userLinks; track link.path) {
       <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">
+        <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
         {{ link.label }}
       </a>
     }
@@ -25,9 +27,15 @@
   <mat-divider class="mx-4" />
 
   <mat-action-list>
-    <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()" i18n>Session Info</button>
+    <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()">
+      <mat-icon matListItemIcon>attribution</mat-icon>
+      <span i18n>Session Info</span>
+    </button>
 
-    <button mat-list-item (click)="logout(); navigated.emit()" i18n>Logout</button>
+    <button mat-list-item (click)="logout(); navigated.emit()">
+      <mat-icon matListItemIcon>logout</mat-icon>
+      <span i18n>Logout</span>
+    </button>
   </mat-action-list>
 } @else {
   <div class="mt-10 mb-4 flex flex-col items-center">
@@ -41,6 +49,7 @@
   <mat-nav-list>
     @for (link of publicLinks; track link.path) {
       <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="isActive(link)" (click)="navigated.emit()">
+        <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
         {{ link.label }}
       </a>
     }
@@ -49,7 +58,10 @@
   <mat-divider class="mx-4" />
 
   <mat-action-list>
-    <button mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
+    <button mat-list-item (click)="navigateToLogin(); navigated.emit()">
+      <mat-icon matListItemIcon>login</mat-icon>
+      Login
+    </button>
   </mat-action-list>
 }
 <button mat-icon-button (click)="navigated.emit()" class="absolute end-0 top-0 m-2" aria-label="Close" i18n-aria-label>

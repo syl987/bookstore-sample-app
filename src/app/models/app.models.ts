@@ -22,6 +22,8 @@ export interface AppLink {
   readonly label: string;
   /** Router path. */
   readonly path: string;
+  /** Display icon. Used in the sidenav. */
+  readonly icon: string;
   /** Fragment for a specific router path. */
   readonly fragment?: string;
   /** Whether authentication as existing user is required (default: false). */

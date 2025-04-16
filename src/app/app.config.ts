@@ -59,10 +59,10 @@ export const appLanguages: AppLanguages = [
 ];
 
 const appLinks: AppLinks = [
-  { label: $localize`Welcome`, path: '/welcome' },
-  { label: $localize`Books`, path: '/volumes' },
-  { label: $localize`My Books`, path: '/user/books', userSpecific: true },
-  { label: 'Dev', path: '/dev' },
+  { label: $localize`Welcome`, icon: 'celebration', path: '/welcome' },
+  { label: $localize`Books`, icon: 'library_books', path: '/volumes' },
+  { label: $localize`My Books`, icon: 'auto_stories', path: '/user/books', userSpecific: true },
+  { label: 'Dev', icon: 'code', path: '/dev' },
 ];
 
 function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
