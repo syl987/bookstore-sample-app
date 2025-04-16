@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,7 +43,6 @@ const FAKE_RESPONSE_TIME = 750;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent extends SidenavComponent {
-  protected readonly builder = inject(FormBuilder);
   protected readonly destroyRef = inject(DestroyRef);
   protected readonly breakpointObserver = inject(BreakpointObserver);
   protected readonly volumeService = inject(VolumeService);
@@ -60,8 +59,8 @@ export class HeaderComponent extends SidenavComponent {
 
   readonly searching = signal(false);
 
-  readonly form = this.builder.nonNullable.group({
-    query: new FormControl<string>(''),
+  readonly form = new FormGroup({
+    query: new FormControl<string>('', { nonNullable: true }),
   });
 
   readonly APP_LANGUAGES = APP_LANGUAGES;

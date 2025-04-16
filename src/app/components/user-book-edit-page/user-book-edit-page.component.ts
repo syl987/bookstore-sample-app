@@ -1,7 +1,7 @@
 import { DecimalPipe, getCurrencySymbol, SlicePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, inject } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
@@ -50,7 +50,6 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class UserBookEditPageComponent {
   protected readonly currency = inject(DEFAULT_CURRENCY_CODE);
-  protected readonly builder = inject(FormBuilder);
   protected readonly route = inject(ActivatedRoute);
   protected readonly router = inject(Router);
   protected readonly routerService = inject(RouterService);
@@ -77,7 +76,7 @@ export class UserBookEditPageComponent {
   readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;
 
-  readonly form = this.builder.nonNullable.group({
+  readonly form = new FormGroup({
     description: new FormControl<string | null>(null),
     condition: new FormControl<BookCondition | null>(null),
     price: new FormControl<number | null>(null),
