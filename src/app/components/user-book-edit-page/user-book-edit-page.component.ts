@@ -117,6 +117,9 @@ export class UserBookEditPageComponent {
   }
 
   saveChanges(): void {
+    if (this.form.invalid) {
+      return;
+    }
     const data: UserBookEditDraftDTO = {
       description: this.form.value.description,
       condition: this.form.value.condition,

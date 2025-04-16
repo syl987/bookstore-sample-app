@@ -184,7 +184,7 @@
 
   <h2>Forms</h2>
 
-  <form [formGroup]="form" (ngSubmit)="form.valid && submitForm()">
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
     <div class="mb-4 grid gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
       <mat-form-field>
         <mat-label>Email</mat-label>

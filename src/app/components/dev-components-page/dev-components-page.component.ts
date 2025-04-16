@@ -96,6 +96,9 @@ export class DevComponentsPageComponent {
   }
 
   submitForm(): void {
+    if (this.form.invalid) {
+      return;
+    }
     this.toastService.showInfoToast('Form has been submitted.');
   }
 
