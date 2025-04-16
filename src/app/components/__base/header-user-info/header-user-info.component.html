@@ -4,7 +4,7 @@
       <div class="truncate text-sm font-normal" style="max-width: 256px">{{ displayName }}</div>
     }
     @if (user().photoURL; as photoURL) {
-      <img [src]="photoURL" alt="user" width="40" height="40" class="rounded-circle ms-4" (error)="photo.classList.add('cdk-visually-hidden')" i18n-alt #photo />
+      <img [src]="photoURL" alt="user" width="40" height="40" class="ms-4 rounded-sm" (error)="photo.classList.add('cdk-visually-hidden')" i18n-alt #photo />
     }
   </div>
 </div>

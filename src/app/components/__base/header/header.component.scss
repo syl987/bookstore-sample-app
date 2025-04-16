@@ -1,5 +1,7 @@
 @use '@angular/material' as mat;
 
+@use 'shared' as *;
+
 $form-field-tokens: (
   container-height: 64px,
   container-vertical-padding: 20px,
@@ -24,7 +26,15 @@ $tabs-tokens: (
     height: 0;
   }
 
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    margin-inline-start: -12px; // partially negate default padding
+  }
+
   ::ng-deep .mdc-tab-indicator__content--underline {
     width: calc(100% - 16px); // value by visuals
   }
+}
+
+.mat-toolbar-row {
+  @include app-container-fluid;
 }

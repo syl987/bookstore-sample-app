@@ -47,18 +47,17 @@
       }
       <mat-divider vertical class="mx-2" style="height: 32px" />
     } @else {
-      <button mat-icon-button (click)="sidenavToggle.emit()" class="me-2" aria-label="Toggle Navigation" i18n-aria-label>
+      <button mat-icon-button (click)="sidenavToggle.emit()" class="-ms-2 me-2" aria-label="Toggle Navigation" i18n-aria-label>
         <mat-icon>menu</mat-icon>
       </button>
 
       @if (!searchOpen()) {
-        <div class="text-primary truncate text-lg">{{ options.applicationName }}</div>
+        <div class="text-primary truncate text-base sm:text-lg">{{ options.applicationName }}</div>
 
         <span class="ms-2 me-auto"></span>
       } @else {
         <form [formGroup]="form" (ngSubmit)="search(); searchOpen.set(false); form.controls.query.setValue('')" class="grow">
-          <mat-form-field appearance="fill" class="-ms-2 w-full">
-            <mat-icon class="text-primary align-top" matPrefix>search</mat-icon>
+          <mat-form-field appearance="fill" class="w-20 min-w-full">
             <input matInput formControlName="query" placeholder="Search..." aria-label="Search" appAutofocus i18n-placeholder i18n-aria-label />
           </mat-form-field>
         </form>
@@ -70,8 +69,6 @@
           <mat-icon>close</mat-icon>
         }
       </button>
-
-      <mat-divider vertical class="mx-2" style="height: 32px" />
     }
     <div class="flex gap-1">
       <button mat-icon-button (click)="themeService.toggleTheme()" aria-label="Toggle Theme">
@@ -82,7 +79,7 @@
         }
       </button>
 
-      <button mat-icon-button [matMenuTriggerFor]="languageMenu" aria-label="Language" i18n-aria-label>
+      <button mat-icon-button [matMenuTriggerFor]="languageMenu" class="-me-2" aria-label="Language" i18n-aria-label>
         <mat-icon fontSet="fp" [fontIcon]="currentLang.icon" />
       </button>
     </div>
