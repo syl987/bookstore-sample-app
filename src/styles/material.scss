@@ -8,6 +8,7 @@
 @use 'material/form-field';
 @use 'material/icon-button';
 @use 'material/progress-spinner';
+@use 'material/sidenav';
 @use 'material/snack-bar';
 
 // fix: false border
@@ -43,6 +44,7 @@ html {
   @include mat.form-field-overrides(form-field.$tokens);
   @include mat.icon-button-overrides(icon-button.$tokens);
   @include mat.progress-spinner-overrides(progress-spinner.$tokens);
+  @include mat.sidenav-overrides(sidenav.$tokens);
   @include mat.snack-bar-overrides(snack-bar.$tokens);
 }
 
