@@ -23,3 +23,15 @@ h6 {
 p {
   margin-bottom: 1rem;
 }
+
+dl {
+  margin-bottom: 1rem;
+
+  dt {
+    font-weight: 500;
+  }
+
+  dd {
+    margin-bottom: 0.5rem;
+  }
+}
