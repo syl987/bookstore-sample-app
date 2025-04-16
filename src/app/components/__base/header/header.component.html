@@ -11,11 +11,12 @@
 
       <form [formGroup]="form" (ngSubmit)="search()">
         <mat-form-field appearance="fill" style="min-width: 268px">
-          <mat-icon class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
-          <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
           @if (searching()) {
-            <mat-spinner diameter="24" class="me-4" matSuffix />
+            <mat-spinner diameter="24" class="mx-3" matPrefix />
+          } @else {
+            <mat-icon class="text-primary align-top" matPrefix>search</mat-icon>
           }
+          <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
         </mat-form-field>
       </form>
 
@@ -57,11 +58,8 @@
       } @else {
         <form [formGroup]="form" (ngSubmit)="search(); searchOpen.set(false); form.controls.query.setValue('')" class="grow">
           <mat-form-field appearance="fill" class="-ms-2 w-full">
-            <mat-icon class="text-primary me-2 align-top" matTextPrefix>search</mat-icon>
+            <mat-icon class="text-primary align-top" matPrefix>search</mat-icon>
             <input matInput formControlName="query" placeholder="Search..." aria-label="Search" appAutofocus i18n-placeholder i18n-aria-label />
-            @if (searching()) {
-              <mat-spinner diameter="24" class="me-4" matSuffix />
-            }
           </mat-form-field>
         </form>
       }
