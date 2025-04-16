@@ -4,7 +4,7 @@
 $fp-countries: 'de', 'es', 'us';
 
 // sizes
-$fp-size: calc(24px * 3 / 4); // set 24px icon width for 4x3 variants
+$fp-size: calc(24px * 3 / 4); // set height by ratio: 24px * (3 / 4) = 18px
 $fp-size-md: false;
 $fp-size-lg: false;
 
@@ -16,4 +16,6 @@ $fp-enable-rounded: false;
 
 .fp {
   height: initial !important; // support 4x3 variants: override mat-icon height
+  margin-top: 3px; // total icon height required: 24px
+  margin-bottom: 3px; // total icon height required: 24px
 }
