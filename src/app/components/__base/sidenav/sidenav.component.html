@@ -22,15 +22,6 @@
     <button mat-list-item (click)="openUserSessionInfoDialog(user); navigated.emit()" i18n>Session Info</button>
 
     <button mat-list-item (click)="logout(); navigated.emit()" i18n>Logout</button>
-
-    <button mat-list-item (click)="themeService.toggleTheme()">
-      @if (themeService.theme === 'dark') {
-        <mat-icon matListItemIcon>dark_mode</mat-icon>
-      } @else {
-        <mat-icon matListItemIcon>light_mode</mat-icon>
-      }
-      Theme
-    </button>
   </mat-action-list>
 } @else {
   <div class="mt-10 mb-4 flex flex-col items-center">
@@ -51,15 +42,6 @@
 
   <mat-action-list>
     <button mat-list-item (click)="navigateToLogin(); navigated.emit()">Login</button>
-
-    <button mat-list-item (click)="themeService.toggleTheme()">
-      @if (themeService.theme === 'dark') {
-        <mat-icon matListItemIcon>dark_mode</mat-icon>
-      } @else {
-        <mat-icon matListItemIcon>light_mode</mat-icon>
-      }
-      Theme
-    </button>
   </mat-action-list>
 }
 <button mat-icon-button (click)="navigated.emit()" class="position-absolute end-0 top-0 m-1" aria-label="Close" i18n-aria-label>
