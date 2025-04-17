@@ -18,11 +18,15 @@ export class AuthErrorInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
     return next.handle(request).pipe(
-      catchError((err?: Partial<HttpErrorResponse>) => {
-        if (err?.status === 401) {
-          // despite frontend auth checks, backend is still the source of truth. if any non-excluded request could not authenticate, auto-logout.
-          this.store.dispatch(AuthActions.authResponseERROR());
-          return EMPTY;
+      catchError((err: unknown) => {
+        if (err instanceof HttpErrorResponse) {
+          switch (err.status) {
+            case 401:
+              // despite frontend auth checks, backend is still the source of truth. if any non-excluded request could not authenticate, auto-logout.
+              this.store.dispatch(AuthActions.authResponseERROR());
+              return EMPTY;
+            default:
+          }
         }
         return throwError(() => err);
       }),

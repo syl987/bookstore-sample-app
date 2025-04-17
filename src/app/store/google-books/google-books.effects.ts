@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
-import { httpError } from 'src/app/models/error.models';
+import { httpError, internalError } from 'src/app/models/error.models';
 import { GoogleBooksApiService } from 'src/app/services/__api/google-books-api.service';
 
 import { GoogleBooksActions } from './google-books.actions';
@@ -19,7 +19,12 @@ export class GoogleBooksEffects {
       switchMap(({ query }) =>
         this.googleBooksApi.list(query).pipe(
           map(list => GoogleBooksActions.searchSUCCESS({ query, list })),
-          catchError((err: HttpErrorResponse) => of(GoogleBooksActions.searchERROR({ error: httpError({ err }) }))),
+          catchError((err: unknown) => {
+            if (err instanceof HttpErrorResponse) {
+              return of(GoogleBooksActions.searchERROR({ error: httpError({ err }) }));
+            }
+            return of(GoogleBooksActions.searchERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          }),
         ),
       ),
     );
