@@ -2,6 +2,8 @@
 
 @use 'sass:meta';
 
+@use 'shared/shared';
+
 @include meta.load-css('common/background');
 @include meta.load-css('common/base');
 @include meta.load-css('common/button-spinner');

@@ -16,17 +16,6 @@
 @use 'material/tabs';
 @use 'material/toolbar';
 
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Inter, 'Helvetica Neue', sans-serif;
-  color-scheme: light dark;
-}
-
 html {
   --mat-sys-corner-extra-large: 10px !important;
   --mat-sys-corner-extra-large-top: 10px 10px 0 0 !important;
