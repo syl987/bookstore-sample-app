@@ -79,7 +79,7 @@ export class UserBooksService implements IUserBooksService {
         }
         return throwError(() => action.error.err);
       }),
-      shareReplay(1),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
     result.subscribe();
     return result;
@@ -97,7 +97,7 @@ export class UserBooksService implements IUserBooksService {
         }
         return throwError(() => action.error.err);
       }),
-      shareReplay(1),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
     result.subscribe();
     return result;
@@ -115,7 +115,7 @@ export class UserBooksService implements IUserBooksService {
         }
         return throwError(() => action.error.err);
       }),
-      shareReplay(1),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
     result.subscribe();
     return result;
@@ -133,7 +133,7 @@ export class UserBooksService implements IUserBooksService {
         }
         return throwError(() => action.error.err);
       }),
-      shareReplay(1),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
     result.subscribe();
     return result;
@@ -151,7 +151,7 @@ export class UserBooksService implements IUserBooksService {
         }
         return throwError(() => action.error.err);
       }),
-      shareReplay(1),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
     result.subscribe();
     return result;
@@ -181,7 +181,7 @@ export class UserBooksService implements IUserBooksService {
         }
         return throwError(() => action.error.err);
       }),
-      shareReplay(1),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
     result.subscribe();
     return result;
@@ -199,7 +199,7 @@ export class UserBooksService implements IUserBooksService {
         }
         return throwError(() => action.error.err);
       }),
-      shareReplay(1),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
     result.subscribe();
     return result;
@@ -217,7 +217,7 @@ export class UserBooksService implements IUserBooksService {
         }
         return throwError(() => action.error.err);
       }),
-      shareReplay(1),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
     result.subscribe();
     return result;
@@ -235,7 +235,7 @@ export class UserBooksService implements IUserBooksService {
         }
         return throwError(() => action.error.err);
       }),
-      shareReplay(1),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
     result.subscribe();
     return result;
