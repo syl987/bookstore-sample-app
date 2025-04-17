@@ -1,25 +1,20 @@
 $tokens: ();
-
 $surface-tokens: (
   icon-color: var(--mat-sys-on-surface),
   state-layer-color: var(--mat-sys-on-surface),
 );
-
 $primary-tokens: (
   icon-color: var(--mat-sys-primary),
   state-layer-color: var(--mat-sys-primary),
 );
-
 $secondary-tokens: (
   icon-color: var(--mat-sys-secondary),
   state-layer-color: var(--mat-sys-secondary),
 );
-
 $tertiary-tokens: (
   icon-color: var(--mat-sys-tertiary),
   state-layer-color: var(--mat-sys-tertiary),
 );
-
 $error-tokens: (
   icon-color: var(--mat-sys-error),
   state-layer-color: var(--mat-sys-error),

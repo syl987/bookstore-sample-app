@@ -4,20 +4,20 @@ h1 {
 }
 
 h2 {
-  font: var(--mat-sys-title-large);
-  font-weight: 700;
   margin-top: 1rem * 2;
   margin-bottom: 1rem;
+  font: var(--mat-sys-title-large);
+  font-weight: 700;
 }
 
 h3,
 h4,
 h5,
 h6 {
-  font: var(--mat-sys-title-medium);
-  font-weight: 700;
   margin-top: 1rem * 1.25;
   margin-bottom: 1rem;
+  font: var(--mat-sys-title-medium);
+  font-weight: 700;
 }
 
 p {
