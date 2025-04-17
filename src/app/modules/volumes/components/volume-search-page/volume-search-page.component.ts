@@ -6,8 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { VolumeService } from 'src/app/services/volume.service';
 
-import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
-import { VolumeCardComponent } from '../volume-card/volume-card.component';
+import { TitleBarComponent } from '../../../../components/__base/title-bar/title-bar.component';
+import { VolumeCardComponent } from '../../../../components/volume-card/volume-card.component';
 
 @Component({
   selector: 'app-volume-search-page',

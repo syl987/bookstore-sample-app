@@ -4,6 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { concatMap, filter } from 'rxjs';
+import { TitleBarComponent } from 'src/app/components/__base/title-bar/title-bar.component';
+import { VolumeCardComponent } from 'src/app/components/volume-card/volume-card.component';
 
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookDTO } from 'src/app/models/book.models';
@@ -12,9 +14,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
-
-import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
-import { VolumeCardComponent } from '../volume-card/volume-card.component';
 import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-fields.component';
 
 function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undefined {

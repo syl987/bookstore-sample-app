@@ -20,18 +20,7 @@ export const routes: Routes = [
   },
   {
     path: 'volumes',
-    title: $localize`Books`,
-    loadComponent: () => import('./components/volume-search-page/volume-search-page.component').then(m => m.VolumeSearchPageComponent),
-  },
-  {
-    path: 'volumes/:volumeId',
-    title: $localize`Volume Details`,
-    loadComponent: () => import('./components/volume-detail-page/volume-detail-page.component').then(m => m.VolumeDetailPageComponent),
-  },
-  {
-    path: 'volumes/:volumeId/offer/:offerId',
-    title: $localize`Book Offer Details`,
-    loadComponent: () => import('./components/volume-offer-detail-page/volume-offer-detail-page.component').then(m => m.VolumeOfferDetailPageComponent),
+    loadChildren: () => import('./modules/volumes/volumes.routes').then(m => m.routes),
   },
   {
     path: 'user',

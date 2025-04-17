@@ -8,8 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
-import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
-import { VolumeCardComponent } from '../volume-card/volume-card.component';
+import { TitleBarComponent } from '../../../../components/__base/title-bar/title-bar.component';
+import { VolumeCardComponent } from '../../../../components/volume-card/volume-card.component';
 import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list.component';
 
 @Component({
