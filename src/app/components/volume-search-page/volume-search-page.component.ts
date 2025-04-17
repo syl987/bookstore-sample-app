@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 
@@ -7,7 +8,6 @@ import { VolumeService } from 'src/app/services/volume.service';
 
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-volume-search-page',

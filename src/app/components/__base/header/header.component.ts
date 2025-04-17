@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject, LOCALE_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject, LOCALE_ID, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,14 +13,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { delay, distinctUntilChanged, map, of, tap } from 'rxjs';
 
+import { AutofocusDirective } from 'src/app/directives/autofocus.directive';
 import { getCurrentAppLanguage } from 'src/app/helpers/app.helpers';
 import { APP_LANGUAGES } from 'src/app/models/app.models';
+import { ThemeService } from 'src/app/services/theme.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
 import { HeaderUserInfoComponent } from '../header-user-info/header-user-info.component';
-import { ThemeService } from 'src/app/services/theme.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
-import { AutofocusDirective } from 'src/app/directives/autofocus.directive';
 
 const FAKE_RESPONSE_TIME = 750;
 
@@ -45,7 +45,7 @@ const FAKE_RESPONSE_TIME = 750;
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'app-header' },
 })
-export class HeaderComponent extends SidenavComponent {
+export class HeaderComponent extends SidenavComponent implements OnInit {
   protected readonly locale = inject(LOCALE_ID);
   protected readonly destroyRef = inject(DestroyRef);
   protected readonly breakpointObserver = inject(BreakpointObserver);

@@ -1,9 +1,10 @@
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, VERSION } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 
-import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { AppTechnicalFeature, AppTechStackItem } from 'src/app/models/app.models';
-import { NgClass } from '@angular/common';
+
+import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 
 const techStack: AppTechStackItem[] = [
   {

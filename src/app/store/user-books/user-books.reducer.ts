@@ -1,4 +1,5 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
+import { getRouterSelectors } from '@ngrx/router-store';
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 
 import { BookStatus, UserBookDTO } from 'src/app/models/book.models';
@@ -6,7 +7,6 @@ import { OperationState, OperationStateWithProgress } from 'src/app/models/store
 
 import { UserBooksActions } from './user-books.actions';
 import { VolumeActions } from '../volume/volume.actions';
-import { getRouterSelectors } from '@ngrx/router-store';
 
 export const userBooksFeatureKey = 'userBooks';
 

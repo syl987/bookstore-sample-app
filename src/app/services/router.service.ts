@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { getRouterSelectors } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { NavigationState, QueryParams, RouteParam, RouteParams, RouteQueryParam } from '../models/router.models';
-import { getRouterSelectors } from '@ngrx/router-store';
 
 @Injectable({
   providedIn: 'root',

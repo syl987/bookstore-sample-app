@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,7 +12,6 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-fields.component';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-book-detail-page',

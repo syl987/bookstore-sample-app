@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 import { Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -11,8 +13,6 @@ import { UserBooksService } from 'src/app/services/user-books.service';
 import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
 import { UserBookCardContentComponent } from '../user-book-card-content/user-book-card-content.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-book-list-page',
