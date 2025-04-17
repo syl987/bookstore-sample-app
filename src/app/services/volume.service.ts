@@ -48,7 +48,7 @@ export class VolumeService implements IVolumeService {
         if (action.type === VolumeActions.loadSUCCESS.type) {
           return of(action.volume);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -66,7 +66,7 @@ export class VolumeService implements IVolumeService {
         if (action.type === VolumeActions.loadAllSUCCESS.type) {
           return of(action.volumes);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -88,7 +88,7 @@ export class VolumeService implements IVolumeService {
         if (action.type === VolumeActions.buyOfferSUCCESS.type) {
           return of(action.book);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );

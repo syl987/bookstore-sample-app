@@ -77,7 +77,7 @@ export class UserBooksService implements IUserBooksService {
         if (action.type === UserBooksActions.loadSUCCESS.type) {
           return of(action.book);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -95,7 +95,7 @@ export class UserBooksService implements IUserBooksService {
         if (action.type === UserBooksActions.loadAllSUCCESS.type) {
           return of(action.books);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -113,7 +113,7 @@ export class UserBooksService implements IUserBooksService {
         if (action.type === UserBooksActions.createSUCCESS.type) {
           return of(action.book);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -131,7 +131,7 @@ export class UserBooksService implements IUserBooksService {
         if (action.type === UserBooksActions.deleteSUCCESS.type) {
           return of(undefined);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -149,7 +149,7 @@ export class UserBooksService implements IUserBooksService {
         if (action.type === UserBooksActions.editDraftSUCCESS.type) {
           return of(action.book);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -179,7 +179,7 @@ export class UserBooksService implements IUserBooksService {
         if (action.type === UserBooksActions.uploadPhotoSUCCESS.type) {
           return of(action.uploadData);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -197,7 +197,7 @@ export class UserBooksService implements IUserBooksService {
         if (action.type === UserBooksActions.removePhotoSUCCESS.type) {
           return of(undefined);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -215,7 +215,7 @@ export class UserBooksService implements IUserBooksService {
         if (action.type === UserBooksActions.removeAllPhotosSUCCESS.type) {
           return of(undefined);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
@@ -233,7 +233,7 @@ export class UserBooksService implements IUserBooksService {
         if (action.type === UserBooksActions.publishSUCCESS.type) {
           return of(action.book);
         }
-        return throwError(() => action.error);
+        return throwError(() => action.error.err);
       }),
       shareReplay(1),
     );
