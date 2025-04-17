@@ -12,6 +12,7 @@
 @use 'material/progress-spinner';
 @use 'material/sidenav';
 @use 'material/snack-bar';
+@use 'material/tabs';
 @use 'material/toolbar';
 
 // fix: false border
@@ -51,6 +52,7 @@ html {
   @include mat.progress-spinner-overrides(progress-spinner.$tokens);
   @include mat.sidenav-overrides(sidenav.$tokens);
   @include mat.snack-bar-overrides(snack-bar.$tokens);
+  @include mat.tabs-overrides(tabs.$tokens);
   @include mat.toolbar-overrides(toolbar.$tokens);
 }
 
