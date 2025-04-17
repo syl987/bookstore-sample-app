@@ -65,10 +65,8 @@ const appLinks: AppLinks = [
   { label: 'Dev', icon: 'code', path: '/dev' },
 ];
 
-function registerIconFonts(iconRegistry: MatIconRegistry): () => void {
-  return () => {
-    iconRegistry.registerFontClassAlias('fp', 'fp'); // flagpack (4x3 variants)
-  };
+function registerIconFonts(iconRegistry = inject(MatIconRegistry)): void {
+  iconRegistry.registerFontClassAlias('fp', 'fp'); // flagpack (4x3 variants)
 }
 
 export const appConfig: ApplicationConfig = {
@@ -87,10 +85,7 @@ export const appConfig: ApplicationConfig = {
     provideDatabase(() => getDatabase()),
     provideStorage(() => getStorage()),
 
-    provideAppInitializer(() => {
-      const initializerFn = registerIconFonts(inject(MatIconRegistry));
-      return initializerFn();
-    }),
+    provideAppInitializer(() => registerIconFonts()),
 
     importProvidersFrom(
       MatDialogModule, // used centrally
