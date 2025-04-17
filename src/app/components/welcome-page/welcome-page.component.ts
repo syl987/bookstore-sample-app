@@ -120,7 +120,6 @@ const features: AppTechnicalFeature[] = [
   selector: 'app-welcome-page',
   imports: [NgClass, MatCardModule, TitleBarComponent],
   templateUrl: './welcome-page.component.html',
-  styleUrl: './welcome-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomePageComponent {

@@ -15,11 +15,6 @@
 @use 'material/tabs';
 @use 'material/toolbar';
 
-// fix: false border
-.mdc-notched-outline__notch {
-  border-right: none;
-}
-
 html {
   --mat-sys-corner-extra-large: 10px !important;
   --mat-sys-corner-extra-large-top: 10px 10px 0 0 !important;
@@ -38,7 +33,7 @@ html {
         primary: mat.$azure-palette,
         tertiary: mat.$spring-green-palette,
       ),
-      typography: 'Inter',
+      typography: Inter,
     )
   );
 

@@ -8,3 +8,7 @@ $tokens: (
   outlined-focus-outline-width: 2px,
   outlined-container-shape: var(--mat-sys-corner-large),
 );
+
+.mdc-notched-outline__notch {
+  border-right: none; // fix: false border
+}
