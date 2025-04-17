@@ -1,7 +1,9 @@
+@use 'shared';
+
 .container {
-  @include app-container;
+  @include shared.app-container;
 }
 
 .container-fluid {
-  @include app-container-fluid;
+  @include shared.app-container-fluid;
 }
