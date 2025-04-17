@@ -32,7 +32,7 @@ import { snackBarOptions } from './options/snack-bar.options';
 import { AppTitleStrategy } from './services/title-strategy';
 import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-const appOptions: AppOptions = {
+const options: AppOptions = {
   applicationName: 'Bookstore Sample App',
   copyrightName: 'Igor M.',
   copyrightYear: '2024',
@@ -52,13 +52,13 @@ const authConfig: AuthConfig = {
   },
 };
 
-export const appLanguages: AppLanguages = [
+export const languages: AppLanguages = [
   { label: 'English', locale: 'en', icon: 'us' },
   { label: 'Deutsch', locale: 'de', icon: 'de' },
   { label: 'Español', locale: 'es', icon: 'es' },
 ];
 
-const appLinks: AppLinks = [
+const links: AppLinks = [
   { label: $localize`Welcome`, icon: 'celebration', path: '/welcome' },
   { label: $localize`Books`, icon: 'library_books', path: '/volumes' },
   { label: $localize`My Books`, icon: 'auto_stories', path: '/user/books', userSpecific: true },
@@ -86,17 +86,13 @@ export const appConfig: ApplicationConfig = {
     provideStorage(() => getStorage()),
 
     provideAppInitializer(() => registerIconFonts()),
-
-    importProvidersFrom(
-      MatDialogModule, // used centrally
-      MatSnackBarModule, // used centrally
-    ),
+    importProvidersFrom(MatDialogModule, MatSnackBarModule), // used centrally
 
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
-    { provide: APP_OPTIONS, useValue: appOptions },
+    { provide: APP_OPTIONS, useValue: options },
     { provide: AUTH_CONFIG, useValue: authConfig },
-    { provide: APP_LANGUAGES, useValue: appLanguages },
-    { provide: APP_LINKS, useValue: appLinks },
+    { provide: APP_LANGUAGES, useValue: languages },
+    { provide: APP_LINKS, useValue: links },
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
     /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */
