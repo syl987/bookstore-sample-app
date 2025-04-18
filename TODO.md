@@ -17,6 +17,7 @@
 - [ ] add github icon link
 - [ ] fully localize welcome-page
 - [ ] table actions sticky right
+- [ ] display search string besides clear search button
 
 ## Maintenance Tasks
 
