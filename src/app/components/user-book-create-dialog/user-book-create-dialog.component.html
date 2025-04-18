@@ -11,16 +11,15 @@
     </mat-form-field>
   </div>
 
-  <mat-selection-list [multiple]="false" #list="matSelectionList" class="-mx-4 py-0">
-    @for (volume of results() | slice: 0 : 7; track volume) {
-      <mat-list-option [value]="volume" class="truncate">
-        @if (volume.volumeInfo.imageLinks) {
-          <img [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" height="44" width="44" class="me-4" i18n-alt />
+  <mat-selection-list [multiple]="false" #list="matSelectionList" class="-mx-6 py-0">
+    @for (volume of results() | slice: 0 : 20; track volume.id) {
+      <mat-list-option [value]="volume" class="truncate px-2">
+        <img matListItemIcon [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" class="h-[inherit] max-h-16" i18n-alt />
+        <div matListItemTitle>{{ volume.volumeInfo.title }}</div>
+        @if (volume.volumeInfo.authors.length) {
+          <div matListItemLine>{{ volume.volumeInfo.authors | array }}</div>
         }
-        <span class="font-semibold">{{ volume.volumeInfo.title }}</span>
-        @if (volume.volumeInfo.authors) {
-          <span class="text-secondary ms-1">&nbsp;{{ volume.volumeInfo.authors | array }}</span>
-        }
+        <div matListItemLine>{{ [volume.volumeInfo.publishedDate | date, volume.volumeInfo.publisher] | array }}</div>
       </mat-list-option>
     }
   </mat-selection-list>

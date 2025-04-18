@@ -1,0 +1,9 @@
+@use '@angular/material' as mat;
+
+$tokens: (
+  list-item-leading-icon-size: 48px,
+);
+
+:host {
+  @include mat.list-overrides($tokens);
+}

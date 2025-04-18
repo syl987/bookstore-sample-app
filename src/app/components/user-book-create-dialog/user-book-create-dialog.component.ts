@@ -1,4 +1,4 @@
-import { SlicePipe } from '@angular/common';
+import { DatePipe, SlicePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -30,8 +30,10 @@ const DEBOUNCE_TIME = 500;
     ButtonSpinnerDirective,
     ArrayPipe,
     SlicePipe,
+    DatePipe,
   ],
   templateUrl: './user-book-create-dialog.component.html',
+  styleUrl: './user-book-create-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookCreateDialogComponent implements AfterViewInit {
