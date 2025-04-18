@@ -12,8 +12,8 @@
     $fp-enable-rounded: false
   );
 
-.fp {
-  height: initial !important; // support 4x3 variants: override mat-icon height
-  margin-top: 3px; // total icon height required: 24px
-  margin-bottom: 3px; // total icon height required: 24px
+mat-icon.fp:not([inline]) {
+  height: 18px !important; // override mat-icon height: support 4x3 variants
+  margin-top: 3px; // align total icon height with material default: 24px
+  margin-bottom: 3px; // align total icon height with material default: 24px
 }
