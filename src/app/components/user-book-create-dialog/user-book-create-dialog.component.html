@@ -14,12 +14,10 @@
   <mat-selection-list [multiple]="false" #list="matSelectionList" class="-mx-6 py-0">
     @for (volume of results() | slice: 0 : 20; track volume.id) {
       <mat-list-option [value]="volume" class="truncate px-2">
-        <img matListItemIcon [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" class="h-[inherit] max-h-16" i18n-alt />
-        <div matListItemTitle>{{ volume.volumeInfo.title }}</div>
-        @if (volume.volumeInfo.authors.length) {
-          <div matListItemLine>{{ volume.volumeInfo.authors | array }}</div>
-        }
-        <div matListItemLine>{{ [volume.volumeInfo.publishedDate | date, volume.volumeInfo.publisher] | array }}</div>
+        <img matListItemIcon [src]="volume.volumeInfo.imageLinks.smallThumbnail" alt="book thumbnail" class="my-2 h-18" i18n-alt />
+        <div matListItemTitle>{{ volume.volumeInfo.title || '-' }}</div>
+        <div matListItemLine>{{ (volume.volumeInfo.authors | array) || '-' }}</div>
+        <div matListItemLine>{{ ([volume.volumeInfo.publishedDate | date, volume.volumeInfo.publisher] | array) || '-' }}</div>
       </mat-list-option>
     }
   </mat-selection-list>
@@ -29,10 +27,11 @@
   <button
     mat-flat-button
     (click)="createUserBook(list.selectedOptions.selected[0].value)"
+    class="app-tertiary"
     [spinning]="createPending()"
     [disabled]="list.selectedOptions.isEmpty() || createPending()"
   >
     <ng-container i18n>Create Book</ng-container>
   </button>
-  <button mat-stroked-button mat-dialog-close i18n>Close</button>
+  <button mat-stroked-button mat-dialog-close class="app-tertiary" i18n>Close</button>
 </div>
