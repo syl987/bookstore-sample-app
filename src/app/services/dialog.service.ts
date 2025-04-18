@@ -35,7 +35,7 @@ export class DialogService {
       title: $localize`Publish selected book`,
       description: $localize`Once published, a book cannot be changed anymore. It will become visible to other users who will be able to buy it.`,
       action: $localize`Publish Book`,
-      color: 'accent',
+      theme: 'success',
     };
 
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
@@ -46,7 +46,7 @@ export class DialogService {
       title: $localize`Buy selected book`,
       description: $localize`Buying a book will make you the new owner. The offer will no longer be available to other users. You can always review your list of bought books in your "My Books" section.`,
       action: $localize`Buy Book`,
-      color: 'accent',
+      theme: 'success',
     };
 
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
@@ -57,7 +57,7 @@ export class DialogService {
       title: $localize`Delete selected book`,
       description: $localize`Once deleted, a book cannot be found any more. All references will be removed.`,
       action: $localize`Delete Book`,
-      color: 'warn',
+      theme: 'error',
     };
 
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
@@ -68,7 +68,7 @@ export class DialogService {
       title: $localize`Delete all book photos`,
       description: $localize`All photos with references for this book will be deleted.`,
       action: $localize`Delete All Photos`,
-      color: 'warn',
+      theme: 'error',
     };
 
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
@@ -79,7 +79,7 @@ export class DialogService {
       title: $localize`Login required`,
       description: $localize`This action requires a user to be logged in. Would you like to be redirected to the login page?`,
       action: $localize`Redirect to Login`,
-      color: 'primary',
+      theme: 'primary',
     };
 
     return this.dialog.open(ConfirmationDialogComponent, { data, maxWidth: 568 });
