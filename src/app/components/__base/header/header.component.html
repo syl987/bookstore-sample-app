@@ -54,6 +54,7 @@
       } @else {
         <form [formGroup]="form" (ngSubmit)="search(); searchOpen.set(false); form.controls.query.setValue('')" class="grow">
           <mat-form-field appearance="fill" class="w-20 min-w-full">
+            <mat-icon class="text-primary ps-1 align-top" matPrefix>search</mat-icon>
             <input matInput formControlName="query" placeholder="Search..." aria-label="Search" appAutofocus i18n-placeholder i18n-aria-label />
           </mat-form-field>
         </form>
