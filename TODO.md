@@ -18,6 +18,8 @@
 - [ ] fully localize welcome-page
 - [ ] table actions sticky right
 - [ ] display search string besides clear search button
+- [ ] create inline mat-button link
+- [ ] add routing to user-books sub pages (draft, published, sold, bought)
 
 ## Maintenance Tasks
 
