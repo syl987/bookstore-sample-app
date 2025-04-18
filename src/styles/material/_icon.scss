@@ -15,6 +15,7 @@ $error-tokens: (
   color: var(--mat-sys-error),
 );
 
-.mdc-button .mat-icon {
+a mat-icon,
+button mat-icon {
   color: inherit;
 }
