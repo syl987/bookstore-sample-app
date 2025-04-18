@@ -35,7 +35,7 @@ import { effects, reducers, routerStoreConfig, storeConfig } from './store/app.s
 const options: AppOptions = {
   applicationName: 'Bookstore Sample App',
   copyrightName: 'Igor M.',
-  copyrightYear: '2024',
+  copyrightYear: new Date().getFullYear(),
 };
 
 const authConfig: AuthConfig = {
