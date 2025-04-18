@@ -1,27 +1,35 @@
 <mat-toolbar class="mat-level2">
   <mat-toolbar-row class="gap-1 sm:gap-2">
-    @if (desktop()) {
-      <div class="text-primary text-xl">{{ options.applicationName }}</div>
-
+    @if (!large()) {
+      <button mat-icon-button (click)="sidenavToggle.emit()" class="-ms-2 sm:me-1 md:me-2" aria-label="Toggle Navigation" i18n-aria-label>
+        <mat-icon>menu</mat-icon>
+      </button>
+    }
+    @if (large() || !searchOpen()) {
+      <div class="text-primary truncate text-base sm:text-lg md:text-xl">{{ options.applicationName }}</div>
+    }
+    @if (large()) {
       <nav mat-tab-nav-bar>
         @for (link of publicLinks; track link.path) {
           <a mat-tab-link [routerLink]="link.path" routerLinkActive [active]="a.isActive" class="px-3" #a="routerLinkActive">{{ link.label }}</a>
         }
       </nav>
-
-      <form [formGroup]="form" (ngSubmit)="search()">
-        <mat-form-field appearance="fill" class="min-w-3xs">
+    }
+    @if (large() || searchOpen()) {
+      <form [formGroup]="form" (ngSubmit)="search(); searchOpen.set(false); form.controls.query.setValue('')" class="grow">
+        <mat-form-field appearance="fill" class="w-16 min-w-full">
           @if (searching()) {
             <mat-spinner diameter="24" class="mx-3" matPrefix />
           } @else {
             <mat-icon class="text-primary align-top" matPrefix>search</mat-icon>
           }
-          <input matInput formControlName="query" placeholder="Search..." aria-label="Search" i18n-placeholder i18n-aria-label />
+          <input matInput formControlName="query" placeholder="Search..." aria-label="Search" appAutofocus i18n-placeholder i18n-aria-label />
         </mat-form-field>
       </form>
+    }
+    <span class="ms-2 me-auto"></span>
 
-      <span class="ms-2 me-auto"></span>
-
+    @if (large()) {
       @if (user(); as user) {
         <div mat-tab-nav-bar>
           <button mat-tab-link (click)="openUserSessionInfoDialog(user)" class="px-3">
@@ -43,22 +51,6 @@
         </nav>
       }
     } @else {
-      <button mat-icon-button (click)="sidenavToggle.emit()" class="-ms-2 sm:me-1 md:me-2" aria-label="Toggle Navigation" i18n-aria-label>
-        <mat-icon>menu</mat-icon>
-      </button>
-
-      @if (!searchOpen()) {
-        <div class="text-primary truncate text-base sm:text-lg md:text-xl">{{ options.applicationName }}</div>
-
-        <span class="me-auto h-6"></span>
-      } @else {
-        <form [formGroup]="form" (ngSubmit)="search(); searchOpen.set(false); form.controls.query.setValue('')" class="grow">
-          <mat-form-field appearance="fill" class="w-20 min-w-full">
-            <mat-icon class="text-primary ps-1 align-top" matPrefix>search</mat-icon>
-            <input matInput formControlName="query" placeholder="Search..." aria-label="Search" appAutofocus i18n-placeholder i18n-aria-label />
-          </mat-form-field>
-        </form>
-      }
       <button mat-icon-button (click)="searchOpen.set(!searchOpen())" aria-label="Search" i18n-aria-label>
         @if (!searchOpen()) {
           <mat-icon>search</mat-icon>

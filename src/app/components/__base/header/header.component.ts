@@ -54,12 +54,12 @@ export class HeaderComponent extends SidenavComponent implements OnInit {
   readonly themeService = inject(ThemeService);
   readonly languages = inject(APP_LANGUAGES);
 
-  readonly desktop$ = this.breakpointObserver.observe([Breakpoints.WebLandscape]).pipe(
+  readonly large$ = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge]).pipe(
     map(({ matches }) => matches),
     distinctUntilChanged(),
   );
 
-  readonly desktop = toSignal(this.desktop$, { requireSync: true });
+  readonly large = toSignal(this.large$, { requireSync: true });
 
   readonly searching = signal(false);
 
