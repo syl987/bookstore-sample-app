@@ -6,6 +6,7 @@ $tokens: (
   protected-container-shape: var(--mat-sys-corner-medium),
   text-container-shape: var(--mat-sys-corner-medium),
 );
+
 $surface-tokens: (
   filled-container-color: var(--mat-sys-on-surface),
   filled-label-text-color: var(--mat-sys-surface),
@@ -18,6 +19,7 @@ $surface-tokens: (
   text-label-text-color: var(--mat-sys-on-surface),
   text-state-layer-color: var(--mat-sys-on-surface),
 );
+
 $secondary-tokens: (
   filled-container-color: var(--mat-sys-secondary),
   filled-label-text-color: var(--mat-sys-on-secondary),
@@ -30,6 +32,7 @@ $secondary-tokens: (
   text-label-text-color: var(--mat-sys-secondary),
   text-state-layer-color: var(--mat-sys-secondary),
 );
+
 $tertiary-tokens: (
   filled-container-color: var(--mat-sys-tertiary),
   filled-label-text-color: var(--mat-sys-on-tertiary),
@@ -42,6 +45,7 @@ $tertiary-tokens: (
   text-label-text-color: var(--mat-sys-tertiary),
   text-state-layer-color: var(--mat-sys-tertiary),
 );
+
 $error-tokens: (
   filled-container-color: var(--mat-sys-error),
   filled-label-text-color: var(--mat-sys-on-error),

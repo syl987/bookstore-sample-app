@@ -1,4 +1,5 @@
 $tokens: ();
+
 $surface-tokens: (
   container-color: var(--mat-sys-surface-container),
   foreground-color: var(--mat-sys-on-surface),
@@ -7,6 +8,7 @@ $surface-tokens: (
   small-foreground-color: var(--mat-sys-on-surface),
   small-state-layer-color: var(--mat-sys-on-surface-container),
 );
+
 $secondary-tokens: (
   container-color: var(--mat-sys-secondary-container),
   foreground-color: var(--mat-sys-on-secondary-container),
@@ -15,6 +17,7 @@ $secondary-tokens: (
   small-foreground-color: var(--mat-sys-on-secondary-container),
   small-state-layer-color: var(--mat-sys-on-secondary-container),
 );
+
 $tertiary-tokens: (
   container-color: var(--mat-sys-tertiary-container),
   foreground-color: var(--mat-sys-on-tertiary-container),
@@ -23,6 +26,7 @@ $tertiary-tokens: (
   small-foreground-color: var(--mat-sys-on-tertiary-container),
   small-state-layer-color: var(--mat-sys-on-tertiary-container),
 );
+
 $error-tokens: (
   container-color: var(--mat-sys-error-container),
   foreground-color: var(--mat-sys-on-error-container),
