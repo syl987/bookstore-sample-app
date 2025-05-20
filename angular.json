@@ -33,12 +33,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles/flagpack.scss",
-              "src/styles/material.scss",
-              "src/styles/styles.scss",
-              "src/styles/tailwind.css"
-            ],
+            "styles": ["src/styles/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["node_modules/", "src/styles/shared"]
             },

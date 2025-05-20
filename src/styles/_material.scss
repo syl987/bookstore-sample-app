@@ -1,6 +1,8 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 
+@use 'sass:meta';
+
 @use '@angular/material' as mat;
 
 @use 'material/button';
@@ -15,6 +17,11 @@
 @use 'material/snack-bar';
 @use 'material/tabs';
 @use 'material/toolbar';
+
+@include meta.load-css('material/background');
+@include meta.load-css('material/color');
+@include meta.load-css('material/elevation');
+@include meta.load-css('material/typography');
 
 html {
   --mat-sys-corner-extra-large: 10px !important;
