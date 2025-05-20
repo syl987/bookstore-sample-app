@@ -7,11 +7,13 @@
  */
 const config = {
   extends: [
-    'stylelint-config-standard-scss', // also extends: recommended-scss, standard, recommended
+    'stylelint-config-recommended-scss', // also extends: recommended
     'stylelint-config-clean-order',
     'stylelint-config-prettier-scss',
   ],
-  rules: {},
+  rules: {
+    'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['ng-deep'] }], // recommended override: support angular elements
+  },
 };
 
 module.exports = config;
