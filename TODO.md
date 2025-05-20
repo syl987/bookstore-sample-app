@@ -2,6 +2,7 @@
 
 ## Features
 
+- [ ] host tech-stack logos internally?
 - [ ] add terms-of-use page
 - [ ] add data-policy page
 - [ ] remove any work-in-progress info
@@ -21,12 +22,16 @@
 - [ ] create inline mat-button link
 - [ ] add routing to user-books sub pages (draft, published, sold, bought)
 
-## Maintenance Tasks
+## Bugs
 
-- [ ] resolve any todo comments in code
-- [ ] resolve any commented code
+- [ ] change detection not fired after photo upload
+- [ ] title-bar incorrect heading on navigation error
 
-## Technical Improvements
+## Styling
+
+- [ ] fix tech-stack icons rounded borders
+
+## Technical
 
 - [ ] adjust eslint rules
 - [ ] separate css/scss in angular.json per plugin or merge back together
@@ -51,7 +56,12 @@
 - [ ] resolve sass deprecations
 - [ ] replace sass imports
 
-### Low Priority
+## Maintenance
+
+- [ ] resolve any todo comments in code
+- [ ] resolve any commented code
+
+### Miscellaneous
 
 - [ ] add loading appearance to volume card
 - [ ] keep same page after login
@@ -61,8 +71,3 @@
   - [ ] add placeholder image
   - [ ] display progress spinner
 - [ ] add store logic for firebase data streams
-
-## Bug Issues
-
-- [ ] change detection not fired after photo upload
-- [ ] title-bar incorrect heading on navigation error
