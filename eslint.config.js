@@ -23,7 +23,7 @@ module.exports = tseslint.config(
       imports.flatConfigs?.typescript,
       ngrx.configs.all,
       regexp.configs['flat/recommended'],
-      rxjs.configs.strict,
+      rxjs.configs.recommended,
       prettier,
     ],
     plugins: {
