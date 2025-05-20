@@ -3,6 +3,6 @@
     "angular.ng-template",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "eamodio.gitlens"
+    "stylelint.vscode-stylelint"
   ]
 }

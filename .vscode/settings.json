@@ -9,9 +9,7 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.codeActionsOnSave.mode": "problems",
-  "eslint.options": {
-    "extensions": [".ts", ".html"]
-  },
+  "stylelint.validate": ["css", "scss"],
   "extensions.ignoreRecommendations": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "cSpell.words": ["flagpack"]
