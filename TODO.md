@@ -2,6 +2,7 @@
 
 ## Features
 
+- [ ] user-books as module and lazy load all components together
 - [ ] host tech-stack logos internally?
 - [ ] add terms-of-use page
 - [ ] add data-policy page
