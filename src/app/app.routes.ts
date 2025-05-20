@@ -1,6 +1,10 @@
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { Routes } from '@angular/router';
 
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { VolumeSearchPageComponent } from './components/volume-search-page/volume-search-page.component';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -11,17 +15,17 @@ export const routes: Routes = [
     path: 'login',
     title: $localize`Login`,
     ...canActivate(() => redirectLoggedInTo('/volumes')),
-    loadComponent: () => import('./components/login-page/login-page.component').then(m => m.LoginPageComponent),
+    component: LoginPageComponent,
   },
   {
     path: 'welcome',
     title: $localize`Welcome`,
-    loadComponent: () => import('./components/welcome-page/welcome-page.component').then(m => m.WelcomePageComponent),
+    component: WelcomePageComponent,
   },
   {
     path: 'volumes',
     title: $localize`Books`,
-    loadComponent: () => import('./components/volume-search-page/volume-search-page.component').then(m => m.VolumeSearchPageComponent),
+    component: VolumeSearchPageComponent,
   },
   {
     path: 'volumes/:volumeId',
