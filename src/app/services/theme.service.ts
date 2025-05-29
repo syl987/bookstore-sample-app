@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, DOCUMENT } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +23,6 @@ export class ThemeService {
   }
 
   private _getDefaultTheme(): string {
-    const view = this.document.defaultView;
-    return view && view.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return this.document.defaultView?.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 }
