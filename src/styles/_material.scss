@@ -21,7 +21,7 @@
 @include meta.load-css('material/background');
 @include meta.load-css('material/color');
 @include meta.load-css('material/elevation');
-@include meta.load-css('material/typography');
+@include meta.load-css('material/font');
 
 html {
   --mat-sys-corner-extra-large: 10px !important;
