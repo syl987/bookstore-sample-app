@@ -23,6 +23,14 @@
 @include meta.load-css('material/elevation');
 @include meta.load-css('material/font');
 
+$theme: (
+  color: (
+    primary: mat.$azure-palette,
+    tertiary: mat.$spring-green-palette,
+  ),
+  typography: Inter,
+);
+
 html {
   --mat-sys-corner-extra-large: 10px !important;
   --mat-sys-corner-extra-large-top: 10px 10px 0 0 !important;
@@ -35,15 +43,7 @@ html {
   --mat-sys-corner-medium: 6px !important;
   --mat-sys-corner-small: 4px !important;
 
-  @include mat.theme(
-    (
-      color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$spring-green-palette,
-      ),
-      typography: Inter,
-    )
-  );
+  @include mat.theme($theme);
 
   @include mat.button-overrides(button.$tokens);
   @include mat.dialog-overrides(dialog.$tokens);
