@@ -59,7 +59,7 @@ export const languages: AppLanguages = [
 ];
 
 const links: AppLinks = [
-  { label: $localize`Welcome`, icon: 'celebration', path: '/welcome' },
+  { label: $localize`Welcome`, icon: 'home', path: '/welcome' },
   { label: $localize`Books`, icon: 'library_books', path: '/volumes' },
   { label: $localize`My Books`, icon: 'auto_stories', path: '/user/books', userSpecific: true },
   { label: 'Dev', icon: 'code', path: '/dev' },
