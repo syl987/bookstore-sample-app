@@ -3,7 +3,7 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Auth, user } from '@angular/fire/auth';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, concatMap, map, Observable, of, shareReplay, take, throwError } from 'rxjs';
 
 import { toAuthUser } from '../helpers/auth.helpers';
 import { AuthProviderId } from '../models/auth.models';
@@ -41,14 +41,42 @@ export class AuthService {
   /**
    * Login with an external provider.
    */
-  loginWithProvider(provider: AuthProviderId): void {
+  loginWithProvider(provider: AuthProviderId): Observable<void> {
     this.store.dispatch(AuthActions.loginWithProvider({ providerId: provider }));
+
+    const result = this.actions.pipe(
+      ofType(AuthActions.loginWithProviderSUCCESS, AuthActions.loginWithProviderERROR),
+      take(1),
+      concatMap(action => {
+        if (action.type === AuthActions.loginWithProviderSUCCESS.type) {
+          return of(undefined);
+        }
+        return throwError(() => action.error.err);
+      }),
+      shareReplay({ bufferSize: 1, refCount: true }),
+    );
+    result.subscribe();
+    return result;
   }
 
   /**
    * Logout.
    */
-  logout(): void {
+  logout(): Observable<void> {
     this.store.dispatch(AuthActions.logout());
+
+    const result = this.actions.pipe(
+      ofType(AuthActions.logoutSUCCESS, AuthActions.logoutERROR),
+      take(1),
+      concatMap(action => {
+        if (action.type === AuthActions.logoutSUCCESS.type) {
+          return of(undefined);
+        }
+        return throwError(() => action.error.err);
+      }),
+      shareReplay({ bufferSize: 1, refCount: true }),
+    );
+    result.subscribe();
+    return result;
   }
 }
