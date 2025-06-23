@@ -2,11 +2,11 @@ import { DestroyRef, Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-
 import { concatMap, Observable, of, shareReplay, take, throwError } from 'rxjs';
+
+import { GoogleBooksListDTO } from '../models/google-books.models';
 import { GoogleBooksActions } from '../store/google-books/google-books.actions';
 import { googleBooksFeature } from '../store/google-books/google-books.reducer';
-import { GoogleBooksListDTO } from '../models/google-books.models';
 
 @Injectable({
   providedIn: 'root',
