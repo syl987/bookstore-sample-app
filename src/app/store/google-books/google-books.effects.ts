@@ -17,7 +17,7 @@ export class GoogleBooksEffects {
     return this.actions.pipe(
       ofType(GoogleBooksActions.search),
       switchMap(({ query }) =>
-        this.googleBooksApi.list(query).pipe(
+        this.googleBooksApi.list(query, { maxResults: 20 }).pipe(
           map(list => GoogleBooksActions.searchSUCCESS({ list })),
           catchError((err: unknown) => {
             if (err instanceof HttpErrorResponse) {
