@@ -6,7 +6,7 @@
   }
 
   <image-cropper
-    [imageFile]="file"
+    [imageFile]="data.file"
     format="png"
     [maintainAspectRatio]="false"
     [resizeToWidth]="1024"
@@ -14,7 +14,7 @@
     [cropperMinWidth]="512"
     [cropperMinHeight]="512"
     [onlyScaleDown]="true"
-    (imageCropped)="setResult($event)"
+    (imageCropped)="result = $event.blob"
     (loadImageFailed)="loadError = true"
   />
 </div>
