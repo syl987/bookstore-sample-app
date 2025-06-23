@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { AuthUser } from 'src/app/models/auth.models';
