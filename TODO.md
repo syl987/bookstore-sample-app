@@ -35,6 +35,7 @@
 ## Technical
 
 - [ ] adjust eslint rules
+- [ ] place method signal values at the top
 - [ ] separate css/scss in angular.json per plugin or merge back together
   - [x] material
   - [ ] cdk (if needed)
