@@ -7,7 +7,7 @@ export const GoogleBooksActions = createActionGroup({
   source: 'GoogleBooks',
   events: {
     'search': props<{ query: string }>(),
-    'search SUCCESS': props<{ query: string; list: GoogleBooksListDTO }>(),
+    'search SUCCESS': props<{ list: GoogleBooksListDTO }>(),
     'search ERROR': props<{ error: ResponseError }>(),
   },
 });

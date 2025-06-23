@@ -21,13 +21,13 @@ const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(GoogleBooksActions.search, state => ({
+  on(GoogleBooksActions.search, (state, { query }) => ({
     ...state,
-    search: { ...state.search, pending: true, error: undefined },
+    search: { ...state.search, query, pending: true, error: undefined },
   })),
-  on(GoogleBooksActions.searchSUCCESS, (state, { query, list }) => ({
+  on(GoogleBooksActions.searchSUCCESS, (state, { list }) => ({
     ...state,
-    search: { ...state.search, query, list, pending: false, error: undefined },
+    search: { ...state.search, list, pending: false, error: undefined },
   })),
   on(GoogleBooksActions.searchERROR, (state, { error }) => ({
     ...state,
