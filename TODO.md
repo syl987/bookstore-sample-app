@@ -2,6 +2,7 @@
 
 ## Features
 
+- [ ] add "load more" button to google-books search results
 - [ ] user-books as module and lazy load all components together
 - [ ] host tech-stack logos internally?
 - [ ] add terms-of-use page
@@ -30,6 +31,8 @@
 
 ## Styling
 
+- [ ] add icons to all non-header buttons
+- [ ] check button colors, close cancel buttons all neutral color
 - [ ] fix tech-stack icons rounded borders
 
 ## Technical
