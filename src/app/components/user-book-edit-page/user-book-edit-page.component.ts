@@ -1,6 +1,5 @@
 import { DecimalPipe, getCurrencySymbol, SlicePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, DestroyRef, inject, Injector, OnInit } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, effect, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -49,8 +48,6 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBookEditPageComponent implements OnInit {
-  protected readonly destroyRef = inject(DestroyRef);
-  protected readonly injector = inject(Injector);
   protected readonly currency = inject(DEFAULT_CURRENCY_CODE);
   protected readonly router = inject(Router);
   protected readonly routerService = inject(RouterService);
@@ -87,14 +84,12 @@ export class UserBookEditPageComponent implements OnInit {
 
   readonly currencySymbol = getCurrencySymbol(this.currency, 'narrow');
 
+  constructor() {
+    effect(() => this._resetForm());
+  }
+
   ngOnInit(): void {
     this.userBooksService.load(this.bookId());
-
-    toObservable(this.book, { injector: this.injector })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(_ => {
-        this._resetForm();
-      });
   }
 
   saveChanges(): void {
