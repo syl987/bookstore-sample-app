@@ -10,10 +10,6 @@ export class AppTitleStrategy extends TitleStrategy {
 
   readonly options = inject(APP_OPTIONS);
 
-  constructor() {
-    super();
-  }
-
   override updateTitle(routerState: RouterStateSnapshot): void {
     const title = this.buildTitle(routerState);
 
