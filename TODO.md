@@ -2,6 +2,7 @@
 
 ## Features
 
+- [ ] shorten button texts
 - [ ] prevent scrolling of the google-books dialog search query
 - [ ] add "load more" button to google-books search results
 - [ ] user-books as module and lazy load all components together
