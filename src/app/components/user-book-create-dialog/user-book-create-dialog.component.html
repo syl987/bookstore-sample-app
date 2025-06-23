@@ -12,7 +12,7 @@
   </div>
 
   <mat-selection-list [multiple]="false" #list="matSelectionList" class="-mx-6 py-0">
-    @for (volume of results() | slice: 0 : 20; track volume.id) {
+    @for (volume of results(); track volume.id) {
       <mat-list-option [value]="volume" class="truncate px-2">
         @if (volume.volumeInfo.imageLinks?.smallThumbnail; as thumbnail) {
           <img matListItemIcon [src]="thumbnail" alt="book thumbnail" class="my-2 h-18" i18n-alt />

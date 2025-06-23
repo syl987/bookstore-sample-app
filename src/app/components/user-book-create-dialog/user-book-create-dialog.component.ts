@@ -1,4 +1,4 @@
-import { DatePipe, SlicePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, viewChild, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +29,6 @@ const DEBOUNCE_TIME = 500;
     MatProgressSpinnerModule,
     ButtonSpinnerDirective,
     ArrayPipe,
-    SlicePipe,
     DatePipe,
   ],
   templateUrl: './user-book-create-dialog.component.html',
