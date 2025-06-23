@@ -1,7 +1,11 @@
 @if (volume(); as volume) {
   <mat-card class="h-full">
     <mat-card-header>
-      <img mat-card-sm-image [src]="volume.volumeInfo.imageLinks.thumbnail" alt="volume cover" class="order-first me-4" i18n-alt />
+      @if (volume.volumeInfo.imageLinks?.thumbnail; as thumbnail) {
+        <img mat-card-sm-image [src]="thumbnail" alt="volume cover" class="order-first me-4" i18n-alt />
+      } @else {
+        <!-- TODO placeholder -->
+      }
       <mat-card-title>{{ volume.volumeInfo.title }}</mat-card-title>
       <mat-card-subtitle>{{ volume.volumeInfo.authors }}</mat-card-subtitle>
       <mat-card-subtitle>{{ volume.volumeInfo.publishedDate | date: 'yyyy' }} {{ volume.volumeInfo.publisher }}</mat-card-subtitle>
