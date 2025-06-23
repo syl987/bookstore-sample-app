@@ -42,8 +42,8 @@ export class AuthService {
   /**
    * Login with an external provider.
    */
-  loginWithProvider(provider: AuthProviderId): Observable<void> {
-    this.store.dispatch(AuthActions.loginWithProvider({ providerId: provider }));
+  loginWithProvider(providerId: AuthProviderId): Observable<void> {
+    this.store.dispatch(AuthActions.loginWithProvider({ providerId }));
 
     const result = this.actions.pipe(
       ofType(AuthActions.loginWithProviderSUCCESS, AuthActions.loginWithProviderERROR),
