@@ -1,13 +1,13 @@
 import { DatePipe, SlicePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, viewChild } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule, MatSelectionList } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { debounceTime, take } from 'rxjs';
+import { debounceTime } from 'rxjs';
 
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { UserBookDTO } from 'src/app/models/book.models';
@@ -61,13 +61,11 @@ export class UserBookCreateDialogComponent implements AfterViewInit {
       this.googleBooksService.searchVolumes(query);
     });
 
-    toObservable(this.googleBooksService.searchQuery)
-      .pipe(take(1), takeUntilDestroyed())
-      .subscribe(query => {
-        if (query) {
-          this.searchControl.setValue(query, { emitEvent: false });
-        }
-      });
+    const query = this.googleBooksService.searchQuery();
+
+    if (query) {
+      this.searchControl.setValue(query, { emitEvent: false });
+    }
   }
 
   ngAfterViewInit(): void {
