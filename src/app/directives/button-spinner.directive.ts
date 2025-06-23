@@ -48,11 +48,10 @@ export class ButtonSpinnerDirective implements OnInit {
 
   constructor() {
     this.spinnerRef.instance.diameter = 20; // dependent on style positioning
+    this.spinnerRef.instance.mode = 'indeterminate';
   }
 
   ngOnInit(): void {
-    this.spinnerRef.instance.mode = 'indeterminate';
-
     const spinnerEl: Element = this.spinnerRef.instance._elementRef.nativeElement;
 
     this.renderer.appendChild(this.elementRef.nativeElement, spinnerEl);
