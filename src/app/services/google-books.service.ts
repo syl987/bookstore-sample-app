@@ -1,4 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { DestroyRef, Injectable, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -11,6 +12,7 @@ import { GoogleBooksListDTO } from '../models/google-books.models';
   providedIn: 'root',
 })
 export class GoogleBooksService {
+  protected readonly destroyRef = inject(DestroyRef);
   protected readonly store = inject(Store);
   protected readonly actions = inject(Actions);
 
@@ -37,7 +39,7 @@ export class GoogleBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 }

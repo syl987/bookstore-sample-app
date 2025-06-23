@@ -1,4 +1,4 @@
-import { computed, Injectable, inject } from '@angular/core';
+import { computed, Injectable, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Auth, user } from '@angular/fire/auth';
 import { Actions, ofType } from '@ngrx/effects';
@@ -13,6 +13,7 @@ import { AuthActions } from '../store/auth/auth.actions';
   providedIn: 'root',
 })
 export class AuthService {
+  protected readonly destroyRef = inject(DestroyRef);
   protected readonly store = inject(Store);
   protected readonly actions = inject(Actions);
   protected readonly auth = inject(Auth);
@@ -55,7 +56,7 @@ export class AuthService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 
@@ -76,7 +77,7 @@ export class AuthService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 }

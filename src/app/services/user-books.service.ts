@@ -1,4 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { DestroyRef, Injectable, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { concatMap, Observable, of, shareReplay, take, takeWhile, throwError } from 'rxjs';
@@ -32,6 +33,7 @@ interface IUserBooksService {
   providedIn: 'root',
 })
 export class UserBooksService implements IUserBooksService {
+  protected readonly destroyRef = inject(DestroyRef);
   protected readonly store = inject(Store);
   protected readonly actions = inject(Actions);
 
@@ -81,7 +83,7 @@ export class UserBooksService implements IUserBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 
@@ -99,7 +101,7 @@ export class UserBooksService implements IUserBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 
@@ -117,7 +119,7 @@ export class UserBooksService implements IUserBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 
@@ -135,7 +137,7 @@ export class UserBooksService implements IUserBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 
@@ -153,7 +155,7 @@ export class UserBooksService implements IUserBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 
@@ -183,7 +185,7 @@ export class UserBooksService implements IUserBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 
@@ -201,7 +203,7 @@ export class UserBooksService implements IUserBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 
@@ -219,7 +221,7 @@ export class UserBooksService implements IUserBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 
@@ -237,7 +239,7 @@ export class UserBooksService implements IUserBooksService {
       }),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
-    result.subscribe();
+    result.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     return result;
   }
 }
