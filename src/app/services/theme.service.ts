@@ -1,4 +1,3 @@
-
 import { inject, Injectable, DOCUMENT } from '@angular/core';
 
 @Injectable({
@@ -13,18 +12,19 @@ export class ThemeService {
     return this.#theme;
   }
 
-  toggleTheme(): void {
+  toggleTheme(): string {
     if (this.theme === 'dark') {
       this.document.body.style.colorScheme = 'light';
       this.#theme = 'light';
-    } else {
-      this.document.body.style.colorScheme = 'dark';
-      this.#theme = 'dark';
+      return 'light';
     }
+    this.document.body.style.colorScheme = 'dark';
+    this.#theme = 'dark';
+    return 'dark';
   }
 
   private _getDefaultTheme(): string {
     const view = this.document.defaultView;
-    return view && view.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return view?.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 }
