@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject, LOCALE_ID, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, output, signal, inject, LOCALE_ID, OnInit, Injector } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -48,6 +48,7 @@ const FAKE_RESPONSE_TIME = 750;
 export class HeaderComponent extends SidenavComponent implements OnInit {
   protected readonly locale = inject(LOCALE_ID);
   protected readonly destroyRef = inject(DestroyRef);
+  protected readonly injector = inject(Injector);
   protected readonly breakpointObserver = inject(BreakpointObserver);
   protected readonly volumeService = inject(VolumeService);
 
@@ -74,7 +75,7 @@ export class HeaderComponent extends SidenavComponent implements OnInit {
   readonly sidenavToggle = output();
 
   ngOnInit(): void {
-    toObservable(this.volumeService.filterQuery)
+    toObservable(this.volumeService.filterQuery, { injector: this.injector })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(query => {
         this.form.controls.query.setValue(query, { emitEvent: false });

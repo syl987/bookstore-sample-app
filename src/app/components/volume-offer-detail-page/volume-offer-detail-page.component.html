@@ -1,5 +1,5 @@
 <div class="container">
-  <app-title-bar [backUrl]="'/volumes/' + id">
+  <app-title-bar [backUrl]="'/volumes/' + volumeId()">
     @if (offer(); as offer) {
       <button mat-stroked-button (click)="buyBookOffer(offer)" [disabled]="isUserBook()" i18n>Buy Book</button>
     }

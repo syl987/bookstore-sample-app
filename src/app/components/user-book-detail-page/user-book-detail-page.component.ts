@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute } from '@angular/router';
 
 import { BookCondition, BookStatus } from 'src/app/models/book.models';
 import { RouterService } from 'src/app/services/router.service';
@@ -26,12 +24,11 @@ import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-
   templateUrl: './user-book-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBookDetailPageComponent {
-  protected readonly route = inject(ActivatedRoute);
+export class UserBookDetailPageComponent implements OnInit {
   protected readonly routerService = inject(RouterService);
   protected readonly userBooksService = inject(UserBooksService);
 
-  id: string = this.route.snapshot.params['bookId'];
+  readonly bookId = computed(() => this.routerService.routeParams().bookId!); // mandatory param defined by route
 
   readonly book = this.userBooksService.entityByRoute;
   readonly bookLoading = this.userBooksService.loadPending;
@@ -39,15 +36,7 @@ export class UserBookDetailPageComponent {
   readonly BookStatus = BookStatus;
   readonly BookCondition = BookCondition;
 
-  constructor() {
-    this.routerService
-      .selectRouteParam('bookId')
-      .pipe(takeUntilDestroyed())
-      .subscribe(id => {
-        if (id) {
-          this.id = id;
-          this.userBooksService.load(id);
-        }
-      });
+  ngOnInit(): void {
+    this.userBooksService.load(this.bookId());
   }
 }

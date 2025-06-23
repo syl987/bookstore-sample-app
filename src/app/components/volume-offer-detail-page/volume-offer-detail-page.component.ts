@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { concatMap, filter } from 'rxjs';
 
 import { isTrue } from 'src/app/functions/typeguard.functions';
@@ -33,33 +32,25 @@ function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undef
   templateUrl: './volume-offer-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VolumeOfferDetailPageComponent {
-  protected readonly route = inject(ActivatedRoute);
+export class VolumeOfferDetailPageComponent implements OnInit {
   protected readonly router = inject(Router);
   protected readonly authService = inject(AuthService);
   protected readonly routerService = inject(RouterService);
   protected readonly volumeService = inject(VolumeService);
   protected readonly dialogService = inject(DialogService);
 
-  id: string = this.route.snapshot.params['volumeId'];
+  readonly volumeId = computed(() => this.routerService.routeParams().volumeId!); // mandatory param defined by route
+  readonly offerId = computed(() => this.routerService.routeParams().offerId!); // mandatory param defined by route
 
   readonly volume = this.volumeService.entityByRoute;
   readonly volumeLoading = this.volumeService.loadPending;
 
-  readonly offer = computed(() => getBookOfferById(this.volume(), this.routerService.routeParams().offerId));
+  readonly offer = computed(() => getBookOfferById(this.volume(), this.offerId()));
 
   readonly isUserBook = computed(() => this.authService.uid() && this.offer()?.uid === this.authService.uid());
 
-  constructor() {
-    this.routerService
-      .selectRouteParam('volumeId')
-      .pipe(takeUntilDestroyed())
-      .subscribe(id => {
-        if (id) {
-          this.id = id;
-          this.volumeService.load(id);
-        }
-      });
+  ngOnInit(): void {
+    this.volumeService.load(this.volumeId());
   }
 
   buyBookOffer(offer: BookDTO): void {
@@ -78,7 +69,7 @@ export class VolumeOfferDetailPageComponent {
       .beforeClosed()
       .pipe(
         filter(isTrue),
-        concatMap(_ => this.volumeService.buyOffer(this.id, offer.id)),
+        concatMap(_ => this.volumeService.buyOffer(this.volumeId(), offer.id)),
       )
       .subscribe(_ => {
         this.router.navigateByUrl(`/user/books`);

@@ -2,9 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { getRouterSelectors } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
-import { NavigationState, QueryParams, RouteParam, RouteParams, RouteQueryParam } from '../models/router.models';
+import { NavigationState, QueryParams, RouteParams } from '../models/router.models';
 
 @Injectable({
   providedIn: 'root',
@@ -22,13 +21,5 @@ export class RouterService {
 
   getCurrentNavigationState(): NavigationState {
     return (this.router.getCurrentNavigation()?.extras.state ?? {}) as NavigationState;
-  }
-
-  selectRouteParam(param: RouteParam): Observable<string | undefined> {
-    return this.store.select(getRouterSelectors().selectRouteParam(param));
-  }
-
-  selectQueryParam(param: RouteQueryParam): Observable<string | string[] | undefined> {
-    return this.store.select(getRouterSelectors().selectQueryParam(param));
   }
 }

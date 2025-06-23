@@ -1,5 +1,5 @@
 import { DatePipe, SlicePipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, viewChild, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,11 +36,11 @@ const DEBOUNCE_TIME = 500;
   styleUrl: './user-book-create-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBookCreateDialogComponent implements AfterViewInit {
-  protected readonly userBooksService = inject(UserBooksService);
-  protected readonly googleBooksService = inject(GoogleBooksService);
+export class UserBookCreateDialogComponent implements AfterViewInit, OnInit {
   protected readonly changeDetectorRef = inject(ChangeDetectorRef);
   protected readonly destroyRef = inject(DestroyRef);
+  protected readonly userBooksService = inject(UserBooksService);
+  protected readonly googleBooksService = inject(GoogleBooksService);
 
   readonly dialogRef = inject<MatDialogRef<UserBookCreateDialogComponent, UserBookDTO | undefined>>(MatDialogRef);
 
@@ -56,8 +56,8 @@ export class UserBookCreateDialogComponent implements AfterViewInit {
 
   readonly list = viewChild.required(MatSelectionList);
 
-  constructor() {
-    this.searchControl.valueChanges.pipe(debounceTime(DEBOUNCE_TIME), takeUntilDestroyed()).subscribe(query => {
+  ngOnInit(): void {
+    this.searchControl.valueChanges.pipe(debounceTime(DEBOUNCE_TIME), takeUntilDestroyed(this.destroyRef)).subscribe(query => {
       this.googleBooksService.searchVolumes(query);
     });
 

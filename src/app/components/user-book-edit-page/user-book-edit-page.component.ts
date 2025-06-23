@@ -1,5 +1,5 @@
 import { DecimalPipe, getCurrencySymbol, SlicePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, DestroyRef, inject, Injector, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,9 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
-import { BehaviorSubject, combineLatest, concatMap, filter } from 'rxjs';
+import { concatMap, filter } from 'rxjs';
 
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { getObjectValues } from 'src/app/functions/object.functions';
@@ -48,15 +48,16 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
   templateUrl: './user-book-edit-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserBookEditPageComponent {
+export class UserBookEditPageComponent implements OnInit {
+  protected readonly destroyRef = inject(DestroyRef);
+  protected readonly injector = inject(Injector);
   protected readonly currency = inject(DEFAULT_CURRENCY_CODE);
-  protected readonly route = inject(ActivatedRoute);
   protected readonly router = inject(Router);
   protected readonly routerService = inject(RouterService);
   protected readonly userBooksService = inject(UserBooksService);
   protected readonly dialogService = inject(DialogService);
 
-  id: string = this.route.snapshot.params['bookId'];
+  readonly bookId = computed(() => this.routerService.routeParams().bookId!); // mandatory param defined by route
 
   readonly book = this.userBooksService.entityByRoute;
   readonly bookLoading = this.userBooksService.loadPending;
@@ -86,32 +87,13 @@ export class UserBookEditPageComponent {
 
   readonly currencySymbol = getCurrencySymbol(this.currency, 'narrow');
 
-  private readonly _resetFields$ = new BehaviorSubject<void>(undefined);
+  ngOnInit(): void {
+    this.userBooksService.load(this.bookId());
 
-  constructor() {
-    this.routerService
-      .selectRouteParam('bookId')
-      .pipe(takeUntilDestroyed())
-      .subscribe(id => {
-        if (id) {
-          this.id = id;
-          this.userBooksService.load(id);
-        }
-      });
-
-    combineLatest([toObservable(this.book), this._resetFields$])
-      .pipe(takeUntilDestroyed())
-      .subscribe(([book]) => {
-        this.form.setValue({
-          description: book?.description ?? null,
-          condition: book?.condition ?? null,
-          price: book?.price ?? null,
-        });
-        if (book?.status !== BookStatus.DRAFT) {
-          this.form.disable();
-        } else {
-          this.form.enable();
-        }
+    toObservable(this.book, { injector: this.injector })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(_ => {
+        this._resetForm();
       });
   }
 
@@ -124,11 +106,11 @@ export class UserBookEditPageComponent {
       condition: this.form.value.condition,
       price: this.form.value.price,
     };
-    this.userBooksService.editDraft(this.id, data);
+    this.userBooksService.editDraft(this.bookId(), data);
   }
 
   discardChanges(): void {
-    this._resetFields$.next();
+    this._resetForm();
   }
 
   publishBook(): void {
@@ -137,7 +119,7 @@ export class UserBookEditPageComponent {
       .beforeClosed()
       .pipe(
         filter(isTrue), // ignore close without result
-        concatMap(_ => this.userBooksService.publish(this.id)),
+        concatMap(_ => this.userBooksService.publish(this.bookId())),
       )
       .subscribe({
         next: _ => this.router.navigateByUrl('/user/books'),
@@ -163,7 +145,7 @@ export class UserBookEditPageComponent {
       .beforeClosed()
       .pipe(
         filter(isTrue),
-        concatMap(_ => this.userBooksService.delete(this.id)),
+        concatMap(_ => this.userBooksService.delete(this.bookId())),
       )
       .subscribe(_ => this.router.navigateByUrl('/user/books'));
   }
@@ -174,11 +156,11 @@ export class UserBookEditPageComponent {
       .beforeClosed()
       .pipe(
         filter(isTruthy),
-        concatMap(result => this.userBooksService.uploadPhoto(this.id, result)),
+        concatMap(result => this.userBooksService.uploadPhoto(this.bookId(), result)),
       )
       .subscribe(uploadData => {
         if (uploadData.complete) {
-          this.userBooksService.load(this.id);
+          this.userBooksService.load(this.bookId());
         }
       });
   }
@@ -189,10 +171,25 @@ export class UserBookEditPageComponent {
       .beforeClosed()
       .pipe(
         filter(isTrue),
-        concatMap(_ => this.userBooksService.removeAllPhotos(this.id)),
+        concatMap(_ => this.userBooksService.removeAllPhotos(this.bookId())),
       )
       .subscribe(_ => {
-        this.userBooksService.load(this.id);
+        this.userBooksService.load(this.bookId());
       });
+  }
+
+  private _resetForm(): void {
+    const book = this.book();
+
+    this.form.setValue({
+      description: book?.description ?? null,
+      condition: book?.condition ?? null,
+      price: book?.price ?? null,
+    });
+    if (book?.status !== BookStatus.DRAFT) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
   }
 }
