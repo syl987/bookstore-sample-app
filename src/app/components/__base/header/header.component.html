@@ -9,7 +9,7 @@
       <div class="text-primary truncate text-base sm:text-lg md:text-xl">{{ options.applicationName }}</div>
     }
     @if (large()) {
-      <nav mat-tab-nav-bar>
+      <nav mat-tab-nav-bar [tabPanel]="tabPanel">
         @for (link of publicLinks; track link.path) {
           <a mat-tab-link [routerLink]="link.path" routerLinkActive [active]="a.isActive" class="px-3" #a="routerLinkActive">{{ link.label }}</a>
         }
@@ -31,7 +31,7 @@
 
     @if (large()) {
       @if (user(); as user) {
-        <div mat-tab-nav-bar>
+        <div mat-tab-nav-bar [tabPanel]="tabPanel">
           <button mat-tab-link (click)="openUserSessionInfoDialog(user)" class="px-3">
             <app-header-user-info [user]="user" />
           </button>
@@ -39,14 +39,14 @@
 
         <mat-divider vertical class="h-8" />
 
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           @for (link of userLinks; track link.path) {
             <a mat-tab-link [routerLink]="link.path" routerLinkActive [active]="a.isActive" class="px-3" #a="routerLinkActive">{{ link.label }}</a>
           }
           <button mat-tab-link (click)="logout()" class="px-3" i18n>Logout</button>
         </nav>
       } @else {
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           <a mat-tab-link routerLink="/login" routerLinkActive [active]="a.isActive" class="px-3" i18n #a="routerLinkActive">Login</a>
         </nav>
       }
@@ -83,3 +83,6 @@
     </a>
   }
 </mat-menu>
+
+<!-- TODO kick after fixed - workaround: tabs falsely require a tabPanel input -->
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
