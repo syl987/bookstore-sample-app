@@ -32,7 +32,8 @@
 - [x] add welcome-page accessibility feature item
 - [x] add welcome-page intuitive UX feature item
 - [x] add welcome-page lazy loading feature item
-- [ ] add stylelint to tech-stack, potentially kick github
+- [ ] add welcome-page stylelint to tech-stack, potentially kick github
+- [ ] swap welcome-page material and rxjs tech-stack
 
 ## Bugs
 
