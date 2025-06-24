@@ -35,7 +35,7 @@
 
 ## Styling
 
-nothing
+- [x] add active tab surface-container background
 
 ## Technical
 

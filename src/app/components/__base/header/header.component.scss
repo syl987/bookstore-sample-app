@@ -33,10 +33,6 @@ $tabs-tokens: (
   ::ng-deep .mdc-tab-indicator__content--underline {
     width: calc(100% - 16px); // value by visuals
   }
-
-  ::ng-deep .mdc-tab--active {
-    background-color: var(--mat-sys-surface-container);
-  }
 }
 
 .mat-toolbar-row {

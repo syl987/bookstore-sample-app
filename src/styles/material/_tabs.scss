@@ -1,3 +1,7 @@
 $tokens: (
   active-indicator-height: 3px,
 );
+
+.mdc-tab.mdc-tab--active {
+  background-color: var(--mat-sys-surface-container);
+}
