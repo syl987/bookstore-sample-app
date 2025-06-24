@@ -18,8 +18,14 @@
 - [ ] add github icon link
 - [x] table actions sticky right
 - [ ] display search string besides clear search button
-- [ ] create inline mat-button link
 - [ ] add routing to user-books sub pages (draft, published, sold, bought)
+- [ ] add loading appearance to volume card
+- [ ] keep same page after login
+- [ ] guard and keep same page or redirect after logout
+- [ ] improve image upload
+  - [ ] add placeholder image
+  - [ ] add progress percentage
+  - [ ] allow deleting a single image
 
 ## Bugs
 
@@ -28,27 +34,19 @@
 
 ## Styling
 
-- [ ] add icons to all non-header buttons
-- [ ] check button colors, close cancel buttons all neutral color
 - [ ] fix tech-stack icons rounded borders
 
 ## Technical
 
+- [ ] create inline mat-button link
 - [ ] consider hosting tech-stack logos internally
 - [ ] adjust eslint rules
-- [ ] place method signal values at the top
-- [ ] separate css/scss in angular.json per plugin or merge back together
-  - [x] material
-  - [ ] cdk (if needed)
-  - [x] tailwindcss
-  - [x] flagpack
-  - [ ] rename styles.scss as custom.scss
-- [ ] component init actions via resolvers + check execution conditions
-- [ ] try replace any final observables and code subscriptions with signals
+- [ ] extract signal values as const at the top of a code block
+- [ ] execute component on-init actions via resolvers + check execution conditions
+- [ ] replace any component observables and subscriptions with signals
   - [ ] check for any mergeable streams using computed
 - [ ] use functional guards / resolvers / effects
-- [ ] resolve deprecations
-- [ ] create functions for each pipe + avoid injecting pipes
+- [ ] create functions for each pipe + avoid injecting pipes into code
 - [ ] research and apply any ngrx syntax updates
   - [ ] functions
   - [ ] map creators
@@ -56,9 +54,7 @@
 - [ ] split user-books code as feature with lazy loading and providers
 - [ ] split volumes code as feature with lazy loading and providers
 - [ ] replace generated translations keys with custom strings
-- [ ] resolve sass deprecations
-- [ ] replace sass imports
-- [ ] check file delete feature works properly
+- [ ] check if file delete feature works properly, deleting file and all data
 
 ## Maintenance
 
@@ -67,11 +63,4 @@
 
 ### Miscellaneous
 
-- [ ] add loading appearance to volume card
-- [ ] keep same page after login
-- [ ] guard and keep same page or redirect after logout
-- [ ] improve image upload
-  - [ ] kick readonly format
-  - [ ] add placeholder image
-  - [ ] display progress spinner
 - [ ] add store logic for firebase data streams
