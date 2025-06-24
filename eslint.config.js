@@ -233,7 +233,7 @@ module.exports = tseslint.config(
       '@angular-eslint/template/no-positive-tabindex': 'warn',
       '@angular-eslint/template/prefer-control-flow': 'warn',
       '@angular-eslint/template/prefer-ngsrc': 'off', // currently unused
-      '@angular-eslint/template/prefer-self-closing-tags': 'off', // TODO resolve svg elements and enable
+      '@angular-eslint/template/prefer-self-closing-tags': 'warn',
     },
   },
 );

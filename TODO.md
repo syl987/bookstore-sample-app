@@ -40,7 +40,6 @@
 
 - [ ] create inline mat-button link
 - [ ] consider hosting tech-stack logos internally
-- [ ] adjust eslint rules
 - [ ] extract signal values as const at the top of a code block
 - [ ] execute component on-init actions via resolvers + check execution conditions
 - [ ] replace any component observables and subscriptions with signals
