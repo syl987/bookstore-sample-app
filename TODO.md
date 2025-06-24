@@ -34,6 +34,7 @@
 - [x] add welcome-page lazy loading feature item
 - [ ] add welcome-page stylelint to tech-stack, potentially kick github
 - [ ] swap welcome-page material and rxjs tech-stack
+- [ ] consider adding a todo page with ngx-markdown library
 
 ## Bugs
 
