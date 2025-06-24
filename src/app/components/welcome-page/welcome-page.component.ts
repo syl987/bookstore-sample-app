@@ -96,6 +96,10 @@ const features: AppTechnicalFeature[] = [
     description: $localize`The semi-dynamic application layout fully supports all common device sizes.`,
   },
   {
+    title: `Accessibility`,
+    description: $localize`HTML marked up with relevant semantics and accessibility definitions.`,
+  },
+  {
     title: `Dark Theme`,
     description: $localize`Switch between light and dark theme at any time. Defaults to browser settings.`,
   },

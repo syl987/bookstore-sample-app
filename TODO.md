@@ -29,6 +29,7 @@
   - [ ] allow deleting a single image
 - [ ] shorten the header search field
 - [x] add welcome-page material theming feature item
+- [x] add welcome-page accessibility feature item
 
 ## Bugs
 
@@ -57,6 +58,7 @@
 - [ ] split volumes code as feature with lazy loading and providers
 - [ ] replace generated translations keys with custom strings
 - [ ] check if file delete feature works properly, deleting file and all data
+- [ ] check material components docs for any missing accessibility
 
 ## Maintenance
 
