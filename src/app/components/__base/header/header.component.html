@@ -9,7 +9,7 @@
       <div class="text-primary truncate text-base sm:text-lg md:text-xl">{{ options.applicationName }}</div>
     }
     @if (large()) {
-      <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="ms-2">
         @for (link of publicLinks; track link.path) {
           <a mat-tab-link [routerLink]="link.path" routerLinkActive [active]="a.isActive" class="px-3" #a="routerLinkActive">{{ link.label }}</a>
         }
