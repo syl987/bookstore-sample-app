@@ -108,6 +108,10 @@ const features: AppTechnicalFeature[] = [
     description: $localize`Altered appearance of material components based on tokens and overrides.`,
   },
   {
+    title: `Intuitive UX`,
+    description: $localize`Interactive elements with semantical coloring and icons, descriptive layout and navigation.`,
+  },
+  {
     title: `NoSQL Database`,
     description: $localize`Any changes by the user are persistently saved using Firebase realtime database.`,
   },
