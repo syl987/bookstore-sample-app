@@ -2,25 +2,20 @@
 
 ## Features
 
-- [ ] shorten button texts
 - [ ] prevent scrolling of the google-books dialog search query
 - [ ] add "load more" button to google-books search results
 - [ ] user-books as module and lazy load all components together
-- [ ] host tech-stack logos internally?
 - [ ] add terms-of-use page
-- [ ] add data-policy page
-- [ ] remove any work-in-progress info
+- [ ] add contact page
+- [ ] remove work-in-progress info
 - [ ] on buy: navigate to user books => create a success dialog
 - [ ] volume / offer detail: add support for 404
 - [ ] user-book edit / detail: add support for 404
 - [ ] resolve navigation between book and volume or display offer list
 - [ ] improve user-book edit
-  - [ ] upload button spinner
   - [ ] navigate to user books after an action
   - [ ] delete book (if not sold)
-  - [ ] check file delete feature works properly
 - [ ] add github icon link
-- [ ] fully localize welcome-page
 - [ ] table actions sticky right
 - [ ] display search string besides clear search button
 - [ ] create inline mat-button link
@@ -39,6 +34,7 @@
 
 ## Technical
 
+- [ ] consider hosting tech-stack logos internally
 - [ ] adjust eslint rules
 - [ ] place method signal values at the top
 - [ ] separate css/scss in angular.json per plugin or merge back together
@@ -62,6 +58,7 @@
 - [ ] replace generated translations keys with custom strings
 - [ ] resolve sass deprecations
 - [ ] replace sass imports
+- [ ] check file delete feature works properly
 
 ## Maintenance
 
