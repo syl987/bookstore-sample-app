@@ -16,9 +16,10 @@
   - [ ] navigate to user books after an action
   - [ ] delete book (if not sold)
 - [ ] add github icon link
-- [x] table actions sticky right
 - [ ] display search string besides clear search button
 - [ ] add routing to user-books sub pages (draft, published, sold, bought)
+  - [ ] create grid component for tab panel
+  - [ ] with tab panel slide animations
 - [ ] add loading appearance to volume card
 - [ ] keep same page after login
 - [ ] guard and keep same page or redirect after logout
@@ -38,6 +39,7 @@ nothing
 
 ## Technical
 
+- [ ] rename offer list component from list to table
 - [ ] create inline mat-button link
 - [ ] consider hosting tech-stack logos internally
 - [ ] extract signal values as const at the top of a code block
