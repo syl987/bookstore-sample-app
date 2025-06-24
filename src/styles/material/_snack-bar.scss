@@ -31,3 +31,7 @@ $error-tokens: (
   supporting-text-color: var(--mat-sys-on-error-container),
   button-color: var(--mat-sys-error),
 );
+
+.mdc-snackbar__surface {
+  border: var(--mat-snack-bar-supporting-text-color) 2px solid;
+}

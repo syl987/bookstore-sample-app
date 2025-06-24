@@ -37,6 +37,7 @@
 ## Styling
 
 - [x] add active tab surface-container background
+- [x] fix missing snack-bar border
 
 ## Technical
 
