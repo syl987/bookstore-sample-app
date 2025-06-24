@@ -29,6 +29,10 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
+                "glob": "TODO.md",
+                "input": ""
+              },
+              {
                 "glob": "**/*",
                 "input": "public"
               }
