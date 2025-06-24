@@ -115,6 +115,10 @@ const features: AppTechnicalFeature[] = [
     title: `Forms with Validation`,
     description: $localize`A variety of form fields with consistent offline and on-response validation.`,
   },
+  /* {
+    title: `Progress Indicators`,
+    description: $localize`Progress spinners reflect the actual progress of relevant backend tasks.`,
+  }, */
 ];
 
 @Component({

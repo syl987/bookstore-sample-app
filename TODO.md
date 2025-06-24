@@ -64,4 +64,5 @@
 
 ### Miscellaneous
 
+- [ ] support progress spinners for backend tasks
 - [ ] add store logic for firebase data streams
