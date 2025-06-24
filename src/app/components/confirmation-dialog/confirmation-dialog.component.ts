@@ -2,6 +2,7 @@ import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 export interface ConfirmationDialogData {
   title: string;
@@ -12,7 +13,12 @@ export interface ConfirmationDialogData {
 
 @Component({
   selector: 'app-confirmation-dialog',
-  imports: [NgClass, MatButtonModule, MatDialogModule],
+  imports: [
+    NgClass,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+  ],
   templateUrl: './confirmation-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

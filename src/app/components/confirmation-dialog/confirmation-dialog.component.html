@@ -5,6 +5,13 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-flat-button [mat-dialog-close]="true" [ngClass]="themeClass">{{ data.action }}</button>
-  <button mat-stroked-button mat-dialog-close [ngClass]="themeClass" i18n>Close</button>
+  <button mat-flat-button [mat-dialog-close]="true" [ngClass]="themeClass">
+    <mat-icon>check</mat-icon>
+    <span>{{ data.action }}</span>
+  </button>
+
+  <button mat-stroked-button class="app-secondary" mat-dialog-close [ngClass]="themeClass">
+    <mat-icon>close</mat-icon>
+    <span i18n>Cancel</span>
+  </button>
 </div>

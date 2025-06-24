@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { concatMap, filter } from 'rxjs';
@@ -24,6 +25,7 @@ function getBookOfferById(volume?: VolumeDTO, offerId?: string): BookDTO | undef
   selector: 'app-volume-offer-detail-page',
   imports: [
     MatButtonModule,
+    MatIconModule,
     MatProgressSpinnerModule,
     TitleBarComponent,
     VolumeCardComponent,

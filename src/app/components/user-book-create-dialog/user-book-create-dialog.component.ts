@@ -4,6 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule, MatSelectionList } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -24,6 +25,7 @@ const DEBOUNCE_TIME = 500;
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
+    MatIconModule,
     MatInputModule,
     MatListModule,
     MatProgressSpinnerModule,

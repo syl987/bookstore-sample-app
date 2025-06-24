@@ -5,6 +5,13 @@
 </div>
 
 <div class="flex flex-wrap gap-x-2">
-  <button mat-stroked-button (click)="fileSelect.emit()" [spinning]="uploading()" [disabled]="readonly() || uploading()" i18n>Upload Image</button>
-  <button mat-stroked-button (click)="removeAll.emit()" [disabled]="readonly() || !images().length" i18n>Remove All</button>
+  <button mat-stroked-button (click)="fileSelect.emit()" [spinning]="uploading()" [disabled]="readonly() || uploading()">
+    <mat-icon>upload</mat-icon>
+    <span i18n>Upload</span>
+  </button>
+
+  <button mat-stroked-button class="app-error" (click)="removeAll.emit()" [disabled]="readonly() || !images().length">
+    <mat-icon>clear</mat-icon>
+    <span i18n>Clear</span>
+  </button>
 </div>

@@ -10,7 +10,7 @@
   <div matSnackBarActions>
     <button mat-button matSnackBarAction (click)="action()">
       <mat-icon>{{ data.action!.icon }}</mat-icon>
-      {{ data.action!.name }}
+      <span>{{ data.action!.name }}</span>
     </button>
   </div>
 }

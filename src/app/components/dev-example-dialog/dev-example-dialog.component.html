@@ -5,6 +5,13 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-flat-button mat-dialog-close="action">Action</button>
-  <button mat-stroked-button mat-dialog-close>Close</button>
+  <button mat-flat-button mat-dialog-close="action">
+    <mat-icon>check</mat-icon>
+    <span i18n>Action</span>
+  </button>
+
+  <button mat-stroked-button class="app-secondary" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+    <span i18n>Cancel</span>
+  </button>
 </div>

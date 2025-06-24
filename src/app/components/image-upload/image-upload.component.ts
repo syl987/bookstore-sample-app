@@ -1,13 +1,14 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { ImageDTO } from 'src/app/models/image.models';
 
 @Component({
   selector: 'app-image-upload',
-  imports: [MatButtonModule, ButtonSpinnerDirective],
+  imports: [MatButtonModule, MatIconModule, ButtonSpinnerDirective],
   templateUrl: './image-upload.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

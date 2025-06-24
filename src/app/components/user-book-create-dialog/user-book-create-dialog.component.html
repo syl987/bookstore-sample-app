@@ -30,12 +30,17 @@
 <div mat-dialog-actions>
   <button
     mat-flat-button
-    (click)="createUserBook(list.selectedOptions.selected[0].value)"
     class="app-tertiary"
+    (click)="createUserBook(list.selectedOptions.selected[0].value)"
     [spinning]="createPending()"
     [disabled]="list.selectedOptions.isEmpty() || createPending()"
   >
-    <ng-container i18n>Create Book</ng-container>
+    <mat-icon>create</mat-icon>
+    <span i18n>Create</span>
   </button>
-  <button mat-stroked-button mat-dialog-close class="app-tertiary" i18n>Close</button>
+
+  <button mat-stroked-button class="app-secondary" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+    <span i18n>Cancel</span>
+  </button>
 </div>

@@ -20,6 +20,13 @@
 </div>
 
 <mat-dialog-actions>
-  <button mat-flat-button [mat-dialog-close]="result" i18n>Crop Image</button>
-  <button mat-stroked-button mat-dialog-close i18n>Cancel</button>
+  <button mat-flat-button [mat-dialog-close]="result">
+    <mat-icon>crop</mat-icon>
+    <span i18n>Crop</span>
+  </button>
+
+  <button mat-stroked-button class="app-secondary" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+    <span i18n>Cancel</span>
+  </button>
 </mat-dialog-actions>

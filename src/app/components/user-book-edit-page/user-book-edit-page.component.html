@@ -2,12 +2,12 @@
   <app-title-bar backUrl="/user/books">
     <button mat-stroked-button class="app-tertiary" (click)="publishBook()" [spinning]="publishPending()" [disabled]="publishDisabled()">
       <mat-icon>publish</mat-icon>
-      <span i18n>Publish Book</span>
+      <span i18n>Publish</span>
     </button>
 
     <button mat-stroked-button class="app-error" (click)="deleteBook()" [spinning]="deletePending()" [disabled]="deleteDisabled()">
       <mat-icon>delete</mat-icon>
-      <span i18n>Delete Book</span>
+      <span i18n>Delete</span>
     </button>
   </app-title-bar>
 
@@ -63,7 +63,7 @@
       <div class="mb-8 flex flex-wrap gap-2">
         <button type="submit" mat-flat-button [spinning]="editDraftPending()" [disabled]="editDraftDisabled()">
           <mat-icon>save</mat-icon>
-          <span i18n>Save changes</span>
+          <span i18n>Save</span>
         </button>
 
         <button type="button" mat-stroked-button class="app-secondary" (click)="discardChanges()" [disabled]="form.disabled">
