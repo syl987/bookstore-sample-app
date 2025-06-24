@@ -18,7 +18,7 @@ export class ImageUploadComponent {
   readonly readonly = input<boolean, BooleanInput>(false, { transform: coerceBooleanProperty });
   readonly uploading = input<boolean, BooleanInput>(false, { transform: coerceBooleanProperty });
 
-  /* readonly progress = input<boolean, BooleanInput>(false, { transform: coerceBooleanProperty }); */
+  /* readonly progress = input<boolean, NumberInput>(false, { transform: coerceNumberProperty }); */
 
   readonly fileSelect = output();
 
