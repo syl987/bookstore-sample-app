@@ -10,7 +10,7 @@ const techStack: AppTechStackItem[] = [
   {
     title: `Angular ${VERSION.major}`,
     subtitle: `Main Framework`,
-    description: $localize`Leveraging signals, control flows, structured standalone architecture, etc.`,
+    description: $localize`Leveraging signals, control flows, structured standalone architecture, lazy loading, etc.`,
     image: 'assets/img/logo/angular_gradient.png',
   },
   {
