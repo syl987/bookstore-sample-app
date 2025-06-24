@@ -100,6 +100,10 @@ const features: AppTechnicalFeature[] = [
     description: $localize`Switch between light and dark theme at any time. Defaults to browser settings.`,
   },
   {
+    title: `Material Theming`,
+    description: $localize`Altered appearance of material components based on tokens and overrides.`,
+  },
+  {
     title: `File Upload`,
     description: $localize`Select, crop and upload image files for display alongside with regular data.`,
   },

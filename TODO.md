@@ -28,6 +28,7 @@
   - [ ] add progress percentage
   - [ ] allow deleting a single image
 - [ ] shorten the header search field
+- [x] add welcome-page material theming feature item
 
 ## Bugs
 
