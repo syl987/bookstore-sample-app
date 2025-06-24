@@ -100,6 +100,10 @@ const features: AppTechnicalFeature[] = [
     description: $localize`HTML marked up with relevant semantics and accessibility definitions.`,
   },
   {
+    title: `Lazy Loading`,
+    description: $localize`Reduce startup times by postponing the loading of less directly frequented routes.`,
+  },
+  {
     title: `Dark Theme`,
     description: $localize`Switch between light and dark theme at any time. Defaults to browser settings.`,
   },
