@@ -92,10 +92,6 @@ const features: AppTechnicalFeature[] = [
     description: $localize`Fully translated application content with respective locale formatting.`,
   },
   {
-    title: `Responsive Design`,
-    description: $localize`The semi-dynamic application layout fully supports all common device sizes.`,
-  },
-  {
     title: `Accessibility`,
     description: $localize`HTML marked up with relevant semantics and accessibility definitions.`,
   },
@@ -104,8 +100,8 @@ const features: AppTechnicalFeature[] = [
     description: $localize`Reduce startup times by postponing the loading of less directly frequented routes.`,
   },
   {
-    title: `Dark Theme`,
-    description: $localize`Switch between light and dark theme at any time. Defaults to browser settings.`,
+    title: `Responsive Design`,
+    description: $localize`The semi-dynamic application layout fully supports all common device sizes.`,
   },
   {
     title: `Material Theming`,
@@ -116,25 +112,25 @@ const features: AppTechnicalFeature[] = [
     description: $localize`Interactive elements with semantical coloring and icons, descriptive layout and navigation.`,
   },
   {
-    title: `NoSQL Database`,
-    description: $localize`Any changes by the user are persistently saved using Firebase realtime database.`,
+    title: `Dark Theme`,
+    description: $localize`Switch between light and dark theme at any time. Defaults to browser settings.`,
+  },
+  {
+    title: `Interactive Forms`,
+    description: $localize`A variety of form fields with consistent offline and on-response validation.`,
   },
   {
     title: `File Upload`,
     description: $localize`Select, crop and upload image files for display alongside with regular data.`,
   },
   {
+    title: `NoSQL Database`,
+    description: $localize`Any changes by the user are persistently saved using Firebase realtime database.`,
+  },
+  {
     title: `External API`,
     description: $localize`Find your favorite books with Google Books API and provide custom data.`,
   },
-  {
-    title: `Forms with Validation`,
-    description: $localize`A variety of form fields with consistent offline and on-response validation.`,
-  },
-  /* {
-    title: `Progress Indicators`,
-    description: $localize`Progress spinners reflect the actual progress of relevant backend tasks.`,
-  }, */
 ];
 
 @Component({
