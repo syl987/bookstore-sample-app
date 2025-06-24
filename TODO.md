@@ -30,6 +30,7 @@
 - [ ] shorten the header search field
 - [x] add welcome-page material theming feature item
 - [x] add welcome-page accessibility feature item
+- [ ] add stylelint to tech-stack, potentially kick github
 
 ## Bugs
 
@@ -69,3 +70,4 @@
 
 - [ ] support progress spinners for backend tasks
 - [ ] add store logic for firebase data streams
+- [ ] add e2e testing to avoid unintended breaking changes
