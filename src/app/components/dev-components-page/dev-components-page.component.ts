@@ -45,18 +45,16 @@ export class DevComponentsPageComponent {
   protected readonly dialog = inject(MatDialog);
   protected readonly toastService = inject(ToastService);
 
-  readonly disabled$ = timer(0, 5000).pipe(
+  private readonly disabled$ = timer(0, 5000).pipe(
     map(value => value % 2),
     map(value => !!value),
   );
-
   readonly disabled = toSignal(this.disabled$, { initialValue: false });
 
-  readonly progress$ = timer(0, 35).pipe(
+  private readonly progress$ = timer(0, 35).pipe(
     map(value => value % 100),
     auditTime(140),
   );
-
   readonly progress = toSignal(this.progress$, { initialValue: 0 });
 
   readonly form = new FormGroup({

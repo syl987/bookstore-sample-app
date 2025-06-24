@@ -42,8 +42,6 @@ nothing
 - [ ] consider hosting tech-stack logos internally
 - [ ] extract signal values as const at the top of a code block
 - [ ] execute component on-init actions via resolvers + check execution conditions
-- [ ] replace any component observables and subscriptions with signals
-  - [ ] check for any mergeable streams using computed
 - [ ] use functional guards / resolvers / effects
 - [ ] create functions for each pipe + avoid injecting pipes into code
 - [ ] research and apply any ngrx syntax updates

@@ -54,11 +54,10 @@ export class HeaderComponent extends SidenavComponent {
   readonly themeService = inject(ThemeService);
   readonly languages = inject(APP_LANGUAGES);
 
-  readonly large$ = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge]).pipe(
+  private readonly large$ = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge]).pipe(
     map(({ matches }) => matches),
     distinctUntilChanged(),
   );
-
   readonly large = toSignal(this.large$, { requireSync: true });
 
   readonly searching = signal(false);
