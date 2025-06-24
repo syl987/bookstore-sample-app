@@ -14,7 +14,7 @@
   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     @for (item of techStack; track item.title) {
       <mat-card class="text-center">
-        <img mat-card-image [src]="item.image" [alt]="item.title + ' logo'" class="mx-auto mt-4 h-[128px]" [ngClass]="item.imageClass" />
+        <img mat-card-image [src]="item.image" [alt]="item.title + ' logo'" class="mx-auto mt-4 h-[128px] rounded-none" [ngClass]="item.imageClass" />
 
         <mat-card-header class="mb-2 block">
           <mat-card-title>{{ item.title }}</mat-card-title>

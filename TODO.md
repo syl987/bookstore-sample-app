@@ -34,7 +34,7 @@
 
 ## Styling
 
-- [ ] fix tech-stack icons rounded borders
+nothing
 
 ## Technical
 
