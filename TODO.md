@@ -16,7 +16,7 @@
   - [ ] navigate to user books after an action
   - [ ] delete book (if not sold)
 - [ ] add github icon link
-- [ ] table actions sticky right
+- [x] table actions sticky right
 - [ ] display search string besides clear search button
 - [ ] create inline mat-button link
 - [ ] add routing to user-books sub pages (draft, published, sold, bought)
