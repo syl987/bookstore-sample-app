@@ -11,7 +11,7 @@
 
   <p i18n>These technologies are the backbone of the application and its development process.</p>
 
-  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  <div class="mb-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     @for (item of techStack; track item.title) {
       <mat-card class="text-center">
         <img mat-card-image [src]="item.image" [alt]="item.title + ' logo'" class="mx-auto mt-4 h-[128px] rounded-none" [ngClass]="item.imageClass" />
@@ -30,7 +30,7 @@
 
   <p i18n>Non-content-specific features on the technical level of the application.</p>
 
-  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  <div class="mb-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     @for (feature of features; track feature.title) {
       <mat-card class="text-center">
         <mat-card-header class="mt-1 mb-2 block">
