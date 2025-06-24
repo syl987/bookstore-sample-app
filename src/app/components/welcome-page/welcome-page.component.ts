@@ -108,12 +108,12 @@ const features: AppTechnicalFeature[] = [
     description: $localize`Altered appearance of material components based on tokens and overrides.`,
   },
   {
-    title: `File Upload`,
-    description: $localize`Select, crop and upload image files for display alongside with regular data.`,
-  },
-  {
     title: `NoSQL Database`,
     description: $localize`Any changes by the user are persistently saved using Firebase realtime database.`,
+  },
+  {
+    title: `File Upload`,
+    description: $localize`Select, crop and upload image files for display alongside with regular data.`,
   },
   {
     title: `External API`,
