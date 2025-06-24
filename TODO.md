@@ -27,6 +27,7 @@
   - [ ] add placeholder image
   - [ ] add progress percentage
   - [ ] allow deleting a single image
+- [ ] shorten the header search field
 
 ## Bugs
 
