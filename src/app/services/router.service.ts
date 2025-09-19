@@ -20,6 +20,6 @@ export class RouterService {
   readonly queryParams = this.store.selectSignal<QueryParams>(getRouterSelectors().selectQueryParams);
 
   getCurrentNavigationState(): NavigationState {
-    return (this.router.getCurrentNavigation()?.extras.state ?? {}) as NavigationState;
+    return (this.router.currentNavigation()?.extras.state ?? {}) as NavigationState;
   }
 }
