@@ -24,7 +24,6 @@ export class ThemeService {
   }
 
   private _getDefaultTheme(): string {
-    const view = this.document.defaultView;
-    return view?.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return this.document.defaultView?.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 }
