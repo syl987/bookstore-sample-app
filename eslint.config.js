@@ -33,7 +33,7 @@ module.exports = tseslint.config(
     processor: angular.processInlineTemplates,
     languageOptions: {
       parserOptions: {
-        projectService: true,
+        project: true, // TODO replace with: projectService: true
         tsconfigRootDir: __dirname,
       },
     },
