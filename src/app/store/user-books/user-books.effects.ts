@@ -86,7 +86,7 @@ export class UserBooksEffects implements OnRunEffects {
         };
         return this.firebaseApi.createUserBook(uid, volume).pipe(
           mapResponse({
-            next: res => UserBooksActions.createSUCCESS({ book: res }),
+            next: book => UserBooksActions.createSUCCESS({ book }),
             error: (err: unknown) => {
               if (err instanceof FirebaseError) {
                 return UserBooksActions.createERROR({ error: firebaseError({ err }) });
@@ -134,7 +134,7 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.editUserBookDraft(uid, id, data).pipe(
           mapResponse({
-            next: res => UserBooksActions.editDraftSUCCESS({ book: res }),
+            next: book => UserBooksActions.editDraftSUCCESS({ book }),
             error: (err: unknown) => {
               if (err instanceof FirebaseError) {
                 return UserBooksActions.editDraftERROR({ error: firebaseError({ err }) });
@@ -158,11 +158,11 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.uploadUserBookPhoto(uid, bookId, data).pipe(
           mapResponse({
-            next: res => {
-              if (res.complete) {
-                return UserBooksActions.uploadPhotoSUCCESS({ uploadData: res });
+            next: uploadData => {
+              if (uploadData.complete) {
+                return UserBooksActions.uploadPhotoSUCCESS({ uploadData });
               }
-              return UserBooksActions.uploadPhotoPROGRESS({ uploadData: res });
+              return UserBooksActions.uploadPhotoPROGRESS({ uploadData });
             },
             error: (err: unknown) => {
               if (err instanceof FirebaseError) {
@@ -235,7 +235,7 @@ export class UserBooksEffects implements OnRunEffects {
         }
         return this.firebaseApi.publishUserBook(uid, id).pipe(
           mapResponse({
-            next: res => UserBooksActions.publishSUCCESS({ book: res }),
+            next: book => UserBooksActions.publishSUCCESS({ book }),
             error: (err: unknown) => {
               if (err instanceof FirebaseError) {
                 return UserBooksActions.publishERROR({ error: firebaseError({ err }) });

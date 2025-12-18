@@ -44,7 +44,7 @@ export class VolumesEffects {
       switchMap(_ => {
         return this.firebaseApi.getVolumes().pipe(
           mapResponse({
-            next: res => VolumeActions.loadAllSUCCESS({ volumes: res }),
+            next: volumes => VolumeActions.loadAllSUCCESS({ volumes }),
             error: (err: unknown) => {
               if (err instanceof FirebaseError) {
                 return VolumeActions.loadAllERROR({ error: firebaseError({ err }) });
@@ -75,7 +75,7 @@ export class VolumesEffects {
         }
         return this.firebaseApi.buyBookOffer(uid, id, offerId).pipe(
           mapResponse({
-            next: res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, book: res.book }),
+            next: ({ volume, book }) => VolumeActions.buyOfferSUCCESS({ id, volume, book }),
             error: (err: unknown) => {
               if (err instanceof FirebaseError) {
                 return VolumeActions.buyOfferERROR({ error: firebaseError({ err }) });
