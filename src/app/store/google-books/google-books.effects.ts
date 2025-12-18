@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mapResponse } from '@ngrx/operators';
 import { switchMap } from 'rxjs';
 
-import { httpError, internalError } from 'src/app/models/error.models';
+import { httpError, unknownError } from 'src/app/models/error.models';
 import { GoogleBooksApiService } from 'src/app/services/__api/google-books-api.service';
 
 import { GoogleBooksActions } from './google-books.actions';
@@ -25,7 +25,7 @@ export class GoogleBooksEffects {
               if (err instanceof HttpErrorResponse) {
                 return GoogleBooksActions.searchERROR({ error: httpError({ err }) });
               }
-              return GoogleBooksActions.searchERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+              return GoogleBooksActions.searchERROR({ error: unknownError({ err }) });
             },
           }),
         ),

@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mapResponse } from '@ngrx/operators';
 import { concatMap, map, of } from 'rxjs';
 
-import { firebaseError, internalError } from 'src/app/models/error.models';
+import { firebaseError, internalError, unknownError } from 'src/app/models/error.models';
 import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -60,7 +60,7 @@ export class LoggerEffects {
               if (err instanceof FirebaseError) {
                 return LoggerActions.logErrorERROR({ error: firebaseError({ err }) });
               }
-              return VolumeActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+              return VolumeActions.loadERROR({ error: unknownError({ err }) });
             },
           }),
         );

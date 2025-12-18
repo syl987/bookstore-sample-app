@@ -7,7 +7,7 @@ import { FirebaseError } from 'firebase/app';
 import { concatMap, exhaustMap, from, map, skipWhile } from 'rxjs';
 
 import { toResponseErrorMessage } from 'src/app/helpers/error.helpers';
-import { firebaseError, internalError } from 'src/app/models/error.models';
+import { firebaseError, unknownError } from 'src/app/models/error.models';
 import { DialogService } from 'src/app/services/dialog.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -47,7 +47,7 @@ export class AuthEffects {
               if (err instanceof FirebaseError) {
                 return AuthActions.loginWithProviderERROR({ error: firebaseError({ err }) });
               }
-              return AuthActions.logoutERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+              return AuthActions.logoutERROR({ error: unknownError({ err }) });
             },
           }),
         ),
@@ -66,7 +66,7 @@ export class AuthEffects {
               if (err instanceof FirebaseError) {
                 return AuthActions.logoutERROR({ error: firebaseError({ err }) });
               }
-              return AuthActions.logoutERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+              return AuthActions.logoutERROR({ error: unknownError({ err }) });
             },
           }),
         ),

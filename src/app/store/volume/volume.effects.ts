@@ -5,7 +5,7 @@ import { FirebaseError } from 'firebase/app';
 import { exhaustMap, map, of, switchMap, tap } from 'rxjs';
 
 import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
-import { firebaseError, internalError } from 'src/app/models/error.models';
+import { firebaseError, internalError, unknownError } from 'src/app/models/error.models';
 import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -30,7 +30,7 @@ export class VolumesEffects {
               if (err instanceof FirebaseError) {
                 return VolumeActions.loadERROR({ error: firebaseError({ err }) });
               }
-              return VolumeActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+              return VolumeActions.loadERROR({ error: unknownError({ err }) });
             },
           }),
         );
@@ -49,7 +49,7 @@ export class VolumesEffects {
               if (err instanceof FirebaseError) {
                 return VolumeActions.loadAllERROR({ error: firebaseError({ err }) });
               }
-              return VolumeActions.loadAllERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+              return VolumeActions.loadAllERROR({ error: unknownError({ err }) });
             },
           }),
         );
@@ -80,7 +80,7 @@ export class VolumesEffects {
               if (err instanceof FirebaseError) {
                 return VolumeActions.buyOfferERROR({ error: firebaseError({ err }) });
               }
-              return VolumeActions.buyOfferERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+              return VolumeActions.buyOfferERROR({ error: unknownError({ err }) });
             },
           }),
         );
