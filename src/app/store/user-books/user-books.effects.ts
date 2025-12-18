@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
+import { mapResponse } from '@ngrx/operators';
 import { FirebaseError } from 'firebase/app';
-import { catchError, concatMap, exhaustMap, map, Observable, of, switchMap, tap } from 'rxjs';
+import { exhaustMap, Observable, of, switchMap, tap } from 'rxjs';
 
 import { requireAuth } from 'src/app/helpers/auth.helpers';
 import { toActionErrorMessage, toActionSuccessMessage } from 'src/app/helpers/error.helpers';
@@ -30,12 +31,14 @@ export class UserBooksEffects implements OnRunEffects {
           return of(UserBooksActions.loadERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.getUserBook(uid, id).pipe(
-          map(book => UserBooksActions.loadSUCCESS({ book })),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(UserBooksActions.loadERROR({ error: firebaseError({ err }) }));
-            }
-            return of(UserBooksActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: book => UserBooksActions.loadSUCCESS({ book }),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return UserBooksActions.loadERROR({ error: firebaseError({ err }) });
+              }
+              return UserBooksActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -52,12 +55,14 @@ export class UserBooksEffects implements OnRunEffects {
           return of(UserBooksActions.loadAllERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.getUserBooks(uid).pipe(
-          map(books => UserBooksActions.loadAllSUCCESS({ books })),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(UserBooksActions.loadAllERROR({ error: firebaseError({ err }) }));
-            }
-            return of(UserBooksActions.loadAllERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: books => UserBooksActions.loadAllSUCCESS({ books }),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return UserBooksActions.loadAllERROR({ error: firebaseError({ err }) });
+              }
+              return UserBooksActions.loadAllERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -80,12 +85,14 @@ export class UserBooksEffects implements OnRunEffects {
           searchInfo: volumeData.searchInfo,
         };
         return this.firebaseApi.createUserBook(uid, volume).pipe(
-          map(res => UserBooksActions.createSUCCESS({ book: res })),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(UserBooksActions.createERROR({ error: firebaseError({ err }) }));
-            }
-            return of(UserBooksActions.createERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: res => UserBooksActions.createSUCCESS({ book: res }),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return UserBooksActions.createERROR({ error: firebaseError({ err }) });
+              }
+              return UserBooksActions.createERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -102,12 +109,14 @@ export class UserBooksEffects implements OnRunEffects {
           return of(UserBooksActions.deleteERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.deleteUserBook(uid, id).pipe(
-          map(_ => UserBooksActions.deleteSUCCESS({ id })),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(UserBooksActions.deleteERROR({ error: firebaseError({ err }) }));
-            }
-            return of(UserBooksActions.deleteERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: _ => UserBooksActions.deleteSUCCESS({ id }),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return UserBooksActions.deleteERROR({ error: firebaseError({ err }) });
+              }
+              return UserBooksActions.deleteERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -124,12 +133,14 @@ export class UserBooksEffects implements OnRunEffects {
           return of(UserBooksActions.editDraftERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.editUserBookDraft(uid, id, data).pipe(
-          map(res => UserBooksActions.editDraftSUCCESS({ book: res })),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(UserBooksActions.editDraftERROR({ error: firebaseError({ err }) }));
-            }
-            return of(UserBooksActions.editDraftERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: res => UserBooksActions.editDraftSUCCESS({ book: res }),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return UserBooksActions.editDraftERROR({ error: firebaseError({ err }) });
+              }
+              return UserBooksActions.editDraftERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -146,17 +157,19 @@ export class UserBooksEffects implements OnRunEffects {
           return of(UserBooksActions.uploadPhotoERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.uploadUserBookPhoto(uid, bookId, data).pipe(
-          concatMap(res => {
-            if (res.complete) {
-              return of(UserBooksActions.uploadPhotoSUCCESS({ uploadData: res }));
-            }
-            return of(UserBooksActions.uploadPhotoPROGRESS({ uploadData: res }));
-          }),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(UserBooksActions.uploadPhotoERROR({ error: firebaseError({ err }) }));
-            }
-            return of(UserBooksActions.uploadPhotoERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: res => {
+              if (res.complete) {
+                return UserBooksActions.uploadPhotoSUCCESS({ uploadData: res });
+              }
+              return UserBooksActions.uploadPhotoPROGRESS({ uploadData: res });
+            },
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return UserBooksActions.uploadPhotoERROR({ error: firebaseError({ err }) });
+              }
+              return UserBooksActions.uploadPhotoERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -173,12 +186,14 @@ export class UserBooksEffects implements OnRunEffects {
           return of(UserBooksActions.removePhotoERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.removeUserBookPhoto(uid, bookId, photoId).pipe(
-          map(_ => UserBooksActions.removePhotoSUCCESS()),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(UserBooksActions.removePhotoERROR({ error: firebaseError({ err }) }));
-            }
-            return of(UserBooksActions.removePhotoERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: _ => UserBooksActions.removePhotoSUCCESS(),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return UserBooksActions.removePhotoERROR({ error: firebaseError({ err }) });
+              }
+              return UserBooksActions.removePhotoERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -195,12 +210,14 @@ export class UserBooksEffects implements OnRunEffects {
           return of(UserBooksActions.removeAllPhotosERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.removeUserBookPhotos(uid, bookId).pipe(
-          map(_ => UserBooksActions.removeAllPhotosSUCCESS()),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(UserBooksActions.removeAllPhotosERROR({ error: firebaseError({ err }) }));
-            }
-            return of(UserBooksActions.removeAllPhotosERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: _ => UserBooksActions.removeAllPhotosSUCCESS(),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return UserBooksActions.removeAllPhotosERROR({ error: firebaseError({ err }) });
+              }
+              return UserBooksActions.removeAllPhotosERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -217,12 +234,14 @@ export class UserBooksEffects implements OnRunEffects {
           return of(UserBooksActions.publishERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.publishUserBook(uid, id).pipe(
-          map(res => UserBooksActions.publishSUCCESS({ book: res })),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(UserBooksActions.publishERROR({ error: firebaseError({ err }) }));
-            }
-            return of(UserBooksActions.publishERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: res => UserBooksActions.publishSUCCESS({ book: res }),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return UserBooksActions.publishERROR({ error: firebaseError({ err }) });
+              }
+              return UserBooksActions.publishERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),

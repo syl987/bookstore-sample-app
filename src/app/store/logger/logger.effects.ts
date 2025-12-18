@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, map, of } from 'rxjs';
+import { mapResponse } from '@ngrx/operators';
+import { concatMap, map, of } from 'rxjs';
 
 import { firebaseError, internalError } from 'src/app/models/error.models';
 import { FirebaseApiService } from 'src/app/services/__api/firebase-api.service';
@@ -53,12 +54,14 @@ export class LoggerEffects {
           return of(LoggerActions.logErrorERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.logError(uid, data).pipe(
-          map(_ => LoggerActions.logErrorSUCCESS()),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(LoggerActions.logErrorERROR({ error: firebaseError({ err }) }));
-            }
-            return of(VolumeActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: _ => LoggerActions.logErrorSUCCESS(),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return LoggerActions.logErrorERROR({ error: firebaseError({ err }) });
+              }
+              return VolumeActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),

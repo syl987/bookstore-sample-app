@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { mapResponse } from '@ngrx/operators';
 import { FirebaseError } from 'firebase/app';
-import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
+import { exhaustMap, map, of, switchMap, tap } from 'rxjs';
 
 import { toActionErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError, internalError } from 'src/app/models/error.models';
@@ -23,12 +24,14 @@ export class VolumesEffects {
       ofType(VolumeActions.load),
       switchMap(({ id }) => {
         return this.firebaseApi.getVolume(id).pipe(
-          map(volume => VolumeActions.loadSUCCESS({ volume })),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(VolumeActions.loadERROR({ error: firebaseError({ err }) }));
-            }
-            return of(VolumeActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: volume => VolumeActions.loadSUCCESS({ volume }),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return VolumeActions.loadERROR({ error: firebaseError({ err }) });
+              }
+              return VolumeActions.loadERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -40,12 +43,14 @@ export class VolumesEffects {
       ofType(VolumeActions.loadAll),
       switchMap(_ => {
         return this.firebaseApi.getVolumes().pipe(
-          map(res => VolumeActions.loadAllSUCCESS({ volumes: res })),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(VolumeActions.loadAllERROR({ error: firebaseError({ err }) }));
-            }
-            return of(VolumeActions.loadAllERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: res => VolumeActions.loadAllSUCCESS({ volumes: res }),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return VolumeActions.loadAllERROR({ error: firebaseError({ err }) });
+              }
+              return VolumeActions.loadAllERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),
@@ -69,12 +74,14 @@ export class VolumesEffects {
           return of(VolumeActions.buyOfferERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
         return this.firebaseApi.buyBookOffer(uid, id, offerId).pipe(
-          map(res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, book: res.book })),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(VolumeActions.buyOfferERROR({ error: firebaseError({ err }) }));
-            }
-            return of(VolumeActions.buyOfferERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: res => VolumeActions.buyOfferSUCCESS({ id, volume: res.volume, book: res.book }),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return VolumeActions.buyOfferERROR({ error: firebaseError({ err }) });
+              }
+              return VolumeActions.buyOfferERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         );
       }),

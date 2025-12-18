@@ -2,8 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { Auth, authState, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { mapResponse } from '@ngrx/operators';
 import { FirebaseError } from 'firebase/app';
-import { catchError, concatMap, exhaustMap, from, map, of, skipWhile } from 'rxjs';
+import { concatMap, exhaustMap, from, map, skipWhile } from 'rxjs';
 
 import { toResponseErrorMessage } from 'src/app/helpers/error.helpers';
 import { firebaseError, internalError } from 'src/app/models/error.models';
@@ -40,12 +41,14 @@ export class AuthEffects {
       ofType(AuthActions.loginWithProvider),
       exhaustMap(({ providerId }) =>
         from(signInWithPopup(this.auth, getAuthProvider(providerId))).pipe(
-          map(_ => AuthActions.loginWithProviderSUCCESS()),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(AuthActions.loginWithProviderERROR({ error: firebaseError({ err }) }));
-            }
-            return of(AuthActions.logoutERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: _ => AuthActions.loginWithProviderSUCCESS(),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return AuthActions.loginWithProviderERROR({ error: firebaseError({ err }) });
+              }
+              return AuthActions.logoutERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         ),
       ),
@@ -57,12 +60,14 @@ export class AuthEffects {
       ofType(AuthActions.logout, AuthActions.authRefreshERROR, AuthActions.authTokenNotFound, AuthActions.authResponseERROR),
       concatMap(_ =>
         from(this.auth.signOut()).pipe(
-          map(() => AuthActions.logoutSUCCESS()),
-          catchError((err: unknown) => {
-            if (err instanceof FirebaseError) {
-              return of(AuthActions.logoutERROR({ error: firebaseError({ err }) }));
-            }
-            return of(AuthActions.logoutERROR({ error: internalError({ err: new Error('Connection Error.') }) }));
+          mapResponse({
+            next: () => AuthActions.logoutSUCCESS(),
+            error: (err: unknown) => {
+              if (err instanceof FirebaseError) {
+                return AuthActions.logoutERROR({ error: firebaseError({ err }) });
+              }
+              return AuthActions.logoutERROR({ error: internalError({ err: new Error('Connection Error.') }) });
+            },
           }),
         ),
       ),
