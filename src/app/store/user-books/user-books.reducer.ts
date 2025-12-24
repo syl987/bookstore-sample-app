@@ -146,7 +146,7 @@ export const userBooksFeature = createFeature({
     selectAllSold: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.SOLD && !b.buyerUid)),
     selectAllBought: createSelector(createSelector(selectUserBooksState, adapter.getSelectors().selectAll), books => books.filter(b => b.status === BookStatus.SOLD && b.buyerUid)),
 
-    selectByRoute: createSelector(selectEntities, getRouterSelectors().selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
+    selectByRouteParam: createSelector(selectEntities, getRouterSelectors().selectRouteParam('bookId'), (entities, id) => (id ? entities[id] : undefined)),
 
     selectLoadPending: createSelector(selectLoad, ({ pending }) => pending),
     selectLoadError: createSelector(selectLoad, ({ error }) => error),

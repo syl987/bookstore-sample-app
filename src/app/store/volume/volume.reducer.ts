@@ -87,7 +87,7 @@ export const volumeFeature = createFeature({
 
     selectAllFiltered: createSelector(selectEntities, selectFilter, (entities, { ids }) => ids.map(id => entities[id]).filter(notUndefined)),
 
-    selectByRoute: createSelector(selectEntities, getRouterSelectors().selectRouteParam('volumeId'), (entities, id) => (id ? entities[id] : undefined)),
+    selectByRouteParam: createSelector(selectEntities, getRouterSelectors().selectRouteParam('volumeId'), (entities, id) => (id ? entities[id] : undefined)),
 
     selectFilterQuery: createSelector(selectVolumesState, ({ filter }) => filter.query),
 

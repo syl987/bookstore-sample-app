@@ -33,7 +33,7 @@ export class VolumeService implements IVolumeService {
 
   readonly entitiesFiltered$ = this.store.select(volumeFeature.selectAllFiltered);
 
-  readonly entityByRoute$ = this.store.select(volumeFeature.selectByRoute);
+  readonly entityByRouteParam$ = this.store.select(volumeFeature.selectByRouteParam);
 
   readonly filterQuery$ = this.store.select(volumeFeature.selectFilterQuery);
 

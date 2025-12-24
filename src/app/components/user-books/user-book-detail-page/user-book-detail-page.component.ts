@@ -31,7 +31,7 @@ export class UserBookDetailPageComponent implements OnInit {
 
   readonly bookId = toSignal(this.routerService.params$.bookId, { requireSync: true }) as Signal<string>; // mandatory param defined by route
 
-  readonly book = toSignal(this.userBooksService.entityByRoute$, { requireSync: true });
+  readonly book = toSignal(this.userBooksService.entityByRouteParam$, { requireSync: true });
   readonly bookLoading = toSignal(this.userBooksService.loadPending$, { requireSync: true });
 
   readonly BookStatus = BookStatus;

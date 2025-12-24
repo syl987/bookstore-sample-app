@@ -45,7 +45,7 @@ export class UserBooksService implements IUserBooksService {
   readonly entitiesSold$ = this.store.select(userBooksFeature.selectAllSold);
   readonly entitiesBought$ = this.store.select(userBooksFeature.selectAllBought);
 
-  readonly entityByRoute$ = this.store.select(userBooksFeature.selectByRoute);
+  readonly entityByRouteParam$ = this.store.select(userBooksFeature.selectByRouteParam);
 
   readonly loadPending$ = this.store.select(userBooksFeature.selectLoadPending);
   readonly loadError$ = this.store.select(userBooksFeature.selectLoadError);

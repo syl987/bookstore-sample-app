@@ -45,7 +45,7 @@ export class VolumeOfferDetailPageComponent implements OnInit {
   readonly volumeId = toSignal(this.routerService.params$.volumeId, { requireSync: true }) as Signal<string>; // mandatory param defined by route
   readonly offerId = toSignal(this.routerService.params$.offerId, { requireSync: true }) as Signal<string>; // mandatory param defined by route
 
-  readonly volume = toSignal(this.volumeService.entityByRoute$, { requireSync: true });
+  readonly volume = toSignal(this.volumeService.entityByRouteParam$, { requireSync: true });
   readonly volumeLoading = toSignal(this.volumeService.loadPending$, { requireSync: true });
 
   readonly uid = toSignal(this.authService.uid$, { requireSync: true });
