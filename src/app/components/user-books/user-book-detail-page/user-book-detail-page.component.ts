@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { map } from 'rxjs';
 
 import { BookCondition, BookStatus } from 'src/app/models/book.models';
 import { RouterService } from 'src/app/services/router.service';
@@ -30,7 +29,7 @@ export class UserBookDetailPageComponent implements OnInit {
   protected readonly routerService = inject(RouterService);
   protected readonly userBooksService = inject(UserBooksService);
 
-  readonly bookId = toSignal(this.routerService.routeParams$.pipe(map(({ bookId }) => bookId!)), { requireSync: true }); // mandatory param defined by route
+  readonly bookId = toSignal(this.routerService.params$.bookId, { requireSync: true }) as Signal<string>; // mandatory param defined by route
 
   readonly book = toSignal(this.userBooksService.entityByRoute$, { requireSync: true });
   readonly bookLoading = toSignal(this.userBooksService.loadPending$, { requireSync: true });

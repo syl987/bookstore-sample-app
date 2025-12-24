@@ -2,8 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { getRouterSelectors } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { NavigationState, QueryParams, RouteParams } from '../models/router.models';
+import { NavigationState, QueryParam, RouteParam } from '../models/router.models';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,13 @@ export class RouterService {
   readonly title$ = this.store.select(getRouterSelectors().selectTitle);
   readonly fragment$ = this.store.select(getRouterSelectors().selectFragment);
 
-  readonly routeParams$ = this.store.select<RouteParams>(getRouterSelectors().selectRouteParams);
-  readonly queryParams$ = this.store.select<QueryParams>(getRouterSelectors().selectQueryParams);
+  readonly params$ = Object.freeze<Record<RouteParam, Observable<string | undefined>>>({
+    bookId: this.store.select(getRouterSelectors().selectRouteParam('bookId')),
+    offerId: this.store.select(getRouterSelectors().selectRouteParam('offerId')),
+    volumeId: this.store.select(getRouterSelectors().selectRouteParam('volumeId')),
+  });
+
+  readonly queryParams$ = Object.freeze<Record<QueryParam, Observable<string | undefined>>>({});
 
   getCurrentNavigationState(): NavigationState {
     return (this.router.currentNavigation()?.extras.state ?? {}) as NavigationState;

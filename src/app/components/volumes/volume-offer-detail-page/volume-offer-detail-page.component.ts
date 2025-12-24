@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
-import { concatMap, filter, map } from 'rxjs';
+import { concatMap, filter } from 'rxjs';
 
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookDTO } from 'src/app/models/book.models';
@@ -42,8 +42,8 @@ export class VolumeOfferDetailPageComponent implements OnInit {
   protected readonly volumeService = inject(VolumeService);
   protected readonly dialogService = inject(DialogService);
 
-  readonly volumeId = toSignal(this.routerService.routeParams$.pipe(map(({ volumeId }) => volumeId!)), { requireSync: true }); // mandatory param defined by route
-  readonly offerId = toSignal(this.routerService.routeParams$.pipe(map(({ offerId }) => offerId!)), { requireSync: true }); // mandatory param defined by route
+  readonly volumeId = toSignal(this.routerService.params$.volumeId, { requireSync: true }) as Signal<string>; // mandatory param defined by route
+  readonly offerId = toSignal(this.routerService.params$.offerId, { requireSync: true }) as Signal<string>; // mandatory param defined by route
 
   readonly volume = toSignal(this.volumeService.entityByRoute$, { requireSync: true });
   readonly volumeLoading = toSignal(this.volumeService.loadPending$, { requireSync: true });
@@ -74,7 +74,7 @@ export class VolumeOfferDetailPageComponent implements OnInit {
       .beforeClosed()
       .pipe(
         filter(isTrue),
-        concatMap(_ => this.volumeService.buyOffer(this.volumeId(), offer.id)),
+        concatMap(_ => this.volumeService.buyOffer(this.volumeId()!, offer.id)), // mandatory param defined by route
       )
       .subscribe(_ => {
         this.router.navigateByUrl(`/user/books`);

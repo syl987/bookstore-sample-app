@@ -1,5 +1,5 @@
 import { DecimalPipe, getCurrencySymbol, SlicePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, effect, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, effect, inject, OnInit, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
-import { concatMap, filter, map } from 'rxjs';
+import { concatMap, filter } from 'rxjs';
 
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { getObjectValues } from 'src/app/functions/object.functions';
@@ -55,7 +55,7 @@ export class UserBookEditPageComponent implements OnInit {
   protected readonly userBooksService = inject(UserBooksService);
   protected readonly dialogService = inject(DialogService);
 
-  readonly bookId = toSignal(this.routerService.routeParams$.pipe(map(({ bookId }) => bookId!)), { requireSync: true }); // mandatory param defined by route
+  readonly bookId = toSignal(this.routerService.params$.bookId, { requireSync: true }) as Signal<string>; // mandatory param defined by route
 
   readonly book = toSignal(this.userBooksService.entityByRoute$, { requireSync: true });
   readonly bookLoading = toSignal(this.userBooksService.loadPending$, { requireSync: true });
@@ -94,6 +94,8 @@ export class UserBookEditPageComponent implements OnInit {
   }
 
   saveChanges(): void {
+    const bookId = this.bookId();
+
     if (this.form.invalid) {
       return;
     }
@@ -102,7 +104,7 @@ export class UserBookEditPageComponent implements OnInit {
       condition: this.form.value.condition,
       price: this.form.value.price,
     };
-    this.userBooksService.editDraft(this.bookId(), data);
+    this.userBooksService.editDraft(bookId, data);
   }
 
   discardChanges(): void {
@@ -110,12 +112,14 @@ export class UserBookEditPageComponent implements OnInit {
   }
 
   publishBook(): void {
+    const bookId = this.bookId();
+
     this.dialogService
       .openUserBookPublishDialog()
       .beforeClosed()
       .pipe(
         filter(isTrue), // ignore close without result
-        concatMap(_ => this.userBooksService.publish(this.bookId())),
+        concatMap(_ => this.userBooksService.publish(bookId)),
       )
       .subscribe({
         next: _ => this.router.navigateByUrl('/user/books'),
@@ -136,41 +140,47 @@ export class UserBookEditPageComponent implements OnInit {
   }
 
   deleteBook(): void {
+    const bookId = this.bookId();
+
     this.dialogService
       .openUserBookDeleteDialog()
       .beforeClosed()
       .pipe(
         filter(isTrue),
-        concatMap(_ => this.userBooksService.delete(this.bookId())),
+        concatMap(_ => this.userBooksService.delete(bookId)),
       )
       .subscribe(_ => this.router.navigateByUrl('/user/books'));
   }
 
   cropAndUploadPhoto(file: File): void {
+    const bookId = this.bookId();
+
     this.dialogService
       .openImageCropDialog(file)
       .beforeClosed()
       .pipe(
         filter(isTruthy),
-        concatMap(result => this.userBooksService.uploadPhoto(this.bookId(), result)),
+        concatMap(result => this.userBooksService.uploadPhoto(bookId, result)),
       )
       .subscribe(uploadData => {
         if (uploadData.complete) {
-          this.userBooksService.load(this.bookId());
+          this.userBooksService.load(bookId);
         }
       });
   }
 
   removeAllPhotos(): void {
+    const bookId = this.bookId();
+
     this.dialogService
       .openUserBookDeleteAllPhotosDialog()
       .beforeClosed()
       .pipe(
         filter(isTrue),
-        concatMap(_ => this.userBooksService.removeAllPhotos(this.bookId())),
+        concatMap(_ => this.userBooksService.removeAllPhotos(bookId)),
       )
       .subscribe(_ => {
-        this.userBooksService.load(this.bookId());
+        this.userBooksService.load(bookId);
       });
   }
 
