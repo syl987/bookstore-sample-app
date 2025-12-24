@@ -13,7 +13,7 @@ export class RouterService {
   protected readonly store = inject(Store);
   protected readonly router = inject(Router);
 
-  readonly url$ = this.store.select<string | undefined>(getRouterSelectors().selectUrl);
+  readonly url$ = this.store.select<string | undefined>(getRouterSelectors().selectUrl); // fix type on startup
   readonly title$ = this.store.select(getRouterSelectors().selectTitle);
   readonly fragment$ = this.store.select(getRouterSelectors().selectFragment);
 
