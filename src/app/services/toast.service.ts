@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
 
-import { ToastComponent, ToastData } from '../components/__base/toast/toast.component';
+import { ToastComponent, ToastData } from '../components/base/toast/toast.component';
 
 export interface ToastConfig extends Pick<MatSnackBarConfig<never>, 'duration'> {
   action?: { name: string; icon: string };

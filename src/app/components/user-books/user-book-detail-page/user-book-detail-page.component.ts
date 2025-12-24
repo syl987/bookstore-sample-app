@@ -3,15 +3,15 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
 import { map } from 'rxjs';
+
 import { BookCondition, BookStatus } from 'src/app/models/book.models';
 import { RouterService } from 'src/app/services/router.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
-import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
-import { VolumeCardComponent } from '../volume-card/volume-card.component';
-import { VolumeOfferFieldsComponent } from '../volume-offer-fields/volume-offer-fields.component';
+import { TitleBarComponent } from '../../base/title-bar/title-bar.component';
+import { VolumeCardComponent } from '../../volumes/volume-card/volume-card.component';
+import { VolumeOfferFieldsComponent } from '../../volumes/volume-offer-fields/volume-offer-fields.component';
 
 @Component({
   selector: 'app-user-book-detail-page',

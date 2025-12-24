@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 
 import { AppTechnicalFeature, AppTechStackItem } from 'src/app/models/app.models';
 
-import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
+import { TitleBarComponent } from '../../base/title-bar/title-bar.component';
 
 const techStack: AppTechStackItem[] = [
   {

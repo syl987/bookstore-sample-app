@@ -15,7 +15,7 @@ import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.direct
 import { ValidationErrorPipe } from 'src/app/pipes/validation-error.pipe';
 import { ToastService } from 'src/app/services/toast.service';
 
-import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
+import { TitleBarComponent } from '../../base/title-bar/title-bar.component';
 import { DevExampleDialogComponent, ExampleDevDialogData } from '../dev-example-dialog/dev-example-dialog.component';
 
 @Component({

@@ -1,9 +1,9 @@
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { Routes } from '@angular/router';
 
-import { LoginPageComponent } from './components/login-page/login-page.component';
-import { VolumeSearchPageComponent } from './components/volume-search-page/volume-search-page.component';
-import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { LoginPageComponent } from './components/main/login-page/login-page.component';
+import { VolumeSearchPageComponent } from './components/volumes/volume-search-page/volume-search-page.component';
+import { WelcomePageComponent } from './components/main/welcome-page/welcome-page.component';
 
 export const routes: Routes = [
   {
@@ -30,12 +30,12 @@ export const routes: Routes = [
   {
     path: 'volumes/:volumeId',
     title: $localize`Volume Details`,
-    loadComponent: () => import('./components/volume-detail-page/volume-detail-page.component').then(m => m.VolumeDetailPageComponent),
+    loadComponent: () => import('./components/volumes/volume-detail-page/volume-detail-page.component').then(m => m.VolumeDetailPageComponent),
   },
   {
     path: 'volumes/:volumeId/offer/:offerId',
     title: $localize`Book Offer Details`,
-    loadComponent: () => import('./components/volume-offer-detail-page/volume-offer-detail-page.component').then(m => m.VolumeOfferDetailPageComponent),
+    loadComponent: () => import('./components/volumes/volume-offer-detail-page/volume-offer-detail-page.component').then(m => m.VolumeOfferDetailPageComponent),
   },
   {
     path: 'user',
@@ -44,24 +44,24 @@ export const routes: Routes = [
       {
         path: 'books',
         title: $localize`My Books`,
-        loadComponent: () => import('./components/user-book-list-page/user-book-list-page.component').then(m => m.UserBookListPageComponent),
+        loadComponent: () => import('./components/user-books/user-book-list-page/user-book-list-page.component').then(m => m.UserBookListPageComponent),
       },
       {
         path: 'books/:bookId/edit',
         title: $localize`Edit Book Details`,
-        loadComponent: () => import('./components/user-book-edit-page/user-book-edit-page.component').then(m => m.UserBookEditPageComponent),
+        loadComponent: () => import('./components/user-books/user-book-edit-page/user-book-edit-page.component').then(m => m.UserBookEditPageComponent),
       },
       {
         path: 'books/:bookId',
         title: $localize`View Book Details`,
-        loadComponent: () => import('./components/user-book-detail-page/user-book-detail-page.component').then(m => m.UserBookDetailPageComponent),
+        loadComponent: () => import('./components/user-books/user-book-detail-page/user-book-detail-page.component').then(m => m.UserBookDetailPageComponent),
       },
     ],
   },
   {
     path: 'dev',
     title: `Component Collection`,
-    loadComponent: () => import('./components/dev-components-page/dev-components-page.component').then(m => m.DevComponentsPageComponent),
+    loadComponent: () => import('./components/main/dev-components-page/dev-components-page.component').then(m => m.DevComponentsPageComponent),
   },
   {
     path: '**',

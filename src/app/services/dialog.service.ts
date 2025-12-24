@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
-import { ConfirmationDialogComponent, ConfirmationDialogData } from '../components/confirmation-dialog/confirmation-dialog.component';
-import { ImageCropDialogComponent, ImageCropDialogData } from '../components/image-crop-dialog/image-crop-dialog.component';
-import { UserBookCreateDialogComponent } from '../components/user-book-create-dialog/user-book-create-dialog.component';
-import { UserSessionInfoDialogComponent, UserSessionInfoDialogData } from '../components/user-session-info-dialog/user-session-info-dialog.component';
+import { ConfirmationDialogComponent, ConfirmationDialogData } from '../components/shared/confirmation-dialog/confirmation-dialog.component';
+import { ImageCropDialogComponent, ImageCropDialogData } from '../components/shared/image-crop-dialog/image-crop-dialog.component';
+import { UserBookCreateDialogComponent } from '../components/user-books/user-book-create-dialog/user-book-create-dialog.component';
+import { UserSessionInfoDialogComponent, UserSessionInfoDialogData } from '../components/base/user-session-info-dialog/user-session-info-dialog.component';
 import { AuthUser } from '../models/auth.models';
 import { UserBookDTO } from '../models/book.models';
 

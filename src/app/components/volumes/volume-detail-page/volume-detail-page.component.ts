@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
 import { map } from 'rxjs';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
 
-import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
+import { TitleBarComponent } from '../../base/title-bar/title-bar.component';
 import { VolumeCardComponent } from '../volume-card/volume-card.component';
 import { VolumeOfferListComponent } from '../volume-offer-list/volume-offer-list.component';
 
