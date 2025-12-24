@@ -12,8 +12,8 @@ import { DialogService } from 'src/app/services/dialog.service';
 import { UserBooksService } from 'src/app/services/user-books.service';
 
 import { TitleBarComponent } from '../../base/title-bar/title-bar.component';
-import { UserBookCardContentComponent } from '../user-book-card-content/user-book-card-content.component';
 import { VolumeCardComponent } from '../../volumes/volume-card/volume-card.component';
+import { UserBookCardContentComponent } from '../user-book-card-content/user-book-card-content.component';
 
 @Component({
   selector: 'app-user-book-list-page',

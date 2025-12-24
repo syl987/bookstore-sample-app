@@ -2,8 +2,8 @@ import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angula
 import { Routes } from '@angular/router';
 
 import { LoginPageComponent } from './components/main/login-page/login-page.component';
-import { VolumeSearchPageComponent } from './components/volumes/volume-search-page/volume-search-page.component';
 import { WelcomePageComponent } from './components/main/welcome-page/welcome-page.component';
+import { VolumeSearchPageComponent } from './components/volumes/volume-search-page/volume-search-page.component';
 
 export const routes: Routes = [
   {
