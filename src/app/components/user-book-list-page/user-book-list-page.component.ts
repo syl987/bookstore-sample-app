@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -34,12 +35,12 @@ export class UserBookListPageComponent implements OnInit {
   protected readonly userBooksService = inject(UserBooksService);
   protected readonly dialogService = inject(DialogService);
 
-  readonly userBooksDraft = this.userBooksService.entitiesDraft;
-  readonly userBooksPublished = this.userBooksService.entitiesPublished;
-  readonly userBooksSold = this.userBooksService.entitiesSold;
-  readonly userBooksBought = this.userBooksService.entitiesBought;
+  readonly userBooksDraft = toSignal(this.userBooksService.entitiesDraft$, { requireSync: true });
+  readonly userBooksPublished = toSignal(this.userBooksService.entitiesPublished$, { requireSync: true });
+  readonly userBooksSold = toSignal(this.userBooksService.entitiesSold$, { requireSync: true });
+  readonly userBooksBought = toSignal(this.userBooksService.entitiesBought$, { requireSync: true });
 
-  readonly userBooksLoading = this.userBooksService.loadPending;
+  readonly userBooksLoading = toSignal(this.userBooksService.loadPending$, { requireSync: true });
 
   ngOnInit(): void {
     this.userBooksService.loadAll();

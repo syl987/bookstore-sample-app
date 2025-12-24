@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+import { map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterService } from 'src/app/services/router.service';
 import { VolumeService } from 'src/app/services/volume.service';
@@ -27,12 +29,12 @@ export class VolumeDetailPageComponent implements OnInit {
   protected readonly routerService = inject(RouterService);
   protected readonly volumeService = inject(VolumeService);
 
-  readonly volumeId = computed(() => this.routerService.routeParams().volumeId!); // mandatory param defined by route
+  readonly volumeId = toSignal(this.routerService.routeParams$.pipe(map(({ volumeId }) => volumeId!)), { requireSync: true }); // mandatory param defined by route
 
-  readonly volume = this.volumeService.entityByRoute;
-  readonly volumeLoading = this.volumeService.loadPending;
+  readonly volume = toSignal(this.volumeService.entityByRoute$, { requireSync: true });
+  readonly volumeLoading = toSignal(this.volumeService.loadPending$, { requireSync: true });
 
-  readonly uid = this.authService.uid;
+  readonly uid = toSignal(this.authService.uid$, { requireSync: true });
 
   ngOnInit(): void {
     this.volumeService.load(this.volumeId());

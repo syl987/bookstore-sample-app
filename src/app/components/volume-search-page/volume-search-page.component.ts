@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, OnInit, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -25,10 +26,10 @@ import { VolumeCardComponent } from '../volume-card/volume-card.component';
 export class VolumeSearchPageComponent implements OnInit {
   protected readonly volumeService = inject(VolumeService);
 
-  readonly volumesFiltered = this.volumeService.entitiesFiltered;
-  readonly volumesLoading = this.volumeService.loadPending;
+  readonly volumesFiltered = toSignal(this.volumeService.entitiesFiltered$, { requireSync: true });
+  readonly volumesLoading = toSignal(this.volumeService.loadPending$, { requireSync: true });
 
-  readonly filterQuery = this.volumeService.filterQuery;
+  readonly filterQuery = toSignal(this.volumeService.filterQuery$, { requireSync: true });
   readonly filterQueryEmpty = computed(() => !this.filterQuery().length);
 
   ngOnInit(): void {

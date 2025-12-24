@@ -28,17 +28,17 @@ export class VolumeService implements IVolumeService {
   protected readonly store = inject(Store);
   protected readonly actions = inject(Actions);
 
-  readonly entities = this.store.selectSignal(volumeFeature.selectAll);
-  readonly entitiesTotal = this.store.selectSignal(volumeFeature.selectTotal);
+  readonly entities$ = this.store.select(volumeFeature.selectAll);
+  readonly entitiesTotal$ = this.store.select(volumeFeature.selectTotal);
 
-  readonly entitiesFiltered = this.store.selectSignal(volumeFeature.selectAllFiltered);
+  readonly entitiesFiltered$ = this.store.select(volumeFeature.selectAllFiltered);
 
-  readonly entityByRoute = this.store.selectSignal(volumeFeature.selectByRoute);
+  readonly entityByRoute$ = this.store.select(volumeFeature.selectByRoute);
 
-  readonly filterQuery = this.store.selectSignal(volumeFeature.selectFilterQuery);
+  readonly filterQuery$ = this.store.select(volumeFeature.selectFilterQuery);
 
-  readonly loadPending = this.store.selectSignal(volumeFeature.selectLoadPending);
-  readonly loadError = this.store.selectSignal(volumeFeature.selectLoadError);
+  readonly loadPending$ = this.store.select(volumeFeature.selectLoadPending);
+  readonly loadError$ = this.store.select(volumeFeature.selectLoadError);
 
   load(id: string): Observable<VolumeDTO> {
     this.store.dispatch(VolumeActions.load({ id }));

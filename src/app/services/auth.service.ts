@@ -1,9 +1,9 @@
-import { computed, Injectable, inject, DestroyRef } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { Injectable, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Auth, user } from '@angular/fire/auth';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { concatMap, map, Observable, of, shareReplay, take, throwError } from 'rxjs';
+import { concatMap, map, Observable, of, shareReplay, startWith, take, throwError } from 'rxjs';
 
 import { toAuthUser } from '../helpers/auth.helpers';
 import { AuthProviderId } from '../models/auth.models';
@@ -18,23 +18,19 @@ export class AuthService {
   protected readonly actions = inject(Actions);
   protected readonly auth = inject(Auth);
 
-  readonly user = toSignal(user(this.auth).pipe(map(toAuthUser)));
-  readonly uid = computed(() => this.user()?.uid);
+  readonly user$ = user(this.auth).pipe(map(toAuthUser), startWith(null), shareReplay({ bufferSize: 1, refCount: true }));
+  readonly uid$ = this.user$.pipe(map(u => u?.uid ?? null));
 
-  readonly loginPending = toSignal(
-    this.actions.pipe(
-      ofType(AuthActions.loginWithProvider, AuthActions.loginWithProviderSUCCESS, AuthActions.loginWithProviderERROR, AuthActions.authResetState),
-      map(({ type }) => type === AuthActions.loginWithProvider.type),
-    ),
-    { initialValue: false },
+  readonly loginPending$ = this.actions.pipe(
+    ofType(AuthActions.loginWithProvider, AuthActions.loginWithProviderSUCCESS, AuthActions.loginWithProviderERROR, AuthActions.authResetState),
+    map(({ type }) => type === AuthActions.loginWithProvider.type),
+    startWith(false),
   );
 
-  readonly logoutPending = toSignal(
-    this.actions.pipe(
-      ofType(AuthActions.logout, AuthActions.logoutSUCCESS, AuthActions.logoutERROR, AuthActions.authResetState),
-      map(({ type }) => type === AuthActions.logout.type),
-    ),
-    { initialValue: false },
+  readonly logoutPending$ = this.actions.pipe(
+    ofType(AuthActions.logout, AuthActions.logoutSUCCESS, AuthActions.logoutERROR, AuthActions.authResetState),
+    map(({ type }) => type === AuthActions.logout.type),
+    startWith(false),
   );
 
   /**

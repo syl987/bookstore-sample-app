@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, viewChild, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -45,13 +45,13 @@ export class UserBookCreateDialogComponent implements AfterViewInit, OnInit {
 
   readonly dialogRef = inject<MatDialogRef<UserBookCreateDialogComponent, UserBookDTO | undefined>>(MatDialogRef);
 
-  readonly results = this.googleBooksService.searchResults;
+  readonly results = toSignal(this.googleBooksService.searchResults$, { requireSync: true });
 
-  readonly searchQuery = this.googleBooksService.searchQuery;
-  readonly searchPending = this.googleBooksService.searchPending;
-  readonly searchError = this.googleBooksService.searchError;
+  readonly searchQuery = toSignal(this.googleBooksService.searchQuery$, { requireSync: true });
+  readonly searchPending = toSignal(this.googleBooksService.searchPending$, { requireSync: true });
+  readonly searchError = toSignal(this.googleBooksService.searchError$, { requireSync: true });
 
-  readonly createPending = this.userBooksService.createPending;
+  readonly createPending = toSignal(this.userBooksService.createPending$, { requireSync: true });
 
   readonly searchControl = new FormControl<string>('', { nonNullable: true });
 
@@ -62,7 +62,7 @@ export class UserBookCreateDialogComponent implements AfterViewInit, OnInit {
       this.googleBooksService.searchVolumes(query);
     });
 
-    const query = this.googleBooksService.searchQuery();
+    const query = this.searchQuery();
 
     if (query) {
       this.searchControl.setValue(query, { emitEvent: false });

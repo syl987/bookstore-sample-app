@@ -16,14 +16,14 @@ export class GoogleBooksService {
   protected readonly store = inject(Store);
   protected readonly actions = inject(Actions);
 
-  readonly searchQuery = this.store.selectSignal(googleBooksFeature.selectSearchQuery);
-  readonly searchList = this.store.selectSignal(googleBooksFeature.selectSearchList);
+  readonly searchQuery$ = this.store.select(googleBooksFeature.selectSearchQuery);
+  readonly searchList$ = this.store.select(googleBooksFeature.selectSearchList);
 
-  readonly searchResults = this.store.selectSignal(googleBooksFeature.selectSearchResults);
-  readonly searchResultsTotal = this.store.selectSignal(googleBooksFeature.selectSearchResultsTotal);
+  readonly searchResults$ = this.store.select(googleBooksFeature.selectSearchResults);
+  readonly searchResultsTotal$ = this.store.select(googleBooksFeature.selectSearchResultsTotal);
 
-  readonly searchPending = this.store.selectSignal(googleBooksFeature.selectSearchPending);
-  readonly searchError = this.store.selectSignal(googleBooksFeature.selectSearchError);
+  readonly searchPending$ = this.store.select(googleBooksFeature.selectSearchPending);
+  readonly searchError$ = this.store.select(googleBooksFeature.selectSearchError);
 
   searchVolumes(query: string): Observable<GoogleBooksListDTO> {
     this.store.dispatch(GoogleBooksActions.search({ query }));

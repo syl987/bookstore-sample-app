@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
-import { concatMap, filter } from 'rxjs';
+import { concatMap, filter, map } from 'rxjs';
 
 import { isTrue } from 'src/app/functions/typeguard.functions';
 import { BookDTO } from 'src/app/models/book.models';
@@ -41,22 +42,24 @@ export class VolumeOfferDetailPageComponent implements OnInit {
   protected readonly volumeService = inject(VolumeService);
   protected readonly dialogService = inject(DialogService);
 
-  readonly volumeId = computed(() => this.routerService.routeParams().volumeId!); // mandatory param defined by route
-  readonly offerId = computed(() => this.routerService.routeParams().offerId!); // mandatory param defined by route
+  readonly volumeId = toSignal(this.routerService.routeParams$.pipe(map(({ volumeId }) => volumeId!)), { requireSync: true }); // mandatory param defined by route
+  readonly offerId = toSignal(this.routerService.routeParams$.pipe(map(({ offerId }) => offerId!)), { requireSync: true }); // mandatory param defined by route
 
-  readonly volume = this.volumeService.entityByRoute;
-  readonly volumeLoading = this.volumeService.loadPending;
+  readonly volume = toSignal(this.volumeService.entityByRoute$, { requireSync: true });
+  readonly volumeLoading = toSignal(this.volumeService.loadPending$, { requireSync: true });
+
+  readonly uid = toSignal(this.authService.uid$, { requireSync: true });
+  readonly user = toSignal(this.authService.user$, { requireSync: true });
 
   readonly offer = computed(() => getBookOfferById(this.volume(), this.offerId()));
-
-  readonly isUserBook = computed(() => this.authService.uid() && this.offer()?.uid === this.authService.uid());
+  readonly isUserBook = computed(() => this.uid() && this.offer()?.uid === this.uid());
 
   ngOnInit(): void {
     this.volumeService.load(this.volumeId());
   }
 
   buyBookOffer(offer: BookDTO): void {
-    if (!this.authService.user()) {
+    if (!this.user()) {
       this.dialogService
         .openLoginRequiredDialog()
         .beforeClosed()

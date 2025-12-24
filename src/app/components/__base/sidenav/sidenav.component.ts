@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, output, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -29,7 +30,7 @@ export class SidenavComponent {
   readonly options = inject(APP_OPTIONS);
   readonly links = inject(APP_LINKS);
 
-  readonly user = this.authService.user;
+  readonly user = toSignal(this.authService.user$, { requireSync: true });
 
   readonly publicLinks = this.links.filter(l => !l.userSpecific);
   readonly userLinks = this.links.filter(l => l.userSpecific);

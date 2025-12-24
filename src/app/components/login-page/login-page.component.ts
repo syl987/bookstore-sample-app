@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProviderId } from 'firebase/auth';
@@ -19,7 +20,7 @@ export class LoginPageComponent {
 
   readonly options = inject(APP_OPTIONS);
 
-  readonly loginPending = this.authService.loginPending;
+  readonly loginPending = toSignal(this.authService.loginPending$, { requireSync: true });
 
   loginWithGoogle(): void {
     this.authService.loginWithProvider(ProviderId.GOOGLE);

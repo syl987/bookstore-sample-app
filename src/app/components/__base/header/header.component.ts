@@ -54,6 +54,8 @@ export class HeaderComponent extends SidenavComponent {
   readonly themeService = inject(ThemeService);
   readonly languages = inject(APP_LANGUAGES);
 
+  readonly searchQuery = toSignal(this.volumeService.filterQuery$, { requireSync: true });
+
   private readonly large$ = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge]).pipe(
     map(({ matches }) => matches),
     distinctUntilChanged(),
@@ -61,6 +63,7 @@ export class HeaderComponent extends SidenavComponent {
   readonly large = toSignal(this.large$, { requireSync: true });
 
   readonly searching = signal(false);
+  readonly searchOpen = signal(false);
 
   readonly form = new FormGroup({
     query: new FormControl<string>('', { nonNullable: true }),
@@ -68,14 +71,12 @@ export class HeaderComponent extends SidenavComponent {
 
   readonly currentLang = getCurrentAppLanguage(this.languages, this.locale);
 
-  readonly searchOpen = signal(false);
-
   readonly sidenavToggle = output();
 
   constructor() {
     super();
 
-    effect(() => this.form.controls.query.setValue(this.volumeService.filterQuery(), { emitEvent: false }));
+    effect(() => this.form.controls.query.setValue(this.searchQuery(), { emitEvent: false }));
   }
 
   search(): void {

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -15,7 +16,7 @@ import { RouterService } from 'src/app/services/router.service';
 export class TitleBarComponent {
   protected readonly routerService = inject(RouterService);
 
-  readonly title = this.routerService.title;
+  readonly title = toSignal(this.routerService.title$, { requireSync: true });
 
   readonly backUrl = input<string | null>();
 }

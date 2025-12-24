@@ -1,5 +1,6 @@
 import { DecimalPipe, getCurrencySymbol, SlicePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, DEFAULT_CURRENCY_CODE, effect, inject, OnInit } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -9,7 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
-import { concatMap, filter } from 'rxjs';
+import { concatMap, filter, map } from 'rxjs';
 
 import { ButtonSpinnerDirective } from 'src/app/directives/button-spinner.directive';
 import { getObjectValues } from 'src/app/functions/object.functions';
@@ -54,17 +55,17 @@ export class UserBookEditPageComponent implements OnInit {
   protected readonly userBooksService = inject(UserBooksService);
   protected readonly dialogService = inject(DialogService);
 
-  readonly bookId = computed(() => this.routerService.routeParams().bookId!); // mandatory param defined by route
+  readonly bookId = toSignal(this.routerService.routeParams$.pipe(map(({ bookId }) => bookId!)), { requireSync: true }); // mandatory param defined by route
 
-  readonly book = this.userBooksService.entityByRoute;
-  readonly bookLoading = this.userBooksService.loadPending;
+  readonly book = toSignal(this.userBooksService.entityByRoute$, { requireSync: true });
+  readonly bookLoading = toSignal(this.userBooksService.loadPending$, { requireSync: true });
 
-  readonly editDraftPending = this.userBooksService.editDraftPending;
-  readonly publishPending = this.userBooksService.publishPending;
-  readonly uploadPhotoPending = this.userBooksService.uploadPhotoPending;
-  readonly uploadPhotoProgress = this.userBooksService.uploadPhotoProgress;
-  readonly removePhotoPending = this.userBooksService.removePhotoPending;
-  readonly deletePending = this.userBooksService.deletePending;
+  readonly editDraftPending = toSignal(this.userBooksService.editDraftPending$, { requireSync: true });
+  readonly publishPending = toSignal(this.userBooksService.publishPending$, { requireSync: true });
+  readonly uploadPhotoPending = toSignal(this.userBooksService.uploadPhotoPending$, { requireSync: true });
+  readonly uploadPhotoProgress = toSignal(this.userBooksService.uploadPhotoProgress$, { requireSync: true });
+  readonly removePhotoPending = toSignal(this.userBooksService.removePhotoPending$, { requireSync: true });
+  readonly deletePending = toSignal(this.userBooksService.deletePending$, { requireSync: true });
 
   readonly editDraftDisabled = computed(() => this.editDraftPending() || this.form.disabled); // TODO false on startup
 

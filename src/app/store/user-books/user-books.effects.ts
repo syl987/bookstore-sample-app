@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, EffectNotification, ofType, OnRunEffects } from '@ngrx/effects';
-import { mapResponse } from '@ngrx/operators';
+import { concatLatestFrom, mapResponse } from '@ngrx/operators';
 import { FirebaseError } from 'firebase/app';
 import { exhaustMap, Observable, of, switchMap, tap } from 'rxjs';
 
@@ -24,9 +24,8 @@ export class UserBooksEffects implements OnRunEffects {
   readonly load = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.load),
-      switchMap(({ id }) => {
-        const uid = this.authService.uid();
-
+      concatLatestFrom(() => this.authService.uid$),
+      switchMap(([{ id }, uid]) => {
         if (!uid) {
           return of(UserBooksActions.loadERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
@@ -48,9 +47,8 @@ export class UserBooksEffects implements OnRunEffects {
   readonly loadAll = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.loadAll),
-      switchMap(_ => {
-        const uid = this.authService.uid();
-
+      concatLatestFrom(() => this.authService.uid$),
+      switchMap(([_, uid]) => {
         if (!uid) {
           return of(UserBooksActions.loadAllERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
@@ -72,9 +70,8 @@ export class UserBooksEffects implements OnRunEffects {
   readonly create = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.create),
-      exhaustMap(({ volumeData }) => {
-        const uid = this.authService.uid();
-
+      concatLatestFrom(() => this.authService.uid$),
+      exhaustMap(([{ volumeData }, uid]) => {
         if (!uid) {
           return of(UserBooksActions.createERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
@@ -102,9 +99,8 @@ export class UserBooksEffects implements OnRunEffects {
   readonly delete = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.delete),
-      exhaustMap(({ id }) => {
-        const uid = this.authService.uid();
-
+      concatLatestFrom(() => this.authService.uid$),
+      exhaustMap(([{ id }, uid]) => {
         if (!uid) {
           return of(UserBooksActions.deleteERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
@@ -126,9 +122,8 @@ export class UserBooksEffects implements OnRunEffects {
   readonly editDraft = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.editDraft),
-      exhaustMap(({ id, data }) => {
-        const uid = this.authService.uid();
-
+      concatLatestFrom(() => this.authService.uid$),
+      exhaustMap(([{ id, data }, uid]) => {
         if (!uid) {
           return of(UserBooksActions.editDraftERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
@@ -150,9 +145,8 @@ export class UserBooksEffects implements OnRunEffects {
   readonly uploadPhoto = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.uploadPhoto),
-      exhaustMap(({ bookId, data }) => {
-        const uid = this.authService.uid();
-
+      concatLatestFrom(() => this.authService.uid$),
+      exhaustMap(([{ bookId, data }, uid]) => {
         if (!uid) {
           return of(UserBooksActions.uploadPhotoERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
@@ -179,9 +173,8 @@ export class UserBooksEffects implements OnRunEffects {
   readonly removePhoto = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.removePhoto),
-      exhaustMap(({ bookId, photoId }) => {
-        const uid = this.authService.uid();
-
+      concatLatestFrom(() => this.authService.uid$),
+      exhaustMap(([{ bookId, photoId }, uid]) => {
         if (!uid) {
           return of(UserBooksActions.removePhotoERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
@@ -203,9 +196,8 @@ export class UserBooksEffects implements OnRunEffects {
   readonly removeAllPhotos = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.removeAllPhotos),
-      exhaustMap(({ bookId }) => {
-        const uid = this.authService.uid();
-
+      concatLatestFrom(() => this.authService.uid$),
+      exhaustMap(([{ bookId }, uid]) => {
         if (!uid) {
           return of(UserBooksActions.removeAllPhotosERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
@@ -227,9 +219,8 @@ export class UserBooksEffects implements OnRunEffects {
   readonly publish = createEffect(() => {
     return this.actions.pipe(
       ofType(UserBooksActions.publish),
-      exhaustMap(({ id }) => {
-        const uid = this.authService.uid();
-
+      concatLatestFrom(() => this.authService.uid$),
+      exhaustMap(([{ id }, uid]) => {
         if (!uid) {
           return of(UserBooksActions.publishERROR({ error: internalError({ err: new Error($localize`User not logged in.`) }) }));
         }
