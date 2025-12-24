@@ -7,6 +7,21 @@
 
   <p class="text-error text-sm" i18n>Note: the application is currently under active development as changes can occur on a daily basis.</p>
 
+  <h2 i18n>Technical Features</h2>
+
+  <p i18n>Non-content-specific features implemented in the application.</p>
+
+  <div class="mb-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    @for (feature of features; track feature.title) {
+      <mat-card class="text-center">
+        <mat-card-header class="mt-1 mb-2 block">
+          <mat-card-title>{{ feature.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>{{ feature.description }}</mat-card-content>
+      </mat-card>
+    }
+  </div>
+
   <h2 class="mt-0" i18n>Tech-Stack</h2>
 
   <p i18n>These technologies are the backbone of the application and its development process.</p>
@@ -22,21 +37,6 @@
         </mat-card-header>
 
         <mat-card-content>{{ item.description }}</mat-card-content>
-      </mat-card>
-    }
-  </div>
-
-  <h2 i18n>Technical Features</h2>
-
-  <p i18n>Non-content-specific features on the technical level of the application.</p>
-
-  <div class="mb-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-    @for (feature of features; track feature.title) {
-      <mat-card class="text-center">
-        <mat-card-header class="mt-1 mb-2 block">
-          <mat-card-title>{{ feature.title }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>{{ feature.description }}</mat-card-content>
       </mat-card>
     }
   </div>
