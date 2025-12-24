@@ -17,7 +17,7 @@ const techStack: AppTechStackItem[] = [
     title: `NGRX`,
     subtitle: `State Management, Logic`,
     description: $localize`Application State and View fully decoupled! View all events in the browser console in real-time.`,
-    image: 'https://ngrx.io/assets/images/badge.svg',
+    image: 'https://ngrx.io/ngrx-logo.svg',
   },
   {
     title: `RXJS`,
