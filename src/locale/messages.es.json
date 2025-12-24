@@ -62,6 +62,7 @@
     "8830157245609499420": "Proveedores de login",
     "6338378562333277926": "Último login",
     "8726577995394605058": "tapa del libro",
+    "6641647329787981955": "No hay tapa disponible",
     "4162209846692442047": "{VAR_PLURAL, plural, =1 {Un libro disponible por {INTERPOLATION}.} other {{INTERPOLATION_1} libros disponibles a partir de {INTERPOLATION}.}}",
     "2895028737142036295": "Explore las ofertas de libros disponibles para el volumen seleccionado.",
     "5877541543547848488": "Lista de ofertas del libro",

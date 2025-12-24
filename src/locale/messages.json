@@ -62,6 +62,7 @@
     "8830157245609499420": "Login Providers",
     "6338378562333277926": "Last Login",
     "8726577995394605058": "volume cover",
+    "6641647329787981955": "No cover available",
     "4162209846692442047": "{VAR_PLURAL, plural, =1 {One book available for {INTERPOLATION}.} other {{INTERPOLATION_1} books available starting from {INTERPOLATION}.}}",
     "2895028737142036295": "Browse the available book offers for the selected volume.",
     "5877541543547848488": "List of book offers",
